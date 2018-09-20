@@ -5,38 +5,42 @@ import java.sql.Date;
 import org.springframework.stereotype.Repository;
 
 @Repository
-/*@Component*/
 public class Member implements java.io.Serializable{
 	private int mid;
-	private String userId;
-	private String userPwd;
-	private String userName;
 	private String email;
-	private String birthDay;
+	private String user_pwd;
+	private String user_name;
+	private Date birthday;
 	private String gender;
 	private String phone;
-	private String address;
-	private Date enrollDate;
-	private Date modifyDate;
+	private String user_class;
 	private String status;
+	private String login_class;
+	private String blacklist_status;
+	private Date join_date;
+	private Date withdraw_date;
+	private String nickname;
 	
-	public Member() {}
+	public Member(){}
 
-	public Member(int mid, String userId, String userPwd, String userName, String email, String birthDay, String gender,
-			String phone, String address, Date enrollDate, Date modifyDate, String status) {
+	public Member(int mid, String email, String user_pwd, String user_name, Date birthday, String gender, String phone,
+			String user_class, String status, String login_class, String blacklist_status, Date join_date,
+			Date withdraw_date, String nickname) {
 		super();
 		this.mid = mid;
-		this.userId = userId;
-		this.userPwd = userPwd;
-		this.userName = userName;
 		this.email = email;
-		this.birthDay = birthDay;
+		this.user_pwd = user_pwd;
+		this.user_name = user_name;
+		this.birthday = birthday;
 		this.gender = gender;
 		this.phone = phone;
-		this.address = address;
-		this.enrollDate = enrollDate;
-		this.modifyDate = modifyDate;
+		this.user_class = user_class;
 		this.status = status;
+		this.login_class = login_class;
+		this.blacklist_status = blacklist_status;
+		this.join_date = join_date;
+		this.withdraw_date = withdraw_date;
+		this.nickname = nickname;
 	}
 
 	public int getMid() {
@@ -47,30 +51,6 @@ public class Member implements java.io.Serializable{
 		this.mid = mid;
 	}
 
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getUserPwd() {
-		return userPwd;
-	}
-
-	public void setUserPwd(String userPwd) {
-		this.userPwd = userPwd;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -79,12 +59,28 @@ public class Member implements java.io.Serializable{
 		this.email = email;
 	}
 
-	public String getBirthDay() {
-		return birthDay;
+	public String getUser_pwd() {
+		return user_pwd;
 	}
 
-	public void setBirthDay(String birthDay) {
-		this.birthDay = birthDay;
+	public void setUser_pwd(String user_pwd) {
+		this.user_pwd = user_pwd;
+	}
+
+	public String getUser_name() {
+		return user_name;
+	}
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
 	}
 
 	public String getGender() {
@@ -103,28 +99,12 @@ public class Member implements java.io.Serializable{
 		this.phone = phone;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getUser_class() {
+		return user_class;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public Date getEnrollDate() {
-		return enrollDate;
-	}
-
-	public void setEnrollDate(Date enrollDate) {
-		this.enrollDate = enrollDate;
-	}
-
-	public Date getModifyDate() {
-		return modifyDate;
-	}
-
-	public void setModifyDate(Date modifyDate) {
-		this.modifyDate = modifyDate;
+	public void setUser_class(String user_class) {
+		this.user_class = user_class;
 	}
 
 	public String getStatus() {
@@ -135,12 +115,52 @@ public class Member implements java.io.Serializable{
 		this.status = status;
 	}
 
+	public String getLogin_class() {
+		return login_class;
+	}
+
+	public void setLogin_class(String login_class) {
+		this.login_class = login_class;
+	}
+
+	public String getBlacklist_status() {
+		return blacklist_status;
+	}
+
+	public void setBlacklist_status(String blacklist_status) {
+		this.blacklist_status = blacklist_status;
+	}
+
+	public Date getJoin_date() {
+		return join_date;
+	}
+
+	public void setJoin_date(Date join_date) {
+		this.join_date = join_date;
+	}
+
+	public Date getWithdraw_date() {
+		return withdraw_date;
+	}
+
+	public void setWithdraw_date(Date withdraw_date) {
+		this.withdraw_date = withdraw_date;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
 	@Override
 	public String toString() {
-		return "Member [mid=" + mid + ", userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName
-				+ ", email=" + email + ", birthDay=" + birthDay + ", gender=" + gender + ", phone=" + phone
-				+ ", address=" + address + ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", status="
-				+ status + "]";
+		return "Member [mid=" + mid + ", email=" + email + ", user_pwd=" + user_pwd + ", user_name=" + user_name
+				+ ", birthday=" + birthday + ", gender=" + gender + ", phone=" + phone + ", user_class=" + user_class
+				+ ", status=" + status + ", login_class=" + login_class + ", blacklist_status=" + blacklist_status
+				+ ", join_date=" + join_date + ", withdraw_date=" + withdraw_date + ", nickname=" + nickname + "]";
 	}
 	
 	

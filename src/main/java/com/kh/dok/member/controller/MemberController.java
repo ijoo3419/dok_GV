@@ -36,5 +36,10 @@ public class MemberController {
 	public String theaterAddView(){
 		return "member/theaterAdd";
 	}
+	
+	@RequestMapping("login.me")
+	public String loginCheck(Member m, Model model){
+		model.addAttribute("loginUser", ms.loginMember(m));
+	}
 
 }
