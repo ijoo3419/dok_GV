@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,8 +64,8 @@ a:-webkit-any-link{
 		</div>
 		<ul class="nau">	<!-- href="#"부분 자신한테 맞게 변경하기 ex) 로그인 : href="login.me"-->
 			<li class="nli" style="border-left: 1px solid #a9a5a5;"><a
-				href="#" title="영화 바로가기"><p>영화</p></a></li>
-			<li class="nli"><a href="go.me" title="극장 바로가기"><p>극장</p></a></li>
+				href="movie.mo" title="영화 바로가기"><p>영화</p></a></li>
+			<li class="nli"><a href="cinema.ci" title="극장 바로가기"><p>극장</p></a></li>
 			<li class="nli"><a href="#" title="예매 바로가기"><p>예매</p></a></li>
 			<li class="nli"><a href="#" title="공지사항 바로가기"><p>공지사항</p></a></li>
 			<li class="nli"><a href="#" title="로그인 하기"><p>로그인</p></a></li>
