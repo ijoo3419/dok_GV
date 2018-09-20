@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -22,11 +23,16 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="${contextPath }/resources/css/main.css" />
-	<link rel="stylesheet"
-		href="${contextPath }/resources/css/noscript.css" />
+<script
+   src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<noscript>
+   <link rel="stylesheet"
+      href="${contextPath }/resources/css/noscript.css" />
+</noscript>
 
 </head>
 <body class="is-preload">
+	<c:import url="../common/headBar.jsp" />
 
 
 	<!-- Wrapper -->
@@ -54,16 +60,20 @@
 		<!-- Nav -->
 		<nav id="nav">
 			<ul class="links">
-				<li><a href="playManagePage.jsp"><font size="4">상영등록</font></a></li>
-				<li class="active"><a href="theaterManagePage.jsp"><font size="4">영화관 등록</font></a></li>
-				<li><a href="movieRoomManagePage.jsp"><font size="4">상영관 등록</font></a></li>
-				<li><a href="statsManagePage.jsp"><font size="4">통계/관리</font></a></li>
-				<li><a href="reservationManagePage.jsp"><font size="4">예매 현황</font></a></li>
-				<li><a href="noticeManagePage.jsp"><font size="4">공지사항 등록</font></a></li>
-				<li><a href="inquireManagePage.jsp"><font size="4">문의내역</font></a></li>
-
+				<li><a href="play.li"><font
+						size="4">상영등록</font></a></li>
+				<li class="active"><a href="theater.li"><font size="4">영화관
+							등록</font></a></li>
+				<li><a href="movieRoom.li"><font size="4">상영관
+							등록</font></a></li>
+				<li><a href="stats.li"><font size="4">통계/
+							관리</font></a></li>
+				<li><a href="reservation.li"><font size="4">예매
+							현황</font></a></li>
+				<li><a href="notice.li"><font size="4">공지사항
+							등록</font></a></li>
+				<li><a href="inquire.li"><font size="4">문의내역</font></a></li>
 			</ul>
-
 		</nav>
 
 		<!-- Main -->
@@ -112,7 +122,7 @@
 					</div>
 				</form>
 
-				<hr />
+			
 
 
 

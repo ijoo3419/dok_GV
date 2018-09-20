@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,10 +41,10 @@ h2 {
 </noscript>
 
 </head>
-	<c:import url="../common/headBar.jsp" />
 
 <body class="is-preload">
 
+	<c:import url="../common/headBar.jsp" />
 
 	<!-- Wrapper -->
 	<div id="wrapper" class="fade-in">
@@ -69,18 +71,18 @@ h2 {
 		<!-- Nav -->
 		<nav id="nav">
 			<ul class="links">
-				<li class="active"><a href="playManagePage.jsp"><font
+				<li class="active"><a href="play.li"><font
 						size="4">상영등록</font></a></li>
-				<li><a href="theaterManagePage.jsp"><font size="4">영화관
+				<li><a href="theater.li"><font size="4">영화관
 							등록</font></a></li>
-				<li><a href="movieRoomManagePage.jsp"><font size="4">상영관
+				<li><a href="movieRoom.li"><font size="4">상영관
 							등록</font></a></li>
-				<li><a href="statsManagePage.jsp"><font size="4">통계/관리</font></a></li>
-				<li><a href="reservationManagePage.jsp"><font size="4">예매
+				<li><a href="stats.li"><font size="4">통계/관리</font></a></li>
+				<li><a href="reservation.li"><font size="4">예매
 							현황</font></a></li>
-				<li><a href="noticeManagePage.jsp"><font size="4">공지사항
+				<li><a href="notice.li"><font size="4">공지사항
 							등록</font></a></li>
-				<li><a href="inquireManagePage.jsp"><font size="4">문의내역</font></a></li>
+				<li><a href="inquire.li"><font size="4">문의내역</font></a></li>
 			</ul>
 		</nav>
 
