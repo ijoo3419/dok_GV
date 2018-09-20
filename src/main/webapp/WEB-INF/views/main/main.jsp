@@ -133,10 +133,15 @@ to {
 
 #detail {
 	width: 110px;
+	font-size : 9pt;
 }
 
 #book {
+	font-size : 9pt;
 	width: 110px;
+	background-color : #212931;
+	box-shadow : none;
+	color : #ffffff !important;
 }
 </style>
 </head>
