@@ -86,6 +86,7 @@ input[type=text], input[type=password] {
 
 button:hover {
     cursor: pointer;
+    color: #18bfef !important;
 }
 
 /* Extra styles for the cancel button */
@@ -164,6 +165,7 @@ span.psw {
 a {
 	text-decoration: none;
 	color: black;
+	border-bottom: none;
 }
 
 /* Add Zoom Animation */
@@ -201,8 +203,8 @@ a {
 	<div class="headerd">
 		<div class="logo">
 		
-			<a><img src="${contextPath }/resources/images/logo.jpg" height="40px"
-				width="150px"></a>
+			<a href="main.co"><img src="${contextPath }/resources/images/logo.jpg" height="40px"
+				width="150px"></a> <!-- 로고를 눌르면 메인으로 이동 -->
 		</div>
 		<ul class="nau">	<!-- href="#"부분 자신한테 맞게 변경하기 ex) 로그인 : href="login.me"-->
 			<li class="nli" style="border-left: 1px solid #a9a5a5;"><a
