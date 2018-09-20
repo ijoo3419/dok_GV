@@ -1,3 +1,4 @@
+
 package com.kh.dok.movie.controller;
 
 import org.springframework.stereotype.Controller;
@@ -16,4 +17,3 @@ public class MovieController {
 		return "movie/movieDetail";
 	}
 }
-
