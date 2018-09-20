@@ -131,18 +131,13 @@ to {
 	text-align: center;
 }
 
-/* .detail {
-	width: 40%;
-	margin: 0;
-	display: inherit;
-	margin-left: 40px;
+#detail {
+	width: 110px;
 }
 
-.book {
-	width: 50%;
-	margin: 0;
-	display: inline;
-} */
+#book {
+	width: 110px;
+}
 </style>
 </head>
 <body>
@@ -179,17 +174,15 @@ to {
 	<div class="movie">
 		<div class="ranking">
 			<ul class="rul">
-				<li class="rank"><img class="rimage"
+				<li class="rank"><img class="rimage"										
 					src="${contextPath }/resources/images/slide1.jpg"
 					style="width: 100%; height: 70%;">
-					<div class="mname">
+					<div class="mname">														<!-- 샘플 -->
 						<p>영화1</p>
 					</div>
-					<div class="detail">
-						<button onclick="location.href=''">상세보기</button>
-					</div>
-					<div class="book">
-						<button onclick="location.href=''">예매하기</button>
+					<div>
+						<button id="detail" onclick="location.href=''">상세보기</button>		<!-- view구현 할 사람 여기 사용 -->
+						<button id="book" onclick="location.href=''">예매하기</button>			<!-- 영화 리스트에서 view연결 할 사람 여기로 -->
 					</div></li>
 				<li class="rank"><img class="rimage"
 					src="${contextPath }/resources/images/slide2.jpg"
@@ -197,11 +190,9 @@ to {
 					<div class="mname">
 						<p>영화2</p>
 					</div>
-					<div class="detail">
-						<button>상세보기</button>
-					</div>
-					<div class="book">
-						<button>예매하기</button>
+					<div>
+						<button id="detail">상세보기</button>
+						<button id="book">예매하기</button>
 					</div></li>
 				<li class="rank"><img class="rimage"
 					src="${contextPath }/resources/images/slide3.jpg"
@@ -209,11 +200,9 @@ to {
 					<div class="mname">
 						<p>영화3</p>
 					</div>
-					<div class="detail">
-						<button>상세보기</button>
-					</div>
-					<div class="book">
-						<button>예매하기</button>
+					<div>
+						<button id="detail">상세보기</button>
+						<button id="book">예매하기</button>
 					</div></li>
 				<li class="rank"><img class="rimage"
 					src="${contextPath }/resources/images/slide4.jpg"
@@ -221,17 +210,60 @@ to {
 					<div class="mname">
 						<p>영화4</p>
 					</div>
-					<div class="detail">
-						<button>상세보기</button>
-					</div>
-					<div class="book">
-						<button>예매하기</button>
+					<div>
+						<button id="detail">상세보기</button>
+						<button id="book">예매하기</button>
 					</div></li>
 			</ul>
 		</div>
 	</div>
-	<br><br><br>
-	
+
+	<div class="movie">
+		<div class="ranking">
+			<ul class="rul">
+				<li class="rank"><img class="rimage"
+					src="${contextPath }/resources/images/slide1.jpg"
+					style="width: 100%; height: 70%;">
+					<div class="mname">
+						<p>영화1</p>
+					</div>
+					<div>
+						<button id="detail" onclick="location.href=''">상세보기</button>
+						<button id="book" onclick="location.href=''">예매하기</button>
+					</div></li>
+				<li class="rank"><img class="rimage"
+					src="${contextPath }/resources/images/slide2.jpg"
+					style="width: 100%; height: 70%;">
+					<div class="mname">
+						<p>영화2</p>
+					</div>
+					<div>
+						<button id="detail">상세보기</button>
+						<button id="book">예매하기</button>
+					</div></li>
+				<li class="rank"><img class="rimage"
+					src="${contextPath }/resources/images/slide3.jpg"
+					style="width: 100%; height: 70%;">
+					<div class="mname">
+						<p>영화3</p>
+					</div>
+					<div>
+						<button id="detail">상세보기</button>
+						<button id="book">예매하기</button>
+					</div></li>
+				<li class="rank"><img class="rimage"
+					src="${contextPath }/resources/images/slide4.jpg"
+					style="width: 100%; height: 70%;">
+					<div class="mname">
+						<p>영화4</p>
+					</div>
+					<div>
+						<button id="detail">상세보기</button>
+						<button id="book">예매하기</button>
+					</div></li>
+			</ul>
+		</div>
+	</div>
 	<script>
 		var slideIndex = 0;
 		showSlides();
