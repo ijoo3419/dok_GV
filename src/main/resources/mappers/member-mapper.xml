@@ -5,17 +5,19 @@
 <mapper namespace="Member">
 	<resultMap type="Member" id="memberResultSet">
 		<id property="mid" column="MID"/>
-		<result property="userId" column="USER_ID"/>
+		<result property="userId" column="EMAIL"/>
 		<result property="userPwd" column="USER_PWD"/>
 		<result property="userName" column="USER_NAME"/>
-		<result property="email" column="EMAIL"/>
 		<result property="birthDay" column="BIRTHDAY"/>
 		<result property="gender" column="GENDER"/>
 		<result property="phone" column="PHONE"/>
-		<result property="address" column="ADDRESS"/>
-		<result property="enrollDate" column="ENROLL_DATE"/>
-		<result property="modifyDate" column="MODIFY_DATE"/>
-		<result property="status" column="STATUS"/>
+		<result property="address" column="USER_CLASS"/>
+		<result property="enrollDate" column="STATUS"/>
+		<result property="modifyDate" column="LOGIN_CLASS"/>
+		<result property="status" column="BLACKLIST_STATUS"/>
+		<result property="modifyDate" column="JOIN_DATE"/>
+		<result property="status" column="WITHDRAW_DATE"/>
+		<result property="modifyDate" column="NICKNAME"/>
 	</resultMap>
 	 <!--  로그인 정보 조회용 쿼리문  -->
 	<select id="loginCheck" resultMap="memberResultSet" parameterType="Member">
