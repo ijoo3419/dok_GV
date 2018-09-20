@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -228,7 +227,7 @@ a {
 	
 	<div id="id01" class="modal">
 
-		<form class="modal-content animate" action="/action_page.php">
+		<form class="modal-content animate" action="login.me" method="post">
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span> 
 					<img src="resources/images/movie-icon-11.png" alt="Avatar" class="avatar">
@@ -236,9 +235,9 @@ a {
 
 			<div class="container">
 				<label for="uname"><b>아이디(이메일)</b></label> 
-				<input type="text" placeholder="Enter Username" name="uname" required> 
+				<input type="text" placeholder="Enter Username" name="email" required> 
 				<label for="psw"><b>비밀번호</b></label> 
-				<input type="password" placeholder="Enter Password" name="psw" required>
+				<input type="password" placeholder="Enter Password" name="user_pwd" required>
 
 				<button class="submitBtn" type="submit">로그인</button>
 				<label> <input type="checkbox" checked="checked" name="remember"> 아이디 저장 </label>
