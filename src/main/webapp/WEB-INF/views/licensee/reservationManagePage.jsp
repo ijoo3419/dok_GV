@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -26,71 +27,71 @@ progress {
 }
 
 .progress {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width:200px;
-  height: 1rem;
-  overflow: hidden;
-  font-size: 0.65625rem;
-  background-color: #EDEDED;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  width:200px !important;
+  height: 1rem !important;
+  overflow: hidden !important;
+  font-size: 0.65625rem !important;
+  background-color: #EDEDED !important;
 }
 
 .progress {
-  height: 20px;
+  height: 20px !important;
 }
 @-webkit-keyframes progress-bar-stripes {
   from {
-    background-position: 1rem 0;
+    background-position: 1rem 0 !important;
   }
   to {
-    background-position: 0 0;
+    background-position: 0 0 !important;
   }
 }
 
 @keyframes progress-bar-stripes {
   from {
-    background-position: 1rem 0;
+    background-position: 1rem 0 !important;
   }
   to {
-    background-position: 0 0;
+    background-position: 0 0 !important;
   }
 }
 
 .progress-bar {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  color: #fff;
-  text-align: center;
-  white-space: nowrap;
-  background-color: #593196;
-  -webkit-transition: width 0.6s ease;
-  transition: width 0.6s ease;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-box-direction: normal !important;
+      -ms-flex-direction: column !important;
+          flex-direction: column !important;
+  -webkit-box-pack: center !important;
+      -ms-flex-pack: center !important;
+          justify-content: center !important;
+  color: #fff !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  background-color: #593196 !important;
+  -webkit-transition: width 0.6s ease !important;
+  transition: width 0.6s ease !important;
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
   .progress-bar {
-    -webkit-transition: none;
-    transition: none;
+    -webkit-transition: none !important;
+    transition: none !important;
   }
 }
 
 .progress-bar-striped {
-  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-  background-size: 1rem 1rem;
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent) !important;
+  background-size: 1rem 1rem !important;
 }
 
 .progress-bar-animated {
-  -webkit-animation: progress-bar-stripes 1s linear infinite;
-          animation: progress-bar-stripes 1s linear infinite;
+  -webkit-animation: progress-bar-stripes 1s linear infinite !important;
+          animation: progress-bar-stripes 1s linear infinite !important;
 }
 
 
@@ -103,13 +104,14 @@ progress {
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
-<noscript>
 <link rel="stylesheet" href="${contextPath }/resources/css/main.css" />
-	<link rel="stylesheet"
-		href="${contextPath }/resources/css/noscript.css" />
+<noscript>
+   <link rel="stylesheet"
+      href="${contextPath }/resources/css/noscript.css" />
 </noscript>
 </head>
 <body class="is-preload">
+	<c:import url="../common/headBar.jsp" />
 
 
 	<!-- Wrapper -->
@@ -137,26 +139,21 @@ progress {
 		<!-- Nav -->
 		<nav id="nav">
 			<ul class="links">
-				<li><a href="playManagePage.jsp"><font size="4">상영등록</font></a></li>
-				<li><a href="theaterManagePage.jsp"><font size="4">영화관
+				<li><a href="play.li"><font
+						size="4">상영등록</font></a></li>
+				<li><a href="theater.li"><font size="4">영화관
 							등록</font></a></li>
-				<li><a href="movieRoomManagePage.jsp"><font size="4">상영관
+				<li><a href="movieRoom.li"><font size="4">상영관
 							등록</font></a></li>
-				<li><a href="statsManagePage.jsp"><font size="4">통계/관리</font></a></li>
-				<li class="active"><a href="reservationManagePage.jsp"><font
-						size="4">예매 현황</font></a></li>
-				<li><a href="noticeManagePage.jsp"><font size="4">공지사항
+				<li><a href="stats.li"><font size="4">통계/관리</font></a></li>
+				<li class="active"><a href="reservation.li"><font size="4">예매
+							현황</font></a></li>
+				<li><a href="notice.li"><font size="4">공지사항
 							등록</font></a></li>
-				<li><a href="inquireManagePage.jsp"><font size="4">문의내역</font></a></li>
-
+				<li><a href="inquire.li"><font size="4">문의내역</font></a></li>
 			</ul>
-			<!--  <ul class="icons">
-							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-							<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-							<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
-						</ul>-->
 		</nav>
+			
 
 		<!-- Main -->
 		<div id="main">
