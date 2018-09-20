@@ -250,34 +250,40 @@
 						<tr>
 							<th>No</th>
 							<th>Id</th>
-							<th>상태</th>
+							<th>이름</th>
+							<th>전화번호</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td>1</td>
 							<td>Id 1</td>
-							<td>상태 1</td>
+							<td>이름 1</td>
+							<td>전화번호 1</td>
 						</tr>
 						<tr>
-							<td>2</td>
+							<td>1</td>
 							<td>Id 2</td>
-							<td>상태 2</td>
+							<td>이름 2</td>
+							<td>전화번호 2</td>
 						</tr>
 						<tr>
 							<td>3</td>
 							<td>Id 3</td>
-							<td>상태 3</td>
+							<td>이름 3</td>
+							<td>전화번호 3</td>
 						</tr>
 						<tr>
 							<td>4</td>
 							<td>Id 4</td>
-							<td>상태 4</td>
+							<td>이름 4</td>
+							<td>전화번호 4</td>
 						</tr>
 						<tr>
 							<td>5</td>
 							<td>Id 5</td>
-							<td>상태 5</td>
+							<td>이름 5</td>
+							<td>전화번호 5</td>
 						</tr>
 					</tbody>
 				</table>
