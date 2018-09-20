@@ -41,6 +41,8 @@
 		<url-pattern>*.me</url-pattern>
 	</servlet-mapping>
 	
+	
+	<!-- 소진이형 관리자 부분 -->
 	<servlet>
 		<servlet-name>admin</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -51,8 +53,23 @@
 		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>member</servlet-name>
+		<servlet-name>admin</servlet-name>
 		<url-pattern>*.ad</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 정태 판매자 부분 -->
+	<servlet>
+		<servlet-name>licensee</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/licensee-servlet.xml</param-value>	
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>licensee</servlet-name>
+		<url-pattern>*.li</url-pattern>
 	</servlet-mapping>
 	<!-- 한글 인코딩 처리를 위한 filter Mapping -->
 	<filter>

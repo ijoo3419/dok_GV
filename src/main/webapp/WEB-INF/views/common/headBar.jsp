@@ -7,7 +7,7 @@
 <title>headBar</title>
 <style>
 .headerd {
-	position: fixed;
+	position: fixed; 
 	height: 50px;
 	top: 0;
 	width: 100%;
@@ -70,7 +70,7 @@ a:-webkit-any-link{
 			<li class="nli"><a href="#" title="로그인 하기"><p>로그인</p></a></li>
 			<li class="nli"><a href="#" title="로그아웃 하기"><p>로그아웃</p></a></li>
 			<li class="nli"><a href="#" title="마이페이지 바로가기"><p>마이페이지</p></a></li>
-			<li class="nli"><a href="#" title="영화관 관리 바로가기"><p>영화관관리</p></a></li>
+			<li class="nli"><a href="licensee.li" title="영화관 관리 바로가기"><p>영화관관리</p></a></li>
 			<li class="nli"><a href="admin.ad" title="관리자 페이지"><p>관리자</p></a></li>
 		</ul>
 	</div>
