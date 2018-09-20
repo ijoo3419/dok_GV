@@ -374,7 +374,7 @@
 			
 			
 		</section>
-		<!-- 여섯번째 탭(공지사항) : 성희 공간-->
+		<!-- 일곱번째 탭(공지사항) : 성희 공간-->
 		<section id="tab-7" class="post">
 		
 		</section>

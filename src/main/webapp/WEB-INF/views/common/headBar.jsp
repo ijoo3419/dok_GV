@@ -58,8 +58,9 @@ a:-webkit-any-link{
 <body>
 	<div class="headerd">
 		<div class="logo">
-			<img src="${contextPath }/resources/images/logo.jpg" height="40px"
-				width="150px">
+		
+			<a><img src="${contextPath }/resources/images/logo.jpg" height="40px"
+				width="150px"></a>
 		</div>
 		<ul class="nau">	<!-- href="#"부분 자신한테 맞게 변경하기 ex) 로그인 : href="login.me"-->
 			<li class="nli" style="border-left: 1px solid #a9a5a5;"><a
