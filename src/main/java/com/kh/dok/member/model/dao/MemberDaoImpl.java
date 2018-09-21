@@ -20,8 +20,8 @@ public class MemberDaoImpl implements MemberDao{
 	//비밀번호 일치시 회원 정보 조회용 메소드
 	@Override
 	public Member selectMember(SqlSessionTemplate sqlSession, Member m) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return sqlSession.selectOne("Member.selectLoginUser", m);
 	}
 
 

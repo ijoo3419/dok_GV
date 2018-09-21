@@ -57,7 +57,7 @@
 				<li><a href="reservation.li"><font size="4">예매
 							현황</font></a></li>
 				<li><a href="notice.li"><font size="4">공지사항
-							등록</font></a></li>
+							</font></a></li>
 				<li class="active"><a href="inquire.li"><font size="4">문의내역</font></a></li>
 			</ul>
 		</nav>
@@ -68,6 +68,69 @@
 			<!-- Featured Post -->
 			<article class="post featured">
 			
+			<h2>문의내역</h2>
+			<!-- <div class="col-12">	
+				<div>
+				<h3>날짜 : &nbsp;&nbsp;  <select name="demo-category" id="demo-category">
+
+						<option value="">- 날 짜 -</option>
+						<option value="1">09/11</option>
+						<option value="1">09/12</option>
+						<option value="1">09/13</option>
+						<option value="1">09/14</option>
+					</select></h3>
+				</div>
+				</div>
+				<br><br> -->
+				<br><br>
+				<!-- Table -->
+				<div class="table-wrapper">
+					<table>
+						<thead>
+							<tr>
+								<th>글번호</th>
+								<th>제목</th>
+								<th>작성자</th>
+								<th>조회수</th>
+								<th>날짜</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>이주가 무모한 시도를 하는 중</td>
+								<td>고성희</td>
+								<td>349802</td>
+								<td width="150px">(2018.09.19)</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>이주가 무모한 시도를 하는 중</td>
+								<td>고성희</td>
+								<td>349802</td>
+								<td width="150px">(2018.09.19)</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>이주가 무모한 시도를 하는 중</td>
+								<td>고성희</td>
+								<td>349802</td>
+								<td width="150px">(2018.09.19)</td>
+							</tr>
+						</tbody>
+						<tfoot>
+					</table>
+				</div>
+				
+				<div>
+					<button class="button"><a href="writeQna.bo">문의작성</a></button>
+				</div>
+
+			
+			
+			
+			
+			
 			<div class="progress">
   <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
 </div>
@@ -76,6 +139,7 @@
 			
 		</div>
 	</div>
+
 
 
 

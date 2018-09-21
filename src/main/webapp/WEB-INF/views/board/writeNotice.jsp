@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +9,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<title>Massively by HTML5 UP</title>
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -62,7 +60,7 @@
 				<li><a href="reservation.li"><font size="4">예매
 							현황</font></a></li>
 				<li class="active"><a href="notice.li"><font size="4">공지사항
-							</font></a></li>
+							등록</font></a></li>
 				<li><a href="inquire.li"><font size="4">문의내역</font></a></li>
 			</ul>
 		</nav>
@@ -80,64 +78,45 @@
 			<!-- Featured Post -->
 			<article class="post featured">
 			
-			<h2>공지사항</h2>
-			<!-- <div class="col-12">	
-				<div>
-				<h3>날짜 : &nbsp;&nbsp;  <select name="demo-category" id="demo-category">
+			<!-- 영화관 정보 폼 -->
+				<h2>공지사항 입력</h2><br><br>
+				<form action="insert.me" method="post" encType="multipart/form-data">
 
-						<option value="">- 날 짜 -</option>
-						<option value="1">09/11</option>
-						<option value="1">09/12</option>
-						<option value="1">09/13</option>
-						<option value="1">09/14</option>
-					</select></h3>
-				</div>
-				</div>
-				<br><br> -->
-				<br><br>
-				<!-- Table -->
-				<div class="table-wrapper">
-					<table>
-						<thead>
-							<tr>
-								<th>글번호</th>
-								<th>제목</th>
-								<th>작성자</th>
-								<th>조회수</th>
-								<th>날짜</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>공지사항</td>
-								<td>고성희</td>
-								<td>349802</td>
-								<td width="150px">(2018.09.19)</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>공지사항</td>
-								<td>고성희</td>
-								<td>349802</td>
-								<td width="150px">(2018.09.19)</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>공지사항</td>
-								<td>고성희</td>
-								<td>349802</td>
-								<td width="150px">(2018.09.19)</td>
-							</tr>
-						</tbody>
-						<tfoot>
-					</table>
-				</div>
-				
-				<div>
-					<button class="button"><a href="writeNotice.bo">공지작성</a></button>
-				</div>
 
+
+
+					<div class="row gtr-uniform">
+						
+						<div class="col-6 col-12-xsmall">
+							<h2 align="left">1.제목</h2>
+							<input type="text" name="demo-name" id="demo-name" value=""
+								placeholder="공지사항의 제목을 입력해주세요." />				
+							</div>
+						</div>
+						<br>
+						<h2 align="left">2.내용</h2>
+							<!-- Break -->
+						<div class="col-12">
+							<textarea name="demo-message" id="demo-message"
+								placeholder="공지사항의 내용을 입력해주세요." rows="6"></textarea>
+						</div>
+						<br>
+						<!-- <h2 align="left">3.찾아오는 길</h2>
+							Break
+						<div class="col-12">
+							<textarea name="demo-message" id="demo-message"
+								placeholder="찾아오는 길을 입력해 주세요" rows="6"></textarea>
+						</div> -->
+						<br>
+						<h2 align="left">3.파일첨부</h2>
+						<div class="col-12">
+					
+						<input type="file"><br>
+						<input type="file"><br>
+						<input type="file">
+						</div>
+					</div>
+				</form>
 			
 			
 			
