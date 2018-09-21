@@ -213,7 +213,7 @@ a {
 			<li class="nli"><a href="#" title="예매 바로가기"><p>예매</p></a></li>
 			<li class="nli"><a href="#" title="공지사항 바로가기"><p>공지사항</p></a></li>
 			<li class="nli"><a href="login.me"><p>로그인</p></a></li>
-			<li class="nli"><a href="#" title="로그아웃 하기"><p>로그아웃</p></a></li>
+			<li class="nli"><a href="logout.me" title="로그아웃 하기"><p>로그아웃</p></a></li>
       
 
 			<li class="nli"><a href="member.me" title="마이페이지 바로가기"><p>마이페이지</p></a></li>
@@ -222,49 +222,7 @@ a {
 		</ul>
 	</div>
 	
-	 
-	
-	
-	<!-- 로그인용 모달창 -->
-	
-	<div id="id01" class="modal">
 
-		<form class="modal-content animate" action="login.me" method="post">
-			<div class="imgcontainer">
-				<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span> 
-					<img src="resources/images/movie-icon-11.png" alt="Avatar" class="avatar">
-			</div>
-
-			<div class="container">
-				<label for="uname"><b>아이디(이메일)</b></label> 
-				<input type="text" placeholder="Enter Username" name="email" required> 
-				<label for="psw"><b>비밀번호</b></label> 
-				<input type="password" placeholder="Enter Password" name="user_pwd" required>
-
-				<button class="submitBtn" type="submit">로그인</button>
-				<label> <input type="checkbox" checked="checked" name="remember"> 아이디 저장 </label>
-			</div>
-
-			<div class="container" style="background-color: #f1f1f1">
-				<button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-				<span class="psw"><a href="#"> 비밀번호 찾기 </a></span>
-			</div>
-		</form>
-	</div>
-	
-	<!-- 로그인용 모달창 스크립트 -->
-	<script>
-		// Get the modal
-		var modal = document.getElementById('id01');
-
-		// When the user clicks anywhere outside of the modal, close it
-		window.onclick = function(event) {
-			if (event.target == modal) {
-				modal.style.display = "none";
-			}
-		}
-	</script>
-	
 	
 	
 </body>

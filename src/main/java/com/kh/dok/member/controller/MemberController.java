@@ -6,7 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
+import com.kh.dok.member.model.exception.LoginException;
 import com.kh.dok.member.model.service.MemberService;
 import com.kh.dok.member.model.vo.Member;
 
@@ -57,6 +59,7 @@ public class MemberController {
       return "member/signup";
    } 
    
+
    @RequestMapping(value="insert.me")
    public String signup(Model model, Member m){ 
 	   
@@ -75,6 +78,29 @@ public class MemberController {
 			return "common/errorPage";
 		}
 	   
+
+   @RequestMapping("loginCheck.me")
+   public String loginCheck(Member m, Model model){
+	   
+	   System.out.println("MemberController : " + m);
+      try {
+		model.addAttribute("loginUser", ms.loginMember(m));
+		
+		return "main/main";
+	} catch (LoginException e) {
+		model.addAttribute("msg", e.getMessage());
+		
+		return "common/errorPage";
+	}
+      
+   }
+   
+   @RequestMapping("logout.me")
+   public String logout(SessionStatus status){
+	   status.setComplete();
+	   
+	   return "main/main";
+
    }
 
 }

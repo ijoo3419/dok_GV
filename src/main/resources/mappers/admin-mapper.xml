@@ -2,7 +2,29 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <!-- 인소진 추가  관리자 맵퍼 -->
+<!-- 인소진 추가 관리자 맵퍼 -->
 <mapper namespace="Admin">
-	
+	<resultMap type="Member" id="searchResultSet">
+		<id property="mId" column="MID" />
+		<result property="email" column="EMAIL" />
+		<result property="userPwd" column="USER_PWD" />
+		<result property="userName" column="USER_NAME" />
+		<result property="birthDay" column="BIRTHDAY" />
+		<result property="gender" column="GENDER" />
+		<result property="phone" column="PHONE" />
+		<result property="userClass" column="USER_CLASS" />
+		<result property="status" column="STATUS" />
+		<result property="loginClass" column="LOGIN_CLASS" />
+		<result property="blackListStatus" column="BLACKLIST_CLASS" />
+		<result property="joinDate" column="JOIN_DATE" />
+		<result property="withdrawDate" column="WITHDRAW_DATE" />
+		<result property="nickName" column="NICKNAME" />
+	</resultMap>
+
+	<!-- 회원 전체 조회 -->
+	<select id="searchAll" resultMap="searchResultSet">
+		SELECT *
+		FROM MEMBER
+		ORDER BY MID DESC
+	</select>
 </mapper>
