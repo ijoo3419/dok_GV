@@ -10,37 +10,61 @@
 
 
 <style>
-
+.post{
+height:1600px;
+}
 
 
 #jb-container {
 	width: 940px;
 	margin: 0px auto;
 	padding: 20px;
+	background: green;
+	height:2000px;
+	overflow:hidden;
+	
+	
 }
 
 #jb-header {
 	padding: 20px;
 	margin-bottom: 20px;
+	background:cyan;	
 }
+#rightBox, #leftBox, #centerBox{
+	display:inline-block;
+	height:1500px;
 
-#jb-content {
-	width: 580px;
+}
+#jb-right {
+	width: 300px;
+	padding: 20px;
+	margin-top:20px;
+	margin-bottom: 20px;
+	background:red;
+}
+#jb-center{
+	width: 300px;
+	margin-top:20px;
+	margin-right:20px;
+	margin-bottom: 20px;
+	background:gray;
+}
+/*	float:cener; */
+
+#jb-left {
+	width: 275px;
 	padding: 20px;
 	margin-bottom: 20px;
-	float: right;
-}
-
-#jb-sidebar {
-	width: 260px;
-	padding: 20px;
-	margin-bottom: 20px;
-	float: left;
+	margin-top:20px;
+	height: 300px;
+	background:pink;	
 }
 
 #jb-footer {
 	clear: both;
 	padding: 20px;
+	background:blue;	
 }
 
  #edit :hover {
@@ -71,12 +95,6 @@ li {
 }
 
 </style>
-
-
-
-
-
-
 
 
 
@@ -124,7 +142,7 @@ li {
 			</ul>
 		</nav>
 
-		<!-- Main -->
+			<!-- Main -->
 		<div id="main">
 
 			<!-- Post -->
@@ -137,42 +155,14 @@ li {
 
 				<hr>
 
+ 	
+				 <div id="jb-container" class="box"> 
+				<div id="leftBox">
 
-
-				<div id="jb-container" class="box"> 
-					<!-- <div class="box" id="jb-header">
-						<h1></h1>
-					</div> -->
-					<!-- 예매내역 -->
-					<div id="jb-content" name="reservation" class="box">
-						<div>
-						<img align="left" src="http://image2.megabox.co.kr/mop/home/mypage/main_title4.png" alt="최근 예매 내역">
-						<img align="right" onclick="booked()" src="http://image2.megabox.co.kr/mop/home/mypage/main_btn2.jpg" alt="더보기" id="plus">
-						<br>
-						</div>
-						
-							<p>(영화포스터)(영화제목)(예매시간)(영화관)</p>
-							<p>-</p>
-							<!-- 텍스트에 따라 높이 고정 xx -->
-					</div>
-					
-						<div id="jb-content" name="reservation" class="box">
-						<div>
-						<img align="left" src="http://image2.megabox.co.kr/mop/home/mypage/main_title4.png" alt="최근 예매 내역">
-						<img align="right" onclick="booked()" src="http://image2.megabox.co.kr/mop/home/mypage/main_btn2.jpg" alt="더보기" id="plus">
-						<br>
-						</div>
-						
-							<p>22222222222(영화포스터)(영화제목)(예매시간)(영화관)</p>
-							<p>-</p>
-							<!-- 텍스트에 따라 높이 고정 xx -->
-					</div>
-					
-					
-					<div id="jb-sidebar" class="box">
+					<div id="jb-left" class="box">
 					<div class="h3_wrap">
-					<!-- 개인정보 -->
-						<img align="left" src="http://image2.megabox.co.kr/mop/home/mypage/main_title3.png" alt="개인정보">
+					<h3 align="center">예매 현황</h3>
+					
 						<img align="right" onclick="goToEdit()" src="http://image2.megabox.co.kr/mop/home/mypage/main_btn5.jpg" alt="수정하기 " id="edit">
 						</div>
 						<br>
@@ -181,55 +171,92 @@ li {
 							<li>선호 장르 : </li>
 						</ul>
 					</div>
-					<!-- 문의내역 -->
-					<div id="jb-sidebar" class="box">
+					
+								<div id="jb-left" class="box">
 					<div class="h3_wrap">
-						<img align="left" src="http://image2.megabox.co.kr/mop/home/mypage/main_title8.png" alt="나의문의내역">
+					<h3 align="center">통계</h3>
 						<img align="right" onclick="pluss()" src="http://image2.megabox.co.kr/mop/home/mypage/main_btn2.jpg" alt="더보기" id="pluss">
 						</div>
 						<br>
-						
 						<ul>
 							<p> 문의 내역이 없습니다. </p>
 						</ul>
-					<!-- 무비스토리 -->
-					</div>
-					<div id="jb-footer" class="box">
-						<img src="http://image2.megabox.co.kr/mop/home/mypage/main_title7.png" alt="나의 무비스토리">
+						</div>
+						
+						</div>
+						
+						<div id="centerBox">
+						
+						 <div id="jb-center" class="box"> 
+				 		<div>
+				 		<h3 align="center">상영</h3>
+						<img align="right" onclick="booked()" src="http://image2.megabox.co.kr/mop/home/mypage/main_btn2.jpg" alt="더보기" id="plus">
 						<br>
-						<ul>
-							<li><a href="javascript:void(0)" onclick="showMenu('mypage-moviestory', 'interesting')" title="보고싶어 보기">
-								<span><img src="http://image2.megabox.co.kr/mop/home/mypage/main_icon1.png" onclick="wish()"></span>
-								<strong class="ml10" onclick="wish()">보고싶어</strong>
-								<strong class="c_purple pull-right">0</strong>
-							</li>
-							<li><a href="javascript:void(0)" onclick="showMenu('mypage-moviestory', 'seen')" title="본영화 보기">
-								<span><img src="http://image2.megabox.co.kr/mop/home/mypage/main_icon2.png" onclick="watched()"></span>
-								<strong class="ml10" onclick="watched()">본영화</strong>
-								<strong class="c_purple pull-right">1</strong>
-							</a></li>
-							<li><a href="javascript:void(0)" onclick="showMenu('mypage-moviestory', 'comment')" title="나의 한줄평 보기">
-								<span><img src="http://image2.megabox.co.kr/mop/home/mypage/main_icon4.png" onclick="rev()"></span>
-								<strong class="ml10" onclick="rev()">나의 한줄평</strong>
-								<strong class="c_purple pull-right">0</strong></li>
-						</ul>
+						</div>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							Aenean nec mollis nulla.</p>
+						
+								<p>(영화포스터)(영화제목)(예매시간)(영화관)</p>
+							
+							<p>-</p>
+								
+								</div>
+							
+						
+						<div id="rightBox">
+						</div>
+					<div id="jb-right" class="box">
+					<h3 align="center">상영관 관리</h3>
+					<div>
+						<img align="right" onclick="booked()" src="http://image2.megabox.co.kr/mop/home/mypage/main_btn2.jpg" alt="더보기" id="plus">
+						<br>
+						</div>
+						<p>Lorem ipsum dolor 
+							</p>
+						
+							
+							<p>(영화포스터)(영화제목)(예매시간)(영화관)</p>
+							<p>-</p>
+							
+					</div>
+				
+				
+					<div id="jb-right" class="box">
+					<h3 align="center">공지사항</h3>
+					
+					<div>
+						<img align="right" onclick="booked()" src="http://image2.megabox.co.kr/mop/home/mypage/main_btn2.jpg" alt="더보기" id="plus">
+						<br>
+						</div>
+						
+						
+							
+							<p>(영화포스터)(영화제목)(예매시간)(영화관)</p>
+							<p>-</p>
+							
+					</div>
+				
+					<div id="jb-right" class="box">
+					<h3 align="center">문의사항</h3>
+					
+					<div>
+						<img align="right" onclick="booked()" src="http://image2.megabox.co.kr/mop/home/mypage/main_btn2.jpg" alt="더보기" id="plus">
+						<br>
+						</div>
+						
+						
+							
+							<p>(영화포스터)(영화제목)(예매시간)(영화관)</p>
+							<p>-</p>
+							
 					</div>
 				</div>
+		</div>
+		
+		
 			</section>
-
 		</div>
-
-
-
-		<!-- Copyright -->
-		<div id="copyright">
-			<ul>
-				<li>&copy; Untitled</li>
-				<li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
-			</ul>
-		</div>
-
-	</div>
+		
 	
 	<script>
 		function goToEdit(){
