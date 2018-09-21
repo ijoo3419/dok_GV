@@ -10,6 +10,9 @@
 
 
 <style>
+
+
+
 #jb-container {
 	width: 940px;
 	margin: 0px auto;
@@ -115,7 +118,7 @@ li {
 				<li><a href="stats.li"><font size="4">통계/관리</font></a></li>
 				<li><a href="reservation.li"><font size="4">예매
 							현황</font></a></li>
-				<li><a href="notice.li"><font size="4">공지사항
+				<li><a href="notice.li"><font size="4">공지사항/
 							등록</font></a></li>
 				<li><a href="inquire.li"><font size="4">문의내역</font></a></li>
 			</ul>
@@ -140,33 +143,35 @@ li {
 					<!-- <div class="box" id="jb-header">
 						<h1></h1>
 					</div> -->
-					<div id="jb-content" class="box">
+					<!-- 예매내역 -->
+					<div id="jb-content" name="reservation" class="box">
 						<div>
 						<img align="left" src="http://image2.megabox.co.kr/mop/home/mypage/main_title4.png" alt="최근 예매 내역">
 						<img align="right" onclick="booked()" src="http://image2.megabox.co.kr/mop/home/mypage/main_btn2.jpg" alt="더보기" id="plus">
 						<br>
 						</div>
-						<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Aenean nec mollis nulla. Phasellus lacinia tempus mauris eu
-							laoreet. Proin gravida velit dictum dui consequat malesuada.
-							Aenean et nibh eu purus scelerisque aliquet nec non justo.
-							Aliquam vitae aliquet ipsum. Etiam condimentum varius purus ut
-							ultricies. Mauris id odio pretium, sollicitudin sapien eget,
-							adipiscing risus.</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Aenean nec mollis nulla. Phasellus lacinia tempus mauris eu
-							laoreet. Proin gravida velit dictum dui consequat malesuada.
-							Aenean et nibh eu purus scelerisque aliquet nec non justo.
-							Aliquam vitae aliquet ipsum. Etiam condimentum varius purus ut
-							ultricies. Mauris id odio pretium, sollicitudin sapien eget,
-							adipiscing risus.</p> -->
-							
+						
 							<p>(영화포스터)(영화제목)(예매시간)(영화관)</p>
 							<p>-</p>
-							
+							<!-- 텍스트에 따라 높이 고정 xx -->
 					</div>
+					
+						<div id="jb-content" name="reservation" class="box">
+						<div>
+						<img align="left" src="http://image2.megabox.co.kr/mop/home/mypage/main_title4.png" alt="최근 예매 내역">
+						<img align="right" onclick="booked()" src="http://image2.megabox.co.kr/mop/home/mypage/main_btn2.jpg" alt="더보기" id="plus">
+						<br>
+						</div>
+						
+							<p>22222222222(영화포스터)(영화제목)(예매시간)(영화관)</p>
+							<p>-</p>
+							<!-- 텍스트에 따라 높이 고정 xx -->
+					</div>
+					
+					
 					<div id="jb-sidebar" class="box">
 					<div class="h3_wrap">
+					<!-- 개인정보 -->
 						<img align="left" src="http://image2.megabox.co.kr/mop/home/mypage/main_title3.png" alt="개인정보">
 						<img align="right" onclick="goToEdit()" src="http://image2.megabox.co.kr/mop/home/mypage/main_btn5.jpg" alt="수정하기 " id="edit">
 						</div>
@@ -176,7 +181,7 @@ li {
 							<li>선호 장르 : </li>
 						</ul>
 					</div>
-					
+					<!-- 문의내역 -->
 					<div id="jb-sidebar" class="box">
 					<div class="h3_wrap">
 						<img align="left" src="http://image2.megabox.co.kr/mop/home/mypage/main_title8.png" alt="나의문의내역">
@@ -187,7 +192,7 @@ li {
 						<ul>
 							<p> 문의 내역이 없습니다. </p>
 						</ul>
-					
+					<!-- 무비스토리 -->
 					</div>
 					<div id="jb-footer" class="box">
 						<img src="http://image2.megabox.co.kr/mop/home/mypage/main_title7.png" alt="나의 무비스토리">

@@ -27,6 +27,7 @@
 		FROM MEMBER 
 		WHERE EMAIL = #{email} 
 		AND USER_PWD = #{user_pwd} 
+
 		AND STATUS = 'Y'
 	</select>
 	
