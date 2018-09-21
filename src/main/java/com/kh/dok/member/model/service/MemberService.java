@@ -5,6 +5,9 @@ import com.kh.dok.member.model.vo.Member;
 
 public interface MemberService {
 
-	Object loginMember(Member m)  throws LoginException;
+	Member loginMember(Member m)  throws LoginException;
 
+	int insertMember(Member m);
+ 
 }
+     
