@@ -117,18 +117,7 @@
 		<url-pattern>*.mo</url-pattern>
 	</servlet-mapping>
 
-	<servlet>
-		<description></description>
-		<display-name>CinemaController</display-name>
-		<servlet-name>CinemaController</servlet-name>
-		<servlet-class>com.kh.dok.cinema.controller.CinemaController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>CinemaController</servlet-name>
-		<url-pattern>/CinemaController</url-pattern>
-	</servlet-mapping>
-
-
+	
 
 
 
