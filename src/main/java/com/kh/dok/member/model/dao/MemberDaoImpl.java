@@ -14,7 +14,7 @@ public class MemberDaoImpl implements MemberDao{
 	public String selectEncPassword(SqlSessionTemplate sqlSession, Member m) {
 
 		return sqlSession.selectOne("Member.selectPwd", m.getUser_pwd());
-	}
+	}     
 
 	
 	//비밀번호 일치시 회원 정보 조회용 메소드
@@ -22,6 +22,13 @@ public class MemberDaoImpl implements MemberDao{
 	public Member selectMember(SqlSessionTemplate sqlSession, Member m) {
 		
 		return sqlSession.selectOne("Member.selectLoginUser", m);
+	}
+
+	//회원가입용 메소드
+	@Override
+	public int insertMember(SqlSessionTemplate Sqlsession, Member m) {
+		
+		return Sqlsession.insert("Member.insertMember", m);
 	}
 
 

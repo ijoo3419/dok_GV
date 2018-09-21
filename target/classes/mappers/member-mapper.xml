@@ -5,7 +5,7 @@
 <mapper namespace="Member">
 	<resultMap type="Member" id="memberResultSet">
 
-		<id property="mid" column="MID"/>
+		<id property="mId" column="MID"/>
 		<result property="email" column="EMAIL"/>
 		<result property="user_pwd" column="USER_PWD"/>
 		<result property="user_name" column="USER_NAME"/>
@@ -20,7 +20,7 @@
 		<result property="withdraw_date" column="WITHDRAW_DATE"/>
 		<result property="nickname" column="NICKNAME"/>
 	</resultMap>
-	
+	   
 	 <!--  로그인 정보 조회용 쿼리문  / 고성희 -->
 	<select id="loginCheck" resultMap="memberResultSet" parameterType="Member">
 		SELECT * 
@@ -34,9 +34,10 @@
 	<!-- 회원 가입용 메소드 -->
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER
-		VALUES(SEQ_MID.NEXTVAL, #{email}, #{userPwd}, #{userName}, 
-			   #{email}, #{birthDay}, #{gender}, #{phone}, #{address}, 
-			   SYSDATE, SYSDATE, DEFAULT)
+		VALUES('M' || SEQ_MID.NEXTVAL, #{email}, #{user_pwd}, #{user_name},
+				#{birthday}, NULL, #{phone}, 'BUYER', default,
+				'GENERAL', 'N', SYSDATE, NULL,
+				#{nickname})		   
 	</insert>
 	
 	<!-- 암호화된 비밀번호 조회용 메소드 -->

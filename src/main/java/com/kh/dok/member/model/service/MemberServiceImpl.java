@@ -22,7 +22,7 @@ public class MemberServiceImpl implements MemberService{
 	@Autowired
 	private DataSourceTransactionManager transactionManager;
 	
-	//로그인 메소드
+	//로그인 메소드    
 	@Override
 	public Member loginMember(Member m) throws LoginException{
 		Member loginUser = null;
@@ -36,6 +36,12 @@ public class MemberServiceImpl implements MemberService{
 		}
 		
 		return loginUser;
+	}
+	
+	//회원가입 메소드
+	@Override
+	public int insertMember(Member m) {
+		return md.insertMember(sqlSession, m);
 	}
 
 }

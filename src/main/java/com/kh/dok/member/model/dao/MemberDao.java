@@ -9,6 +9,8 @@ public interface MemberDao {
 	String selectEncPassword(SqlSessionTemplate sqlSession, Member m);
 
 	Member selectMember(SqlSessionTemplate sqlSession, Member m);
+	
+	int insertMember(SqlSessionTemplate Sqlsession, Member m);
 
-
+     
 }

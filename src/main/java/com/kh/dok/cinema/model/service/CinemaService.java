@@ -1,10 +1,12 @@
 package com.kh.dok.cinema.model.service;
 
+import java.util.ArrayList;
+
 import com.kh.dok.cinema.model.vo.Cinema;
 
 public interface CinemaService {
 
-		Cinema selectCinema(Cinema c);
+		ArrayList<Cinema> selectCinema(Cinema c);
 		
 
 }

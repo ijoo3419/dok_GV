@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class Member implements java.io.Serializable{
-	private int mid;
+	private String mid;
 	private String email;
 	private String user_pwd;
 	private String user_name;
@@ -23,31 +23,11 @@ public class Member implements java.io.Serializable{
 	
 	public Member(){}
 
-	public Member(int mid, String email, String user_pwd, String user_name, Date birthday, String gender, String phone,
-			String user_class, String status, String login_class, String blacklist_status, Date join_date,
-			Date withdraw_date, String nickname) {
-		super();
-		this.mid = mid;
-		this.email = email;
-		this.user_pwd = user_pwd;
-		this.user_name = user_name;
-		this.birthday = birthday;
-		this.gender = gender;
-		this.phone = phone;
-		this.user_class = user_class;
-		this.status = status;
-		this.login_class = login_class;
-		this.blacklist_status = blacklist_status;
-		this.join_date = join_date;
-		this.withdraw_date = withdraw_date;
-		this.nickname = nickname;
-	}
-
-	public int getMid() {
+	public String getMid() {
 		return mid;
 	}
 
-	public void setMid(int mid) {
+	public void setMid(String mid) {
 		this.mid = mid;
 	}
 
@@ -155,6 +135,26 @@ public class Member implements java.io.Serializable{
 		this.nickname = nickname;
 	}
 
+	public Member(String mid, String email, String user_pwd, String user_name, Date birthday, String gender,
+			String phone, String user_class, String status, String login_class, String blacklist_status, Date join_date,
+			Date withdraw_date, String nickname) {
+		super();
+		this.mid = mid;
+		this.email = email;
+		this.user_pwd = user_pwd;
+		this.user_name = user_name;
+		this.birthday = birthday;
+		this.gender = gender;
+		this.phone = phone;
+		this.user_class = user_class;
+		this.status = status;
+		this.login_class = login_class;
+		this.blacklist_status = blacklist_status;
+		this.join_date = join_date;
+		this.withdraw_date = withdraw_date;
+		this.nickname = nickname;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [mid=" + mid + ", email=" + email + ", user_pwd=" + user_pwd + ", user_name=" + user_name
@@ -162,6 +162,6 @@ public class Member implements java.io.Serializable{
 				+ ", status=" + status + ", login_class=" + login_class + ", blacklist_status=" + blacklist_status
 				+ ", join_date=" + join_date + ", withdraw_date=" + withdraw_date + ", nickname=" + nickname + "]";
 	}
-	
+
 	
 }

@@ -6,71 +6,80 @@
 <title>Insert title here</title>
 
 <style>
+
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
 /* BASIC */
-
-html {
-  background-color: #56baed;
+ 
+html { 
+  background-color: #5F4B8B !important;
 }
 
 body {
-  font-family: "Poppins", sans-serif;
-  height: 100vh;
+  font-family: "Poppins", sans-serif !important;
+  height: 100vh !important;
 }
 
 a {
-  color: #92badd;
-  display:inline-block;
-  text-decoration: none;
-  font-weight: 400;
+  color: #92badd !important;
+  display:inline-block !important;
+  text-decoration: none !important;
+  font-weight: 400 !important;
 }
 
 h2 {
-  text-align: center;
-  font-size: 16px;
-  font-weight: 600;
-  text-transform: uppercase;
-  display:inline-block;
-  margin: 40px 8px 10px 8px; 
-  color: #cccccc;
+  text-align: center !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  display:inline-block !important;
+  margin: 40px 8px 10px 8px !important; 
+  color: #cccccc !important;
 }
 
+.nli {
+	text-align: center;
+	color: black;
+}
+
+p {
+	color: black;
+}
 
 
 /* STRUCTURE */
 
 .wrapper {
-  display: flex;
-  align-items: center;
-  flex-direction: column; 
-  justify-content: center;
-  width: 100%;
-  min-height: 100%;
-  padding: 20px;
+  display: flex !important;
+  align-items: center !important;
+  flex-direction: column !important; 
+  justify-content: center !important;
+  width: 100% !important;
+  min-height: 100% !important;
+  padding: 20px !important;
 }
 
 #formContent {
-  -webkit-border-radius: 10px 10px 10px 10px;
-  border-radius: 10px 10px 10px 10px;
-  background: #fff;
-  padding: 30px;
-  width: 90%;
-  max-width: 450px;
-  position: relative;
-  padding: 0px;
-  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
-  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
-  text-align: center;
+  -webkit-border-radius: 10px 10px 10px 10px !important;
+  border-radius: 10px 10px 10px 10px !important;
+  background: #fff !important;
+  padding: 30px !important;
+  width: 90% !important;
+  max-width: 450px !important;
+  position: relative !important;
+  padding: 0px !important;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3) !important;
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3) !important;
+  text-align: center !important;
 }
 
 #formFooter {
-  background-color: #f6f6f6;
-  border-top: 1px solid #dce8f1;
-  padding: 25px;
-  text-align: center;
-  -webkit-border-radius: 0 0 10px 10px;
-  border-radius: 0 0 10px 10px;
+  background-color: #f6f6f6 !important;
+  border-top: 1px solid #dce8f1 !important;
+  padding: 25px !important;
+  text-align: center !important;
+  -webkit-border-radius: 0 0 10px 10px !important;
+  border-radius: 0 0 10px 10px !important;
 }
 
 
@@ -78,12 +87,12 @@ h2 {
 /* TABS */
 
 h2.inactive {
-  color: #cccccc;
+  color: #cccccc !important;
 }
 
 h2.active {
-  color: #0d0d0d;
-  border-bottom: 2px solid #5fbae9;
+  color: #0d0d0d !important;
+  border-bottom: 2px solid #5fbae9 !important;
 }
 
 
@@ -91,106 +100,106 @@ h2.active {
 /* FORM TYPOGRAPHY*/
 
 input[type=button], input[type=submit], input[type=reset]  {
-  background-color: #56baed;
-  border: none;
-  color: white;
-  padding: 15px 80px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  text-transform: uppercase;
-  font-size: 13px;
-  -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
-  box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
-  margin: 5px 20px 40px 20px;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
+  background-color: #5F4B8B !important;
+  border: none !important;
+  color: white !important;
+  padding: 15px 80px !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  text-transform: uppercase !important;
+  font-size: 13px !important;
+  -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4) !important;
+  box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4) !important;
+  -webkit-border-radius: 5px 5px 5px 5px !important;
+  border-radius: 5px 5px 5px 5px !important;
+  margin: 5px 20px 40px 20px !important;
+  -webkit-transition: all 0.3s ease-in-out !important;
+  -moz-transition: all 0.3s ease-in-out !important;
+  -ms-transition: all 0.3s ease-in-out !important;
+  -o-transition: all 0.3s ease-in-out !important;
+  transition: all 0.3s ease-in-out !important;
 }
 
 input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
-  background-color: #39ace7;
+  background-color: #39ace7 !important;
 }
 
 input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
-  -moz-transform: scale(0.95);
-  -webkit-transform: scale(0.95);
-  -o-transform: scale(0.95);
-  -ms-transform: scale(0.95);
-  transform: scale(0.95);
+  -moz-transform: scale(0.95) !important;
+  -webkit-transform: scale(0.95) !important;
+  -o-transform: scale(0.95) !important;
+  -ms-transform: scale(0.95) !important;
+  transform: scale(0.95) !important;
 }
 
-input[type=text], input[type=password] {
-  background-color: #f6f6f6;
-  border: none;
-  color: #0d0d0d;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 5px;
-  width: 85%;
-  border: 2px solid #f6f6f6;
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -ms-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
+input[type=text], input[type=password]{
+  background-color: #f6f6f6 !important;
+  border: none !important;
+  color: #0d0d0d !important;
+  padding: 15px 32px !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  font-size: 16px !important;
+  margin: 5px !important;
+  width: 85% !important;
+  border: 2px solid #f6f6f6 !important;
+  -webkit-transition: all 0.5s ease-in-out !important;
+  -moz-transition: all 0.5s ease-in-out !important;
+  -ms-transition: all 0.5s ease-in-out !important;
+  -o-transition: all 0.5s ease-in-out !important;
+  transition: all 0.5s ease-in-out !important;
+  -webkit-border-radius: 5px 5px 5px 5px !important;
+  border-radius: 5px 5px 5px 5px !important;
 }
 
 input[type=text]:focus, input[type=password]:focus {
-  background-color: #fff;
-  border-bottom: 2px solid #5fbae9;
+  background-color: #fff !important;
+  border-bottom: 2px solid #5fbae9 !important;
 }
 
-input[type=text]:placeholder, input[type=password]:placeholder {
-  color: #cccccc;
+input[type=text]:placeholder, input[type=password]:placeholder{
+  color: #cccccc !important;
 }
- 
+
 
 
 /* ANIMATIONS */
 
 /* Simple CSS3 Fade-in-down Animation */
 .fadeInDown {
-  -webkit-animation-name: fadeInDown;
-  animation-name: fadeInDown;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
+  -webkit-animation-name: fadeInDown !important;
+  animation-name: fadeInDown !important;
+  -webkit-animation-duration: 1s !important;
+  animation-duration: 1s !important;
+  -webkit-animation-fill-mode: both !important;
+  animation-fill-mode: both !important;
 }
 
 @-webkit-keyframes fadeInDown {
   0% {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
+    opacity: 0 !important;
+    -webkit-transform: translate3d(0, -100%, 0) !important;
+    transform: translate3d(0, -100%, 0) !important;
   }
   100% {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
+    opacity: 1 !important;
+    -webkit-transform: none !important;
+    transform: none !important;
   }
 }
 
 @keyframes fadeInDown {
   0% {
     opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
+    -webkit-transform: translate3d(0, -100%, 0) !important;
+    transform: translate3d(0, -100%, 0) !important;
   }
   100% {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
+    opacity: 1 !important;
+    -webkit-transform: none !important;
+    transform: none !important;
   }
 }
 
@@ -201,61 +210,61 @@ input[type=text]:placeholder, input[type=password]:placeholder {
 
 .fadeIn {
   opacity:0;
-  -webkit-animation:fadeIn ease-in 1;
-  -moz-animation:fadeIn ease-in 1;
-  animation:fadeIn ease-in 1;
+  -webkit-animation:fadeIn ease-in 1 !important;
+  -moz-animation:fadeIn ease-in 1 !important;
+  animation:fadeIn ease-in 1 !important;
 
-  -webkit-animation-fill-mode:forwards;
-  -moz-animation-fill-mode:forwards;
-  animation-fill-mode:forwards;
+  -webkit-animation-fill-mode:forwards !important;
+  -moz-animation-fill-mode:forwards !important;
+  animation-fill-mode:forwards !important;
 
-  -webkit-animation-duration:1s;
-  -moz-animation-duration:1s;
-  animation-duration:1s;
+  -webkit-animation-duration:1s !important;
+  -moz-animation-duration:1s !important;
+  animation-duration:1s !important;
 }
 
 .fadeIn.first {
-  -webkit-animation-delay: 0.4s;
-  -moz-animation-delay: 0.4s;
-  animation-delay: 0.4s;
+  -webkit-animation-delay: 0.4s !important;
+  -moz-animation-delay: 0.4s !important;
+  animation-delay: 0.4s !important;
 }
 
 .fadeIn.second {
-  -webkit-animation-delay: 0.6s;
-  -moz-animation-delay: 0.6s;
-  animation-delay: 0.6s;
+  -webkit-animation-delay: 0.6s !important;
+  -moz-animation-delay: 0.6s !important;
+  animation-delay: 0.6s !important;
 }
 
 .fadeIn.third {
-  -webkit-animation-delay: 0.8s;
-  -moz-animation-delay: 0.8s;
-  animation-delay: 0.8s;
+  -webkit-animation-delay: 0.8s !important;
+  -moz-animation-delay: 0.8s !important;
+  animation-delay: 0.8s !important;
 }
 
 .fadeIn.fourth {
-  -webkit-animation-delay: 1s;
-  -moz-animation-delay: 1s;
-  animation-delay: 1s;
+  -webkit-animation-delay: 1s !important;
+  -moz-animation-delay: 1s !important;
+  animation-delay: 1s !important;
 }
 
 /* Simple CSS3 Fade-in Animation */
 .underlineHover:after {
-  display: block;
-  left: 0;
-  bottom: -10px;
-  width: 0;
-  height: 2px;
-  background-color: #56baed;
-  content: "";
-  transition: width 0.2s;
+  display: block !important;
+  left: 0 !important;
+  bottom: -10px !important;
+  width: 0 !important;
+  height: 2px !important;
+  background-color: #56baed !important;
+  content: "" !important;
+  transition: width 0.2s !important;
 }
 
 .underlineHover:hover {
-  color: #0d0d0d;
+  color: #0d0d0d !important;
 }
 
 .underlineHover:hover:after{
-  width: 100%;
+  width: 100% !important;
 }
 
 
@@ -263,17 +272,95 @@ input[type=text]:placeholder, input[type=password]:placeholder {
 /* OTHERS */
 
 *:focus {
-    outline: none;
+    outline: none !important;
 } 
 
 #icon {
-  width:60%;
+  width:60% !important;
 }
 
 * {
-  box-sizing: border-box;
+  box-sizing: border-box !important;
 }
 
+*{font-family: 'Roboto', sans-serif;}
+
+@keyframes click-wave {
+  0% {
+    height: 40px;
+    width: 40px;
+    opacity: 0.35;
+    position: relative;
+  }
+  100% {
+    height: 200px;
+    width: 200px;
+    margin-left: -80px;
+    margin-top: -80px;
+    opacity: 0;
+  }
+}
+
+.option-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  position: relative;
+  top: 8px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 40px;
+  width: 40px;
+  transition: all 0.15s ease-out 0s;
+  background: #cbd1d8;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 0.5rem;
+  outline: none;
+  position: relative;
+  z-index: 1000;
+}
+.option-input:hover {
+  background: #9faab7;
+}
+.option-input:checked {
+  background: #40e0d0;
+}
+.option-input:checked::before {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  content: '✔';
+  display: inline-block;
+  font-size: 26.66667px;
+  text-align: center;
+  line-height: 40px;
+}
+.option-input:checked::after {
+  -webkit-animation: click-wave 0.65s;
+  -moz-animation: click-wave 0.65s;
+  animation: click-wave 0.65s;
+  background: #40e0d0;
+  content: '';
+  display: block;
+  position: relative;
+  z-index: 100;
+}
+.option-input.radio {
+  border-radius: 50%;
+}
+.option-input.radio::after {
+  border-radius: 50%;
+}
+body label {
+  display: block;
+  line-height: 50px;
+}
 
 </style>
 
@@ -283,6 +370,10 @@ input[type=text]:placeholder, input[type=password]:placeholder {
 
 </head>
 <body>
+
+	<%@ include file="../common/headBar.jsp"%>
+
+
 <div class="wrapper fadeInDown">
   <div id="formContent">
   
@@ -295,15 +386,23 @@ input[type=text]:placeholder, input[type=password]:placeholder {
       <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
     </div>
 
-    <!-- Login Form -->
-    <form>
-      <input type="text" id="email" class="fadeIn third" name="email" placeholder="email">
-      <input type="password" id="user_pwd" class="fadeIn second" name="user_pwd" placeholder="password">
+    <!-- Signup Form -->
+    <form action="insert.me" method="post">
+      <input type="text" id="email" class="fadeIn third" name="email" placeholder="* email">
+      <input type="password" id="user_pwd" class="fadeIn second" name="user_pwd" placeholder="* password">
       <input type="text" id="user_name" class="fadeIn third" name="user_name" placeholder="name">
-      <input type="text" id="birthday" class="fadeIn second" name="birthday" placeholder="birthday">
-      <input type="text" id="gender" class="fadeIn third" name="gender" placeholder="gender">
+  	  <input type="text" id="birthday" name="birthday" maxlength="8" class="fadeIn third" placeholder="생년월일 (20180919 형식으로 적어주세요.)">
+
+   <!-- <label>
+    <input type="radio" class="option-input radio fadeIn second" name="gender" value="F"/>
+    F 
+    <input type="radio" class="option-input radio fadeIn second" name="gender" value="M"/>
+    M
+  </label> -->
+  
+  
       <input type="text" id="phone" class="fadeIn second" name="phone" placeholder="phone">
-      <input type="text" id="nickname" class="fadeIn second" name="nickname" placeholder="nickname">
+      <input type="text" id="nickname" class="fadeIn second" name="nickname" placeholder="* nickname">
       <input type="submit" class="fadeIn fourth" value="회원가입">
     </form>
 
