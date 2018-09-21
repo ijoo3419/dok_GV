@@ -1,5 +1,7 @@
 package com.kh.dok.cinema.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +18,8 @@ public class CinemaServiceImpl implements CinemaService{
 	
 	
 	@Override
-	public Cinema selectCinema(Cinema c) {
-		Cinema cienmaView = null;
+	public ArrayList<Cinema> selectCinema(Cinema c) {
+		ArrayList<Cinema> cienmaView = null;
 		
 		
 		cienmaView = cd.selectCinema(sqlSession, c);
