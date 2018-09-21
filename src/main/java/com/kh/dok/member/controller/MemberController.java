@@ -15,10 +15,11 @@ import com.kh.dok.member.model.vo.Member;
 @Controller
 @SessionAttributes("loginUser")
 public class MemberController {
+	
    @Autowired
    private MemberService ms;
    @Autowired BCryptPasswordEncoder passwordEncoder;
-   
+        
    @RequestMapping("member.me")
    public String showMypageView(){
       return "member/mypage_main";
@@ -58,6 +59,26 @@ public class MemberController {
       return "member/signup";
    } 
    
+
+   @RequestMapping(value="insert.me")
+   public String signup(Model model, Member m){ 
+	   
+	   System.out.println("0120231021301230" + m);
+	   
+	   m.setUser_pwd(passwordEncoder.encode(m.getUser_pwd()));
+	   
+	   int result = ms.insertMember(m);
+	   
+	   System.out.println("controller Member : " + m);
+	   
+		if(result > 0){
+			return "main/main";
+		} else {
+			model.addAttribute("msg", "회원 가입 실패");
+			return "common/errorPage";
+		}
+	   
+
    @RequestMapping("loginCheck.me")
    public String loginCheck(Member m, Model model){
 	   
@@ -79,6 +100,7 @@ public class MemberController {
 	   status.setComplete();
 	   
 	   return "main/main";
+
    }
 
 }
