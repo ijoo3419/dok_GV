@@ -5,7 +5,7 @@
 <mapper namespace="Member">
 	<resultMap type="Member" id="memberResultSet">
 
-		<id property="mid" column="MID"/>
+		<id property="mId" column="MID"/>
 		<result property="email" column="EMAIL"/>
 		<result property="user_pwd" column="USER_PWD"/>
 		<result property="user_name" column="USER_NAME"/>

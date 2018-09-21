@@ -80,47 +80,31 @@
 			
 			<!-- 영화관 정보 폼 -->
 				<h2>공지사항 입력</h2><br><br>
-				<form action="insert.me" method="post" encType="multipart/form-data">
-
-
-
-
+				<form action="insertNotice.bo" method="post" encType="multipart/form-data">
 					<div class="row gtr-uniform">
-						
 						<div class="col-6 col-12-xsmall">
 							<h2 align="left">1.제목</h2>
-							<input type="text" name="demo-name" id="demo-name" value=""
-								placeholder="공지사항의 제목을 입력해주세요." />				
-							</div>
-						</div>
-						<br>
-						<h2 align="left">2.내용</h2>
-							<!-- Break -->
-						<div class="col-12">
-							<textarea name="demo-message" id="demo-message"
-								placeholder="공지사항의 내용을 입력해주세요." rows="6"></textarea>
-						</div>
-						<br>
-						<!-- <h2 align="left">3.찾아오는 길</h2>
-							Break
-						<div class="col-12">
-							<textarea name="demo-message" id="demo-message"
-								placeholder="찾아오는 길을 입력해 주세요" rows="6"></textarea>
-						</div> -->
-						<br>
-						<h2 align="left">3.파일첨부</h2>
-						<div class="col-12">
-					
-						<input type="file"><br>
-						<input type="file"><br>
-						<input type="file">
+							<input type="text" name="btitle" id="btitle" placeholder="공지사항의 제목을 입력해주세요." />				
 						</div>
 					</div>
+					<br>
+					<h2 align="left">2.내용</h2>
+					
+					<!-- Break -->
+					<div class="col-12">
+						<textarea name="bcontent" id="bcontent" placeholder="공지사항의 내용을 입력해주세요." rows="6"></textarea>
+					</div>
+					<br>
+					<h2 align="left">3.파일첨부</h2>
+					<div class="col-12">
+						<input type="file" name="file">
+					</div>
+				</div>
 				</form>
-			
-			
-			
-			
+				
+				<div>
+					<button class="button"><a href="insertNotice.bo">공지등록</a></button>
+				</div>
 			</article>
 		</div>
 	</div>

@@ -14,6 +14,7 @@
 		<mapper resource="mappers/member-mapper.xml"/>
 		<mapper resource="mappers/cinema-mapper.xml"/>
 		<mapper resource="mappers/movie-mapper.xml"/>
+
 	</mappers>
 </configuration>
 
