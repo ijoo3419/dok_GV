@@ -4,10 +4,13 @@ import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.kh.dok.movie.model.dao.MovieDao;
 import com.kh.dok.movie.model.vo.Movie;
 
+
+@Service
 public class MovieServiceImpl implements MovieService{
 	@Autowired
 	private SqlSessionTemplate sqlSession;

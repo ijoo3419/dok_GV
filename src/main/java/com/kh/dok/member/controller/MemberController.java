@@ -77,7 +77,7 @@ public class MemberController {
 			model.addAttribute("msg", "회원 가입 실패");
 			return "common/errorPage";
 		}
-	   
+   }
 
    @RequestMapping("loginCheck.me")
    public String loginCheck(Member m, Model model){
