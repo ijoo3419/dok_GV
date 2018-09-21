@@ -369,7 +369,7 @@ hr {
 				<a style="text-align:center; width:100px; margin-left:40px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">평점을 입력하세요.</a>
 			</div>
 			<div id="gradeinsert">
-				<input type="text" style="width:600px; height:98px;">
+				<input type="text" style="width:600px; height:98px; margin:0 !important;">
 			</div>
 			<input type="button" value="등록" style="width:100px; height:100px;">
 			
@@ -591,7 +591,17 @@ hr {
 	<!-- </div> -->
 							
 		</article>
+		
+		
 </div>
+<!-- Copyright -->
+		<div id="copyright">
+			<ul>
+				<li>&copy; Untitled</li>
+				<li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+			</ul>
+		</div>
+
 <br><br><br><br><br><br>			
 
 		<!-- Scripts -->
