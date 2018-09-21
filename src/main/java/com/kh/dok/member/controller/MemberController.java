@@ -47,6 +47,14 @@ public class MemberController {
    public String theaterAddView(){
       return "member/theaterAdd";
    } 
+   @RequestMapping("login.me")
+   public String loginView(){
+      return "member/login";
+   } 
+   @RequestMapping("signUp.me")
+   public String signupView(){
+      return "member/signup";
+   } 
    
 /*   @RequestMapping("login.me")
    public String loginCheck(Member m, Model model){
