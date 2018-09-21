@@ -91,15 +91,15 @@ button:hover {
 
 /* Extra styles for the cancel button */
 .cancelbtn {
-    width: auto;
-    padding: 10px 18px;
-    background-color: #f44336;
+    width: auto  !important;
+    padding: 10px 18px  !important;
+    background-color: #f44336  !important;
 }
 
 .submitBtn {
-    width: auto;
-    padding: 10px 18px;
-    background-color: #5F4B8B;
+    width: auto  !important;
+    padding: 10px 18px  !important;
+    background-color: #5F4B8B  !important;
 }
 
 /* Center the image and position the close button */
@@ -187,11 +187,11 @@ a {
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {
     span.psw {
-       display: block;
-       float: none;
+       display: block  !important;
+       float: none  !important;
     }
     .cancelbtn {
-       width: 100%;
+       width: 100%  !important;
     }
 
 }
@@ -212,7 +212,7 @@ a {
 			<li class="nli"><a href="cinema.ci" title="극장 바로가기"><p>극장</p></a></li>
 			<li class="nli"><a href="#" title="예매 바로가기"><p>예매</p></a></li>
 			<li class="nli"><a href="#" title="공지사항 바로가기"><p>공지사항</p></a></li>
-			<li class="nli"><a onclick="document.getElementById('id01').style.display='block'"><p>로그인</p></a></li>
+			<li class="nli"><a href="login.me"><p>로그인</p></a></li>
 			<li class="nli"><a href="#" title="로그아웃 하기"><p>로그아웃</p></a></li>
       
 
@@ -222,7 +222,7 @@ a {
 		</ul>
 	</div>
 	
-	
+	 
 	
 	
 	<!-- 로그인용 모달창 -->
