@@ -15,5 +15,11 @@ public class MovieController {
 	public String showmovieDetailView(){
 		return "movie/movieDetail";
 	}
+	
+	//박지용 예매페이지 이동
+	@RequestMapping("moviePay.mo")
+	public String showmoviePayView(){
+		return "movie/moviePay";
+	}
 }
 

@@ -187,7 +187,7 @@ to {
 					</div>
 					<div>
 						<button id="detail" onclick="location.href=''">상세보기</button>		<!-- view구현 할 사람 여기 사용 -->
-						<button id="book" onclick="location.href=''">예매하기</button>			<!-- 영화 리스트에서 view연결 할 사람 여기로 -->
+						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>			<!-- 영화 리스트에서 view연결 할 사람 여기로 -->
 					</div></li>
 				<li class="rank"><img class="rimage"
 					src="${contextPath }/resources/images/slide2.jpg"
@@ -197,7 +197,7 @@ to {
 					</div>
 					<div>
 						<button id="detail">상세보기</button>
-						<button id="book">예매하기</button>
+						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>
 					</div></li>
 				<li class="rank"><img class="rimage"
 					src="${contextPath }/resources/images/slide3.jpg"
@@ -207,7 +207,7 @@ to {
 					</div>
 					<div>
 						<button id="detail">상세보기</button>
-						<button id="book">예매하기</button>
+						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>
 					</div></li>
 				<li class="rank"><img class="rimage"
 					src="${contextPath }/resources/images/slide4.jpg"
@@ -217,7 +217,7 @@ to {
 					</div>
 					<div>
 						<button id="detail">상세보기</button>
-						<button id="book">예매하기</button>
+						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>
 					</div></li>
 			</ul>
 		</div>
@@ -234,7 +234,7 @@ to {
 					</div>
 					<div>
 						<button id="detail" onclick="location.href=''">상세보기</button>
-						<button id="book" onclick="location.href=''">예매하기</button>
+						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>
 					</div></li>
 				<li class="rank"><img class="rimage"
 					src="${contextPath }/resources/images/slide2.jpg"
@@ -244,7 +244,7 @@ to {
 					</div>
 					<div>
 						<button id="detail">상세보기</button>
-						<button id="book">예매하기</button>
+						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>
 					</div></li>
 				<li class="rank"><img class="rimage"
 					src="${contextPath }/resources/images/slide3.jpg"
@@ -254,7 +254,7 @@ to {
 					</div>
 					<div>
 						<button id="detail">상세보기</button>
-						<button id="book">예매하기</button>
+						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>
 					</div></li>
 				<li class="rank"><img class="rimage"
 					src="${contextPath }/resources/images/slide4.jpg"
@@ -264,7 +264,7 @@ to {
 					</div>
 					<div>
 						<button id="detail">상세보기</button>
-						<button id="book">예매하기</button>
+						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>
 					</div></li>
 			</ul>
 		</div>
