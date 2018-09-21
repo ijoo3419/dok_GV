@@ -4,26 +4,26 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Member">
 	<resultMap type="Member" id="memberResultSet">
-		<id property="mid" column="MID"/>
-		<result property="userId" column="EMAIL"/>
-		<result property="userPwd" column="USER_PWD"/>
-		<result property="userName" column="USER_NAME"/>
-		<result property="birthDay" column="BIRTHDAY"/>
-		<result property="gender" column="GENDER"/>
-		<result property="phone" column="PHONE"/>
-		<result property="address" column="USER_CLASS"/>
-		<result property="enrollDate" column="STATUS"/>
-		<result property="modifyDate" column="LOGIN_CLASS"/>
-		<result property="status" column="BLACKLIST_STATUS"/>
-		<result property="modifyDate" column="JOIN_DATE"/>
-		<result property="status" column="WITHDRAW_DATE"/>
-		<result property="modifyDate" column="NICKNAME"/>
-	</resultMap>
+      <id property="mid" column="MID"/>
+      <result property="email" column="EMAIL"/>
+      <result property="user_pwd" column="USER_PWD"/>
+      <result property="user_name" column="USER_NAME"/>
+      <result property="birthday" column="BIRTHDAY"/>
+      <result property="gender" column="GENDER"/>
+      <result property="phone" column="PHONE"/>
+      <result property="user_class" column="USER_CLASS"/>
+      <result property="status" column="STATUS"/>
+      <result property="login_class" column="LOGIN_CLASS"/>
+      <result property="blacklist_status" column="BLACKLIST_STATUS"/>
+      <result property="join_date" column="JOIN_DATE"/>
+      <result property="withdraw_date" column="WITHDRAW_DATE"/>
+      <result property="nickname" column="NICKNAME"/>
+   </resultMap>
 	 <!--  로그인 정보 조회용 쿼리문  -->
 	<select id="loginCheck" resultMap="memberResultSet" parameterType="Member">
 		SELECT * 
 		FROM MEMBER 
-		WHERE USER_ID = #{userId} 
+		WHERE email = #{email} 
 		AND USER_PWD = #{userPwd} 
 		AND STATUS = 'Y'
 	</select>
@@ -31,16 +31,16 @@
 	<!-- 회원 가입용 메소드 -->
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER
-		VALUES(SEQ_MID.NEXTVAL, #{userId}, #{userPwd}, #{userName}, 
+		VALUES(SEQ_MID.NEXTVAL, #{email}, #{userPwd}, #{userName}, 
 			   #{email}, #{birthDay}, #{gender}, #{phone}, #{address}, 
 			   SYSDATE, SYSDATE, DEFAULT)
 	</insert>
 	
 	<!-- 암호화된 비밀번호 조회용 메소드 -->
 	<select id="selectPwd" resultType="java.lang.String" parameterType="java.lang.String">
-		SELECT USER_PWD
+		SELECT USER_PWD 
 		FROM MEMBER
-		WHERE USER_ID = #{userId}
+		WHERE email = #{email}
 		AND STATUS = 'Y'
 	</select>
 	
@@ -48,12 +48,8 @@
 	<select id="selectLoginUser" resultMap="memberResultSet" parameterType="Member">
 		SELECT *
 		FROM MEMBER
-		WHERE USER_ID = #{userId}
+		WHERE email = #{email}
 		AND STATUS = 'Y'
 	</select>
 	
-	<insert id="insertBoard">
-		INSERT INTO BOARD(BID, BTITLE)
-		VALUES(SQE_BID.NEXTVAL, '새로운 회원이 가입되었습니다.')
-	</insert>
 </mapper>

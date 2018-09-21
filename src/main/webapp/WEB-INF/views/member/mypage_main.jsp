@@ -197,7 +197,7 @@ li {
 								<strong class="c_purple pull-right">0</strong></li>
 						</ul>
 					</div>
-				</div>
+				</div> 
 			</section>
 
 		</div>
