@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Movie">
+	<resultMap type="Movie" id="movieResultSet">
+		<id property="movie_id" column="MOVIE_ID"/>
+		<result property="movie_title" column="MOVIE_TITLE"/>
+		<result property="movie_etitle" column="MOVIE_ETITLE"/>
+		<result property="movie_content" column="MOVIE_CONTENT"/>
+		<result property="open_date" column="OPEN_DATE"/>
+		<result property="director_name" column="DIRECTOR_NAME"/>
+		<result property="production_com" column="PRODUCTION_COM"/>
+		<result property="movie_Age" column="MOVIE_AGE"/>
+		<result property="genre" column="GENRE"/>
+		<result property="running_time" column="RUNNIG_TIME"/>
+	
+	</resultMap>
+	
+</mapper>
