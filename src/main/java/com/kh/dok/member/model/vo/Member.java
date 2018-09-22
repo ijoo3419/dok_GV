@@ -10,15 +10,15 @@ public class Member implements java.io.Serializable{
 	private String email;
 	private String user_pwd;
 	private String user_name;
-	private Date birthday;
+	private String birthday;
 	private String gender;
 	private String phone;
 	private String user_class;
 	private String status;
 	private String login_class;
 	private String blacklist_status;
-	private Date join_date;
-	private Date withdraw_date;
+	private String join_date;
+	private String withdraw_date;
 	private String nickname;
 	
 	public Member(){}
@@ -55,11 +55,11 @@ public class Member implements java.io.Serializable{
 		this.user_name = user_name;
 	}
 
-	public Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 
@@ -111,19 +111,19 @@ public class Member implements java.io.Serializable{
 		this.blacklist_status = blacklist_status;
 	}
 
-	public Date getJoin_date() {
+	public String getJoin_date() {
 		return join_date;
 	}
 
-	public void setJoin_date(Date join_date) {
+	public void setJoin_date(String join_date) {
 		this.join_date = join_date;
 	}
 
-	public Date getWithdraw_date() {
+	public String getWithdraw_date() {
 		return withdraw_date;
 	}
 
-	public void setWithdraw_date(Date withdraw_date) {
+	public void setWithdraw_date(String withdraw_date) {
 		this.withdraw_date = withdraw_date;
 	}
 
@@ -135,9 +135,17 @@ public class Member implements java.io.Serializable{
 		this.nickname = nickname;
 	}
 
-	public Member(String mid, String email, String user_pwd, String user_name, Date birthday, String gender,
-			String phone, String user_class, String status, String login_class, String blacklist_status, Date join_date,
-			Date withdraw_date, String nickname) {
+	@Override
+	public String toString() {
+		return "Member [mid=" + mid + ", email=" + email + ", user_pwd=" + user_pwd + ", user_name=" + user_name
+				+ ", birthday=" + birthday + ", gender=" + gender + ", phone=" + phone + ", user_class=" + user_class
+				+ ", status=" + status + ", login_class=" + login_class + ", blacklist_status=" + blacklist_status
+				+ ", join_date=" + join_date + ", withdraw_date=" + withdraw_date + ", nickname=" + nickname + "]";
+	}
+
+	public Member(String mid, String email, String user_pwd, String user_name, String birthday, String gender,
+			String phone, String user_class, String status, String login_class, String blacklist_status,
+			String join_date, String withdraw_date, String nickname) {
 		super();
 		this.mid = mid;
 		this.email = email;
@@ -154,14 +162,5 @@ public class Member implements java.io.Serializable{
 		this.withdraw_date = withdraw_date;
 		this.nickname = nickname;
 	}
-
-	@Override
-	public String toString() {
-		return "Member [mid=" + mid + ", email=" + email + ", user_pwd=" + user_pwd + ", user_name=" + user_name
-				+ ", birthday=" + birthday + ", gender=" + gender + ", phone=" + phone + ", user_class=" + user_class
-				+ ", status=" + status + ", login_class=" + login_class + ", blacklist_status=" + blacklist_status
-				+ ", join_date=" + join_date + ", withdraw_date=" + withdraw_date + ", nickname=" + nickname + "]";
-	}
-
 	
 }

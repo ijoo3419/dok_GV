@@ -4,7 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+	
 <style>
 
 @import url('https://fonts.googleapis.com/css?family=Poppins');
@@ -113,7 +115,7 @@ input[type=button], input[type=submit], input[type=reset]  {
   box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4) !important;
   -webkit-border-radius: 5px 5px 5px 5px !important;
   border-radius: 5px 5px 5px 5px !important;
-  margin: 5px 20px 40px 20px !important;
+  margin: 5px 20px 10px 20px !important;
   -webkit-transition: all 0.3s ease-in-out !important;
   -moz-transition: all 0.3s ease-in-out !important;
   -ms-transition: all 0.3s ease-in-out !important;
@@ -388,22 +390,26 @@ body label {
 
     <!-- Signup Form -->
     <form action="insert.me" method="post">
-      <input type="text" id="email" class="fadeIn third" name="email" placeholder="* email">
-      <input type="password" id="user_pwd" class="fadeIn second" name="user_pwd" placeholder="* password">
+      <input type="text" id="email" class="fadeIn third" name="email" placeholder="* email" required>
+      <input type="button" class="fadeIn fourth" value="이메일 인증">
+      <input type="password" id="user_pwd" class="fadeIn second" class="pass" name="user_pwd" placeholder="* password" required onkeyup="checkPwd()">
+      <input type="password" id="user_pwd2" class="fadeIn second" class="pass" name="user_pwd2" placeholder="* password check" required onkeyup="checkPwd()">
+      <div id="check"></div>
       <input type="text" id="user_name" class="fadeIn third" name="user_name" placeholder="name">
   	  <input type="text" id="birthday" name="birthday" maxlength="8" class="fadeIn third" placeholder="생년월일 (20180919 형식으로 적어주세요.)">
 
-   <!-- <label>
+   <label>
     <input type="radio" class="option-input radio fadeIn second" name="gender" value="F"/>
     F 
     <input type="radio" class="option-input radio fadeIn second" name="gender" value="M"/>
     M
-  </label> -->
+  </label>
   
   
       <input type="text" id="phone" class="fadeIn second" name="phone" placeholder="phone">
-      <input type="text" id="nickname" class="fadeIn second" name="nickname" placeholder="* nickname">
+      <input type="text" id="nickname" class="fadeIn second" name="nickname" placeholder="* nickname" required onkeyup="checkNick()">
       <input type="submit" class="fadeIn fourth" value="회원가입">
+      
     </form>
 
     <!-- Remind Passowrd -->
@@ -411,7 +417,38 @@ body label {
       <a class="underlineHover" href="#">Forgot Password?</a>
     </div>
 
+<script>
+
+//재입력 비밀번호 체크하여 가입버튼 비활성화 또는 맞지않음을 알림.
+function checkPwd() {
+    var input = $('#user_pwd').val();
+    var reinput = $('#user_pwd2').val();
+    
+    console.log(input);
+    console.log(reinput);
+    
+    if(reinput != "" && input == reinput){
+    	document.getElementById('check').innerHTML = "<span style='color: green;'>비밀번호가 일치합니다.</span>"
+    } else if(reinput != "" && input != reinput){
+    	document.getElementById('check').innerHTML = "<span style='color: red;'>비밀번호가 일치하지 않습니다.</span>"
+    }
+}
+
+
+
+</script>
+
+
+
   </div>
 </div>
+
+
+
+
+
+
+
+
 </body>
 </html>
