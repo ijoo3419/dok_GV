@@ -29,6 +29,9 @@ public class MemberServiceImpl implements MemberService{
 		
 		String encPassword = md.selectEncPassword(sqlSession, m);
 		
+		System.out.println("enc" + encPassword);
+		System.out.println("mgu" + m.getUser_pwd());
+		
 		if(!passwordEncoder.matches(m.getUser_pwd(), encPassword)){
 			throw new LoginException("로그인 실패!");
 		}else{
@@ -43,5 +46,7 @@ public class MemberServiceImpl implements MemberService{
 	public int insertMember(Member m) {
 		return md.insertMember(sqlSession, m);
 	}
+	
+	
 
 }

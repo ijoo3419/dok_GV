@@ -61,10 +61,10 @@ public class MemberController {
    
 
    @RequestMapping(value="insert.me")
-   public String signup(Model model, Member m){ 
+   public String insertMember(Model model, Member m){ 
 	   
-	   System.out.println("0120231021301230" + m);
-	   
+	   System.out.println("나와라나와라" + m);
+
 	   m.setUser_pwd(passwordEncoder.encode(m.getUser_pwd()));
 	   
 	   int result = ms.insertMember(m);
@@ -83,12 +83,19 @@ public class MemberController {
    public String loginCheck(Member m, Model model){
 	   
 	   System.out.println("MemberController : " + m);
+	   
       try {
 		model.addAttribute("loginUser", ms.loginMember(m));
 		
+		System.out.println("MemberController in try : " + m);
+		
 		return "main/main";
-	} catch (LoginException e) {
+		
+      	} catch (LoginException e) {
+      		
 		model.addAttribute("msg", e.getMessage());
+		
+		System.out.println("MemberController in catch : " + m);
 		
 		return "common/errorPage";
 	}

@@ -5,7 +5,7 @@
 <mapper namespace="Member">
 	<resultMap type="Member" id="memberResultSet">
 
-		<id property="mId" column="MID"/>
+		<id property="mid" column="MID"/>
 		<result property="email" column="EMAIL"/>
 		<result property="user_pwd" column="USER_PWD"/>
 		<result property="user_name" column="USER_NAME"/>
@@ -27,27 +27,25 @@
 		FROM MEMBER 
 		WHERE EMAIL = #{email} 
 		AND USER_PWD = #{user_pwd} 
-
-		AND STATUS = 'Y'
+		AND STATUS = 'N'
 	</select>
 	
-	<!-- 회원 가입용 메소드 -->
+	<!-- 회원 가입용 메소드 / 황이주 -->
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER
-		VALUES('M' || SEQ_MID.NEXTVAL, #{email}, #{user_pwd}, #{user_name},
-				#{birthday}, NULL, #{phone}, 'BUYER', default,
+		VALUES('M' || MEMBER_MID.NEXTVAL, #{email}, #{user_pwd}, #{user_name},
+				#{birthday}, #{gender}, #{phone}, 'BUYER', DEFAULT,
 				'GENERAL', 'N', SYSDATE, NULL,
 				#{nickname})		   
 	</insert>
 	
 	<!-- 암호화된 비밀번호 조회용 메소드 -->
 	<select id="selectPwd" resultType="java.lang.String" parameterType="java.lang.String">
-
-		SELECT EMAIL
+		SELECT USER_PWD
 		FROM MEMBER
 		WHERE EMAIL = #{email}
 
-		AND STATUS = 'Y'
+		AND STATUS = 'N'
 	</select>
 	
 	<!-- 비밀번호 일치 시 회원 정보 조회용 쿼리문 -->
@@ -57,7 +55,7 @@
 
 		WHERE EMAIL = #{email}
 
-		AND STATUS = 'Y'
+		AND STATUS = 'N'
 	</select>
 	
 </mapper>

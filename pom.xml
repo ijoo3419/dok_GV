@@ -252,10 +252,6 @@
 		</dependency>
 
 
-
-
-
-
 	</dependencies>
 	<build>
 		<plugins>
