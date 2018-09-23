@@ -47,6 +47,15 @@ public class MemberServiceImpl implements MemberService{
 		return md.insertMember(sqlSession, m);
 	}
 	
+	//닉네임 중복 체크
+	@Override
+	public int checkNick(Member m) {
+		return md.checkNick(sqlSession, m);
+	}
+	
+	
+
+	
 	
 
 }
