@@ -39,12 +39,11 @@
 				#{nickname})		   
 	</insert>
 	
-	<!-- 암호화된 비밀번호 조회용 메소드 -->
+	<!-- 암호화된 비밀번호 조회용 메소드 / 고성희 -->
 	<select id="selectPwd" resultType="java.lang.String" parameterType="java.lang.String">
 		SELECT USER_PWD
 		FROM MEMBER
 		WHERE EMAIL = #{email}
-
 		AND STATUS = 'N'
 	</select>
 	
