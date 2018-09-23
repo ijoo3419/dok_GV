@@ -96,10 +96,11 @@ public class MemberController {
 		}
    }
 
+   //암호화 처리 로그인(성희)
    @RequestMapping("loginCheck.me")
    public String loginCheck(Member m, Model model){
 	   
-	   System.out.println("MemberController : " + m);
+	   System.out.println("loginCheck MemberController : " + m);
 	   
       try {
 		model.addAttribute("loginUser", ms.loginMember(m));
@@ -119,6 +120,7 @@ public class MemberController {
       
    }
    
+   //암호화 처리 로그아웃(성희)
    @RequestMapping("logout.me")
    public String logout(SessionStatus status){
 	   status.setComplete();

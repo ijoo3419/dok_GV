@@ -13,7 +13,7 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public String selectEncPassword(SqlSessionTemplate sqlSession, Member m) {
 
-		return sqlSession.selectOne("Member.selectPwd", m.getUser_pwd());
+		return sqlSession.selectOne("Member.selectPwd", m.getEmail());
 	}     
 
 	
