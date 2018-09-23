@@ -58,4 +58,12 @@
 		AND STATUS = 'N'
 	</select>
 	
+	<!-- 닉네임 중복 체크 -->
+	<select id="checkNick" parameterType="Member" resultType="java.lang.String">
+    SELECT NVL(COUNT(*),0)
+    FROM MEMBER 
+    WHERE NICKNAME = ${nickname}
+	</select>
+	
+	
 </mapper>

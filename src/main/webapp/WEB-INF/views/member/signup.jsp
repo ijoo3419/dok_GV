@@ -6,7 +6,6 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	
-	
 <style>
 
 @import url('https://fonts.googleapis.com/css?family=Poppins');
@@ -391,7 +390,12 @@ body label {
     <!-- Signup Form -->
     <form action="insert.me" method="post">
       <input type="text" id="email" class="fadeIn third" name="email" placeholder="* email" required>
-      <input type="button" class="fadeIn fourth" value="이메일 인증">
+      <input type="button" class="fadeIn fourth" value="이메일 인증" onclick="checkMail()">
+      <input type="text" id="authNum" class="fadeIn third" name="authNum" placeholder="* 인증번호" required>
+      <input type="button" class="fadeIn fourth" value="이메일 인증" onkeyup="checkAuth()">
+      <div id="checkCode"></div>
+      <input type="hidden" name="authNumOrig" id="authNumOrig" value="<%= request.getAttribute("authNumOrig") %>"/>
+      
       <input type="password" id="user_pwd" class="fadeIn second" class="pass" name="user_pwd" placeholder="* password" required onkeyup="checkPwd()">
       <input type="password" id="user_pwd2" class="fadeIn second" class="pass" name="user_pwd2" placeholder="* password check" required onkeyup="checkPwd()">
       <div id="check"></div>
@@ -408,6 +412,7 @@ body label {
   
       <input type="text" id="phone" class="fadeIn second" name="phone" placeholder="phone">
       <input type="text" id="nickname" class="fadeIn second" name="nickname" placeholder="* nickname" required onkeyup="checkNick()">
+      <div id="checkName"></div>
       <input type="submit" class="fadeIn fourth" value="회원가입">
       
     </form>
@@ -418,6 +423,46 @@ body label {
     </div>
 
 <script>
+
+//유저 이메일로 인증번호 발송~~
+function checkMail(){
+	 
+	var email = $("#email").val();
+	var count = 0;
+	
+	if(email == ""){
+		alert("메일을 입력해 주세요.");
+		return false;
+	}
+			
+	$.ajax({
+		url:"checkMail.me",
+		type:"post",
+		data:{email:email},
+		success:function(data){
+			alert("이메일 인증 번호가 발급되었습니다. 이메일을 확인해주세요.");
+			}
+	});
+	
+}
+
+//인증 번호 확인 절차
+function checkAuth(){
+	
+	var authNum = $("#authNum").val();
+	var authNumOrig = $("#authNumOrig").val();
+	
+	if(authNum != "" && authNum != authNumOrig){
+		document.getElementById('checkCode').innerHTML = "<span style='color: red;'>인증번호가 일치하지 않습니다.</span>"
+	} else if (authNum != "" && authNum == authNumOrig){
+		document.getElementById('checkCode').innerHTML = "<span style='color: green;'>인증번호가 일치합니다.</span>"
+	}
+	
+	
+	
+}
+
+
 
 //재입력 비밀번호 체크하여 가입버튼 비활성화 또는 맞지않음을 알림.
 function checkPwd() {
@@ -434,6 +479,29 @@ function checkPwd() {
     }
 }
 
+//닉네임 중복 확인
+function checkNick(){
+	
+	var nickname = $("#nickname").val();
+	
+	$.ajax({
+		data : {
+			nickname:nickname
+		},
+		url: "checkNick.me",
+		success: function(data){
+			if(nick==""){
+				document.getElementById('checkName').innerHTML = "<span style='color: red;'> 닉네임을 입력해 주세요. </span>"
+			} else if (data == '1'){
+				document.getElementById('checkName').innerHTML = "<span style='color: green;'> 닉네임 사용이 가능합니다. </span>"
+			} else if (data == '0'){
+				document.getElementById('checkName').innerHTML = "<span style='color: red;'> 닉네임이 중복됩니다. </span>"
+			}
+		}
+	});
+	
+	
+}
 
 
 </script>
