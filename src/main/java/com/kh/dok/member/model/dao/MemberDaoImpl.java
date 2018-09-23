@@ -31,5 +31,12 @@ public class MemberDaoImpl implements MemberDao{
 		return Sqlsession.insert("Member.insertMember", m);
 	}
 
+	//닉네임 중복 체크용 메소드
+	@Override
+	public int checkNick(SqlSessionTemplate Sqlsession, Member m) {
+		
+		return Sqlsession.selectOne("Member.checkNick", m);
+	}
+
 
 }
