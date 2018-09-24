@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -80,7 +83,7 @@ li {
 
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
-<link rel="stylesheet" href="${contextPath }/resources/css/main.css" />
+<link rel="stylesheet" href="${ contextPath }/resources/css/main.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
@@ -115,7 +118,7 @@ li {
 			<!-- Post -->
 			<section class="post">
 				<header class="major">
-					<h4>loginUser님, 오늘도 영화 같은 하루 보내세요.</h4>
+					<h4>${ sessionScope.loginUser.user_name }님, 오늘도 영화 같은 하루 보내세요.</h4>
 				</header>
 
 				<!-- Text stuff -->
@@ -160,8 +163,8 @@ li {
 						</div>
 						<br>
 						<ul>
-							<li>휴대폰 : </li>
-							<li>선호 장르 : </li>
+							<li>휴대폰 : ${ sessionScope.loginUser.phone }</li>
+							<li>닉네임 : ${ sessionScope.loginUser.nickname }</li>
 						</ul>
 					</div>
 					
@@ -216,27 +219,27 @@ li {
 	
 	<script>
 		function goToEdit(){
-			location.href = "editInfo.jsp";
+			location.href = "editInfo.me";
 		}
 		
 		function pluss(){
-			location.href = "ask.jsp";
+			location.href = "ask.me";
 		}
 		
 		function watched(){
-			location.href = "bookingHist.jsp";
+			location.href = "bookingHist.me";
 		}
 		
 		function rev(){
-			location.href = "reviews.jsp";
+			location.href = "reviews.me";
 		}
 		
 		function wish(){
-			location.href = "wishlist.jsp";
+			location.href = "wishlist.me";
 		}
 		
 		function booked(){
-			location.href = "bookingHist.jsp";
+			location.href = "bookingHist.me";
 		}
 		
 	</script>

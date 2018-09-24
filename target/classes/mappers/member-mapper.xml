@@ -58,10 +58,17 @@
 	</select>
 	
 	<!-- 닉네임 중복 체크 -->
-	<select id="checkNick" parameterType="Member" resultType="java.lang.String">
+	<select id="checkNick" parameterType="Member" resultType="java.lang.Integer">
     SELECT NVL(COUNT(*),0)
     FROM MEMBER 
-    WHERE NICKNAME = ${nickname}
+    WHERE NICKNAME = '${nickname}'
+	</select>
+	
+	<!-- 이메일 중복 체크 -->
+	<select id="checkSame" parameterType="Member" resultType="java.lang.Integer">
+    SELECT NVL(COUNT(*),0)
+    FROM MEMBER 
+    WHERE EMAIL = '${email}'
 	</select>
 	
 	

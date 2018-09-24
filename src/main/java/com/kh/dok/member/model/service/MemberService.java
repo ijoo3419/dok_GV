@@ -10,6 +10,8 @@ public interface MemberService {
 	int insertMember(Member m);
 	
 	int checkNick(Member m);
+
+	int checkSame(Member m);
 	
 }
      

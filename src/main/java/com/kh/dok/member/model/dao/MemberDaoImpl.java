@@ -38,5 +38,11 @@ public class MemberDaoImpl implements MemberDao{
 		return Sqlsession.selectOne("Member.checkNick", m);
 	}
 
+	//이메일 중복 체크
+	@Override
+	public int checkSame(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("Member.checkSame", m);
+	}
+
 
 }

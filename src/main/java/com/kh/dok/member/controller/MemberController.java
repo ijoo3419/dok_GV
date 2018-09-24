@@ -129,6 +129,7 @@ public class MemberController {
 
    }
    
+   //메일 인증  + 보내기 (이주)
    @RequestMapping("checkMail.me")
    public ModelAndView emailAuth(HttpServletResponse response, HttpServletRequest request) throws Exception {
 	   
@@ -143,11 +144,6 @@ public class MemberController {
 	   
 	   authNum = RandomNum();
 	   authNumOrig = authNum;
-	   
-	   request.setAttribute("authNumOrig", authNum);
-	   
-	   RequestDispatcher view = request.getRequestDispatcher("member/signup");
-	   view.forward(request, response);
 	   
 	   sendEmail(email.toString(),authNum);
 	   
@@ -217,8 +213,9 @@ public class MemberController {
    }
    
    //인증번호 확인
+   @ResponseBody
    @RequestMapping("checkAuth.me")
-   public int checkAuth(HttpServletResponse response, HttpServletRequest request){
+/*   public String checkAuth(HttpServletResponse response, HttpServletRequest request){
 	   
 	   int result = 0;
 	   
@@ -228,19 +225,25 @@ public class MemberController {
 	   String authNumOrig = request.getParameter("authNumOrig");
 	   System.out.println("checkAuth의 authNumOrig: " + authNumOrig);
 	   
-	   if(authNum==""){
-		   result = 0;
-		   return result;
-	   } else if(!authNum.equals(authNumOrig)){
-		   result = 2;
-		   return result;
-	   } else if(authNum.equals(authNumOrig)){
-		  result = 1;
-		  return result;
-	   }
+	   return "member/signup";
+
+   }*/
+   public int checkAuth(HttpServletResponse response, HttpServletRequest request){
+	   
+	   int result = 0;
+	   
+	   String authNumOrig = request.getParameter("authNumOrig");
+	   System.out.println("checkAuth의 authNumOrig : " + authNumOrig);
+	   //위에 값이 자꾸 null임,,, null이면 if문으로 비교를 할 수가 없응께,, 이유: request.getParam에 orig을 저장 못함~~!~~!
+	   
+	   String authNumUser = request.getParameter("authNum");
+	   System.out.println("checkAuth에서 받은 authNum(유저가 쓴거야야 함) : " + authNumUser);
+	   
+	   
+	   
 	   
 	   return result;
-
+	   
    }
    
    //닉네임 중복 체크
@@ -249,6 +252,23 @@ public class MemberController {
    public int checkNickname(Member m, Model model){
 	   
 	   int result = ms.checkNick(m);
+	   
+	   if(result > 0){
+		   result = 1;
+		   return result;
+	   } else {
+		   result = 0;
+		   return result;
+	   }
+	   
+   }
+   
+   //이메일 중복 체크
+   @ResponseBody
+   @RequestMapping("checkSame.me")
+   public int checkSameMail(Member m, Model model){
+	   
+	   int result = ms.checkSame(m);
 	   
 	   if(result > 0){
 		   result = 1;
