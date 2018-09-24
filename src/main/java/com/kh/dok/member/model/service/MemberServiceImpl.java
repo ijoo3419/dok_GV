@@ -53,6 +53,12 @@ public class MemberServiceImpl implements MemberService{
 		return md.checkNick(sqlSession, m);
 	}
 	
+	//이메일 중복 체크
+	@Override
+	public int checkSame(Member m) {
+		return md.checkSame(sqlSession, m);
+	}
+	
 	
 
 	

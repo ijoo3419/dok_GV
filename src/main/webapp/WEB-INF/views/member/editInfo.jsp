@@ -61,27 +61,23 @@
 						
 							<tr>
 								<td colspan="2"> * 비밀번호 </td>
-								<td> <input type="password" id="inputtext2" name="password" fieldname="비밀번호" required=""> </td>
+								<td> <input type="password" id="inputtext2" name="password"> </td>
 							</tr>
 							<tr>
-								<td colspan="2"> * 이름 </td>
-								<td> <input type="text" id="memberName" name="memberName" value="이름" fieldname="이름" required="" allowtype="hangul"> </td>
+								<td colspan="2"> * 닉네임 </td>
+								<td> <input type="text" id="memberName" name="memberName" placeholder="${ sessionScope.loginUser.nickname }"> </td>
 							</tr>
 							<tr>
-								<td colspan="2"> * 생년월일 (20180919 형식으로 적어주세요.)</td>
+								<td colspan="2"> * 생년월일 (20180919 형식으로 적어주세요.)</td> <!-- DB 저장할 때 들어가는 형식 바꿀 것 -->
 								<td> 
 								
-								<input type="text" id="birthday" name="birthday"value="" fieldname="생년월일" required="" allowtype="number" maxlength="8">
+								<input type="text" id="birthday" name="birthday" value="" maxlength="8" placeholder="${ sessionScope.loginUser.birthday }">
 							
 								</td>
 							</tr>
 							<tr>
 								<td colspan="2"> * 휴대폰 </td>
-								<td> <input type="text" id="memberPhone" name="memberPhone" value="" fieldname="연락처" required="" allowtype="number"> </td>
-							</tr>
-							<tr>
-								<td colspan="2"> * 이메일 </td>
-								<td> <input type="text" id="email" name="email" value="" fieldname="이메일" required=""> </td>
+								<td> <input type="text" id="memberPhone" name="memberPhone" placeholder="${ sessionScope.loginUser.phone }"> </td>
 							</tr>
 
 						

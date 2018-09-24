@@ -13,5 +13,7 @@ public interface MemberDao {
 	int insertMember(SqlSessionTemplate Sqlsession, Member m);
 	
 	int checkNick(SqlSessionTemplate Sqlsession, Member m);
+
+	int checkSame(SqlSessionTemplate sqlSession, Member m);
      
 }
