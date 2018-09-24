@@ -69,5 +69,6 @@ public class MovieController {
 		return list;
 		//작성후 movie-servlet.xml로 이동하기 메시지 컨버터 추가하기
 	}
+	
 }
 

@@ -9,6 +9,7 @@ public interface MovieService {
 	
 		ArrayList<Movie> selectMovie(Movie v);
 
+		
 		//박지용 영화 리스트 출력기능
 		ArrayList<Movie> selectMovieList(Movie v);
 

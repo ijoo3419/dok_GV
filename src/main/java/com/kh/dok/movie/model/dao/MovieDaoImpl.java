@@ -31,4 +31,5 @@ public class MovieDaoImpl implements MovieDao{
 		return list = (ArrayList)sqlSession.selectList("Movie.selectMovieList", fromDate);
 	}
 
+	
 }

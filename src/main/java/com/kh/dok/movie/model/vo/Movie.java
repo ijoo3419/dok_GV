@@ -195,4 +195,5 @@ public class Movie {
 				+ movieroom_id + ", play_status=" + play_status + "]";
 	}
 	
+	
 }

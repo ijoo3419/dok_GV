@@ -16,6 +16,7 @@
 		<result property="running_time" column="RUNNIG_TIME"/>
 	</resultMap>
 	
+	<!-- 박지용 영화 리스트를 ResultSet -->
 	<resultMap type="Movie" id="movieResultSetTwo">
 		<id property="turning_id" column="TURNING_ID"/>
 		<result property="movie_id" column="MOVIE_ID"/>
@@ -35,7 +36,7 @@
 		<result property="play_status" column="PLAY_STATUS"/>
 	</resultMap>
 	
-	<!-- 영화 리스트를 가져오는 쿼리문 -->
+	<!-- 박지용 영화 리스트를 가져오는 쿼리문 -->
 	<select id="selectMovieList" resultMap="movieResultSetTwo" parameterType="Movie">
 		SELECT *
 		FROM TURNING, PLAY, MOVIE
@@ -44,5 +45,6 @@
 		AND PLAY_STATUS = 'Y'
 		AND TURNING_DAY >= #{fromDate}
 	</select>
+	
 	
 </mapper>
