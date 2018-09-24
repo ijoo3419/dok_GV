@@ -1,5 +1,6 @@
 package com.kh.dok.movie.model.service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -22,10 +23,18 @@ public class MovieServiceImpl implements MovieService{
 	public ArrayList<Movie> selectMovie(Movie v) {
 		ArrayList<Movie> movieView = null;
 		
-		
 		movieView = md.selectCinema(sqlSession, v);
 		
 		return movieView;
+	}
+
+	
+	//박지용 영화 리스트 출력기능
+	@Override
+	public ArrayList<Movie> selectMovieList(Movie v) {
+		ArrayList<Movie> list = md.selectMovieList(sqlSession, v);
+		
+		return list;
 	}
 
 }

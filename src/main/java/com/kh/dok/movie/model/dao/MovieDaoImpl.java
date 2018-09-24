@@ -1,5 +1,6 @@
 package com.kh.dok.movie.model.dao;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -18,6 +19,16 @@ public class MovieDaoImpl implements MovieDao{
 		
 		
 		return movieView;
+	}
+
+	//박지용 영화 리스트 출력기능
+	@Override
+	public ArrayList<Movie> selectMovieList(SqlSessionTemplate sqlSession, Movie v) {
+		ArrayList<Movie> list = null;
+		
+		Date fromDate = v.getOpen_date();
+				
+		return list = (ArrayList)sqlSession.selectList("Movie.selectMovieList", fromDate);
 	}
 
 }
