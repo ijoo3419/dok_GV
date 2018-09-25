@@ -59,6 +59,18 @@ public class MemberServiceImpl implements MemberService{
 		return md.checkSame(sqlSession, m);
 	}
 	
+	//비밀번호 맞나 조회 (회원정보 수정용)
+	@Override
+	public int checkPass(Member m) {
+		return md.checkPass(sqlSession, m);
+	}
+	
+	//회원 정보 업데이트
+	@Override
+	public int updateInfo(Member m) {
+		return md.updateInfo(sqlSession, m);
+	}
+	
 	
 
 	

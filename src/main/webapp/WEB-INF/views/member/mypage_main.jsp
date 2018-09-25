@@ -128,29 +128,12 @@ li {
 
 
 				<div id="jb-container" class="box"> 
-					<!-- <div class="box" id="jb-header">
-						<h1></h1>
-					</div> -->
 					<div id="jb-content" class="box">
 						<div>
 						<img align="left" src="http://image2.megabox.co.kr/mop/home/mypage/main_title4.png" alt="최근 예매 내역">
 						<img align="right" onclick="booked()" src="http://image2.megabox.co.kr/mop/home/mypage/main_btn2.jpg" alt="더보기" id="plus">
 						<br>
 						</div>
-						<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Aenean nec mollis nulla. Phasellus lacinia tempus mauris eu
-							laoreet. Proin gravida velit dictum dui consequat malesuada.
-							Aenean et nibh eu purus scelerisque aliquet nec non justo.
-							Aliquam vitae aliquet ipsum. Etiam condimentum varius purus ut
-							ultricies. Mauris id odio pretium, sollicitudin sapien eget,
-							adipiscing risus.</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Aenean nec mollis nulla. Phasellus lacinia tempus mauris eu
-							laoreet. Proin gravida velit dictum dui consequat malesuada.
-							Aenean et nibh eu purus scelerisque aliquet nec non justo.
-							Aliquam vitae aliquet ipsum. Etiam condimentum varius purus ut
-							ultricies. Mauris id odio pretium, sollicitudin sapien eget,
-							adipiscing risus.</p> -->
 							
 							<p>(영화포스터)(영화제목)(예매시간)(영화관)</p>
 							<p>-</p>
