@@ -12,6 +12,10 @@ public interface MemberService {
 	int checkNick(Member m);
 
 	int checkSame(Member m);
+
+	int checkPass(Member m);
+
+	int updateInfo(Member m);
 	
 }
      

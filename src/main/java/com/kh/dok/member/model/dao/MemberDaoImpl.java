@@ -12,7 +12,6 @@ public class MemberDaoImpl implements MemberDao{
 	//암호화된 비밀번호 조회용 메소드
 	@Override
 	public String selectEncPassword(SqlSessionTemplate sqlSession, Member m) {
-
 		return sqlSession.selectOne("Member.selectPwd", m.getEmail());
 	}     
 
@@ -20,21 +19,18 @@ public class MemberDaoImpl implements MemberDao{
 	//비밀번호 일치시 회원 정보 조회용 메소드
 	@Override
 	public Member selectMember(SqlSessionTemplate sqlSession, Member m) {
-		
 		return sqlSession.selectOne("Member.selectLoginUser", m);
 	}
 
 	//회원가입용 메소드
 	@Override
 	public int insertMember(SqlSessionTemplate Sqlsession, Member m) {
-		
 		return Sqlsession.insert("Member.insertMember", m);
 	}
 
 	//닉네임 중복 체크용 메소드
 	@Override
 	public int checkNick(SqlSessionTemplate Sqlsession, Member m) {
-		
 		return Sqlsession.selectOne("Member.checkNick", m);
 	}
 
@@ -42,6 +38,18 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public int checkSame(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.selectOne("Member.checkSame", m);
+	}
+
+	//회원 정보 수정 전 비밀번호 체크
+	@Override
+	public int checkPass(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("Member.checkPass", m);
+	}
+
+	//회원 정보 업데이트
+	@Override
+	public int updateInfo(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("Member.updateInfo", m);
 	}
 
 

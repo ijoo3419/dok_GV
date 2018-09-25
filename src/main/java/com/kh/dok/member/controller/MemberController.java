@@ -78,7 +78,7 @@ public class MemberController {
       return "member/signup";
    } 
    
-
+   //회원가입
    @RequestMapping(value="insert.me")
    public String insertMember(Model model, Member m){ 
 
@@ -269,6 +269,38 @@ public class MemberController {
    public int checkSameMail(Member m, Model model){
 	   
 	   int result = ms.checkSame(m);
+	   
+	   if(result > 0){
+		   result = 1;
+		   return result;
+	   } else {
+		   result = 0;
+		   return result;
+	   }
+	   
+   }
+   
+   //회원 정보 수정 - 비밀번호 비교
+   @RequestMapping("checkEditable.me")
+   public int checkPass(Member m, Model model){
+	   
+	   int result = ms.checkPass(m);
+	   
+	   if(result > 0){
+		   result = 1;
+		   return result;
+	   } else {
+		   result = 0;
+		   return result;
+	   }
+	   
+   }
+   
+   //회원 정보 수정 - 정보 업데이트
+   @RequestMapping("updateInfo.me")
+   public int updateInfo(Member m, Model model){
+	   
+	   int result = ms.updateInfo(m);
 	   
 	   if(result > 0){
 		   result = 1;
