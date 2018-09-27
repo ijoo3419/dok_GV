@@ -9,6 +9,7 @@ import com.kh.dok.movie.model.vo.MovieSumbnail;
 
 public interface MovieService {
 	
+
 		//이진희 전체영화 출력
 		ArrayList<MovieSumbnail> selectMovie(MovieSumbnail msn);
 

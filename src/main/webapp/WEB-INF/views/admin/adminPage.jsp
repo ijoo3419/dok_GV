@@ -86,8 +86,8 @@
 	<!-- Nav -->
 	<nav id="nav">
 		<ul class="links">
-			<li class="tab-link current" data-tab="tab-1"><a>블랙리스트 관리</a></li>
-			<li class="tab-link" data-tab="tab-2"><a href="searchAll.ad">전체회원 관리</a></li>
+			<li class="tab-link current" data-tab="tab-1"><a>회원 관리</a></li>
+			<li class="tab-link" data-tab="tab-2"><a>블랙리스트 관리 관리</a></li>
 			<li class="tab-link" data-tab="tab-3"><a>메인페이지 관리</a></li>
 			<li class="tab-link" data-tab="tab-4"><a>통계</a></li>
 			<li class="tab-link" data-tab="tab-5"><a>문의 사항</a></li>
@@ -101,10 +101,87 @@
 	<div id="main">
 
 		<!-- Post -->
-		<!-- 첫번째 탭(블랙리스트 관리) -->
+		<!-- 첫번째 탭(회원 관리) -->
 		<section id="tab-1" class="post current">
-
 			<!-- Table -->
+			<h2>회원 관리</h2>
+			<select id="amember" name="amember" onchange="select()"
+				style="width: 150px">
+				<option value="default">정렬기준</option>
+				<option value="all">전체회원</option>
+				<option value="buyer">일반회원</option>
+				<option value="seller">판매자회원</option>
+			</select> 
+			<br>
+			<div class="table-wrapper">
+				<table>
+					<thead>
+						<tr>
+							<th>No</th>
+							<th>Id</th>
+							<th>이름</th>
+							<th>전화번호</th>
+							<th>회원등급</th>
+							<th>생일</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="am" items="${mlist }">
+							<tr>
+								<td>${am.mid }</td>
+								<td>${am.email }</td>
+								<td>${am.user_name }</td>
+								<td>${am.phone }</td>
+								<td>${am.user_class }</td>
+								<td>${am.birthday }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+
+				 <div id="pageid" class="pagination">
+					<c:if test="${pi.currentPage <=1 }">
+						<a>&lt;이전</a>&nbsp;
+					</c:if>
+					<c:if test="${pi.currentPage > 1 }">
+						<c:url var="blistBack" value="searchAll">
+							<c:param name="currentPage" value="${pi.currentPage - 1 }"/>
+						</c:url>
+						<a href="${blistBack }">&lt;이전</a> &nbsp;
+					</c:if>
+					<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+						<c:if test="${p eq pi.currentPage }">
+							  <a><b><font color="#18bfef " size="4">${p }</b></a></font>
+						</c:if>
+						<c:if test="${p ne pi.currentPage }">
+							<c:url var="blistCheck" value="searchAll">
+								<c:param name="currentPage" value="${p }"/>
+							</c:url>
+							<a href="${blistCheck }">${p }</a>
+						</c:if>
+					</c:forEach>
+					<c:if test="${pi.currentPage >= pi.maxPage}">
+						&nbsp; <a>다음&gt;</a>
+					</c:if>
+					<c:if test="${pi.currentPage < pi.maxPage }">
+						<c:url var="blistEnd" value="searchAll">
+							<c:param name="currentPage" value="${pi.currentPage + 1 }"/>
+						</c:url>
+						<a href="${blistEnd }">&nbsp;다음&gt;</a>
+					</c:if>
+				</div>
+				<div class="search">
+					<input id="gsearch" type="text" value placeholder="검색"
+						style="width: 300px"> <a href="#" id="gicon"
+						class="button primary icon fa-search"> 조회 </a>
+				</div>
+			</div>
+
+		</section>
+
+		<!-- 두번째 탭(전체회원 관리) -->
+		<!-- Table -->
+		<section id="tab-2" class="post">
 			<h2>블랙 리스트 관리 관리</h2>
 			<br>
 			<div class="table-wrapper">
@@ -122,26 +199,6 @@
 							<td>Id 1</td>
 							<td>신고내용 1</td>
 						</tr>
-						<tr>
-							<td>2</td>
-							<td>Id 2</td>
-							<td>신고내용 2</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>Id 3</td>
-							<td>신고내용 3</td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td>Id 4</td>
-							<td>신고내용 4</td>
-						</tr>
-						<tr>
-							<td>5</td>
-							<td>Id 5</td>
-							<td>신고내용 5</td>
-						</tr>
 					</tbody>
 				</table>
 				<div id="pageid" class="pagination">
@@ -157,77 +214,9 @@
 				</div>
 			</div>
 
-		</section>
-		<!-- 두번째 탭(전체회원 관리) -->
-		<section id="tab-2" class="post">
-
-			<!-- Table -->
-			<h2>전체회원 관리</h2>
-			<select style="width: 150px">
-				<option value="">정렬기준</option>
-				<option value="ㄹ">기준1</option>
-				<option value="ㄹ">기준2</option>
-				<option value="ㄹ">기준3</option>
-				<option value="ㄹ">기준4</option>
-				<option value="ㄹ">기준5</option>
-			</select> <br>
-			<div class="table-wrapper">
-				<table>
-					<thead>
-						<tr>
-							<th>No</th>
-							<th>Id</th>
-							<th>이름</th>
-							<th>전화번호</th>
-							<th>회원등급</th>
-							<th>생일</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>${mlist.mId }</th>
-							<td>${mlist.email }</th>
-							<td>${mlist.userName }</th>
-							<td>${mlist.phone }</th>
-							<td>${mlist.userClass }</th>
-							<td>${mlist.birthDay }</th>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Id 2</td>
-							<td>상태 2</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>Id 3</td>
-							<td>상태 3</td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td>Id 4</td>
-							<td>상태 4</td>
-						</tr>
-						<tr>
-							<td>5</td>
-							<td>Id 5</td>
-							<td>상태 5</td>
-						</tr>
-					</tbody>
-				</table>
-				<div id="pageid" class="pagination">
-					<a href="#" class="page">&lt&lt </a> <a href="#"
-						class="page active">1</a> <a href="#" class="page">2</a> <a
-						href="#" class="page">3</a> <a href="#" class="page">4</a> <a
-						href="#" class="page">5</a> <a href="#" class="page">&gt&gt</a>
-				</div>
-				<div class="search">
-					<input id="gsearch" type="text" value placeholder="검색"
-						style="width: 300px"> <a href="#" id="gicon"
-						class="button primary icon fa-search"> 조회 </a>
-				</div>
-			</div>
 
 		</section>
+
 		<!-- 세번째 탭(메인 페이지 관리) -->
 		<section id="tab-3" class="post">
 			<h2>메인 페이지 관리</h2>
@@ -237,26 +226,22 @@
 					<div class="col-4" id="colsize">
 						<span><img id="colimg"
 							src="${contextPath }/resources/images/slide1.jpg" alt="" /></span> <a
-							href="#" id="modimg" class="button primary">슬라이드1
-							수정</a>
+							href="#" id="modimg" class="button primary">슬라이드1 수정</a>
 					</div>
 					<div class="col-4" id="colsize">
 						<span><img id="colimg"
 							src="${contextPath }/resources/images/slide2.jpg" alt="" /></span> <a
-							href="#" id="modimg" class="button primary">슬라이드2
-							수정</a>
+							href="#" id="modimg" class="button primary">슬라이드2 수정</a>
 					</div>
 					<div class="col-4" id="colsize">
 						<span><img id="colimg"
 							src="${contextPath }/resources/images/slide3.jpg" alt="" /></span> <a
-							href="#" id="modimg" class="button primary">슬라이드3
-							수정</a>
+							href="#" id="modimg" class="button primary">슬라이드3 수정</a>
 					</div>
 					<div class="col-4" id="colsize">
 						<span><img id="colimg"
 							src="${contextPath }/resources/images/slide4.jpg" alt="" /></span> <a
-							href="#" id="modimg" class="button primary">슬라이드4
-							수정</a>
+							href="#" id="modimg" class="button primary">슬라이드4 수정</a>
 					</div>
 
 				</div>
@@ -272,8 +257,7 @@
 					<div class="col-4" id="graphsize">
 						<span><img id="colimg"
 							src="${contextPath }/resources/images/graph1.png" alt="" /></span> <a
-							href="#" id="modgraph" class="button primary">그래프
-							1</a>
+							href="#" id="modgraph" class="button primary">그래프 1</a>
 					</div>
 					<div class="col-4" id="graphsize">
 						<span><img id="colimg"
@@ -328,20 +312,46 @@
 	</div>
 
 	<!-- Scripts -->
+	<!-- 탭관련 js파일 -->
+
+	<script src="${contextPath }/resources/js/tab.js"></script>
+	<!-- select태그 선택 관련 js파일 -->
 	<script>
-      $(document).ready(function() {
-
-         $('ul.links li').click(function() {
-            var tab_id = $(this).attr('data-tab');
-
-            $('ul.links li').removeClass('current');
-            $('.post').removeClass('current');
-
-            $(this).addClass('current');
-            $("#" + tab_id).addClass('current');
-         })
-      })
-   </script>
+		function select() {
+			var sresult = $("select[name=amember]").val();
+			
+			if (sresult == "default"){
+				location.href = "searchAll.ad?currentPage=1";
+			} else if (sresult == "all") {
+				location.href = "searchAll.ad?currentPage=1";
+			} else if (sresult == "buyer") {
+				location.href = "searchBu.ad?currentPage=1";
+			} else if (sresult == "seller") {
+				location.href = "searchSe.ad?currentPage=1";
+			}
+		}
+	</script>
+	<!-- <script>
+		function searchAll(){
+			$.ajax({
+				url : "searchAll.ad",
+				type : "POST",
+				dataType: "json",
+				success : function(data){
+					var t1 = data.map;
+					console.log(t1);
+					var t2 = data.map[0].mid;
+					console.log(t2);
+				},
+				error : function(){
+					alert("에러 발생");
+				}
+			});
+		}
+	</script> -->
+	<%-- <script src="${contextPath }/resources/js/selectIndex.js"></script> --%>
+	<!-- 템플릿 관련 js파일들 -->
+		
 	<script src="${contextPath }/resources/js/jquery.min.js"></script>
 	<script src="${contextPath }/resources/js/jquery.scrollex.min.js"></script>
 	<script src="${contextPath }/resources/js/jquery.scrolly.min.js"></script>
@@ -349,6 +359,14 @@
 	<script src="${contextPath }/resources/js/breakpoints.min.js"></script>
 	<script src="${contextPath }/resources/js/util.js"></script>
 	<script src="${contextPath }/resources/js/main.js"></script>
-
 </body>
 </html>
+
+
+
+<!-- <div id="pageid" class="pagination">
+					<a href="#" class="page">&lt&lt </a> <a href="#"
+						class="page active">1</a> <a href="#" class="page">2</a> <a
+						href="#" class="page">3</a> <a href="#" class="page">4</a> <a
+						href="#" class="page">5</a> <a href="#" class="page">&gt&gt</a>
+				</div> -->

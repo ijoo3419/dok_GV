@@ -2,7 +2,6 @@ package com.kh.dok.movie.controller;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kh.dok.movie.model.dao.MovieDao;
 import com.kh.dok.movie.model.service.MovieService;
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieSumbnail;
@@ -85,5 +83,14 @@ public class MovieController {
 		//작성후 movie-servlet.xml로 이동하기 메시지 컨버터 추가하기
 	}
 	
+	@RequestMapping(value="selectPlayList.mo")
+	public @ResponseBody ArrayList<Movie> selectPlayList(@RequestParam String fromDate, String theaterId, String movieId){
+		System.out.println("오니??");
+		System.out.println(fromDate);
+		System.out.println(theaterId);
+		System.out.println(movieId);
+		
+		return null;
+	}
 }
 

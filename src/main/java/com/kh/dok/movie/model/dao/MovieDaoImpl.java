@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
-
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieSumbnail;
 
@@ -15,6 +14,7 @@ public class MovieDaoImpl implements MovieDao{
 	
 	//이진희 전체영화 출력
 	@Override
+
 	public ArrayList<MovieSumbnail> selectMovie(SqlSessionTemplate sqlSession, MovieSumbnail msn) {
 		ArrayList<MovieSumbnail> movieView =  null;
 		

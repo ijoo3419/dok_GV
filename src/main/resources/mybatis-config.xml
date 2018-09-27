@@ -9,14 +9,25 @@
 		<typeAlias type="com.kh.dok.member.model.vo.Member" alias="Member"></typeAlias>
 		<typeAlias type="com.kh.dok.cinema.model.vo.Cinema" alias="Cinema"></typeAlias>
 		<typeAlias type="com.kh.dok.movie.model.vo.Movie" alias="Movie"></typeAlias>
+
 		<typeAlias type="com.kh.dok.movie.model.vo.MovieSumbnail" alias="MovieSumbnail"></typeAlias>
+
+		<typeAlias type="com.kh.dok.area.model.vo.Area" alias="Area"></typeAlias>
+
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml"/>
 		<mapper resource="mappers/cinema-mapper.xml"/>
+
 		<mapper resource="mappers/movieSumbnail-mapper.xml"/>
 		<mapper resource="mappers/movie-mapper.xml"/>
 
+
+		<mapper resource="mappers/admin-mapper.xml"/>
+		<mapper resource="mappers/area-mapper.xml"/>
+
+
+		<mapper resource="mappers/movie-mapper.xml"/>
 	</mappers>
 </configuration>
 

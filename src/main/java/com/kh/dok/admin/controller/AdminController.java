@@ -1,13 +1,19 @@
 package com.kh.dok.admin.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.dok.admin.model.service.AdminService;
+import com.kh.dok.common.PageInfo;
+import com.kh.dok.common.Pagination;
 import com.kh.dok.member.model.vo.Member;
 
 @Controller
@@ -23,13 +29,50 @@ public class AdminController {
 	}
 	
 	//전체 회원 조회
-		@RequestMapping("searchAll.ad")
-		public String searchAll(Model model){
+		@RequestMapping(value="searchAll.ad")
+		public String searchAll(Model model,int currentPage){
 			
-			ArrayList<Member> mlist = as.searchAll();
+			int  listCount = as.countAll();
+			
+			
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+			ArrayList<Member> mlist = as.searchAll(pi);
+			
 			
 			model.addAttribute("mlist",mlist);
-			
+			model.addAttribute("pi",pi);
 			return "admin/adminPage";
 }
+	//일반 회원 조회
+		@RequestMapping("searchBu.ad")
+		public String searchBu(Model model,int currentPage){
+			
+			int listCount = as.countBu();
+			
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+			
+			ArrayList<Member> mlist = as.searchBu(pi);
+			
+			model.addAttribute("mlist",mlist);
+			model.addAttribute("pi",pi);
+			
+			return "admin/adminPage";
+		}
+		
+	//판매자 회원 조회
+		@RequestMapping("searchSe.ad")
+		public String searchSe(Model model,int currentPage){
+			
+			int listCount = as.countSe();
+			
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+			
+			
+			ArrayList<Member> mlist = as.searchSe(pi);
+			
+			model.addAttribute("mlist",mlist);
+			model.addAttribute("pi",pi);
+			
+			return "admin/adminPage";
+		}
 }
