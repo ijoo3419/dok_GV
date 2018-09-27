@@ -3,7 +3,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
 <title>Insert title here</title>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Poppins');
@@ -313,18 +316,85 @@ input[type=text]:placeholder, input[type=password]:placeholder {
       		<input type="text" id="email" class="fadeIn second" name="email" placeholder="email">
       		<input type="password" id="user_pwd" class="fadeIn third" name="user_pwd" placeholder="password">
       		<input type="submit" class="fadeIn fourth">
-      		<br>
-      		<div id="kakaoBtn" class="fadeIn second" onclick="kakao();">
-      			<img class="fadeIn second" src="${ contextPath }/resources/images/member/kakaoBtn.png" width="370px" height="60px"/>
-      		</div>
     	</form>
 	</div>
 	
-	<script>
-		function kakao(){
-			
-		}
-	</script>
+	
+	<div class="fadeIn second">
+		<a id="kakao-login-btn"></a>
+		<script type='text/javascript'>
+  			//<![CDATA[
+    			// 사용할 앱의 JavaScript 키를 설정해 주세요.
+    			Kakao.init('faa355a32a09b6c1847ad4dc9444637b');
+   			 	// 카카오 로그인 버튼을 생성합니다.
+    			Kakao.Auth.createLoginButton({
+      				container: '#kakao-login-btn',
+      				success: function(authObj) {
+      					var accessToken = Kakao.Auth.getAccessToken();
+      					var refreshToken = authObj.refresh_token;
+      					console.log("accessToken : " + accessToken);
+      					console.log("refreshToken : " + refreshToken);
+      					
+      				if(accessToken){
+        			// 로그인 성공시, API를 호출합니다.
+        			Kakao.API.request({
+          				url: '/v2/user/me',
+          				success: function(res) {
+            				alert(JSON.stringify(res));
+            				
+            				var str = JSON.stringify(res);
+            				var id = str.substring(str.indexOf('id'), str.length);
+            				var start_id = id.indexOf(':');
+            				var end_id = id.indexOf(',');
+            				var idNum = id.substring(start_id + 1, end_id);
+            				
+            				var email = str.substring(str.indexOf('"email"'), str.length);
+            				var start_email = email.indexOf(':');
+            				var end_email = email.indexOf(',');
+            				var useremail = email.substring(start_email + 1, end_email);
+            				
+            				var nickEnd = str.substring(str.indexOf('nickname'), str.length);
+            				var start_nick = nickEnd.indexOf(':');
+            				var end_nick = nickEnd.indexOf(',');
+            				var nickname = nickEnd.substring(start_nick + 2, end_nick - 1);
+            				
+            				console.log("useremail : " + useremail);
+            				
+            				document.kakaoform.email.value = useremail;
+            				document.kakaoform.idNum.value = idNum;
+            				document.kakaoform.nickname.value = nickname;
+            				document.kakaoform.refreshToken.value = refreshToken;
+            				document.kakaoform.submit();
+            				
+            				console.log("useremail : " + email);
+            				console.log("idNum : " + idNum);
+            				console.log("nickname : " + nickname);
+            				console.log("refreshToken : " + refreshToken);
+            				
+            
+          				},
+          				fail: function(error) {
+            				alert(JSON.stringify(error));
+          				}
+        			});
+      				}
+      			},
+      			fail: function(err) {
+        			alert(JSON.stringify(err));
+      			}
+    		});
+  		//]]>
+		</script>
+		
+		<form action="kakaologin.me" form="post" name="kakaoform">
+			<input type="hidden" name="email">
+			<input type="hidden" name="idNum">
+			<input type="hidden" name="nickname">
+			<input type="hidden" name="refreshToken">
+		</form>
+    </div>
+	
+
 
     <!-- Remind Passowrd -->
     <div id="formFooter">

@@ -70,6 +70,30 @@ public class MemberServiceImpl implements MemberService{
 	public int updateInfo(Member m) {
 		return md.updateInfo(sqlSession, m);
 	}
+
+	//카카오 로그인 유저 체크
+	@Override
+	public int kakaoUserCheck(Member m) {
+		int kakaoUserCheck = md.kakaoUserCheck(sqlSession, m);
+		
+		return kakaoUserCheck;
+	}
+
+	//카카오 새 유저 회원가입
+	@Override
+	public int insertKakaoMember(Member m) {
+		int insertresult = md.insertKakaoMember(sqlSession, m);
+		
+		return insertresult;
+	}
+
+	//카카오 기존 유저 로그인
+	@Override
+	public Member loginKakaoMember(Member m) {
+		Member loginUser = md.loginKakaoMember(sqlSession, m);
+		
+		return loginUser;
+	}
 	
 	
 

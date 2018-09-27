@@ -311,5 +311,28 @@ public class MemberController {
 	   }
 	   
    }
+   
+   //카카오 로그인(성희)
+   /*@RequestMapping("kakaologin.me")
+   public String kakaologin(Member m, Model model, HttpSession session){
+	   System.out.println("카카오 로그인 : " + m);
+	   
+	   //1. 기존 유저인가 확인
+	   int kakaoUserCheck = ms.kakaoUserCheck(m);
+	   
+	   //2. 새 유저면 회원가입
+	   if(kakaoUserCheck == 11){
+		   int insertresult = ms.insertKakaoMember(m);
+		   
+		   return "member/insertMyInfo";
+
+	   }else if(kakaoUserCheck == 22){	//3. 기존 유저면 로그인
+		   Member loginUser = ms.loginKakaoMember(m);
+		   
+		   session.setAttribute("loginUser", loginUser);
+		   
+		   return "main/main";
+	   }
+   }*/
 
 }
