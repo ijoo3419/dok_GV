@@ -54,8 +54,27 @@
 		<aop:advisor id="transactionAdvice" pointcut-ref="serviceMethod" advice-ref="txAdvice"/>
 	</aop:config>
 	
+
 	<!-- 소진 Ajax관련 태그
 	<bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/> -->
+
+	<!-- 메일보내기 -->
+   <bean id="mailSender" class = "org.springframework.mail.javamail.JavaMailSenderImpl">
+      <property name="host" value="smtp.gmail.com" />
+      <property name="port" value="587" />
+      <property name="username" value="dokdokdokGV@gmail.com" />
+      <property name="password" value="dokdokdok123" />
+      <property name="javaMailProperties">
+         <props>
+               <prop key="mail.transport.protocol">smtp</prop>
+               <prop key="mail.smtp.auth">true</prop>
+               <prop key="mail.smtp.starttls.enable">true</prop>
+               <prop key="mail.debug">true</prop>
+         </props>
+      </property>
+ 
+   </bean>
+
 	
 	
 	

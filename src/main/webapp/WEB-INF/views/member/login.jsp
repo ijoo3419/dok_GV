@@ -241,6 +241,7 @@ input[type=text]:placeholder, input[type=password]:placeholder {
   animation-delay: 0.8s !important;
 }
 
+
 .fadeIn.fourth {
   -webkit-animation-delay: 1s !important;
   -moz-animation-delay: 1s !important;
@@ -288,8 +289,6 @@ input[type=text]:placeholder, input[type=password]:placeholder {
 </style>
 
 
-
-
 </head>
 <body>
 
@@ -314,8 +313,18 @@ input[type=text]:placeholder, input[type=password]:placeholder {
       		<input type="text" id="email" class="fadeIn second" name="email" placeholder="email">
       		<input type="password" id="user_pwd" class="fadeIn third" name="user_pwd" placeholder="password">
       		<input type="submit" class="fadeIn fourth">
+      		<br>
+      		<div id="kakaoBtn" class="fadeIn second" onclick="kakao();">
+      			<img class="fadeIn second" src="${ contextPath }/resources/images/member/kakaoBtn.png" width="370px" height="60px"/>
+      		</div>
     	</form>
 	</div>
+	
+	<script>
+		function kakao(){
+			
+		}
+	</script>
 
     <!-- Remind Passowrd -->
     <div id="formFooter">

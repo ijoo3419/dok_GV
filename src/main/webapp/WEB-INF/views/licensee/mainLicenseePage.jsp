@@ -11,29 +11,39 @@
 
 <style>
 .post{
-height:1600px;
+height:1800px;
 }
 
 
 #jb-container {
-	width: 940px;
+	width: 1000px;
 	margin: 0px auto;
 	padding: 20px;
-	background: green;
-	height:2000px;
+	height:1300px;
 	overflow:hidden;
-	
-	
 }
 
 #jb-header {
 	padding: 20px;
 	margin-bottom: 20px;
-	background:cyan;	
 }
 #rightBox, #leftBox, #centerBox{
 	display:inline-block;
 	height:1500px;
+	
+}
+#rightBox{
+float:right;
+
+}
+#leftBox{
+float:left;
+margin-right:40px;
+
+}
+#centerBox{
+float:center;
+	height:1200px;
 
 }
 #jb-right {
@@ -41,14 +51,14 @@ height:1600px;
 	padding: 20px;
 	margin-top:20px;
 	margin-bottom: 20px;
-	background:red;
+	
 }
 #jb-center{
 	width: 300px;
 	margin-top:20px;
 	margin-right:20px;
 	margin-bottom: 20px;
-	background:gray;
+	height:1200px;
 }
 /*	float:cener; */
 
@@ -57,8 +67,7 @@ height:1600px;
 	padding: 20px;
 	margin-bottom: 20px;
 	margin-top:20px;
-	height: 300px;
-	background:pink;	
+	height: 600px;
 }
 
 #jb-footer {
@@ -163,7 +172,7 @@ li {
 					<div class="h3_wrap">
 					<h3 align="center">예매 현황</h3>
 					
-						<img align="right" onclick="goToEdit()" src="http://image2.megabox.co.kr/mop/home/mypage/main_btn5.jpg" alt="수정하기 " id="edit">
+						<img align="right" onclick="booked()" src="http://image2.megabox.co.kr/mop/home/mypage/main_btn2.jpg" alt="더보기" id="plus">
 						</div>
 						<br>
 						<ul>
@@ -175,7 +184,7 @@ li {
 								<div id="jb-left" class="box">
 					<div class="h3_wrap">
 					<h3 align="center">통계</h3>
-						<img align="right" onclick="pluss()" src="http://image2.megabox.co.kr/mop/home/mypage/main_btn2.jpg" alt="더보기" id="pluss">
+						<img align="right" onclick="booked()" src="http://image2.megabox.co.kr/mop/home/mypage/main_btn2.jpg" alt="더보기" id="plus">
 						</div>
 						<br>
 						<ul>
@@ -190,34 +199,32 @@ li {
 						 <div id="jb-center" class="box"> 
 				 		<div>
 				 		<h3 align="center">상영</h3>
-						<img align="right" onclick="booked()" src="http://image2.megabox.co.kr/mop/home/mypage/main_btn2.jpg" alt="더보기" id="plus">
+						<img align="right" onclick="goToEdit()" src="http://image2.megabox.co.kr/mop/home/mypage/main_btn5.jpg" alt="관리하기 " id="edit">
 						<br>
 						</div>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Aenean nec mollis nulla.</p>
 						
 								<p>(영화포스터)(영화제목)(예매시간)(영화관)</p>
 							
 							<p>-</p>
 								
 								</div>
-							
+							</div>
 						
 						<div id="rightBox">
-						</div>
 					<div id="jb-right" class="box">
-					<h3 align="center">상영관 관리</h3>
-					<div>
-						<img align="right" onclick="booked()" src="http://image2.megabox.co.kr/mop/home/mypage/main_btn2.jpg" alt="더보기" id="plus">
-						<br>
-						</div>
-						<p>Lorem ipsum dolor 
-							</p>
+					<h3 align="left">상영관 관리</h3>
+					
+						<img align="right" onclick="goToEdit()" src="http://image2.megabox.co.kr/mop/home/mypage/main_btn5.jpg" alt="관리하기 " id="edit">
 						
-							
-							<p>(영화포스터)(영화제목)(예매시간)(영화관)</p>
-							<p>-</p>
-							
+						<div>
+						<br>
+						<br><br>
+						<img align="right" onclick="goToEdit()" src="http://image2.megabox.co.kr/mop/home/mypage/main_btn5.jpg" alt="관리하기 " id="edit">
+						<br>
+						<br><br>
+						</div>
+						<img align="right" onclick="booked()" src="http://image2.megabox.co.kr/mop/home/mypage/main_btn2.jpg" alt="더보기" id="plus">
+						
 					</div>
 				
 				

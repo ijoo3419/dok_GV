@@ -39,12 +39,11 @@
 				#{nickname})		   
 	</insert>
 	
-	<!-- 암호화된 비밀번호 조회용 메소드 -->
+	<!-- 암호화된 비밀번호 조회용 메소드 / 고성희 -->
 	<select id="selectPwd" resultType="java.lang.String" parameterType="java.lang.String">
 		SELECT USER_PWD
 		FROM MEMBER
 		WHERE EMAIL = #{email}
-
 		AND STATUS = 'N'
 	</select>
 	
@@ -57,5 +56,37 @@
 
 		AND STATUS = 'N'
 	</select>
+	
+	<!-- 닉네임 중복 체크 -->
+	<select id="checkNick" parameterType="Member" resultType="java.lang.Integer">
+    SELECT NVL(COUNT(*),0)
+    FROM MEMBER 
+    WHERE NICKNAME = '${nickname}'
+	</select>
+	
+	<!-- 이메일 중복 체크 -->
+	<select id="checkSame" parameterType="Member" resultType="java.lang.Integer">
+    SELECT NVL(COUNT(*),0)
+    FROM MEMBER 
+    WHERE EMAIL = '${email}'
+	</select>
+	
+	<!-- 회원정보 수정 전 비밀번호 확인 -->
+	<select id="checkPass" parameterType="Member" resultType="java.lang.Integer">
+    SELECT NVL(COUNT(*),0)
+    FROM MEMBER 
+    WHERE USER_PWD = '${user_pwd}'
+    AND EMAIL = '${email}'
+	</select>
+	
+	<!-- 회원정보 업데이트 -->
+	<update id="updateInfo">
+	UPDATE MEMBER
+	SET NICKNAME = '${ nickname }',
+	BIRTHDAY = '${ birthday }',
+	PHONE = '${ phone }'
+	WHERE EMAIL = '${ email }'
+
+	</update>
 	
 </mapper>

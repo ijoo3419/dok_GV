@@ -2386,7 +2386,7 @@ input, select, textarea {
 		padding: 0.75rem 1rem;
 	}
 
-	input[type="checkbox"],
+	 input[type="checkbox"],
 	input[type="radio"] {
 		-moz-appearance: none;
 		-webkit-appearance: none;
@@ -2448,7 +2448,7 @@ input, select, textarea {
 	input[type="checkbox"] + label:before {
 		border-radius: 0;
 	}
-
+ 
 	input[type="radio"] + label:before {
 		border-radius: 100%;
 	}
@@ -2502,7 +2502,6 @@ input, select, textarea {
 		color: #eeeeee;
 	}
 
-	input[type="checkbox"] + label,
 	input[type="radio"] + label {
 		color: #212931;
 	}
@@ -2523,7 +2522,7 @@ input, select, textarea {
 	input[type="radio"]:focus + label:before {
 		border-color: #18bfef;
 	}
-
+ 
 	::-webkit-input-placeholder {
 		color: #909498 !important;
 	}
@@ -4045,7 +4044,7 @@ input, select, textarea {
 			color: #e2e2e2;
 		}
 
-		#footer input[type="checkbox"] + label,
+		 #footer input[type="checkbox"] + label,
 		#footer input[type="radio"] + label {
 			color: #717981;
 		}
@@ -4065,7 +4064,7 @@ input, select, textarea {
 		#footer input[type="checkbox"]:focus + label:before,
 		#footer input[type="radio"]:focus + label:before {
 			border-color: #18bfef;
-		}
+		} 
 
 		#footer ::-webkit-input-placeholder {
 			color: #b3b7bb !important;

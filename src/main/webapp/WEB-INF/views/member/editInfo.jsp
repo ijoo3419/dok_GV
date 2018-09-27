@@ -61,27 +61,23 @@
 						
 							<tr>
 								<td colspan="2"> * 비밀번호 </td>
-								<td> <input type="password" id="inputtext2" name="password" fieldname="비밀번호" required=""> </td>
+								<td> <input type="password" id="user_pwd" name="user_pwd"> </td>
 							</tr>
 							<tr>
-								<td colspan="2"> * 이름 </td>
-								<td> <input type="text" id="memberName" name="memberName" value="이름" fieldname="이름" required="" allowtype="hangul"> </td>
+								<td colspan="2"> * 닉네임 </td>
+								<td> <input type="text" id="nickname" name="nickname" value="${ sessionScope.loginUser.nickname }"> </td>
 							</tr>
 							<tr>
-								<td colspan="2"> * 생년월일 (20180919 형식으로 적어주세요.)</td>
+								<td colspan="2"> * 생년월일 (20180919 형식으로 적어주세요.)</td> <!-- DB 저장할 때 들어가는 형식 바꿀 것 -->
 								<td> 
 								
-								<input type="text" id="birthday" name="birthday"value="" fieldname="생년월일" required="" allowtype="number" maxlength="8">
+								<input type="text" id="birthday" name="birthday" value="" maxlength="8" value="${ sessionScope.loginUser.birthday }">
 							
 								</td>
 							</tr>
 							<tr>
 								<td colspan="2"> * 휴대폰 </td>
-								<td> <input type="text" id="memberPhone" name="memberPhone" value="" fieldname="연락처" required="" allowtype="number"> </td>
-							</tr>
-							<tr>
-								<td colspan="2"> * 이메일 </td>
-								<td> <input type="text" id="email" name="email" value="" fieldname="이메일" required=""> </td>
+								<td> <input type="text" id="phone" name="phone" value="${ sessionScope.loginUser.phone }"> </td>
 							</tr>
 
 						
@@ -89,19 +85,19 @@
 						</tbody>
 
 					</table>
+					
 					<br>
+					
+					<input type="hidden" id="email" name="email" value="${ sessionScope.loginUser.email }">
+					
 					<div align="center">
 					<button type="button" class="img_btn user cancel mr7" id="myInfoModifycancel">취소</button>
-					<button type="button" class="img_btn user modify ml7" onclick="MyPageMyInfoInput.save('')">수정</button>
+					<button type="button" class="img_btn user modify ml7" onclick="editInfo()">수정</button>
 					</div>
 					
 				</div>
 
 		</div>
-		
-
-
-
 
 		<!-- Copyright -->
 		<div id="copyright">
@@ -121,6 +117,80 @@
 	<script src="${contextPath }/resources/js/breakpoints.min.js"></script>
 	<script src="${contextPath }/resources/js/util.js"></script>
 	<script src="${contextPath }/resources/js/main.js"></script>
-
+	
+	<script>
+		function editInfo(){
+			
+			var email = $("email").val();
+			
+			var user_pwd = $("#user_pwd").val();
+			var nickname = $("#nickname").val();
+			var birthday = $("#birthday").val();
+			var phone = $("#phone").val();
+			
+			if(user_pwd == ""){
+				alert("비밀번호를 입력해 주세요.");
+				return false;
+			}
+			
+			if(nickname == ""){
+				alert("닉네임을 입력해 주세요.");
+				return false;
+			}
+			
+			if(birthday == ""){
+				alert("생년월일을 입력해 주세요.");
+				return false;
+			}
+			
+			if(phone == ""){
+				alert("전화번호를 입력해 주세요.");
+				return false;
+			}
+			
+			
+			
+			$.ajax({
+				data:{
+					user_pwd:user_pwd,
+					email:email
+				},
+				url: "checkEditable.me",
+				success: function(data){
+					if(data == '1'){
+						$.ajax({
+							data : {
+								email:email,
+								nickname:nickname,
+								birthday:birthday,
+								phone:phone
+							},
+							url: "updateInfo.me",
+							success:function(data){
+								
+								console.log("update data: " + data);
+								
+							}
+							
+							
+						});
+					} else if (data == '0'){
+						alert("비밀번호가 일치하지 않습니다. 다시 입력해주세요.");
+					}
+				}
+				
+				
+				
+			});
+			
+			
+			
+			
+		}
+	
+	</script>
+	
+	
+		
 </body>
 </html>
