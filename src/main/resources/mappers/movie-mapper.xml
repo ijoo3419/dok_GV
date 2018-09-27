@@ -45,6 +45,5 @@
 		AND PLAY_STATUS = 'Y'
 		AND TURNING_DAY >= #{fromDate}
 	</select>
-	
-	
+
 </mapper>
