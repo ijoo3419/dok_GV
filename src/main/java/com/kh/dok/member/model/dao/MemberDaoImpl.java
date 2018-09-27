@@ -13,8 +13,7 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public String selectEncPassword(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.selectOne("Member.selectPwd", m.getEmail());
-	}     
-
+	}
 	
 	//비밀번호 일치시 회원 정보 조회용 메소드
 	@Override
@@ -38,12 +37,6 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public int checkSame(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.selectOne("Member.checkSame", m);
-	}
-
-	//회원 정보 수정 전 비밀번호 체크
-	@Override
-	public int checkPass(SqlSessionTemplate sqlSession, Member m) {
-		return sqlSession.selectOne("Member.checkPass", m);
 	}
 
 	//회원 정보 업데이트

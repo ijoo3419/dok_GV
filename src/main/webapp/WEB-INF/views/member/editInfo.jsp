@@ -71,7 +71,7 @@
 								<td colspan="2"> * 생년월일 (20180919 형식으로 적어주세요.)</td> <!-- DB 저장할 때 들어가는 형식 바꿀 것 -->
 								<td> 
 								
-								<input type="text" id="birthday" name="birthday" value="" maxlength="8" value="${ sessionScope.loginUser.birthday }">
+								<input type="text" id="birthday" name="birthday" value="${ sessionScope.loginUser.birthday }">
 							
 								</td>
 							</tr>
@@ -88,7 +88,7 @@
 					
 					<br>
 					
-					<input type="hidden" id="email" name="email" value="${ sessionScope.loginUser.email }">
+					<input type="hidden" id="email" value="${ sessionScope.loginUser.email }" />
 					
 					<div align="center">
 					<button type="button" class="img_btn user cancel mr7" id="myInfoModifycancel">취소</button>
@@ -119,9 +119,11 @@
 	<script src="${contextPath }/resources/js/main.js"></script>
 	
 	<script>
+	
 		function editInfo(){
 			
-			var email = $("email").val();
+			var email = $("#email").val();
+			console.log(email); 
 			
 			var user_pwd = $("#user_pwd").val();
 			var nickname = $("#nickname").val();
