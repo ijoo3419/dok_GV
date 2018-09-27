@@ -12,6 +12,7 @@
 
 		<typeAlias type="com.kh.dok.movie.model.vo.MovieSumbnail" alias="MovieSumbnail"></typeAlias>
 
+
 		<typeAlias type="com.kh.dok.area.model.vo.Area" alias="Area"></typeAlias>
 	</typeAliases>
 	

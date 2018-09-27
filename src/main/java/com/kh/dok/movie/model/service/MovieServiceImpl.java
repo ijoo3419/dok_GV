@@ -58,4 +58,12 @@ public class MovieServiceImpl implements MovieService{
 		return movieimagecut;
 	}
 
+
+	//박지용 상영 리스트 출력기능
+	@Override
+	public ArrayList<Movie> selectTurningList(Movie v) {
+		ArrayList<Movie> list = md.selectTurningList(sqlSession, v);
+		
+		return list;
+	}
 }
