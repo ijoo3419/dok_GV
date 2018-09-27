@@ -32,7 +32,6 @@ public class AdminServiceImpl implements AdminService{
 
 		ArrayList<Member> mlist = ad.searchAll(sqlSession,pi);
 		
-		System.out.println("Service mlist " + mlist);
 		return mlist;
 	}
 
@@ -46,9 +45,9 @@ public class AdminServiceImpl implements AdminService{
 	//일반 회원 조회 메소드
 	@Override
 	public ArrayList<Member> searchBu(PageInfo pi) {
+		
 		ArrayList<Member> mlist = ad.searchBu(sqlSession,pi);
 		
-		System.out.println("Service mlist(bu) : " + mlist);
 		return mlist;
 	}
 
@@ -62,9 +61,9 @@ public class AdminServiceImpl implements AdminService{
 	//판매자 회원 조회 메소드
 	@Override
 	public ArrayList<Member> searchSe(PageInfo pi) {
+		
 		ArrayList<Member> mlist = ad.searchSe(sqlSession,pi);
 		
-		System.out.println("Service mlist(se) : " + mlist);
 		return mlist;
 	}
 }

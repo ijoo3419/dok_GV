@@ -31,22 +31,23 @@ public class AdminController {
 	//전체 회원 조회
 		@RequestMapping(value="searchAll.ad")
 		public String searchAll(Model model,int currentPage){
+			String aval="all";
 			
 			int  listCount = as.countAll();
-			
-			
 			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 			ArrayList<Member> mlist = as.searchAll(pi);
 			
-			
 			model.addAttribute("mlist",mlist);
 			model.addAttribute("pi",pi);
+			model.addAttribute("aval",aval);
+			
 			return "admin/adminPage";
 }
 	//일반 회원 조회
 		@RequestMapping("searchBu.ad")
 		public String searchBu(Model model,int currentPage){
 			
+			String aval="buyer";
 			int listCount = as.countBu();
 			
 			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
@@ -55,6 +56,7 @@ public class AdminController {
 			
 			model.addAttribute("mlist",mlist);
 			model.addAttribute("pi",pi);
+			model.addAttribute("aval",aval);
 			
 			return "admin/adminPage";
 		}
@@ -63,6 +65,8 @@ public class AdminController {
 		@RequestMapping("searchSe.ad")
 		public String searchSe(Model model,int currentPage){
 			
+			
+			String aval = "seller";
 			int listCount = as.countSe();
 			
 			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
@@ -72,6 +76,7 @@ public class AdminController {
 			
 			model.addAttribute("mlist",mlist);
 			model.addAttribute("pi",pi);
+			model.addAttribute("aval",aval);
 			
 			return "admin/adminPage";
 		}
