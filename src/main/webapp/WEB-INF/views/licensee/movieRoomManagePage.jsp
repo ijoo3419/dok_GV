@@ -7,6 +7,10 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 <style>
+input[type="checkbox"] {
+  		transform: scale(5);
+	} 
+	
 .col-6 col-12-xsmall .button primary small{
 	float:left !important;
 }
@@ -53,7 +57,7 @@
 				<!-- Header -->
 					
 					<header id="header">
-						<!-- <a href="index.html" class="logo">Massively</a> -->`	```
+						<!-- <a href="index.html" class="logo">Massively</a> -->
 					</header>
 			    
 				<!-- Nav -->
@@ -91,9 +95,19 @@
 											
 											<div class="col-12">
 									<h3 align="left">2.상영관 좌석수 등록</h3>
-											
-								<textarea name="demo-message" id="demo-message" placeholder="Enter your message"
-								 rows="6"></textarea>
+									<input type="checkbox"/>
+		<%for(int i=1;i<(20*10)+1; i++){ %>
+			
+			<input type="checkbox" id='ch<%=i %>' name="bak" value="<%=i%>" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<%if(i%20 == 0){ %>
+				<br>
+				<br><br>
+			<%} %>
+		<%} %>
+	<hr><hr>
+	
+	<br><br><br><br><br><br><br><br><br><br><br><br><br>
+	
 											</div>
 											
 										<div class="col-6 col-12-xsmall">
