@@ -46,6 +46,13 @@
 	color: #585858;
 }
 
+td #web-fontDate {
+	font-family: 'Do Hyeon', sans-serif;
+	font-size: 20px;
+	color: #585858;
+	margin-left:20px;
+}
+
 .modal-content {
 	margin-top: 100px;
 	margin-left: 300px;
@@ -391,6 +398,9 @@
 a{
 	color: white;
 }
+#movieTimeTable{
+	border: 1px solid #E6E6E6;
+}
 </style>
 <body>
 	<div class="contain_box">
@@ -455,23 +465,12 @@ a{
 
 							<hr>
 
-							<div style="width: 100%; height: 450px; overflow: auto">
-								<% int i = 1;
-								   if(i != 1){ %>
-								<table>
-									<tr style="width: 100%; height: 60px;">
-										<td>시간</td>
-										<td>제목</td>
-										<td>상영관</td>
-									</tr>
-								</table>
-								<% }else{ %>
-								<div align="center">
+							<div style="width: 100%; height: 450px; overflow: auto" class="movieTimeMainDiv" >
+								<div class="movieTimeDiv" align="center">
 									<br><br><br><br>
 									<img src="${ contextPath }/resources/images/timePage.PNG"
 										width="200" height="200">
 								</div>
-								<% } %>
 							</div>
 						</div>
 					</div>
@@ -543,15 +542,18 @@ a{
 			return false;
 		}
 		
+		var run = 0;
+		
 		$(function foo(){
-			
+				
+				
 			    setTimeout(foo, 2000);
 			    
-				var formDate = $("#fromDate").val();
+				var formDateTwo = $("#fromDate").val();
 				var theaterId = $(".theater-id").val();
 				var movieId = $(".movie-id").val();
 				
-				var arrayCheck = [ formDate, theaterId, movieId ];
+				var arrayCheck = [ formDateTwo, theaterId, movieId ];
 				var check = 0;
 				
 				for(var i = 0; i < arrayCheck.length; i++){
@@ -564,19 +566,74 @@ a{
 			    	}
 				}
 				
-				if(check == 1){
+				if(check == 1 || run == 1){
 			    	
-			    }else{
-			    	alert("동작");
+			    }else if(run != 1){
+			    	run = 1;
 			    	
 			    	$.ajax({
 			    		url:"selectPlayList.mo",
 			    		type:"post",
-			    		data:{formDate:formDate,
-			    			  theaterId:theaterId,
-			    			  movieId:movieId},
+			    		data:{formDateTwo:formDateTwo,
+			    			  movieId:movieId,
+			    			  theaterId:theaterId},
 			    		success:function(data){
-			    			
+			    			var $mainDiv = $(".movieTimeMainDiv");
+			    			var $div = $(".movieTimeDiv");	
+							$div.remove();
+							var $table = $("<table id='movieTimeTable' border='1'>");
+							
+							for(var key in data){
+								var $tr = $("<tr>");
+								var $fontOne = $("<font id='web-fontDate'>");
+								var $fontTwo = $("<font id='web-fontDate'>");
+								var $fontTree = $("<font id='web-fontDate'>");
+								var $tdOne = $("<td width='100' height='50'>");
+								var $tdTwo = $("<td width='300' height='50'>");
+								var $tdTree = $("<td width='100' height='50' align='right'>");
+								/* var $tdTitle = $("<input type='hidden' class='hidden-movie-list' value=''>")
+								var $tdTurning = $("<td id='web-fontTitle-child'>"); */
+								
+								/* $td.val(data[key].movie_id); */
+								$fontOne.text(data[key].turning_time);
+								$fontTwo.text(data[key].movie_title);
+								$fontTree.text(data[key].area_name);
+								
+								$tdOne.append($fontOne);
+								$tdTwo.append($fontTwo);
+								$tdTree.append($fontTree);
+								
+								$tr.append($tdOne);
+								$tr.append($tdTwo);
+								$tr.append($tdTree);
+								
+								$table.append($tr);
+							}
+							
+							$mainDiv.append($table);
+							
+							$(".movieTimeMainDiv").show();
+							
+							$(function(){
+
+								$(".movieTimeMainDiv tr").mouseenter(function(){
+									$(this).parent().css({"cursor":"pointer"});
+									$(this).hover().css({"background":"#F2F2F2"});
+							 	}).click(function(){
+							 			/* var num = $(this).find("input").val();
+										var movieId = $(".hidden-movie-list").val();
+										$(".movie-id").val(movieId); //영화ID를 가지고있다.
+										$(".movieBtn").find("img").attr("src", "${ contextPath }/resources/images/moviePay.PNG");
+										$(".movieBtn").find("img").attr("style", "width:100px; height:150px;");
+										$(".movieBtn").show(); */
+							 	});
+								
+								$(".movieTimeMainDiv tr").mouseleave(function(){
+									$(this).hover().css({"background":"white"});
+							 	});
+								
+						  	});
+							
 			    		},
 			    		error:function(data){
 			    			console.log(data);

@@ -29,9 +29,6 @@ public class MemberServiceImpl implements MemberService{
 		
 		String encPassword = md.selectEncPassword(sqlSession, m);
 		
-		System.out.println("enc" + encPassword);
-		System.out.println("mgu" + m.getUser_pwd());
-		
 		if(!passwordEncoder.matches(m.getUser_pwd(), encPassword)){
 			throw new LoginException("로그인 실패!");
 		}else{
@@ -39,6 +36,28 @@ public class MemberServiceImpl implements MemberService{
 		}
 		
 		return loginUser;
+	}
+	
+	//비밀번호 맞나 조회 (회원정보 수정용)
+	@Override
+	public int checkPass(Member m) throws LoginException {
+		
+		String encPassword = md.selectEncPassword(sqlSession, m);
+		String userPassword = m.getUser_pwd();
+		
+		System.out.println("userPassword : " + userPassword);
+		System.out.println("encPasswrd : (checkPass-ServiceImpl) " + encPassword);
+		
+		int result = 0;
+		
+		if(passwordEncoder.matches(userPassword, encPassword)){
+			result = 1;
+			return result;
+		} else {
+			result = 0;
+			throw new LoginException("실패!");
+		}
+		
 	}
 	
 	//회원가입 메소드
@@ -57,12 +76,6 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int checkSame(Member m) {
 		return md.checkSame(sqlSession, m);
-	}
-	
-	//비밀번호 맞나 조회 (회원정보 수정용)
-	@Override
-	public int checkPass(Member m) {
-		return md.checkPass(sqlSession, m);
 	}
 	
 	//회원 정보 업데이트

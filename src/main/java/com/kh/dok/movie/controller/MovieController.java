@@ -88,13 +88,36 @@ public class MovieController {
 	}
 	
 	@RequestMapping(value="selectPlayList.mo")
-	public @ResponseBody ArrayList<Movie> selectPlayList(@RequestParam String fromDate, String theaterId, String movieId){
-		System.out.println("오니??");
-		System.out.println(fromDate);
-		System.out.println(theaterId);
-		System.out.println(movieId);
+	public @ResponseBody ArrayList<Movie> selectPlayList(@RequestParam String formDateTwo, @RequestParam String movieId, @RequestParam String theaterId){
 		
-		return null;
+		java.sql.Date startDay = null;
+		
+		if(formDateTwo != "" || formDateTwo != null) {
+			String[] dateArr = formDateTwo.split("-");
+			
+			int[] arr = new int[dateArr.length];
+			
+			for(int i = 0; i < dateArr.length; i++) {
+				arr[i] = Integer.parseInt(dateArr[i]);
+			}
+			
+			startDay = new java.sql.Date(new GregorianCalendar(arr[0], arr[1] - 1, arr[2]).getTimeInMillis());
+			
+		}else {
+			startDay = new java.sql.Date(new GregorianCalendar().getTimeInMillis());
+		}
+		
+		Movie v = new Movie();
+		
+		v.setTurning_day(startDay);
+		v.setArea_id(theaterId);
+		v.setMovie_id(movieId);
+		
+		ArrayList<Movie> list = ms.selectTurningList(v);
+		
+		System.out.println(list);
+		
+		return list;
 	}
 }
 

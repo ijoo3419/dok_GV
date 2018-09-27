@@ -15,16 +15,13 @@ public class AdminDaoImpl implements AdminDao{
 	//전체 회원 조회 메소드
 	@Override
 	public ArrayList<Member> searchAll(SqlSessionTemplate sqlSession,PageInfo pi) {
-		ArrayList<Member> mlist = null;
 		
 		int offset = (pi.getCurrentPage()-1)* pi.getLimit();
 		
 		RowBounds rowBound = new RowBounds(offset, pi.getLimit());
 		
 		
-		mlist = (ArrayList)sqlSession.selectList("Admin.searchAll",null, rowBound);
-		
-		return mlist;
+		return (ArrayList)sqlSession.selectList("Admin.searchAll",null, rowBound);
 	}
 
 	//일반 회원 조회 메소드

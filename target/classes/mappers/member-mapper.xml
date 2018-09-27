@@ -70,20 +70,12 @@
     FROM MEMBER 
     WHERE EMAIL = '${email}'
 	</select>
-	
-	<!-- 회원정보 수정 전 비밀번호 확인 -->
-	<select id="checkPass" parameterType="Member" resultType="java.lang.Integer">
-    SELECT NVL(COUNT(*),0)
-    FROM MEMBER 
-    WHERE USER_PWD = '${user_pwd}'
-    AND EMAIL = '${email}'
-	</select>
-	
+
 	<!-- 회원정보 업데이트 -->
 	<update id="updateInfo">
 	UPDATE MEMBER
 	SET NICKNAME = '${ nickname }',
-	BIRTHDAY = '${ birthday }',
+	BIRTHDAY = TO_DATE('${ birthday }'),
 	PHONE = '${ phone }'
 	WHERE EMAIL = '${ email }'
 
