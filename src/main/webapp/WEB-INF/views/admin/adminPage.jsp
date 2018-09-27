@@ -351,6 +351,7 @@
 	</script> -->
 	<%-- <script src="${contextPath }/resources/js/selectIndex.js"></script> --%>
 	<!-- 템플릿 관련 js파일들 -->
+		
 	<script src="${contextPath }/resources/js/jquery.min.js"></script>
 	<script src="${contextPath }/resources/js/jquery.scrollex.min.js"></script>
 	<script src="${contextPath }/resources/js/jquery.scrolly.min.js"></script>
