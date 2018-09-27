@@ -84,46 +84,49 @@
 				
 				<!-- 영화관 정보 폼 -->
 
-				<form action="insert.me" method="post" encType="multipart/form-data">
+				<form action="theaterInsert.li" method="post" encType="multipart/form-data">
+
+				<input type="hidden" value="${mid}"/>
 
 
 
-
-					<div class="row gtr-uniform">
-						
-						<div class="col-6 col-12-xsmall">
-							<h2 align="left">1.영화관 이름</h2>
-							<input type="text" name="demo-name" id="demo-name" value=""
-								placeholder="영화관 이름을 입력하세요." />				
+						<div class="row gtr-uniform">
+							
+							<div class="col-6 col-12-xsmall">
+								<h2 align="left">1.영화관 이름</h2>
+								<input type="text" name="theaterName" id="demo-name" value=""
+									placeholder="영화관 이름을 입력하세요." />				
 							</div>
 						</div>
 						<br><br>
 						<h2 align="left">2.영화관 정보</h2>
 							<!-- Break -->
 						<div class="col-12">
-							<textarea name="demo-message" id="demo-message"
+							<textarea name="theaterText" id="demo-message"
 								placeholder="영화관 정보를 입력해 주세요" rows="6"></textarea>
 						</div>
 						<br><br>
 						<h2 align="left">3.찾아오는 길</h2>
 							<!-- Break -->
 						<div class="col-12">
-							<textarea name="demo-message" id="demo-message"
+							<textarea name="theaterRoot" id="demo-message"
 								placeholder="찾아오는 길을 입력해 주세요" rows="6"></textarea>
 						</div>
 						<br><br>
 						<h2 align="left">4.영화관 사진</h2>
 						<div class="col-12">
 					
-						<input type="file"><br>
-						<input type="file"><br>
-						<input type="file">
+						<input type="file" name="photo"><br>
+					
 						</div>
-					</div>
+						<br><br><br>
+					<div class="col-12">
+												<ul class="actions">
+													<li align="center"><input type="submit" value="등록하기" class="primary" /></li>
+													<li align="center"><input type="reset" value="돌아가기" /></li>
+												</ul>
+											</div>
 				</form>
-
-			
-
 
 
 			</article>
