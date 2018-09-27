@@ -58,5 +58,13 @@ public class MovieDaoImpl implements MovieDao{
 		return movieimagecut;
 	}
 
+	//박지용 상영 리스트 출력기능
+	@Override
+	public ArrayList<Movie> selectTurningList(SqlSessionTemplate sqlSession, Movie v) {
+		
+		ArrayList<Movie> list = (ArrayList)sqlSession.selectList("Movie.selectTurningList", v);
+		
+		return list;
+	}
 	
 }

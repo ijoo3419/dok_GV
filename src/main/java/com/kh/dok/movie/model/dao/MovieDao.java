@@ -22,4 +22,7 @@ public interface MovieDao {
 	//이진희 영화이미지컷 출력
 	ArrayList<MovieSumbnail> selectMovieImageCut(SqlSessionTemplate sqlSession, MovieSumbnail msn);
 
+	//박지용 상영 리스트 출력기능
+	ArrayList<Movie> selectTurningList(SqlSessionTemplate sqlSession, Movie v);
+
 }
