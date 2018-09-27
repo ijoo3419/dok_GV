@@ -20,6 +20,7 @@ public class MovieController {
 	@Autowired
 	private MovieService ms;
 	
+	//이진희 전체영화 출력
 	@RequestMapping("movie.mo")
 	public String showmovieView(MovieSumbnail msn, Model model){
 		
@@ -30,6 +31,7 @@ public class MovieController {
 		return "movie/movie";
 	}
 	
+	//이진희 영화상세 출력
 	@RequestMapping("movieDetail.mo")
 	public String showmovieDetailView(@RequestParam String id, Model model){
 		
@@ -40,9 +42,11 @@ public class MovieController {
 		
 		ArrayList<MovieSumbnail> movieDetail = ms.selectMovieDetail(msn);
 		ArrayList<MovieSumbnail> movieimagecut = ms.selectMovieImageCut(msn);
+		ArrayList<MovieSumbnail> movievideo= ms.selectMovieVideo(msn);
 		
 		model.addAttribute("movieDetail",movieDetail);
 		model.addAttribute("movieimagecut",movieimagecut);
+		model.addAttribute("movievideo",movievideo);
 		
 		return "movie/movieDetail";
 	}

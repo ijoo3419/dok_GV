@@ -53,6 +53,18 @@
 		 AND BF.FILE_LEVEL = '2'
 	 </select>
 	
+	<select id="movieVideo" resultMap="movieSumbnailResultSet" parameterType="MovieSumbnail">
+		SELECT M.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_ETITLE,
+		 M.MOVIE_CONTENT, M.OPEN_DATE,M.DIRECTOR_NAME, 
+		 M.PRODUCTION_COM, M.MOVIE_AGE,M.GENRE, 
+		 M.RUNNIG_TIME, BF.FILE_SRC, BF.FILE_LEVEL
+		 FROM MOVIE M, BOARD B, BOARD_FILE BF
+		 WHERE M.MOVIE_ID = B.MOVIE_ID 
+		 AND B.BOARD_ID = BF.BOARD_ID
+		 AND M.MOVIE_ID = #{id}
+		 AND BF.FILE_LEVEL = '3'
+	 </select>
 	
+			
 	
 </mapper>

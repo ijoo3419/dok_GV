@@ -59,6 +59,16 @@ public class MovieServiceImpl implements MovieService{
 	}
 
 
+
+	//이진희 영화상세 비디오 출력
+	@Override
+	public ArrayList<MovieSumbnail> selectMovieVideo(MovieSumbnail msn) {
+		ArrayList<MovieSumbnail> movievideo = md.selectMovieVideo(sqlSession,msn);
+		
+		return movievideo;
+	}
+
+
 	//박지용 상영 리스트 출력기능
 	@Override
 	public ArrayList<Movie> selectTurningList(Movie v) {
@@ -66,4 +76,5 @@ public class MovieServiceImpl implements MovieService{
 		
 		return list;
 	}
+
 }
