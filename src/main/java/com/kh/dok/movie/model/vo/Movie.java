@@ -23,12 +23,22 @@ public class Movie {
 	private String movieroom_id;
 	private String play_status;
 	
+	//박지용 추가
+	private String area_id;
+	private String area_name;
+	private String area_level;
+	private String area_parents;
+	
+	private String theater_id;
+	private String theater_name;
+	
 	public Movie(){}
 
 	public Movie(String movie_id, String movie_title, String movie_etitle, String movie_content, Date open_date,
 			String director_name, String production_com, String movie_age, String genre, int runnig_time,
 			String turning_id, String play_id, String price, Date turning_day, String turning_time, String movieroom_id,
-			String play_status) {
+			String play_status, String area_id, String area_name, String area_level, String area_parents,
+			String theater_id, String theater_name) {
 		super();
 		this.movie_id = movie_id;
 		this.movie_title = movie_title;
@@ -47,6 +57,12 @@ public class Movie {
 		this.turning_time = turning_time;
 		this.movieroom_id = movieroom_id;
 		this.play_status = play_status;
+		this.area_id = area_id;
+		this.area_name = area_name;
+		this.area_level = area_level;
+		this.area_parents = area_parents;
+		this.theater_id = theater_id;
+		this.theater_name = theater_name;
 	}
 
 	public String getMovie_id() {
@@ -185,6 +201,54 @@ public class Movie {
 		this.play_status = play_status;
 	}
 
+	public String getArea_id() {
+		return area_id;
+	}
+
+	public void setArea_id(String area_id) {
+		this.area_id = area_id;
+	}
+
+	public String getArea_name() {
+		return area_name;
+	}
+
+	public void setArea_name(String area_name) {
+		this.area_name = area_name;
+	}
+
+	public String getArea_level() {
+		return area_level;
+	}
+
+	public void setArea_level(String area_level) {
+		this.area_level = area_level;
+	}
+
+	public String getArea_parents() {
+		return area_parents;
+	}
+
+	public void setArea_parents(String area_parents) {
+		this.area_parents = area_parents;
+	}
+
+	public String getTheater_id() {
+		return theater_id;
+	}
+
+	public void setTheater_id(String theater_id) {
+		this.theater_id = theater_id;
+	}
+
+	public String getTheater_name() {
+		return theater_name;
+	}
+
+	public void setTheater_name(String theater_name) {
+		this.theater_name = theater_name;
+	}
+
 	@Override
 	public String toString() {
 		return "Movie [movie_id=" + movie_id + ", movie_title=" + movie_title + ", movie_etitle=" + movie_etitle
@@ -192,8 +256,9 @@ public class Movie {
 				+ ", production_com=" + production_com + ", movie_age=" + movie_age + ", genre=" + genre
 				+ ", runnig_time=" + runnig_time + ", turning_id=" + turning_id + ", play_id=" + play_id + ", price="
 				+ price + ", turning_day=" + turning_day + ", turning_time=" + turning_time + ", movieroom_id="
-				+ movieroom_id + ", play_status=" + play_status + "]";
+				+ movieroom_id + ", play_status=" + play_status + ", area_id=" + area_id + ", area_name=" + area_name
+				+ ", area_level=" + area_level + ", area_parents=" + area_parents + ", theater_id=" + theater_id
+				+ ", theater_name=" + theater_name + "]";
 	}
-	
-	
+
 }

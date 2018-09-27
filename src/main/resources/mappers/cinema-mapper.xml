@@ -3,5 +3,23 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Cinema">
+	<resultMap type="Cinema" id="cinemaResultSet">
+		<id property="theaterId" column="THEATER_ID"/>
+		<result property="mid" column="MID"/>
+		<result property="theaterName" column="THEATER_NAME"/>
+		<result property="theaterRoot" column="THEATER_ROOT"/>
+		<result property="theaterText" column="THEATER_TEXT"/>
+		<result property="fileId" column="FILE_ID"/>
+		<result property="boardId" column="BOARD_ID"/>
+		<result property="fileSrc" column="FILE_SRC"/>
+		<result property="originName" column="ORIGIN_NAME"/>
+		<result property="editName" column="EDIT_NAME"/>
+		<result property="fileLevel" column="FILE_LEVEL"/>
+	</resultMap>
 	
+<!-- 영화관 추가하기~!~!~!~!~! -->
+<insert id="insertTheater" parameterType="Cinema">
+		INSERT INTO THEATER VALUES('TT' || TO_CHAR(THEATER_THEATER_ID.NEXTVAL), 'M100'
+		#{theaterName}, #{theaterRoot}, #{theaterText})
+	</insert>
 </mapper>
