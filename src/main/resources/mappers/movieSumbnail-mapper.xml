@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MovieSumbnail">
+	<resultMap type="MovieSumbnail" id="movieSumbnailResultSet">
+		<id property="movie_id" column="MOVIE_ID"/>
+		<result property="movie_title" column="MOVIE_TITLE"/>
+		<result property="movie_etitle" column="MOVIE_ETITLE"/>
+		<result property="movie_content" column="MOVIE_CONTENT"/>
+		<result property="open_date" column="OPEN_DATE"/>
+		<result property="director_name" column="DIRECTOR_NAME"/>
+		<result property="production_com" column="PRODUCTION_COM"/>
+		<result property="movie_age" column="MOVIE_AGE"/>
+		<result property="genre" column="GENRE"/>
+		<result property="runnig_time" column="RUNNIG_TIME"/>
+		<result property="file_src" column="FILE_SRC" />
+		<result property="file_level" column="FILE_LEVEL" />
+	</resultMap>
+	
+	<select id="selectMovie" resultMap="movieSumbnailResultSet" parameterType="MovieSumbnail">
+		SELECT M.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_ETITLE,
+		 M.MOVIE_CONTENT, M.OPEN_DATE,M.DIRECTOR_NAME, 
+		 M.PRODUCTION_COM, M.MOVIE_AGE,M.GENRE, 
+		 M.RUNNIG_TIME, BF.FILE_SRC, BF.FILE_LEVEL
+		 FROM MOVIE M, BOARD B, BOARD_FILE BF
+		 WHERE M.MOVIE_ID = B.MOVIE_ID 
+		 AND B.BOARD_ID = BF.BOARD_ID
+		 AND BF.FILE_LEVEL='1' 
+	 </select>
+	 
+	 <select id="movieDetail" resultMap="movieSumbnailResultSet" parameterType="MovieSumbnail">
+		SELECT M.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_ETITLE,
+		 M.MOVIE_CONTENT, M.OPEN_DATE,M.DIRECTOR_NAME, 
+		 M.PRODUCTION_COM, M.MOVIE_AGE,M.GENRE, 
+		 M.RUNNIG_TIME, BF.FILE_SRC, BF.FILE_LEVEL
+		 FROM MOVIE M, BOARD B, BOARD_FILE BF
+		 WHERE M.MOVIE_ID = B.MOVIE_ID 
+		 AND B.BOARD_ID = BF.BOARD_ID
+		 AND M.MOVIE_ID = #{id}
+		 AND BF.FILE_LEVEL='1'
+	 </select>
+	 
+	 <select id="movieImageCut" resultMap="movieSumbnailResultSet" parameterType="MovieSumbnail">
+		SELECT M.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_ETITLE,
+		 M.MOVIE_CONTENT, M.OPEN_DATE,M.DIRECTOR_NAME, 
+		 M.PRODUCTION_COM, M.MOVIE_AGE,M.GENRE, 
+		 M.RUNNIG_TIME, BF.FILE_SRC, BF.FILE_LEVEL
+		 FROM MOVIE M, BOARD B, BOARD_FILE BF
+		 WHERE M.MOVIE_ID = B.MOVIE_ID 
+		 AND B.BOARD_ID = BF.BOARD_ID
+		 AND M.MOVIE_ID = #{id}
+		 AND BF.FILE_LEVEL = '2'
+	 </select>
+	
+	
+	
+</mapper>

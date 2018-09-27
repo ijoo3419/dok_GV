@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -225,6 +226,35 @@ hr {
     	margin-top:2px;
     	height: 20px
     }
+    #detail {
+	width: 110px;
+	font-size : 9pt;
+}
+
+#book {
+	font-size : 9pt;
+	width: 110px;
+	background-color : #212931;
+	box-shadow : none;
+	color : #ffffff !important;
+}
+#buttonarea{
+	margin-left:30px;
+	margin-top:10px;
+}
+#age{
+	width: 30px;
+    height: 30px;
+    background: skyblue;
+    display: inline-block;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    margin-right:10px;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+    line-height:30px;
+}
 </style>		
 		 <title>Massively by HTML5 UP</title>
 		<meta charset="utf-8" />
@@ -372,7 +402,34 @@ hr {
 	<div id="data">
 		<h3 align="left">전체영화</h3>
 			
+			<c:forEach items="${movieView }" var="row">
 		<div id="sumnailimage">
+                   <${row.file_src} style="width:298px; height:270px;">
+                   <c:set var="name" value="${row.movie_age}"/>
+                    <c:choose>
+					    <c:when test="${name eq '12'}">
+					        <div id="age">12</div>
+					    </c:when>
+					    <c:when test="${name eq '15'}">
+					        <div id="age" style="background:#FDD835;">15</div>
+					    </c:when>
+					     <c:when test="${name eq '19'}">
+					        <div id="age" style="background:#FF3D00;">19</div>
+					    </c:when>
+					    <c:otherwise>
+					        <div id="age" style="background:#43A047; font-size: 13px;">전체</div>
+					    </c:otherwise>
+					</c:choose>
+                    ${row.movie_title }<br>
+                   <hr>
+                   <div id="buttonarea">     
+                   <button id="detail" onclick="location.href='movieDetail.mo?id=${row.movie_id}'">상세보기</button>		<!-- view구현 할 사람 여기 사용 -->
+						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>			<!-- 영화 리스트에서 view연결 할 사람 여기로 -->
+					</div>	
+		</div>
+                </c:forEach>
+		
+		<!-- <div id="sumnailimage">
 	
 		</div>
 		
@@ -390,11 +447,7 @@ hr {
 		
 		<div id="sumnailimage">
 	
-		</div>
-		
-		<div id="sumnailimage">
-	
-		</div>
+		</div> -->
 			
 		
 			

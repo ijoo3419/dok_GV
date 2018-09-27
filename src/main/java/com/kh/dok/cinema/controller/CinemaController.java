@@ -18,7 +18,7 @@ public class CinemaController {
 	@RequestMapping("cinema.ci")
 	public String showcinemaView(Cinema c, Model model){
 		
-		model.addAttribute("cienmaView", cs.selectCinema(c));
+		/*model.addAttribute("cienmaView", cs.selectCinema(c));*/
 		
 		return "cinema/cinema";
 	}

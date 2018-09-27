@@ -2,22 +2,25 @@ package com.kh.dok.movie.model.dao;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.dok.movie.model.vo.Movie;
+import com.kh.dok.movie.model.vo.MovieSumbnail;
 
 @Repository
 public class MovieDaoImpl implements MovieDao{
-
+	
+	//이진희 전체영화 출력
 	@Override
-	public ArrayList<Movie> selectCinema(SqlSessionTemplate sqlSession, Movie v) {
-		ArrayList<Movie> movieView =  null;
+	public ArrayList<MovieSumbnail> selectMovie(SqlSessionTemplate sqlSession, MovieSumbnail msn) {
+		ArrayList<MovieSumbnail> movieView =  null;
 		
-		movieView = (ArrayList)sqlSession.selectList("movie.selectmovie",v);
+		movieView = (ArrayList)sqlSession.selectList("MovieSumbnail.selectMovie");
 		
-		
+		System.out.println("나오냐?: " + movieView);
 		return movieView;
 	}
 
@@ -29,6 +32,30 @@ public class MovieDaoImpl implements MovieDao{
 		Date fromDate = v.getOpen_date();
 				
 		return list = (ArrayList)sqlSession.selectList("Movie.selectMovieList", fromDate);
+	}
+
+	//이진희 영화상세 출력	
+	@Override
+	public ArrayList<MovieSumbnail> selectMovieDetail(SqlSessionTemplate sqlSession, MovieSumbnail msn) {
+		
+		String id = msn.getMovie_id();
+		
+		ArrayList<MovieSumbnail> movieDetail = (ArrayList)sqlSession.selectList("MovieSumbnail.movieDetail",id);
+		
+		System.out.println("영화상세 : " + movieDetail);
+		return movieDetail;
+	}
+	
+	//이진희 영화 이미지컷 출력
+	@Override
+	public ArrayList<MovieSumbnail> selectMovieImageCut(SqlSessionTemplate sqlSession, MovieSumbnail msn) {
+		
+		String id = msn.getMovie_id();
+		
+		ArrayList<MovieSumbnail> movieimagecut = (ArrayList)sqlSession.selectList("MovieSumbnail.movieImageCut",id);
+		
+		System.out.println("영화이미지컷 : " + movieimagecut);
+		return movieimagecut;
 	}
 
 	
