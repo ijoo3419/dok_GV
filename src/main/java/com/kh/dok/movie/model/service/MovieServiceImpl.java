@@ -58,4 +58,13 @@ public class MovieServiceImpl implements MovieService{
 		return movieimagecut;
 	}
 
+
+	//이진희 영화상세 비디오 출력
+	@Override
+	public ArrayList<MovieSumbnail> selectMovieVideo(MovieSumbnail msn) {
+		ArrayList<MovieSumbnail> movievideo = md.selectMovieVideo(sqlSession,msn);
+		
+		return movievideo;
+	}
+
 }

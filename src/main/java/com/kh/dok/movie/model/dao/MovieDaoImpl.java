@@ -57,6 +57,17 @@ public class MovieDaoImpl implements MovieDao{
 		System.out.println("영화이미지컷 : " + movieimagecut);
 		return movieimagecut;
 	}
+	
+	//이진희 영화 비디오 출력
+	@Override
+	public ArrayList<MovieSumbnail> selectMovieVideo(SqlSessionTemplate sqlSession, MovieSumbnail msn) {
+		String id = msn.getMovie_id();
+		
+		ArrayList<MovieSumbnail> movievideo = (ArrayList)sqlSession.selectList("MovieSumbnail.movieVideo",id);
+		
+		System.out.println("영화이미지컷 : " + movievideo);
+		return movievideo;
+	}
 
 	
 }

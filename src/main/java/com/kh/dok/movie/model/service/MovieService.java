@@ -23,4 +23,7 @@ public interface MovieService {
 		//이진희 영화 이미지컷 출력
 		ArrayList<MovieSumbnail> selectMovieImageCut(MovieSumbnail msn);
 
+		//이진희 영화 비디오 출력
+		ArrayList<MovieSumbnail> selectMovieVideo(MovieSumbnail msn);
+
 }
