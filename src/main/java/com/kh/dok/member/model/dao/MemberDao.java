@@ -16,8 +16,6 @@ public interface MemberDao {
 
 	int checkSame(SqlSessionTemplate sqlSession, Member m);
 
-	int checkPass(SqlSessionTemplate sqlSession, Member m);
-
 	int updateInfo(SqlSessionTemplate sqlSession, Member m);
      
 }

@@ -388,14 +388,14 @@ body label {
     </div>
 
     <!-- Signup Form -->
-    <form action="insert.me" method="post">
+    <form method="post">
       <input type="text" id="email" class="fadeIn third" name="email" placeholder="* email" required onkeyup="checkSame()">
       <div id="checkSame"></div>
       <input type="button" class="fadeIn fourth" value="이메일 인증" id="emailBtn" onclick="checkMail()">
       <input type="text" id="authNum" class="fadeIn third" name="authNum" placeholder="* 인증번호" required onkeyup="checkAuth()">
       <!-- <input type="button" class="fadeIn fourth" value="이메일 인증" > -->
       <div id="checkCode"></div>
-      <input type="hidden" name="authNumOrig" id="authNumOrig" value="<%= request.getAttribute("authNumOrig") %>"/>
+      <input type="hidden" name="authNumOrig" id="authNumOrig" value=""/>
       
       <input type="password" id="user_pwd" class="fadeIn second" class="pass" name="user_pwd" placeholder="* password" required onkeyup="checkPwd()">
       <input type="password" id="user_pwd2" class="fadeIn second" class="pass" name="user_pwd2" placeholder="* password check" required onkeyup="checkPwd()">
@@ -410,11 +410,10 @@ body label {
     M
   </label>
   
-  
       <input type="text" id="phone" class="fadeIn second" name="phone" placeholder="phone">
       <input type="text" id="nickname" class="fadeIn second" name="nickname" placeholder="* nickname" required onkeyup="checkNick()">
       <div id="checkName"></div>
-      <input type="submit" class="fadeIn fourth" id="signupBtn" value="회원가입">
+      <input type="submit" class="fadeIn fourth" id="signupBtn" onclick="signupCheck()" value="회원가입">
       
     </form>
 
@@ -427,7 +426,9 @@ body label {
 
 //이메일과 비밀번호가 맞지 않을 경우 가입버튼 비활성화를 위한 변수 설정
 var emailCheck = 0;
+var authCheck = 0;
 var pwdCheck = 0;
+var nickCheck = 0;
 
 
 //이메일 중복 확인
@@ -450,9 +451,10 @@ var email = $("#email").val();
 			
 			 if (data == '1'){
 				document.getElementById('checkSame').innerHTML = "<span style='color: red;'> 중복되는 이메일입니다. 다른 이메일을 입력해주세요.  </span>"
+				emailCheck = 0;
 			} else if (data == '0'){
 				document.getElementById('checkSame').innerHTML = "<span style='color: green;'> 사용 가능한 이메일입니다. </span>"
-				
+				emailCheck = 1;
 			}
 		}
 	});
@@ -469,64 +471,35 @@ function checkMail(){
 		alert("메일을 입력해 주세요.");
 		return false;
 	}
-			
+	
+	if(emailCheck == 1){
 	$.ajax({
 		url:"checkMail.me",
 		type:"post",
 		data:{email:email},
 		success:function(data){
 			alert("이메일 인증 번호가 발급되었습니다. 이메일을 확인해주세요.");
-			
+			authNumOrig = data;	
 			}
 	});
-	
+	} else {
+		alert("이미 같은 이메일로 가입한 이력이 있습니다. 다른 이메일을 사용해 주세요.");
+	}
 }
 
 //인증 번호 확인 절차
-function checkAuth(){
+  function checkAuth(){
 	
 	var authNum = $("#authNum").val();
-	var authNumOrig = <%= request.getAttribute("authNumOrig") %>;
 	
-	
-	$.ajax({
-		url:"checkAuth.me",
-		type:"post",
-		data:{
-			authNum:authNum,
-			authNumOrig:authNumOrig
-			},
-		
-		success:function(data){
-			
-			console.log("checkAuth()안에서 받아오는 authNumOrig : " + data);
-			
-/* 			if(authNum != "" && authNum != authNumOrig){
-				document.getElementById('checkCode').innerHTML = "<span style='color: red;'>인증번호가 일치하지 않습니다.</span>"
-			} else if (authNum != "" && authNum == authNumOrig){
-				document.getElementById('checkCode').innerHTML = "<span style='color: green;'>인증번호가 일치합니다.</span>"
-			} */
-			
-			if(data =='0'){
-				document.getElementById('checkCode').innerHTML = "<span style='color: red;'>인증번호가 일치하지 않습니다.</span>"
-			} else if(data == '1'){
-				document.getElementById('checkCode').innerHTML = "<span style='color: red;'>인증번호가 일치하지 않습니다.</span>"
-			}
-			
-		}
-	});
-	
-	
-	
-/* 	if(authNum != "" && authNum != authNumOrig){
+	if(authNum != "" && authNum != authNumOrig){
 		document.getElementById('checkCode').innerHTML = "<span style='color: red;'>인증번호가 일치하지 않습니다.</span>"
 	} else if (authNum != "" && authNum == authNumOrig){
 		document.getElementById('checkCode').innerHTML = "<span style='color: green;'>인증번호가 일치합니다.</span>"
-	} */
+		authCheck = 1;
+	}
 	
-	
-	
-}
+} 
 
 
 
@@ -545,9 +518,6 @@ function checkPwd() {
     	document.getElementById('check').innerHTML = "<span style='color: red;'>비밀번호가 일치하지 않습니다.</span>"
     }
     
-    
-    if(emailCheck == 1 && pwdCheck == 1){
-	}
     
 }
 
@@ -573,11 +543,28 @@ function checkNick(){
 				document.getElementById('checkName').innerHTML = "<span style='color: red;'> 중복되는 닉네임입니다. 다른 닉네임을 입력해주세요.  </span>"
 			} else if (data == '0'){
 				document.getElementById('checkName').innerHTML = "<span style='color: green;'> 사용 가능한 닉네임입니다. </span>"
+				nickCheck = 1;
 			}
 		}
 	});
 	
 	
+}
+
+function signupCheck(){
+	
+	console.log("emailCheck = " + emailCheck);
+	console.log("pwdCheck = " + pwdCheck);
+	console.log("nickCheck = " + nickCheck);
+	console.log("authCheck = " + authCheck);
+	
+	if(emailCheck == 1 && pwdCheck == 1 && nickCheck == 1 && authCheck == 1){
+		location.href="insert.me";
+	} else {
+		alert("필수 입력 조건이 충족되지 않았습니다. 다시 확인해 주세요.");
+		return false;
+	}
+
 }
 
 

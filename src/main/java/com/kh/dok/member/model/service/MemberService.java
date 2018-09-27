@@ -13,7 +13,7 @@ public interface MemberService {
 
 	int checkSame(Member m);
 
-	int checkPass(Member m);
+	int checkPass(Member m) throws LoginException;
 
 	int updateInfo(Member m);
 	

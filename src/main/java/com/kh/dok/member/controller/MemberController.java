@@ -105,19 +105,35 @@ public class MemberController {
       try {
 		model.addAttribute("loginUser", ms.loginMember(m));
 		
-		System.out.println("MemberController in try : " + m);
-		
 		return "main/main";
 		
       	} catch (LoginException e) {
       		
 		model.addAttribute("msg", e.getMessage());
 		
-		System.out.println("MemberController in catch : " + m);
-		
 		return "common/errorPage";
 	}
       
+   }
+   
+   //회원 정보 수정 - 비밀번호 비교
+   @ResponseBody
+   @RequestMapping("checkEditable.me")
+   public int checkPass(Member m, Model model){
+	   
+	   int result;
+	   
+	try {
+		result = ms.checkPass(m);
+		return result;
+		
+	} catch (LoginException e) {
+		
+		result = 0;
+		return result;
+		
+	}
+	   
    }
    
    //암호화 처리 로그아웃(성희)
@@ -130,29 +146,24 @@ public class MemberController {
    }
    
    //메일 인증  + 보내기 (이주)
+   @ResponseBody
    @RequestMapping("checkMail.me")
-   public ModelAndView emailAuth(HttpServletResponse response, HttpServletRequest request) throws Exception {
+   public int emailAuth(HttpServletResponse response, HttpServletRequest request) throws Exception {
 	   
 	   System.out.println("오니?");
 	   
 	   String email = request.getParameter("email");
 	   String authNum = "";
-	   String authNumOrig = "";
-	   
+	   int authNumOrig = 0;
 	   
 	   System.out.println("이잉미멤일일" + email);
 	   
 	   authNum = RandomNum();
-	   authNumOrig = authNum;
-	   
+	   authNumOrig = Integer.parseInt(authNum);
+
 	   sendEmail(email.toString(),authNum);
 	   
-	   ModelAndView mv = new ModelAndView();
-	   mv.setViewName("/member/signup");
-	   mv.addObject("email", email);
-	   mv.addObject("authNumOrig", authNum);
-	   
-	   return mv;
+	   return authNumOrig;
 	   
    }
    
@@ -212,40 +223,6 @@ public class MemberController {
 	   return buffer.toString();
    }
    
-   //인증번호 확인
-   @ResponseBody
-   @RequestMapping("checkAuth.me")
-/*   public String checkAuth(HttpServletResponse response, HttpServletRequest request){
-	   
-	   int result = 0;
-	   
-	   String authNum = request.getParameter("authNum");
-	   System.out.println("checkAuth에서 받은 authNum(유저가 쓴거야야 함) : " + authNum);
-	   
-	   String authNumOrig = request.getParameter("authNumOrig");
-	   System.out.println("checkAuth의 authNumOrig: " + authNumOrig);
-	   
-	   return "member/signup";
-
-   }*/
-   public int checkAuth(HttpServletResponse response, HttpServletRequest request){
-	   
-	   int result = 0;
-	   
-	   String authNumOrig = request.getParameter("authNumOrig");
-	   System.out.println("checkAuth의 authNumOrig : " + authNumOrig);
-	   //위에 값이 자꾸 null임,,, null이면 if문으로 비교를 할 수가 없응께,, 이유: request.getParam에 orig을 저장 못함~~!~~!
-	   
-	   String authNumUser = request.getParameter("authNum");
-	   System.out.println("checkAuth에서 받은 authNum(유저가 쓴거야야 함) : " + authNumUser);
-	   
-	   
-	   
-	   
-	   return result;
-	   
-   }
-   
    //닉네임 중복 체크
    @ResponseBody
    @RequestMapping("checkNick.me")
@@ -279,23 +256,7 @@ public class MemberController {
 	   }
 	   
    }
-   
-   //회원 정보 수정 - 비밀번호 비교
-   @RequestMapping("checkEditable.me")
-   public int checkPass(Member m, Model model){
-	   
-	   int result = ms.checkPass(m);
-	   
-	   if(result > 0){
-		   result = 1;
-		   return result;
-	   } else {
-		   result = 0;
-		   return result;
-	   }
-	   
-   }
-   
+     
    //회원 정보 수정 - 정보 업데이트
    @RequestMapping("updateInfo.me")
    public int updateInfo(Member m, Model model){
