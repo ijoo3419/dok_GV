@@ -107,12 +107,13 @@
 			<h2>회원 관리</h2>
 			<select id="amember" name="amember" onchange="select()"
 				style="width: 150px">
-				<option value="default">정렬기준</option>
+				<option value="">정렬기준</option>
 				<option value="all">전체회원</option>
 				<option value="buyer">일반회원</option>
 				<option value="seller">판매자회원</option>
-			</select> 
-			<br>
+			</select> <br>
+			
+			
 			<div class="table-wrapper">
 				<table>
 					<thead>
@@ -139,23 +140,35 @@
 					</tbody>
 				</table>
 
-				 <div id="pageid" class="pagination">
+				<div id="pageid" class="pagination">
+					<c:choose>
+						<c:when test="${aval == 'all'}">
+							<c:set var="search" value="searchAll.ad"></c:set>
+						</c:when>
+						<c:when test="${aval == 'buyer'}">
+							<c:set var="search" value="searchBu.ad"></c:set>
+						</c:when>
+						<c:when test="${aval == 'seller' }">
+							<c:set var="search" value="searchSe.ad"></c:set>
+						</c:when>
+					</c:choose>
 					<c:if test="${pi.currentPage <=1 }">
-						<a>&lt;이전</a>&nbsp;
+						<a>&lt;이전&nbsp;</a>
 					</c:if>
 					<c:if test="${pi.currentPage > 1 }">
-						<c:url var="blistBack" value="searchAll">
-							<c:param name="currentPage" value="${pi.currentPage - 1 }"/>
+						<c:url var="blistBack" value="${search }">
+							<c:param name="currentPage" value="${pi.currentPage - 1 }" />
 						</c:url>
-						<a href="${blistBack }">&lt;이전</a> &nbsp;
+						<a href="${blistBack }">&lt;이전&nbsp;</a>
 					</c:if>
 					<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
 						<c:if test="${p eq pi.currentPage }">
-							  <a><b><font color="#18bfef " size="4">${p }</b></a></font>
+							<b><font color="#18bfef " size="4"></b></font>
+							<a><b><font color="#18bfef" size="4">${p }</font></b></a>
 						</c:if>
 						<c:if test="${p ne pi.currentPage }">
-							<c:url var="blistCheck" value="searchAll">
-								<c:param name="currentPage" value="${p }"/>
+							<c:url var="blistCheck" value="${search }">
+								<c:param name="currentPage" value="${p }" />
 							</c:url>
 							<a href="${blistCheck }">${p }</a>
 						</c:if>
@@ -164,12 +177,14 @@
 						&nbsp; <a>다음&gt;</a>
 					</c:if>
 					<c:if test="${pi.currentPage < pi.maxPage }">
-						<c:url var="blistEnd" value="searchAll">
-							<c:param name="currentPage" value="${pi.currentPage + 1 }"/>
+						<c:url var="blistEnd" value="${search }">
+							<c:param name="currentPage" value="${pi.currentPage + 1 }" />
 						</c:url>
 						<a href="${blistEnd }">&nbsp;다음&gt;</a>
 					</c:if>
 				</div>
+
+
 				<div class="search">
 					<input id="gsearch" type="text" value placeholder="검색"
 						style="width: 300px"> <a href="#" id="gicon"
@@ -319,39 +334,26 @@
 	<script>
 		function select() {
 			var sresult = $("select[name=amember]").val();
-			
-			if (sresult == "default"){
+
+			if (sresult == "all") {
 				location.href = "searchAll.ad?currentPage=1";
-			} else if (sresult == "all") {
-				location.href = "searchAll.ad?currentPage=1";
+				$("#amember option:eq(1)").prop("selected",true);
 			} else if (sresult == "buyer") {
 				location.href = "searchBu.ad?currentPage=1";
+				$("#amember option:eq(2)").prop("selected",true);
 			} else if (sresult == "seller") {
+				$("#amember option:eq(3)").prop("selected",true);
 				location.href = "searchSe.ad?currentPage=1";
 			}
 		}
 	</script>
-	<!-- <script>
-		function searchAll(){
-			$.ajax({
-				url : "searchAll.ad",
-				type : "POST",
-				dataType: "json",
-				success : function(data){
-					var t1 = data.map;
-					console.log(t1);
-					var t2 = data.map[0].mid;
-					console.log(t2);
-				},
-				error : function(){
-					alert("에러 발생");
-				}
-			});
-		}
-	</script> -->
-	<%-- <script src="${contextPath }/resources/js/selectIndex.js"></script> --%>
+	<!-- 기본 option값 설정 -->
+	<script>
+		$(function(){
+			$("select option[value='${aval}']").prop("selected",true);
+		})
+	</script>
 	<!-- 템플릿 관련 js파일들 -->
-		
 	<script src="${contextPath }/resources/js/jquery.min.js"></script>
 	<script src="${contextPath }/resources/js/jquery.scrollex.min.js"></script>
 	<script src="${contextPath }/resources/js/jquery.scrolly.min.js"></script>
@@ -370,3 +372,61 @@
 						href="#" class="page">3</a> <a href="#" class="page">4</a> <a
 						href="#" class="page">5</a> <a href="#" class="page">&gt&gt</a>
 				</div> -->
+
+<%-- <c:if test="${va = 'all' }">
+				 		<c;set name="pval" value="searchAll.ad?currentPage="${pi.currentPage }">
+				 	</c:if> --%>
+<!-- <b><font color="#18bfef " size="4"></b></font> -->
+<%--  --%>
+
+
+
+<%-- <c:if test="${ pi.currentPage <= 1 }">
+				[이전] &nbsp;
+			</c:if>
+					<c:if test="${ pi.currentPage > 1 }">
+						<c:url var="blistBack" value="searchAll.ad">
+							<c:param name="currentPage" value="${pi.currentPage - 1 }" />
+						</c:url>
+						<a href="${ blistBack }">[이전]</a> &nbsp;
+			</c:if>
+					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+						<c:if test="${ p eq pi.currentPage }">
+							<font color="red" size="4"><b>[${ p }]</b></font>
+						</c:if>
+						<c:if test="${ p ne pi.currentPage }">
+							<c:url var="blistCheck" value="searchAll.ad">
+								<c:param name="currentPage" value="${ p }" />
+							</c:url>
+							<a href="${ blistCheck }">${ p }</a>
+						</c:if>
+					</c:forEach>
+					<c:if test="${ pi.currentPage >= pi.maxPage }">
+				&nbsp; [다음]
+			</c:if>
+					<c:if test="${ pi.currentPage < pi.maxPage }">
+						<c:url var="blistEnd" value="searchAll.ad">
+							<c:param name="currentPage" value="${ pi.currentPage + 1 }" />
+						</c:url>
+						<a href="${ blistEnd }">&nbsp;[다음]</a>
+					</c:if> --%>
+					
+					<!-- <script>
+		function searchAll(){
+			$.ajax({
+				url : "searchAll.ad",
+				type : "POST",
+				dataType: "json",
+				success : function(data){
+					var t1 = data.map;
+					console.log(t1);
+					var t2 = data.map[0].mid;
+					console.log(t2);
+				},
+				error : function(){
+					alert("에러 발생");
+				}
+			});
+		}
+	</script> -->
+	<%-- <script src="${contextPath }/resources/js/selectIndex.js"></script> --%>
