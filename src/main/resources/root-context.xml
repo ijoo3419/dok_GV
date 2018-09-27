@@ -54,6 +54,9 @@
 		<aop:advisor id="transactionAdvice" pointcut-ref="serviceMethod" advice-ref="txAdvice"/>
 	</aop:config>
 	
+	<!-- 소진 Ajax관련 태그
+	<bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/> -->
+	
 	
 	
 </beans>
