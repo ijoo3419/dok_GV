@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.dok.movie.model.service.MovieService;
 import com.kh.dok.movie.model.vo.Movie;
+import com.kh.dok.movie.model.vo.MovieSumbnail;
 
 @Controller
 public class MovieController {
@@ -20,15 +21,29 @@ public class MovieController {
 	private MovieService ms;
 	
 	@RequestMapping("movie.mo")
-	public String showmovieView(Movie v, Model model){
+	public String showmovieView(MovieSumbnail msn, Model model){
 		
-		model.addAttribute("mobvieView",ms.selectMovie(v));
+		ArrayList<MovieSumbnail> movieView = ms.selectMovie(msn);
+		
+		model.addAttribute("movieView",movieView);
 		
 		return "movie/movie";
 	}
 	
 	@RequestMapping("movieDetail.mo")
-	public String showmovieDetailView(){
+	public String showmovieDetailView(@RequestParam String id, Model model){
+		
+		System.out.println("파라미터 옴?" +id);
+		MovieSumbnail msn = new MovieSumbnail();
+		
+		msn.setMovie_id(id);
+		
+		ArrayList<MovieSumbnail> movieDetail = ms.selectMovieDetail(msn);
+		ArrayList<MovieSumbnail> movieimagecut = ms.selectMovieImageCut(msn);
+		
+		model.addAttribute("movieDetail",movieDetail);
+		model.addAttribute("movieimagecut",movieimagecut);
+		
 		return "movie/movieDetail";
 	}
 	

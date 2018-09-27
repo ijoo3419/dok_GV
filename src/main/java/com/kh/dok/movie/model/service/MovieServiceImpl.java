@@ -2,6 +2,7 @@ package com.kh.dok.movie.model.service;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.dok.movie.model.dao.MovieDao;
 import com.kh.dok.movie.model.vo.Movie;
+import com.kh.dok.movie.model.vo.MovieSumbnail;
 
 
 @Service
@@ -18,12 +20,12 @@ public class MovieServiceImpl implements MovieService{
 	@Autowired
 	private MovieDao md;
 	
-
+	//이진희 전체영화 출력
 	@Override
-	public ArrayList<Movie> selectMovie(Movie v) {
-		ArrayList<Movie> movieView = null;
+	public ArrayList<MovieSumbnail> selectMovie(MovieSumbnail msn) {
+		ArrayList<MovieSumbnail> movieView = null;
 		
-		movieView = md.selectCinema(sqlSession, v);
+		movieView = md.selectMovie(sqlSession, msn);
 		
 		return movieView;
 	}
@@ -36,6 +38,24 @@ public class MovieServiceImpl implements MovieService{
 		ArrayList<Movie> list = md.selectMovieList(sqlSession, v);
 		
 		return list;
+	}
+
+
+	//이진희 영화상세 출력
+	@Override
+	public ArrayList<MovieSumbnail> selectMovieDetail(MovieSumbnail msn) {
+		ArrayList<MovieSumbnail> movieDetail = md.selectMovieDetail(sqlSession,msn);
+		
+		return movieDetail;
+	}
+
+
+	//이진희 영화이미지컷 출력
+	@Override
+	public ArrayList<MovieSumbnail> selectMovieImageCut(MovieSumbnail msn) {
+		ArrayList<MovieSumbnail> movieimagecut = md.selectMovieImageCut(sqlSession,msn);
+		
+		return movieimagecut;
 	}
 
 }

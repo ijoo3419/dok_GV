@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -197,6 +198,25 @@ hr {
     	margin-top:2px;
     	height: 20px
     }
+    #age{
+	width: 40px;
+    height: 40px;
+    background: skyblue;
+    display: inline-block;
+    /* margin-left: 10px; */
+    margin-bottom: 10px;
+    margin-right:10px;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+    /* line-height:30px; */
+}
+#title{
+	width: 500px;
+    height: 60px;
+	display: inline-block;
+	 margin-left: 10px;
+}
 </style>		
 		 <title>Massively by HTML5 UP</title>
 		<meta charset="utf-8" />
@@ -256,14 +276,34 @@ hr {
 							<article class="post featured">
 							<br>
 	<h1 align="left" style="margin-left:20px;"> 영화상세</h1>
+		<c:forEach items="${movieDetail }" var="row">
 	<hr>
 	<!-- <div id="movieArea"> -->
 		<div id="sumnailimage">
-	
+			 <${row.file_src} style="width:298px; height:400px;">
 		</div>
 		<div id="data">
-			<h3 align="left">독립영화</h3>
-			<p style="text-align:left;">movie, 2018</p>
+			<c:set var="name" value="${row.movie_age}"/>
+              <div style="display:inline-block; vertical-align: top;">
+                    <c:choose>
+					    <c:when test="${name eq '12'}">
+					        <div id="age">12</div>
+					    </c:when>
+					    <c:when test="${name eq '15'}">
+					        <div id="age" style="background:#FDD835;">15</div>
+					    </c:when>
+					     <c:when test="${name eq '19'}">
+					        <div id="age" style="background:#FF3D00;">19</div>
+					    </c:when>
+					    <c:otherwise>
+					        <div id="age" style="background:#43A047; font-size: 13px;">전체</div>
+					    </c:otherwise>
+					</c:choose>
+			</div>		
+			<div id="title">				
+			<h3 align="left">${row.movie_title}</h3>
+			<p style="text-align:left;">${row.movie_etitle}</p>
+			</div>
 		<hr style="margin:0;">
 			<a style="text-align:left; width:100px; margin:0; font-size:30px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">★★★☆☆</a>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -275,11 +315,10 @@ hr {
 			<input type="button" value="예매하기" style="background:purple; font-clolr:white; float:right;  margin-top:10px;">
 			<br>
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">타입:</a><br>
-			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">개봉일:</a><br>
-			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">감독:</a><br>
+			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">개봉일: ${row.open_date }</a><br>
+			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">감독: ${row.director_name}</a><br>
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">출연진:</a><br>
-			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">장르:</a><br>
-			
+			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">장르: ${row.genre}</a><br>
 			
 			<input type="button" value="상영시간표" style="float:right; ">
 			<input type="button" value="♥보고싶어" style="float:right; margin-right:10px; text-decoration: none;">
@@ -290,14 +329,10 @@ hr {
 		<br>
 		<h2 align="left" style="margin-left:20px;">줄거리</h2>
 		<div id="synopsis">
-			발휘하기 커다란 않는 반짝이는 우리 피부가 얼마나 넣는 피다. 
-			아름답고 얼마나 모래뿐일 튼튼하며, 것이다. 이상의 우리의 것이다.보라, 철환하였는가? 
-			아니더면, 무엇이 가장 가치를 하였으며, 그들의 실현에 천지는 거친 봄바람이다. 
-			그들의 관현악이며, 돋고, 것이다. 곧 속잎나고, 새 천지는 어디 보는 밥을 가는 교향악이다. 
-			그들의 인생을 가지에 생생하며, 곧 피가 얼음이 사라지지 것이다. 
-			천하를 속에 지혜는 바로 못할 피다. 귀는 속잎나고, 열락의 피고, 운다. 옷을 위하여, 미인을 때까지 무엇을 할지라도 그리하였는가?
+			${row.movie_content}
 		</div>
 		
+	</c:forEach>
 		<br><br><br>
 		
 		<a style="text-align:left; width:100px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;;">스틸컷</a>
@@ -306,31 +341,42 @@ hr {
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">동영상</a>
 			<br>
+				
 		<div align="center" id="imageview">
+		<c:forEach items="${movieimagecut }" var="row1">
+			<${row1.file_src} style="width:200px; height:198px;">
 		
-		
+		</c:forEach>
 		</div>
 
 		 <br><br>
+
 		<div class="container">
  
   <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
     <!-- Indicators -->
-    <!-- <ol class="carousel-indicators">
+     <!-- <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#myCarousel" data-slide-to="1"></li>
       <li data-target="#myCarousel" data-slide-to="2"></li>
       <li data-target="#myCarousel" data-slide-to="3"></li>
-    </ol> -->
+    </ol>  -->
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
-
+	
       <div class="item active">
-        <img src="${contextPath }/resources/images/logo.jpg" alt="Chania" width="460" height="345">
+        <%-- <img src="${contextPath}/resources/images/logo.jpg" alt="Chania" width="460" height="345"> --%>
+        <div style="background:black; width:500px; height:450px;"></div>
       </div>
-
-      <div class="item">
+		
+	 <c:forEach items="${movieimagecut }" var="row1">
+		 <div class="item">	
+			<${row1.file_src} style="width:500px; height:450px;">
+		</div>
+		</c:forEach>	 	
+		
+      <%-- <div class="item">
         <img src="${contextPath }/resources/images/logo.jpg" alt="Chania" width="460" height="345">
       </div>
     
@@ -340,7 +386,7 @@ hr {
 
       <div class="item">
         <img src="${contextPath }/resources/images/logo.jpg" alt="Flower" width="460" height="345">
-      </div>
+      </div> --%>
   
     </div>
 
