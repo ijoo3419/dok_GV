@@ -34,6 +34,11 @@
 	color: #585858;
 	margin-left: 20px;
 }
+#web-fontTitle-child-two {
+	font-family: 'Do Hyeon', sans-serif;
+	font-size:20px;
+	color: #585858;
+}
 
 #web-fontDate {
 	font-family: 'Do Hyeon', sans-serif;
@@ -421,19 +426,25 @@ a{
 						</div>
 						<div class="modal-startDate-div">
 							<h2 id="web-fontTitle">극장</h2>
+							<a data-toggle="modal" href="#myModal5" class="movieB">
 							<button class="cinemaBtn">
 								<img src="${ contextPath }/resources/images/plusBtn.PNG"
 									width="30" height="30">
 							</button>
-
+							</a>
+							<input type="hidden" class="theater-id" value="">
+							
 							<hr>
 
 							<h2 id="web-fontTitle">영화</h2>
 
 							<a data-toggle="modal" href="#myModal4" class="movieA">
 								<!-- <input type="image" class="movieBtn" onclick="return selectMovieList()"> -->
-								<button class="movieBtn" onclick="return selectMovieList()"><img src="${ contextPath }/resources/images/plusBtn.PNG" width="30" height="30"></button>
+								<button class="movieBtn" onclick="return selectMovieList()">
+									<img src="${ contextPath }/resources/images/plusBtn.PNG" width="30" height="30">
+								</button>
 							</a>
+							<input type="hidden" class="movie-id" value="">
 						</div>
 					</div>
 
@@ -444,7 +455,9 @@ a{
 
 							<hr>
 
-							<div style="width: 100%; height: 700px; overflow: auto">
+							<div style="width: 100%; height: 450px; overflow: auto">
+								<% int i = 1;
+								   if(i != 1){ %>
 								<table>
 									<tr style="width: 100%; height: 60px;">
 										<td>시간</td>
@@ -452,10 +465,13 @@ a{
 										<td>상영관</td>
 									</tr>
 								</table>
+								<% }else{ %>
 								<div align="center">
+									<br><br><br><br>
 									<img src="${ contextPath }/resources/images/timePage.PNG"
 										width="200" height="200">
 								</div>
+								<% } %>
 							</div>
 						</div>
 					</div>
@@ -485,7 +501,7 @@ a{
 						var $trOne = $("<tr>");
 						var $trTwo = $("<tr>");
 						var $tdOne = $("<td><img src='${ contextPath }/resources/images/moviePay.PNG' width='150'>");
-						var $tdhidden = $("<input type='hidden' value=''>")
+						var $tdhidden = $("<input type='hidden' class='hidden-movie-list' value=''>")
 						var $tdTwo = $("<td id='web-fontTitle-child'>");
 						
 						$tdhidden.val(data[key].movie_id);
@@ -504,20 +520,18 @@ a{
 					
 					$(".movieTable").show();
 					
-					console.log(data);
+					/* console.log(data); */
 					
 					$(function(){
 						$(".movieTable table").mouseenter(function(){
 							$(this).parent().css({"cursor":"pointer"});
 					 	}).click(function(){
 					 			var num = $(this).find("input").val();
-					 			/* alert("num = " + num);
-								console.log(num); */
-								/* $(".movieBtn").find("img").remove(); */
+								var movieId = $(".hidden-movie-list").val();
+								$(".movie-id").val(movieId); //영화ID를 가지고있다.
 								$(".movieBtn").find("img").attr("src", "${ contextPath }/resources/images/moviePay.PNG");
 								$(".movieBtn").find("img").attr("style", "width:100px; height:150px;");
 								$(".movieBtn").show();
-								alert("이미지 변경완료!");
 					 	});
 				  	});
 				},
@@ -526,9 +540,50 @@ a{
 				}
 			});
 			
-			
 			return false;
 		}
+		
+		$(function foo(){
+			
+			    setTimeout(foo, 2000);
+			    
+				var formDate = $("#fromDate").val();
+				var theaterId = $(".theater-id").val();
+				var movieId = $(".movie-id").val();
+				
+				var arrayCheck = [ formDate, theaterId, movieId ];
+				var check = 0;
+				
+				for(var i = 0; i < arrayCheck.length; i++){
+					if(arrayCheck[i] == null){
+			    		  check = 1;
+			    	}else if(arrayCheck[i] == ""){
+			    		  check = 1;
+			    	}else if(arrayCheck[i] == undefined){
+			    		  check = 1;
+			    	}
+				}
+				
+				if(check == 1){
+			    	
+			    }else{
+			    	alert("동작");
+			    	
+			    	$.ajax({
+			    		url:"selectPlayList.mo",
+			    		type:"post",
+			    		data:{formDate:formDate,
+			    			  theaterId:theaterId,
+			    			  movieId:movieId},
+			    		success:function(data){
+			    			
+			    		},
+			    		error:function(data){
+			    			console.log(data);
+			    		}
+			    	});
+				}
+			});
 	</script>
 	<!-- second modal -->
 	<div class="modal" id="myModal2" aria-hidden="true"
@@ -632,7 +687,7 @@ a{
 							</tr>
 							<tr class="seatPay-btn">
 								<td><button class="seatPay-btn-left">이전</button>
-									<a data-toggle="modal" href="#myModal3"><button class="seatPay-btn-right">다음</button></a></td>
+								<a data-toggle="modal" href="#myModal3"><button class="seatPay-btn-right">다음</button></a></td>
 							</tr>
 						</table>
 					</div>
@@ -861,5 +916,222 @@ a{
 			</div>
 		</div>
 	</div>
+	<style>
+		.myModal5-title{
+			height:30px;
+		}
+		.myModal5-titleOne{
+			display:inline-block;
+			float:left;
+			height:50px;
+		}
+		.myModal5-titleOne #web-fontTitle{
+			margin-top:0px;
+		}
+		.myModal5-titleTwo{
+			display:inline-block;
+			float:right;
+			height:50px;
+		}
+		.areaDiv{
+			display:inline-block;
+			height:400px;
+			overflow:hidden;
+			float:left;
+		}
+		.areaDiv td{
+			width:150px;
+			height:40px;
+			border:1px solid #E6E6E6;
+			cursor:pointer;
+		}
+		.areaDiv td:hover{
+			background:#E6E6E6;
+		}
+		.areaChild{
+			display:inline-block;
+			height:450px;
+			overflow:hidden;
+			border:1px solid #E6E6E6;
+		}
+		.areaChild td{
+			width:180px;
+			height:40px;
+			cursor:pointer;
+			/* border:1px solid #E6E6E6; */
+		}
+	</style>
+	<!-- 5th modal -->
+	<div class="modal" id="myModal5" aria-hidden="true" style="display: none; z-index: 1080;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="myModal5-title">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					</div>
+					<div class="myModal5-titleOne">
+					<h2 id="web-fontTitle">지역별</h2>
+					</div>
+					<div class="myModal5-titleTwo">
+						<button class="seatPay-btn-left">이전</button>
+						<a data-toggle="modal" href="#myModal3"><button class="seatPay-btn-right">다음</button></a>
+					</div>
+				</div>
+				<div class="container"></div>
+				<div class="modal-body">
+					<div class="areaDiv">
+						<table class="areaTable">
+							<tr>
+								<td>
+									<input type="hidden" value="A1">
+									<font id="web-fontTitle-child">서울</font>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="hidden" value="A2">
+									<font id="web-fontTitle-child">경기</font>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="hidden" value="A3">
+									<font id="web-fontTitle-child">인천</font>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="hidden" value="A4">
+									<font id="web-fontTitle-child">강원</font>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="hidden" value="A5">
+									<font id="web-fontTitle-child">대전/춘천</font>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="hidden" value="A6">
+									<font id="web-fontTitle-child">대구</font>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="hidden" value="A7">
+									<font id="web-fontTitle-child">부산/울산</font>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="hidden" value="A8">
+									<font id="web-fontTitle-child">경상</font>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="hidden" value="A9">
+									<font id="web-fontTitle-child">광주/전라/제주</font>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="areaChild" style="overflow:auto; height:450px;">
+						<!-- <table>
+							<tr>
+								<td><font id="web-fontTitle-child">강남</font></td>
+							</tr>
+							<tr>
+								<td><font id="web-fontTitle-child">강동</font></td>
+							</tr>
+							<tr>
+								<td><font id="web-fontTitle-child">군자</font></td>
+							</tr>
+							<tr>
+								<td><font id="web-fontTitle-child">동대문</font></td>
+							</tr>
+							<tr>
+								<td><font id="web-fontTitle-child">마곡</font></td>
+							</tr>
+							<tr>
+								<td><font id="web-fontTitle-child">목동</font></td>
+							</tr>
+							<tr>
+								<td><font id="web-fontTitle-child">상봉</font></td>
+							</tr>
+							<tr>
+								<td><font id="web-fontTitle-child">신촌</font></td>
+							</tr>
+							<tr>
+								<td><font id="web-fontTitle-child">코엑스</font></td>
+							</tr>
+						</table>
+ -->					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		$(function(){
+			$(".areaTable td").mouseenter(function(){
+				$(this).parent().css({"cursor":"pointer"});
+		 	}).click(function(){
+		 			var area_id = $(this).find("input").val();
+		 			
+		 				$.ajax({
+		 					url:"selectAreaList.ar", 
+		 					type:"post",
+		 					data:{area_id:area_id},
+		 					success:function(data){
+		 						$div = $(".areaChild");	
+		 						$div.find("table").remove();
+		 						var $table = $("<table>");
+		 						
+		 						for(var key in data){
+		 							var $tr = $("<tr>");
+		 							var $td = $("<td>");
+		 							var $font = $("<font id='web-fontTitle-child'>")
+		 							var $tdhidden = $("<input type='hidden' value=''>")
+		 							
+		 							$tdhidden.val(data[key].area_id);
+		 							$font.text(data[key].area_name);
+		 							
+		 							$td.append($tdhidden);
+		 							$td.append($font);
+		 							$tr.append($td);
+		 							$table.append($tr);
+		 						}
+		 						
+		 						$div.append($table);
+		 						
+		 						$(".areaChild").show();
+		 						
+		 						/* console.log(data); */
+		 						
+		 						$(function(){
+		 							$(".areaChild table td").mouseenter(function(){
+		 								$(this).parent().css({"cursor":"pointer"});
+		 						 	}).click(function(){
+		 						 			var num = $(this).find("font").text();
+		 						 			var id = $(this).find("input").val();
+		 						 			var $font = $("<font id='web-fontTitle-child-two'>");
+		 						 			$font.append(num);
+		 									$(".cinemaBtn").find("img").remove();
+		 									$(".cinemaBtn").find("font").remove();
+		 									$(".cinemaBtn").append($font);
+		 									$(".cinemaBtn").show();
+		 									
+		 									$(".theater-id").val(id);
+		 						 	});
+		 					  	});
+		 					},
+		 					error:function(){
+		 						console.log("에러!");
+		 					}
+		 				});
+		 	});
+		});
+	</script>
 </body>
 </html>
