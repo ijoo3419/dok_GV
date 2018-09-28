@@ -52,5 +52,48 @@ public class MemberDaoImpl implements MemberDao{
 		return sqlSession.insert("Member.insertWishlist", m);
 	}
 
+	//카카오 로그인 유저 체크
+	@Override
+	public int kakaoUserCheck(SqlSessionTemplate sqlSession, Member m) {
+		Member kakaoUserCheck = sqlSession.selectOne("Member.kakaoUserCheck", m);
+		
+		System.out.println("Dao kakaoUserCheck Member : " + kakaoUserCheck);
+		
+		if(kakaoUserCheck == null){
+			//새유저
+			return 11;
+		}else{
+			//기존유저
+			return 22;
+		}
+		
+		
+	}
+
+
+	//카카오 새 유저 회원가입
+	@Override
+	public int insertKakaoMember(SqlSessionTemplate sqlSession, Member m) {
+		
+		return sqlSession.insert("Member.insertKakaoMember", m);
+	}
+
+	
+	
+	//카카오 유저 로그인
+	@Override
+	public Member loginKakaoMember(SqlSessionTemplate sqlSession, Member m) {
+		Member loginUser = sqlSession.selectOne("Member.loginKakaoMember", m);
+		
+		return loginUser;
+	}
+
+
+	@Override
+	public int updatePlusInfo(SqlSessionTemplate sqlSession, Member m) {
+		
+		return sqlSession.update("Member.kakaoUserInfo", m);
+	}
+
 
 }

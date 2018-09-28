@@ -285,6 +285,7 @@ public class MemberController {
 	   
    }
    
+
    //위시리스트(보고싶어) 추가
    @ResponseBody
    @RequestMapping("insertWish.me")
@@ -303,5 +304,61 @@ public class MemberController {
 	   }
 	   
    }
+
+   //카카오 로그인(성희)
+   @RequestMapping("kakaologin.me")
+   public String kakaologin(Member m, Model model){
+	   System.out.println("카카오 로그인 : " + m);
+	   
+	   //1. 기존 유저인가 확인
+	   int kakaoUserCheck = ms.kakaoUserCheck(m);
+	   
+	   //2. 새 유저면 회원가입
+	   if(kakaoUserCheck == 11){
+		   int insertresult = ms.insertKakaoMember(m);
+		   
+		   Member loginUser = ms.loginKakaoMember(m);
+		   
+		   
+		   
+		 
+		   model.addAttribute("loginUser", loginUser);
+		   
+		   /*session.setAttribute("loginUser", m);
+		   model.addAttribute("loginUser", m);*/
+		   System.out.println("시소에서 : " + m.getEmail() + m);
+		   System.out.println("loginUser : " + loginUser);
+
+		   return "member/insertMyInfo";
+
+	   }else if(kakaoUserCheck == 22){	//3. 기존 유저면 로그인
+		   Member loginUser = ms.loginKakaoMember(m);
+		   
+		   
+		   model.addAttribute("loginUser", loginUser);
+		   
+		   return "main/main";
+	   }else{
+		   model.addAttribute("msg", "카카오 로그인 실패");
+		   
+		   return "common/errorPage";
+	   }
+	   
+   }
+   
+   //카톡유저 추가정보 업데이트(성희)
+   @RequestMapping(value="updatePlusInfo.me")
+   public String updatePlusInfo(Model model, Member m){
+	   int result = ms.updatePlusInfo(m);
+	   
+	   if(result > 0){
+		   return "main/main";
+	   }else{
+		   model.addAttribute("msg", "카톡유저 추가정보 입력 실패!");
+		   
+		   return "common/errorPage";
+	   }
+   }
+
 
 }

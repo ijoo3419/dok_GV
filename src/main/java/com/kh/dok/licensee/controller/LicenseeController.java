@@ -18,63 +18,62 @@ import com.kh.dok.common.CommonUtils;
 import com.kh.dok.licensee.model.service.LicenseeService;
 
 @Controller
-@SessionAttributes("loginUser")
+@SessionAttributes(value="loginUser")
 public class LicenseeController {
 	@Autowired
 	private LicenseeService ls;
 
-	@RequestMapping("licensee.li")
+	@RequestMapping(value="licensee.li")
 	public String showLicenseeMainView(){
 		return "licensee/mainLicenseePage";
 	}	
 
-	@RequestMapping("play.li")
+	@RequestMapping(value="play.li")
 	public String showPlayView(){
 		return "licensee/playManagePage";
 	}
 
-	@RequestMapping("inquire.li")
+	@RequestMapping(value="inquire.li")
 	public String showInquireView(){
 		return "licensee/inquireManagePage";
 	}
 
 
-	@RequestMapping("movieRoom.li")
+	@RequestMapping(value="movieRoom.li")
 	public String showMovieRoomView(){
 		return "licensee/movieRoomManagePage";
 	}
 
-	@RequestMapping("notice.li")
+	@RequestMapping(value="notice.li")
 	public String showNoticeView(){
 		return "licensee/noticeManagePage";
 	}
 
-	@RequestMapping("reservation.li")
+	@RequestMapping(value="reservation.li")
 	public String showReservationView(){
 		return "licensee/reservationManagePage";
 	}
 
-	@RequestMapping("stats.li")
+	@RequestMapping(value="stats.li")
 	public String showStatsView(){
 		return "licensee/statsManagePage";
 	}
 
-	@RequestMapping("theater.li")
+	@RequestMapping(value="theater.li")
 	public String showTheaterView(){
 		return "licensee/theaterManagePage";
 		
 	}
 	
 	//정태 영화관 등록 메소드(+파일 첨부)
-	@RequestMapping("theaterInsert.li")
+	@RequestMapping(value="theaterInsert.li")
 	public String insertTheater(Model model, Cinema cm, 
 								HttpServletRequest request, 
 								@RequestParam(name="photo", required=false)MultipartFile photo){
 		
-		System.out.println("첫번째 photo = " + photo);
-		System.out.println("두번째 cm = " + cm);
 		
 		String root = request.getSession().getServletContext().getRealPath("resources");
+		
 		String filePath = root + "\\uploadFiles";
 		
 		String originFileName = photo.getOriginalFilename();
@@ -84,10 +83,10 @@ public class LicenseeController {
 		
 		try {
 			photo.transferTo(new File(filePath + "\\" + changeName + ext));
-	
+			
+			
 			ls.insertTheater(cm);
-			System.out.println(cm);
-			System.out.println("성공하면 여기로");
+			
 			return "licensee/theaterManagePage";
 		
 		} catch (Exception e){

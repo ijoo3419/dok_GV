@@ -135,7 +135,7 @@
 				</div>
 				
 				<div>
-					<button class="button"><a href="writeNotice.bo">공지작성</a></button>
+					<button type="button" class="img_btn user cancel mr7"><a href="writeNotice.bo">공지작성</a></button>
 				</div>
 
 			

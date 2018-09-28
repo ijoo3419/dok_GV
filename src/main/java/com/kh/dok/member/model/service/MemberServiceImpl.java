@@ -84,20 +84,53 @@ public class MemberServiceImpl implements MemberService{
 	public int updateInfo(Member m) {
 		return md.updateInfo(sqlSession, m);
 	}
+
+	//카카오 로그인 유저 체크
+	@Override
+	public int kakaoUserCheck(Member m) {
+		int kakaoUserCheck = md.kakaoUserCheck(sqlSession, m);
+		
+		return kakaoUserCheck;
+	}
+
+	//카카오 새 유저 회원가입
+	@Override
+	public int insertKakaoMember(Member m) {
+		int insertresult = md.insertKakaoMember(sqlSession, m);
+		
+		return insertresult;
+	}
+
+	//카카오 기존 유저 로그인
+	@Override
+	public Member loginKakaoMember(Member m) {
+		Member loginUser = md.loginKakaoMember(sqlSession, m);
+		
+		return loginUser;
+	}
+
+	//카톡 유저 추가정보 입력
+	@Override
+	public int updatePlusInfo(Member m) {
+		
+		return md.updatePlusInfo(sqlSession, m);
+	}
+
 	
 	//수정한 회원 정보 뿌리기용 selectOne (황이주)
 	@Override
 	public Member selectUser(Member m) {
-		return md.selectMember(sqlSession, m);
+	   return md.selectMember(sqlSession, m);
 	}
 	
+
 	//위시리스트 추가(황이주)
 	@Override
 	public int insertWish(Movie m) {
 		return md.insertWish(sqlSession, m);
 	}
 	
-	
+
 
 	
 	
