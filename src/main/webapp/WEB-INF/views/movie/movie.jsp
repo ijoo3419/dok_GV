@@ -453,6 +453,8 @@ hr {
 			
 		</div>
 		 
+		<br><br><br><br><br><br><br><br><br><br>
+		
 	<!-- 	 <div class="container1">
   <h2>공지사항</h2>          
   <table class="table table-hover">
