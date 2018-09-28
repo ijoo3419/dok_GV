@@ -351,7 +351,8 @@ input[type=text]:placeholder, input[type=password]:placeholder {
             				var email = str.substring(str.indexOf('"email"'), str.length);
             				var start_email = email.indexOf(':');
             				var end_email = email.indexOf(',');
-            				var useremail = email.substring(start_email + 1, end_email);
+            				var useremail1 = email.substring(start_email + 1, end_email);
+            				var useremail = useremail1.substring(1, useremail1.length-1);
             				
             				var nickEnd = str.substring(str.indexOf('nickname'), str.length);
             				var start_nick = nickEnd.indexOf(':');

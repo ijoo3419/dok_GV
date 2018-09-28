@@ -87,4 +87,11 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 
+	@Override
+	public int updatePlusInfo(SqlSessionTemplate sqlSession, Member m) {
+		
+		return sqlSession.update("Member.kakaoUserInfo", m);
+	}
+
+
 }

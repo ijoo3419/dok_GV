@@ -94,6 +94,13 @@ public class MemberServiceImpl implements MemberService{
 		
 		return loginUser;
 	}
+
+	//카톡 유저 추가정보 입력
+	@Override
+	public int updatePlusInfo(Member m) {
+		
+		return md.updatePlusInfo(sqlSession, m);
+	}
 	
 	
 

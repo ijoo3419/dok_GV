@@ -115,4 +115,14 @@
 		AND STATUS = 'N'
 	</select>
 	
+	<!-- 카카오 유저 추가정보 입력 -->
+	<update id="kakaoUserInfo">
+		UPDATE MEMBER
+		SET USER_NAME = '${user_name}',
+		BIRTHDAY = '${birthday}',
+		GENDER = '${gender}',
+		PHONE = '${phone}',
+		NICKNAME = '${nickname}'
+		WHERE EMAIL = '${email}'
+	</update>
 </mapper>

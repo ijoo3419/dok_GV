@@ -22,6 +22,8 @@ public interface MemberService {
 	int insertKakaoMember(Member m);
 
 	Member loginKakaoMember(Member m);
+
+	int updatePlusInfo(Member m);
 	
 }
      

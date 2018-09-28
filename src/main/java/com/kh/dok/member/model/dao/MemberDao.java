@@ -25,5 +25,7 @@ public interface MemberDao {
 	int insertKakaoMember(SqlSessionTemplate sqlSession, Member m);
 
 	Member loginKakaoMember(SqlSessionTemplate sqlSession, Member m);
+
+	int updatePlusInfo(SqlSessionTemplate sqlSession, Member m);
      
 }
