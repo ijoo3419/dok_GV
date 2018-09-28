@@ -78,6 +78,8 @@ public class MemberDaoImpl implements MemberDao{
 		return sqlSession.insert("Member.insertKakaoMember", m);
 	}
 
+	
+	
 	//카카오 유저 로그인
 	@Override
 	public Member loginKakaoMember(SqlSessionTemplate sqlSession, Member m) {

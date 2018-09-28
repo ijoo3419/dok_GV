@@ -24,6 +24,8 @@ public class Member implements java.io.Serializable{
 	
 	
 	
+	
+	
 	public Member(){}
 
 	public Member(String mid, String email, String user_pwd, String user_name, String birthday, String gender,

@@ -327,6 +327,8 @@ public class MemberController {
 		   
 		   Member loginUser = ms.loginKakaoMember(m);
 		   
+		   
+		   
 		 
 		   model.addAttribute("loginUser", loginUser);
 		   

@@ -382,6 +382,8 @@ body label {
     <div class="fadeIn first">
       <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
     </div>
+    
+    
 
     <!-- Signup Form -->
     <form action="updatePlusInfo.me" method="post">

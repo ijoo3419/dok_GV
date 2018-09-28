@@ -115,6 +115,7 @@
 		AND STATUS = 'N'
 	</select>
 	
+	
 	<!-- 카카오 유저 추가정보 입력 -->
 	<update id="kakaoUserInfo">
 		UPDATE MEMBER

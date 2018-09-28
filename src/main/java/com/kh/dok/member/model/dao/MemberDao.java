@@ -28,4 +28,6 @@ public interface MemberDao {
 
 	int updatePlusInfo(SqlSessionTemplate sqlSession, Member m);
      
+	
+	
 }

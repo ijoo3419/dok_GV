@@ -25,5 +25,7 @@ public interface MemberService {
 
 	int updatePlusInfo(Member m);
 	
+	
+	
 }
      
