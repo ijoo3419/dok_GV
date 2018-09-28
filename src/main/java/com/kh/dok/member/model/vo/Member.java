@@ -20,8 +20,30 @@ public class Member implements java.io.Serializable{
 	private String join_date;
 	private String withdraw_date;
 	private String nickname;
+	private String refreshToken;
 	
 	public Member(){}
+
+	public Member(String mid, String email, String user_pwd, String user_name, String birthday, String gender,
+			String phone, String user_class, String status, String login_class, String blacklist_status,
+			String join_date, String withdraw_date, String nickname, String refreshToken) {
+		super();
+		this.mid = mid;
+		this.email = email;
+		this.user_pwd = user_pwd;
+		this.user_name = user_name;
+		this.birthday = birthday;
+		this.gender = gender;
+		this.phone = phone;
+		this.user_class = user_class;
+		this.status = status;
+		this.login_class = login_class;
+		this.blacklist_status = blacklist_status;
+		this.join_date = join_date;
+		this.withdraw_date = withdraw_date;
+		this.nickname = nickname;
+		this.refreshToken = refreshToken;
+	}
 
 	public String getMid() {
 		return mid;
@@ -135,32 +157,22 @@ public class Member implements java.io.Serializable{
 		this.nickname = nickname;
 	}
 
+	public String getRefreshToken() {
+		return refreshToken;
+	}
+
+	public void setRefreshToken(String refreshToken) {
+		this.refreshToken = refreshToken;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [mid=" + mid + ", email=" + email + ", user_pwd=" + user_pwd + ", user_name=" + user_name
 				+ ", birthday=" + birthday + ", gender=" + gender + ", phone=" + phone + ", user_class=" + user_class
 				+ ", status=" + status + ", login_class=" + login_class + ", blacklist_status=" + blacklist_status
-				+ ", join_date=" + join_date + ", withdraw_date=" + withdraw_date + ", nickname=" + nickname + "]";
+				+ ", join_date=" + join_date + ", withdraw_date=" + withdraw_date + ", nickname=" + nickname
+				+ ", refreshToken=" + refreshToken + "]";
 	}
 
-	public Member(String mid, String email, String user_pwd, String user_name, String birthday, String gender,
-			String phone, String user_class, String status, String login_class, String blacklist_status,
-			String join_date, String withdraw_date, String nickname) {
-		super();
-		this.mid = mid;
-		this.email = email;
-		this.user_pwd = user_pwd;
-		this.user_name = user_name;
-		this.birthday = birthday;
-		this.gender = gender;
-		this.phone = phone;
-		this.user_class = user_class;
-		this.status = status;
-		this.login_class = login_class;
-		this.blacklist_status = blacklist_status;
-		this.join_date = join_date;
-		this.withdraw_date = withdraw_date;
-		this.nickname = nickname;
-	}
 	
 }

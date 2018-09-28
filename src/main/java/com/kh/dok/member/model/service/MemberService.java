@@ -17,6 +17,14 @@ public interface MemberService {
 
 	int updateInfo(Member m);
 
+	int kakaoUserCheck(Member m);
+
+	int insertKakaoMember(Member m);
+
+	Member loginKakaoMember(Member m);
+
+	int updatePlusInfo(Member m);
+
 	Member selectUser(Member m);
 	
 }
