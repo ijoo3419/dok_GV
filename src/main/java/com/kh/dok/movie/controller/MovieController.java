@@ -119,5 +119,12 @@ public class MovieController {
 		
 		return list;
 	}
+	
+/*	//황이주 - 보고싶어 insert
+	@RequestMapping("insertLike.mo")
+	public int insertWish(Model model, Member m){
+		
+	}
+	*/
 }
 

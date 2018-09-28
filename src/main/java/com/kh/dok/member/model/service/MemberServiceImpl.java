@@ -84,6 +84,12 @@ public class MemberServiceImpl implements MemberService{
 		return md.updateInfo(sqlSession, m);
 	}
 	
+	//수정한 회원 정보 뿌리기용 selectOne
+	@Override
+	public Member selectUser(Member m) {
+		return md.selectMember(sqlSession, m);
+	}
+	
 	
 
 	

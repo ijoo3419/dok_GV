@@ -65,19 +65,19 @@
 							</tr>
 							<tr>
 								<td colspan="2"> * 닉네임 </td>
-								<td> <input type="text" id="nickname" name="nickname" value="${ sessionScope.loginUser.nickname }"> </td>
+								<td> <input type="text" id="nickname" name="nickname" value="${ requestScope.loginUser.nickname }" onkeyup="checkNick()"> <div id="checkName"></div> </td>
 							</tr>
 							<tr>
 								<td colspan="2"> * 생년월일 (20180919 형식으로 적어주세요.)</td> <!-- DB 저장할 때 들어가는 형식 바꿀 것 -->
 								<td> 
 								
-								<input type="text" id="birthday" name="birthday" value="${ sessionScope.loginUser.birthday }">
+								<input type="text" id="birthday" name="birthday" value="${ requestScope.loginUser.birthday }">
 							
 								</td>
 							</tr>
 							<tr>
 								<td colspan="2"> * 휴대폰 </td>
-								<td> <input type="text" id="phone" name="phone" value="${ sessionScope.loginUser.phone }"> </td>
+								<td> <input type="text" id="phone" name="phone" value="${ requestScope.loginUser.phone }"> </td>
 							</tr>
 
 						
@@ -88,7 +88,7 @@
 					
 					<br>
 					
-					<input type="hidden" id="email" value="${ sessionScope.loginUser.email }" />
+					<input type="hidden" id="email" value="${ requestScope.loginUser.email }" />
 					
 					<div align="center">
 					<button type="button" class="img_btn user cancel mr7" id="myInfoModifycancel">취소</button>
@@ -120,10 +120,41 @@
 	
 	<script>
 	
+	var nickCheck = 0;
+	
+	//닉네임 중복 확인
+	function checkNick(){
+		
+		var nickname = $("#nickname").val();
+		
+		if(nickname==""){
+			document.getElementById('checkName').innerHTML = "<span style='color: red;'> 닉네임을 입력해 주세요. </span>"
+		}
+		
+		$.ajax({
+			data : {
+				nickname:nickname
+			},
+			url: "checkNick.me",
+			success: function(data){
+				
+				console.log("닉네임 data: " + data);
+				
+				 if (data == '1'){
+					document.getElementById('checkName').innerHTML = "<span style='color: red;'> 중복되는 닉네임입니다. 다른 닉네임을 입력해주세요.  </span>";
+				} else if (data == '0'){
+					document.getElementById('checkName').innerHTML = "<span style='color: green;'> 사용 가능한 닉네임입니다. </span>"
+					nickCheck = 1;
+				}
+			}
+		});
+		
+		
+	}
+	
 		function editInfo(){
 			
 			var email = $("#email").val();
-			console.log(email); 
 			
 			var user_pwd = $("#user_pwd").val();
 			var nickname = $("#nickname").val();
@@ -151,7 +182,7 @@
 			}
 			
 			
-			
+			if(nickCheck == '1'){
 			$.ajax({
 				data:{
 					user_pwd:user_pwd,
@@ -160,6 +191,8 @@
 				url: "checkEditable.me",
 				success: function(data){
 					if(data == '1'){
+						
+						
 						$.ajax({
 							data : {
 								email:email,
@@ -171,6 +204,16 @@
 							success:function(data){
 								
 								console.log("update data: " + data);
+								
+								if(data == '0'){
+									alert("회원 정보 수정에 실패했습니다. 정보를 다시 입력해 주세요.");
+									return false;
+								} else if (data == '1'){
+									alert("회원 정보 수정에 성공하였습니다.");
+									location.href = "editInfo.me";
+
+								}
+								
 								
 							}
 							
@@ -184,10 +227,10 @@
 				
 				
 			});
-			
-			
-			
-			
+			} else {
+				alert("중복되는 닉네임은 사용하실 수 없습니다.");
+			}
+
 		}
 	
 	</script>
