@@ -228,57 +228,21 @@ hr {
 	<body class="is-preload">
 <jsp:include page="../common/headBar.jsp"/>
 			
-		<!-- Wrapper -->
 			<div id="wrapper" class="fade-in">
-				<!-- Intro -->
 				
-				
-					<!-- <div id="intro">
-						<h1>This is<br />
-						Massively</h1>
-						<p>A free, fully responsive HTML5 + CSS3 site template designed by <a href="https://twitter.com/ajlkn">@ajlkn</a> for <a href="https://html5up.net">HTML5 UP</a><br />
-						and released for free under the <a href="https://html5up.net/license">Creative Commons license</a>.</p>
-						<ul class="actions">
-							<li><a href="#header" class="button icon solo fa-arrow-down scrolly">Continue</a></li>
-						</ul> 
-						
-					</div>
-			 -->
-				<!-- Header -->
-					
 					<header id="header">
-						<!-- <a href="index.html" class="logo">Massively</a> -->
+
 					</header>
-			    
-				<!-- Nav -->
-					<!-- <nav id="nav">
-						<ul class="links">
-							<li><a href="../index.jsp">jsp상영등록</a></li>
-							<li><a href="findIdPassword.jsp">아이디/비밀번호 찾기</a></li>
-							<li><a href="movie.jsp">영화 페이지</a></li>
-							<li><a href="cinema.jsp">영화관 페이지</a></li>
-							<li><a href="cinemaDetail.jsp">영화관 상세보기</a></li>
-							<li class="active"><a href="movieDetail.jsp">영화상세보기</a></li>
 
-						</ul>
-						 <ul class="icons">
-							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-							<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-							<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
-						</ul>
-					</nav> -->
-
-				<!-- Main -->
 					<div id="main">
 
-						<!-- Featured Post -->
+
 							<article class="post featured">
 							<br>
 	<h1 align="left" style="margin-left:20px;"> 영화상세</h1>
 		<c:forEach items="${movieDetail }" var="row">
 	<hr>
-	<!-- <div id="movieArea"> -->
+
 		<div id="sumnailimage">
 			 <${row.file_src} style="width:298px; height:400px;">
 		</div>
@@ -321,7 +285,7 @@ hr {
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">장르: ${row.genre}</a><br>
 			
 			<input type="button" value="상영시간표" style="float:right; ">
-			<input type="button" value="♥보고싶어" style="float:right; margin-right:10px; text-decoration: none;">
+			<input type="button" value="♥보고싶어" style="float:right; margin-right:10px; text-decoration: none;" onclick="insertWish()">
 		</div>
 		<br><br><br><br><br><br><br><br><br><br><br><br><br>
 		<hr>
@@ -354,15 +318,7 @@ hr {
 		<div class="container">
  
   <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
-    <!-- Indicators -->
-     <!-- <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-      <li data-target="#myCarousel" data-slide-to="3"></li>
-    </ol>  -->
 
-    <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
 	
       <div class="item active">
@@ -376,17 +332,6 @@ hr {
 		</div>
 		</c:forEach>	 	
 		
-      <%-- <div class="item">
-        <img src="${contextPath }/resources/images/logo.jpg" alt="Chania" width="460" height="345">
-      </div>
-    
-      <div class="item">
-        <img src="${contextPath }/resources/images/logo.jpg" alt="Flower" width="460" height="345">
-      </div>
-
-      <div class="item">
-        <img src="${contextPath }/resources/images/logo.jpg" alt="Flower" width="460" height="345">
-      </div> --%>
   
     </div>
 
@@ -609,28 +554,14 @@ hr {
              <div class="pagination" align="center">
              <br>
              	<a href="location.href='#'"><<</a>
-             	<%-- <% if(currentPage <= 1){ %> --%>
              	<a disabled><</a>
-             <%-- 	<% }else{ %> --%>
              	<a onclick="location.href='#'">&laquo;</a>
 
-             	<%-- <% } %>
-             	<% for(int p = startPage; p <= endPage; p++){
-             		if(p == currentPage){	
-             	%> --%>
-
              	<a class="active" disabled><%-- <%= p %> --%>1</a>
-             	<%-- <%  }else{ %> --%>
              	<a onclick="location.href='#'"><%-- <%= p %> --%>2</a>
 
-             <%-- 	<%  } %>
-             	<% } %> --%>
-             	
-             	<%-- <% if(currentPage >= maxPage){ %> --%>
              	<a disabled>></a>
-             	<%-- <% }else{ %> --%>
              	<a onclick="location.href='#'">></a>
-             	<%-- <% } %> --%>
              	<a onclick="location.href='#'">>></a>
              </div>
          </div>
@@ -658,6 +589,48 @@ hr {
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			
+	<script>
+	
+		function insertWish(){
+			
+			var mid = ${ mid };
+			console.log("엠아이디!!!!!!!!" + mid);
+			
+			if(loginUser == null){
+				alert("로그인이 필요한 기능입니다.");
+			} else {
+				
+				$.ajax({
+					data: {
+						mid:mid,
+						movieId:movieId
+					},
+					url: 'insertLike.mo',
+					success(data):{
+						
+						alert("일단 성공함");
+						
+					}
+					
+				});
+				
+			}
+			
+		}
+	
+	
+	</script>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 
 	</body>
 </html>

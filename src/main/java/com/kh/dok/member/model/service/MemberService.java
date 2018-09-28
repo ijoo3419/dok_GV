@@ -16,6 +16,8 @@ public interface MemberService {
 	int checkPass(Member m) throws LoginException;
 
 	int updateInfo(Member m);
+
+	Member selectUser(Member m);
 	
 }
      

@@ -388,7 +388,7 @@ body label {
     </div>
 
     <!-- Signup Form -->
-    <form method="post">
+    <form action="insert.me" method="post">
       <input type="text" id="email" class="fadeIn third" name="email" placeholder="* email" required onkeyup="checkSame()">
       <div id="checkSame"></div>
       <input type="button" class="fadeIn fourth" value="이메일 인증" id="emailBtn" onclick="checkMail()">
@@ -413,7 +413,7 @@ body label {
       <input type="text" id="phone" class="fadeIn second" name="phone" placeholder="phone">
       <input type="text" id="nickname" class="fadeIn second" name="nickname" placeholder="* nickname" required onkeyup="checkNick()">
       <div id="checkName"></div>
-      <input type="submit" class="fadeIn fourth" id="signupBtn" onclick="signupCheck()" value="회원가입">
+      <input type="submit" class="fadeIn fourth" id="signupBtn" value="회원가입">
       
     </form>
 
@@ -508,9 +508,6 @@ function checkPwd() {
     var input = $('#user_pwd').val();
     var reinput = $('#user_pwd2').val();
     
-    console.log(input);
-    console.log(reinput);
-    
     if(reinput != "" && input == reinput){
     	document.getElementById('check').innerHTML = "<span style='color: green;'>비밀번호가 일치합니다.</span>"
     	pwdCheck = 1;
@@ -551,21 +548,6 @@ function checkNick(){
 	
 }
 
-function signupCheck(){
-	
-	console.log("emailCheck = " + emailCheck);
-	console.log("pwdCheck = " + pwdCheck);
-	console.log("nickCheck = " + nickCheck);
-	console.log("authCheck = " + authCheck);
-	
-	if(emailCheck == 1 && pwdCheck == 1 && nickCheck == 1 && authCheck == 1){
-		location.href="insert.me";
-	} else {
-		alert("필수 입력 조건이 충족되지 않았습니다. 다시 확인해 주세요.");
-		return false;
-	}
-
-}
 
 
 </script>

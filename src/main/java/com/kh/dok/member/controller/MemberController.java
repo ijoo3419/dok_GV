@@ -1,5 +1,6 @@
 package com.kh.dok.member.controller;
 
+import java.io.IOException;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -12,6 +13,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 import javax.rmi.ssl.SslRMIClientSocketFactory;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -81,6 +83,8 @@ public class MemberController {
    //회원가입
    @RequestMapping(value="insert.me")
    public String insertMember(Model model, Member m){ 
+	   
+	   System.out.println("설마설마설마???" + m);
 
 	   m.setUser_pwd(passwordEncoder.encode(m.getUser_pwd()));
 	   
@@ -258,13 +262,20 @@ public class MemberController {
    }
      
    //회원 정보 수정 - 정보 업데이트
+   @ResponseBody
    @RequestMapping("updateInfo.me")
-   public int updateInfo(Member m, Model model){
+   public int updateInfo(Member m, Model model) {
 	   
 	   int result = ms.updateInfo(m);
 	   
+	  
+	   
 	   if(result > 0){
 		   result = 1;
+		   
+		   //수정한 정보를 loginUser세션에 재입력한다.
+		   model.addAttribute("loginUser", ms.selectUser(m));
+		   
 		   return result;
 	   } else {
 		   result = 0;
