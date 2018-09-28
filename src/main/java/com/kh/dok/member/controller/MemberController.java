@@ -32,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.dok.member.model.exception.LoginException;
 import com.kh.dok.member.model.service.MemberService;
 import com.kh.dok.member.model.vo.Member;
+import com.kh.dok.movie.model.vo.Movie;
 
 @Controller
 @SessionAttributes("loginUser")
@@ -284,6 +285,26 @@ public class MemberController {
 	   
    }
    
+
+   //위시리스트(보고싶어) 추가
+   @ResponseBody
+   @RequestMapping("insertWish.me")
+   public int insertWishlist(Movie m, Model model){
+	   System.out.println(m);
+	   
+	   int result = ms.insertWish(m);
+	   
+	   if(result > 0){
+		   result = 1;
+		   //위시리스트 반영되게 보여주는 거 추가해야 함 (회원정보 수정처럼)
+		   return result;
+	   } else {
+		   result = 0;
+		   return result;
+	   }
+	   
+   }
+
    //카카오 로그인(성희)
    @RequestMapping("kakaologin.me")
    public String kakaologin(Member m, Model model){
@@ -338,5 +359,6 @@ public class MemberController {
 		   return "common/errorPage";
 	   }
    }
+
 
 }

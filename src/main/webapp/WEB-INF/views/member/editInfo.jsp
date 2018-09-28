@@ -132,7 +132,7 @@
 		}
 		
 		$.ajax({
-			data : {
+			data : {   
 				nickname:nickname
 			},
 			url: "checkNick.me",

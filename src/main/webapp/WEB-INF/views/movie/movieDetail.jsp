@@ -286,6 +286,9 @@ hr {
 			
 			<input type="button" value="상영시간표" style="float:right; ">
 			<input type="button" value="♥보고싶어" style="float:right; margin-right:10px; text-decoration: none;" onclick="insertWish()">
+			<input type="hidden" value="${ loginUser.mid }" id="mid" >
+			<%-- <input type="hidden" value="${ movieDetail.movie_id }" id="movie_id"> --%>
+			<input type="hidden" value=${ row.movie_id } id="movie_id">
 		</div>
 		<br><br><br><br><br><br><br><br><br><br><br><br><br>
 		<hr>
@@ -609,27 +612,38 @@ hr {
 	
 		function insertWish(){
 			
-			var mid = ${ mid };
-			console.log("엠아이디!!!!!!!!" + mid);
+			var mid = $("#mid").val();
+			var loginUser = '${ sessionScope.loginUser.email }';
+			var movie_id = $('#movie_id').val();
 			
-			if(loginUser == null){
-				alert("로그인이 필요한 기능입니다.");
-			} else {
+			console.log(mid);
+			console.log(movie_id);
+			
+			
+			if(loginUser != ""){
 				
 				$.ajax({
-					data: {
+					data:{
 						mid:mid,
-						movieId:movieId
+						movie_id:movie_id
 					},
-					url: 'insertLike.mo',
-					success(data):{
-						
-						alert("일단 성공함");
-						
+					url: "insertWish.me",
+					success: function(data){
+						if(data == '1'){
+							alert("위시리스트에 추가되었습니다.");
+							
+							location.href = "movie.mo";
+							
+						} else {
+							alert("위시리스트 추가가 실패하였습니다 ㅠㅠ;;");
+						}
 					}
+					
 					
 				});
 				
+			} else {
+				alert("로그인이 필요한 서비스 입니다.");
 			}
 			
 		}
