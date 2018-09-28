@@ -3,6 +3,7 @@ package com.kh.dok.member.model.dao;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.dok.member.model.vo.Member;
+import com.kh.dok.movie.model.vo.Movie;
 
 public interface MemberDao {
 
@@ -17,5 +18,7 @@ public interface MemberDao {
 	int checkSame(SqlSessionTemplate sqlSession, Member m);
 
 	int updateInfo(SqlSessionTemplate sqlSession, Member m);
+
+	int insertWish(SqlSessionTemplate sqlSession, Movie m);
      
 }

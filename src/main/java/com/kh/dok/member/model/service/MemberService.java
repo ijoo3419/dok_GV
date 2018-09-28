@@ -2,6 +2,7 @@ package com.kh.dok.member.model.service;
 
 import com.kh.dok.member.model.exception.LoginException;
 import com.kh.dok.member.model.vo.Member;
+import com.kh.dok.movie.model.vo.Movie;
 
 public interface MemberService {
 
@@ -18,6 +19,8 @@ public interface MemberService {
 	int updateInfo(Member m);
 
 	Member selectUser(Member m);
+
+	int insertWish(Movie m);
 	
 }
      

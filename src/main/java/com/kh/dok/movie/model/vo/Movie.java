@@ -32,37 +32,21 @@ public class Movie {
 	private String theater_id;
 	private String theater_name;
 	
+	//황이주 추가
+	private String mid;
+	
 	public Movie(){}
 
-	public Movie(String movie_id, String movie_title, String movie_etitle, String movie_content, Date open_date,
-			String director_name, String production_com, String movie_age, String genre, int runnig_time,
-			String turning_id, String play_id, String price, Date turning_day, String turning_time, String movieroom_id,
-			String play_status, String area_id, String area_name, String area_level, String area_parents,
-			String theater_id, String theater_name) {
-		super();
-		this.movie_id = movie_id;
-		this.movie_title = movie_title;
-		this.movie_etitle = movie_etitle;
-		this.movie_content = movie_content;
-		this.open_date = open_date;
-		this.director_name = director_name;
-		this.production_com = production_com;
-		this.movie_age = movie_age;
-		this.genre = genre;
-		this.runnig_time = runnig_time;
-		this.turning_id = turning_id;
-		this.play_id = play_id;
-		this.price = price;
-		this.turning_day = turning_day;
-		this.turning_time = turning_time;
-		this.movieroom_id = movieroom_id;
-		this.play_status = play_status;
-		this.area_id = area_id;
-		this.area_name = area_name;
-		this.area_level = area_level;
-		this.area_parents = area_parents;
-		this.theater_id = theater_id;
-		this.theater_name = theater_name;
+	@Override
+	public String toString() {
+		return "Movie [movie_id=" + movie_id + ", movie_title=" + movie_title + ", movie_etitle=" + movie_etitle
+				+ ", movie_content=" + movie_content + ", open_date=" + open_date + ", director_name=" + director_name
+				+ ", production_com=" + production_com + ", movie_age=" + movie_age + ", genre=" + genre
+				+ ", runnig_time=" + runnig_time + ", turning_id=" + turning_id + ", play_id=" + play_id + ", price="
+				+ price + ", turning_day=" + turning_day + ", turning_time=" + turning_time + ", movieroom_id="
+				+ movieroom_id + ", play_status=" + play_status + ", area_id=" + area_id + ", area_name=" + area_name
+				+ ", area_level=" + area_level + ", area_parents=" + area_parents + ", theater_id=" + theater_id
+				+ ", theater_name=" + theater_name + ", mid=" + mid + "]";
 	}
 
 	public String getMovie_id() {
@@ -249,16 +233,46 @@ public class Movie {
 		this.theater_name = theater_name;
 	}
 
-	@Override
-	public String toString() {
-		return "Movie [movie_id=" + movie_id + ", movie_title=" + movie_title + ", movie_etitle=" + movie_etitle
-				+ ", movie_content=" + movie_content + ", open_date=" + open_date + ", director_name=" + director_name
-				+ ", production_com=" + production_com + ", movie_age=" + movie_age + ", genre=" + genre
-				+ ", runnig_time=" + runnig_time + ", turning_id=" + turning_id + ", play_id=" + play_id + ", price="
-				+ price + ", turning_day=" + turning_day + ", turning_time=" + turning_time + ", movieroom_id="
-				+ movieroom_id + ", play_status=" + play_status + ", area_id=" + area_id + ", area_name=" + area_name
-				+ ", area_level=" + area_level + ", area_parents=" + area_parents + ", theater_id=" + theater_id
-				+ ", theater_name=" + theater_name + "]";
+	public String getMid() {
+		return mid;
 	}
+
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
+
+	public Movie(String movie_id, String movie_title, String movie_etitle, String movie_content, Date open_date,
+			String director_name, String production_com, String movie_age, String genre, int runnig_time,
+			String turning_id, String play_id, String price, Date turning_day, String turning_time, String movieroom_id,
+			String play_status, String area_id, String area_name, String area_level, String area_parents,
+			String theater_id, String theater_name, String mid) {
+		super();
+		this.movie_id = movie_id;
+		this.movie_title = movie_title;
+		this.movie_etitle = movie_etitle;
+		this.movie_content = movie_content;
+		this.open_date = open_date;
+		this.director_name = director_name;
+		this.production_com = production_com;
+		this.movie_age = movie_age;
+		this.genre = genre;
+		this.runnig_time = runnig_time;
+		this.turning_id = turning_id;
+		this.play_id = play_id;
+		this.price = price;
+		this.turning_day = turning_day;
+		this.turning_time = turning_time;
+		this.movieroom_id = movieroom_id;
+		this.play_status = play_status;
+		this.area_id = area_id;
+		this.area_name = area_name;
+		this.area_level = area_level;
+		this.area_parents = area_parents;
+		this.theater_id = theater_id;
+		this.theater_name = theater_name;
+		this.mid = mid;
+	}
+
+	
 
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.dok.member.model.dao.MemberDao;
 import com.kh.dok.member.model.exception.LoginException;
 import com.kh.dok.member.model.vo.Member;
+import com.kh.dok.movie.model.vo.Movie;
 
 
 @Service
@@ -38,7 +39,7 @@ public class MemberServiceImpl implements MemberService{
 		return loginUser;
 	}
 	
-	//비밀번호 맞나 조회 (회원정보 수정용)
+	//비밀번호 맞나 조회 (회원정보 수정용) (황이주)
 	@Override
 	public int checkPass(Member m) throws LoginException {
 		
@@ -60,34 +61,40 @@ public class MemberServiceImpl implements MemberService{
 		
 	}
 	
-	//회원가입 메소드
+	//회원가입 메소드 (황이주)
 	@Override
 	public int insertMember(Member m) {
 		return md.insertMember(sqlSession, m);
 	}
 	
-	//닉네임 중복 체크
+	//닉네임 중복 체크 (황이주)
 	@Override
 	public int checkNick(Member m) {
 		return md.checkNick(sqlSession, m);
 	}
 	
-	//이메일 중복 체크
+	//이메일 중복 체크 (황이주)
 	@Override
 	public int checkSame(Member m) {
 		return md.checkSame(sqlSession, m);
 	}
 	
-	//회원 정보 업데이트
+	//회원 정보 업데이트 (황이주)
 	@Override
 	public int updateInfo(Member m) {
 		return md.updateInfo(sqlSession, m);
 	}
 	
-	//수정한 회원 정보 뿌리기용 selectOne
+	//수정한 회원 정보 뿌리기용 selectOne (황이주)
 	@Override
 	public Member selectUser(Member m) {
 		return md.selectMember(sqlSession, m);
+	}
+	
+	//위시리스트 추가(황이주)
+	@Override
+	public int insertWish(Movie m) {
+		return md.insertWish(sqlSession, m);
 	}
 	
 	

@@ -78,4 +78,10 @@
 	WHERE EMAIL = '${ email }'
 	</update>
 	
+	<!-- 위시리스트 추가 -->
+	<insert id="insertWishlist" parameterType="Movie">
+	INSERT INTO WISHLIST
+	VALUES(WISHLIST_WISHLIST_ID.NEXTVAL, '${ movie_id }', '${ mid }')
+	</insert>
+	
 </mapper>

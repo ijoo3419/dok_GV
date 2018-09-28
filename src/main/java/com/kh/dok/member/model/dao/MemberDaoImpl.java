@@ -4,6 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.dok.member.model.vo.Member;
+import com.kh.dok.movie.model.vo.Movie;
 
 @Repository
 public class MemberDaoImpl implements MemberDao{
@@ -43,6 +44,12 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public int updateInfo(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("Member.updateInfo", m);
+	}
+	
+	//위시리스트 추가
+	@Override
+	public int insertWish(SqlSessionTemplate sqlSession, Movie m) {
+		return sqlSession.insert("Member.insertWishlist", m);
 	}
 
 
