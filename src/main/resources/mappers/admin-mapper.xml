@@ -21,6 +21,16 @@
 		<result property="nickname" column="NICKNAME" />
 	</resultMap>
 
+	<resultMap type="ReportHistory" id="searchBlackListSet">
+		<id property="rep_id" column="REP_ID"/>
+		<result property="rid" column="RID"/>
+		<result property="rep_userid" column="REP_USERID"/>
+		<result property="rep_level" column="REP_LEVEL"/>
+		<result property="rep_content" column="REP_CONTENT"/>
+		<result property="treat_date" column="TREAT_DATE"/>
+		<result property="reped_userid" column="REPED_USERID"/>
+	</resultMap>
+
 	<!-- 회원 전체 조회 인소진-->
 	<select id="searchAll" resultMap="searchResultSet">
 		SELECT *
@@ -62,5 +72,18 @@
 		SELECT COUNT(*)
 		FROM MEMBER
 		WHERE USER_CLASS='SELLER'
+	</select>
+	
+	<!-- 블랙리스트 이력 조회  인소진 -->
+	<select id="searchBlack" resultMap="searchBlackListSet">
+		SELECT *
+		FROM REPORT_HISTORY
+		ORDER BY SUBSTR(REP_ID,2)
+	</select>
+	
+	<!-- 블랙리스트 회원 조회 카운트 인소진 -->
+	<select id="countBl" resultType="_int">
+		SELECT COUNT(*)
+		FROM REPORT_HISTORY
 	</select>
 </mapper>
