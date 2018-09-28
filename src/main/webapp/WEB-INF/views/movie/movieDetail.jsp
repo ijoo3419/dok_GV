@@ -298,54 +298,69 @@ hr {
 		
 	</c:forEach>
 		<br><br><br>
-		
-		<a style="text-align:left; width:100px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;;">스틸컷</a>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<hr width="1px" size="40px" color="black" id="hrline">
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">동영상</a>
-			<br>
-				
-		<div align="center" id="imageview">
+  
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">스틸컷</a></li>
+    <li><a data-toggle="tab" href="#menu1">동영상</a></li>
+    
+    
+  </ul>
+
+	
+
+	  <div class="tab-content">
+	    <div id="home" class="tab-pane fade in active">
+	    <%-- <div align="center" id="imageview">
 		<c:forEach items="${movieimagecut }" var="row1">
 			<${row1.file_src} style="width:200px; height:198px;">
 		
 		</c:forEach>
-		</div>
+		</div> --%>
 
 		 <br><br>
 
-		<div class="container">
- 
-  <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
-
-    <div class="carousel-inner" role="listbox">
+	    
+	     	<div class="container">
+	 
+	  <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+	   
+	    <!-- Wrapper for slides -->
+	    <div class="carousel-inner" role="listbox">
+		
+	      <div class="item active">
+	        <div style="background:black; width:500px; height:450px;"></div>
+	      </div>
+			
+		 <c:forEach items="${movieimagecut }" var="row1">
+			 <div class="item">	
+				<${row1.file_src} style="width:500px; height:450px;">
+			</div>
+			</c:forEach>	 	
+	    </div>
 	
-      <div class="item active">
-        <%-- <img src="${contextPath}/resources/images/logo.jpg" alt="Chania" width="460" height="345"> --%>
-        <div style="background:black; width:500px; height:450px;"></div>
-      </div>
-		
-	 <c:forEach items="${movieimagecut }" var="row1">
-		 <div class="item">	
-			<${row1.file_src} style="width:500px; height:450px;">
-		</div>
-		</c:forEach>	 	
-		
-  
-    </div>
+	    <!-- Left and right controls -->
+	    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+	      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+	      <span class="sr-only">Previous</span>
+	    </a>
+	    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+	      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+	      <span class="sr-only">Next</span>
+	    </a>
+	  </div>
+	</div>
+	    </div>
+	    <div id="menu1" class="tab-pane fade">
+	    <c:forEach items="${movievideo }" var="row2">
+			 <video width="500" height="400" controls>
+			  <${row2.file_src } type="video/mp4">
+			  </video>
+			</c:forEach>
+	    </div>
+	    
+	  </div>
 
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
-</div>
+
 		<br><br><br>
 		<hr>
 		<h2 align="left" style="margin-left:20px;">평점</h2>
