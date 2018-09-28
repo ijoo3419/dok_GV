@@ -86,13 +86,15 @@
 	<!-- Nav -->
 	<nav id="nav">
 		<ul class="links">
-			<li class="tab-link current" data-tab="tab-1"><a>회원 관리</a></li>
-			<li class="tab-link" data-tab="tab-2"><a>블랙리스트 관리 관리</a></li>
-			<li class="tab-link" data-tab="tab-3"><a>메인페이지 관리</a></li>
-			<li class="tab-link" data-tab="tab-4"><a>통계</a></li>
-			<li class="tab-link" data-tab="tab-5"><a>문의 사항</a></li>
-			<li class="tab-link" data-tab="tab-6"><a>공지사항</a></li>
-			<li class="tab-link" data-tab="tab-7"><a>영화 추가</a></li>
+			<li class="tab-link1 current" data-tab="tab-1"><a
+				href="searchAll.ad?currentPage=1">회원 관리</a></li>
+			<li class="tab-link2" data-tab="tab-2"><a
+				href="searchBlack.ad?currentPage=1">블랙리스트 관리 관리</a></li>
+			<li class="tab-link3" data-tab="tab-3"><a>메인페이지 관리</a></li>
+			<li class="tab-link4" data-tab="tab-4"><a>통계</a></li>
+			<li class="tab-link5" data-tab="tab-5"><a>문의 사항</a></li>
+			<li class="tab-link6" data-tab="tab-6"><a>공지사항</a></li>
+			<li class="tab-link7" data-tab="tab-7"><a>영화 추가</a></li>
 		</ul>
 	</nav>
 
@@ -112,8 +114,8 @@
 				<option value="buyer">일반회원</option>
 				<option value="seller">판매자회원</option>
 			</select> <br>
-			
-			
+
+
 			<div class="table-wrapper">
 				<table>
 					<thead>
@@ -163,7 +165,8 @@
 					</c:if>
 					<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
 						<c:if test="${p eq pi.currentPage }">
-							<b><font color="#18bfef " size="4"></b></font>
+							<b><font color="#18bfef " size="4"></b>
+							</font>
 							<a><b><font color="#18bfef" size="4">${p }</font></b></a>
 						</c:if>
 						<c:if test="${p ne pi.currentPage }">
@@ -204,28 +207,60 @@
 					<thead>
 						<tr>
 							<th>No</th>
-							<th>Id</th>
+							<th>신고 리플 번호</th>
+							<th>신고자 ID</th>
+							<th>신고 구분</th>
 							<th>신고 내용</th>
+							<th>신고 처리일</th>
+							<th>피신고자 ID</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td>Id 1</td>
-							<td>신고내용 1</td>
-						</tr>
+						<c:forEach var="ar" items="${rlist }">
+							<tr>
+								<td>${ar.rep_id }</td>
+								<td>${ar.rid }</td>
+								<td>${ar.rep_userid }</td>
+								<td>${ar.rep_level }</td>
+								<td>${ar.rep_content }</td>
+								<td>${ar.treat_date }</td>
+								<td>${ar.reped_userid }</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 				<div id="pageid" class="pagination">
-					<a href="#" class="page">&lt&lt </a> <a href="#"
-						class="page active">1</a> <a href="#" class="page">2</a> <a
-						href="#" class="page">3</a> <a href="#" class="page">4</a> <a
-						href="#" class="page">5</a> <a href="#" class="page">&gt&gt</a>
-				</div>
-				<div class="search">
-					<input id="gsearch" type="text" value placeholder="검색"
-						style="width: 300px"> <a href="#" id="gicon"
-						class="button primary icon fa-search"> 조회 </a>
+					<c:if test="${pi.currentPage <=1 }">
+						<a>&lt;이전&nbsp;</a>
+					</c:if>
+					<c:if test="${pi.currentPage > 1 }">
+						<c:url var="blistBack" value="searchBlack.ad">
+							<c:param name="currentPage" value="${pi.currentPage - 1 }" />
+						</c:url>
+						<a href="${blistBack }">&lt;이전&nbsp;</a>
+					</c:if>
+					<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+						<c:if test="${p eq pi.currentPage }">
+							<b><font color="#18bfef " size="4"></b>
+							</font>
+							<a><b><font color="#18bfef" size="4">${p }</font></b></a>
+						</c:if>
+						<c:if test="${p ne pi.currentPage }">
+							<c:url var="blistCheck" value="searchBlack.ad">
+								<c:param name="currentPage" value="${p }" />
+							</c:url>
+							<a href="${blistCheck }">${p }</a>
+						</c:if>
+					</c:forEach>
+					<c:if test="${pi.currentPage >= pi.maxPage}">
+						&nbsp; <a>다음&gt;</a>
+					</c:if>
+					<c:if test="${pi.currentPage < pi.maxPage }">
+						<c:url var="blistEnd" value="searchBlack.ad">
+							<c:param name="currentPage" value="${pi.currentPage + 1 }" />
+						</c:url>
+						<a href="${blistEnd }">&nbsp;다음&gt;</a>
+					</c:if>
 				</div>
 			</div>
 
@@ -337,20 +372,33 @@
 
 			if (sresult == "all") {
 				location.href = "searchAll.ad?currentPage=1";
-				$("#amember option:eq(1)").prop("selected",true);
+				$("#amember option:eq(1)").prop("selected", true);
 			} else if (sresult == "buyer") {
 				location.href = "searchBu.ad?currentPage=1";
-				$("#amember option:eq(2)").prop("selected",true);
+				$("#amember option:eq(2)").prop("selected", true);
 			} else if (sresult == "seller") {
-				$("#amember option:eq(3)").prop("selected",true);
+				$("#amember option:eq(3)").prop("selected", true);
 				location.href = "searchSe.ad?currentPage=1";
 			}
 		}
 	</script>
 	<!-- 기본 option값 설정 -->
 	<script>
-		$(function(){
-			$("select option[value='${aval}']").prop("selected",true);
+		$(function() {
+			$("select option[value='${aval}']").prop("selected", true);
+		})
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			var tab_id = '${tab}';
+			var tab_id2 = 'tab-link' + tab_id.substring(4, 5);
+
+			$('ul.link li').removeClass('current');
+			$('.post').removeClass('current');
+
+			$('.tab_id2').addClass('current');
+			$("#" + tab_id).addClass('current');
 		})
 	</script>
 	<!-- 템플릿 관련 js파일들 -->
@@ -410,8 +458,8 @@
 						</c:url>
 						<a href="${ blistEnd }">&nbsp;[다음]</a>
 					</c:if> --%>
-					
-					<!-- <script>
+
+<!-- <script>
 		function searchAll(){
 			$.ajax({
 				url : "searchAll.ad",
@@ -429,4 +477,4 @@
 			});
 		}
 	</script> -->
-	<%-- <script src="${contextPath }/resources/js/selectIndex.js"></script> --%>
+<%-- <script src="${contextPath }/resources/js/selectIndex.js"></script> --%>

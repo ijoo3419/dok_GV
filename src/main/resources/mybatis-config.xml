@@ -11,6 +11,7 @@
 		<typeAlias type="com.kh.dok.movie.model.vo.Movie" alias="Movie"></typeAlias>
 		<typeAlias type="com.kh.dok.movie.model.vo.MovieSumbnail" alias="MovieSumbnail"></typeAlias>
 		<typeAlias type="com.kh.dok.area.model.vo.Area" alias="Area"></typeAlias>
+		<typeAlias type="com.kh.dok.admin.model.vo.ReportHistory" alias="ReportHistory"></typeAlias>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml"/>
