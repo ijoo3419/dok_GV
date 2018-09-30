@@ -71,7 +71,7 @@ public class AdminDaoImpl implements AdminDao{
 		
 		int countAll = sqlSession.selectOne("Admin.countAll");
 		
-		if(countAll<=0){
+		if(countAll<0){
 			throw new MemberSelectListException("전체 회원 카운트 실패");
 		}
 		return sqlSession.selectOne("Admin.countAll");
@@ -83,7 +83,7 @@ public class AdminDaoImpl implements AdminDao{
 		
 		int countBu = sqlSession.selectOne("Admin.countBu");
 		
-		if(countBu<=0){
+		if(countBu<0){
 			throw new MemberSelectListException("일반 회원 카운트 실패");
 		}
 		return countBu;
@@ -95,7 +95,7 @@ public class AdminDaoImpl implements AdminDao{
 		
 		int countSe = sqlSession.selectOne("Admin.countSe");
 		
-		if(countSe<=0){
+		if(countSe<0){
 			throw new MemberSelectListException("판매자 회원 카운트 실패");
 		}
 		return countSe;
@@ -107,7 +107,7 @@ public class AdminDaoImpl implements AdminDao{
 		
 		int countBl = sqlSession.selectOne("Admin.countBl");
 		
-		if(countBl <= 0){
+		if(countBl < 0){
 			throw new BlackMemberSelectListException("블랙리스트 회원 카운트 실패");
 		}
 		return countBl;
