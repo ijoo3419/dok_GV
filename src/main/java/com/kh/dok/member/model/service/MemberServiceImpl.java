@@ -1,5 +1,7 @@
 package com.kh.dok.member.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -10,6 +12,7 @@ import com.kh.dok.member.model.dao.MemberDao;
 import com.kh.dok.member.model.exception.LoginException;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.movie.model.vo.Movie;
+import com.kh.dok.movie.model.vo.MovieSumbnail;
 
 
 @Service
@@ -130,9 +133,12 @@ public class MemberServiceImpl implements MemberService{
 		return md.insertWish(sqlSession, m);
 	}
 	
+	//유저 클래스 업데이트 (이주)
+	@Override
+	public int updateClass(Member m) {
+		return md.updateClass(sqlSession, m);
+	}
 
-
-	
 	
 
 }

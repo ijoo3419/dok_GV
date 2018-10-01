@@ -1,8 +1,11 @@
 package com.kh.dok.member.model.service;
 
+import java.util.ArrayList;
+
 import com.kh.dok.member.model.exception.LoginException;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.movie.model.vo.Movie;
+import com.kh.dok.movie.model.vo.MovieSumbnail;
 
 public interface MemberService {
 
@@ -29,6 +32,8 @@ public interface MemberService {
 	Member selectUser(Member m);
 
 	int insertWish(Movie m);
+
+	int updateClass(Member m);
 	
 }
      

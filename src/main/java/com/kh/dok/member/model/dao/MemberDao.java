@@ -1,9 +1,12 @@
 package com.kh.dok.member.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.movie.model.vo.Movie;
+import com.kh.dok.movie.model.vo.MovieSumbnail;
 
 public interface MemberDao {
 
@@ -29,6 +32,8 @@ public interface MemberDao {
 	Member loginKakaoMember(SqlSessionTemplate sqlSession, Member m);
 
 	int updatePlusInfo(SqlSessionTemplate sqlSession, Member m);
+
+	int updateClass(SqlSessionTemplate sqlSession, Member m);
 
      
 }

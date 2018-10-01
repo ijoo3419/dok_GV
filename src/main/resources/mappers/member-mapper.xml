@@ -121,4 +121,12 @@
 		NICKNAME = '${nickname}'
 		WHERE EMAIL = '${email}'
 	</update>
+	
+	<!-- 판매자 등급 변경 -->
+	<update id="updateClass">
+		UPDATE MEMBER
+		SET USER_CLASS = 'SELLER'
+		WHERE EMAIL = '${email}'
+	</update>
+	
 </mapper>

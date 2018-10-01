@@ -1,10 +1,13 @@
 package com.kh.dok.member.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.movie.model.vo.Movie;
+import com.kh.dok.movie.model.vo.MovieSumbnail;
 
 @Repository
 public class MemberDaoImpl implements MemberDao{
@@ -88,11 +91,16 @@ public class MemberDaoImpl implements MemberDao{
 		return loginUser;
 	}
 
-
+	//SNS 로그인 시 추가 정보 입력
 	@Override
 	public int updatePlusInfo(SqlSessionTemplate sqlSession, Member m) {
-		
 		return sqlSession.update("Member.kakaoUserInfo", m);
+	}
+	
+	//판매자 등급 변경
+	@Override
+	public int updateClass(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("Member.updateClass", m);
 	}
 
 
