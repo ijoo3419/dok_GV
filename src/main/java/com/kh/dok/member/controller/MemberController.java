@@ -1,6 +1,7 @@
 package com.kh.dok.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -33,6 +34,7 @@ import com.kh.dok.member.model.exception.LoginException;
 import com.kh.dok.member.model.service.MemberService;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.movie.model.vo.Movie;
+import com.kh.dok.movie.model.vo.MovieSumbnail;
 
 @Controller
 @SessionAttributes("loginUser")
@@ -286,7 +288,7 @@ public class MemberController {
    }
    
 
-   //위시리스트(보고싶어) 추가
+   //위시리스트(보고싶어) DB에 저장 (황이주)
    @ResponseBody
    @RequestMapping("insertWish.me")
    public int insertWishlist(Movie m, Model model){
@@ -358,6 +360,26 @@ public class MemberController {
 		   
 		   return "common/errorPage";
 	   }
+   }
+   
+   //판매자 등록 시 user_class update (황이주)
+   @ResponseBody
+   @RequestMapping("updateClass.me")
+   public int updateClass(Model model, Member m){
+	   int result = ms.updateClass(m);
+	   
+	   if(result > 0){
+		   result = 1;
+		   
+		   //수정한 정보를 loginUser세션에 재입력한다.
+		   model.addAttribute("loginUser", ms.selectUser(m));
+		   
+		   return result;
+	   } else {
+		   result = 0;
+		   return result;
+	   }
+	   
    }
 
 
