@@ -574,6 +574,33 @@ a{
 				var arrayCheck = [ formDateTwo, theaterId, movieId ];
 				var check = 0;
 				
+				$("#movieCount").change(function(){
+					<!-- 모달 3 체크용 변수들-->
+					var treeCheck = $("#movieCount option:selected").val(); //모달3에서 체크용 변수
+					var treePlue = treeCheck;
+					
+					<!--              -->
+					
+					if(treeCheck == 0){
+						$("input[type='checkbox']").attr("disabled", true);
+					}else if(treeCheck == 1){
+
+						if(treePlue == 1){
+							$("input[type='checkbox']").attr("disabled", false);
+						}else{
+							$("input[type='checkbox']").attr("disabled", true);
+						}
+						
+						$("input[type='checkbox']").click(function(){
+							alert('클릭');
+							treePlue += 1;	
+							console.log(treePlue);
+						});
+						
+					}
+				});
+				
+				
 				if(((arrayCheck[0] == "" && arrayCheck[1] != "") && arrayCheck[2] != "") && dateRun == 0){
 					$.ajax({
 			    		url:"selectDateList.mo",
@@ -701,7 +728,7 @@ a{
 							
 							$(function(){
 
-								$(".movieTimeMainDiv tr").mouseenter(function(){
+								$(".movieTimeMainDiv a tr").mouseenter(function(){
 									$(this).parent().css({"cursor":"pointer"});
 									$(this).hover().css({"background":"#F2F2F2"});
 							 	}).click(function(){
@@ -713,9 +740,13 @@ a{
 										$(".movieBtn").show(); */
 							 	});
 								
-								$(".movieTimeMainDiv tr").mouseleave(function(){
+								$(".movieTimeMainDiv a tr").mouseleave(function(){
 									$(this).hover().css({"background":"white"});
 							 	});
+								
+								/* $(".movieTimeMainDiv a").click(function(){
+									
+							 	}); */
 								
 						  	});
 							
@@ -740,10 +771,12 @@ a{
 				<div class="container"></div>
 				<div class="modal-body">
 					<div class="modal-content-two-count">
-						<font id="web-fontTitle">일반</font> <select name="count">
+						<font id="web-fontTitle">일반</font> 
+						<select name="count" id="movieCount">
+							<option value="0" selected="selected">0</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
-							<option value="3" selected="selected">3</option>
+							<option value="3">3</option>
 							<option value="4">4</option>
 						</select>
 					</div>
@@ -839,7 +872,7 @@ a{
 			
 		</div>
 	</div>
-
+	
 	<!-- third modal -->
 	<div class="modal" id="myModal3" aria-hidden="true"
 		style="display: none; z-index: 1070;">
