@@ -65,7 +65,7 @@ public class AdminController {
 			
 			String aval="buyer";
 			String tab="tab-1";
-			
+			System.out.println("왔어");
 			
 			try {
 				int listCount = as.countBu();
@@ -149,5 +149,26 @@ public class AdminController {
 				
 				return "common/errorPage";
 			}
+		}
+		
+		//아이디로 회원 검색
+		@RequestMapping("searchId.ad")
+		public String searchId(Model model,int currentPage,String searchInput){
+			
+			String tab="tab-1";
+			
+			int listCount;
+			
+			try {
+				listCount = as.countId(searchInput);
+				
+				return "admin/adminPage";
+			} catch (MemberSelectListException e) {
+				model.addAttribute("msg",e.getMessage());
+				
+				return "common/errorPage";
+			}
+			
+			
 		}
 }

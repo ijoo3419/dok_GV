@@ -26,4 +26,6 @@ public interface AdminService {
 
 	ArrayList<ReportHistory> searchBlack(PageInfo pi) throws BlackMemberSelectListException;
 
+	int countId(String searchInput) throws MemberSelectListException;
+
 }

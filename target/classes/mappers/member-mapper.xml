@@ -36,7 +36,7 @@
 		VALUES('M' || MEMBER_MID.NEXTVAL, #{email}, #{user_pwd}, #{user_name},
 				#{birthday}, #{gender}, #{phone}, 'BUYER', DEFAULT,
 				'GENERAL', 'N', SYSDATE, NULL,
-				#{nickname})		   
+				#{nickname}, NULL)
 	</insert>
 	
 	<!-- 암호화된 비밀번호 조회용 메소드 / 고성희 -->
@@ -51,9 +51,7 @@
 	<select id="selectLoginUser" resultMap="memberResultSet" parameterType="Member">
 		SELECT *
 		FROM MEMBER
-
 		WHERE EMAIL = #{email}
-
 		AND STATUS = 'N'
 	</select>
 	
@@ -72,13 +70,12 @@
 	</select>
 
 	<!-- 회원정보 업데이트 -->
-	<update id="updateInfo">
+	<update id="updateInfo" parameterType="Member">
 	UPDATE MEMBER
 	SET NICKNAME = '${ nickname }',
-	BIRTHDAY = TO_DATE('${ birthday }'),
+	BIRTHDAY = '${ birthday }',
 	PHONE = '${ phone }'
 	WHERE EMAIL = '${ email }'
-
 	</update>
 	
 </mapper>

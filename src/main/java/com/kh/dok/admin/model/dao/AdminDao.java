@@ -28,4 +28,6 @@ public interface AdminDao {
 
 	ArrayList<ReportHistory> searchBlack(SqlSessionTemplate sqlSession, PageInfo pi) throws BlackMemberSelectListException;
 
+	int countId(SqlSessionTemplate sqlSession, String searchInput) throws MemberSelectListException;
+
 }
