@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.dok.admin.model.exception.BlackMemberSelectListException;
 import com.kh.dok.admin.model.exception.MemberSelectListException;
+import com.kh.dok.admin.model.exception.SearchMemberException;
 import com.kh.dok.admin.model.vo.ReportHistory;
+import com.kh.dok.admin.model.vo.SearchCondition;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.member.model.vo.Member;
 
@@ -17,13 +19,13 @@ public class AdminDaoImpl implements AdminDao{
 
 	//전체 회원 조회 메소드
 	@Override
-	public ArrayList<Member> searchAll(SqlSessionTemplate sqlSession,PageInfo pi) throws MemberSelectListException {
+	public ArrayList<Member> searchAll(SqlSessionTemplate sqlSession,PageInfo pi,SearchCondition sc) throws MemberSelectListException {
 		
 		int offset = (pi.getCurrentPage()-1)* pi.getLimit();
 		
 		RowBounds rowBound = new RowBounds(offset, pi.getLimit());
 		
-		ArrayList<Member> mlist = (ArrayList)sqlSession.selectList("Admin.searchAll",null, rowBound);
+		ArrayList<Member> mlist = (ArrayList)sqlSession.selectList("Admin.searchAll",sc, rowBound);
 		
 		if(mlist == null ){
 			throw new MemberSelectListException("전체 회원 조회 실패");
@@ -67,9 +69,9 @@ public class AdminDaoImpl implements AdminDao{
 
 	//전체 회원 조회  카운트 메소드
 	@Override
-	public int countAll(SqlSessionTemplate sqlSession) throws MemberSelectListException{
-		
-		int countAll = sqlSession.selectOne("Admin.countAll");
+	public int countAll(SqlSessionTemplate sqlSession,SearchCondition sc) throws MemberSelectListException{
+		System.out.println(sc);
+		int countAll = sqlSession.selectOne("Admin.countAll",sc);
 		
 		if(countAll<0){
 			throw new MemberSelectListException("전체 회원 카운트 실패");
@@ -131,14 +133,30 @@ public class AdminDaoImpl implements AdminDao{
 
 	//아이디 조회 카운트 메소드
 	@Override
-	public int countId(SqlSessionTemplate sqlSession,String searchInput) throws MemberSelectListException {
+	public int countMember(SqlSessionTemplate sqlSession,SearchCondition sc) throws SearchMemberException{
 		
-		int countId = sqlSession.selectOne("Admin.countId",searchInput);
-		System.out.println("id로 검색 결과 카운트 : " + countId);
+		int countId = sqlSession.selectOne("Admin.countId",sc);
+		System.out.println("검색 결과 카운트 : " + countId);
 		if(countId < 0){
-			throw new MemberSelectListException("아이디로 조회 실패!");
+			throw new SearchMemberException("회원 검색 실패!");
 		}
 		return countId;
+	}
+
+	@Override
+	public ArrayList<Member> searchMember(SqlSessionTemplate sqlSession, PageInfo pi, SearchCondition sc) throws SearchMemberException {
+		
+		int offset = (pi.getCurrentPage()-1)*pi.getLimit();
+		
+		RowBounds rowBound = new RowBounds(offset,pi.getLimit());
+		
+		ArrayList<Member> mslist = (ArrayList)sqlSession.selectList("Admin.searchMember",sc,rowBound);
+		
+		if(mslist == null){
+			throw new SearchMemberException("회원 검색 실패");
+		}
+		
+		return mslist;
 	}
 
 	

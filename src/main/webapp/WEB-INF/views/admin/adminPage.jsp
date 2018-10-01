@@ -92,7 +92,7 @@
 	<nav id="nav">
 		<ul class="links">
 			<li class="tab-link1 current" data-tab="tab-1"><a
-				href="searchAll.ad?currentPage=1">회원 관리</a></li>
+				href="searchAll.ad?currentPage=1%searchResult=null&searchCondition=null">회원 관리</a></li>
 			<li class="tab-link2" data-tab="tab-2"><a
 				href="searchBlack.ad?currentPage=1">블랙리스트 관리 관리</a></li>
 			<li class="tab-link3" data-tab="tab-3"><a>메인페이지 관리</a></li>
@@ -196,8 +196,8 @@
 				<div class="search">
 					<select id="searchot" name="searchot">
 						<option value="">조회기준</option>
-						<option value="searchId">아이디</option>
-						<option value="searchName">이름</option>
+						<option value="id">아이디</option>
+						<option value="name">이름</option>
 					</select>
 					<input id="gsearch" name="gsearch" type="text" value placeholder="검색"
 						style="width: 300px"> <a href="#" id="gicon"
@@ -381,7 +381,7 @@
 			var sresult = $("select[name=amember]").val();
 
 			if (sresult == "all") {
-				location.href = "searchAll.ad?currentPage=1";
+				location.href = "searchAll.ad?currentPage=1&searchResult=null&searchCondition=null";
 				$("#amember option:eq(1)").prop("selected", true);
 			} else if (sresult == "buyer") {
 				location.href = "searchBu.ad?currentPage=1";
@@ -395,16 +395,26 @@
 	<!-- search 부분 select 선택 관련 function -->
 	<script>
 		function searchopt(){
-			var searesult = $("select[name=searchot]").val();
-			var searchInput = $("input[name=gsearch]").val();
+			var searchCondition = $("select[name=searchot]").val();
+			var searchResult = $("input[name=gsearch]").val();
+			var aval = '${aval}';
 			
-			if (searesult == "searchId"){
-				location.href = "searchId.ad?currentPage=1&searchInput="+searchInput;
-				$("#searchop option:eq(1)").prop("selected",true);
-			}else if(searesult == "searchName"){
+			if (searchCondition == "name"){
+				alert("hi");
+			location.href = "searchAll.ad?currentPage=1&searchResult="+searchResult+"&searchCondition="+searchCondition;
+			$("#searchop").val(searchCondition).prop("selected",true);	
+			}/* else if(aval == "buyer"){
+				location.href = "searchBu.ad?currentPage=1&searchResult="+searchResult+"&searchCondition="+searchCondition;
+				$("#searchop").val(searchCondition).prop("selected",true);	
+			}else{
+				location.href = "searchSe.ad?currentPage=1&searchResult="+searchResult+"&searchCondition="+searchCondition;
+				$("#searchop").val(searchCondition).prop("selected",true);	
+			} */
+			
+			/* else if(searesult == "searchName"){
 				location.href="searchName.ad?currentPage=1";
-				$("#searchop option:eq(2)").prop("selected",true);
-			}
+				$("#searchop).val(2)").prop("selected",true);
+			} */
 		}
 	</script>
 	<!-- 기본 option값 설정 -->

@@ -13,8 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.dok.admin.model.exception.BlackMemberSelectListException;
 import com.kh.dok.admin.model.exception.MemberSelectListException;
+import com.kh.dok.admin.model.exception.SearchMemberException;
 import com.kh.dok.admin.model.service.AdminService;
 import com.kh.dok.admin.model.vo.ReportHistory;
+import com.kh.dok.admin.model.vo.SearchCondition;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.common.Pagination;
 import com.kh.dok.member.model.vo.Member;
@@ -33,17 +35,23 @@ public class AdminController {
 	
 	//전체 회원 조회
 		@RequestMapping(value="searchAll.ad")
-		public String searchAll(Model model,int currentPage){
-			String aval="all";
+		public String searchAll(Model model,int currentPage,String searchResult, String searchCondition){
 			String tab="tab-1";
+			String aval = "all";
+			SearchCondition sc = new SearchCondition();
 			
-				
+			
+			sc.setId(searchResult);
+			sc.setName(searchResult);
+			sc.setSearchCondition(searchCondition);
+			
 			try {
-				int listCount = as.countAll();
+				int listCount = as.countAll(sc);
+				System.out.println("카운트올은? " + listCount);
 				PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 				ArrayList<Member> mlist;
 				
-				mlist = as.searchAll(pi);
+				mlist = as.searchAll(pi,sc);
 				model.addAttribute("mlist",mlist);
 				model.addAttribute("pi",pi);
 				model.addAttribute("aval",aval);
@@ -152,23 +160,39 @@ public class AdminController {
 		}
 		
 		//아이디로 회원 검색
-		@RequestMapping("searchId.ad")
-		public String searchId(Model model,int currentPage,String searchInput){
+		/*@RequestMapping("searchId.ad")
+		public String searchMember(Model model,int currentPage,String searchResult, String searchCondition){
 			
 			String tab="tab-1";
 			
 			int listCount;
 			
+			SearchCondition sc = new SearchCondition();
+			
+			if(searchCondition.equals("id")){
+				sc.setId(searchResult);
+				String aval = "id";
+			}else if(searchCondition.equals("name")){
+				sc.setName(searchResult);
+				String aval = "name";
+			}
+			sc.setSearchCondition(searchCondition);
 			try {
-				listCount = as.countId(searchInput);
+				listCount = as.countMember(sc);
 				
-				return "admin/adminPage";
-			} catch (MemberSelectListException e) {
+				PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+				
+				ArrayList<Member> mlist = as.searchMember(pi,sc);
+				
+				model.addAttribute("mlist",mlist);
+				model.addAttribute("tab",tab);
+				model.addAttribute("pi",pi);
+			}
+			catch (SearchMemberException e) {
 				model.addAttribute("msg",e.getMessage());
 				
 				return "common/errorPage";
-			}
-			
-			
-		}
+				}
+				return "admin/adminPage";
+		}*/
 }
