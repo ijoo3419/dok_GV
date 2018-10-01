@@ -8,13 +8,14 @@ import org.mybatis.spring.SqlSessionTemplate;
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieSumbnail;
 
+
 public interface MovieDao {
 	
 	//이진희 전체영화 출력
 	ArrayList<MovieSumbnail> selectMovie(SqlSessionTemplate sqlSession, MovieSumbnail msn);
 
 	//박지용 영화 리스트 출력기능
-	ArrayList<Movie> selectMovieList(SqlSessionTemplate sqlSession, Movie v);
+	ArrayList<Movie> selectMovieList(SqlSessionTemplate sqlSession);
 
 	//이진희 영화상세 출력
 	ArrayList<MovieSumbnail> selectMovieDetail(SqlSessionTemplate sqlSession, MovieSumbnail msn);
@@ -28,4 +29,8 @@ public interface MovieDao {
 	//박지용 상영 리스트 출력기능
 	ArrayList<Movie> selectTurningList(SqlSessionTemplate sqlSession, Movie v);
 
+	//박지용 날짜 리스트 출력기능
+	ArrayList<Movie> selectDateList(SqlSessionTemplate sqlSession, Movie v);
+
+	
 }
