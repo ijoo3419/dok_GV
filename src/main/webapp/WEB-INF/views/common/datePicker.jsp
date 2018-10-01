@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
 <style>
+
 /*datepicker에서 사용한 이미지 버튼 style적용*/
 img.ui-datepicker-trigger {
 	margin-left:5px; vertical-align:middle; cursor:pointer;
@@ -59,7 +60,7 @@ $(function() {
 			buttonText : "날짜선택", // 버튼의 대체 텍스트
 			dateFormat : "yy-mm-dd", // 날짜의 형식
 			changeMonth : true, // 월을 이동하기 위한 선택상자 표시여부
-			//minDate: 0,                       // 선택할수있는 최소날짜, ( 0 : 오늘 이전 날짜 선택 불가)
+			minDate: 0,                       // 선택할수있는 최소날짜, ( 0 : 오늘 이전 날짜 선택 불가)
 			onClose : function(selectedDate) {
 				// 시작일(fromDate) datepicker가 닫힐때
 				// 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정

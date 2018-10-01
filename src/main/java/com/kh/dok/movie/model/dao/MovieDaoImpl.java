@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieSumbnail;
 
+
 @Repository
 public class MovieDaoImpl implements MovieDao{
 	
@@ -26,13 +27,12 @@ public class MovieDaoImpl implements MovieDao{
 
 	//박지용 영화 리스트 출력기능
 	@Override
-	public ArrayList<Movie> selectMovieList(SqlSessionTemplate sqlSession, Movie v) {
+	public ArrayList<Movie> selectMovieList(SqlSessionTemplate sqlSession) {
 		ArrayList<Movie> list = null;
-		
-		Date fromDate = v.getOpen_date();
 				
-		return list = (ArrayList)sqlSession.selectList("Movie.selectMovieList", fromDate);
+		return list = (ArrayList)sqlSession.selectList("Movie.selectMovieList");
 	}
+	
 
 	//이진희 영화상세 출력	
 	@Override
@@ -77,5 +77,14 @@ public class MovieDaoImpl implements MovieDao{
 		
 		return list;
 	}
+
+	//박지용 날짜 리스트 출력기능
+	@Override
+	public ArrayList<Movie> selectDateList(SqlSessionTemplate sqlSession, Movie v) {
+		ArrayList<Movie> list = (ArrayList)sqlSession.selectList("Movie.selectDateList", v);
+		
+		return list;
+	}
+	
 	
 }

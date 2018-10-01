@@ -13,6 +13,7 @@ import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieSumbnail;
 
 
+
 @Service
 public class MovieServiceImpl implements MovieService{
 	@Autowired
@@ -32,10 +33,11 @@ public class MovieServiceImpl implements MovieService{
 
 	
 	
+	
 	//박지용 영화 리스트 출력기능
 	@Override
-	public ArrayList<Movie> selectMovieList(Movie v) {
-		ArrayList<Movie> list = md.selectMovieList(sqlSession, v);
+	public ArrayList<Movie> selectMovieList() {
+		ArrayList<Movie> list = md.selectMovieList(sqlSession);
 		
 		return list;
 	}
@@ -73,6 +75,15 @@ public class MovieServiceImpl implements MovieService{
 	@Override
 	public ArrayList<Movie> selectTurningList(Movie v) {
 		ArrayList<Movie> list = md.selectTurningList(sqlSession, v);
+		
+		return list;
+	}
+
+
+	//박지용 날짜 리스트 가져오기
+	@Override
+	public ArrayList<Movie> selectDateList(Movie v) {
+		ArrayList<Movie> list = md.selectDateList(sqlSession, v);
 		
 		return list;
 	}
