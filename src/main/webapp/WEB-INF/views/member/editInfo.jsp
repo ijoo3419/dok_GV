@@ -17,7 +17,7 @@
 	cursor: pointer;
 }
 
-</style>	
+</style>	  
 	
 	
 	
