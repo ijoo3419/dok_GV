@@ -62,16 +62,21 @@
 		
 		<result property="theater_id" column="THEATER_ID"/>
 		<result property="theater_name" column="THEATER_NAME"/>
+		
+		<result property="theater_type" column="THEATER_TYPE"/>
+	</resultMap>
+	
+	<!-- 박지용 영화 리스트를 ResultSet -->
+	<resultMap type="Movie" id="movieResultSetFour">
+		<id property="turning_day" column="TURNING_DAY"/>
 	</resultMap>
 	
 	<!-- 박지용 영화 리스트를 가져오는 쿼리문 -->
 	<select id="selectMovieList" resultMap="movieResultSetTwo" parameterType="Movie">
-		SELECT *
-		FROM TURNING, PLAY, MOVIE
-		WHERE PLAY.PLAY_ID = TURNING.PLAY_ID 
-		AND MOVIE.MOVIE_ID = PLAY.MOVIE_ID
+		SELECT DISTINCT MOVIE.MOVIE_ID, MOVIE.MOVIE_TITLE 
+		FROM MOVIE, PLAY
+		WHERE MOVIE.MOVIE_ID = PLAY.MOVIE_ID
 		AND PLAY_STATUS = 'Y'
-		AND TURNING_DAY = #{fromDate}
 	</select>
 	
 	<!-- 박지용 상영 리스트를 가져오는 쿼리문 -->
@@ -85,6 +90,20 @@
 		AND AREA.AREA_ID = THEATER.AREA_ID
 		AND PLAY_STATUS = 'Y' 
 		AND TURNING_DAY = #{turning_day}
+		AND AREA.AREA_ID = #{area_id}
+		AND MOVIE.MOVIE_ID = #{movie_id}
+	</select>
+	
+	<!-- 박지용 날짜 리스트를 가져오는 쿼리문 -->
+	<select id="selectDateList" resultMap="movieResultSetFour" parameterType="Movie">
+		SELECT DISTINCT TURNING.TURNING_DAY 
+		FROM TURNING, PLAY, MOVIE, MOVIEROOM, THEATER, AREA
+		WHERE PLAY.PLAY_ID = TURNING.PLAY_ID 
+		AND MOVIE.MOVIE_ID = PLAY.MOVIE_ID 
+		AND MOVIEROOM.MOVIEROOM_ID = PLAY.MOVIEROOM_ID
+		AND THEATER.THEATER_ID = MOVIEROOM.THEATER_ID
+		AND AREA.AREA_ID = THEATER.AREA_ID
+		AND PLAY_STATUS = 'Y' 
 		AND AREA.AREA_ID = #{area_id}
 		AND MOVIE.MOVIE_ID = #{movie_id}
 	</select>

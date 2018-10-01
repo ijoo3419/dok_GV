@@ -15,6 +15,9 @@
 <!-- 구글폰트 -->
 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon"
 	rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+
 <title>Insert title here</title>
 </head>
 <style>
@@ -34,6 +37,13 @@
 	color: #585858;
 	margin-left: 20px;
 }
+
+.areaTable #web-fontTitle-child {
+	font-family: 'Do Hyeon', sans-serif;
+	color: #E6E6E6;
+	margin-left: 20px;
+}
+
 #web-fontTitle-child-two {
 	font-family: 'Do Hyeon', sans-serif;
 	font-size:20px;
@@ -50,7 +60,7 @@ td #web-fontDate {
 	font-family: 'Do Hyeon', sans-serif;
 	font-size: 20px;
 	color: #585858;
-	margin-left:20px;
+	margin-left:5px;
 }
 
 .modal-content {
@@ -476,7 +486,7 @@ a{
 					</div>
 					<!-- </div> -->
 
-					<a data-toggle="modal" href="#myModal2" class="btn btn-primary">Launch
+					<a data-toggle="modal" href="#myModal2" class="btn btn-primary" id="btn btn-primary-two">Launch
 						modal</a>
 				</div>
 			</div>
@@ -528,11 +538,15 @@ a{
 					 			var num = $(this).find("input").val();
 								var movieId = $(".hidden-movie-list").val();
 								$(".movie-id").val(movieId); //영화ID를 가지고있다.
+								var a = $(".movie-id").val();
+								/* console.log(a); */
 								$(".movieBtn").find("img").attr("src", "${ contextPath }/resources/images/moviePay.PNG");
 								$(".movieBtn").find("img").attr("style", "width:100px; height:150px;");
 								$(".movieBtn").show();
+								$("#myModal4").find(".close").click();
 					 	});
 				  	});
+					
 				},
 				error:function(){
 					console.log("에러!");
@@ -543,11 +557,13 @@ a{
 		}
 		
 		var run = 0;
+		var dateRun = 0;
 		
 		$(function foo(){
 				
-				
 			    setTimeout(foo, 2000);
+			    
+			    var arrayDate = new Array();
 			    
 				var formDateTwo = $("#fromDate").val();
 				var theaterId = $(".theater-id").val();
@@ -555,6 +571,62 @@ a{
 				
 				var arrayCheck = [ formDateTwo, theaterId, movieId ];
 				var check = 0;
+				
+				if(((arrayCheck[0] == "" && arrayCheck[1] != "") && arrayCheck[2] != "") && dateRun == 0){
+					$.ajax({
+			    		url:"selectDateList.mo",
+			    		type:"post",
+			    		data:{movieId:movieId,
+			    			  theaterId:theaterId},
+			    		success:function(data){
+			    			var div = $(".movieTimeDiv");
+			    			
+			    			for(var key in data){
+			    				var str = moment("/Date(" + data[key].turning_day +")/").format("YY/MM/DD"); //json string
+			   
+			    				arrayDate[key] = str.toString();
+			    				
+			    				var strDate = "";
+			    				
+			    				for(var i = 0; i < arrayDate.length; i++){
+			    					if(i == 0){
+			    						strDate += arrayDate[key];
+			    					}else if(i == arrayDate.length - 1){
+			    						strDate += ", " + arrayDate[key];
+			    					}else{
+			    						strDate += ", " + arrayDate[key];
+			    					}
+			    				}
+			    				
+			    				/* var dateSplit = new Array();
+			    				dateSplit = arrayDate[key].split('/'); 
+			    				
+			    				for(var i = 0; i < dateSplit.length; i++){
+			    					if(dateSplit[1] == "10"){
+			    						$('select[class="ui-datepicker-month"]').val('9').attr('selected', true);
+			    					}else if(dateSplit[1] == "11"){
+			    						$('select[class="ui-datepicker-month"]').val('10').attr('selected', true);
+			    					}else if(dateSplit[1] == "12"){
+			    						$('select[class="ui-datepicker-month"]').val('11').attr('selected', true);
+			    					}
+			    				}  */
+			    				
+			    				var $input = $("<input type='hidden' value=''>");
+			    				
+			    				$input.val(arrayDate[key]);
+			    				console.log($input.val());
+			    				div.append($input);
+			    				
+			    				alert("해당 영화는 " + strDate + "일만 예매가 가능합니다.");
+			    			}
+			    			
+			    			dateRun = 1;
+			    		},
+			    		error:function(data){
+			    			console.log(data);
+			    		}
+			    	});
+				}
 				
 				for(var i = 0; i < arrayCheck.length; i++){
 					if(arrayCheck[i] == null){
@@ -567,7 +639,7 @@ a{
 				}
 				
 				if(check == 1 || run == 1){
-			    	
+					
 			    }else if(run != 1){
 			    	run = 1;
 			    	
@@ -584,13 +656,17 @@ a{
 							var $table = $("<table id='movieTimeTable' border='1'>");
 							
 							for(var key in data){
-								var $tr = $("<tr>");
+								var $tr = $("<a data-toggle='modal' href='#myModal2'><tr>");
 								var $fontOne = $("<font id='web-fontDate'>");
 								var $fontTwo = $("<font id='web-fontDate'>");
 								var $fontTree = $("<font id='web-fontDate'>");
-								var $tdOne = $("<td width='100' height='50'>");
+								var $fontFour = $("<br><font id='web-fontDate'>");
+								var $fontFive = $("<font id='web-fontDate'>");
+								var $fontSix = $("<br><font>");
+								
+								var $tdOne = $("<td width='180' height='50' align='center'>");
 								var $tdTwo = $("<td width='300' height='50'>");
-								var $tdTree = $("<td width='100' height='50' align='right'>");
+								var $tdTree = $("<td width='100' height='50' align='center'>");
 								/* var $tdTitle = $("<input type='hidden' class='hidden-movie-list' value=''>")
 								var $tdTurning = $("<td id='web-fontTitle-child'>"); */
 								
@@ -598,10 +674,17 @@ a{
 								$fontOne.text(data[key].turning_time);
 								$fontTwo.text(data[key].movie_title);
 								$fontTree.text(data[key].area_name);
+								$fontFour.text(data[key].movie_type);
+								$fontFive.text(data[key].movie_age);
+								$fontSix.text(data[key].theater_name);
 								
 								$tdOne.append($fontOne);
+								$tdTwo.append($fontFive);
 								$tdTwo.append($fontTwo);
+								$tdTwo.append($fontFour);
+								
 								$tdTree.append($fontTree);
+								$tdTree.append($fontSix);
 								
 								$tr.append($tdOne);
 								$tr.append($tdTwo);
@@ -1000,10 +1083,7 @@ a{
 			width:150px;
 			height:40px;
 			border:1px solid #E6E6E6;
-			cursor:pointer;
-		}
-		.areaDiv td:hover{
-			background:#E6E6E6;
+			
 		}
 		.areaChild{
 			display:inline-block;
@@ -1039,55 +1119,55 @@ a{
 					<div class="areaDiv">
 						<table class="areaTable">
 							<tr>
-								<td>
+								<td class="area-A1">
 									<input type="hidden" value="A1">
 									<font id="web-fontTitle-child">서울</font>
 								</td>
 							</tr>
 							<tr>
-								<td>
+								<td class="area-A2">
 									<input type="hidden" value="A2">
 									<font id="web-fontTitle-child">경기</font>
 								</td>
 							</tr>
 							<tr>
-								<td>
+								<td class="area-A3">
 									<input type="hidden" value="A3">
 									<font id="web-fontTitle-child">인천</font>
 								</td>
 							</tr>
 							<tr>
-								<td>
+								<td class="area-A4">
 									<input type="hidden" value="A4">
 									<font id="web-fontTitle-child">강원</font>
 								</td>
 							</tr>
 							<tr>
-								<td>
+								<td class="area-A5">
 									<input type="hidden" value="A5">
 									<font id="web-fontTitle-child">대전/춘천</font>
 								</td>
 							</tr>
 							<tr>
-								<td>
+								<td class="area-A6">
 									<input type="hidden" value="A6">
 									<font id="web-fontTitle-child">대구</font>
 								</td>
 							</tr>
 							<tr>
-								<td>
+								<td class="area-A7">
 									<input type="hidden" value="A7">
 									<font id="web-fontTitle-child">부산/울산</font>
 								</td>
 							</tr>
 							<tr>
-								<td>
+								<td class="area-A8">
 									<input type="hidden" value="A8">
 									<font id="web-fontTitle-child">경상</font>
 								</td>
 							</tr>
 							<tr>
-								<td>
+								<td class="area-A9">
 									<input type="hidden" value="A9">
 									<font id="web-fontTitle-child">광주/전라/제주</font>
 								</td>
@@ -1131,21 +1211,40 @@ a{
 	</div>
 	<script>
 		$(function(){
-			$(".areaTable td").mouseenter(function(){
-				$(this).parent().css({"cursor":"pointer"});
+			$(".cinemaBtn").mouseenter(function(){
+				
 		 	}).click(function(){
-		 			var area_id = $(this).find("input").val();
+		 			var movie_id = $(".movie-id").val();
 		 			
 		 				$.ajax({
 		 					url:"selectAreaList.ar", 
 		 					type:"post",
-		 					data:{area_id:area_id},
+		 					data:{movie_id:movie_id},
 		 					success:function(data){
+		 						var area_parents = new Array();
+		 						var area_val = new Array();
+		 						
+		 						for(var key in data){
+		 							area_parents[key] = data[key].area_parents; //부모의 지역 아이디를 저장
+		 							
+		 							for(var i = 0; i < 9; i++){
+		 								
+		 								if($(".areaTable").find("td").eq(i).find("input").val() == area_parents[key]){ //부모의 지역 아이디에 해당 되는 td만 활성화 
+		 									$(".areaTable").find("td").eq(i).css({"cursor":"pointer"});
+		 									$(".areaTable").find("td").eq(i).hover().css({"background":"#F2F2F2"});
+		 									$(".areaTable").find("td").eq(i).find("font").css({"color":"#424242"});
+		 									
+		 									area_val[i] = $(".areaTable").find("td").eq(i).find("input").val();
+			 							}
+		 							}
+		 						}
+		 						
 		 						$div = $(".areaChild");	
 		 						$div.find("table").remove();
 		 						var $table = $("<table>");
 		 						
 		 						for(var key in data){
+		 							
 		 							var $tr = $("<tr>");
 		 							var $td = $("<td>");
 		 							var $font = $("<font id='web-fontTitle-child'>")
@@ -1164,11 +1263,9 @@ a{
 		 						
 		 						$(".areaChild").show();
 		 						
-		 						/* console.log(data); */
-		 						
 		 						$(function(){
 		 							$(".areaChild table td").mouseenter(function(){
-		 								$(this).parent().css({"cursor":"pointer"});
+		 								
 		 						 	}).click(function(){
 		 						 			var num = $(this).find("font").text();
 		 						 			var id = $(this).find("input").val();
@@ -1180,6 +1277,8 @@ a{
 		 									$(".cinemaBtn").show();
 		 									
 		 									$(".theater-id").val(id);
+		 									
+		 									$("#myModal5").find(".close").click();
 		 						 	});
 		 					  	});
 		 					},

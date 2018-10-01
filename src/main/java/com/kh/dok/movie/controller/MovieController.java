@@ -61,27 +61,7 @@ public class MovieController {
 	@RequestMapping(value="selectMovieList.mo")
 	public @ResponseBody ArrayList<Movie> selectMovieList(@RequestParam String fromDate){
 		
-		java.sql.Date startDay = null;
-		
-		if(fromDate != "" || fromDate != null) {
-			String[] dateArr = fromDate.split("-");
-			
-			int[] arr = new int[dateArr.length];
-			
-			for(int i = 0; i < dateArr.length; i++) {
-				arr[i] = Integer.parseInt(dateArr[i]);
-			}
-			
-			startDay = new java.sql.Date(new GregorianCalendar(arr[0], arr[1] - 1, arr[2]).getTimeInMillis());
-			
-		}else {
-			startDay = new java.sql.Date(new GregorianCalendar().getTimeInMillis());
-		}
-		
-		Movie v = new Movie();
-		v.setOpen_date(startDay);
-		
-		ArrayList<Movie> list = ms.selectMovieList(v);
+		ArrayList<Movie> list = ms.selectMovieList();
 		
 		return list;
 		//작성후 movie-servlet.xml로 이동하기 메시지 컨버터 추가하기
@@ -114,6 +94,24 @@ public class MovieController {
 		v.setMovie_id(movieId);
 		
 		ArrayList<Movie> list = ms.selectTurningList(v);
+		
+		System.out.println(list);
+		
+		return list;
+	}
+	
+	//박지용 @ResponseBody를 이용한 ajax 처리
+	@RequestMapping(value="selectDateList.mo")
+	public @ResponseBody ArrayList<Movie> selectDateList(@RequestParam String movieId, @RequestParam String theaterId){
+		System.out.println(movieId);
+		System.out.println(theaterId);
+		
+		Movie v = new Movie();
+		
+		v.setMovie_id(movieId);
+		v.setArea_id(theaterId);
+		
+		ArrayList<Movie> list = ms.selectDateList(v);
 		
 		System.out.println(list);
 		

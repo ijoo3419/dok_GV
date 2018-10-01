@@ -26,12 +26,10 @@ public class MovieDaoImpl implements MovieDao{
 
 	//박지용 영화 리스트 출력기능
 	@Override
-	public ArrayList<Movie> selectMovieList(SqlSessionTemplate sqlSession, Movie v) {
+	public ArrayList<Movie> selectMovieList(SqlSessionTemplate sqlSession) {
 		ArrayList<Movie> list = null;
-		
-		Date fromDate = v.getOpen_date();
 				
-		return list = (ArrayList)sqlSession.selectList("Movie.selectMovieList", fromDate);
+		return list = (ArrayList)sqlSession.selectList("Movie.selectMovieList");
 	}
 
 	//이진희 영화상세 출력	
@@ -74,6 +72,14 @@ public class MovieDaoImpl implements MovieDao{
 	public ArrayList<Movie> selectTurningList(SqlSessionTemplate sqlSession, Movie v) {
 		
 		ArrayList<Movie> list = (ArrayList)sqlSession.selectList("Movie.selectTurningList", v);
+		
+		return list;
+	}
+
+	//박지용 날짜 리스트 출력기능
+	@Override
+	public ArrayList<Movie> selectDateList(SqlSessionTemplate sqlSession, Movie v) {
+		ArrayList<Movie> list = (ArrayList)sqlSession.selectList("Movie.selectDateList", v);
 		
 		return list;
 	}

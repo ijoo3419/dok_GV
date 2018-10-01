@@ -15,11 +15,7 @@ public class AreaDaoImpl implements AreaDao{
 	public ArrayList<Area> selectAreaList(SqlSessionTemplate sqlSession, Area a) {
 		ArrayList<Area> list = null;
 		
-		String area_id = a.getArea_id();
-		
-		/*System.out.println("전달받은 값 = " + area_id);*/
-		
-		return list = (ArrayList)sqlSession.selectList("Area.selectAreaList", area_id);
+		return list = (ArrayList)sqlSession.selectList("Area.selectAreaList", a);
 	}
 
 }

@@ -18,15 +18,14 @@ public class AreaController {
 	
 	//박지용 @ResponseBody를 이용한 ajax 처리
     @RequestMapping(value="selectAreaList.ar")
-	public @ResponseBody ArrayList<Area> selectAreaList(@RequestParam String area_id){
-		/*System.out.println("오니?" + area_id);*/
+	public @ResponseBody ArrayList<Area> selectAreaList(@RequestParam String movie_id){
 		
 		Area a = new Area();
-		a.setArea_id(area_id);
+		a.setMovie_id(movie_id);
 		
 		ArrayList<Area> list = as.selectAreaList(a);
 		
-		/*System.out.println(list);*/
+		System.out.println(list);
 		
     	return list;
     }

@@ -15,7 +15,7 @@ public interface MovieService {
 
 		
 		//박지용 영화 리스트 출력기능
-		ArrayList<Movie> selectMovieList(Movie v);
+		ArrayList<Movie> selectMovieList();
 
 		//이진희 영화상세 출력
 		ArrayList<MovieSumbnail> selectMovieDetail(MovieSumbnail msn);
@@ -29,6 +29,9 @@ public interface MovieService {
 
 		//박지용 상영 리스트 출력기능
 		ArrayList<Movie> selectTurningList(Movie v);
+
+		//박지용 날짜 가져오기
+		ArrayList<Movie> selectDateList(Movie v);
 
 
 }
