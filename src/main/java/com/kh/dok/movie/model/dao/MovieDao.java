@@ -31,6 +31,13 @@ public interface MovieDao {
 
 	//박지용 날짜 리스트 출력기능
 	ArrayList<Movie> selectDateList(SqlSessionTemplate sqlSession, Movie v);
+	
+	//이진희 영화순위1
+	ArrayList<MovieSumbnail> selectMovieRank1(SqlSessionTemplate sqlSession, MovieSumbnail msn);
+	//이진희 영화순위2
+	ArrayList<MovieSumbnail> selectMovieRank2(SqlSessionTemplate sqlSession, MovieSumbnail msn);
+	//이진희 영화순위3
+	ArrayList<MovieSumbnail> selectMovieRank3(SqlSessionTemplate sqlSession, MovieSumbnail msn);
 
 	
 }

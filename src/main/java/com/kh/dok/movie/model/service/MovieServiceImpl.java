@@ -88,4 +88,38 @@ public class MovieServiceImpl implements MovieService{
 		return list;
 	}
 
+
+
+	//이진희 영화순위1
+	@Override
+	public ArrayList<MovieSumbnail> selectMovieRank1(MovieSumbnail msn) {
+		ArrayList<MovieSumbnail> movieRank1 = null;
+		
+		movieRank1 = md.selectMovieRank1(sqlSession, msn);
+		
+		return movieRank1;
+
+
+	}
+
+	//이진희 영화순위2	
+	@Override
+	public ArrayList<MovieSumbnail> selectMovieRank2(MovieSumbnail msn) {
+		ArrayList<MovieSumbnail> movieRank2 = null;
+		
+		movieRank2 = md.selectMovieRank2(sqlSession, msn);
+		
+		return movieRank2;
+	}
+
+	//이진희 영화순위3
+	@Override
+	public ArrayList<MovieSumbnail> selectMovieRank3(MovieSumbnail msn) {
+		ArrayList<MovieSumbnail> movieRank3 = null;
+		
+		movieRank3 = md.selectMovieRank3(sqlSession, msn);
+		
+		return movieRank3;
+	}
+
 }

@@ -27,8 +27,14 @@ public class MovieController {
 	public String showmovieView(MovieSumbnail msn, Model model){
 		
 		ArrayList<MovieSumbnail> movieView = ms.selectMovie(msn);
+		ArrayList<MovieSumbnail> movieRank1 = ms.selectMovieRank1(msn);
+		ArrayList<MovieSumbnail> movieRank2 = ms.selectMovieRank2(msn);
+		ArrayList<MovieSumbnail> movieRank3 = ms.selectMovieRank3(msn);
 		
 		model.addAttribute("movieView",movieView);
+		model.addAttribute("movieRank1",movieRank1);
+		model.addAttribute("movieRank2",movieRank2);
+		model.addAttribute("movieRank3",movieRank3);
 		
 		return "movie/movie";
 	}

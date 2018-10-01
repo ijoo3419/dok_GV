@@ -380,7 +380,116 @@ hr {
 		<div id="data1">
 			<h3 align="left">영화순위</h3>
 			
-		<div id="sumnailimage" onclick="location.href='${contextPath}/movieDetail.mo'">
+			<div class="container">
+  <br>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+
+      <div class="item active">
+        <c:forEach items="${movieRank1 }" var="rank1">
+		<div id="sumnailimage">
+                   <${rank1.file_src} style="width:298px; height:270px;">
+                   <c:set var="name" value="${rank1.movie_age}"/>
+                    <c:choose>
+					    <c:when test="${name eq '12'}">
+					        <div id="age">12</div>
+					    </c:when>
+					    <c:when test="${name eq '15'}">
+					        <div id="age" style="background:#FDD835;">15</div>
+					    </c:when>
+					     <c:when test="${name eq '19'}">
+					        <div id="age" style="background:#FF3D00;">19</div>
+					    </c:when>
+					    <c:otherwise>
+					        <div id="age" style="background:#43A047; font-size: 13px;">전체</div>
+					    </c:otherwise>
+					</c:choose>
+                    ${rank1.movie_title }<br>
+                   <hr>
+                   <div id="buttonarea">     
+                   <button id="detail" onclick="location.href='movieDetail.mo?id=${rank1.movie_id}'">상세보기</button>		<!-- view구현 할 사람 여기 사용 -->
+						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>			<!-- 영화 리스트에서 view연결 할 사람 여기로 -->
+					</div>	
+		</div>
+                </c:forEach>
+      </div>
+
+      <div class="item">
+      	  <c:forEach items="${movieRank2 }" var="rank2">
+		<div id="sumnailimage">
+                   <${rank2.file_src} style="width:298px; height:270px;">
+                   <c:set var="name" value="${rank2.movie_age}"/>
+                    <c:choose>
+					    <c:when test="${name eq '12'}">
+					        <div id="age">12</div>
+					    </c:when>
+					    <c:when test="${name eq '15'}">
+					        <div id="age" style="background:#FDD835;">15</div>
+					    </c:when>
+					     <c:when test="${name eq '19'}">
+					        <div id="age" style="background:#FF3D00;">19</div>
+					    </c:when>
+					    <c:otherwise>
+					        <div id="age" style="background:#43A047; font-size: 13px;">전체</div>
+					    </c:otherwise>
+					</c:choose>
+                    ${rank2.movie_title }<br>
+                   <hr>
+                   <div id="buttonarea">     
+                   <button id="detail" onclick="location.href='movieDetail.mo?id=${rank2.movie_id}'">상세보기</button>		<!-- view구현 할 사람 여기 사용 -->
+						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>			<!-- 영화 리스트에서 view연결 할 사람 여기로 -->
+					</div>	
+		</div>
+                </c:forEach>
+    
+      </div>
+    
+      <div class="item">
+        <c:forEach items="${movieRank3 }" var="rank3">
+		<div id="sumnailimage">
+                   <${rank3.file_src} style="width:298px; height:270px;">
+                   <c:set var="name" value="${rank3.movie_age}"/>
+                    <c:choose>
+					    <c:when test="${name eq '12'}">
+					        <div id="age">12</div>
+					    </c:when>
+					    <c:when test="${name eq '15'}">
+					        <div id="age" style="background:#FDD835;">15</div>
+					    </c:when>
+					     <c:when test="${name eq '19'}">
+					        <div id="age" style="background:#FF3D00;">19</div>
+					    </c:when>
+					    <c:otherwise>
+					        <div id="age" style="background:#43A047; font-size: 13px;">전체</div>
+					    </c:otherwise>
+					</c:choose>
+                    ${rank3.movie_title }<br>
+                   <hr>
+                   <div id="buttonarea">     
+                   <button id="detail" onclick="location.href='movieDetail.mo?id=${rank3.movie_id}'">상세보기</button>		<!-- view구현 할 사람 여기 사용 -->
+						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>			<!-- 영화 리스트에서 view연결 할 사람 여기로 -->
+					</div>	
+		</div>
+                </c:forEach>
+      </div>
+  
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+			
+	<%-- 	<div id="sumnailimage" onclick="location.href='${contextPath}/movieDetail.mo'">
 	
 		</div>
 		
@@ -390,7 +499,7 @@ hr {
 		
 		<div id="sumnailimage">
 	
-		</div>
+		</div> --%>
 			
 		
 			
