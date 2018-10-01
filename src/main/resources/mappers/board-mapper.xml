@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="Board">
+	<resultMap type="BoardNBoardFile" id="BBFileResultSet">
+		<id property="board_id" column="BOARD_ID"/>
+		<id property="file_id" column="FILE_ID"/>
+		<result property="mId" column="MID"/>
+		<result property="btitle" column="BTITLE"/>
+		<result property="bcontent" column="BCONTENT"/>
+		<result property="board_sort" column="BOARD_SORT"/>
+		<result property="board_date" column="BOARD_DATE"/>
+		<result property="modify_date" column="MODIFY_DATE"/>
+		<result property="bstatus" column="BSTATUS"/>
+		<result property="bcount" column="BCOUNT"/>
+		<result property="cinema_div" column="CINEMA_DIV"/>
+		<result property="theater_id" column="THEATER_ID"/>
+		<result property="movie_id" column="MOVIE_ID"/>
+		<result property="board_biv" column="BOARD_DIV"/>
+		<result property="origin_name" column="ORIGIN_NAME"/>
+		<result property="edit_name" column="EDIT_NAME"/>
+		<result property="file_src" column="FILE_SRC"/>
+		<result property="file_date" column="FILE_DATE"/>
+		<result property="file_level" column="FILE_LEVEL"/>
+	</resultMap>
+	
+	<!-- 공지등록 -->
+	<insert id="insertNotice" parameterType="board">
+		INSERT INTO BOARD
+		VALUES('B' || BOARD_BOARD_ID.NEXTVAL, #{mId}, #{btitle}, #{bcontent}, 'BOARD', 
+				SYSDATE, NULL, 'Y', DEFAULT, NULL, NULL, NULL, 'BD4')
+	</insert>
+	
+	<!-- 공지 boardId 조회 -->
+	<select id="selectBoardId" resultType="java.lang.String" parameterType="java.lang.String">
+		SELECT BOARD_ID
+		FROM (SELECT * 
+      		  FROM BOARD
+	  		  ORDER BY BOARD_DATE DESC)
+		WHERE ROWNUM = 1
+	</select>
+	
+	<!-- 공지 첨부파일 등록 -->
+	<insert id="insertNoticeFile" parameterType="BoardFile">
+		INSERT INTO BOARDFILE
+		VALUES('BF' || BOARD_FILE_FILE_ID.NEXTVAL, #{board_id}, #{origin_name}, #{edit_name}, #{file_src}, SYSDATE, 1)
+	</insert>
+	
+
+
+
+
+</mapper>

@@ -12,6 +12,9 @@
 		<typeAlias type="com.kh.dok.movie.model.vo.MovieSumbnail" alias="MovieSumbnail"></typeAlias>
 		<typeAlias type="com.kh.dok.area.model.vo.Area" alias="Area"></typeAlias>
 		<typeAlias type="com.kh.dok.admin.model.vo.ReportHistory" alias="ReportHistory"></typeAlias>
+		<typeAlias type="com.kh.dok.board.model.vo.Board" alias="Board"></typeAlias>
+		<typeAlias type="com.kh.dok.board.model.vo.BoardNBoardFile" alias="BoardNBoardFile"></typeAlias>
+		<typeAlias type="com.kh.dok.board.model.vo.BoardFile" alias="BoardFile"></typeAlias>
 	</typeAliases>
 	
 	<mappers>
@@ -27,6 +30,8 @@
 
 
 		<mapper resource="mappers/movie-mapper.xml"/>
+		
+		<mapper resource="mappers/board-mapper.xml"/>
 	</mappers>
 </configuration>
 
