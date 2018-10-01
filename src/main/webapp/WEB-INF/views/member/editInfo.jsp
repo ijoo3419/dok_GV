@@ -9,6 +9,24 @@
 <link rel="stylesheet" href="${contextPath }/resources/css/main.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+	
+<style>
+
+#edit:hover {
+	cursor: pointer;
+}
+
+</style>	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </head>
 <body class="is-preload">
 
@@ -91,7 +109,7 @@
 					<input type="hidden" id="email" value="${ requestScope.loginUser.email }" />
 					
 					<div align="center">
-					<button type="button" class="img_btn user cancel mr7" id="myInfoModifycancel">취소</button>
+					<button type="button" class="img_btn user cancel mr7" onclick="cancel()">취소</button>
 					<button type="button" class="img_btn user modify ml7" onclick="editInfo()">수정</button>
 					</div>
 					
@@ -119,6 +137,11 @@
 	<script src="${contextPath }/resources/js/main.js"></script>
 	
 	<script>
+	
+	function cancel(){
+		location.href = "member.me";
+	}
+	
 	
 	var nickCheck = 0;
 	

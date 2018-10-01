@@ -19,6 +19,7 @@
 		<result property="join_date" column="JOIN_DATE"/>
 		<result property="withdraw_date" column="WITHDRAW_DATE"/>
 		<result property="nickname" column="NICKNAME"/>
+		<result property="refreshToken" column="REFRESHTOKEN"/>
 	</resultMap>
 	   
 	 <!--  로그인 정보 조회용 쿼리문  / 고성희 -->
@@ -36,7 +37,7 @@
 		VALUES('M' || MEMBER_MID.NEXTVAL, #{email}, #{user_pwd}, #{user_name},
 				#{birthday}, #{gender}, #{phone}, 'BUYER', DEFAULT,
 				'GENERAL', 'N', SYSDATE, NULL,
-				#{nickname})		   
+				#{nickname}, NULL)
 	</insert>
 	
 	<!-- 암호화된 비밀번호 조회용 메소드 / 고성희 -->
@@ -51,9 +52,7 @@
 	<select id="selectLoginUser" resultMap="memberResultSet" parameterType="Member">
 		SELECT *
 		FROM MEMBER
-
 		WHERE EMAIL = #{email}
-
 		AND STATUS = 'N'
 	</select>
 	
@@ -72,13 +71,54 @@
 	</select>
 
 	<!-- 회원정보 업데이트 -->
-	<update id="updateInfo">
+	<update id="updateInfo" parameterType="Member">
 	UPDATE MEMBER
 	SET NICKNAME = '${ nickname }',
-	BIRTHDAY = TO_DATE('${ birthday }'),
+	BIRTHDAY = '${ birthday }',
 	PHONE = '${ phone }'
 	WHERE EMAIL = '${ email }'
-
 	</update>
 	
+	<!-- 위시리스트 추가 -->
+	<insert id="insertWishlist" parameterType="Movie">
+	INSERT INTO WISHLIST
+	VALUES(WISHLIST_WISHLIST_ID.NEXTVAL, '${ movie_id }', '${ mid }')
+	</insert>
+	
+	<!-- 카카오 로그인 유저 체크 -->
+	<select id="kakaoUserCheck" resultMap="memberResultSet" parameterType="Member">
+		SELECT *
+		FROM MEMBER
+		WHERE EMAIL = #{email}
+		AND STATUS = 'N'
+	</select>
+	
+	<!-- 카카오 새 유저 회원가입 -->
+	<insert id="insertKakaoMember" parameterType="Member">
+		INSERT INTO MEMBER
+		VALUES('M' || MEMBER_MID.NEXTVAL, #{email}, NULL, NULL,
+				NULL, NULL, NULL, 'BUYER', DEFAULT,
+				'KAKAO', 'N', SYSDATE, NULL,
+				#{nickname}, NULL)
+	</insert>
+	
+	<!-- 카카오 기존 유저 로그인 -->
+	<select id="loginKakaoMember" resultMap="memberResultSet" parameterType="Member">
+		SELECT *
+		FROM MEMBER
+		WHERE EMAIL = #{email} 
+		AND STATUS = 'N'
+	</select>
+	
+	
+	<!-- 카카오 유저 추가정보 입력 -->
+	<update id="kakaoUserInfo">
+		UPDATE MEMBER
+		SET USER_NAME = '${user_name}',
+		BIRTHDAY = '${birthday}',
+		GENDER = '${gender}',
+		PHONE = '${phone}',
+		NICKNAME = '${nickname}'
+		WHERE EMAIL = '${email}'
+	</update>
 </mapper>

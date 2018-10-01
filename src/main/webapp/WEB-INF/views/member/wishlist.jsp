@@ -89,9 +89,7 @@
 										</div>
 									</div>
 							
-
 				</div>
-
 
 				<!-- Copyright -->
 					<div id="copyright">
