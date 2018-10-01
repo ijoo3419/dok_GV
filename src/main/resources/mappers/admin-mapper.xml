@@ -86,4 +86,11 @@
 		SELECT COUNT(*)
 		FROM REPORT_HISTORY
 	</select>
+	
+	<!-- 아이디로 조회 카운트 인소진 -->
+	<select id="countId" parameterType="String" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE MID LIKE '%#{searchInput}%'
+	</select>
 </mapper>

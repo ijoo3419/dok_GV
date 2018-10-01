@@ -36,7 +36,7 @@
 }
 
 #gsearch {
-	margin-left: 200px;
+	margin-left: 10px;
 	display: inline-block;
 }
 
@@ -70,6 +70,11 @@
 
 #update {
 	margin-left: 30px;
+}
+#searchot{
+	width : 170px;
+	display : inline-block;
+	margin-left : 80px;
 }
 </style>
 </head>
@@ -187,11 +192,16 @@
 					</c:if>
 				</div>
 
-
+				
 				<div class="search">
-					<input id="gsearch" type="text" value placeholder="검색"
+					<select id="searchot" name="searchot">
+						<option value="">조회기준</option>
+						<option value="searchId">아이디</option>
+						<option value="searchName">이름</option>
+					</select>
+					<input id="gsearch" name="gsearch" type="text" value placeholder="검색"
 						style="width: 300px"> <a href="#" id="gicon"
-						class="button primary icon fa-search"> 조회 </a>
+						class="button primary icon fa-search" onclick="searchopt()"> 조회 </a>
 				</div>
 			</div>
 
@@ -365,7 +375,7 @@
 	<!-- 탭관련 js파일 -->
 
 	<script src="${contextPath }/resources/js/tab.js"></script>
-	<!-- select태그 선택 관련 js파일 -->
+	<!-- 회원 조회 부분 select태그 선택 관련 js파일 -->
 	<script>
 		function select() {
 			var sresult = $("select[name=amember]").val();
@@ -379,6 +389,21 @@
 			} else if (sresult == "seller") {
 				$("#amember option:eq(3)").prop("selected", true);
 				location.href = "searchSe.ad?currentPage=1";
+			}
+		}
+	</script>
+	<!-- search 부분 select 선택 관련 function -->
+	<script>
+		function searchopt(){
+			var searesult = $("select[name=searchot]").val();
+			var searchInput = $("input[name=gsearch]").val();
+			
+			if (searesult == "searchId"){
+				location.href = "searchId.ad?currentPage=1&searchInput="+searchInput;
+				$("#searchop option:eq(1)").prop("selected",true);
+			}else if(searesult == "searchName"){
+				location.href="searchName.ad?currentPage=1";
+				$("#searchop option:eq(2)").prop("selected",true);
 			}
 		}
 	</script>

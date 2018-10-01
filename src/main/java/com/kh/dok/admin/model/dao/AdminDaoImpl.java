@@ -112,7 +112,8 @@ public class AdminDaoImpl implements AdminDao{
 		}
 		return countBl;
 	}
-
+	
+	//블랙리스트 회원 조회 메소드
 	@Override
 	public ArrayList<ReportHistory> searchBlack(SqlSessionTemplate sqlSession, PageInfo pi) throws BlackMemberSelectListException {
 		
@@ -126,6 +127,18 @@ public class AdminDaoImpl implements AdminDao{
 		}
 		
 		return blist;
+	}
+
+	//아이디 조회 카운트 메소드
+	@Override
+	public int countId(SqlSessionTemplate sqlSession,String searchInput) throws MemberSelectListException {
+		
+		int countId = sqlSession.selectOne("Admin.countId",searchInput);
+		System.out.println("id로 검색 결과 카운트 : " + countId);
+		if(countId < 0){
+			throw new MemberSelectListException("아이디로 조회 실패!");
+		}
+		return countId;
 	}
 
 	

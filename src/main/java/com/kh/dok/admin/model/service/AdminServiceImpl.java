@@ -84,4 +84,10 @@ public class AdminServiceImpl implements AdminService{
 		ArrayList<ReportHistory> rlist = ad.searchBlack(sqlSession,pi);
 		return rlist;
 	}
+
+	@Override
+	public int countId(String searchInput) throws MemberSelectListException {
+		
+		return ad.countId(sqlSession,searchInput);
+	}
 }
