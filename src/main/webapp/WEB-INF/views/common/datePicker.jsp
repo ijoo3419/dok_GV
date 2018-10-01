@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
 <style>
+
 /*datepicker에서 사용한 이미지 버튼 style적용*/
 img.ui-datepicker-trigger {
 	margin-left:5px; vertical-align:middle; cursor:pointer;

@@ -22,6 +22,7 @@ public class AreaServiceImpl implements AreaService{
 		ArrayList<Area> list = ad.selectAreaList(sqlSession, a);
 
 		return list;
+		
 	}
 
 }

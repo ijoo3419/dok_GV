@@ -18,4 +18,5 @@ public class AreaDaoImpl implements AreaDao{
 		return list = (ArrayList)sqlSession.selectList("Area.selectAreaList", a);
 	}
 
+	
 }

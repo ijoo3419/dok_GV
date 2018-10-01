@@ -31,6 +31,7 @@ public class MovieDaoImpl implements MovieDao{
 				
 		return list = (ArrayList)sqlSession.selectList("Movie.selectMovieList");
 	}
+	
 
 	//이진희 영화상세 출력	
 	@Override

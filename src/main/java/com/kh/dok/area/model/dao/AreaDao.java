@@ -11,4 +11,5 @@ public interface AreaDao {
 	//박지용 영화관 지역 리스트 출력기능
 	ArrayList<Area> selectAreaList(SqlSessionTemplate sqlSession, Area a);
 
+	
 }

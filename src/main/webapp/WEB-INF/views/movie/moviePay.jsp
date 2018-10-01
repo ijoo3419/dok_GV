@@ -492,6 +492,7 @@ a{
 			</div>
 		</div>
 	</div>
+	
 	<script>
 		function selectMovieList(){
 			var fromDate = $("#fromDate").val();

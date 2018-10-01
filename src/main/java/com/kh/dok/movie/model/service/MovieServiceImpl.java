@@ -32,6 +32,7 @@ public class MovieServiceImpl implements MovieService{
 
 	
 	
+	
 	//박지용 영화 리스트 출력기능
 	@Override
 	public ArrayList<Movie> selectMovieList() {

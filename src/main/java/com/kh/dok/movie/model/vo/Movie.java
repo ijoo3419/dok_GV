@@ -23,6 +23,7 @@ public class Movie {
 	private String movieroom_id;
 	private String play_status;
 	
+	
 	//박지용 추가
 	private String area_id;
 	private String area_name;

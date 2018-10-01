@@ -30,6 +30,7 @@ public interface MovieService {
 		//박지용 상영 리스트 출력기능
 		ArrayList<Movie> selectTurningList(Movie v);
 
+		
 		//박지용 날짜 가져오기
 		ArrayList<Movie> selectDateList(Movie v);
 

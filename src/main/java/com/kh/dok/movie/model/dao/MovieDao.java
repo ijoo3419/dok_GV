@@ -31,4 +31,5 @@ public interface MovieDao {
 	//박지용 날짜 리스트 출력기능
 	ArrayList<Movie> selectDateList(SqlSessionTemplate sqlSession, Movie v);
 
+	
 }
