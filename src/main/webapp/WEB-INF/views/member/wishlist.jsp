@@ -13,7 +13,7 @@
 			
 			<%@ include file="../common/headBar.jsp"%>
 			
-		<!-- Wrapper -->
+		<!-- Wrapper -->    
 			<div id="wrapper" class="fade-in">
 				<!-- Intro -->
 				

@@ -14,7 +14,7 @@
 <style>
 
 #edit:hover {
-	cursor: pointer;
+	cursor: pointer;   
 }
 
 </style>	  
