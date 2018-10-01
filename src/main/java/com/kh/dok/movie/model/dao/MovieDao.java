@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieSumbnail;
 
+
 public interface MovieDao {
 	
 	//이진희 전체영화 출력

@@ -2,6 +2,7 @@ package com.kh.dok.movie.model.vo;
 
 import java.sql.Date;
 
+
 public class Movie {
 	private String movie_id;
 	private String movie_title;

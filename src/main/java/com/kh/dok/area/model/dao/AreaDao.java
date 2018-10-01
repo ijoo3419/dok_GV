@@ -12,4 +12,5 @@ public interface AreaDao {
 	ArrayList<Area> selectAreaList(SqlSessionTemplate sqlSession, Area a);
 
 	
+	
 }

@@ -1,6 +1,7 @@
 package com.kh.dok.area.model.vo;
 
 
+
 public class Area implements java.io.Serializable{
 	private String area_id;
 	private String area_name;

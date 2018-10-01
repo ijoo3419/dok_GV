@@ -7,6 +7,7 @@ import java.util.HashMap;
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieSumbnail;
 
+
 public interface MovieService {
 	
 

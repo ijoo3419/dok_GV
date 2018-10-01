@@ -13,6 +13,7 @@ import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieSumbnail;
 
 
+
 @Service
 public class MovieServiceImpl implements MovieService{
 	@Autowired

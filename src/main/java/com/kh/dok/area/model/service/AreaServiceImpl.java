@@ -23,6 +23,7 @@ public class AreaServiceImpl implements AreaService{
 
 		return list;
 		
+		
 	}
 
 }

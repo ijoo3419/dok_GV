@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.dok.area.model.service.AreaService;
 import com.kh.dok.area.model.vo.Area;
 
+
 @Controller
 public class AreaController {
 	@Autowired
@@ -29,5 +30,6 @@ public class AreaController {
 		
     	return list;
     }
+    
     
 }

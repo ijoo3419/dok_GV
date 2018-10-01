@@ -5,7 +5,7 @@
 ### Eclipse ###
 
 .metadata
-bin/
+bin/  
 tmp/
 *.tmp
 *.bak
@@ -75,6 +75,9 @@ local.properties
 ### Java ###
 # Compiled class file
 *.class
+.class
+.MF
+.properties
 
 # Log file
 *.log
