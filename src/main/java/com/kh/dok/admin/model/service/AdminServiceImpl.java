@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import com.kh.dok.admin.model.dao.AdminDao;
 import com.kh.dok.admin.model.exception.BlackMemberSelectListException;
 import com.kh.dok.admin.model.exception.MemberSelectListException;
+import com.kh.dok.admin.model.exception.SearchMemberException;
 import com.kh.dok.admin.model.vo.ReportHistory;
+import com.kh.dok.admin.model.vo.SearchCondition;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.member.model.vo.Member;
 
@@ -23,17 +25,17 @@ public class AdminServiceImpl implements AdminService{
 	
 	//전체 회원 조회 카운트 메소드
 	@Override
-	public int countAll() throws MemberSelectListException{
+	public int countAll(SearchCondition sc) throws MemberSelectListException{
 		
-		return ad.countAll(sqlSession);
+		return ad.countAll(sqlSession,sc);
 		
 	}
 
 	//전체 회원 조회 메소드
 	@Override
-	public ArrayList<Member> searchAll(PageInfo pi) throws MemberSelectListException {
+	public ArrayList<Member> searchAll(PageInfo pi,SearchCondition sc) throws MemberSelectListException {
 
-		ArrayList<Member> mlist = ad.searchAll(sqlSession,pi);
+		ArrayList<Member> mlist = ad.searchAll(sqlSession,pi,sc);
 		
 		return mlist;
 	}
@@ -86,8 +88,15 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public int countId(String searchInput) throws MemberSelectListException {
+	public int countMember(SearchCondition sc) throws SearchMemberException{
 		
-		return ad.countId(sqlSession,searchInput);
+		return ad.countMember(sqlSession,sc);
+	}
+
+	@Override
+	public ArrayList<Member> searchMember(PageInfo pi,SearchCondition sc) throws SearchMemberException {
+		
+		ArrayList<Member> smlist = ad.searchMember(sqlSession,pi,sc);
+		return smlist;
 	}
 }

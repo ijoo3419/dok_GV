@@ -227,7 +227,7 @@ a {
       
 			<li class="nli"><a href="member.me" title="마이페이지 바로가기"><p>마이페이지</p></a></li>
 			<li class="nli"><a href="licensee.li" title="영화관 관리 바로가기"><p>영화관관리</p></a></li>
-			<li class="nli"><a href="searchAll.ad?currentPage=1" title="관리자 페이지"><p>관리자</p></a></li>
+			<li class="nli"><a href="searchAll.ad?currentPage=1&searchResult=jin&searchCondition=name" title="관리자 페이지"><p>관리자</p></a></li>
 		</ul>
 		</c:if>
 	</div>
