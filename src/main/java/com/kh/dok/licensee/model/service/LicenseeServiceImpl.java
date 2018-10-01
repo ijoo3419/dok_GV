@@ -17,7 +17,9 @@ public class LicenseeServiceImpl implements LicenseeService{
 	
 	@Override
 	public int insertTheater(Cinema cm) {
-		return ld.insertTheater(sqlSession, cm);
+		int result = ld.insertTheater(sqlSession, cm);
+		
+		return result;
 	}
 	
 	

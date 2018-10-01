@@ -7,10 +7,54 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 <style>
+#checkBox{
+	display:inline-block !important;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+input[id="1"] + label{
+	cursor:pointer !important;
+}
+
+#screen{
+	align:center !important;
+	width:930px;
+	background:#D8D8D8;
+
+}
+.ckBox{
+	display:inline-block;
+	height:30px !important;
+	width:30px !important;
+}
+
+	input[type=checkbox] {
+  		transform: scale(3) !important;
+  		color: black !important;
+	background: black!important;
+	 -webkit-appearance: checkbox !important;
+	
+	}
+	
+	.check{
+	  		display:none !important;
+	}
+	.check + label span{
+	display:inline-block;
+	width:30px;
+	height:30px;
+	background:white;
+	border:1px solid black;
+	cursor:pointer;
+	}
 input[type="checkbox"] {
   		transform: scale(5);
 	} 
 	
+	.check:checked + label span{
+	background:#D8D8D8;
+	}
 .col-6 col-12-xsmall .button primary small{
 	float:left !important;
 }
@@ -26,12 +70,11 @@ input[type="checkbox"] {
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="${contextPath }/resources/css/main.css" />
-<script
-   src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <noscript>
    <link rel="stylesheet"
       href="${contextPath }/resources/css/noscript.css" />
 </noscript>
+
 		
 	</head>
 	<body class="is-preload">
@@ -95,18 +138,41 @@ input[type="checkbox"] {
 											
 											<div class="col-12">
 									<h3 align="left">2.상영관 좌석수 등록</h3>
-									<input type="checkbox"/>
-		<%for(int i=1;i<(20*10)+1; i++){ %>
-			
-			<input type="checkbox" id='ch<%=i %>' name="bak" value="<%=i%>" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<%if(i%20 == 0){ %>
-				<br>
-				<br><br>
-			<%} %>
-		<%} %>
+							
+							<form id="form1" name="form1" method="post" action="<%=request.getContextPath() %>/TestServlet">
+		<input type='hidden' name='name'> 
+		<input type='hidden' name='table'> 
+		<div id="screen"> 
+			<h3>screen</h3>
+		</div>
+		<div id="checkBox">
+		
+		
+		<%for(int i=97; i<=111; i++){ %>
+		<br>
+		<input type="checkbox" id='ch<%=i %>' class="check" name="bak" value="<%=i%>" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<label class="ckBox" for="ch<%=i %>"><span></span></label>
+		
+		<%for(int j=1; j<=15; j++){ %>
+		<input type="checkbox" id='ch<%=j %>' class="check" name="bak" value="<%=j%>" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<label class="ckBox" for="ch<%=j %>"><span></span></label>
+			<% } %>
+		<% } %>
+
+		
+	</div>
+	<br>
+	<%-- 	<%for(int i=1;i<(15*15)+1; i++){ %>
+	
+			<input type="checkbox" id='ch<%=i %>' class="check" name="bak" value="<%=i%>" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<%if(i%15 == 0){ %>
+				<br> --%>
+		
+		<input type='submit' value='전송'>
+	</form>
 	<hr><hr>
 	
-	<br><br><br><br><br><br><br><br><br><br><br><br><br>
+							
 	
 											</div>
 											

@@ -1,7 +1,6 @@
 package com.kh.dok.licensee.controller;
 
 import java.io.File;
-import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -80,7 +79,7 @@ public class LicenseeController {
 		String ext = originFileName.substring(originFileName.lastIndexOf("."));
 		String changeName = CommonUtils.getRandomString();
 		
-		
+		System.out.println(photo);
 		try {
 			photo.transferTo(new File(filePath + "\\" + changeName + ext));
 			
@@ -99,5 +98,26 @@ public class LicenseeController {
 			
 		}
 	}
+	
+	
+		//정태 영화관 등록 메소드
+	/*@RequestMapping(value="theaterInsert.li")
+	public String insertTheater(Model model, Cinema cm){
 		
+		System.out.println("controller Cinema : " + cm);
+		
+		int result = ls.insertTheater(cm);
+		
+		if(result > 0){
+			return "licensee/theaterManagePage";
+		}else{
+			model.addAttribute("msg", "영화관 추가 실패");
+			return "common/errorPage";
+		}
+		
+	}*/
+	
+	
+	
+	
 }

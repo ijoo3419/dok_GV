@@ -10,7 +10,7 @@ public class LicenseeDaoImpl implements LicenseeDao{
 
 	@Override
 	public int insertTheater(SqlSessionTemplate sqlSession, Cinema cm) {
-		return sqlSession.insert("Licensee.insertTheater", cm);
+		return sqlSession.insert("Cinema.insertTheater", cm);
 	}
 	
 
