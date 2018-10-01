@@ -85,6 +85,37 @@ public class MovieDaoImpl implements MovieDao{
 		
 		return list;
 	}
+
+	//이진희 영화순위1
+	@Override
+	public ArrayList<MovieSumbnail> selectMovieRank1(SqlSessionTemplate sqlSession, MovieSumbnail msn) {
+		ArrayList<MovieSumbnail> movieRank1 =  null;
+		
+		movieRank1 = (ArrayList)sqlSession.selectList("MovieSumbnail.selectMovieRank1");
+		
+		System.out.println("랭크1: " + movieRank1);
+		return movieRank1;
+	}
+	//이진희 영화순위2
+	@Override
+	public ArrayList<MovieSumbnail> selectMovieRank2(SqlSessionTemplate sqlSession, MovieSumbnail msn) {
+		ArrayList<MovieSumbnail> movieRank2 =  null;
+		
+		movieRank2 = (ArrayList)sqlSession.selectList("MovieSumbnail.selectMovieRank2");
+		
+		System.out.println("랭크2: " + movieRank2);
+		return movieRank2;
+	}
+	//이진희 영화순위3
+	@Override
+	public ArrayList<MovieSumbnail> selectMovieRank3(SqlSessionTemplate sqlSession, MovieSumbnail msn) {
+		ArrayList<MovieSumbnail> movieRank3 =  null;
+		
+		movieRank3 = (ArrayList)sqlSession.selectList("MovieSumbnail.selectMovieRank3");
+		
+		System.out.println("랭크3: " + movieRank3);
+		return movieRank3;
+	}
 	
 	
 }

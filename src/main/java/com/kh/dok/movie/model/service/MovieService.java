@@ -35,5 +35,15 @@ public interface MovieService {
 		//박지용 날짜 가져오기
 		ArrayList<Movie> selectDateList(Movie v);
 
+		
+		//이진희 영화순위1
+		ArrayList<MovieSumbnail> selectMovieRank1(MovieSumbnail msn);
+
+		//이진희 영화순위2
+		ArrayList<MovieSumbnail> selectMovieRank2(MovieSumbnail msn);
+
+		//이진희 영화순위3
+		ArrayList<MovieSumbnail> selectMovieRank3(MovieSumbnail msn);
+
 
 }
