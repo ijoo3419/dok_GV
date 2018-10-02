@@ -11,7 +11,10 @@
 	input {
 			margin-right:700px;
 } 
+	input[type=submit], input[type=reset] {
+			float:left !important;
 
+	}
      
           
 </style>
@@ -84,14 +87,12 @@
 				
 				<!-- 영화관 정보 폼 -->
 
+
+
 				<form action="theaterInsert.li" method="post" encType="multipart/form-data">
-
-				<input type="hidden" value="${mid}"/>
-
-
-
 						<div class="row gtr-uniform">
 							
+							<input type="hidden" name="mid" value="${ requestScope.loginUser.mid }">
 							<div class="col-6 col-12-xsmall">
 								<h2 align="left">1.영화관 이름</h2>
 								<input type="text" name="theaterName" id="demo-name" value=""
@@ -120,12 +121,14 @@
 					
 						</div>
 						<br><br><br>
+						<div class="col-6 col-12-xsmall">
 					<div class="col-12">
-												<ul class="actions">
-													<li align="center"><input type="submit" value="등록하기" class="primary" /></li>
-													<li align="center"><input type="reset" value="돌아가기" /></li>
-												</ul>
-											</div>
+							<ul class="actions">
+									<li><input type="submit" value="등록하기" class="primary" /></li>
+									<li><input type="reset" value="돌아가기" /></li>
+							</ul>
+					</div>
+					</div>
 				</form>
 
 

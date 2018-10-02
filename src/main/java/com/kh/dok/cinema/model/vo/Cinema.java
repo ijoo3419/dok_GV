@@ -69,4 +69,13 @@ public class Cinema {
 		this.theaterRoot = theaterRoot;
 		this.theaterText = theaterText;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Cinema [theaterId=" + theaterId + ", mid=" + mid + ", theaterName=" + theaterName + ", theaterRoot="
+				+ theaterRoot + ", theaterText=" + theaterText + "]";
+	}
+	
+	
 }
