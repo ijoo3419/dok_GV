@@ -25,13 +25,14 @@ public class BoardNBoardFile implements java.io.Serializable{
 	private String file_src;
 	private Date file_date;
 	private int file_level;
+	private int rownum;
 	
 	public BoardNBoardFile(){}
 
 	public BoardNBoardFile(String board_id, String mId, String btitle, String bcontent, String board_sort,
 			Date board_date, Date modify_date, String bstatus, int bcount, String cinema_div, String theater_id,
 			String movie_id, String board_biv, String file_id, String origin_name, String edit_name, String file_src,
-			Date file_date, int file_level) {
+			Date file_date, int file_level, int rownum) {
 		super();
 		this.board_id = board_id;
 		this.mId = mId;
@@ -52,6 +53,7 @@ public class BoardNBoardFile implements java.io.Serializable{
 		this.file_src = file_src;
 		this.file_date = file_date;
 		this.file_level = file_level;
+		this.rownum = rownum;
 	}
 
 	public String getBoard_id() {
@@ -206,6 +208,14 @@ public class BoardNBoardFile implements java.io.Serializable{
 		this.file_level = file_level;
 	}
 
+	public int getRownum() {
+		return rownum;
+	}
+
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
+
 	@Override
 	public String toString() {
 		return "BoardNBoardFile [board_id=" + board_id + ", mId=" + mId + ", btitle=" + btitle + ", bcontent="
@@ -213,8 +223,9 @@ public class BoardNBoardFile implements java.io.Serializable{
 				+ modify_date + ", bstatus=" + bstatus + ", bcount=" + bcount + ", cinema_div=" + cinema_div
 				+ ", theater_id=" + theater_id + ", movie_id=" + movie_id + ", board_biv=" + board_biv + ", file_id="
 				+ file_id + ", origin_name=" + origin_name + ", edit_name=" + edit_name + ", file_src=" + file_src
-				+ ", file_date=" + file_date + ", file_level=" + file_level + "]";
+				+ ", file_date=" + file_date + ", file_level=" + file_level + ", rownum=" + rownum + "]";
 	}
+
 	
 	
 }

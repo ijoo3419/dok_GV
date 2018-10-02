@@ -1,5 +1,7 @@
 package com.kh.dok.board.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.dok.board.model.exception.BoardInsertException;
@@ -10,5 +12,7 @@ import com.kh.dok.board.model.vo.BoardNBoardFile;
 public interface BoardDao {
 
 	int inserNotice(SqlSessionTemplate sqlSession, Board b, BoardFile bf) throws BoardInsertException;
+
+	ArrayList selectNoticeList(SqlSessionTemplate sqlSession, BoardNBoardFile bbf);
 
 }

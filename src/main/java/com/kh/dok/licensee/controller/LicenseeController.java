@@ -32,20 +32,9 @@ public class LicenseeController {
 		return "licensee/playManagePage";
 	}
 
-	@RequestMapping(value="inquire.li")
-	public String showInquireView(){
-		return "licensee/inquireManagePage";
-	}
-
-
 	@RequestMapping(value="movieRoom.li")
 	public String showMovieRoomView(){
 		return "licensee/movieRoomManagePage";
-	}
-
-	@RequestMapping(value="notice.li")
-	public String showNoticeView(){
-		return "licensee/noticeManagePage";
 	}
 
 	@RequestMapping(value="reservation.li")

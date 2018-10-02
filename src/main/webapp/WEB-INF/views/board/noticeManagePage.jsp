@@ -49,23 +49,20 @@
 			<!-- <a href="index.html" class="logo">Massively</a> -->
 		</header>
 
-		<!-- Nav -->
-			<nav id="nav">
+	<!-- Nav -->
+	<c:set var="mid" value="${ loginUser.mid }" scope="session"/>
+	<nav id="nav">
 			<ul class="links">
-				<li><a href="play.li"><font
-						size="4">상영등록</font></a></li>
-				<li><a href="theater.li"><font size="4">영화관
-							등록</font></a></li>
-				<li><a href="movieRoom.li"><font size="4">상영관
-							등록</font></a></li>
+				<li><a href="play.li"><fontsize="4">상영등록</font></a></li>
+				<li><a href="theater.li"><font size="4">영화관등록</font></a></li>
+				<li><a href="movieRoom.li"><font size="4">상영관등록</font></a></li>
 				<li><a href="stats.li"><font size="4">통계/관리</font></a></li>
-				<li><a href="reservation.li"><font size="4">예매
-							현황</font></a></li>
-				<li class="active"><a href="notice.li"><font size="4">공지사항
-							</font></a></li>
+				<li><a href="reservation.li"><font size="4">예매현황</font></a></li>
+				<li><a href="notice.li"><font size="4">공지사항/등록</font></a></li>
 				<li><a href="inquire.li"><font size="4">문의내역</font></a></li>
 			</ul>
 		</nav>
+		
 			<!--  <ul class="icons">
 							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
@@ -107,7 +104,28 @@
 								<th>날짜</th>
 							</tr>
 						</thead>
-						<tbody>
+						<%-- <c:set var="mid" value="${ loginUser.mid }" scope="session"/>
+						<c:if test="${ list == null }">
+							<tr>
+								<td>등록된 공지사항이 없습니다.</td>
+							</tr>
+						</c:if>
+						<c:if test="${ list != null }">
+							<c:forEach var="list" items="${ list }">
+								<tr>
+									<th><c:out value="${ list.rownum }"/></th>
+									<th><c:out value="${ list.btitle }"/></th>
+									<th><c:out value="${ loginUser.email }"/></th>
+									<th><c:out value="${ list.bcount }"/></th>
+									<th><c:out value="${ list.board_date }"/></th>
+								</tr>
+							</c:forEach>
+						</c:if> --%>
+						
+						
+						
+						
+						<!-- <tbody>
 							<tr>
 								<td>1</td>
 								<td>공지사항</td>
@@ -129,7 +147,7 @@
 								<td>349802</td>
 								<td width="150px">(2018.09.19)</td>
 							</tr>
-						</tbody>
+						</tbody> -->
 						<tfoot>
 					</table>
 				</div>
