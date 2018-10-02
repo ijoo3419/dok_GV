@@ -546,7 +546,7 @@ hr {
 	<div id="data">
 		<h3 align="left">전체영화</h3>
 			
-			<c:forEach items="${movieView }" var="row">
+			<c:forEach items="${ movieView }" var="row">
 		<div id="sumnailimage">
                    <${row.file_src} style="width:298px; height:270px;">
                    <c:set var="name" value="${row.movie_age}"/>

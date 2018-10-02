@@ -33,6 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.dok.member.model.exception.LoginException;
 import com.kh.dok.member.model.service.MemberService;
 import com.kh.dok.member.model.vo.Member;
+import com.kh.dok.movie.model.service.MovieService;
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieSumbnail;
 
@@ -61,10 +62,10 @@ public class MemberController {
    public String askView(){
       return "member/ask";
    }
-   @RequestMapping("wishlist.me")
+/*   @RequestMapping("wishlist.me")
    public String wishlistView(){
       return "member/wishlist";
-   }
+   }*/
    @RequestMapping("reviews.me")
    public String reviewsView(){
       return "member/reviews";
@@ -381,6 +382,21 @@ public class MemberController {
 	   }
 	   
    }
+   
+   //위시리스트 뷰 출력
+	@RequestMapping("wishlist.me")
+	public String wishlistView(MovieSumbnail msn, Model model, Member m, HttpServletRequest request){
+		
+		String mid = request.getParameter("mid");
+		
+		System.out.println("MomberController movie.mo에 담긴 m의 값은?? " + mid);
+		
+		ArrayList<MovieSumbnail> wishlistView = ms.selectWishList(msn, m);
+		
+		model.addAttribute("wishlistView", wishlistView);
+		
+		return "member/wishlist";
+	}
 
 
 }

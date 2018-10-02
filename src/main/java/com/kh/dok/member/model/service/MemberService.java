@@ -34,6 +34,8 @@ public interface MemberService {
 	int insertWish(Movie m);
 
 	int updateClass(Member m);
+
+	ArrayList<MovieSumbnail> selectWishList(MovieSumbnail msn, Member m);
 	
 }
      

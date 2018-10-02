@@ -35,5 +35,7 @@ public interface MemberDao {
 
 	int updateClass(SqlSessionTemplate sqlSession, Member m);
 
+	ArrayList<MovieSumbnail> selectWishList(SqlSessionTemplate sqlSession, MovieSumbnail msn, Member m);
+
      
 }

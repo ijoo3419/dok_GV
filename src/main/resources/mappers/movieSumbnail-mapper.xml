@@ -16,6 +16,7 @@
 		<result property="runnig_time" column="RUNNIG_TIME"/>
 		<result property="file_src" column="FILE_SRC" />
 		<result property="file_level" column="FILE_LEVEL" />
+		<result property="mid" column="MID" />
 	</resultMap>
 	
 	<select id="selectMovie" resultMap="movieSumbnailResultSet" parameterType="MovieSumbnail">
@@ -139,5 +140,19 @@ FROM (SELECT ROWNUM RNUM, MOVIE_ID, MOVIE_TITLE, MOVIE_ETITLE, OPEN_DATE, DIRECT
              ORDER BY COUNT(TU.TURNING_ID) DESC))     
 WHERE RNUM BETWEEN 7 AND 9
 	</select>		
+	
+	<!-- 위시리스트 뷰 뿌리기용 쿼리문 -->
+	<select id="selectWishlist" resultMap="movieSumbnailResultSet" parameterType="MovieSumbnail">
+	SELECT M.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_ETITLE,
+		 M.MOVIE_CONTENT, M.OPEN_DATE,M.DIRECTOR_NAME, 
+		 M.PRODUCTION_COM, M.MOVIE_AGE,M.GENRE, 
+		 M.RUNNIG_TIME, BF.FILE_SRC, BF.FILE_LEVEL
+		 FROM MOVIE M, BOARD B, BOARD_FILE BF, WISHLIST W
+		 WHERE M.MOVIE_ID = B.MOVIE_ID 
+		 AND B.BOARD_ID = BF.BOARD_ID
+         AND W.MOVIE_ID = M.MOVIE_ID
+		 AND BF.FILE_LEVEL='1'
+         AND W.MID = '${mid}'
+	</select>
 	
 </mapper>

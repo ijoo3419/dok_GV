@@ -139,6 +139,16 @@ public class MemberServiceImpl implements MemberService{
 		return md.updateClass(sqlSession, m);
 	}
 
+	//황이주 위시리스트 출력
+	@Override
+	public ArrayList<MovieSumbnail> selectWishList(MovieSumbnail msn, Member m) {
+		ArrayList<MovieSumbnail> wishlistView = null;
+		
+		wishlistView = md.selectWishList(sqlSession, msn, m);
+		
+		return wishlistView;
+	}
+
 	
 
 }
