@@ -1,6 +1,7 @@
 package com.kh.dok.admin.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -69,10 +70,9 @@ public class AdminDaoImpl implements AdminDao{
 
 	//전체 회원 조회  카운트 메소드
 	@Override
-	public int countAll(SqlSessionTemplate sqlSession,SearchCondition sc) throws MemberSelectListException{
-		System.out.println(sc);
-		int countAll = sqlSession.selectOne("Admin.countAll",sc);
-		
+	public int countAll(SqlSessionTemplate sqlSession,HashMap map) throws MemberSelectListException{
+		System.out.println(map);
+		int countAll = sqlSession.selectOne("Admin.countAll",map);
 		if(countAll<0){
 			throw new MemberSelectListException("전체 회원 카운트 실패");
 		}

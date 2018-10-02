@@ -38,15 +38,13 @@ public class AdminController {
 		public String searchAll(Model model,int currentPage,String searchResult, String searchCondition){
 			String tab="tab-1";
 			String aval = "all";
-			SearchCondition sc = new SearchCondition();
 			
-			
-			sc.setId(searchResult);
-			sc.setName(searchResult);
-			sc.setSearchCondition(searchCondition);
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("sr", searchResult);
+			map.put("sc", searchCondition);
 			
 			try {
-				int listCount = as.countAll(sc);
+				int listCount = as.countAll(map);
 				System.out.println("카운트올은? " + listCount);
 				PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 				ArrayList<Member> mlist;

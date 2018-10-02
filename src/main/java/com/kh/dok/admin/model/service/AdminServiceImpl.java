@@ -1,6 +1,7 @@
 package com.kh.dok.admin.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,9 @@ public class AdminServiceImpl implements AdminService{
 	
 	//전체 회원 조회 카운트 메소드
 	@Override
-	public int countAll(SearchCondition sc) throws MemberSelectListException{
+	public int countAll(HashMap map) throws MemberSelectListException{
 		
-		return ad.countAll(sqlSession,sc);
+		return ad.countAll(sqlSession,map);
 		
 	}
 

@@ -32,16 +32,16 @@
 	</resultMap>
 
 	<!-- 회원 전체 조회 인소진-->
-	<select id="searchAll" resultMap="searchResultSet">
+	<select id="searchAll" parameterType="object" resultMap="searchResultSet">
 		SELECT *
 		FROM MEMBER
 		WHERE 
 		<choose>
-			<when test="id != null">
-				MID LIKE '%' || #{id} || '%'
+			<when test="#{searchCondition} == id">
+				MID LIKE '%' || #{searchResult} || '%'
 			</when>
-			<when test="name != null">
-				USER_NAME LIKE '%' || #{name} || '%'
+			<when test="#{searchCondition} == name">
+				USER_NAME LIKE '%' || #{searchResult} || '%'
 			</when>
 			<otherwise>
 				MID LIKE '%' || 'M' || '%'
@@ -56,11 +56,11 @@
 		FROM MEMBER
 		WHERE USER_CLASS='BUYER'
 		<choose>
-			<when test="id != null">
-				AND MID LIKE '%' || #{id} || '%'
+			<when test="searchCondition == id">
+				AND MID LIKE '%' || #{id, jdbcType=VARCHAR} || '%'
 			</when>
-			<when test="name != null">
-				AND USER_NAME LIKE '%' || #{name} || '%'
+			<when test="searchCondition == name">
+				AND USER_NAME LIKE '%' || #{name, jdbcType=VARCHAR} || '%'
 			</when>
 			<otherwise>
 				AND MID LIKE '%' || 'M' || '%'
@@ -70,15 +70,15 @@
 	</select>
 	
 	<!-- 판매자 회원 조회 인소진 -->
-	<select id="searchSe" resultMap="searchResultSet">
+	<select id="searchSe" parameterType="object" resultMap="searchResultSet">
 		SELECT *
 		FROM MEMBER
 		WHERE USER_CLASS='SELLER'
 		<choose>
-			<when test="id != null">
+			<when test="searchCondition == id">
 				AND MID LIKE '%' || #{id} || '%'
 			</when>
-			<when test="name != null">
+			<when test="searchCondition == name">
 				AND USER_NAME LIKE '%' || #{name} || '%'
 			</when>
 			<otherwise>
@@ -89,10 +89,10 @@
 	</select>
 	
 	<!-- 일반 회원 조회 카운트 결과 인소진 -->
-	<select id="countAll" resultType="_int">
-		SELECT COUNT(*)
+	<select id="countAll" parameterType="hashmap" resultType="_int">
+		SELECT COUNT(*) 
 		FROM MEMBER
-		WHERE MID LIKE '%' || #{id, jdbcType=VARCHAR} || '%'
+		WHERE MID LIKE '%' || #{sr} || '%'
 	</select>
 	
 	<!-- 일반 회원 조회 카운트 결과 인소진 -->
