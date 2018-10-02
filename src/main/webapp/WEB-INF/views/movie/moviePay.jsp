@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -512,14 +513,17 @@ a{
 						var $table = $("<table>");
 						var $trOne = $("<tr>");
 						var $trTwo = $("<tr>");
-						var $tdOne = $("<td><img src='${ contextPath }/resources/images/moviePay.PNG' width='150'>");
-						var $tdhidden = $("<input type='hidden' class='hidden-movie-list' value=''>")
+						var $tdOne = $("<td>");
+						var $tdhiddenTitle = $("<input type='hidden' class='hidden-movie-list' value=''>");
+						/* var $tdhidden = $("<input type='hidden' class='hidden-movie-list' value=''>");
+						var $tdhidden = $("<input type='hidden' class='hidden-movie-list' value=''>"); */
 						var $tdTwo = $("<td id='web-fontTitle-child'>");
 						
-						$tdhidden.val(data[key].movie_id);
+						$tdhiddenTitle.val(data[key].movie_id);
 						$tdTwo.text(data[key].movie_title);
 						
-						$tdOne.append($tdhidden);
+						$tdOne.append("<" + data[key].file_src + "style='width:150px; height:200px;'>");
+						$tdOne.append($tdhiddenTitle);
 						$trOne.append($tdOne);
 						$table.append($trOne);
 						
@@ -543,10 +547,15 @@ a{
 								$(".movie-id").val(movieId); //영화ID를 가지고있다.
 								var a = $(".movie-id").val();
 								/* console.log(a); */
-								$(".movieBtn").find("img").attr("src", "${ contextPath }/resources/images/moviePay.PNG");
+								var b = $(this).find('img').attr("src");
+								
+								$(".movieBtn").find("img").attr("src", b);
 								$(".movieBtn").find("img").attr("style", "width:100px; height:150px;");
 								$(".movieBtn").show();
 								$("#myModal4").find(".close").click();
+								
+								var movieTitle = $(this).find('#web-fontTitle-child').text();
+								$(".seatPay").find("tr").eq(1).find('td').text(movieTitle);
 					 	});
 				  	});
 					
@@ -576,6 +585,10 @@ a{
 				
 				treeCheck = $("#movieCount option:selected").val();
 				
+				treePlue = 0;
+				
+				$("input:checkbox").prop("checked", false);
+				
 				if(treeCheck == 0){
 					$("input[type='checkbox']").attr("disabled", true);
 				}else if(treeCheck == 1){
@@ -585,17 +598,21 @@ a{
 						$("input[type='checkbox']").attr("disabled", false);
 						
 						$("input[type='checkbox']").click(function(){
+							
+							console.log(treePlue);
+							
 							$("input[type='checkbox']").attr("disabled", true);
 						});
 					}
 				}else if(treeCheck == 2){
 					$("input:checkbox").prop("checked", false);
 					
-					if(treePlue <= 2){
+					if(treePlue < 2){
 						$("input[type='checkbox']").attr("disabled", false);
 						
-						$("input[type='checkbox']").click(function(){
+						$("input[type='checkbox']").off().on('click', function(){
 							++treePlue;
+							console.log(treePlue);
 						});
 					}else{
 						$("input[type='checkbox']").attr("disabled", true);
@@ -604,10 +621,10 @@ a{
 				else if(treeCheck == 3){
 					$("input:checkbox").prop("checked", false);
 					
-					if(treePlue <= 3){
+					if(treePlue < 3){
 						$("input[type='checkbox']").attr("disabled", false);
 						
-						$("input[type='checkbox']").click(function(){
+						$("input[type='checkbox']").off().on('click', function(){
 							++treePlue;
 							console.log(treePlue);
 						});
@@ -618,13 +635,12 @@ a{
 				else if(treeCheck == 4){
 					$("input:checkbox").prop("checked", false);
 					
-					treePlue = 0;
-					
-					if(treePlue <= 4){
+					if(treePlue < 4){
 						$("input[type='checkbox']").attr("disabled", false);
 						
-						$("input[type='checkbox']").click(function(){
-							treePlue++;
+						$("input[type='checkbox']").off().on('click', function(){
+							++treePlue;
+							console.log(treePlue);
 						});
 					}else{
 						$("input[type='checkbox']").attr("disabled", true);
@@ -807,9 +823,11 @@ a{
 									$(this).hover().css({"background":"white"});
 							 	});
 								
-								/* $(".movieTimeMainDiv a").click(function(){
-									
-							 	}); */
+								$(".movieTimeMainDiv a").click(function(){
+									var c = $(".movieBtn").find("img").attr("src");
+									$(".seatPay").find("img").attr("src", c);
+									$(".seatPay").show();
+							 	});
 								
 						  	});
 							
@@ -903,25 +921,25 @@ a{
 							</tr>
 							<tr>
 								<td id="td-web-fontTitle">어른도감
-								<td>
+								</td>
 							</tr>
 							<tr>
 								<td>디지털
-								<td>
+								</td>
 							</tr>
 							<tr>
 								<td>군자 4관
-								<td>
+								</td>
 							</tr>
 							<tr>
 								<td>2018. 09. 21 (금) 12:40
-								<td>
+								</td>
 							</tr>
 							<tr class="seatPay-price">
 								<td id="td-web-fontTitle">6,000&nbsp;&nbsp;
-								<td>
+								</td>
 								<td>원
-								<td>
+								</td>
 							</tr>
 							<tr class="seatPay-btn">
 								<td><button class="seatPay-btn-left">이전</button>

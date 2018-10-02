@@ -36,6 +36,8 @@ public class Movie {
 	
 	private String movie_type;
 	
+	private String file_src;
+	
 	//황이주 추가
 	private String mid;
 	
@@ -45,7 +47,7 @@ public class Movie {
 			String director_name, String production_com, String movie_age, String genre, int runnig_time,
 			String turning_id, String play_id, String price, Date turning_day, String turning_time, String movieroom_id,
 			String play_status, String area_id, String area_name, String area_level, String area_parents,
-			String theater_id, String theater_name, String movie_type, String mid) {
+			String theater_id, String theater_name, String movie_type, String file_src, String mid) {
 		super();
 		this.movie_id = movie_id;
 		this.movie_title = movie_title;
@@ -71,6 +73,7 @@ public class Movie {
 		this.theater_id = theater_id;
 		this.theater_name = theater_name;
 		this.movie_type = movie_type;
+		this.file_src = file_src;
 		this.mid = mid;
 	}
 
@@ -168,6 +171,10 @@ public class Movie {
 
 	public String getMovie_type() {
 		return movie_type;
+	}
+
+	public String getFile_src() {
+		return file_src;
 	}
 
 	public String getMid() {
@@ -270,6 +277,10 @@ public class Movie {
 		this.movie_type = movie_type;
 	}
 
+	public void setFile_src(String file_src) {
+		this.file_src = file_src;
+	}
+
 	public void setMid(String mid) {
 		this.mid = mid;
 	}
@@ -283,7 +294,8 @@ public class Movie {
 				+ price + ", turning_day=" + turning_day + ", turning_time=" + turning_time + ", movieroom_id="
 				+ movieroom_id + ", play_status=" + play_status + ", area_id=" + area_id + ", area_name=" + area_name
 				+ ", area_level=" + area_level + ", area_parents=" + area_parents + ", theater_id=" + theater_id
-				+ ", theater_name=" + theater_name + ", movie_type=" + movie_type + ", mid=" + mid + "]";
+				+ ", theater_name=" + theater_name + ", movie_type=" + movie_type + ", file_src=" + file_src + ", mid="
+				+ mid + "]";
 	}
 
 }
