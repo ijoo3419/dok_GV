@@ -561,9 +561,97 @@ a{
 		var run = 0;
 		var dateRun = 0;
 		
+		/* 모달 3 체크용 변수 */
+		var treeCheck = 0; //모달3에서 체크용 변수
+		var treePlue = 0;
+		/* 모달 3 체크용 변수 */
+		
+		window.onload = function () {
+			treeCheck = $("#movieCount option:selected").val();
+		}
+		
+		$(function(){
+			$("#movieCount").change(function(){
+				
+				treeCheck = $("#movieCount option:selected").val();
+				
+				if(treeCheck == 0){
+					$("input[type='checkbox']").attr("disabled", true);
+				}else if(treeCheck == 1){
+					$("input:checkbox").prop("checked", false);
+					
+					if(treePlue <= 1){
+						$("input[type='checkbox']").attr("disabled", false);
+						
+						$("input[type='checkbox']").click(function(){
+							$("input[type='checkbox']").attr("disabled", true);
+						});
+					}
+				}else if(treeCheck == 2){
+					$("input:checkbox").prop("checked", false);
+					
+					if(treePlue <= 2){
+						$("input[type='checkbox']").attr("disabled", false);
+						
+						$("input[type='checkbox']").click(function(){
+							++treePlue;
+						});
+					}else{
+						$("input[type='checkbox']").attr("disabled", true);
+					}
+				}
+				else if(treeCheck == 3){
+					$("input:checkbox").prop("checked", false);
+					
+					if(treePlue <= 3){
+						$("input[type='checkbox']").attr("disabled", false);
+						
+						$("input[type='checkbox']").click(function(){
+							++treePlue;
+							console.log(treePlue);
+						});
+					}else{
+						$("input[type='checkbox']").attr("disabled", true);
+					}
+				}
+				else if(treeCheck == 4){
+					$("input:checkbox").prop("checked", false);
+					
+					treePlue = 0;
+					
+					if(treePlue <= 4){
+						$("input[type='checkbox']").attr("disabled", false);
+						
+						$("input[type='checkbox']").click(function(){
+							treePlue++;
+						});
+					}else{
+						$("input[type='checkbox']").attr("disabled", true);
+					}
+				}
+			});
+		});
+		
+		
 		$(function foo(){
 				
-			    setTimeout(foo, 2000);
+			    setTimeout(foo, 1000);
+			    
+			    if(treeCheck == 0){
+			    	$("input[type='checkbox']").attr("disabled", true);
+			    }else if(treeCheck == 2){
+			    	if(treePlue >= 2){
+			    		$("input[type='checkbox']").attr("disabled", true);
+			    	}
+			    }else if(treeCheck == 3){
+			    	if(treePlue >= 3){
+			    		$("input[type='checkbox']").attr("disabled", true);
+			    	}
+			    }else if(treeCheck == 4){
+			    	if(treePlue >= 4){
+			    		$("input[type='checkbox']").attr("disabled", true);
+			    	}
+			    }
 			    
 			    var arrayDate = new Array();
 			    
@@ -573,32 +661,6 @@ a{
 				
 				var arrayCheck = [ formDateTwo, theaterId, movieId ];
 				var check = 0;
-				
-				$("#movieCount").change(function(){
-					<!-- 모달 3 체크용 변수들-->
-					var treeCheck = $("#movieCount option:selected").val(); //모달3에서 체크용 변수
-					var treePlue = treeCheck;
-					
-					<!--              -->
-					
-					if(treeCheck == 0){
-						$("input[type='checkbox']").attr("disabled", true);
-					}else if(treeCheck == 1){
-
-						if(treePlue == 1){
-							$("input[type='checkbox']").attr("disabled", false);
-						}else{
-							$("input[type='checkbox']").attr("disabled", true);
-						}
-						
-						$("input[type='checkbox']").click(function(){
-							alert('클릭');
-							treePlue += 1;	
-							console.log(treePlue);
-						});
-						
-					}
-				});
 				
 				
 				if(((arrayCheck[0] == "" && arrayCheck[1] != "") && arrayCheck[2] != "") && dateRun == 0){
