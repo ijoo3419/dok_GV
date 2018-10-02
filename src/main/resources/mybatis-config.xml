@@ -15,6 +15,7 @@
 		<typeAlias type="com.kh.dok.board.model.vo.Board" alias="Board"></typeAlias>
 		<typeAlias type="com.kh.dok.board.model.vo.BoardNBoardFile" alias="BoardNBoardFile"></typeAlias>
 		<typeAlias type="com.kh.dok.board.model.vo.BoardFile" alias="BoardFile"></typeAlias>
+		<typeAlias type="com.kh.dok.admin.model.vo.SearchCondition" alias="Search"></typeAlias>
 	</typeAliases>
 	
 	<mappers>

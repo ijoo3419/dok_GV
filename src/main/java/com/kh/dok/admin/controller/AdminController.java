@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,16 +36,14 @@ public class AdminController {
 	
 	//전체 회원 조회
 		@RequestMapping(value="searchAll.ad")
-		public String searchAll(Model model,int currentPage,String searchResult, String searchCondition){
+		public String searchAll(Model model,int currentPage,String searchResult,String searchCondition){
 			String tab="tab-1";
 			String aval = "all";
 			
-			HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("sr", searchResult);
-			map.put("sc", searchCondition);
+			SearchCondition sc = new SearchCondition(searchResult,searchCondition);
 			
 			try {
-				int listCount = as.countAll(map);
+				int listCount = as.countAll(sc);
 				System.out.println("카운트올은? " + listCount);
 				PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 				ArrayList<Member> mlist;
@@ -53,7 +52,10 @@ public class AdminController {
 				model.addAttribute("mlist",mlist);
 				model.addAttribute("pi",pi);
 				model.addAttribute("aval",aval);
-				model.addAttribute("tab",tab);*/
+
+				model.addAttribute("tab",tab);
+				model.addAttribute("sc",sc);
+
 				
 				return "admin/adminPage";
 			} catch (MemberSelectListException e) {
@@ -67,20 +69,21 @@ public class AdminController {
 }
 	//일반 회원 조회
 		@RequestMapping("searchBu.ad")
-		public String searchBu(Model model,int currentPage){
+		public String searchBu(Model model,int currentPage,String searchResult,String searchCondition){
 			
 			String aval="buyer";
 			String tab="tab-1";
-			System.out.println("왔어");
+			
+			SearchCondition sc = new SearchCondition(searchResult,searchCondition);
 			
 			try {
-				int listCount = as.countBu();
-				
+				int listCount = as.countBu(sc);
+				System.out.println("bu카운트는?"+listCount);
 				PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 				
 				ArrayList<Member> mlist;
 				
-				mlist = as.searchBu(pi);
+				mlist = as.searchBu(pi,sc);
 				
 				model.addAttribute("mlist",mlist);
 				model.addAttribute("pi",pi);
@@ -100,21 +103,24 @@ public class AdminController {
 		
 	//판매자 회원 조회
 		@RequestMapping("searchSe.ad")
-		public String searchSe(Model model,int currentPage){
+		public String searchSe(Model model,int currentPage,String searchResult,String searchCondition){
 			
 			
 			String aval = "seller";
 			String tab = "tab-1";
 			
+			SearchCondition sc = new SearchCondition(searchResult,searchCondition);
+			
 			try {
-				int listCount = as.countSe();
+				int listCount = as.countSe(sc);
+				System.out.println("카운트se : "+listCount);
 				
 				PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 				
 				
 				ArrayList<Member> mlist;
 				
-				mlist = as.searchSe(pi);
+				mlist = as.searchSe(pi,sc);
 				
 				model.addAttribute("mlist",mlist);
 				model.addAttribute("pi",pi);

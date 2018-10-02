@@ -17,15 +17,15 @@ public interface AdminDao {
 	
 	ArrayList<Member> searchAll(SqlSessionTemplate sqlSession, PageInfo pi, SearchCondition sc) throws MemberSelectListException;
 
-	ArrayList<Member> searchBu(SqlSessionTemplate sqlSession, PageInfo pi) throws MemberSelectListException;
+	ArrayList<Member> searchBu(SqlSessionTemplate sqlSession, PageInfo pi, SearchCondition sc) throws MemberSelectListException;
 
-	ArrayList<Member> searchSe(SqlSessionTemplate sqlSession, PageInfo pi) throws MemberSelectListException;
+	ArrayList<Member> searchSe(SqlSessionTemplate sqlSession, PageInfo pi, SearchCondition sc) throws MemberSelectListException;
 
-	int countAll(SqlSessionTemplate sqlSession, HashMap map) throws MemberSelectListException;
+	int countAll(SqlSessionTemplate sqlSession, SearchCondition sc) throws MemberSelectListException;
 
-	int countBu(SqlSessionTemplate sqlSession) throws MemberSelectListException;
+	int countBu(SqlSessionTemplate sqlSession, SearchCondition sc) throws MemberSelectListException;
 
-	int countSe(SqlSessionTemplate sqlSession) throws MemberSelectListException;
+	int countSe(SqlSessionTemplate sqlSession, SearchCondition sc) throws MemberSelectListException;
 
 	int countBl(SqlSessionTemplate sqlSession) throws BlackMemberSelectListException;
 

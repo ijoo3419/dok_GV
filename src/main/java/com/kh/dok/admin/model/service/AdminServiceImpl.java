@@ -26,9 +26,9 @@ public class AdminServiceImpl implements AdminService{
 	
 	//전체 회원 조회 카운트 메소드
 	@Override
-	public int countAll(HashMap map) throws MemberSelectListException{
+	public int countAll(SearchCondition sc) throws MemberSelectListException{
 		
-		return ad.countAll(sqlSession,map);
+		return ad.countAll(sqlSession,sc);
 		
 	}
 
@@ -43,32 +43,32 @@ public class AdminServiceImpl implements AdminService{
 
 	//일반 회원 조회 카운트 메소드
 	@Override
-	public int countBu() throws MemberSelectListException {
+	public int countBu(SearchCondition sc) throws MemberSelectListException {
 		
-		return ad.countBu(sqlSession);
+		return ad.countBu(sqlSession,sc);
 	}
 	
 	//일반 회원 조회 메소드
 	@Override
-	public ArrayList<Member> searchBu(PageInfo pi) throws MemberSelectListException {
+	public ArrayList<Member> searchBu(PageInfo pi,SearchCondition sc) throws MemberSelectListException {
 		
-		ArrayList<Member> mlist = ad.searchBu(sqlSession,pi);
+		ArrayList<Member> mlist = ad.searchBu(sqlSession,pi,sc);
 		
 		return mlist;
 	}
 
 	//판매자 회원 조회 카운트 메소드
 	@Override
-	public int countSe() throws MemberSelectListException {
+	public int countSe(SearchCondition sc) throws MemberSelectListException {
 		
-		return ad.countSe(sqlSession);
+		return ad.countSe(sqlSession,sc);
 	}
 	
 	//판매자 회원 조회 메소드
 	@Override
-	public ArrayList<Member> searchSe(PageInfo pi) throws MemberSelectListException {
+	public ArrayList<Member> searchSe(PageInfo pi,SearchCondition sc) throws MemberSelectListException {
 		
-		ArrayList<Member> mlist = ad.searchSe(sqlSession,pi);
+		ArrayList<Member> mlist = ad.searchSe(sqlSession,pi,sc);
 		
 		return mlist;
 	}
@@ -94,10 +94,5 @@ public class AdminServiceImpl implements AdminService{
 		return ad.countMember(sqlSession,sc);
 	}
 
-	@Override
-	public ArrayList<Member> searchMember(PageInfo pi,SearchCondition sc) throws SearchMemberException {
-		
-		ArrayList<Member> smlist = ad.searchMember(sqlSession,pi,sc);
-		return smlist;
-	}
+	
 }
