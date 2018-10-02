@@ -14,7 +14,7 @@
 	
 <!-- 영화관 추가하기~!~!~!~!~! -->
 <insert id="insertTheater" parameterType="Cinema">
-		INSERT INTO THEATER VALUES('TT' || TO_CHAR(THEATER_THEATER_ID.NEXTVAL), 'M121',
+		INSERT INTO THEATER VALUES('TT' || TO_CHAR(THEATER_THEATER_ID.NEXTVAL), #{mid},
 		#{theaterName}, #{theaterRoot}, #{theaterText})
 	</insert>
 </mapper>
