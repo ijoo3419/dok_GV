@@ -2,8 +2,10 @@ package com.kh.dok.board.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,11 +40,16 @@ public class BoardController {
 	   @RequestMapping(value="insertNotice.bo")
 	   public String insertNotice(Model model, Board b, BoardFile bf, HttpServletRequest request,
 			   						@RequestParam(name="file", required=false)MultipartFile file){
+		   System.out.println("BoardController insertNotice");
 		   
 		   String root = request.getSession().getServletContext().getRealPath("resources");
 		   String filePath = root + "\\uploadFiles";
 		   
+		   System.out.println("root : " + root);
+		   System.out.println("filepath : " + filePath);
+		   
 		   String originFileName = file.getOriginalFilename();
+		   System.out.println("originFileName : " + originFileName);
 		   String ext = originFileName.substring(originFileName.lastIndexOf("."));
 		   String changeName = CommonUtils.getRandomString();
 		   
@@ -55,12 +62,19 @@ public class BoardController {
 			bf.setEdit_name(changeName);
 			
 			System.out.println("찰리찰리 파일 이름 바꾸고 등록 햇나여? YES");
+			
 			try {
+				System.out.println("BoardController try~ try~ in");
+				
 				int result = bs.insertNotice(b,bf);
+				
+				System.out.println("try result : " + result);
 				
 				return "licensee/noticeManagePage";
 				
 			} catch (Exception e) {
+				System.out.println("BoardController catch~ catch~ in");
+				
 				new File(filePath + "\\" + changeName + ext).delete();
 				
 				model.addAttribute("msg", "공지사항 등록 실패! //파일등록안됨");
@@ -80,8 +94,30 @@ public class BoardController {
 		   
 	   }
 	
+	   //공지사항 페이지로
+	   @RequestMapping(value="notice.li")
+		public String showNoticeView(HttpServletRequest request, Model model){
+		   BoardNBoardFile bbf = new BoardNBoardFile();
+		   ArrayList list = new ArrayList();
+		   
+		   HttpSession session = request.getSession();
+		   String mid = (String)session.getAttribute("mid");
+		   System.out.println("찰리찰리 mid왔나요? YES, mid is " + mid);
+		   
+		   bbf.setmId(mid); 
+		   
+		   list = bs.selectNoticeList(bbf);
+		   
+		   model.addAttribute("list", list);
+		   
+		   return "board/noticeManagePage";
+		}
 	   
-	   
+	   //문의사항 페이지로
+	   @RequestMapping(value="inquire.li")
+		public String showInquireView(){
+			return "board/inquireManagePage";
+		}
 	   
 	   
 	   
