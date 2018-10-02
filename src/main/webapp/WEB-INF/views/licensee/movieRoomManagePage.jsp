@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,59 +10,71 @@
 <style>
 #checkBox{
 	display:inline-block !important;
-	margin-left:auto;
 	margin-right:auto;
+	margin-left:auto;
+}
+span{
+width:40px !important;
+height:40px !important;
 }
 
-input[id="1"] + label{
-	cursor:pointer !important;
-}
 
 #screen{
-	align:center !important;
-	width:930px;
+	margin-right:auto;
+	margin-left:auto;
+	width:1000px;
 	background:#D8D8D8;
 
 }
-.ckBox{
+.ckBox {
 	display:inline-block;
-	height:30px !important;
-	width:30px !important;
+	height:40px !important;
+	width:40px !important;
+	padding-right:0px !important;
+	padding-left:0px !important;
+	
 }
+
+	.check:checked + label span{
+	background:#D8D8D8 !important;
+	color:white !important;
+	
+	}
 
 	input[type=checkbox] {
   		transform: scale(3) !important;
   		color: black !important;
 	background: black!important;
 	 -webkit-appearance: checkbox !important;
-	
-	}
-	
-	.check{
-	  		display:none !important;
-	}
+
+}
+
 	.check + label span{
 	display:inline-block;
-	width:30px;
-	height:30px;
+	width:40px !important;
+	height:40px !important;
 	background:white;
 	border:1px solid black;
 	cursor:pointer;
 	}
-input[type="checkbox"] {
-  		transform: scale(5);
-	} 
+
 	
-	.check:checked + label span{
-	background:#D8D8D8;
-	}
 .col-6 col-12-xsmall .button primary small{
 	float:left !important;
 }
 .col-6 col-12-xsmall{
 	width:800px !important;
 }
-
+input[type="checkbox"] + label:before, input[type="radio"] + label:before{
+	    border-radius: 0;
+    border: solid 0px !important;
+    content: '';
+    display: none !important; 
+    left: 0;
+    text-align: center;
+    width: 40px !important;
+    height: 40px !important;
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -146,28 +159,32 @@ input[type="checkbox"] {
 			<h3>screen</h3>
 		</div>
 		<div id="checkBox">
-		
-		
-		<%for(int i=97; i<=111; i++){ %>
+	<%-- 	<%for(int i=97; i<=111; i++){ %>
 		<br>
-		<input type="checkbox" id='ch<%=i %>' class="check" name="bak" value="<%=i%>" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<label class="ckBox" for="ch<%=i %>"><span></span></label>
+		<input type="checkbox" id='ch<%=i %>' class="check" name="bak" value="<%=(char)i + "" + i %>" />
+		<label class="ckBox" for="ch<%=i %>"><span><%= i %></span></label>
 		
-		<%for(int j=1; j<=15; j++){ %>
-		<input type="checkbox" id='ch<%=j %>' class="check" name="bak" value="<%=j%>" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<label class="ckBox" for="ch<%=j %>"><span></span></label>
+			<%for(int j=1; j<=14; j++){ %>
+			<input type="checkbox" id='ch<%=j %>' class="check" name="bak" value="<%=j%>" />
+			<label class="ckBox" for="ch<%=j %>"><span><%= j %></span></label>
 			<% } %>
 		<% } %>
-
-		
-	</div>
-	<br>
-	<%-- 	<%for(int i=1;i<(15*15)+1; i++){ %>
-	
-			<input type="checkbox" id='ch<%=i %>' class="check" name="bak" value="<%=i%>" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ --%><br>
+	 
+			
+	 	<%for(int i=1; i<(15*15)+1; i++){ %>
+			
+			
+			<input type="checkbox" id='ch<%=i %>' class="check" name="bak" value="<%=i%>" 
+			style="width: 1px; height: 1px;"/>&nbsp;&nbsp;&nbsp;
+			<label class="ckBox" for="ch<%=i %>"><span><%= i %></span></label>
 			<%if(i%15 == 0){ %>
-				<br> --%>
-		
+			<br>
+			<% } %>
+		<% } %>
+	</div>
+	
+		<br><br>
 		<input type='submit' value='전송'>
 	</form>
 	<hr><hr>
@@ -191,6 +208,15 @@ input[type="checkbox"] {
 											
 											</div>			
 											
+							<h2> 다음 API</h2>
+							<br>
+							
+							<input type="text" id="sample4_postcode" placeholder="우편번호">
+<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+<input type="text" id="sample4_roadAddress" placeholder="도로명주소">
+<input type="text" id="sample4_jibunAddress" placeholder="지번주소">
+<span id="guide" style="color:#999"></span>
+				
 											<br><br><br>
 											<!-- Break -->
 											<div class="col-12">
@@ -217,6 +243,61 @@ input[type="checkbox"] {
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+
+
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script>
+    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+    function sample4_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+                // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+                if(fullRoadAddr !== ''){
+                    fullRoadAddr += extraRoadAddr;
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('sample4_roadAddress').value = fullRoadAddr;
+                document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
+
+                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+                if(data.autoRoadAddress) {
+                    //예상되는 도로명 주소에 조합형 주소를 추가한다.
+                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                    document.getElementById('guide').innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+
+                } else if(data.autoJibunAddress) {
+                    var expJibunAddr = data.autoJibunAddress;
+                    document.getElementById('guide').innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+
+                } else {
+                    document.getElementById('guide').innerHTML = '';
+                }
+            }
+        }).open();
+    }
+</script>
 
 	</body>
 </html>

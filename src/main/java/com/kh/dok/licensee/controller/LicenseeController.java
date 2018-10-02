@@ -70,7 +70,7 @@ public class LicenseeController {
 								HttpServletRequest request, 
 								@RequestParam(name="photo", required=false)MultipartFile photo){
 		
-		
+		System.out.println("controller cm : " + cm);
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		
 		String filePath = root + "\\uploadFiles";

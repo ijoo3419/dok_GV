@@ -136,7 +136,7 @@ h2 {
 								<th class="align-center">상영관</th>
 							</tr>
 							<tr>
-								<td>1</td>
+								<td><input type=></td>
 								<td>09/18</td>
 								<td>6000</td>
 								<td>11:00</td>
