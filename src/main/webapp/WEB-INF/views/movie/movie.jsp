@@ -101,8 +101,9 @@ hr {
       margin: auto;
   }
    .container {
-    padding-right: 15px;
-    padding-left: 15px;
+   	padding: 0 !important;
+    /* padding-right: 15px;
+    padding-left: 15px; */
    	margin-right: 0 !important;
     margin-left: 0 !important;
     width:1150px;
@@ -255,6 +256,40 @@ hr {
     border-radius: 5px;
     line-height:30px;
 }
+.carousel-control.left{
+	background-image: linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(0,0,0,.0001) 100%) !important;
+}
+.carousel-control.right{
+	background-image: linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(0,0,0,.0001) 100%) !important;
+}
+.left.carousel-control {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 0% !important;
+    font-size: 20px;
+    /* color: #fff; */
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0,0,0,.6);
+    background-color: rgba(0,0,0,0);
+    filter: alpha(opacity=50);
+    opacity: .5;
+}
+.carousel-control {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 22%;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0,0,0,.6);
+    background-color: rgba(0,0,0,0);
+    filter: alpha(opacity=50);
+    opacity: .5;
+}
 </style>		
 		 <title>Massively by HTML5 UP</title>
 		<meta charset="utf-8" />
@@ -381,7 +416,7 @@ hr {
 			<h3 align="left">영화순위</h3>
 			
 			<div class="container">
-  <br>
+  
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
     <!-- Wrapper for slides -->
