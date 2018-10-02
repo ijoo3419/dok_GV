@@ -36,13 +36,13 @@ public class AdminDaoImpl implements AdminDao{
 
 	//일반 회원 조회 메소드
 	@Override
-	public ArrayList<Member> searchBu(SqlSessionTemplate sqlSession,PageInfo pi) throws MemberSelectListException {
+	public ArrayList<Member> searchBu(SqlSessionTemplate sqlSession,PageInfo pi,SearchCondition sc) throws MemberSelectListException {
 		
 		int offset = (pi.getCurrentPage()-1) * pi.getLimit();
 		
 		RowBounds rowBound = new RowBounds(offset,pi.getLimit());
 		
-		ArrayList<Member> mlist = (ArrayList)sqlSession.selectList("Admin.searchBu",null,rowBound);
+		ArrayList<Member> mlist = (ArrayList)sqlSession.selectList("Admin.searchBu",sc,rowBound);
 		
 		if(mlist == null ){
 			throw new MemberSelectListException("일반 회원 조회 실패");
@@ -53,13 +53,13 @@ public class AdminDaoImpl implements AdminDao{
 
 	//판매자 회원 조회 메소드
 	@Override
-	public ArrayList<Member> searchSe(SqlSessionTemplate sqlSession,PageInfo pi) throws MemberSelectListException {
+	public ArrayList<Member> searchSe(SqlSessionTemplate sqlSession,PageInfo pi,SearchCondition sc) throws MemberSelectListException {
 		
 		int offset = (pi.getCurrentPage()-1) * pi.getLimit();
 		
 		RowBounds rowBound = new RowBounds(offset,pi.getLimit());
 		
-		ArrayList<Member> mlist = (ArrayList)sqlSession.selectList("Admin.searchSe",null,rowBound);
+		ArrayList<Member> mlist = (ArrayList)sqlSession.selectList("Admin.searchSe",sc,rowBound);
 		
 		if( mlist == null ){
 			throw new MemberSelectListException("판매자 회원 조회 실패");
@@ -70,20 +70,22 @@ public class AdminDaoImpl implements AdminDao{
 
 	//전체 회원 조회  카운트 메소드
 	@Override
-	public int countAll(SqlSessionTemplate sqlSession,HashMap map) throws MemberSelectListException{
-		System.out.println(map);
-		int countAll = sqlSession.selectOne("Admin.countAll",map);
+	public int countAll(SqlSessionTemplate sqlSession, SearchCondition sc) throws MemberSelectListException {
+		System.out.println(sc);
+		
+		int countAll = sqlSession.selectOne("Admin.countAll",sc);
+		
 		if(countAll<0){
 			throw new MemberSelectListException("전체 회원 카운트 실패");
 		}
-		return sqlSession.selectOne("Admin.countAll");
+		return countAll;
 	}
 
 	//일반 회원  조회 카운트 메소드
 	@Override
-	public int countBu(SqlSessionTemplate sqlSession) throws MemberSelectListException {
+	public int countBu(SqlSessionTemplate sqlSession,SearchCondition sc) throws MemberSelectListException {
 		
-		int countBu = sqlSession.selectOne("Admin.countBu");
+		int countBu = sqlSession.selectOne("Admin.countBu",sc);
 		
 		if(countBu<0){
 			throw new MemberSelectListException("일반 회원 카운트 실패");
@@ -93,9 +95,9 @@ public class AdminDaoImpl implements AdminDao{
 
 	//판매자 회원 조회 카운트 메소드
 	@Override
-	public int countSe(SqlSessionTemplate sqlSession) throws MemberSelectListException {
+	public int countSe(SqlSessionTemplate sqlSession,SearchCondition sc) throws MemberSelectListException {
 		
-		int countSe = sqlSession.selectOne("Admin.countSe");
+		int countSe = sqlSession.selectOne("Admin.countSe",sc);
 		
 		if(countSe<0){
 			throw new MemberSelectListException("판매자 회원 카운트 실패");
@@ -158,6 +160,9 @@ public class AdminDaoImpl implements AdminDao{
 		
 		return mslist;
 	}
+
+
+	
 
 	
 }

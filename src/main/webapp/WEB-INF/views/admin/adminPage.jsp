@@ -92,7 +92,7 @@
 	<nav id="nav">
 		<ul class="links">
 			<li class="tab-link1 current" data-tab="tab-1"><a
-				href="searchAll.ad?currentPage=1%searchResult=null&searchCondition=null">회원 관리</a></li>
+				href="searchAll.ad?currentPage=1&searchResult=M&searchCondition=id">회원 관리</a></li>
 			<li class="tab-link2" data-tab="tab-2"><a
 				href="searchBlack.ad?currentPage=1">블랙리스트 관리 관리</a></li>
 			<li class="tab-link3" data-tab="tab-3"><a>메인페이지 관리</a></li>
@@ -384,37 +384,35 @@
 				location.href = "searchAll.ad?currentPage=1&searchResult=null&searchCondition=null";
 				$("#amember option:eq(1)").prop("selected", true);
 			} else if (sresult == "buyer") {
-				location.href = "searchBu.ad?currentPage=1";
+				location.href = "searchBu.ad?currentPage=1&searchResult=null&searchCondition=null";
 				$("#amember option:eq(2)").prop("selected", true);
 			} else if (sresult == "seller") {
 				$("#amember option:eq(3)").prop("selected", true);
-				location.href = "searchSe.ad?currentPage=1";
+				location.href = "searchSe.ad?currentPage=1&searchResult=null&searchCondition=null";
 			}
 		}
 	</script>
 	<!-- search 부분 select 선택 관련 function -->
 	<script>
 		function searchopt(){
+			var sresult = $("select[name=amember]").val();
 			var searchCondition = $("select[name=searchot]").val();
 			var searchResult = $("input[name=gsearch]").val();
 			var aval = '${aval}';
 			
-			if (searchCondition == "name"){
-				alert("hi");
-			location.href = "searchAll.ad?currentPage=1&searchResult="+searchResult+"&searchCondition="+searchCondition;
-			$("#searchop").val(searchCondition).prop("selected",true);	
-			}/* else if(searchCondition == "id"){
+			if (sresult == "all"){
+				location.href = "searchAll.ad?currentPage=1&searchResult="+searchResult+"&searchCondition="+searchCondition;
+				$("#searchop").val(searchCondition).prop("selected",true);
+				$("#amember option:eq(1)").prop("selected", true);
+			}else if(sresult == "buyer"){
 				location.href = "searchBu.ad?currentPage=1&searchResult="+searchResult+"&searchCondition="+searchCondition;
-				$("#searchop").val(searchCondition).prop("selected",true);	
+				$("#searchop").val(searchCondition).prop("selected",true);
+				$("#amember option:eq(1)").prop("selected", true);
 			}else{
 				location.href = "searchSe.ad?currentPage=1&searchResult="+searchResult+"&searchCondition="+searchCondition;
-				$("#searchop").val(searchCondition).prop("selected",true);	
-			} */ 
-			
-			/* else if(searesult == "searchName"){
-				location.href="searchName.ad?currentPage=1";
-				$("#searchop).val(2)").prop("selected",true);
-			} */
+				$("#searchop").val(searchCondition).prop("selected",true);
+				$("#amember option:eq(1)").prop("selected", true);
+			}
 		}
 	</script>
 	<!-- 기본 option값 설정 -->

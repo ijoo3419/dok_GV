@@ -15,15 +15,15 @@ public interface AdminService {
 
 	ArrayList<Member> searchAll(PageInfo pi, SearchCondition sc) throws MemberSelectListException;
 
-	ArrayList<Member> searchBu(PageInfo pi) throws MemberSelectListException;
+	ArrayList<Member> searchBu(PageInfo pi, SearchCondition sc) throws MemberSelectListException;
 
-	ArrayList<Member> searchSe(PageInfo pi) throws MemberSelectListException;
+	ArrayList<Member> searchSe(PageInfo pi, SearchCondition sc) throws MemberSelectListException;
 
-	int countAll(HashMap map) throws MemberSelectListException;
+	int countAll(SearchCondition sc) throws MemberSelectListException;
 
-	int countBu() throws MemberSelectListException;
+	int countBu(SearchCondition sc) throws MemberSelectListException;
 
-	int countSe() throws MemberSelectListException;
+	int countSe(SearchCondition sc) throws MemberSelectListException;
 
 	int countBl() throws BlackMemberSelectListException;
 
@@ -31,6 +31,5 @@ public interface AdminService {
 
 	int countMember(SearchCondition sc) throws SearchMemberException;
 
-	ArrayList<Member> searchMember(PageInfo pi, SearchCondition sc) throws SearchMemberException;
 
 }

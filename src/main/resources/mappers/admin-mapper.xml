@@ -32,15 +32,15 @@
 	</resultMap>
 
 	<!-- 회원 전체 조회 인소진-->
-	<select id="searchAll" parameterType="object" resultMap="searchResultSet">
+	<select id="searchAll" parameterType="Search" resultMap="searchResultSet">
 		SELECT *
 		FROM MEMBER
 		WHERE 
 		<choose>
-			<when test="#{searchCondition} == id">
+			<when test="searchCondition != null and searchCondition.equals('id')">
 				MID LIKE '%' || #{searchResult} || '%'
 			</when>
-			<when test="#{searchCondition} == name">
+			<when test="searchCondition != null and searchCondition.equals('name')">
 				USER_NAME LIKE '%' || #{searchResult} || '%'
 			</when>
 			<otherwise>
@@ -56,15 +56,12 @@
 		FROM MEMBER
 		WHERE USER_CLASS='BUYER'
 		<choose>
-			<when test="searchCondition == id">
-				AND MID LIKE '%' || #{id, jdbcType=VARCHAR} || '%'
+			<when test="searchCondition != null and searchCondition.equals('id')">
+				AND MID LIKE '%' || #{searchResult} || '%'
 			</when>
-			<when test="searchCondition == name">
-				AND USER_NAME LIKE '%' || #{name, jdbcType=VARCHAR} || '%'
+			<when test="searchCondition != null and searchCondition.equals('name')">
+				AND USER_NAME LIKE '%' || #{searchResult} || '%'
 			</when>
-			<otherwise>
-				AND MID LIKE '%' || 'M' || '%'
-			</otherwise>
 		</choose>
 		ORDER BY SUBSTR(MID,2)*1
 	</select>
@@ -75,24 +72,29 @@
 		FROM MEMBER
 		WHERE USER_CLASS='SELLER'
 		<choose>
-			<when test="searchCondition == id">
-				AND MID LIKE '%' || #{id} || '%'
+			<when test="searchCondition != null and searchCondition.equals('id')">
+				AND MID LIKE '%' || #{searchResult} || '%'
 			</when>
-			<when test="searchCondition == name">
-				AND USER_NAME LIKE '%' || #{name} || '%'
+			<when test="searchCondition != null and searchCondition.equals('name')">
+				AND USER_NAME LIKE '%' || #{searchResult} || '%'
 			</when>
-			<otherwise>
-				AND MID LIKE '%' || 'M' || '%'
-			</otherwise>
 		</choose>
 		ORDER BY SUBSTR(MID,2)*1
 	</select>
 	
 	<!-- 일반 회원 조회 카운트 결과 인소진 -->
-	<select id="countAll" parameterType="hashmap" resultType="_int">
+	<select id="countAll" parameterType="Search" resultType="_int">
 		SELECT COUNT(*) 
 		FROM MEMBER
-		WHERE MID LIKE '%' || #{sr} || '%'
+		<choose>
+			<when test="searchCondition != null and searchCondition.equals('id')">
+				WHERE MID LIKE '%' || #{searchResult} || '%'
+			</when>
+			<when test="searchCondition != null and searchCondition.equals('name')"> 
+				WHERE USER_NAME LIKE '%' || #{searchResult} || '%'
+			</when>
+		</choose>
+		ORDER BY SUBSTR(MID,2)*1
 	</select>
 	
 	<!-- 일반 회원 조회 카운트 결과 인소진 -->
@@ -101,16 +103,14 @@
 		FROM MEMBER
 		WHERE USER_CLASS='BUYER'
 		<choose>
-			<when test="id != null">
-				AND MID LIKE '%' || #{id} || '%'
+			<when test="searchCondition != null and searchCondition.equals('id')">
+				AND MID LIKE '%' || #{searchResult} || '%'
 			</when>
-			<when test="name != null">
-				AND USER_NAME LIKE '%' || #{name} || '%'
+			<when test="searchCondition != null and searchCondition.equals('name')">
+				AND USER_NAME LIKE '%' || #{searchResult} || '%'
 			</when>
-			<otherwise>
-				AND MID LIKE '%' || 'M' || '%'
-			</otherwise>
 		</choose>
+		ORDER BY SUBSTR(MID,2)*1
 	</select>
 	
 	<!-- 판매자 회원 조회 카운트 결과 인소진 -->
@@ -119,16 +119,14 @@
 		FROM MEMBER
 		WHERE USER_CLASS='SELLER'
 		<choose>
-			<when test="id != null">
-				AND MID LIKE '%' || #{id} || '%'
+			<when test="searchCondition != null and searchCondition.equals('id')">
+				AND MID LIKE '%' || #{searchResult} || '%'
 			</when>
-			<when test="name != null">
-				AND USER_NAME LIKE '%' || #{name} || '%'
+			<when test="searchCondition != null and searchCondition.equals('name')">
+				AND USER_NAME LIKE '%' || #{searchResult} || '%'
 			</when>
-			<otherwise>
-				AND MID LIKE '%' || 'M' || '%'
-			</otherwise>
 		</choose>
+		ORDER BY SUBSTR(MID,2)*1
 	</select>
 	
 	<!-- 블랙리스트 이력 조회  인소진 -->
