@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieSumbnail;
 
@@ -38,6 +39,5 @@ public interface MovieDao {
 	ArrayList<MovieSumbnail> selectMovieRank2(SqlSessionTemplate sqlSession, MovieSumbnail msn);
 	//이진희 영화순위3
 	ArrayList<MovieSumbnail> selectMovieRank3(SqlSessionTemplate sqlSession, MovieSumbnail msn);
-
 	
 }

@@ -6,6 +6,8 @@ import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
+
+import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieSumbnail;
 
@@ -116,6 +118,5 @@ public class MovieDaoImpl implements MovieDao{
 		System.out.println("랭크3: " + movieRank3);
 		return movieRank3;
 	}
-	
 	
 }

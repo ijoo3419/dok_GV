@@ -19,6 +19,7 @@ public class MemberDaoImpl implements MemberDao{
 		return sqlSession.selectOne("Member.selectPwd", m.getEmail());
 	}
 	
+	
 	//비밀번호 일치시 회원 정보 조회용 메소드
 	@Override
 	public Member selectMember(SqlSessionTemplate sqlSession, Member m) {
@@ -101,6 +102,17 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public int updateClass(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("Member.updateClass", m);
+	}
+
+	//황이주 위시리스트 출력
+	@Override
+	public ArrayList<MovieSumbnail> selectWishList(SqlSessionTemplate sqlSession, MovieSumbnail msn, Member m) {
+		ArrayList<MovieSumbnail> wishlistView =  null;
+		
+		wishlistView = (ArrayList)sqlSession.selectList("MovieSumbnail.selectWishlist", m);
+		
+		System.out.println("위시리스트 받아오는지!?!?!?!?!?!?!!! ! ! !! ?: " + wishlistView);
+		return wishlistView;
 	}
 
 

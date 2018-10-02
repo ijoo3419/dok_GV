@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.movie.model.dao.MovieDao;
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieSumbnail;
@@ -121,5 +122,8 @@ public class MovieServiceImpl implements MovieService{
 		
 		return movieRank3;
 	}
+
+
+
 
 }

@@ -38,7 +38,7 @@ header.major {
 				<li><a href="editInfo.me">회원정보수정</a></li>
 				<li><a href="bookingHist.me">예매확인/취소</a></li>
 				<li><a href="ask.me">문의내역</a></li>
-				<li><a href="wishlist.me">위시리스트</a></li>
+				<li><a href="wishlist.me?mid=${ sessionScope.loginUser.mid }">위시리스트</a></li>
 				<li><a href="reviews.me">내가 쓴 리뷰</a></li>
 				<li class="active"><a href="theaterAdd.me">영화관 등록</a></li>
 			
