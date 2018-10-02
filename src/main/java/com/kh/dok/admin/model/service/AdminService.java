@@ -1,6 +1,7 @@
 package com.kh.dok.admin.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.dok.admin.model.exception.BlackMemberSelectListException;
 import com.kh.dok.admin.model.exception.MemberSelectListException;
@@ -18,7 +19,7 @@ public interface AdminService {
 
 	ArrayList<Member> searchSe(PageInfo pi) throws MemberSelectListException;
 
-	int countAll(SearchCondition sc) throws MemberSelectListException;
+	int countAll(HashMap map) throws MemberSelectListException;
 
 	int countBu() throws MemberSelectListException;
 

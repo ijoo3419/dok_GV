@@ -1,48 +1,33 @@
 package com.kh.dok.admin.model.vo;
 
 public class SearchCondition implements java.io.Serializable{
-	private String id;
-	private String name;
+	private String searchResult;
 	private String searchCondition;
 	
 	public SearchCondition(){}
-
-	public String getId() {
-		return id;
+	
+	
+	public String getSearchResult() {
+		return searchResult;
 	}
-
-	public void setId(String id) {
-		this.id = id;
+	public void setSearchResult(String searchResult) {
+		this.searchResult = searchResult;
 	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getSearchCondition() {
 		return searchCondition;
 	}
-
 	public void setSearchCondition(String searchCondition) {
 		this.searchCondition = searchCondition;
 	}
-
-	public SearchCondition(String id, String name, String searchCondition) {
+	public SearchCondition(String searchResult, String searchCondition) {
 		super();
-		this.id = id;
-		this.name = name;
+		this.searchResult = searchResult;
 		this.searchCondition = searchCondition;
 	}
-
 	@Override
 	public String toString() {
-		return "SearchCondition [id=" + id + ", name=" + name + ", searchCondition=" + searchCondition + "]";
+		return "SearchCondition [searchResult=" + searchResult + ", searchCondition=" + searchCondition + "]";
 	}
-	
 	
 	
 }

@@ -403,13 +403,13 @@
 				alert("hi");
 			location.href = "searchAll.ad?currentPage=1&searchResult="+searchResult+"&searchCondition="+searchCondition;
 			$("#searchop").val(searchCondition).prop("selected",true);	
-			}/* else if(aval == "buyer"){
+			}/* else if(searchCondition == "id"){
 				location.href = "searchBu.ad?currentPage=1&searchResult="+searchResult+"&searchCondition="+searchCondition;
 				$("#searchop").val(searchCondition).prop("selected",true);	
 			}else{
 				location.href = "searchSe.ad?currentPage=1&searchResult="+searchResult+"&searchCondition="+searchCondition;
 				$("#searchop").val(searchCondition).prop("selected",true);	
-			} */
+			} */ 
 			
 			/* else if(searesult == "searchName"){
 				location.href="searchName.ad?currentPage=1";

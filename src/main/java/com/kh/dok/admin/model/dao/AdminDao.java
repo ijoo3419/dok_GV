@@ -1,6 +1,7 @@
 package com.kh.dok.admin.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -20,7 +21,7 @@ public interface AdminDao {
 
 	ArrayList<Member> searchSe(SqlSessionTemplate sqlSession, PageInfo pi) throws MemberSelectListException;
 
-	int countAll(SqlSessionTemplate sqlSession, SearchCondition sc) throws MemberSelectListException;
+	int countAll(SqlSessionTemplate sqlSession, HashMap map) throws MemberSelectListException;
 
 	int countBu(SqlSessionTemplate sqlSession) throws MemberSelectListException;
 
