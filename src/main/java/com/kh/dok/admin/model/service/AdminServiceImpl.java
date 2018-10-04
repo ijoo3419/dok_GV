@@ -13,6 +13,7 @@ import com.kh.dok.admin.model.exception.MemberSelectListException;
 import com.kh.dok.admin.model.exception.SearchMemberException;
 import com.kh.dok.admin.model.vo.ReportHistory;
 import com.kh.dok.admin.model.vo.SearchCondition;
+import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.member.model.vo.Member;
 
@@ -86,6 +87,32 @@ public class AdminServiceImpl implements AdminService{
 		
 		ArrayList<ReportHistory> rlist = ad.searchBlack(sqlSession,pi,sc);
 		return rlist;
+	}
+
+	@Override
+	public int insertFile(BoardFile adFile) {
+		System.out.println("as");
+		int af = ad.insertFile(sqlSession,adFile);
+		return af;
+	}
+
+	@Override
+	public int updateFile() {
+		
+		return ad.updateFile(sqlSession);
+	}
+	
+	//파일 삭제용 메소드
+	@Override
+	public int deleteFile() {
+		
+		return ad.deleteFile(sqlSession);
+	}
+
+	@Override
+	public ArrayList<BoardFile> selectFile(BoardFile adFile) {
+		
+		return ad.selectFile(sqlSession,adFile);
 	}
 
 

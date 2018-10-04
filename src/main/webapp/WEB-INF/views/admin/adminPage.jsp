@@ -324,24 +324,37 @@
 						<form action="upload.ad" method="post" enctype="multipart/form-data">
 						<span><img id="colimg"
 							src="${contextPath }/resources/images/slide1.jpg" alt="" /></span>
-							<input type="file" id="file" name="file" style="display:none;"> <a
-							type="submit" id="modimg" class="button primary" onclick="document.getElementById('file').click();">슬라이드1 수정</a>
+							<a id="modimg" class="button primary" onclick="document.getElementById('file').click();">슬라이드1 수정</a>
+							<input type="file" id="file" name="file" onchange="document.getElementById('fsub').click();" style="display:none;">
+							<button type="submit" id="fsub" name="fsub" style="display:none;">
 						</form>
 					</div>
 					<div class="col-4" id="colsize">
+						<form action="upload.ad" method="post" enctype="multipart/form-data">
 						<span><img id="colimg"
-							src="${contextPath }/resources/images/slide2.jpg" alt="" /></span> <a
-							href="#" id="modimg" class="button primary">슬라이드2 수정</a>
+							src="${contextPath }/resources/images/slide2.jpg" alt="" /></span>
+							<a id="modimg" class="button primary" onclick="document.getElementById('file2').click();">슬라이드2 수정</a>
+							<input type="file" id="file2" name="file2" onchange="document.getElementById('fsub2').click();" style="display:none;">
+							<button type="submit" id="fsub2" name="fsub" style="display:none;">
+						</form>
 					</div>
 					<div class="col-4" id="colsize">
+						<form action="upload.ad" method="post" enctype="multipart/form-data">
 						<span><img id="colimg"
-							src="${contextPath }/resources/images/slide3.jpg" alt="" /></span> <a
-							href="#" id="modimg" class="button primary">슬라이드3 수정</a>
+							src="${contextPath }/resources/images/slide3.jpg" alt="" /></span>
+							<a id="modimg" class="button primary" onclick="document.getElementById('file3').click();">슬라이드3 수정</a>
+							<input type="file" id="file3" name="file4" onchange="document.getElementById('fsub3').click();" style="display:none;">
+							<button type="submit" id="fsub3" name="fsub" style="display:none;">
+						</form>
 					</div>
 					<div class="col-4" id="colsize">
+						<form action="upload.ad" method="post" enctype="multipart/form-data">
 						<span><img id="colimg"
-							src="${contextPath }/resources/images/slide4.jpg" alt="" /></span> <a
-							href="#" id="modimg" class="button primary">슬라이드4 수정</a>
+							src="${contextPath }/resources/images/slide4.jpg" alt="" /></span>
+							<a id="modimg" class="button primary" onclick="document.getElementById('file4').click();">슬라이드4 수정</a>
+							<input type="file" id="file4" name="file4" onchange="document.getElementById('fsub4').click();" style="display:none;">
+							<button type="submit" id="fsub4" name="fsub" style="display:none;">
+						</form>
 					</div>
 
 				</div>
@@ -482,7 +495,12 @@
 			$("#" + tab_id).addClass('current');
 		})
 	</script>
-
+	<script>
+		function test(){
+			alert("hi");
+		}
+	</script>
+	</script>
 	<!-- 템플릿 관련 js파일들 -->
 	<script src="${contextPath }/resources/js/jquery.min.js"></script>
 	<script src="${contextPath }/resources/js/jquery.scrollex.min.js"></script>
