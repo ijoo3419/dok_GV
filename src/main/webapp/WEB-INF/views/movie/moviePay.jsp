@@ -1100,6 +1100,85 @@ a{
 			</div>
 		</div>
 	</div>
+	<script>
+	$(function(){
+		$('#myModal3 .seatPay-btn .seatPay-btn-right').click(function(){
+			var answer = window.confirm("환불 후 재결제는 불가능합니다. 계속 진행하시겠습니까?");
+			var count = '<%= n.getEnterCount() %>';
+			var parsonnel ='<%= n.getPersonnel() %>';
+			
+			if(answer==true){
+				if(parsonnel < count){
+					var answer2 = window.confirm("정원이 초과되어 신청이 불가합니다");
+					
+				}else{
+					if(<%=n.getPrice()%> != 0){
+		    	 		cash();
+		     		}else{
+		    			var contextPath = '<%=request.getContextPath()%>';
+		   				var pId = "imp_"+new Date().getTime() ;
+		    			var userNum = '<%=loginUser.getUserNumber()%>';
+		    			var nuriNum = '<%=n.getNuriNum()%>';
+		    			var endDate ='<%=n.getEndDate()%>';
+						var loc = contextPath + '/payment.pms?imp=' + pId + "&userNum="
+								+ userNum + "&nuriNum=" + nuriNum + "&endDate="
+								+ endDate;
+							console.log(loc);
+
+							location.href = loc;
+					}
+				}
+			}else{
+				alert("신청이 취소되었습니다.");
+				}
+		}
+			
+
+			function cash() {
+				var IMP = window.IMP; // 생략가능
+				IMP.init('imp43582013'); // 가맹점 식별 코드
+
+				IMP.request_pay({
+					pg : 'inicis', // 결제방식
+					pay_method : 'card', // 결제 수단
+					merchant_uid : 'merchant_' + new Date().getTime(),
+					name : '주문명: 결제 테스트', // order 테이블에 들어갈 주문명 혹은 주문 번호
+					amount : '<%=n.getPrice()%>',   // 결제 금액
+		           buyer_email : '<%=loginUser.getUserEmail()%>',// 구매자 email
+		          buyer_name :  '<%=loginUser.getUserName()%>',   // 구매자 이름
+		           buyer_tel :  '<%=loginUser.getPhone()%>',   // 구매자 전화번호
+		           buyer_addr :  '<%=loginUser.getAddress()%>',   // 구매자 주소
+		           buyer_postcode :  '123-456',   // 구매자 우편번호
+		       }, function(rsp) {
+		       if ( rsp.success ) { // 성공시
+		          var msg = '결제가 완료되었습니다.';
+		          msg += '고유ID : ' + rsp.imp_uid;
+		          msg += '상점 거래ID : ' + rsp.merchant_uid;
+		          msg += '결제 금액 : ' + rsp.paid_amount;
+		          msg += '카드 승인번호 : ' + rsp.apply_num;
+		          //console.log();
+		          var contextPath = '<%= request.getContextPath() %>';
+		          var uid = rsp.imp_uid;
+		          var userNum = '<%=loginUser.getUserNumber()%>';
+		          var nuriNum = '<%=n.getNuriNum()%>';
+		          var cardNum = rsp.apply_num;
+		          var endDate ='<%=n.getEndDate()%>'
+		          var loc = contextPath + '/payment.pms?imp=' + uid + "&userNum=" + userNum +"&nuriNum=" + nuriNum +"&endDate=" + endDate; 
+		          console.log(loc);
+		    
+		          location.href=loc;
+		       		alert(msg);
+		          /*m_redirect_url : // 결제 완료 후 보낼 컨트롤러의 메소드명 */
+		       } else { // 실패시
+		          var msg = '결제에 실패하였습니다.';
+		          msg += '에러내용 : ' + rsp.error_msg;
+		          
+		       }
+		    });
+			}
+		});
+	});
+	</script>
 	<!-- 4th modal -->
 	<div class="modal" id="myModal4" data-backdrop="static"
 		aria-hidden="true" style="display: none; z-index: 1080;">
