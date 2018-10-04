@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.dok.cinema.model.vo.Cinema;
 import com.kh.dok.common.CommonUtils;
 import com.kh.dok.licensee.model.service.LicenseeService;
+import com.kh.dok.licensee.model.vo.MovieRoom;
 
 @Controller
 @SessionAttributes(value="loginUser")
@@ -88,25 +89,24 @@ public class LicenseeController {
 		}
 	}
 	
-	
-		//정태 영화관 등록 메소드
-	/*@RequestMapping(value="theaterInsert.li")
-	public String insertTheater(Model model, Cinema cm){
+	//정태 상영관 등록(엑셀 파일 전)
+	@RequestMapping(value="movieRoomInsert.li")
+	public String insertMovieRoom(Model model, MovieRoom mr, 
+								HttpServletRequest request){
 		
-		System.out.println("controller Cinema : " + cm);
 		
-		int result = ls.insertTheater(cm);
+		mr.setMovieRoomAddress(mr.getAddress1()+mr.getAddress2()+mr.getAddress3()); 
+		System.out.println(mr.getMovieRoomAddress());
+		/*System.out.println("Controller mr : " + mr);*/
+		int result = ls.insertMovieRoom(mr);
 		
 		if(result > 0){
-			return "licensee/theaterManagePage";
+			return "licensee/movieRoomManagePage";
 		}else{
-			model.addAttribute("msg", "영화관 추가 실패");
+			model.addAttribute("msg", "상영관 등록 실패");
 			return "common/errorPage";
 		}
-		
-	}*/
-	
-	
-	
 	
 }
+}
+

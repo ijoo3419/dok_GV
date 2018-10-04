@@ -2,6 +2,9 @@ package com.kh.dok.admin.model.vo;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class ReportHistory implements java.io.Serializable{
 	
 	private String rep_id;

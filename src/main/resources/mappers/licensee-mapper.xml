@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MovieRoom">
+	<resultMap type="MovieRoom" id="movieRoomResultSet">
+		<id property="movieRoom_id" column="MOVIEROOM_ID"/>
+		<result property="theater_id" column="THEATER_ID"/>
+		<result property="movieRoom_name" column="MOVIEROOM_NAME"/>
+		<result property="movieRoom_address" column="MOVIEROOM_ADDRESS"/>
+	
+	</resultMap>
+	
+<!-- 상영관 추가하기~!~!~!~!~! -->
+<insert id="insertMovieRoom" parameterType="MovieRoom">
+		INSERT INTO MOVIEROOM VALUES('MR' || TO_CHAR(MOVIEROOM_MOVIEROOM_ID.NEXTVAL), 
+		'TT11', #{movieRoomName}, #{movieRoomAddress})
+		
+		
+	</insert>
+</mapper>

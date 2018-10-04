@@ -1,5 +1,8 @@
 package com.kh.dok.admin.model.vo;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class SearchCondition implements java.io.Serializable{
 	private String searchResult;
 	private String searchCondition;

@@ -1,7 +1,8 @@
 package com.kh.dok.area.model.vo;
 
+import org.springframework.stereotype.Repository;
 
-
+@Repository
 public class Area implements java.io.Serializable{
 	private String area_id;
 	private String area_name;

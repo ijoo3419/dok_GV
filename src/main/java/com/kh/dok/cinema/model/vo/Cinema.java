@@ -1,6 +1,9 @@
 package com.kh.dok.cinema.model.vo;
 
-public class Cinema {
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class Cinema  implements java.io.Serializable{
 	private String theaterId;
 	private String mid;
 	private String theaterName;

@@ -17,6 +17,9 @@
 		<typeAlias type="com.kh.dok.board.model.vo.BoardFile" alias="BoardFile"></typeAlias>
 		<typeAlias type="com.kh.dok.admin.model.vo.SearchCondition" alias="Search"></typeAlias>
 		<typeAlias type="com.kh.dok.member.model.vo.BookingHistory" alias="BookingHistory"></typeAlias>
+		
+		<typeAlias type="com.kh.dok.licensee.model.vo.MovieRoom" alias="MovieRoom"></typeAlias>
+		
 	</typeAliases>
 	
 	<mappers>
@@ -36,6 +39,8 @@
 		<mapper resource="mappers/movie-mapper.xml"/>
 		
 		<mapper resource="mappers/board-mapper.xml"/>
+		
+		<mapper resource="mappers/licensee-mapper.xml"/>
 	</mappers>
 </configuration>
 
