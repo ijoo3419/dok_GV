@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,8 @@ import com.kh.dok.admin.model.exception.SearchMemberException;
 import com.kh.dok.admin.model.service.AdminService;
 import com.kh.dok.admin.model.vo.ReportHistory;
 import com.kh.dok.admin.model.vo.SearchCondition;
+import com.kh.dok.board.model.vo.BoardFile;
+import com.kh.dok.common.CommonUtils;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.common.Pagination;
 import com.kh.dok.member.model.vo.Member;
@@ -172,6 +176,83 @@ public class AdminController {
 				return "common/errorPage";
 			}
 		}
-
+		
+		//메인 사진 업로드
+		@RequestMapping(value="upload.ad")
+		public String upload(Model model, HttpServletRequest request, @RequestParam(name="file",required=false)MultipartFile photo,
+				@RequestParam(name="file2",required=false)MultipartFile photo2,@RequestParam(name="file3",required=false)MultipartFile photo3,
+				@RequestParam(name="file4",required=false)MultipartFile photo4){
+			
+			System.out.println(photo);
+			System.out.println(photo2);
+			System.out.println(photo3);
+			System.out.println(photo4);
+			
+			String root = request.getSession().getServletContext().getRealPath("resources");
+			System.out.println(root);
+			String filePath = root + "\\uploadFiles";
+			System.out.println(filePath);
+			
+			try {
+				if(photo != null){
+					String originFileName = photo.getOriginalFilename();
+					String ext = originFileName.substring(originFileName.lastIndexOf("."));
+					String changeName = CommonUtils.getRandomString();
+					String ichangeName = changeName + ext;
+					int au = as.updateFile();
+					int ad = as.deleteFile();
+					BoardFile adFile = new BoardFile("BT1",originFileName,ichangeName,filePath,"100");
+					int af = as.insertFile(adFile);
+					photo.transferTo(new File(filePath + "\\" + changeName + ext));
+					ArrayList<BoardFile> bfile = as.selectFile(adFile);
+					model.addAttribute("bf",bfile);
+				}else if(photo2 != null){
+					String originFileName = photo2.getOriginalFilename();
+					String ext = originFileName.substring(originFileName.lastIndexOf("."));
+					String changeName = CommonUtils.getRandomString();
+					String ichangeName = changeName + ext;
+					int au = as.updateFile();
+					int ad = as.deleteFile();
+					BoardFile adFile = new BoardFile("BT1",originFileName,ichangeName,filePath,"200");
+					int af = as.insertFile(adFile);
+					photo2.transferTo(new File(filePath + "\\" + changeName + ext));
+					ArrayList<BoardFile> bfile = as.selectFile(adFile);
+					model.addAttribute("bf",bfile);
+				}else if(photo3 != null){
+					String originFileName = photo3.getOriginalFilename();
+					String ext = originFileName.substring(originFileName.lastIndexOf("."));
+					String changeName = CommonUtils.getRandomString();
+					String ichangeName = changeName + ext;
+					int au = as.updateFile();
+					int ad = as.deleteFile();
+					BoardFile adFile = new BoardFile("BT1",originFileName,ichangeName,filePath,"300");
+					int af = as.insertFile(adFile);
+					photo3.transferTo(new File(filePath + "\\" + changeName + ext));
+					ArrayList<BoardFile> bfile = as.selectFile(adFile);
+					model.addAttribute("bf",bfile);
+				}else{
+					String originFileName = photo4.getOriginalFilename();
+					String ext = originFileName.substring(originFileName.lastIndexOf("."));
+					String changeName = CommonUtils.getRandomString();
+					String ichangeName = changeName + ext;
+					int au = as.updateFile();
+					int ad = as.deleteFile();
+					BoardFile adFile = new BoardFile("BT1",originFileName,ichangeName,filePath,"400");
+					int af = as.insertFile(adFile);
+					photo4.transferTo(new File(filePath + "\\" + changeName + ext));
+					ArrayList<BoardFile> bfile = as.selectFile(adFile);
+					model.addAttribute("bf",bfile);
+				}
+				return "main/main";
+			} catch (Exception e) {
+				/*new File(filePath + "\\" + changeName + ext).delete();*/
+				
+				model.addAttribute("msg","회입 가입 실패!");
+				
+				return "common/errorPage";
+			} 
+			
+		}
+		
 		}
 

@@ -26,6 +26,15 @@ public class BoardFile implements java.io.Serializable{
 		this.file_level = file_level;
 	}
 
+	public BoardFile(String board_id, String origin_name, String edit_name, String file_src, String file_level) {
+		super();
+		this.board_id = board_id;
+		this.origin_name = origin_name;
+		this.edit_name = edit_name;
+		this.file_src = file_src;
+		this.file_level = file_level;
+	}
+
 	public String getFile_id() {
 		return file_id;
 	}

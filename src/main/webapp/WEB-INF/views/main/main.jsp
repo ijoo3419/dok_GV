@@ -133,61 +133,68 @@ to {
 
 #detail {
 	width: 110px;
-	font-size : 9pt;
+	font-size: 9pt;
 }
 
 #book {
-	font-size : 9pt;
+	font-size: 9pt;
 	width: 110px;
-	background-color : #212931;
-	box-shadow : none;
-	color : #ffffff !important;
+	background-color: #212931;
+	box-shadow: none;
+	color: #ffffff !important;
 }
 </style>
 </head>
 <body>
 	<c:import url="../common/headBar.jsp" />
 	<div class="slideshow-container">
+		<form action="showfile.ad" method="post" enctype="multipart/form-data">
+			<div class="mySlides fade">
+				<div class="numbertext">1 / 4</div>
+				<img src="${bf.file_src }/${bf.edit_name}"
+					style="width: 100%; height: 400px;">
+			</div>
 
-		<div class="mySlides fade">
-			<div class="numbertext">1 / 3</div>
-			<img src="${contextPath }/resources/images/slide3.jpg"
-				style="width: 100%; height: 400px;">
-			<!-- <div class="text">Caption One</div> -->
-		</div>
+			<div class="mySlides fade">
+				<div class="numbertext">2 / 4</div>
+				<img src="${bf.file_src }/${bf.edit_name}"
+					style="width: 100%; height: 400px;">
+			</div>
 
-		<div class="mySlides fade">
-			<div class="numbertext">2 / 3</div>
-			<img src="${contextPath }/resources/images/slide2.jpg"
-				style="width: 100%; height: 400px;">
-			<!-- <div class="text">Caption Two</div> -->
-		</div>
+			<div class="mySlides fade">
+				<div class="numbertext">3 / 4</div>
+				<img src="${bf.file_src }/${bf.edit_name}"
+					style="width: 100%; height: 400px;">
+			</div>
 
-		<div class="mySlides fade">
-			<div class="numbertext">3 / 3</div>
-			<img src="${contextPath }/resources/images/slide4.jpg"
-				style="width: 100%; height: 400px;">
-			<!-- <div class="text">Caption Three</div> -->
-		</div>
-
+			<div class="mySlides fade">
+				<div class="numbertext">4 / 4</div>
+				<img src="${bf.file_src }/${bf.edit_name}"
+					style="width: 100%; height: 400px;">
+			</div>
+		</form>
 	</div>
 	<br>
 
 	<div style="text-align: center">
 		<span class="dot"></span> <span class="dot"></span> <span class="dot"></span>
+		<span class="dot"></span>
 	</div>
 	<div class="movie">
 		<div class="ranking">
 			<ul class="rul">
-				<li class="rank"><img class="rimage"										
+				<li class="rank"><img class="rimage"
 					src="${contextPath }/resources/images/slide1.jpg"
 					style="width: 100%; height: 70%;">
-					<div class="mname">														<!-- 샘플 -->
+					<div class="mname">
+						<!-- 샘플 -->
 						<p>영화1</p>
 					</div>
 					<div>
-						<button id="detail" onclick="location.href=''">상세보기</button>		<!-- view구현 할 사람 여기 사용 -->
-						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>			<!-- 영화 리스트에서 view연결 할 사람 여기로 -->
+						<button id="detail" onclick="location.href=''">상세보기</button>
+						<!-- view구현 할 사람 여기 사용 -->
+						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>
+						<!-- 영화 리스트에서 view연결 할 사람 여기로 -->
 					</div></li>
 				<li class="rank"><img class="rimage"
 					src="${contextPath }/resources/images/slide2.jpg"

@@ -12,6 +12,7 @@ import com.kh.dok.admin.model.exception.MemberSelectListException;
 import com.kh.dok.admin.model.exception.SearchMemberException;
 import com.kh.dok.admin.model.vo.ReportHistory;
 import com.kh.dok.admin.model.vo.SearchCondition;
+import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.member.model.vo.Member;
 
@@ -131,5 +132,32 @@ public class AdminDaoImpl implements AdminDao{
 		}
 		
 		return blist;
+	}
+
+	@Override
+	public int insertFile(SqlSessionTemplate sqlSession, BoardFile adFile) {
+		System.out.println(adFile);
+		System.out.println("ad");
+		return sqlSession.insert("Admin.insertFile", adFile);
+	}
+
+	@Override
+	public int updateFile(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.update("Admin.updateFile");
+	}
+	
+	//슬라이드 사진 파일 삭제용 메소드
+	@Override
+	public int deleteFile(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.delete("Admin.deleteFile");
+	}
+
+	@Override
+	public ArrayList<BoardFile> selectFile(SqlSessionTemplate sqlSession,BoardFile adFile) {
+		System.out.println("여기까지 왔어");
+		ArrayList<BoardFile> bf = (ArrayList)sqlSession.selectList("Admin.selectFile");
+		return (ArrayList)sqlSession.selectList("Admin.selectFile");
 	}
 }

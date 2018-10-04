@@ -31,6 +31,15 @@
 		<result property="reped_userid" column="REPED_USERID"/>
 	</resultMap>
 
+	<resultMap type="BoardFile" id="searchBoardFileSet">
+		<id property="file_id" column="FILE_ID"/>
+		<result property="board_id" column="BOARD_ID"/>
+		<result property="origin_name" column="ORIGIN_NAME"/>
+		<result property="edit_name" column="EDIT_NAME"/>
+		<result property="file_src" column="FILE_SRC"/>
+		<result property="file_date" column="FILE_DATE"/>
+		<result property="file_level" column="FILE_LEVEL"/>
+	</resultMap>
 	<!-- 회원 전체 조회 인소진-->
 	<select id="searchAll" parameterType="Search" resultMap="searchResultSet">
 		SELECT *
@@ -152,6 +161,43 @@
 		</choose>
 	</select>
 	
+	<!-- 메인 슬라이드 사진 파일 추가 -->
+	<insert id="insertFile" parameterType="BoardFile">
+		INSERT INTO BOARD_FILE
+		VALUES('ADFILE' || BOARD_FILE_FILE_ID.NEXTVAL,#{board_id},#{origin_name},#{edit_name},#{file_src},SYSDATE,#{file_level})
+	</insert>
+	
+	<!-- 슬라이드 사진 파일 수정 -->
+	<update id="updateFile">
+		UPDATE BOARD_FILE
+		SET FILE_LEVEL=0
+		<choose>
+			<when test="file_level == 100">
+				WHERE FILE_LEVEL=100
+			</when>
+			<when test="file_level == 200">
+				WHERE FILE_LEVEL=200
+			</when>
+			<when test="file_level == 300">
+				WHERE FILE_LEVEL=300
+			</when>
+			<when test="file_level == 400">
+				WHERE FILE_LEVEL=400
+			</when>
+		</choose>
+		
+	</update>
+	
+	<!-- 슬라이드 사진 삭제  -->
+	<delete id="deleteFile">
+		DELETE BOARD_FILE
+		WHERE FILE_LEVEL=0
+	</delete>
+	
+	<select id="selectFile" resultMap="searchBoardFileSet">
+		SELECT *
+		FROM BOARD_FILE
+	</select>
 	<!-- 검색 결과 조회 카운트 인소진 -->
 	<!-- <select id="countId" resultType="_int">
 		SELECT COUNT(*)

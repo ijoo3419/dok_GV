@@ -10,6 +10,7 @@ import com.kh.dok.admin.model.exception.MemberSelectListException;
 import com.kh.dok.admin.model.exception.SearchMemberException;
 import com.kh.dok.admin.model.vo.ReportHistory;
 import com.kh.dok.admin.model.vo.SearchCondition;
+import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.member.model.vo.Member;
 
@@ -31,4 +32,11 @@ public interface AdminDao {
 
 	ArrayList<ReportHistory> searchBlack(SqlSessionTemplate sqlSession, PageInfo pi, SearchCondition sc) throws BlackMemberSelectListException;
 
+	int insertFile(SqlSessionTemplate sqlSession, BoardFile adFile);
+
+	int updateFile(SqlSessionTemplate sqlSession);
+
+	int deleteFile(SqlSessionTemplate sqlSession);
+
+	ArrayList<BoardFile> selectFile(SqlSessionTemplate sqlSession, BoardFile adFile);
 }
