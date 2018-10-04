@@ -147,6 +147,8 @@ input[type="checkbox"] + label:before, input[type="radio"] + label:before{
 							<!-- Form -->
 									<h2>상영관 등록</h2>
 
+
+	 
 									<form method="post" action="#">
 										<div class="row gtr-uniform">
 											<div class="col-6 col-12-xsmall">
