@@ -46,9 +46,9 @@ public class AdminController {
 				int listCount = as.countAll(sc);
 				System.out.println("카운트올은? " + listCount);
 				PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-				ArrayList<Member> mlist;
+				ArrayList<Member> mlist; 
 				
-			/*	mlist = as.searchAll(pi,sc);
+				mlist = as.searchAll(pi,sc);
 				model.addAttribute("mlist",mlist);
 				model.addAttribute("pi",pi);
 				model.addAttribute("aval",aval);
@@ -163,8 +163,8 @@ public class AdminController {
 			}
 		}
 		
-		//아이디로 회원 검색
-		/*@RequestMapping("searchId.ad")
+/*		//아이디로 회원 검색
+		@RequestMapping("searchId.ad")
 		public String searchMember(Model model,int currentPage,String searchResult, String searchCondition){
 			
 			String tab="tab-1";
