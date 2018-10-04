@@ -26,8 +26,6 @@ public class AreaController {
 		
 		ArrayList<Area> list = as.selectAreaList(a);
 		
-		System.out.println(list);
-		
     	return list;
     }
     

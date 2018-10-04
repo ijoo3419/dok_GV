@@ -22,6 +22,7 @@ public class Movie {
 	private Date turning_day;
 	private String turning_time;
 	private String movieroom_id;
+	private String movieroom_name;
 	private String play_status;
 	
 	
@@ -46,8 +47,9 @@ public class Movie {
 	public Movie(String movie_id, String movie_title, String movie_etitle, String movie_content, Date open_date,
 			String director_name, String production_com, String movie_age, String genre, int runnig_time,
 			String turning_id, String play_id, String price, Date turning_day, String turning_time, String movieroom_id,
-			String play_status, String area_id, String area_name, String area_level, String area_parents,
-			String theater_id, String theater_name, String movie_type, String file_src, String mid) {
+			String movieroom_name, String play_status, String area_id, String area_name, String area_level,
+			String area_parents, String theater_id, String theater_name, String movie_type, String file_src,
+			String mid) {
 		super();
 		this.movie_id = movie_id;
 		this.movie_title = movie_title;
@@ -65,6 +67,7 @@ public class Movie {
 		this.turning_day = turning_day;
 		this.turning_time = turning_time;
 		this.movieroom_id = movieroom_id;
+		this.movieroom_name = movieroom_name;
 		this.play_status = play_status;
 		this.area_id = area_id;
 		this.area_name = area_name;
@@ -139,6 +142,10 @@ public class Movie {
 
 	public String getMovieroom_id() {
 		return movieroom_id;
+	}
+
+	public String getMovieroom_name() {
+		return movieroom_name;
 	}
 
 	public String getPlay_status() {
@@ -245,6 +252,10 @@ public class Movie {
 		this.movieroom_id = movieroom_id;
 	}
 
+	public void setMovieroom_name(String movieroom_name) {
+		this.movieroom_name = movieroom_name;
+	}
+
 	public void setPlay_status(String play_status) {
 		this.play_status = play_status;
 	}
@@ -292,10 +303,11 @@ public class Movie {
 				+ ", production_com=" + production_com + ", movie_age=" + movie_age + ", genre=" + genre
 				+ ", runnig_time=" + runnig_time + ", turning_id=" + turning_id + ", play_id=" + play_id + ", price="
 				+ price + ", turning_day=" + turning_day + ", turning_time=" + turning_time + ", movieroom_id="
-				+ movieroom_id + ", play_status=" + play_status + ", area_id=" + area_id + ", area_name=" + area_name
-				+ ", area_level=" + area_level + ", area_parents=" + area_parents + ", theater_id=" + theater_id
-				+ ", theater_name=" + theater_name + ", movie_type=" + movie_type + ", file_src=" + file_src + ", mid="
-				+ mid + "]";
+				+ movieroom_id + ", movieroom_name=" + movieroom_name + ", play_status=" + play_status + ", area_id="
+				+ area_id + ", area_name=" + area_name + ", area_level=" + area_level + ", area_parents=" + area_parents
+				+ ", theater_id=" + theater_id + ", theater_name=" + theater_name + ", movie_type=" + movie_type
+				+ ", file_src=" + file_src + ", mid=" + mid + "]";
 	}
 
+	
 }

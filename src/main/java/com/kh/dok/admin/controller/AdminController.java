@@ -54,7 +54,9 @@ public class AdminController {
 				PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 				ArrayList<Member> mlist; 
 				
+
 				mlist = as.searchAll(pi,sc);
+
 				model.addAttribute("mlist",mlist);
 				model.addAttribute("pi",pi);
 				model.addAttribute("aval",aval);

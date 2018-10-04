@@ -103,16 +103,12 @@ public class MovieController {
 		
 		ArrayList<Movie> list = ms.selectTurningList(v);
 		
-		System.out.println(list);
-		
 		return list;
 	}
 	
 	//박지용 @ResponseBody를 이용한 ajax 처리
 	@RequestMapping(value="selectDateList.mo")
 	public @ResponseBody ArrayList<Movie> selectDateList(@RequestParam String movieId, @RequestParam String theaterId){
-		System.out.println(movieId);
-		System.out.println(theaterId);
 		
 		Movie v = new Movie();
 		
@@ -120,8 +116,6 @@ public class MovieController {
 		v.setArea_id(theaterId);
 		
 		ArrayList<Movie> list = ms.selectDateList(v);
-		
-		System.out.println(list);
 		
 		return list;
 	}
