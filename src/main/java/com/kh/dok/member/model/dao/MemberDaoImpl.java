@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dok.member.model.vo.BookingHistory;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieSumbnail;
@@ -111,8 +112,18 @@ public class MemberDaoImpl implements MemberDao{
 		
 		wishlistView = (ArrayList)sqlSession.selectList("MovieSumbnail.selectWishlist", m);
 		
-		System.out.println("위시리스트 받아오는지!?!?!?!?!?!?!!! ! ! !! ?: " + wishlistView);
 		return wishlistView;
+	}
+
+	//황이주 예매내역 뷰 출력
+	@Override
+	public ArrayList<BookingHistory> selectBookingHist(SqlSessionTemplate sqlSession, Member m) {
+		
+		ArrayList<BookingHistory> bookingHistView = null;
+		
+		bookingHistView = (ArrayList)sqlSession.selectList("BookingHistory.selectBookingHist", m);
+		
+		return bookingHistView;
 	}
 
 

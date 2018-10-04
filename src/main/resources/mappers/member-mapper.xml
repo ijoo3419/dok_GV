@@ -129,4 +129,22 @@
 		WHERE EMAIL = '${email}'
 	</update>
 	
+	<select id="countWish">
+	SELECT NVL(COUNT(*),0)
+    FROM WISHLIST
+    WHERE MID = #{ mid }
+	</select>
+	
+	<select id="countWatched">
+	SELECT NVL(COUNT(*),0)
+    FROM RESERVATION
+    WHERE MID = #{ mid }
+	</select>
+	
+	<select id="countReview">
+	SELECT NVL(COUNT(*),0)
+    FROM 
+    WHERE MID = #{ mid }
+	</select>
+	
 </mapper>

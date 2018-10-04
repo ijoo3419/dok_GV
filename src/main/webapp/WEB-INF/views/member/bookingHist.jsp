@@ -24,7 +24,7 @@
 				<li><a href="editInfo.me">회원정보수정</a></li>
 				<li class="active"><a href="bookingHist.me">예매확인/취소</a></li>
 				<li><a href="ask.me">문의내역</a></li>
-				<li><a href="wishlist.me?mid=${ sessionScope.loginUser.mid }">위시리스트</a></li>
+				<li><a href="wishlist.me">위시리스트</a></li>
 				<li><a href="reviews.me">내가 쓴 리뷰</a></li>
 				<c:if test="${ sessionScope.loginUser.user_class eq 'BUYER'}">
 				<li><a href="theaterAdd.me">영화관 등록</a></li>
@@ -45,27 +45,30 @@
 										<table>
 											<thead>
 												<tr>
-													<th>No</th>
 													<th>예매번호</th>
 													<th>영화명</th>
 													<th>영화관</th>
-													<th>상영일시</th>
+													<th>상영관</th>
+													<th>좌석</th>
 													<th>예매일</th>
+													<th>상영일시</th>
 													<th>예매상태</th>
+													<th></th>
 												</tr>
 											</thead>
 											
-											<c:forEach items="${ bookingHist }" var="bk">
-											
+											<c:forEach items="${ bookingHistView }" var="bk">
 											<tbody>
 												<tr>
-													<td>[번호 ]</td>
-													<td>[예매번호]</td>
-													<td>[영화 제목 ]</td>
-													<td>[영화관 이름 ]</td>
-													<td>[날짜 ]</td>
-													<td>[예매일 ]</td>
-													<td>[예매확인/취소/리뷰]</td>
+													<td>${ bk.reservation_id }</td>
+													<td>${ bk.movie_title }</td>
+													<td>${ bk.theater_name }</td>
+													<td>${ bk.movieroom_name }</td>
+													<td>${ bk.seat_row }열 ${ bk.seat_column }</td>
+													<td>${ bk.reservation_date }</td>
+													<td>${ bk.turning_day }</td>
+													<td>${ bk.reservation_status }</td>
+													<td>button</td>
 												</tr>
 											</tbody>
 											</c:forEach>
@@ -82,13 +85,13 @@
 
 			</div>
 
-	<script src="${contextPath }/resources/js/jquery.min.js"></script>
-	<script src="${contextPath }/resources/js/jquery.scrollex.min.js"></script>
-	<script src="${contextPath }/resources/js/jquery.scrolly.min.js"></script>
-	<script src="${contextPath }/resources/js/browser.min.js"></script>
-	<script src="${contextPath }/resources/js/breakpoints.min.js"></script>
-	<script src="${contextPath }/resources/js/util.js"></script>
-	<script src="${contextPath }/resources/js/main.js"></script>
+	<script src="${ contextPath }/resources/js/jquery.min.js"></script>
+	<script src="${ contextPath }/resources/js/jquery.scrollex.min.js"></script>
+	<script src="${ contextPath }/resources/js/jquery.scrolly.min.js"></script>
+	<script src="${ contextPath }/resources/js/browser.min.js"></script>
+	<script src="${ contextPath }/resources/js/breakpoints.min.js"></script>
+	<script src="${ contextPath }/resources/js/util.js"></script>
+	<script src="${ contextPath }/resources/js/main.js"></script>
 
 	</body>
 </html>

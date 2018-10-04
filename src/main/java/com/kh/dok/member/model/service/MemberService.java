@@ -3,6 +3,7 @@ package com.kh.dok.member.model.service;
 import java.util.ArrayList;
 
 import com.kh.dok.member.model.exception.LoginException;
+import com.kh.dok.member.model.vo.BookingHistory;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieSumbnail;
@@ -36,6 +37,8 @@ public interface MemberService {
 	int updateClass(Member m);
 
 	ArrayList<MovieSumbnail> selectWishList(MovieSumbnail msn, Member m);
+
+	ArrayList<BookingHistory> selectBookingHist(Member m);
 	
 }
      

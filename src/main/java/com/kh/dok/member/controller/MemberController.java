@@ -32,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.dok.member.model.exception.LoginException;
 import com.kh.dok.member.model.service.MemberService;
+import com.kh.dok.member.model.vo.BookingHistory;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.movie.model.service.MovieService;
 import com.kh.dok.movie.model.vo.Movie;
@@ -44,9 +45,22 @@ public class MemberController {
    @Autowired
    private MemberService ms;
    @Autowired BCryptPasswordEncoder passwordEncoder;
-        
+   
+   
+    //마이페이지 메인
    @RequestMapping("member.me")
-   public String showMypageView(){
+   public String showMypageView(Model model, HttpServletRequest request){
+	   
+	   Member m = (Member)request.getSession().getAttribute("loginUser");
+	   
+	   System.out.println(m.getMid());
+	   
+	   ArrayList<BookingHistory> bookingHistView = ms.selectBookingHist(m);
+	   
+	   model.addAttribute("bookingHistView", bookingHistView);
+	   
+	   System.out.println("djdodo" + bookingHistView);
+	   
       return "member/mypage_main";
    }
    
@@ -293,7 +307,6 @@ public class MemberController {
 	   
 	   if(result > 0){
 		   result = 1;
-		   //위시리스트 반영되게 보여주는 거 추가해야 함 (회원정보 수정처럼)
 		   return result;
 	   } else {
 		   result = 0;
@@ -320,11 +333,6 @@ public class MemberController {
 		   
 		 
 		   model.addAttribute("loginUser", loginUser);
-		   
-		   /*session.setAttribute("loginUser", m);
-		   model.addAttribute("loginUser", m);*/
-		   System.out.println("시소에서 : " + m.getEmail() + m);
-		   System.out.println("loginUser : " + loginUser);
 
 		   return "member/insertMyInfo";
 
@@ -379,11 +387,9 @@ public class MemberController {
    
    //위시리스트 뷰 출력
 	@RequestMapping("wishlist.me")
-	public String wishlistView(MovieSumbnail msn, Model model, Member m, HttpServletRequest request){
+	public String wishlistView(MovieSumbnail msn, Model model, HttpServletRequest request){
 		
-		String mid = request.getParameter("mid");
-		
-		System.out.println("MomberController movie.mo에 담긴 m의 값은?? " + mid);
+		 Member m = (Member)request.getSession().getAttribute("loginUser");
 		
 		ArrayList<MovieSumbnail> wishlistView = ms.selectWishList(msn, m);
 		
@@ -394,9 +400,15 @@ public class MemberController {
 	
 	//예매내역 뷰 출력
 	 @RequestMapping("bookingHist.me")
-	 public String bookingHistView(){
+	 public String bookingHistView(Model model, HttpServletRequest request){
+		 
+		 Member m = (Member)request.getSession().getAttribute("loginUser");
+		 
+		 ArrayList<BookingHistory> bookingHistView = ms.selectBookingHist(m);
+		 
+		 model.addAttribute("bookingHistView", bookingHistView);
+		
 	    return "member/bookingHist";
 	 }
-
 
 }

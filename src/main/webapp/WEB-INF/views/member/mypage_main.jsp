@@ -68,7 +68,7 @@ li {
 	padding-left: 0px;
 }
 
-#edit, #plus, #pluss{
+#edit, #plus, #pluss, strong {
 	cursor: pointer;
 }
 
@@ -101,10 +101,6 @@ li {
 		<header id="header">
 			<!-- <a href="index.html" class="logo">Massively</a> -->
 		</header>
-		
-		<div>
-		<c:set var="mid" value="${ sessionScope.loginUser.mid }" scope="request" />
-		</div>
 
 		<!-- Nav -->
 		<nav id="nav">
@@ -113,7 +109,7 @@ li {
 				<li><a href="editInfo.me">회원정보수정</a></li>
 				<li><a href="bookingHist.me">예매확인/취소</a></li>
 				<li><a href="ask.me">문의내역</a></li>
-				<li><a href="wishlist.me?mid=${ sessionScope.loginUser.mid }">위시리스트</a></li>
+				<li><a href="wishlist.me">위시리스트</a></li>
 				<li><a href="reviews.me">내가 쓴 리뷰</a></li>
 				<c:if test="${ sessionScope.loginUser.user_class eq 'BUYER'}">
 				<li><a href="theaterAdd.me">영화관 등록</a></li>
@@ -129,6 +125,7 @@ li {
 			<section class="post">
 				<header class="major">
 					<h4>${ sessionScope.loginUser.user_name }님, 오늘도 영화 같은 하루 보내세요.</h4>
+					<input type="hidden" value=${ sessionScope.loginUser.mid } id="mid"/>
 				</header>
 
 				<!-- Text stuff -->
@@ -145,9 +142,25 @@ li {
 						<br>
 						</div>
 							
-							<p>(영화포스터)(영화제목)(예매시간)(영화관)</p>
-							<p>-</p>
-							
+							<table>
+											<thead>
+												<tr>
+													<th>영화명</th>
+													<th>영화관</th>
+													<th>상영일시</th>
+												</tr>
+											</thead>
+											
+											<c:forEach items="${ bookingHistView }" var="bk">
+											<tbody>
+												<tr>
+													<td>${ bk.movie_title }</td>
+													<td>${ bk.movieroom_name }</td>
+													<td>${ bk.turning_day }</td>
+												</tr>
+											</tbody>
+											</c:forEach>
+										</table>
 					</div>
 					<div id="jb-sidebar" class="box">
 					<div class="h3_wrap">
@@ -177,20 +190,20 @@ li {
 						<img src="http://image2.megabox.co.kr/mop/home/mypage/main_title7.png" alt="나의 무비스토리">
 						<br>
 						<ul>
-							<li><a href="javascript:void(0)" onclick="showMenu('mypage-moviestory', 'interesting')" title="보고싶어 보기">
+							<li>
 								<span><img src="http://image2.megabox.co.kr/mop/home/mypage/main_icon1.png" onclick="wish()"></span>
 								<strong class="ml10" onclick="wish()">보고싶어</strong>
-								<strong class="c_purple pull-right">0</strong>
+								<strong class="c_purple pull-right" onclick="wish()">0</strong>
 							</li>
-							<li><a href="javascript:void(0)" onclick="showMenu('mypage-moviestory', 'seen')" title="본영화 보기">
+							<li>
 								<span><img src="http://image2.megabox.co.kr/mop/home/mypage/main_icon2.png" onclick="watched()"></span>
 								<strong class="ml10" onclick="watched()">본영화</strong>
-								<strong class="c_purple pull-right">1</strong>
-							</a></li>
-							<li><a href="javascript:void(0)" onclick="showMenu('mypage-moviestory', 'comment')" title="나의 한줄평 보기">
+								<strong class="c_purple pull-right" onclick="watched()">1</strong>
+							</li>
+							<li>
 								<span><img src="http://image2.megabox.co.kr/mop/home/mypage/main_icon4.png" onclick="rev()"></span>
 								<strong class="ml10" onclick="rev()">나의 한줄평</strong>
-								<strong class="c_purple pull-right">0</strong></li>
+								<strong class="c_purple pull-right" onclick="rev()">0</strong></li>
 						</ul>
 					</div>
 				</div> 
@@ -211,6 +224,9 @@ li {
 	</div>
 	
 	<script>
+	
+	var mid = $("#mid").val();
+	
 		function goToEdit(){
 			location.href = "editInfo.me";
 		}
@@ -228,11 +244,11 @@ li {
 		}
 		
 		function wish(){
-			location.href = "wishlist.me";
+			location.href = "wishlist.me?mid=" + mid;
 		}
 		
 		function booked(){
-			location.href = "bookingHist.me";
+			location.href = "bookingHist.me?mid=" + mid;
 		}
 		
 	</script>
