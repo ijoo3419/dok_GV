@@ -488,8 +488,8 @@ a{
 					</div>
 					<!-- </div> -->
 
-					<a data-toggle="modal" href="#myModal2" class="btn btn-primary" id="btn btn-primary-two">Launch
-						modal</a>
+					<!-- <a data-toggle="modal" href="#myModal2" class="btn btn-primary" id="btn btn-primary-two">Launch
+						modal</a> -->
 				</div>
 			</div>
 		</div>
@@ -515,8 +515,6 @@ a{
 						var $trTwo = $("<tr>");
 						var $tdOne = $("<td>");
 						var $tdhiddenTitle = $("<input type='hidden' class='hidden-movie-list' value=''>");
-						/* var $tdhidden = $("<input type='hidden' class='hidden-movie-list' value=''>");
-						var $tdhidden = $("<input type='hidden' class='hidden-movie-list' value=''>"); */
 						var $tdTwo = $("<td id='web-fontTitle-child'>");
 						
 						$tdhiddenTitle.val(data[key].movie_id);
@@ -543,7 +541,7 @@ a{
 							$(this).parent().css({"cursor":"pointer"});
 					 	}).click(function(){
 					 			var num = $(this).find("input").val();
-								var movieId = $(".hidden-movie-list").val();
+								var movieId = $(this).find(".hidden-movie-list").val();
 								$(".movie-id").val(movieId); //영화ID를 가지고있다.
 								var a = $(".movie-id").val();
 								/* console.log(a); */
@@ -554,8 +552,6 @@ a{
 								$(".movieBtn").show();
 								$("#myModal4").find(".close").click();
 								
-								var movieTitle = $(this).find('#web-fontTitle-child').text();
-								$(".seatPay").find("tr").eq(1).find('td').text(movieTitle);
 					 	});
 				  	});
 					
@@ -599,8 +595,6 @@ a{
 						
 						$("input[type='checkbox']").click(function(){
 							
-							console.log(treePlue);
-							
 							$("input[type='checkbox']").attr("disabled", true);
 						});
 					}
@@ -612,7 +606,6 @@ a{
 						
 						$("input[type='checkbox']").off().on('click', function(){
 							++treePlue;
-							console.log(treePlue);
 						});
 					}else{
 						$("input[type='checkbox']").attr("disabled", true);
@@ -626,7 +619,6 @@ a{
 						
 						$("input[type='checkbox']").off().on('click', function(){
 							++treePlue;
-							console.log(treePlue);
 						});
 					}else{
 						$("input[type='checkbox']").attr("disabled", true);
@@ -640,7 +632,6 @@ a{
 						
 						$("input[type='checkbox']").off().on('click', function(){
 							++treePlue;
-							console.log(treePlue);
 						});
 					}else{
 						$("input[type='checkbox']").attr("disabled", true);
@@ -722,7 +713,6 @@ a{
 			    				var $input = $("<input type='hidden' value=''>");
 			    				
 			    				$input.val(arrayDate[key]);
-			    				console.log($input.val());
 			    				div.append($input);
 			    				
 			    				alert("해당 영화는 " + strDate + "일만 예매가 가능합니다.");
@@ -764,27 +754,34 @@ a{
 							var $table = $("<table id='movieTimeTable' border='1'>");
 							
 							for(var key in data){
-								var $tr = $("<a data-toggle='modal' href='#myModal2'><tr>");
+								var $a = $("<a data-toggle='modal' href='#myModal2'>");
+								var $tr = $("<tr>");
 								var $fontOne = $("<font id='web-fontDate'>");
-								var $fontTwo = $("<font id='web-fontDate'>");
+								var $fontTwo = $("<font id='web-fontDate' class='movie_title'>");
 								var $fontTree = $("<font id='web-fontDate'>");
-								var $fontFour = $("<br><font id='web-fontDate'>");
+								var $fontFour = $("<br><font id='web-fontDate' class='movie_type'>");
 								var $fontFive = $("<font id='web-fontDate'>");
-								var $fontSix = $("<br><font>");
+								var $fontSix = $("<br><font class='area_name'>");
+								
+								var $hiddenPrice = $("<input type='hidden' class='hiddenPrice' val=''>");
+								var $hiddenTime = $("<input type='hidden' class='hiddenTime' val=''>");
+								var $hiddenDate = $("<input type='hidden' class='hiddenDate' val=''>");
+								var $hiddenRoom = $("<input type='hidden' class='hiddenRoom' val=''>");
 								
 								var $tdOne = $("<td width='180' height='50' align='center'>");
 								var $tdTwo = $("<td width='300' height='50'>");
 								var $tdTree = $("<td width='100' height='50' align='center'>");
-								/* var $tdTitle = $("<input type='hidden' class='hidden-movie-list' value=''>")
-								var $tdTurning = $("<td id='web-fontTitle-child'>"); */
 								
-								/* $td.val(data[key].movie_id); */
 								$fontOne.text(data[key].turning_time);
 								$fontTwo.text(data[key].movie_title);
 								$fontTree.text(data[key].area_name);
 								$fontFour.text(data[key].movie_type);
 								$fontFive.text(data[key].movie_age);
 								$fontSix.text(data[key].theater_name);
+								$hiddenPrice.val(data[key].price);
+								$hiddenTime.val(data[key].turning_time);
+								$hiddenDate.val(data[key].turning_day);
+								$hiddenRoom.val(data[key].movieroom_name);
 								
 								$tdOne.append($fontOne);
 								$tdTwo.append($fontFive);
@@ -797,8 +794,14 @@ a{
 								$tr.append($tdOne);
 								$tr.append($tdTwo);
 								$tr.append($tdTree);
+								$tr.append($hiddenPrice);
+								$tr.append($hiddenTime);
+								$tr.append($hiddenDate);
+								$tr.append($hiddenRoom);
 								
-								$table.append($tr);
+								$a.append($tr);
+								
+								$table.append($a);
 							}
 							
 							$mainDiv.append($table);
@@ -811,12 +814,7 @@ a{
 									$(this).parent().css({"cursor":"pointer"});
 									$(this).hover().css({"background":"#F2F2F2"});
 							 	}).click(function(){
-							 			/* var num = $(this).find("input").val();
-										var movieId = $(".hidden-movie-list").val();
-										$(".movie-id").val(movieId); //영화ID를 가지고있다.
-										$(".movieBtn").find("img").attr("src", "${ contextPath }/resources/images/moviePay.PNG");
-										$(".movieBtn").find("img").attr("style", "width:100px; height:150px;");
-										$(".movieBtn").show(); */
+							 			
 							 	});
 								
 								$(".movieTimeMainDiv a tr").mouseleave(function(){
@@ -824,6 +822,32 @@ a{
 							 	});
 								
 								$(".movieTimeMainDiv a").click(function(){
+									var movieTitle = $(this).find('.movie_title').text();
+									var movieType = $(this).find('.movie_type').text();
+									var areaName = $(this).find('.area_name').text();
+									var date = $(this).find('.hiddenDate').val();
+									var time = $(this).find('.hiddenTime').val();
+									var money = $(this).find('.hiddenPrice').val();
+									var roomName = $(this).find('.hiddenRoom').val();
+									
+									var str = moment("/Date(" + date +")/").format("YYYY/MM/DD"); //json string
+									   
+				    				arrayDate[key] = str.toString();
+									
+									$(".seatPay").find("tr").eq(1).find('td').text(movieTitle);
+									$(".seatPay").find("tr").eq(2).find('td').text(movieType);
+									$(".seatPay").find("tr").eq(3).find('td').text(areaName + " " + roomName);
+									$(".seatPay").find("tr").eq(4).find('td').text(str + "　" + time);
+									$(".seatPay-price").find("#td-web-fontTitle").text(money + "　");
+									
+									$(".pay-right").find("tr").eq(1).find('td').text(movieTitle);
+									$(".pay-right").find("tr").eq(2).find('td').text(movieType);
+									$(".pay-right").find("tr").eq(3).find('td').text(areaName + " " + roomName);
+									$(".pay-right").find("tr").eq(4).find('td').text(str + "　" + time);
+									
+									$(".pay-center").find("h4").eq(1).text(money).append('<font size="3" id="web-fontTitle-child">원</font>');
+									
+									
 									var c = $(".movieBtn").find("img").attr("src");
 									$(".seatPay").find("img").attr("src", c);
 									$(".seatPay").show();
@@ -953,6 +977,33 @@ a{
 			
 		</div>
 	</div>
+	<script>
+		$(function(){
+			$('.seatPay-btn-right').click(function(){
+				 
+				var img = $('.seatPay').find('img').attr('src');
+				$('.pay-right table').find('img').attr('src', img);
+				
+				/*
+				var movieTitle = $(this).find('.movie_title').text();
+				var movieType = $(this).find('.movie_type').text();
+				var areaName = $(this).find('.area_name').text();
+				var date = $(this).find('.hiddenDate').val();
+				var time = $(this).find('.hiddenTime').val();
+				var money = $(this).find('.hiddenPrice').val();
+				var roomName = $(this).find('.hiddenRoom').val();
+				
+				var str = moment("/Date(" + date +")/").format("YYYY/MM/DD"); //json string
+				   
+				str.toString();
+				
+				$(".pay-right").find("tr").eq(1).find('td').text(movieTitle);
+				$(".pay-right").find("tr").eq(2).find('td').text(movieType);
+				$(".pay-right").find("tr").eq(3).find('td').text(areaName + " " + roomName);
+				$(".pay-right").find("tr").eq(4).find('td').text(str + "　" + time);*/
+			});
+		});
+	</script>
 	
 	<!-- third modal -->
 	<div class="modal" id="myModal3" aria-hidden="true"
@@ -987,7 +1038,8 @@ a{
 					<div class="pay-center">
 						<h4 id="web-fontTitle-child">총 결제 금액</h4>
 						<h4 id="web-fontTitle">
-							20,000<font size="3" id="web-fontTitle-child">원</font>
+							20,000
+							<font size="3" id="web-fontTitle-child">원</font>
 						</h4>
 						<hr>
 						<h4 id="web-fontTitle-child">할인수단/관람권</h4>
@@ -1013,29 +1065,29 @@ a{
 								<td><img
 									src="${ contextPath }/resources/images/moviePay.PNG"
 									width="200px">
-								<td>
+								</td>
 							</tr>
 							<tr>
 								<td id="td-web-fontTitle">어른도감
-								<td>
+								</td>
 							</tr>
 							<tr>
 								<td>디지털
-								<td>
+								</td>
 							</tr>
 							<tr>
 								<td>군자 4관
-								<td>
+								</td>
 							</tr>
 							<tr>
 								<td>2018. 09. 21 (금) 12:40
-								<td>
+								</td>
 							</tr>
 							<tr class="seatPay-price">
-								<td id="td-web-fontTitle">6,000&nbsp;&nbsp;
-								<td>
+								<td id="td-web-fontTitle">7,000&nbsp;&nbsp;
+								</td>
 								<td>원
-								<td>
+								</td>
 							</tr>
 							<tr class="seatPay-btn">
 								<td><button class="seatPay-btn-left">이전</button>

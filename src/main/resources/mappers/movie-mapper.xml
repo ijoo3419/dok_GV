@@ -54,6 +54,7 @@
 		<result property="turning_day" column="TURNING_DAY"/>
 		<result property="turning_time" column="TURNING_TIME"/>
 		<result property="movieroom_id" column="MOVIEROOM_ID"/>
+		<result property="movieroom_name" column="MOVIEROOM_NAME"/>
 		<result property="play_status" column="PLAY_STATUS"/>
 		
 		<result property="area_id" column="AREA_ID"/>
