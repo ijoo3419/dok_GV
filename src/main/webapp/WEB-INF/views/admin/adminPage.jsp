@@ -40,6 +40,11 @@
 	display: inline-block;
 }
 
+#bgsearch {
+	margin-left: 10px;
+	display: inline-block;
+}
+
 #gicon {
 	margin-left: 10px;
 }
@@ -71,11 +76,20 @@
 #update {
 	margin-left: 30px;
 }
-#searchot{
-	width : 170px;
-	display : inline-block;
-	margin-left : 80px;
+
+#searchot {
+	width: 170px;
+	display: inline-block;
+	margin-left: 80px;
 }
+#searchbot {
+	width: 170px;
+	display: inline-block;
+	margin-left: 80px;
+}
+#file{
+	dispaly:none;
+	}
 </style>
 </head>
 <body class="is-preload">
@@ -92,9 +106,10 @@
 	<nav id="nav">
 		<ul class="links">
 			<li class="tab-link1 current" data-tab="tab-1"><a
-				href="searchAll.ad?currentPage=1&searchResult=M&searchCondition=id">회원 관리</a></li>
+				href="searchAll.ad?currentPage=1&searchResult=M&searchCondition=id">회원
+					관리</a></li>
 			<li class="tab-link2" data-tab="tab-2"><a
-				href="searchBlack.ad?currentPage=1">블랙리스트 관리 관리</a></li>
+				href="searchBlack.ad?currentPage=1&searchResult=M&searchCondition=repedId">블랙리스트 관리 관리</a></li>
 			<li class="tab-link3" data-tab="tab-3"><a>메인페이지 관리</a></li>
 			<li class="tab-link4" data-tab="tab-4"><a>통계</a></li>
 			<li class="tab-link5" data-tab="tab-5"><a>문의 사항</a></li>
@@ -165,6 +180,8 @@
 					<c:if test="${pi.currentPage > 1 }">
 						<c:url var="blistBack" value="${search }">
 							<c:param name="currentPage" value="${pi.currentPage - 1 }" />
+							<c:param name="searchResult" value="${sc.searchResult }" />
+							<c:param name="searchCondition" value="${sc.searchCondition }" />
 						</c:url>
 						<a href="${blistBack }">&lt;이전&nbsp;</a>
 					</c:if>
@@ -177,6 +194,8 @@
 						<c:if test="${p ne pi.currentPage }">
 							<c:url var="blistCheck" value="${search }">
 								<c:param name="currentPage" value="${p }" />
+								<c:param name="searchResult" value="${sc.searchResult}" />
+								<c:param name="searchCondition" value="${sc.searchCondition}" />
 							</c:url>
 							<a href="${blistCheck }">${p }</a>
 						</c:if>
@@ -187,21 +206,23 @@
 					<c:if test="${pi.currentPage < pi.maxPage }">
 						<c:url var="blistEnd" value="${search }">
 							<c:param name="currentPage" value="${pi.currentPage + 1 }" />
+							<c:param name="searchResult" value="${sc.searchResult }" />
+							<c:param name="searchCondition" value="${sc.searchCondition }" />
 						</c:url>
 						<a href="${blistEnd }">&nbsp;다음&gt;</a>
 					</c:if>
 				</div>
 
-				
+
 				<div class="search">
 					<select id="searchot" name="searchot">
 						<option value="">조회기준</option>
 						<option value="id">아이디</option>
 						<option value="name">이름</option>
-					</select>
-					<input id="gsearch" name="gsearch" type="text" value placeholder="검색"
-						style="width: 300px"> <a href="#" id="gicon"
-						class="button primary icon fa-search" onclick="searchopt()"> 조회 </a>
+					</select> <input id="gsearch" name="gsearch" type="text" value
+						placeholder="검색" style="width: 300px"> <a href="#"
+						id="gicon" class="button primary icon fa-search"
+						onclick="searchopt()"> 조회 </a>
 				</div>
 			</div>
 
@@ -246,6 +267,8 @@
 					<c:if test="${pi.currentPage > 1 }">
 						<c:url var="blistBack" value="searchBlack.ad">
 							<c:param name="currentPage" value="${pi.currentPage - 1 }" />
+							<c:param name="searchResult" value="${sc.searchResult }"/>
+							<c:param name="searchCondition" value="${sc.searchCondition }"/>
 						</c:url>
 						<a href="${blistBack }">&lt;이전&nbsp;</a>
 					</c:if>
@@ -258,6 +281,8 @@
 						<c:if test="${p ne pi.currentPage }">
 							<c:url var="blistCheck" value="searchBlack.ad">
 								<c:param name="currentPage" value="${p }" />
+								<c:param name="searchResult" value="${sc.searchResult }"/>
+								<c:param name="searchCondition" value="${sc.searchCondition }"/>
 							</c:url>
 							<a href="${blistCheck }">${p }</a>
 						</c:if>
@@ -268,9 +293,21 @@
 					<c:if test="${pi.currentPage < pi.maxPage }">
 						<c:url var="blistEnd" value="searchBlack.ad">
 							<c:param name="currentPage" value="${pi.currentPage + 1 }" />
+							<c:param name="searchResult" value="${sc.searchResult }"/>
+							<c:param name="searchResult" value="${sc.searchCondition }"/>
 						</c:url>
 						<a href="${blistEnd }">&nbsp;다음&gt;</a>
 					</c:if>
+				</div>
+
+				<div class="search">
+					<select id="searchot" name="searchbot">
+						<option value="">조회기준</option>
+						<option value="repedId">피신고자ID</option>
+					</select> <input id="bgsearch" name="bgsearch" type="text" value
+						placeholder="검색" style="width: 300px"> <a href="#"
+						id="gicon" class="button primary icon fa-search"
+						onclick="searchbopt()"> 조회 </a>
 				</div>
 			</div>
 
@@ -283,10 +320,13 @@
 			<br>
 			<div class="box alt">
 				<div class="row gtr-50 gtr-uniform">
-					<div class="col-4" id="colsize">
+					<div class="col-4" id="colsize">	
+						<form action="upload.ad" method="post" enctype="multipart/form-data">
 						<span><img id="colimg"
-							src="${contextPath }/resources/images/slide1.jpg" alt="" /></span> <a
-							href="#" id="modimg" class="button primary">슬라이드1 수정</a>
+							src="${contextPath }/resources/images/slide1.jpg" alt="" /></span>
+							<input type="file" id="file" name="file" style="display:none;"> <a
+							type="submit" id="modimg" class="button primary" onclick="document.getElementById('file').click();">슬라이드1 수정</a>
+						</form>
 					</div>
 					<div class="col-4" id="colsize">
 						<span><img id="colimg"
@@ -382,38 +422,41 @@
 
 			if (sresult == "all") {
 				location.href = "searchAll.ad?currentPage=1&searchResult=null&searchCondition=null";
-				$("#amember option:eq(1)").prop("selected", true);
 			} else if (sresult == "buyer") {
 				location.href = "searchBu.ad?currentPage=1&searchResult=null&searchCondition=null";
-				$("#amember option:eq(2)").prop("selected", true);
 			} else if (sresult == "seller") {
-				$("#amember option:eq(3)").prop("selected", true);
 				location.href = "searchSe.ad?currentPage=1&searchResult=null&searchCondition=null";
 			}
 		}
 	</script>
 	<!-- search 부분 select 선택 관련 function -->
 	<script>
-		function searchopt(){
+		function searchopt() {
 			var sresult = $("select[name=amember]").val();
 			var searchCondition = $("select[name=searchot]").val();
 			var searchResult = $("input[name=gsearch]").val();
-			var aval = '${aval}';
-			
-			if (sresult == "all"){
-				location.href = "searchAll.ad?currentPage=1&searchResult="+searchResult+"&searchCondition="+searchCondition;
-				$("#searchop").val(searchCondition).prop("selected",true);
-				$("#amember option:eq(1)").prop("selected", true);
-			}else if(sresult == "buyer"){
-				location.href = "searchBu.ad?currentPage=1&searchResult="+searchResult+"&searchCondition="+searchCondition;
-				$("#searchop").val(searchCondition).prop("selected",true);
-				$("#amember option:eq(1)").prop("selected", true);
-			}else{
-				location.href = "searchSe.ad?currentPage=1&searchResult="+searchResult+"&searchCondition="+searchCondition;
-				$("#searchop").val(searchCondition).prop("selected",true);
-				$("#amember option:eq(1)").prop("selected", true);
+
+			if (sresult == "all") {
+				location.href = "searchAll.ad?currentPage=1&searchResult="
+						+ searchResult + "&searchCondition=" + searchCondition;
+			} else if (sresult == "buyer") {
+				location.href = "searchBu.ad?currentPage=1&searchResult="
+						+ searchResult + "&searchCondition=" + searchCondition;
+			} else {
+				location.href = "searchSe.ad?currentPage=1&searchResult="
+						+ searchResult + "&searchCondition=" + searchCondition;
 			}
 		}
+	</script>
+	<!-- 블랙리스트 search 부분 select 선택 관련 function -->
+	<script>
+		function searchbopt() {
+			var searchCondition = $("select[name=searchbot]").val();
+			var searchResult = $("input[name=bgsearch]").val();
+			alert("hi");
+			console.log(searchCondition);
+			location.href = "searchBlack.ad?currentPage=1&searchResult="+ searchResult + "&searchCondition="+searchCondition;
+			}
 	</script>
 	<!-- 기본 option값 설정 -->
 	<script>
@@ -421,7 +464,12 @@
 			$("select option[value='${aval}']").prop("selected", true);
 		})
 	</script>
-
+	<script>
+		$(function() {
+			$("select option[value='${sc.searchCondition}']").prop("selected",
+					true);
+		})
+	</script>
 	<script>
 		$(document).ready(function() {
 			var tab_id = '${tab}';
@@ -434,6 +482,7 @@
 			$("#" + tab_id).addClass('current');
 		})
 	</script>
+
 	<!-- 템플릿 관련 js파일들 -->
 	<script src="${contextPath }/resources/js/jquery.min.js"></script>
 	<script src="${contextPath }/resources/js/jquery.scrollex.min.js"></script>

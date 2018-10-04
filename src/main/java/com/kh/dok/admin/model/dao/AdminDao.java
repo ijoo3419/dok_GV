@@ -27,12 +27,8 @@ public interface AdminDao {
 
 	int countSe(SqlSessionTemplate sqlSession, SearchCondition sc) throws MemberSelectListException;
 
-	int countBl(SqlSessionTemplate sqlSession) throws BlackMemberSelectListException;
+	int countBl(SqlSessionTemplate sqlSession, SearchCondition sc) throws BlackMemberSelectListException;
 
-	ArrayList<ReportHistory> searchBlack(SqlSessionTemplate sqlSession, PageInfo pi) throws BlackMemberSelectListException;
-
-	int countMember(SqlSessionTemplate sqlSession, SearchCondition sc) throws SearchMemberException;
-
-	ArrayList<Member> searchMember(SqlSessionTemplate sqlSession, PageInfo pi, SearchCondition sc) throws SearchMemberException;
+	ArrayList<ReportHistory> searchBlack(SqlSessionTemplate sqlSession, PageInfo pi, SearchCondition sc) throws BlackMemberSelectListException;
 
 }
