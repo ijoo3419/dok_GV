@@ -54,18 +54,12 @@ public class MemberController {
    public String editInfoView(){
       return "member/editInfo";
    }
-   @RequestMapping("bookingHist.me")
-   public String bookingHistView(){
-      return "member/bookingHist";
-   }
+
    @RequestMapping("ask.me")
    public String askView(){
       return "member/ask";
    }
-/*   @RequestMapping("wishlist.me")
-   public String wishlistView(){
-      return "member/wishlist";
-   }*/
+
    @RequestMapping("reviews.me")
    public String reviewsView(){
       return "member/reviews";
@@ -397,6 +391,12 @@ public class MemberController {
 		
 		return "member/wishlist";
 	}
+	
+	//예매내역 뷰 출력
+	 @RequestMapping("bookingHist.me")
+	 public String bookingHistView(){
+	    return "member/bookingHist";
+	 }
 
 
 }

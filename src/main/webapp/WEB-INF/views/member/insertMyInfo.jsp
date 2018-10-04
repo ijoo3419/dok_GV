@@ -370,7 +370,7 @@ body label {
 <body>
 
 	<%@ include file="../common/headBar.jsp"%>
-
+	
 
 <div class="wrapper fadeInDown">
   <div id="formContent">

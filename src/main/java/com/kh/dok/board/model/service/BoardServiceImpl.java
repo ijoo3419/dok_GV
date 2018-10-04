@@ -1,5 +1,7 @@
 package com.kh.dok.board.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -23,10 +25,21 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Override
 	public int insertNotice(Board b, BoardFile bf) throws BoardInsertException {
+		System.out.println("BoardServiceImpl 왔어요");
+		
 		int result = bd.inserNotice(sqlSession, b, bf);
+		
+		System.out.println("BoardServiceImpl result : " + result);
 		
 		return result;
 		
+	}
+
+
+	@Override
+	public ArrayList selectNoticeList(BoardNBoardFile bbf) {
+
+		return bd.selectNoticeList(sqlSession, bbf);
 	}
 
 }

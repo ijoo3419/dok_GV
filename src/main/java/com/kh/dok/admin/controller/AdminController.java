@@ -52,7 +52,7 @@ public class AdminController {
 				int listCount = as.countAll(sc);
 				System.out.println("카운트올은? " + listCount);
 				PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-				ArrayList<Member> mlist;
+				ArrayList<Member> mlist; 
 				
 				mlist = as.searchAll(pi,sc);
 				model.addAttribute("mlist",mlist);
@@ -170,5 +170,6 @@ public class AdminController {
 				return "common/errorPage";
 			}
 		}
-		
+
 		}
+
