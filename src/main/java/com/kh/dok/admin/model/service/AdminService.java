@@ -25,11 +25,8 @@ public interface AdminService {
 
 	int countSe(SearchCondition sc) throws MemberSelectListException;
 
-	int countBl() throws BlackMemberSelectListException;
+	int countBl(SearchCondition sc) throws BlackMemberSelectListException;
 
-	ArrayList<ReportHistory> searchBlack(PageInfo pi) throws BlackMemberSelectListException;
-
-	int countMember(SearchCondition sc) throws SearchMemberException;
-
+	ArrayList<ReportHistory> searchBlack(PageInfo pi, SearchCondition sc) throws BlackMemberSelectListException;
 
 }

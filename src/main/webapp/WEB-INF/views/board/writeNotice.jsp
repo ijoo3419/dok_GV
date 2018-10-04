@@ -90,8 +90,7 @@
 					</div>
 					<br>
 					<h2 align="left">2.내용</h2>
-					
-					<!-- Break -->
+				
 					<div class="col-12">
 						<textarea name="bcontent" id="bcontent" placeholder="공지사항의 내용을 입력해주세요." rows="6"></textarea>
 					</div>
@@ -100,7 +99,8 @@
 					<div class="col-12">
 						<input type="file" name="file">
 					</div>
-				<button class="button"><a href="insertNotice.bo">공지등록</a></button>
+				<!-- <button class="button"><a href="insertNotice.bo">공지등록</a></button> -->
+				<button type="submit" class="button">공지등록</button>
 				
 				</div>
 				</form>

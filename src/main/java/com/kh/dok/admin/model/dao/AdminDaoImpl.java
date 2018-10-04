@@ -107,9 +107,9 @@ public class AdminDaoImpl implements AdminDao{
 	
 	//블랙리스트 회원 조회 카운트 메소드
 	@Override
-	public int countBl(SqlSessionTemplate sqlSession) throws BlackMemberSelectListException {
+	public int countBl(SqlSessionTemplate sqlSession,SearchCondition sc) throws BlackMemberSelectListException {
 		
-		int countBl = sqlSession.selectOne("Admin.countBl");
+		int countBl = sqlSession.selectOne("Admin.countBl",sc);
 		
 		if(countBl < 0){
 			throw new BlackMemberSelectListException("블랙리스트 회원 카운트 실패");
@@ -119,50 +119,17 @@ public class AdminDaoImpl implements AdminDao{
 	
 	//블랙리스트 회원 조회 메소드
 	@Override
-	public ArrayList<ReportHistory> searchBlack(SqlSessionTemplate sqlSession, PageInfo pi) throws BlackMemberSelectListException {
+	public ArrayList<ReportHistory> searchBlack(SqlSessionTemplate sqlSession, PageInfo pi,SearchCondition sc) throws BlackMemberSelectListException {
 		
 		int offset = (pi.getCurrentPage()-1)*pi.getLimit();
 		
 		RowBounds rowBound = new RowBounds(offset,pi.getLimit());
 		
-		ArrayList<ReportHistory> blist = (ArrayList)sqlSession.selectList("Admin.searchBlack",null,rowBound); 
+		ArrayList<ReportHistory> blist = (ArrayList)sqlSession.selectList("Admin.searchBlack",sc,rowBound); 
 		if( blist == null){
 			throw new BlackMemberSelectListException("블랙리스트 회원 조회 실패");
 		}
 		
 		return blist;
 	}
-
-	//아이디 조회 카운트 메소드
-	@Override
-	public int countMember(SqlSessionTemplate sqlSession,SearchCondition sc) throws SearchMemberException{
-		
-		int countId = sqlSession.selectOne("Admin.countId",sc);
-		System.out.println("검색 결과 카운트 : " + countId);
-		if(countId < 0){
-			throw new SearchMemberException("회원 검색 실패!");
-		}
-		return countId;
-	}
-
-	@Override
-	public ArrayList<Member> searchMember(SqlSessionTemplate sqlSession, PageInfo pi, SearchCondition sc) throws SearchMemberException {
-		
-		int offset = (pi.getCurrentPage()-1)*pi.getLimit();
-		
-		RowBounds rowBound = new RowBounds(offset,pi.getLimit());
-		
-		ArrayList<Member> mslist = (ArrayList)sqlSession.selectList("Admin.searchMember",sc,rowBound);
-		
-		if(mslist == null){
-			throw new SearchMemberException("회원 검색 실패");
-		}
-		
-		return mslist;
-	}
-
-
-	
-
-	
 }

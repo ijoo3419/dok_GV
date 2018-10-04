@@ -44,11 +44,20 @@
 	
 	<!-- 공지 첨부파일 등록 -->
 	<insert id="insertNoticeFile" parameterType="BoardFile">
-		INSERT INTO BOARDFILE
+		INSERT INTO BOARD_FILE
 		VALUES('BF' || BOARD_FILE_FILE_ID.NEXTVAL, #{board_id}, #{origin_name}, #{edit_name}, #{file_src}, SYSDATE, 1)
 	</insert>
 	
-
+	<!-- <select id="selectNoticeList" resultType="BBFileResultSet" parameterType="BoardNBoardFile">
+		SELECT ROWNUM AS NUM, BOARD.BOARD_ID, MID, BTITLE, BCONTENT, BOARD_SORT, BOARD_DATE, BCOUNT, 
+       	FILE_ID, ORIGIN_NAME, EDIT_NAME, FILE_SRC, FILE_DATE, FILE_LEVEL
+		FROM BOARD, BOARD_FILE
+		WHERE BOARD.BOARD_ID = BOARD_FILE.BOARD_ID
+		AND BOARD.MID = #{mId}
+		AND BSTATUS = 'Y'
+		AND BOARD_DIV = 'BD4'
+		ORDER BY BOARD_DATE DESC;
+	</select> -->
 
 
 
