@@ -54,6 +54,9 @@
 													<th>예매상태</th>
 												</tr>
 											</thead>
+											
+											<c:forEach items="${ bookingHist }" var="bk">
+											
 											<tbody>
 												<tr>
 													<td>[번호 ]</td>
@@ -64,7 +67,8 @@
 													<td>[예매일 ]</td>
 													<td>[예매확인/취소/리뷰]</td>
 												</tr>
-
+											</tbody>
+											</c:forEach>
 										</table>
 									</div>
 			
