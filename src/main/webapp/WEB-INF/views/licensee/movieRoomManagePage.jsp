@@ -13,6 +13,11 @@
 	margin-right:auto;
 	margin-left:auto;
 }
+.addressBox{
+	float:left;
+	width:1000px;
+	margin-bottom:5px;
+}
 span{
 width:40px !important;
 height:40px !important;
@@ -117,15 +122,19 @@ input[type="checkbox"] + label:before, input[type="radio"] + label:before{
 					</header>
 			    
 				<!-- Nav -->
-	<c:set var="mid" value="${ loginUser.mid }" scope="session"/>
-	<nav id="nav">
+				<nav id="nav">
 			<ul class="links">
-				<li><a href="play.li"><fontsize="4">상영등록</font></a></li>
-				<li><a href="theater.li"><font size="4">영화관등록</font></a></li>
-				<li><a href="movieRoom.li"><font size="4">상영관등록</font></a></li>
+				<li><a href="play.li"><font
+						size="4">상영등록</font></a></li>
+				<li><a href="theater.li"><font size="4">영화관
+							등록</font></a></li>
+				<li class="active"><a href="movieRoom.li"><font size="4">상영관
+							등록</font></a></li>
 				<li><a href="stats.li"><font size="4">통계/관리</font></a></li>
-				<li><a href="reservation.li"><font size="4">예매현황</font></a></li>
-				<li><a href="notice.li"><font size="4">공지사항/등록</font></a></li>
+				<li><a href="reservation.li"><font size="4">예매
+							현황</font></a></li>
+				<li><a href="notice.li"><font size="4">공지사항
+							등록</font></a></li>
 				<li><a href="inquire.li"><font size="4">문의내역</font></a></li>
 			</ul>
 		</nav>
@@ -138,6 +147,8 @@ input[type="checkbox"] + label:before, input[type="radio"] + label:before{
 							<!-- Form -->
 									<h2>상영관 등록</h2>
 
+
+	 
 									<form method="post" action="#">
 										<div class="row gtr-uniform">
 											<div class="col-6 col-12-xsmall">
@@ -148,7 +159,8 @@ input[type="checkbox"] + label:before, input[type="radio"] + label:before{
 											<div class="col-12">
 									<h3 align="left">2.상영관 좌석수 등록</h3>
 							
-							<form id="form1" name="form1" method="post" action="<%=request.getContextPath() %>/TestServlet">
+								<h5 style="float:left;">(해당 상영관의 해당하는 좌석을 선택해주세요.)</h5> 
+									<br>
 		<input type='hidden' name='name'> 
 		<input type='hidden' name='table'> 
 		<div id="screen"> 
@@ -173,7 +185,7 @@ input[type="checkbox"] + label:before, input[type="radio"] + label:before{
 			
 			<input type="checkbox" id='ch<%=i %>' class="check" name="bak" value="<%=i%>" 
 			style="width: 1px; height: 1px;"/>&nbsp;&nbsp;&nbsp;
-			<label class="ckBox" for="ch<%=i %>"><span><%= i %></span></label>
+			<label class="ckBox" for="ch<%=i %>"><span></span></label>
 			<%if(i%15 == 0){ %>
 			<br>
 			<% } %>
@@ -181,38 +193,19 @@ input[type="checkbox"] + label:before, input[type="radio"] + label:before{
 	</div>
 	
 		<br><br>
-		<input type='submit' value='전송'>
-	</form>
-	<hr><hr>
-	
-							
-	
 											</div>
 											
 										<div class="col-6 col-12-xsmall">
 								<h3 align="left">3. 주소</h3>
-						<input type="text" name="demo-name" id="demo-name" value="" placeholder="우편번호">
-							<ul class="actions">
-										<li><a href="#" class="button primary small">검색</a></li>
-									</ul>
-								
-								
-									
-						<input type="text" name="demo-name" id="demo-name" value="" placeholder="주소" />
-						<input type="text" name="demo-name" id="demo-name" value="" placeholder="상세주소" />
-								
-											
-											</div>			
-											
-							<h2> 다음 API</h2>
 							<br>
-							
-							<input type="text" id="sample4_postcode" placeholder="우편번호">
-<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+							<div class="addressBox">
+							<input type="text" id="sample4_postcode" placeholder="우편번호" style=" height:64px; width:400px; float:left; margin-bottom:15px;">
+<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" style="margin-left:-380px; margin-top:10px; width:150px; height:45px;"><br> </div>
 <input type="text" id="sample4_roadAddress" placeholder="도로명주소">
 <input type="text" id="sample4_jibunAddress" placeholder="지번주소">
 <span id="guide" style="color:#999"></span>
 				
+											</div>			
 											<br><br><br>
 											<!-- Break -->
 											<div class="col-12">
