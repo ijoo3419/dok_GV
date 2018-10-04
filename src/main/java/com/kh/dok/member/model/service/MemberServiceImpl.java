@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.dok.member.model.dao.MemberDao;
 import com.kh.dok.member.model.exception.LoginException;
+import com.kh.dok.member.model.vo.BookingHistory;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieSumbnail;
@@ -147,6 +148,16 @@ public class MemberServiceImpl implements MemberService{
 		wishlistView = md.selectWishList(sqlSession, msn, m);
 		
 		return wishlistView;
+	}
+	
+	//황이주 예매내역 뷰 출력
+	@Override
+	public ArrayList<BookingHistory> selectBookingHist(Member m) {
+		ArrayList<BookingHistory> bookingHistView = null;
+		
+		bookingHistView = md.selectBookingHist(sqlSession, m);
+		
+		return bookingHistView;
 	}
 
 	
