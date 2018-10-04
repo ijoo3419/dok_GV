@@ -75,24 +75,19 @@ public class AdminServiceImpl implements AdminService{
 	
 	//블랙리스트 회원 카운트 메소드
 	@Override
-	public int countBl() throws BlackMemberSelectListException {
+	public int countBl(SearchCondition sc) throws BlackMemberSelectListException {
 		
-		return ad.countBl(sqlSession);
+		return ad.countBl(sqlSession,sc);
 	}
 
 	//블랙리스트 회원 조회 메소드
 	@Override
-	public ArrayList<ReportHistory> searchBlack(PageInfo pi) throws BlackMemberSelectListException {
+	public ArrayList<ReportHistory> searchBlack(PageInfo pi,SearchCondition sc) throws BlackMemberSelectListException {
 		
-		ArrayList<ReportHistory> rlist = ad.searchBlack(sqlSession,pi);
+		ArrayList<ReportHistory> rlist = ad.searchBlack(sqlSession,pi,sc);
 		return rlist;
 	}
 
-	@Override
-	public int countMember(SearchCondition sc) throws SearchMemberException{
-		
-		return ad.countMember(sqlSession,sc);
-	}
 
 	
 }
