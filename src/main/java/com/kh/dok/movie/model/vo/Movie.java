@@ -41,6 +41,8 @@ public class Movie  implements java.io.Serializable{
 	
 	private String file_src;
 	
+	private int pay_count;
+	
 	//황이주 추가
 	private String mid;
 	
@@ -51,7 +53,7 @@ public class Movie  implements java.io.Serializable{
 			String turning_id, String play_id, String price, Date turning_day, String turning_time, String movieroom_id,
 			String movieroom_name, String play_status, String area_id, String area_name, String area_level,
 			String area_parents, String theater_id, String theater_name, String movie_type, String file_src,
-			String mid) {
+			int pay_count, String mid) {
 		super();
 		this.movie_id = movie_id;
 		this.movie_title = movie_title;
@@ -79,6 +81,7 @@ public class Movie  implements java.io.Serializable{
 		this.theater_name = theater_name;
 		this.movie_type = movie_type;
 		this.file_src = file_src;
+		this.pay_count = pay_count;
 		this.mid = mid;
 	}
 
@@ -184,6 +187,10 @@ public class Movie  implements java.io.Serializable{
 
 	public String getFile_src() {
 		return file_src;
+	}
+
+	public int getPay_count() {
+		return pay_count;
 	}
 
 	public String getMid() {
@@ -294,6 +301,10 @@ public class Movie  implements java.io.Serializable{
 		this.file_src = file_src;
 	}
 
+	public void setPay_count(int pay_count) {
+		this.pay_count = pay_count;
+	}
+
 	public void setMid(String mid) {
 		this.mid = mid;
 	}
@@ -308,8 +319,7 @@ public class Movie  implements java.io.Serializable{
 				+ movieroom_id + ", movieroom_name=" + movieroom_name + ", play_status=" + play_status + ", area_id="
 				+ area_id + ", area_name=" + area_name + ", area_level=" + area_level + ", area_parents=" + area_parents
 				+ ", theater_id=" + theater_id + ", theater_name=" + theater_name + ", movie_type=" + movie_type
-				+ ", file_src=" + file_src + ", mid=" + mid + "]";
+				+ ", file_src=" + file_src + ", pay_count=" + pay_count + ", mid=" + mid + "]";
 	}
-
 	
 }

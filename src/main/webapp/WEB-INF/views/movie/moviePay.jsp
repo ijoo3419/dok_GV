@@ -19,6 +19,10 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
 
+<!-- 아임포트 -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 
 <title>Insert title here</title>
 </head>
@@ -767,6 +771,9 @@ a{
 								var $hiddenTime = $("<input type='hidden' class='hiddenTime' val=''>");
 								var $hiddenDate = $("<input type='hidden' class='hiddenDate' val=''>");
 								var $hiddenRoom = $("<input type='hidden' class='hiddenRoom' val=''>");
+								var $hiddenRoomId = $("<input type='hidden' class='hiddenRoomId' val=''>");
+								var $hiddenTurning = $("<input type='hidden' class='hiddenTurning' val=''>");
+								
 								
 								var $tdOne = $("<td width='180' height='50' align='center'>");
 								var $tdTwo = $("<td width='300' height='50'>");
@@ -782,6 +789,8 @@ a{
 								$hiddenTime.val(data[key].turning_time);
 								$hiddenDate.val(data[key].turning_day);
 								$hiddenRoom.val(data[key].movieroom_name);
+								$hiddenRoomId.val(data[key].movieroom_id);
+								$hiddenTurning.val(data[key].turning_id);
 								
 								$tdOne.append($fontOne);
 								$tdTwo.append($fontFive);
@@ -798,6 +807,9 @@ a{
 								$tr.append($hiddenTime);
 								$tr.append($hiddenDate);
 								$tr.append($hiddenRoom);
+								$tr.append($hiddenRoomId);
+								$tr.append($hiddenTurning);
+								
 								
 								$a.append($tr);
 								
@@ -1103,21 +1115,45 @@ a{
 	<script>
 	$(function(){
 		$('#myModal3 .seatPay-btn .seatPay-btn-right').click(function(){
+			var roomId = $(".hiddenRoomId").val();
+			var turningId = $(".hiddenTurning").val();
+			
+			var count = 0;
+			var money = $('#myModal3 .pay-center').find('h4').eq(1).text();
+			var result = money.replace('원', '');
+			var nMoney = Number(result);
+			
+			alert(result);
+			
+			$.ajax({
+	    		url:"selectPayCount.mo",
+	    		type:"post",
+	    		data:{roomId:roomId,
+	    			  turningId:turningId},
+	    		success:function(data){
+	    			count = data;
+	    		},
+	    		error:function(data){
+	    			console.log(data);
+	    		}
+	    	});
+			
 			var answer = window.confirm("환불 후 재결제는 불가능합니다. 계속 진행하시겠습니까?");
-			var count = '<%= n.getEnterCount() %>';
-			var parsonnel ='<%= n.getPersonnel() %>';
+			var parsonnel = 8;
+			
+			var movieTitle = $(".seatPay").find("tr").eq(1).find('td').text();
 			
 			if(answer==true){
-				if(parsonnel < count){
+				if(count > parsonnel){
 					var answer2 = window.confirm("정원이 초과되어 신청이 불가합니다");
-					
-				}else{
-					if(<%=n.getPrice()%> != 0){
+				}
+				else{
+					if(nMoney != 0){
 		    	 		cash();
 		     		}else{
-		    			var contextPath = '<%=request.getContextPath()%>';
+		    			<%-- var contextPath = '<%=request.getContextPath()%>';
 		   				var pId = "imp_"+new Date().getTime() ;
-		    			var userNum = '<%=loginUser.getUserNumber()%>';
+		    			var userNum = '박지용';
 		    			var nuriNum = '<%=n.getNuriNum()%>';
 		    			var endDate ='<%=n.getEndDate()%>';
 						var loc = contextPath + '/payment.pms?imp=' + pId + "&userNum="
@@ -1125,30 +1161,28 @@ a{
 								+ endDate;
 							console.log(loc);
 
-							location.href = loc;
+							location.href = loc; --%>
 					}
-				}
+			   }
 			}else{
 				alert("신청이 취소되었습니다.");
-				}
-		}
+			}
 			
-
 			function cash() {
 				var IMP = window.IMP; // 생략가능
-				IMP.init('imp43582013'); // 가맹점 식별 코드
+				IMP.init('imp05109083'); // 가맹점 식별 코드
 
 				IMP.request_pay({
 					pg : 'inicis', // 결제방식
 					pay_method : 'card', // 결제 수단
 					merchant_uid : 'merchant_' + new Date().getTime(),
-					name : '주문명: 결제 테스트', // order 테이블에 들어갈 주문명 혹은 주문 번호
-					amount : '<%=n.getPrice()%>',   // 결제 금액
-		           buyer_email : '<%=loginUser.getUserEmail()%>',// 구매자 email
-		          buyer_name :  '<%=loginUser.getUserName()%>',   // 구매자 이름
-		           buyer_tel :  '<%=loginUser.getPhone()%>',   // 구매자 전화번호
-		           buyer_addr :  '<%=loginUser.getAddress()%>',   // 구매자 주소
-		           buyer_postcode :  '123-456',   // 구매자 우편번호
+					name : movieTitle , // order 테이블에 들어갈 주문명 혹은 주문 번호
+					amount : '100',   // 결제 금액
+		            buyer_email : 'wldyd2214@naver.com',// 구매자 email
+		            buyer_name :  '박지용',   // 구매자 이름
+		            buyer_tel :  '010-3392-5787',   // 구매자 전화번호
+		            buyer_addr :  '연남동',   // 구매자 주소
+		            buyer_postcode :  '123-456',   // 구매자 우편번호
 		       }, function(rsp) {
 		       if ( rsp.success ) { // 성공시
 		          var msg = '결제가 완료되었습니다.';
@@ -1157,12 +1191,12 @@ a{
 		          msg += '결제 금액 : ' + rsp.paid_amount;
 		          msg += '카드 승인번호 : ' + rsp.apply_num;
 		          //console.log();
-		          var contextPath = '<%= request.getContextPath() %>';
-		          var uid = rsp.imp_uid;
+		          var contextPath = '<%=request.getContextPath()%>';
+		          <%-- var uid = rsp.imp_uid;
 		          var userNum = '<%=loginUser.getUserNumber()%>';
 		          var nuriNum = '<%=n.getNuriNum()%>';
 		          var cardNum = rsp.apply_num;
-		          var endDate ='<%=n.getEndDate()%>'
+		          var endDate ='<%=n.getEndDate()%>' --%>
 		          var loc = contextPath + '/payment.pms?imp=' + uid + "&userNum=" + userNum +"&nuriNum=" + nuriNum +"&endDate=" + endDate; 
 		          console.log(loc);
 		    

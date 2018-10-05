@@ -125,5 +125,16 @@ public class MovieServiceImpl implements MovieService{
 
 
 
+	//박지용 예매 수 가져오기
+	@Override
+	public int selectPayCount(Movie v) {
+		
+		int count  = md.selectPayCount(sqlSession, v);
+		
+		return count;
+	}
+
+
+
 
 }

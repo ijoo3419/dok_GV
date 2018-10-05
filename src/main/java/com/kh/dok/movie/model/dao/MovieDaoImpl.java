@@ -118,5 +118,14 @@ public class MovieDaoImpl implements MovieDao{
 		System.out.println("랭크3: " + movieRank3);
 		return movieRank3;
 	}
+
+	//박지용 예매 수 가져오기
+	@Override
+	public int selectPayCount(SqlSessionTemplate sqlSession, Movie v) {
+		
+		int count = sqlSession.selectOne("Movie.selectPayCount", v);
+		
+		return count;
+	}
 	
 }

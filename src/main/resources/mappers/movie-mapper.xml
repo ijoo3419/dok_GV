@@ -73,6 +73,10 @@
 		<id property="turning_day" column="TURNING_DAY"/>
 	</resultMap>
 	
+	<resultMap type="Movie" id="movieResultSetFive">
+		<id property="pay_count" column="COUNT(*)"/>
+	</resultMap>
+	
 	<!-- 박지용 영화 리스트를 가져오는 쿼리문 -->
 	<select id="selectMovieList" resultMap="movieResultSetTwo" parameterType="Movie">
 		SELECT DISTINCT MOVIE.MOVIE_ID, MOVIE.MOVIE_TITLE, FILE_SRC, BOARD_DATE
@@ -112,6 +116,19 @@
 		AND PLAY_STATUS = 'Y' 
 		AND AREA.AREA_ID = #{area_id}
 		AND MOVIE.MOVIE_ID = #{movie_id}
+	</select>
+	
+	<!-- 박지용 날짜 리스트를 가져오는 쿼리문 -->
+	<select id="selectPayCount" parameterType="Movie" resultType="_int">
+		SELECT COUNT(*)
+		FROM PLAY, TURNING, SEAT, RESERVATION, PAY
+		WHERE PLAY.PLAY_ID = TURNING.PLAY_ID
+		AND TURNING.TURNING_ID = SEAT.TURNING_ID
+		AND SEAT.SEAT_ID = RESERVATION.SEAT_ID
+		AND RESERVATION.RESERVATION_ID = PAY.RESERVATION_ID
+		AND PAY_STATUS = 'PAY'
+		AND SEAT.MOVIEROOM_ID = #{movieroom_id}
+		AND TURNING.TURNING_ID = #{turning_id}
 	</select>
 
 

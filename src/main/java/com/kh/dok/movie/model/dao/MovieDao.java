@@ -39,5 +39,8 @@ public interface MovieDao {
 	ArrayList<MovieSumbnail> selectMovieRank2(SqlSessionTemplate sqlSession, MovieSumbnail msn);
 	//이진희 영화순위3
 	ArrayList<MovieSumbnail> selectMovieRank3(SqlSessionTemplate sqlSession, MovieSumbnail msn);
+
+	//박지용 예매 수 가져오기
+	int selectPayCount(SqlSessionTemplate sqlSession, Movie v);
 	
 }
