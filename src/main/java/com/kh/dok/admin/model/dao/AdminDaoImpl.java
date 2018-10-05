@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.dok.admin.model.exception.BlackMemberSelectListException;
 import com.kh.dok.admin.model.exception.MemberSelectListException;
 import com.kh.dok.admin.model.exception.SearchMemberException;
+import com.kh.dok.admin.model.exception.UploadException;
 import com.kh.dok.admin.model.vo.ReportHistory;
 import com.kh.dok.admin.model.vo.SearchCondition;
 import com.kh.dok.board.model.vo.BoardFile;
@@ -135,29 +136,47 @@ public class AdminDaoImpl implements AdminDao{
 	}
 
 	@Override
-	public int insertFile(SqlSessionTemplate sqlSession, BoardFile adFile) {
-		System.out.println(adFile);
-		System.out.println("ad");
-		return sqlSession.insert("Admin.insertFile", adFile);
+	public int insertFile(SqlSessionTemplate sqlSession, BoardFile adFile) throws UploadException {
+		int insert = sqlSession.insert("Admin.insertFile", adFile);
+		
+		if(insert < 1){
+			throw new UploadException("메인 슬라이드 업로드 실패");
+		}
+		
+		return insert;
 	}
 
 	@Override
-	public int updateFile(SqlSessionTemplate sqlSession) {
+	public int updateFile(SqlSessionTemplate sqlSession,BoardFile adFile) throws UploadException {
+		int update = sqlSession.update("Admin.updateFile",adFile);
 		
-		return sqlSession.update("Admin.updateFile");
+		if(update < 1){
+			throw new UploadException("메인 슬라이드 업로드 실패");
+		}
+		
+		return update;
 	}
 	
 	//슬라이드 사진 파일 삭제용 메소드
 	@Override
-	public int deleteFile(SqlSessionTemplate sqlSession) {
+	public int deleteFile(SqlSessionTemplate sqlSession) throws UploadException {
+		int delete = sqlSession.delete("Admin.deleteFile");
 		
-		return sqlSession.delete("Admin.deleteFile");
+		if(delete < 1){
+			throw new UploadException("메인 슬라이드 업로드 실패");
+		}
+		
+		return delete;
 	}
-
+	
+	//슬라이드 사진 select 메소드
 	@Override
-	public ArrayList<BoardFile> selectFile(SqlSessionTemplate sqlSession,BoardFile adFile) {
-		System.out.println("여기까지 왔어");
+	public ArrayList<BoardFile> selectFile(SqlSessionTemplate sqlSession) throws UploadException {
 		ArrayList<BoardFile> bf = (ArrayList)sqlSession.selectList("Admin.selectFile");
-		return (ArrayList)sqlSession.selectList("Admin.selectFile");
+		if(bf == null){
+			throw new UploadException("메인 슬라이드 업로드 실패");
+		}
+		
+		return bf;
 	}
 }

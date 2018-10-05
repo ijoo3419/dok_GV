@@ -197,6 +197,7 @@
 	<select id="selectFile" resultMap="searchBoardFileSet">
 		SELECT *
 		FROM BOARD_FILE
+		ORDER BY FILE_LEVEL
 	</select>
 	<!-- 검색 결과 조회 카운트 인소진 -->
 	<!-- <select id="countId" resultType="_int">

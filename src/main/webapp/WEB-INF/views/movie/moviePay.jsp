@@ -1112,7 +1112,7 @@ a{
 			</div>
 		</div>
 	</div>
-	<script>
+	<%-- <script>
 	$(function(){
 		$('#myModal3 .seatPay-btn .seatPay-btn-right').click(function(){
 			var roomId = $(".hiddenRoomId").val();
@@ -1211,7 +1211,7 @@ a{
 		    });
 			}
 		});
-	});
+	}); --%>
 	</script>
 	<!-- 4th modal -->
 	<div class="modal" id="myModal4" data-backdrop="static"

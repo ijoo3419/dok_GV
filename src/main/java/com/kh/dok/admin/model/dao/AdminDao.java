@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import com.kh.dok.admin.model.exception.BlackMemberSelectListException;
 import com.kh.dok.admin.model.exception.MemberSelectListException;
 import com.kh.dok.admin.model.exception.SearchMemberException;
+import com.kh.dok.admin.model.exception.UploadException;
 import com.kh.dok.admin.model.vo.ReportHistory;
 import com.kh.dok.admin.model.vo.SearchCondition;
 import com.kh.dok.board.model.vo.BoardFile;
@@ -32,11 +33,11 @@ public interface AdminDao {
 
 	ArrayList<ReportHistory> searchBlack(SqlSessionTemplate sqlSession, PageInfo pi, SearchCondition sc) throws BlackMemberSelectListException;
 
-	int insertFile(SqlSessionTemplate sqlSession, BoardFile adFile);
+	int insertFile(SqlSessionTemplate sqlSession, BoardFile adFile) throws UploadException;
 
-	int updateFile(SqlSessionTemplate sqlSession);
+	int updateFile(SqlSessionTemplate sqlSession, BoardFile adFile) throws UploadException;
 
-	int deleteFile(SqlSessionTemplate sqlSession);
+	int deleteFile(SqlSessionTemplate sqlSession) throws UploadException;
 
-	ArrayList<BoardFile> selectFile(SqlSessionTemplate sqlSession, BoardFile adFile);
+	ArrayList<BoardFile> selectFile(SqlSessionTemplate sqlSession) throws UploadException;
 }
