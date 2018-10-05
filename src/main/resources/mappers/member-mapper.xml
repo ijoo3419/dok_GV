@@ -129,18 +129,21 @@
 		WHERE EMAIL = '${email}'
 	</update>
 	
+	<!-- 위시리스트 COUNT -->
 	<select id="countWish">
 	SELECT NVL(COUNT(*),0)
     FROM WISHLIST
     WHERE MID = #{ mid }
 	</select>
 	
+	<!-- 본 영화 COUNT -->
 	<select id="countWatched">
 	SELECT NVL(COUNT(*),0)
     FROM RESERVATION
     WHERE MID = #{ mid }
 	</select>
 	
+	<!-- 내가 쓴 리뷰 COUNT -->
 	<select id="countReview">
 	SELECT NVL(COUNT(*),0)
     FROM 

@@ -34,6 +34,7 @@ import com.kh.dok.member.model.exception.LoginException;
 import com.kh.dok.member.model.service.MemberService;
 import com.kh.dok.member.model.vo.BookingHistory;
 import com.kh.dok.member.model.vo.Member;
+import com.kh.dok.member.model.vo.MyReply;
 import com.kh.dok.movie.model.service.MovieService;
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieSumbnail;
@@ -59,8 +60,6 @@ public class MemberController {
 	   
 	   model.addAttribute("bookingHistView", bookingHistView);
 	   
-	   System.out.println("djdodo" + bookingHistView);
-	   
       return "member/mypage_main";
    }
    
@@ -72,11 +71,6 @@ public class MemberController {
    @RequestMapping("ask.me")
    public String askView(){
       return "member/ask";
-   }
-
-   @RequestMapping("reviews.me")
-   public String reviewsView(){
-      return "member/reviews";
    }
    
    @RequestMapping("theaterAdd.me")
@@ -410,5 +404,18 @@ public class MemberController {
 		
 	    return "member/bookingHist";
 	 }
+	 
+	 //내가 쓴 리뷰 출력
+	  @RequestMapping("reviews.me")
+	  public String reviewsView(Model model, HttpServletRequest request){
+		  
+		  Member m = (Member)request.getSession().getAttribute("loginUser");
+		  
+		  ArrayList<MyReply> reviewsView = ms.selectReply(m);
+		  
+		  model.addAttribute("reviewsView", reviewsView);
+
+	     return "member/reviews";
+	  }
 
 }

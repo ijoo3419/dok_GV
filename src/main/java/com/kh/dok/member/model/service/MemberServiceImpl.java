@@ -12,6 +12,7 @@ import com.kh.dok.member.model.dao.MemberDao;
 import com.kh.dok.member.model.exception.LoginException;
 import com.kh.dok.member.model.vo.BookingHistory;
 import com.kh.dok.member.model.vo.Member;
+import com.kh.dok.member.model.vo.MyReply;
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieSumbnail;
 
@@ -158,6 +159,16 @@ public class MemberServiceImpl implements MemberService{
 		bookingHistView = md.selectBookingHist(sqlSession, m);
 		
 		return bookingHistView;
+	}
+	
+	//황이주 내가 쓴 리뷰 출력
+	@Override
+	public ArrayList<MyReply> selectReply(Member m) {
+		ArrayList<MyReply> reviewsView = null;
+		
+		reviewsView = md.selectMyReply(sqlSession, m);
+		
+		return reviewsView;
 	}
 
 	

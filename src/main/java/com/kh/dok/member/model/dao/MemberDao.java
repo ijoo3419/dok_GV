@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.dok.member.model.vo.BookingHistory;
 import com.kh.dok.member.model.vo.Member;
+import com.kh.dok.member.model.vo.MyReply;
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieSumbnail;
 
@@ -39,6 +40,8 @@ public interface MemberDao {
 	ArrayList<MovieSumbnail> selectWishList(SqlSessionTemplate sqlSession, MovieSumbnail msn, Member m);
 
 	ArrayList<BookingHistory> selectBookingHist(SqlSessionTemplate sqlSession, Member m);
+
+	ArrayList<MyReply> selectMyReply(SqlSessionTemplate sqlSession, Member m);
 
      
 }
