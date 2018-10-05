@@ -9,10 +9,11 @@ public class MovieRoom implements java.io.Serializable{
 	private String theaterId;
 	private String movieRoomName;
 	private String movieRoomAddress;
+	
 	private String address1;
 	private String address2;
 	private String address3;
-	
+	private String mid;
 	
 	public MovieRoom(){}
 
@@ -87,8 +88,18 @@ public class MovieRoom implements java.io.Serializable{
 	}
 
 
+	public String getMid() {
+		return mid;
+	}
+
+
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
+
+
 	public MovieRoom(String movieId, String theaterId, String movieRoomName, String movieRoomAddress, String address1,
-			String address2, String address3) {
+			String address2, String address3, String mid) {
 		super();
 		this.movieId = movieId;
 		this.theaterId = theaterId;
@@ -97,6 +108,7 @@ public class MovieRoom implements java.io.Serializable{
 		this.address1 = address1;
 		this.address2 = address2;
 		this.address3 = address3;
+		this.mid = mid;
 	}
 
 
@@ -104,9 +116,10 @@ public class MovieRoom implements java.io.Serializable{
 	public String toString() {
 		return "MovieRoom [movieId=" + movieId + ", theaterId=" + theaterId + ", movieRoomName=" + movieRoomName
 				+ ", movieRoomAddress=" + movieRoomAddress + ", address1=" + address1 + ", address2=" + address2
-				+ ", address3=" + address3 + "]";
+				+ ", address3=" + address3 + ", mid=" + mid + "]";
 	}
 
 
+	
 	
 }

@@ -18,6 +18,12 @@ public class LicenseeDaoImpl implements LicenseeDao{
 	public int insertMovieRoom(SqlSessionTemplate sqlSession, MovieRoom mr) {
 		return sqlSession.insert("MovieRoom.insertMovieRoom", mr);
 	}
+
+	@Override
+	public String searchTheaterId(SqlSessionTemplate sqlSession, Cinema cm) {
+		String theaterId = sqlSession.selectOne("cinema.searchTheaterId", cm);
+		return theaterId;
+	}
 	
 
 }
