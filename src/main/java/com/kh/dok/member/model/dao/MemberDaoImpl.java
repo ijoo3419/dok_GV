@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.dok.member.model.vo.BookingHistory;
 import com.kh.dok.member.model.vo.Member;
+import com.kh.dok.member.model.vo.MyReply;
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieSumbnail;
 
@@ -124,6 +125,17 @@ public class MemberDaoImpl implements MemberDao{
 		bookingHistView = (ArrayList)sqlSession.selectList("BookingHistory.selectBookingHist", m);
 		
 		return bookingHistView;
+	}
+
+	//황이주 내가 쓴 리뷰 조회
+	@Override
+	public ArrayList<MyReply> selectMyReply(SqlSessionTemplate sqlSession, Member m) {
+		
+		ArrayList<MyReply> reviewsView = null;
+		
+		reviewsView = (ArrayList)sqlSession.selectList("MyReply.selectReviews", m);
+		
+		return reviewsView;
 	}
 
 
