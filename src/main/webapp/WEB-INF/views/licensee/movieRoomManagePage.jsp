@@ -149,12 +149,17 @@ input[type="checkbox"] + label:before, input[type="radio"] + label:before{
 
 
 	 
-									<form method="post" action="#">
+									<form method="post" action="movieRoomInsert.li">
 										<div class="row gtr-uniform">
 											<div class="col-6 col-12-xsmall">
+											<%-- 	<input type="hidden" name="theater_id" value="${ requestScope.loginUser.theater_id }"> --%>
+								
+											
 										<h3 align="left">1.상영관 이름</h3>
-												<input type="text" name="demo-name" id="demo-name" value="" placeholder="예)1관, 2관" />
+												<input type="text" name="movieRoomName" id="demo-name" value="" placeholder="예)1관, 2관" />
 											</div>
+											
+											
 											
 											<div class="col-12">
 									<h3 align="left">2.상영관 좌석수 등록</h3>
@@ -167,17 +172,7 @@ input[type="checkbox"] + label:before, input[type="radio"] + label:before{
 			<h3>screen</h3>
 		</div>
 		<div id="checkBox">
-	<%-- 	<%for(int i=97; i<=111; i++){ %>
 		<br>
-		<input type="checkbox" id='ch<%=i %>' class="check" name="bak" value="<%=(char)i + "" + i %>" />
-		<label class="ckBox" for="ch<%=i %>"><span><%= i %></span></label>
-		
-			<%for(int j=1; j<=14; j++){ %>
-			<input type="checkbox" id='ch<%=j %>' class="check" name="bak" value="<%=j%>" />
-			<label class="ckBox" for="ch<%=j %>"><span><%= j %></span></label>
-			<% } %>
-		<% } %>
- --%><br>
 	 
 			
 	 	<%for(int i=1; i<(15*15)+1; i++){ %>
@@ -199,10 +194,10 @@ input[type="checkbox"] + label:before, input[type="radio"] + label:before{
 								<h3 align="left">3. 주소</h3>
 							<br>
 							<div class="addressBox">
-							<input type="text" id="sample4_postcode" placeholder="우편번호" style=" height:64px; width:400px; float:left; margin-bottom:15px;">
+							<input type="text" id="sample4_postcode" name="address1" placeholder="우편번호" style=" height:64px; width:400px; float:left; margin-bottom:15px;">
 <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" style="margin-left:-380px; margin-top:10px; width:150px; height:45px;"><br> </div>
-<input type="text" id="sample4_roadAddress" placeholder="도로명주소">
-<input type="text" id="sample4_jibunAddress" placeholder="지번주소">
+<input type="text" id="sample4_roadAddress" name="address2" placeholder="도로명주소">
+<input type="text" id="sample4_jibunAddress" name="address3" placeholder="지번주소">
 <span id="guide" style="color:#999"></span>
 				
 											</div>			

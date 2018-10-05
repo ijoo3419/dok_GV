@@ -2,8 +2,10 @@ package com.kh.dok.movie.model.vo;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Repository;
 
-public class Movie {
+@Repository
+public class Movie  implements java.io.Serializable{
 	private String movie_id;
 	private String movie_title;
 	private String movie_etitle;

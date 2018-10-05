@@ -2,7 +2,9 @@ package com.kh.dok.movie.model.vo;
 
 import java.sql.Date;
 
-public class MovieSumbnail {
+import org.springframework.stereotype.Repository;
+@Repository
+public class MovieSumbnail  implements java.io.Serializable{
 	private String movie_id;
 	private String movie_title;
 	private String movie_etitle;
