@@ -45,5 +45,8 @@ public interface MovieService {
 		//이진희 영화순위3
 		ArrayList<MovieSumbnail> selectMovieRank3(MovieSumbnail msn);
 
+		//박지용 예매 수 가져오기
+		int selectPayCount(Movie v);
+
 
 }
