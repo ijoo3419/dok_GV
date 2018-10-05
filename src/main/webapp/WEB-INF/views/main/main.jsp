@@ -148,31 +148,25 @@ to {
 <body>
 	<c:import url="../common/headBar.jsp" />
 	<div class="slideshow-container">
-		<form action="showfile.ad" method="post" enctype="multipart/form-data">
 			<div class="mySlides fade">
 				<div class="numbertext">1 / 4</div>
-				<img src="${bf.file_src }/${bf.edit_name}"
-					style="width: 100%; height: 400px;">
+				<img src="${contextPath }/resources/uploadFiles/${bf.get(0).edit_name}" style="width: 100%; height: 400px;">
 			</div>
 
 			<div class="mySlides fade">
 				<div class="numbertext">2 / 4</div>
-				<img src="${bf.file_src }/${bf.edit_name}"
-					style="width: 100%; height: 400px;">
+				<img src="${contextPath }/resources/uploadFiles/${bf.get(1).edit_name}" style="width: 100%; height: 400px;">
 			</div>
 
 			<div class="mySlides fade">
 				<div class="numbertext">3 / 4</div>
-				<img src="${bf.file_src }/${bf.edit_name}"
-					style="width: 100%; height: 400px;">
+				<img src="${contextPath }/resources/uploadFiles/${bf.get(2).edit_name}" style="width: 100%; height: 400px;">
 			</div>
 
 			<div class="mySlides fade">
 				<div class="numbertext">4 / 4</div>
-				<img src="${bf.file_src }/${bf.edit_name}"
-					style="width: 100%; height: 400px;">
+				<img src="${contextPath }/resources/uploadFiles/${bf.get(3).edit_name}" style="width: 100%; height: 400px;">
 			</div>
-		</form>
 	</div>
 	<br>
 

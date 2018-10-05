@@ -205,7 +205,7 @@ a {
 	<div class="headerd">
 		<div class="logo">
 		
-			<a href="main.co"><img src="${contextPath }/resources/images/logo.jpg" height="40px"
+			<a href="upload.ad?gm=main"><img src="${contextPath }/resources/images/logo.jpg" height="40px"
 				width="150px"></a> <!-- 로고를 눌르면 메인으로 이동 -->
 		</div>
 		<c:if test="${ empty sessionScope.loginUser }">

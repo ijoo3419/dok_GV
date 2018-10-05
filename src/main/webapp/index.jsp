@@ -10,6 +10,9 @@
 <body>
 	<h1>인덱스 페이지</h1>
 	<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application"/>
-	<jsp:forward page="WEB-INF/views/main/main.jsp"/>
+	<c:url var="main" value="upload.ad">
+		<c:param name="gm" value="main"/>
+	</c:url>
+	<jsp:forward page="${main }"/>
 </body>
 </html>

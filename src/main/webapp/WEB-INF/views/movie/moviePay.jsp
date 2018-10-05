@@ -1100,7 +1100,7 @@ a{
 			</div>
 		</div>
 	</div>
-	<script>
+	<%-- <script>
 	$(function(){
 		$('#myModal3 .seatPay-btn .seatPay-btn-right').click(function(){
 			var answer = window.confirm("환불 후 재결제는 불가능합니다. 계속 진행하시겠습니까?");
@@ -1177,7 +1177,7 @@ a{
 		    });
 			}
 		});
-	});
+	}); --%>
 	</script>
 	<!-- 4th modal -->
 	<div class="modal" id="myModal4" data-backdrop="static"

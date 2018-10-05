@@ -11,6 +11,7 @@ import com.kh.dok.admin.model.dao.AdminDao;
 import com.kh.dok.admin.model.exception.BlackMemberSelectListException;
 import com.kh.dok.admin.model.exception.MemberSelectListException;
 import com.kh.dok.admin.model.exception.SearchMemberException;
+import com.kh.dok.admin.model.exception.UploadException;
 import com.kh.dok.admin.model.vo.ReportHistory;
 import com.kh.dok.admin.model.vo.SearchCondition;
 import com.kh.dok.board.model.vo.BoardFile;
@@ -90,29 +91,29 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public int insertFile(BoardFile adFile) {
-		System.out.println("as");
+	public int insertFile(BoardFile adFile) throws UploadException {
+		
 		int af = ad.insertFile(sqlSession,adFile);
 		return af;
 	}
 
 	@Override
-	public int updateFile() {
+	public int updateFile(BoardFile adFile) throws UploadException {
 		
-		return ad.updateFile(sqlSession);
+		return ad.updateFile(sqlSession,adFile);
 	}
 	
 	//파일 삭제용 메소드
 	@Override
-	public int deleteFile() {
+	public int deleteFile() throws UploadException {
 		
 		return ad.deleteFile(sqlSession);
 	}
 
 	@Override
-	public ArrayList<BoardFile> selectFile(BoardFile adFile) {
+	public ArrayList<BoardFile> selectFile() throws UploadException {
 		
-		return ad.selectFile(sqlSession,adFile);
+		return ad.selectFile(sqlSession);
 	}
 
 

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import com.kh.dok.admin.model.exception.BlackMemberSelectListException;
 import com.kh.dok.admin.model.exception.MemberSelectListException;
 import com.kh.dok.admin.model.exception.SearchMemberException;
+import com.kh.dok.admin.model.exception.UploadException;
 import com.kh.dok.admin.model.vo.ReportHistory;
 import com.kh.dok.admin.model.vo.SearchCondition;
 import com.kh.dok.board.model.vo.BoardFile;
@@ -30,12 +31,12 @@ public interface AdminService {
 
 	ArrayList<ReportHistory> searchBlack(PageInfo pi, SearchCondition sc) throws BlackMemberSelectListException;
 
-	int insertFile(BoardFile adFile);
+	int insertFile(BoardFile adFile) throws UploadException;
 
-	int updateFile();
+	int updateFile(BoardFile adFile) throws UploadException;
 
-	int deleteFile();
+	int deleteFile() throws UploadException;
 
-	ArrayList<BoardFile> selectFile(BoardFile adFile);
+	ArrayList<BoardFile> selectFile() throws UploadException;
 
 }
