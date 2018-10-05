@@ -7,5 +7,7 @@ public interface LicenseeService {
 
 	int insertTheater(Cinema cm);
 
-	int insertMovieRoom(MovieRoom mr); 
+	int insertMovieRoom(MovieRoom mr);
+
+	String searchTheaterId(Cinema cm); 
 }

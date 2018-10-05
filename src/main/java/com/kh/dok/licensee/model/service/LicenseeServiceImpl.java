@@ -29,6 +29,13 @@ public class LicenseeServiceImpl implements LicenseeService{
 		
 		return ld.insertMovieRoom(sqlSession, mr);
 	}
+
+
+	@Override
+	public String searchTheaterId(Cinema cm) {
+		String theaterId = ld.searchTheaterId(sqlSession, cm);
+		return theaterId;
+	}
 	
 	
 	

@@ -91,14 +91,23 @@ public class LicenseeController {
 	
 	//정태 상영관 등록(엑셀 파일 전)
 	@RequestMapping(value="movieRoomInsert.li")
-	public String insertMovieRoom(Model model, MovieRoom mr, 
+	public String insertMovieRoom(Model model, MovieRoom mr, Cinema cm,
 								HttpServletRequest request){
 		
+		System.out.println("controller mr = " + mr);
+		System.out.println(mr.getMid());
 		
-		mr.setMovieRoomAddress(mr.getAddress1()+mr.getAddress2()+mr.getAddress3()); 
+		cm.setTheaterId(ls.searchTheaterId(cm));	
+		
+		System.out.println("cm.theater_id 는? " + cm.getTheaterId());
+		
+		mr.setTheaterId(cm.getTheaterId());
+		System.out.println("mr.getTheaterId 값은 ?? " + mr.getTheaterId());
+		mr.setMovieRoomAddress(mr.getAddress1()+","+mr.getAddress2()+","+mr.getAddress3()); 
 		System.out.println(mr.getMovieRoomAddress());
-		/*System.out.println("Controller mr : " + mr);*/
 		int result = ls.insertMovieRoom(mr);
+		
+		//int result2 = ls.se
 		
 		if(result > 0){
 			return "licensee/movieRoomManagePage";

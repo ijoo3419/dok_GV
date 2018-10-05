@@ -10,5 +10,7 @@ public interface LicenseeDao {
 	int insertTheater(SqlSessionTemplate sqlSession, Cinema cm);
 
 	int insertMovieRoom(SqlSessionTemplate sqlSession, MovieRoom mr);
+
+	String searchTheaterId(SqlSessionTemplate sqlSession, Cinema cm);
 	
 }

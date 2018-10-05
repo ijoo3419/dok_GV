@@ -139,7 +139,6 @@ input[type="checkbox"] + label:before, input[type="radio"] + label:before{
 			</ul>
 		</nav>
 
-				<!-- Main -->
 					<div id="main">
 
 						<!-- Featured Post -->
@@ -147,12 +146,12 @@ input[type="checkbox"] + label:before, input[type="radio"] + label:before{
 							<!-- Form -->
 									<h2>상영관 등록</h2>
 
-
+		
 	 
 									<form method="post" action="movieRoomInsert.li">
 										<div class="row gtr-uniform">
 											<div class="col-6 col-12-xsmall">
-											<%-- 	<input type="hidden" name="theater_id" value="${ requestScope.loginUser.theater_id }"> --%>
+											 	<input type="hidden" name="mid" value="${ requestScope.loginUser.mid }"> 
 								
 											
 										<h3 align="left">1.상영관 이름</h3>
