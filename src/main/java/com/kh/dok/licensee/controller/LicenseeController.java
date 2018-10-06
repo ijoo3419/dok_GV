@@ -97,17 +97,13 @@ public class LicenseeController {
 		System.out.println("controller mr = " + mr);
 		System.out.println(mr.getMid());
 		
-		cm.setTheaterId(ls.searchTheaterId(cm));	
 		
-		System.out.println("cm.theater_id 는? " + cm.getTheaterId());
 		
-		mr.setTheaterId(cm.getTheaterId());
-		System.out.println("mr.getTheaterId 값은 ?? " + mr.getTheaterId());
 		mr.setMovieRoomAddress(mr.getAddress1()+","+mr.getAddress2()+","+mr.getAddress3()); 
 		System.out.println(mr.getMovieRoomAddress());
 		int result = ls.insertMovieRoom(mr);
 		
-		//int result2 = ls.se
+		
 		
 		if(result > 0){
 			return "licensee/movieRoomManagePage";

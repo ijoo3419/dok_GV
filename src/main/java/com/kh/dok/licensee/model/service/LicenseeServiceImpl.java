@@ -31,11 +31,6 @@ public class LicenseeServiceImpl implements LicenseeService{
 	}
 
 
-	@Override
-	public String searchTheaterId(Cinema cm) {
-		String theaterId = ld.searchTheaterId(sqlSession, cm);
-		return theaterId;
-	}
 	
 	
 	

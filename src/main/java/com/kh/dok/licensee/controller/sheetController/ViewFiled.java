@@ -1,4 +1,5 @@
-/*package com.test.controller;
+/*package com.kh.dok.licensee.controller.sheetController;
+
 
 import java.io.IOException;
 
@@ -55,5 +56,4 @@ public class ViewFiled extends HttpServlet {
 		doGet(request, response);
 	}
 
-}
-*/
+}*/
