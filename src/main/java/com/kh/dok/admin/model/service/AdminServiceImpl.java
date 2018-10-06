@@ -98,18 +98,19 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public int updateFile(BoardFile adFile) throws UploadException {
+	public int updateFile(BoardFile adFile){
 		
 		return ad.updateFile(sqlSession,adFile);
 	}
 	
 	//파일 삭제용 메소드
 	@Override
-	public int deleteFile() throws UploadException {
+	public int deleteFile(){
 		
 		return ad.deleteFile(sqlSession);
 	}
-
+	
+	//파일 select 메소드
 	@Override
 	public ArrayList<BoardFile> selectFile() throws UploadException {
 		

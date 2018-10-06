@@ -147,24 +147,18 @@ public class AdminDaoImpl implements AdminDao{
 	}
 
 	@Override
-	public int updateFile(SqlSessionTemplate sqlSession,BoardFile adFile) throws UploadException {
+	public int updateFile(SqlSessionTemplate sqlSession,BoardFile adFile){
 		int update = sqlSession.update("Admin.updateFile",adFile);
 		
-		if(update < 1){
-			throw new UploadException("메인 슬라이드 업로드 실패");
-		}
 		
 		return update;
 	}
 	
 	//슬라이드 사진 파일 삭제용 메소드
 	@Override
-	public int deleteFile(SqlSessionTemplate sqlSession) throws UploadException {
+	public int deleteFile(SqlSessionTemplate sqlSession){
 		int delete = sqlSession.delete("Admin.deleteFile");
 		
-		if(delete < 1){
-			throw new UploadException("메인 슬라이드 업로드 실패");
-		}
 		
 		return delete;
 	}
@@ -173,9 +167,7 @@ public class AdminDaoImpl implements AdminDao{
 	@Override
 	public ArrayList<BoardFile> selectFile(SqlSessionTemplate sqlSession) throws UploadException {
 		ArrayList<BoardFile> bf = (ArrayList)sqlSession.selectList("Admin.selectFile");
-		if(bf == null){
-			throw new UploadException("메인 슬라이드 업로드 실패");
-		}
+
 		
 		return bf;
 	}

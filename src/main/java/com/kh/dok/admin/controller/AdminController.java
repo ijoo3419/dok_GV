@@ -251,21 +251,40 @@ public class AdminController {
 			}
 		} catch (UploadException e) {
 
-			model.addAttribute("msg","회입 가입 실패!");
+			model.addAttribute("msg","파일 선택 실패!");
 
 			return "common/errorPage";
 		} catch (IllegalStateException e) {
 
-			model.addAttribute("msg","회입 가입 실패!");
+			model.addAttribute("msg","파일 선택 실패!");
 
 			return "common/errorPage";
 		} catch (IOException e) {
-			model.addAttribute("msg","회입 가입 실패!");
+			model.addAttribute("msg","파일 선택 실패!");
 
 			return "common/errorPage";
 		} 
 
 	}
-
+	
+	//통계 페이지
+	@RequestMapping("statistics.ad")
+	public String statistics(Model model){
+		String tab = "tab-4";
+		
+		model.addAttribute("tab", tab);
+		
+		return "admin/adminPage";
+	}
+	
+	//영화 추가 페이지
+	@RequestMapping("addmovie.ad")
+	public String addmovie(Model model){
+		String tab = "tab-7";
+		
+		model.addAttribute("tab", tab);
+		
+		return "admin/adminPage";
+	}
 }
 

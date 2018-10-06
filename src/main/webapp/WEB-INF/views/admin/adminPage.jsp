@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE HTML>
 <!--
    Massively by HTML5 UP
@@ -112,10 +112,12 @@
 				href="searchBlack.ad?currentPage=1&searchResult=M&searchCondition=repedId">블랙리스트 관리 관리</a></li>
 			<li class="tab-link3" data-tab="tab-3"><a
 				href="upload.ad">메인페이지 관리</a></li>
-			<li class="tab-link4" data-tab="tab-4"><a>통계</a></li>
+			<li class="tab-link4" data-tab="tab-4"><a
+				href="statistics.ad">통계</a></li>
 			<li class="tab-link5" data-tab="tab-5"><a>문의 사항</a></li>
 			<li class="tab-link6" data-tab="tab-6"><a>공지사항</a></li>
-			<li class="tab-link7" data-tab="tab-7"><a>영화 추가</a></li>
+			<li class="tab-link7" data-tab="tab-7"><a
+				href="addmovie.ad">영화 추가</a></li>
 		</ul>
 	</nav>
 
@@ -323,8 +325,15 @@
 				<div class="row gtr-50 gtr-uniform">
 					<div class="col-4" id="colsize">	
 						<form action="upload.ad" method="post" enctype="multipart/form-data">
-						<span><img id="colimg"
+						<span>
+						<c:if test="${fn:length(bf) >= 1 }">
+							<img id="colimg"
 							src="${contextPath }/resources/uploadFiles/${bf.get(0).edit_name}" alt="" /></span>
+						</c:if>
+						<c:if test="${fn:length(bf) < 1 }">
+							<img id="colimg"
+							src="${contextPath }/resources/images/slide3jpg" alt="" /></span>
+						</c:if>
 							<a id="modimg" class="button primary" onclick="document.getElementById('file').click();">슬라이드1 수정</a>
 							<input type="file" id="file" name="file" onchange="document.getElementById('fsub').click();" style="display:none;">
 							<button type="submit" id="fsub" name="fsub" style="display:none;">
@@ -332,8 +341,15 @@
 					</div>
 					<div class="col-4" id="colsize">
 						<form action="upload.ad" method="post" enctype="multipart/form-data">
-						<span><img id="colimg"
+						<span>
+						<c:if test="${fn:length(bf) >= 2 }">
+							<img id="colimg"
 							src="${contextPath }/resources/uploadFiles/${bf.get(1).edit_name}" alt="" /></span>
+						</c:if>
+						<c:if test="${fn:length(bf) < 2 }">
+							<img id="colimg"
+							src="${contextPath }/resources/images/slide4.jpg" alt="" /></span>
+						</c:if>
 							<a id="modimg" class="button primary" onclick="document.getElementById('file2').click();">슬라이드2 수정</a>
 							<input type="file" id="file2" name="file2" onchange="document.getElementById('fsub2').click();" style="display:none;">
 							<button type="submit" id="fsub2" name="fsub" style="display:none;">
@@ -341,8 +357,15 @@
 					</div>
 					<div class="col-4" id="colsize">
 						<form action="upload.ad" method="post" enctype="multipart/form-data">
-						<span><img id="colimg"
+						<span>
+						<c:if test="${fn:length(bf) >= 3 }">
+							<img id="colimg"
 							src="${contextPath }/resources/uploadFiles/${bf.get(2).edit_name}" alt="" /></span>
+						</c:if>
+						<c:if test="${fn:length(bf) < 3 }">
+							<img id="colimg"
+							src="${contextPath }/resources/images/slide1.jpg" alt="" /></span>
+						</c:if>
 							<a id="modimg" class="button primary" onclick="document.getElementById('file3').click();">슬라이드3 수정</a>
 							<input type="file" id="file3" name="file3" onchange="document.getElementById('fsub3').click();" style="display:none;">
 							<button type="submit" id="fsub3" name="fsub" style="display:none;">
@@ -350,8 +373,15 @@
 					</div>
 					<div class="col-4" id="colsize">
 						<form action="upload.ad" method="post" enctype="multipart/form-data">
-						<span><img id="colimg"
+						<span>
+						<c:if test="${fn:length(bf) == 4 }">
+							<img id="colimg"
 							src="${contextPath }/resources/uploadFiles/${bf.get(3).edit_name}" alt="" /></span>
+						</c:if>
+						<c:if test="${fn:length(bf) < 4 }">
+							<img id="colimg"
+							src="${contextPath }/resources/images/slide2.jpg" alt="" /></span>
+						</c:if>
 							<a id="modimg" class="button primary" onclick="document.getElementById('file4').click();">슬라이드4 수정</a>
 							<input type="file" id="file4" name="file4" onchange="document.getElementById('fsub4').click();" style="display:none;">
 							<button type="submit" id="fsub4" name="fsub" style="display:none;">
