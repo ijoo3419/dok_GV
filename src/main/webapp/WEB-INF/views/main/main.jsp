@@ -1,9 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127101762-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-127101762-1');
+</script>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${contextPath }/resources/css/main.css" />
@@ -150,22 +162,42 @@ to {
 	<div class="slideshow-container">
 			<div class="mySlides fade">
 				<div class="numbertext">1 / 4</div>
-				<img src="${contextPath }/resources/uploadFiles/${bf.get(0).edit_name}" style="width: 100%; height: 400px;">
+					<c:if test="${fn:length(bf) >= 1}">
+						<img src="${contextPath }/resources/uploadFiles/${bf.get(0).edit_name}" style="width: 100%; height: 400px;">
+					</c:if>
+					<c:if test="${fn:length(bf) < 1}">
+						<img src="${contextPath }/resources/images/slide3.jpg" style="width: 100%; height: 400px;">
+					</c:if>
 			</div>
 
 			<div class="mySlides fade">
 				<div class="numbertext">2 / 4</div>
-				<img src="${contextPath }/resources/uploadFiles/${bf.get(1).edit_name}" style="width: 100%; height: 400px;">
+					<c:if test="${fn:length(bf) >= 2}">
+						<img src="${contextPath }/resources/uploadFiles/${bf.get(1).edit_name}" style="width: 100%; height: 400px;">
+					</c:if>
+					<c:if test="${fn:length(bf) < 2}">
+						<img src="${contextPath }/resources/images/slide4.jpg" style="width: 100%; height: 400px;">
+					</c:if>
 			</div>
 
 			<div class="mySlides fade">
 				<div class="numbertext">3 / 4</div>
-				<img src="${contextPath }/resources/uploadFiles/${bf.get(2).edit_name}" style="width: 100%; height: 400px;">
+					<c:if test="${fn:length(bf) >= 3}">
+						<img src="${contextPath }/resources/uploadFiles/${bf.get(2).edit_name}" style="width: 100%; height: 400px;">
+					</c:if>
+					<c:if test="${fn:length(bf) < 3}">
+						<img src="${contextPath }/resources/images/slide1.jpg" style="width: 100%; height: 400px;">
+					</c:if>
 			</div>
 
 			<div class="mySlides fade">
 				<div class="numbertext">4 / 4</div>
-				<img src="${contextPath }/resources/uploadFiles/${bf.get(3).edit_name}" style="width: 100%; height: 400px;">
+					<c:if test="${fn:length(bf) eq 4}">
+						<img src="${contextPath }/resources/uploadFiles/${bf.get(3).edit_name}" style="width: 100%; height: 400px;">
+					</c:if>
+					<c:if test="${fn:length(bf) < 4}">
+						<img src="${contextPath }/resources/images/slide2.jpg" style="width: 100%; height: 400px;">
+					</c:if>
 			</div>
 	</div>
 	<br>

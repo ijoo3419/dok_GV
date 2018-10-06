@@ -35,9 +35,9 @@ public interface AdminDao {
 
 	int insertFile(SqlSessionTemplate sqlSession, BoardFile adFile) throws UploadException;
 
-	int updateFile(SqlSessionTemplate sqlSession, BoardFile adFile) throws UploadException;
+	int updateFile(SqlSessionTemplate sqlSession, BoardFile adFile);
 
-	int deleteFile(SqlSessionTemplate sqlSession) throws UploadException;
+	int deleteFile(SqlSessionTemplate sqlSession);
 
 	ArrayList<BoardFile> selectFile(SqlSessionTemplate sqlSession) throws UploadException;
 }

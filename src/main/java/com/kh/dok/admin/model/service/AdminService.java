@@ -33,9 +33,9 @@ public interface AdminService {
 
 	int insertFile(BoardFile adFile) throws UploadException;
 
-	int updateFile(BoardFile adFile) throws UploadException;
+	int updateFile(BoardFile adFile);
 
-	int deleteFile() throws UploadException;
+	int deleteFile();
 
 	ArrayList<BoardFile> selectFile() throws UploadException;
 

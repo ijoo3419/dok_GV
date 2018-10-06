@@ -197,6 +197,7 @@
 	<select id="selectFile" resultMap="searchBoardFileSet">
 		SELECT *
 		FROM BOARD_FILE
+		WHERE FILE_LEVEL=100 OR FILE_LEVEL=200 OR FILE_LEVEL=300 OR FILE_LEVEL = 400
 		ORDER BY FILE_LEVEL
 	</select>
 	<!-- 검색 결과 조회 카운트 인소진 -->
