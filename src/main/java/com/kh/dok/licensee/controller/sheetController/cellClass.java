@@ -1,10 +1,13 @@
-/*package com.test.controller;
+package com.kh.dok.licensee.controller.sheetController;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -14,7 +17,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class cellClass {
 
-	//셀 값 읽기 15x15
+	//셀 값 읽기 17x17
 	public String[][] test(String name) {
 
 		XSSFRow row;
@@ -22,9 +25,11 @@ public class cellClass {
 		int type;
 		String[][] num = new String[15][15]; 
 		
+		
+		System.out.println("name 은 : " + name);
 		try {
 
-			FileInputStream inputStream = new FileInputStream("C:/Users/John/Desktop/copy"+ name +".xlsx");
+			FileInputStream inputStream = new FileInputStream("C:/Users/qwertyJeong/Desktop/sheetTest/excel"+ name +".xlsx");
 			XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
 
 			//sheet수 취득
@@ -70,7 +75,7 @@ public class cellClass {
 		FileOutputStream outputStream = null;
 		XSSFWorkbook workbook = null;
 		try {
-				inputStream = new FileInputStream("C:/Users/John/Desktop/TestBox.xlsx");
+				inputStream = new FileInputStream("C:/Users/qwertyJeong/Desktop/sheetTestExcelBox.xlsx");
 				workbook = new XSSFWorkbook(inputStream);
 				
 				XSSFSheet sheet = workbook.getSheetAt(0);	//Class Data 시트
@@ -81,7 +86,7 @@ public class cellClass {
 					int col = n%15;
 					sheet.getRow(row).getCell(col).setCellValue("O");	//값 넣기
 				}
-				outputStream = new FileOutputStream("C:/Users/John/Desktop/copy"+ name +".xlsx");	//만들기
+				outputStream = new FileOutputStream("C:/Users/qwertyJeong/Desktop/sheetTest/excel"+ name +".xlsx");	//만들기
 				workbook.write(outputStream);
 				outputStream.close();
 				
@@ -113,7 +118,7 @@ public class cellClass {
 		FileOutputStream outputStream = null;
 		XSSFWorkbook workbook = null;
 		try {
-				inputStream = new FileInputStream("C:/Users/John/Desktop/copy"+tableName+".xlsx");
+				inputStream = new FileInputStream("C:/Users/qwertyJeong/Desktop/sheetTest/excel"+tableName+".xlsx");
 				workbook = new XSSFWorkbook(inputStream);
 				
 				XSSFSheet sheet = workbook.getSheetAt(0);	//Class Data 시트
@@ -124,24 +129,21 @@ public class cellClass {
 					int col = n%15;
 					sheet.getRow(row).getCell(col).setCellValue(String.valueOf(name));	//값 넣기
 				}
-				outputStream = new FileOutputStream("C:/Users/John/Desktop/copy"+ tableName +".xlsx");	//만들기
+				outputStream = new FileOutputStream("C:/Users/qwertyJeong/Desktop/sheetTest/excel"+ tableName +".xlsx");	//만들기
 				workbook.write(outputStream);
 				outputStream.close();
 				
 				System.out.println(name+" 사용자가 구매한 면적 갯수 :"+ arr.length);
 				
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
 			try {
 				inputStream.close();
 				workbook.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -151,4 +153,3 @@ public class cellClass {
 	
 }
 
-*/

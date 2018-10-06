@@ -9,5 +9,4 @@ public interface LicenseeService {
 
 	int insertMovieRoom(MovieRoom mr);
 
-	String searchTheaterId(Cinema cm); 
 }

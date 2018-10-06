@@ -13,9 +13,9 @@
 	
 <!-- 상영관 추가하기~!~!~!~!~! -->
 <insert id="insertMovieRoom" parameterType="MovieRoom">
-		INSERT INTO MOVIEROOM VALUES('MR' || TO_CHAR(MOVIEROOM_MOVIEROOM_ID.NEXTVAL), 
-		'TT11', #{movieRoomName}, #{movieRoomAddress})
-		
+		INSERT INTO MOVIEROOM VALUES ('MR' || TO_CHAR(MOVIEROOM_MOVIEROOM_ID.NEXTVAL),
+		(SELECT THEATER_ID FROM THEATER
+		WHERE MID = #{mid}), #{movieRoomName}, #{movieRoomAddress})
 	</insert>
 	
 

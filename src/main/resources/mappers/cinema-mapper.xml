@@ -17,11 +17,6 @@
 		INSERT INTO THEATER VALUES('TT' || TO_CHAR(THEATER_THEATER_ID.NEXTVAL), #{mid},
 		#{theaterName}, #{theaterRoot}, #{theaterText})
 	</insert>
-	<!-- 영화관ID 체크 -->
-	<select id="searchTheaterId" resultMap="cinemaResultSet" parameterType="Cinema">
-		SELECT THEATER_ID FROM THEATER
-		WHERE MID=#{mid}
 	
-	</select>
 	
 </mapper>
