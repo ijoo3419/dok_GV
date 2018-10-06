@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	request.setCharacterEncoding("UTF-8");
+	session = request.getSession(true);
+	String id = request.getParameter("id");
+	request.getSession().setAttribute("id", id);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,397 +34,398 @@
 </head>
 <style>
 #myModal {
-	overflow: hidden;
-	width: 1400px;
-	height: 900px;
+	overflow: hidden !important;
+	width: 1400px !important;
+	height: 900px !important;
 }
 
 #web-fontTitle {
-	font-family: 'Do Hyeon', sans-serif;
+	font-family: 'Do Hyeon', sans-serif !important;
 	color: #3104B4;
 }
 
 #web-fontTitle-child {
-	font-family: 'Do Hyeon', sans-serif;
-	color: #585858;
-	margin-left: 20px;
+	font-family: 'Do Hyeon', sans-serif !important;
+	color: #585858 !important;
+	margin-left: 20px !important;
 }
 
 .areaTable #web-fontTitle-child {
-	font-family: 'Do Hyeon', sans-serif;
-	color: #E6E6E6;
-	margin-left: 20px;
+	font-family: 'Do Hyeon', sans-serif !important;
+	color: #E6E6E6 !important;
+	margin-left: 20px !important;
 }
 
 #web-fontTitle-child-two {
-	font-family: 'Do Hyeon', sans-serif;
-	font-size:20px;
-	color: #585858;
+	font-family: 'Do Hyeon', sans-serif !important;
+	font-size:20px !important;
+	color: #585858 !important;
 }
 
 #web-fontDate {
-	font-family: 'Do Hyeon', sans-serif;
-	font-size: 20px;
-	color: #585858;
+	font-family: 'Do Hyeon', sans-serif !important;
+	font-size: 20px !important;
+	color: #585858 !important;
 }
 
 td #web-fontDate {
-	font-family: 'Do Hyeon', sans-serif;
-	font-size: 20px;
-	color: #585858;
-	margin-left:5px;
+	font-family: 'Do Hyeon', sans-serif !important;
+	font-size: 20px !important;
+	color: #585858 !important;
+	margin-left:5px !important;
 }
 
 .modal-content {
-	margin-top: 100px;
-	margin-left: 300px;
-	overflow: hidden;
-	width: 950px;
-	height: 580px;
+	margin-top: 100px !important;
+	margin-left: 300px !important;
+	overflow: hidden !important;
+	width: 950px !important;
+	height: 580px !important;
 }
 
 #myModal2 .modal-content{
-	margin-top: 100px;
-	margin-left: 300px;
-	overflow: hidden;
-	width: 950px;
-	height: 670px;
+	margin-top: 100px !important;
+	margin-left: 300px !important;
+	overflow: hidden !important;
+	width: 950px !important;
+	height: 670px !important;
 } 
 
 #myModal3 .modal-content{
-	margin-top: 100px;
-	margin-left: 300px;
-	overflow: hidden;
-	width: 670px;
-	height: 650px;
+	margin-top: 100px !important;
+	margin-left: 300px !important;
+	overflow: hidden !important;
+	width: 670px !important;
+	height: 650px !important;
 }
 
 #myModal3 .modal-body{
-	width: 660px;
+	width: 660px !important;
 }
 
 #myModal4 .modal-content{
-	width: 670px;
-	height: 600px;
+	width: 670px !important;
+	height: 600px !important;
 }
 
 .modal-dialog {
-	width: 100%;
-	height: 90%;
+	width: 100% !important;
+	height: 90% !important;
 }
 
 .model-left {
-	overflow: hidden;
-	width: 400px;
-	height: 500px;
-	display: inline-block;
-	float: left;
+	overflow: hidden !important;
+	width: 400px !important;
+	height: 500px !important;
+	display: inline-block !important;
+	float: left !important;
 }
 
 .modal-title-div {
-	width: 100%;
-	height: 75px;
-	overflow: hidden;
-	border-bottom-style: solid;
-	border-bottom-width: 1px;
-	border-bottom-color: #E6E6E6;
+	width: 100% !important;
+	height: 75px !important;
+	overflow: hidden !important;
+	border-bottom-style: solid !important;
+	border-bottom-width: 1px !important;
+	border-bottom-color: #E6E6E6 !important;
 }
 
 .modal-title-div .one, .two {
-	display: inline-block;
+	display: inline-block !important;
 }
 
 .modal-title-div .two {
-	margin-left: 150px;
+	margin-left: 150px !important;
 }
 
 .cinemaBtn {
-	width: 200px;
-	height: 80px;
-	background: #FAFAFA;
-	border: 1px solid #D8D8D8;
+	width: 200px !important;
+	height: 80px !important;
+	background: #FAFAFA !important;
+	border: 1px solid #D8D8D8 !important;
 }
 
 .movieBtn {
-	width: 100px;
-	height: 150px;
-	background: #FAFAFA;
-	border: 1px solid #D8D8D8;
+	width: 100px !important;
+	height: 150px !important;
+	background: #FAFAFA !important;
+	border: 1px solid #D8D8D8 !important;
 }
 
 .model-right {
-	overflow: hidden;
-	width: 500px;
-	height: 500px;
-	border-left-style: solid;
-	border-left-width: 1px;
-	border-left-color: #E6E6E6;
+	overflow: hidden !important;
+	width: 500px !important;
+	height: 500px !important;
+	border-left-style: solid !important;
+	border-left-width: 1px !important;
+	border-left-color: #E6E6E6 !important;
 	display: inline-block;
 }
 
 .model-right-child {
-	margin-left: 20px;
+	margin-left: 20px !important;
 }
 
 #myBtn-div {
-	margin-top: 50px;
-	margin-left: 200px;
+	margin-top: 50px !important;
+	margin-left: 200px !important;
 }
 
 #td-web-fontTitle {
-	font-family: 'Do Hyeon', sans-serif;
-	font-size: 17px;
+	font-family: 'Do Hyeon', sans-serif !important;
+	font-size: 17px !important;
 }
 
 /* 	-------------------------------------------------------------- */
 
 /* The Modal (background) */
 .modalTwo {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	left: 0;
-	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0, 0, 0); /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	display: none !important; /* Hidden by default */
+	position: fixed !important; /* Stay in place */
+	z-index: 1 !important; /* Sit on top */
+	left: 0 !important;
+	top: 0 !important;
+	width: 100% !important; /* Full width */
+	height: 100% !important; /* Full height */
+	overflow: auto !important; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0) !important; /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4) !important; /* Black w/ opacity */
 }
 
 /* Modal Content/Box */
 .modal-content-two {
-	background-color: #fefefe;
-	margin: 15% auto; /* 15% from the top and centered */
-	padding: 20px;
-	border: 1px solid #888;
-	width: 960px; /* Could be more or less, depending on screen size */
-	height: 660px;
-	overflow: hidden;
+	background-color: #fefefe !important;
+	margin: 15% auto !important; /* 15% from the top and centered */
+	padding: 20px !important;
+	border: 1px solid #888 !important;
+	width: 960px !important; /* Could be more or less, depending on screen size */
+	height: 660px !important;
+	overflow: hidden !important;
 }
 /* The Close Button */
 .close {
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
+	color: #aaa !important;
+	float: right !important;
+	font-size: 28px !important;
+	font-weight: bold !important;
 }
 
 .close:hover, .close:focus {
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
+	color: black !important;
+	text-decoration: none !important;
+	cursor: pointer !important;
 }
 
 .modal-content-two-count {
-	display: inline-block;
+	display: inline-block !important;
 }
 
 .screen {
-	background: #D8D8D8;
+	background: #D8D8D8 !important;
 }
 
 .screen h4 {
-	font-color: black;
+	font-color: black !important;
 }
 
 .seatDiv {
-	margin-top: 10px;
-	margin-left: 20px;
-	width: auto;
-	height: 500px;
-	border-style: solid;
-	border-width: 1px;
-	border-color: #E6E6E6;
-	display: inline-block;
+	margin-top: 10px !important;
+	margin-left: 20px !important;
+	width: auto !important;
+	height: 500px !important;
+	border-style: solid !important;
+	border-width: 1px !important;
+	border-color: #E6E6E6 !important;
+	display: inline-block !important;
 }
 
 .seatCheck {
-	width: 550px;
-	height: auto;
-	display: inline-block;
-	float: left;
+	width: 550px !important;
+	height: auto !important;
+	display: inline-block !important;
+	float: left !important;
 }
 
 .seatPay {
-	margin-left: 10px;
-	display: inline-block;
-	float: right;
+	margin-left: 10px !important;
+	display: inline-block !important;
+	float: right !important;
 }
 
 .seatPay table {
-	color: white;
-	background: #424242;
+	color: white !important;
+	background: #424242 !important;
 }
 
 .seatPay-price {
-	margin-top: 70px;
-	float: right;
+	margin-top: 70px !important;
+	float: right !important;
 }
 
 .seatPay-btn {
-	margin-top: 10px;
-	height: 50px;
+	margin-top: 10px !important;
+	height: 50px !important;
 }
 
 .seatPay-btn-right {
-	background: #4B088A;
-	margin-left: 15px;
-	width: 80px;
-	height: 30px;
-	border: 1px solid #4B088A;
-	font-family: 'Do Hyeon', sans-serif;
+	background: #4B088A !important;
+	margin-left: 15px !important;
+	width: 80px !important;
+	height: 30px !important;
+	border: 1px solid #4B088A !important;
+	font-family: 'Do Hyeon', sans-serif !important;
 }
 
 .seatPay-btn-left {
-	margin-left: 15px;
-	width: 80px;
-	height: 30px;
-	border: 1px solid #F2F2F2;
-	background: #D8D8D8;
-	font-family: 'Do Hyeon', sans-serif;
-	color: #424242;
+	margin-left: 15px !important;
+	width: 80px !important;
+	height: 30px !important;
+	border: 1px solid #F2F2F2 !important;
+	background: #D8D8D8 !important;
+	font-family: 'Do Hyeon', sans-serif !important;
+	color: #424242 !important;
 }
 
 /* The Modal (background) */
 .modalTree {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	left: 0;
-	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0, 0, 0); /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	display: none !important; /* Hidden by default */
+	position: fixed !important; /* Stay in place */
+	z-index: 1 !important; /* Sit on top */
+	left: 0 !important;
+	top: 0 !important;
+	width: 100% !important; /* Full width */
+	height: 100% !important; /* Full height */
+	overflow: auto !important; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0) !important; /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4) !important; /* Black w/ opacity */
 }
 
 /* Modal Content/Box */
 .modal-content-Tree {
-	background-color: #fefefe;
-	margin: 15% auto; /* 15% from the top and centered */
-	padding: 20px;
-	border: 1px solid #888;
-	width: 675px; /* Could be more or less, depending on screen size */
-	height: 620px;
-	overflow: hidden;
+	background-color: #fefefe !important;
+	margin: 15% auto !important; /* 15% from the top and centered */
+	padding: 20px !important;
+	border: 1px solid #888 !important;
+	width: 675px !important; /* Could be more or less, depending on screen size */
+	height: 620px !important;
+	overflow: hidden !important;
 }
 /* The Close Button */
 .close {
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
+	color: #aaa !important;
+	float: right !important;
+	font-size: 28px !important;
+	font-weight: bold !important;
 }
 
 .close:hover, .close:focus {
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
+	color: black !important;
+	text-decoration: none !important;
+	cursor: pointer !important;
 }
 
 .pay-left {
-	width: 200px;
-	height: 515px;
-	display: inline-block;
-	float: left;
-	margin-left: 10px;
-	border-style: solid;
-	border-width: 1px;
-	border-color: #E6E6E6;
+	width: 200px !important;
+	height: 515px !important;
+	display: inline-block !important;
+	float: left !important;
+	margin-left: 10px !important;
+	border-style: solid !important;
+	border-width: 1px !important;
+	border-color: #E6E6E6 !important;
 }
 
 .pay-center {
-	width: 200px;
-	height: 515px;
-	display: inline-block;
-	float: center;
-	margin-left: 10px;
-	border-style: solid;
-	border-width: 1px;
-	border-color: #E6E6E6;
+	width: 200px !important;
+	height: 515px !important;
+	display: inline-block !important;
+	float: center !important;
+	margin-left: 10px !important;
+	border-style: solid !important;
+	border-width: 1px !important;
+	border-color: #E6E6E6 !important;
 }
 
 .pay-right {
-	width: 200px;
-	display: inline-block;
-	float: right;
-	margin-left: 10px;
-	border-style: solid;
-	border-width: 1px;
-	border-color: #E6E6E6;
+	width: 200px !important;
+	display: inline-block !important;
+	float: right !important;
+	margin-left: 10px !important;
+	border-style: solid !important;
+	border-width: 1px !important;
+	border-color: #E6E6E6 !important;
 }
 
 .pay-center>#web-fontTitle {
-	margin-left: 20px;
+	margin-left: 20px !important;
 }
 
 .pay-right>table {
-	color: white;
-	background: #424242;
+	color: white !important;
+	background: #424242 !important;
 }
 
 /* 	-------------------------------------------------------------- */
 #myBtn-divTwo {
-	margin-top: 50px;
-	margin-left: 200px;
+	margin-top: 50px !important;
+	margin-left: 200px !important;
 }
 
 /* The Modal (background) */
 .modalFour {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	left: 0;
-	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0, 0, 0); /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	display: none !important; /* Hidden by default */
+	position: fixed !important; /* Stay in place */
+	z-index: 1 !important; /* Sit on top */
+	left: 0 !important;
+	top: 0 !important;
+	width: 100% !important; /* Full width */
+	height: 100% !important; /* Full height */
+	overflow: auto !important; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0) !important; /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4) !important; /* Black w/ opacity */
 }
 
 /* Modal Content/Box */
 .modal-content-Four {
-	background-color: #fefefe;
-	margin: 15% auto; /* 15% from the top and centered */
-	padding: 20px;
-	border: 1px solid #888;
-	width: 680px; /* Could be more or less, depending on screen size */
-	height: 620px;
-	overflow: hidden;
+	background-color: #fefefe !important;
+	margin: 15% auto !important; /* 15% from the top and centered */
+	padding: 20px !important;
+	border: 1px solid #888 !important;
+	width: 680px !important; /* Could be more or less, depending on screen size */
+	height: 620px !important;
+	overflow: hidden !important;
 }
 /* The Close Button */
 .close {
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
+	color: #aaa !important;
+	float: right !important;
+	font-size: 28px !important;
+	font-weight: bold !important;
 }
 
 .close:hover, .close:focus {
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
+	color: black !important;
+	text-decoration: none !important;
+	cursor: pointer !important;
 }
 
 .movieTable>div {
-	margin-left: 5px;
-	display: inline-block;
+	margin-left: 5px !important;
+	display: inline-block !important;
 }
 
 .movieTable table {
-	background: #088A68;
+	background: #088A68 !important;
 }
 a{
-	color: white;
+	color: white !important;
 }
 #movieTimeTable{
-	border: 1px solid #E6E6E6;
+	border: 1px solid #E6E6E6 !important;
 }
 </style>
 <body>
+	<jsp:include page="../common/headBar.jsp"/>
 	<div class="contain_box">
 		<div class="container">
 			<div class="row">
@@ -436,7 +443,6 @@ a{
 		style="display: none; z-index: 1050;">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
-				<div class="container"></div>
 				<div class="modal-body">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">×</button>
@@ -885,7 +891,6 @@ a{
 						aria-hidden="true">×</button>
 					<h2 id="web-fontTitle">인원/좌석선택</h2>
 				</div>
-				<div class="container"></div>
 				<div class="modal-body">
 					<div class="modal-content-two-count">
 						<font id="web-fontTitle">일반</font> 
@@ -1027,7 +1032,6 @@ a{
 						aria-hidden="true">×</button>
 					<h2 id="web-fontTitle">결제선택</h2>
 				</div>
-				<div class="container"></div>
 				<div class="modal-body">
 
 					<div class="pay-left">
@@ -1112,18 +1116,17 @@ a{
 			</div>
 		</div>
 	</div>
-	<%-- <script>
+	<script>
 	$(function(){
 		$('#myModal3 .seatPay-btn .seatPay-btn-right').click(function(){
 			var roomId = $(".hiddenRoomId").val();
 			var turningId = $(".hiddenTurning").val();
 			
 			var count = 0;
+			
 			var money = $('#myModal3 .pay-center').find('h4').eq(1).text();
 			var result = money.replace('원', '');
 			var nMoney = Number(result);
-			
-			alert(result);
 			
 			$.ajax({
 	    		url:"selectPayCount.mo",
@@ -1178,11 +1181,11 @@ a{
 					merchant_uid : 'merchant_' + new Date().getTime(),
 					name : movieTitle , // order 테이블에 들어갈 주문명 혹은 주문 번호
 					amount : '100',   // 결제 금액
-		            buyer_email : 'wldyd2214@naver.com',// 구매자 email
-		            buyer_name :  '박지용',   // 구매자 이름
-		            buyer_tel :  '010-3392-5787',   // 구매자 전화번호
-		            buyer_addr :  '연남동',   // 구매자 주소
-		            buyer_postcode :  '123-456',   // 구매자 우편번호
+		            buyer_email : "${ sessionScope.loginUser.email }",// 구매자 email
+		            buyer_name : "${ sessionScope.loginUser.user_name }",   // 구매자 이름
+		            buyer_tel : "${ sessionScope.loginUser.phone }",   // 구매자 전화번호
+		            buyer_addr : '?',   // 구매자 주소
+		            buyer_postcode : '?',   // 구매자 우편번호
 		       }, function(rsp) {
 		       if ( rsp.success ) { // 성공시
 		          var msg = '결제가 완료되었습니다.';
@@ -1211,7 +1214,7 @@ a{
 		    });
 			}
 		});
-	}); --%>
+	});
 	</script>
 	<!-- 4th modal -->
 	<div class="modal" id="myModal4" data-backdrop="static"
@@ -1223,7 +1226,6 @@ a{
 						aria-hidden="true">×</button>
 					<h2 id="web-fontTitle">모든영화</h2>
 				</div>
-				<div class="container"></div>
 				<div class="modal-body">
 					<div class="movieTable">
 						<%-- <div>
@@ -1339,44 +1341,44 @@ a{
 	</div>
 	<style>
 		.myModal5-title{
-			height:30px;
+			height:30px !important;
 		}
 		.myModal5-titleOne{
-			display:inline-block;
-			float:left;
-			height:50px;
+			display:inline-block !important;
+			float:left !important;
+			height:50px !important;
 		}
 		.myModal5-titleOne #web-fontTitle{
-			margin-top:0px;
+			margin-top:0px !important;
 		}
 		.myModal5-titleTwo{
-			display:inline-block;
-			float:right;
-			height:50px;
+			display:inline-block !important;
+			float:right !important;
+			height:50px !important;
 		}
 		.areaDiv{
-			display:inline-block;
-			height:400px;
-			overflow:hidden;
-			float:left;
+			display:inline-block !important;
+			height:400px !important;
+			overflow:hidden !important;
+			float:left !important;
 		}
 		.areaDiv td{
-			width:150px;
-			height:40px;
-			border:1px solid #E6E6E6;
+			width:150px !important;
+			height:40px !important;
+			border:1px solid #E6E6E6 !important;
 			
 		}
 		.areaChild{
-			display:inline-block;
-			height:450px;
-			overflow:hidden;
-			border:1px solid #E6E6E6;
+			display:inline-block !important;
+			height:450px !important;
+			overflow:hidden !important;
+			border:1px solid #E6E6E6 !important;
 		}
 		.areaChild td{
-			width:180px;
-			height:40px;
-			cursor:pointer;
-			/* border:1px solid #E6E6E6; */
+			width:180px !important;
+			height:40px !important;
+			cursor:pointer !important;
+			/* border:1px solid #E6E6E6 !important; */
 		}
 	</style>
 	<!-- 5th modal -->
@@ -1395,7 +1397,6 @@ a{
 						<a data-toggle="modal" href="#myModal3"><button class="seatPay-btn-right">다음</button></a>
 					</div>
 				</div>
-				<div class="container"></div>
 				<div class="modal-body">
 					<div class="areaDiv">
 						<table class="areaTable">
