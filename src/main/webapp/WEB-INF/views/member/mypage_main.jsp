@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 
 
 <html>
@@ -151,16 +153,24 @@ li {
 												</tr>
 											</thead>
 											
-											<c:forEach items="${ bookingHistView }" var="bk">
+											<c:if test="${ empty bookingHistView }">
+												<td></td>
+												<td align="center"> 최근 예매 내역이 없습니다. </td>
+												<td></td>
+											</c:if>
+											
+											<c:forEach items="${ bookingHistView }" var="bk" end="3">
 											<tbody>
 												<tr>
 													<td>${ bk.movie_title }</td>
 													<td>${ bk.movieroom_name }</td>
-													<td>${ bk.turning_day }</td>
+													<td>${ fn:substring(bk.turning_day, 0, 16) }</td>
 												</tr>
 											</tbody>
 											</c:forEach>
 										</table>
+										
+										
 					</div>
 					<div id="jb-sidebar" class="box">
 					<div class="h3_wrap">
@@ -181,30 +191,64 @@ li {
 						</div>
 						<br>
 						
-						<ul>
-							<p> 문의 내역이 없습니다. </p>
-						</ul>
+						<table>
+							<thead>
+								<tr>
+									<th></th>
+								</tr>
+							</thead>
+							
+							<c:if test="${ empty myAskView }">
+							<tbody>
+								<tr>
+									<td> 문의 내역이 없습니다. </td>
+								</tr>
+							</tbody>
+							</c:if>
+							
+							
+							<c:forEach items="${ myAskView }" var="ask" end="2">
+							<tbody>
+								<tr>
+								<c:choose>
+									<c:when test="${ fn:length(ask.btitle) > 11 }">
+										<td>${ fn:substring(ask.btitle,0,10) }...</td>
+									</c:when>
+									<c:otherwise>
+										<td>${ ask.btitle }</td>
+									</c:otherwise>
+								</c:choose>
+								</tr>
+							</tbody>
+							</c:forEach>
+						</table>
+
 					
 					</div>
 					<div id="jb-footer" class="box">
 						<img src="http://image2.megabox.co.kr/mop/home/mypage/main_title7.png" alt="나의 무비스토리">
 						<br>
+						
+						
 						<ul>
 							<li>
 								<span><img src="http://image2.megabox.co.kr/mop/home/mypage/main_icon1.png" onclick="wish()"></span>
 								<strong class="ml10" onclick="wish()">보고싶어</strong>
-								<strong class="c_purple pull-right" onclick="wish()">0</strong>
+								<strong class="c_purple pull-right" onclick="wish()">${ wishCount }</strong>
 							</li>
 							<li>
 								<span><img src="http://image2.megabox.co.kr/mop/home/mypage/main_icon2.png" onclick="watched()"></span>
 								<strong class="ml10" onclick="watched()">본영화</strong>
-								<strong class="c_purple pull-right" onclick="watched()">1</strong>
+								<strong class="c_purple pull-right" onclick="watched()">${ watchedCount }</strong>
 							</li>
 							<li>
 								<span><img src="http://image2.megabox.co.kr/mop/home/mypage/main_icon4.png" onclick="rev()"></span>
 								<strong class="ml10" onclick="rev()">나의 한줄평</strong>
-								<strong class="c_purple pull-right" onclick="rev()">0</strong></li>
+								<strong class="c_purple pull-right" onclick="rev()">${ reviewCount }</strong></li>
 						</ul>
+						
+						
+						
 					</div>
 				</div> 
 			</section>
@@ -244,12 +288,13 @@ li {
 		}
 		
 		function wish(){
-			location.href = "wishlist.me?mid=" + mid;
+			location.href = "wishlist.me";
 		}
 		
 		function booked(){
-			location.href = "bookingHist.me?mid=" + mid;
+			location.href = "bookingHist.me";
 		}
+	
 		
 	</script>
 

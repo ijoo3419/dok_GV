@@ -2,6 +2,7 @@ package com.kh.dok.member.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.member.model.exception.LoginException;
 import com.kh.dok.member.model.vo.BookingHistory;
 import com.kh.dok.member.model.vo.Member;
@@ -42,6 +43,14 @@ public interface MemberService {
 	ArrayList<BookingHistory> selectBookingHist(Member m);
 
 	ArrayList<MyReply> selectReply(Member m);
+
+	int selectWishNum(Member m);
+	
+	int selectWatchedNum(Member m);
+	
+	int selectReviewNum(Member m);
+
+	ArrayList<Board> selectMyAsk(Member m);
 	
 }
      

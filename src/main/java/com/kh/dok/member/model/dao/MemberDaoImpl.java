@@ -5,14 +5,16 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.member.model.vo.BookingHistory;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.member.model.vo.MyReply;
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieSumbnail;
 
+
 @Repository
-public class MemberDaoImpl implements MemberDao{
+public class MemberDaoImpl implements MemberDao {
 
 	
 	//암호화된 비밀번호 조회용 메소드
@@ -138,5 +140,31 @@ public class MemberDaoImpl implements MemberDao{
 		return reviewsView;
 	}
 
+	//위시리스트 count
+	@Override
+	public int selectWishNum(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("Member.countWish", m);
+	}
+	
+	//본 영화 count
+	@Override
+	public int selectWatchedNum(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("Member.countWatched", m);
+	}
+	
+	//본 영화 count
+	@Override
+	public int selectReviewNum(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("Member.countReview", m);
+	}
+
+	//문의 내역 조회
+	@Override
+	public ArrayList<Board> selectMyAsk(SqlSessionTemplate sqlSession, Member m) {
+		ArrayList<Board> myAskView = null;
+		myAskView = (ArrayList)sqlSession.selectList("Board.selectMyAsk", m);
+		return myAskView;
+	}
+	
 
 }

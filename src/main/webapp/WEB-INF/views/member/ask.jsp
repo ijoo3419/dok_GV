@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -31,7 +32,7 @@
 				<li><a href="wishlist.me">위시리스트</a></li>
 				<li><a href="reviews.me">내가 쓴 리뷰</a></li>
 				<c:if test="${ sessionScope.loginUser.user_class eq 'BUYER'}">
-				<li><a href="theaterAdd.me">영화관 등록</a></li>
+					<li><a href="theaterAdd.me">영화관 등록</a></li>
 				</c:if>
 			</ul>
 		</nav>
@@ -47,59 +48,43 @@
 					<h6>고객센터에서 남겨주신 문의내역을 모두 확인하실 수 있습니다.</h6>
 				</header>
 			</section>
-			
+
 			<div class="table-wrapper">
-										<table>
-											<thead>
-												<tr>
-													<th>No</th>
-													<th>제목</th>
-													<th>답변상태</th>
-												</tr>
-											</thead>
-											<tbody>
+				<table>
+					<thead>
+						<tr>
+							<th>No</th>
+							<th>제목</th>
+						</tr>
+					</thead>
+				<c:forEach items="${ myAskView }" var="ask">
+					<tbody>
+						<tr>
+							<td>${ ask.rownum }</td>
+							<td>${ ask.btitle }</td>
+						</tr>
+					</tbody>
+				</c:forEach>
+
+
+
+					<!-- 											<tbody>
 												<tr>
 													<td>[문의글번호]</td>
 													<td>[말머리 + 문의 제목 + 누르면 해당 문의 게시판으로 이동 (가능할까?)]</td>
-													<td>[답변상태 ]</td>
 												</tr>
-												<tr>
-													<td>Item 2</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item 3</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item 4</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item 5</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
-			
-			
-			
-			
+											</tbody> -->
+
+				</table>
+			</div>
+
+
+
+
 		</div>
-		
-		
-		
+
+
+
 
 		<!-- Copyright -->
 		<div id="copyright">

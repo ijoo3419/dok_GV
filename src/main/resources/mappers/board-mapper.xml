@@ -58,7 +58,15 @@
 		AND BOARD_DIV = 'BD4'
 		ORDER BY BOARD_DATE DESC;
 	</select> -->
-
-
+	
+	<!-- 마이페이지 - 내 문의 내역 (황이주) -->
+	<select id="selectMyAsk" resultMap="BBFileResultSet">
+		SELECT ROWNUM, BOARD_SORT, BTITLE 
+		FROM BOARD
+		WHERE MID = #{ mid }
+		AND BOARD_SORT = 'BOARD'
+		AND BOARD_DIV IN ('BD1', 'BD2', 'BD3')
+		AND BSTATUS = 'Y'
+	</select>
 
 </mapper>

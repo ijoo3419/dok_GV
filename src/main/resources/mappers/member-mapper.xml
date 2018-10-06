@@ -130,24 +130,28 @@
 	</update>
 	
 	<!-- 위시리스트 COUNT -->
-	<select id="countWish">
-	SELECT NVL(COUNT(*),0)
-    FROM WISHLIST
-    WHERE MID = #{ mid }
+	<select id="countWish" resultType="java.lang.Integer" parameterType="Member">
+		SELECT NVL(COUNT(*),0)
+    	FROM WISHLIST
+    	WHERE MID = #{ mid }
 	</select>
 	
 	<!-- 본 영화 COUNT -->
-	<select id="countWatched">
-	SELECT NVL(COUNT(*),0)
-    FROM RESERVATION
-    WHERE MID = #{ mid }
+	<select id="countWatched" resultType="java.lang.Integer" parameterType="Member">
+		SELECT NVL(COUNT(*),0)
+    	FROM RESERVATION
+    	WHERE MID = #{ mid }
+    	AND RESERVATION_STATUS = '확인'
+    	OR RESERVATION_STATUS = '완료'
 	</select>
 	
 	<!-- 내가 쓴 리뷰 COUNT -->
-	<select id="countReview">
-	SELECT NVL(COUNT(*),0)
-    FROM 
-    WHERE MID = #{ mid }
+	<select id="countReview" resultType="java.lang.Integer" parameterType="Member">
+		SELECT NVL(COUNT(*),0)
+    	FROM REPLY
+    	WHERE RWRITER = #{ mid }
 	</select>
+	
+	
 	
 </mapper>

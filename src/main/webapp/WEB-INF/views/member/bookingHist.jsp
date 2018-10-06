@@ -4,10 +4,59 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style>
+
+img {
+		cursor: pointer;
+	}
+
+.modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+    
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%; /* Could be more or less, depending on screen size */                          
+        }
+        
+.modal button{
+
+   text-align:center !important;
+
+
+}
+
+
+	
+</style>
+
+
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="${contextPath }/resources/css/main.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/Example.Modal.js"></script>
+		<script src="${ contextPath }/resources/js/jquery.min.js"></script>
+	<script src="${ contextPath }/resources/js/jquery.scrollex.min.js"></script>
+	<script src="${ contextPath }/resources/js/jquery.scrolly.min.js"></script>
+	<script src="${ contextPath }/resources/js/browser.min.js"></script>
+	<script src="${ contextPath }/resources/js/breakpoints.min.js"></script>
+	<script src="${ contextPath }/resources/js/util.js"></script>
+	<script src="${ contextPath }/resources/js/main.js"></script>
 </head>
 	<body class="is-preload">
 			
@@ -68,7 +117,19 @@
 													<td>${ bk.reservation_date }</td>
 													<td>${ bk.turning_day }</td>
 													<td>${ bk.reservation_status }</td>
-													<td>button</td>
+													
+													<c:set var="status" value="${ bk.reservation_status }"/>
+													<c:choose>
+														<c:when test="${ status eq '확인' }">
+															<td><img src="${ contextPath }/resources/images/member/cancel.png" width="25" height="25" style="margin-left:10px; margin-top:10px;" id="cancel"></td>
+														</c:when>
+														<c:when test="${ status eq '예매중' }">
+															<td></td>
+														</c:when>
+														<c:when test="${ status eq '완료' }">
+															<td><img src="${ contextPath }/resources/images/member/rating.png" width="25" height="25" style="margin-left:10px; margin-top:10px;" id="review"></td>
+														</c:when>
+													</c:choose>
 												</tr>
 											</tbody>
 											</c:forEach>
@@ -76,7 +137,13 @@
 									</div>
 			
 			
-			
+			<div id="myModal" class="modal">
+				<div class="modal-content">
+					<h3 align="center">예매를 취소하시겠습니까?</h3>
+					<button id="confirm" onclick="cancelBooking()">확인</button>
+					<button id="close" onclick="cancelCancel()">취소</button>
+				</div>
+			</div>
 			
 		</div>
 					<div id="copyright">
@@ -84,14 +151,26 @@
 					</div>
 
 			</div>
+			
+		<script>
+		
+		$('#cancel').click(function(){
+			$('#myModal').show();
+		});
+      
+ 		function cancelBooking(){
+ 			alert("status 취소로 바꾸러 가기");
+ 		}
+ 		
+ 		function cancelCancel(){
+ 			$('#myModal').hide();
+ 		}
+        
+    </script>
 
-	<script src="${ contextPath }/resources/js/jquery.min.js"></script>
-	<script src="${ contextPath }/resources/js/jquery.scrollex.min.js"></script>
-	<script src="${ contextPath }/resources/js/jquery.scrolly.min.js"></script>
-	<script src="${ contextPath }/resources/js/browser.min.js"></script>
-	<script src="${ contextPath }/resources/js/breakpoints.min.js"></script>
-	<script src="${ contextPath }/resources/js/util.js"></script>
-	<script src="${ contextPath }/resources/js/main.js"></script>
+
+
+
 
 	</body>
 </html>
