@@ -11,28 +11,29 @@
 
 /*datepicker에서 사용한 이미지 버튼 style적용*/
 img.ui-datepicker-trigger {
-	margin-left:5px; vertical-align:middle; cursor:pointer;
+	margin-left:5px !important; vertical-align:middle !important; cursor:pointer !important;
 }
 .web-font{
-	font-color:white;
-    font-family: 'Jua', sans-serif;
-    font-size:18px;
-    margin-right:5px;
+	font-color:white !important;
+    font-family: 'Jua', sans-serif !important;
+    font-size:10px !important;
+    margin-right:5px !important;
 }
 input{
-	box-sizing: border-box;
-	border-style: double;
-	border-color: #3104B4;
+	box-sizing: border-box !important;
+	border-style: double !important;
+	border-color: #3104B4 !important;
 }
 #fromDate, #toDate {
-   	width:100px;
+   	width:100px !important;
+   	height:30px !important;
 }
 .ui-datepicker-header {
-	font-color:white;
-	background: #04B4AE;
+	font-color:white !important;
+	background: #04B4AE !important;
 }
 .ui-datepicker-calendar{
-	font-family: 'Jua', sans-serif;
+	font-family: 'Jua', sans-serif !important;
 }
 
 
