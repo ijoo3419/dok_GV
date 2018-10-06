@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.member.model.exception.LoginException;
 import com.kh.dok.member.model.service.MemberService;
 import com.kh.dok.member.model.vo.BookingHistory;
@@ -52,13 +53,25 @@ public class MemberController {
    @RequestMapping("member.me")
    public String showMypageView(Model model, HttpServletRequest request){
 	   
+	   //m 객체에 loginUser 정보 담아주기
 	   Member m = (Member)request.getSession().getAttribute("loginUser");
 	   
-	   System.out.println(m.getMid());
-	   
+	   //예매 내역 view 담기
 	   ArrayList<BookingHistory> bookingHistView = ms.selectBookingHist(m);
+	   //보고 싶어 count
+	   int wishCount = ms.selectWishNum(m);
+	   //본 영화 count
+	   int watchedCount = ms.selectWatchedNum(m);
+	   //내가 쓴 리뷰 count
+	   int reviewCount = ms.selectReviewNum(m);
+	   //나의 문의 내역 view 담기
+	   ArrayList<Board> myAskView = ms.selectMyAsk(m);
 	   
 	   model.addAttribute("bookingHistView", bookingHistView);
+	   model.addAttribute("wishCount", wishCount);
+	   model.addAttribute("watchedCount", watchedCount);
+	   model.addAttribute("reviewCount", reviewCount);
+	   model.addAttribute("myAskView", myAskView);
 	   
       return "member/mypage_main";
    }
@@ -69,7 +82,14 @@ public class MemberController {
    }
 
    @RequestMapping("ask.me")
-   public String askView(){
+   public String myAskView(Model model, HttpServletRequest request){
+	   
+	   Member m = (Member)request.getSession().getAttribute("loginUser");
+	   
+	   ArrayList<Board> myAskView = ms.selectMyAsk(m);
+	   
+	   model.addAttribute("myAskView", myAskView);
+	   
       return "member/ask";
    }
    

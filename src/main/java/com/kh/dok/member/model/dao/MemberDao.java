@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.member.model.vo.BookingHistory;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.member.model.vo.MyReply;
@@ -42,6 +43,14 @@ public interface MemberDao {
 	ArrayList<BookingHistory> selectBookingHist(SqlSessionTemplate sqlSession, Member m);
 
 	ArrayList<MyReply> selectMyReply(SqlSessionTemplate sqlSession, Member m);
+
+	int selectWishNum(SqlSessionTemplate sqlSession, Member m);
+	
+	int selectWatchedNum(SqlSessionTemplate sqlSession, Member m);
+	
+	int selectReviewNum(SqlSessionTemplate sqlSession, Member m);
+
+	ArrayList<Board> selectMyAsk(SqlSessionTemplate sqlSession, Member m);
 
      
 }

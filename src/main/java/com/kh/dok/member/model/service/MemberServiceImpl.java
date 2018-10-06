@@ -8,6 +8,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.member.model.dao.MemberDao;
 import com.kh.dok.member.model.exception.LoginException;
 import com.kh.dok.member.model.vo.BookingHistory;
@@ -170,7 +171,33 @@ public class MemberServiceImpl implements MemberService{
 		
 		return reviewsView;
 	}
-
 	
+	//황이주 보고 싶어 count
+	@Override
+	public int selectWishNum(Member m) {
+		return md.selectWishNum(sqlSession, m);
+	}
+
+	//황이주 본 영화 count
+	@Override
+	public int selectWatchedNum(Member m) {
+		return md.selectWatchedNum(sqlSession, m);
+	}
+	
+	//황이주 내가 쓴 리뷰 count
+	@Override
+	public int selectReviewNum(Member m) {
+		return md.selectReviewNum(sqlSession, m);
+	}
+	
+	//내 문의 내역 조회
+	@Override
+	public ArrayList<Board> selectMyAsk(Member m) {
+		ArrayList<Board> myAskView = null;
+		
+		myAskView = md.selectMyAsk(sqlSession, m);
+		
+		return myAskView;
+	}
 
 }

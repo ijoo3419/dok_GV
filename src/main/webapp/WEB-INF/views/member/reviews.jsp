@@ -65,7 +65,27 @@
 						<tr>
 							<td><${ rv.file_src } style="width: auto; height:100px;"></td>
 							<td>${ rv.movie_title }</td>
-							<td>${ rv.grade_count }</td>
+							<c:set var="grade" value="${ rv.grade_count }" />
+							<c:choose>
+								<c:when test="${ grade eq 0 }">
+									<td>☆☆☆☆☆</td>
+								</c:when>
+								<c:when test="${ grade eq 1 }">
+									<td>★☆☆☆☆</td>
+								</c:when>
+								<c:when test="${ grade eq 2 }">
+									<td>★★☆☆☆</td>
+								</c:when>
+								<c:when test="${ grade eq 3 }">
+									<td>★★★☆☆</td>
+								</c:when>
+								<c:when test="${ grade eq 4 }">
+									<td>★★★★☆</td>
+								</c:when>
+								<c:when test="${ grade eq 5 }">
+									<td>★★★★★</td>
+								</c:when>
+							</c:choose>
 							<c:set var="division" value="${ rv.division }" />
 							<c:choose>
 								<c:when test="${ division eq 'MOVIE' }">
@@ -75,10 +95,10 @@
 									<td>[영화관] ${ rv.rcontent }</td>
 								</c:when>
 							</c:choose>
-							<td>좋아요 ${ rv.recommend_count }개 </td>
+							<td><img src="${ contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;"> ${ rv.recommend_count } </td>
 							<td>${ rv.rcreate_date }</td>
-							<td>[ 수정버튼 ]</td>
-							<td>[ 삭제버튼 ]</td>
+							<td><img src="${ contextPath }/resources/images/member/edit.png" width="20" height="20" style="margin-left:10px; margin-top:10px;"></td>
+							<td><img src="${ contextPath }/resources/images/member/delete.png" width="20" height="20" style="margin-left:10px; margin-top:10px;"></td>
 						</tr>
 				</table>
 				</c:forEach>
