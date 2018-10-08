@@ -24,6 +24,7 @@
 		<result property="file_src" column="FILE_SRC"/>
 		<result property="file_date" column="FILE_DATE"/>
 		<result property="file_level" column="FILE_LEVEL"/>
+		<result property="nickname" column="NICKNAME" />
 	</resultMap>
 	
 	<!-- 공지등록 -->
@@ -48,16 +49,18 @@
 		VALUES('BF' || BOARD_FILE_FILE_ID.NEXTVAL, #{board_id}, #{origin_name}, #{edit_name}, #{file_src}, SYSDATE, 1)
 	</insert>
 	
-	<!-- <select id="selectNoticeList" resultType="BBFileResultSet" parameterType="BoardNBoardFile">
-		SELECT ROWNUM AS NUM, BOARD.BOARD_ID, MID, BTITLE, BCONTENT, BOARD_SORT, BOARD_DATE, BCOUNT, 
-       	FILE_ID, ORIGIN_NAME, EDIT_NAME, FILE_SRC, FILE_DATE, FILE_LEVEL
-		FROM BOARD, BOARD_FILE
+	<!-- 관리자공지사항 글 불러오기(성희) -->
+	<select id="selectNoticeList" resultMap="BBFileResultSet">
+		SELECT ROWNUM, BOARD.BOARD_ID, BOARD.MID, BTITLE, BCONTENT, BOARD_SORT, BOARD_DATE, BCOUNT, 
+       	       FILE_ID, ORIGIN_NAME, EDIT_NAME, FILE_SRC, FILE_DATE, FILE_LEVEL, M.NICKNAME
+		FROM BOARD, BOARD_FILE, MEMBER M
 		WHERE BOARD.BOARD_ID = BOARD_FILE.BOARD_ID
+    	AND BOARD.MID = M.MID
 		AND BOARD.MID = #{mId}
 		AND BSTATUS = 'Y'
 		AND BOARD_DIV = 'BD4'
-		ORDER BY BOARD_DATE DESC;
-	</select> -->
+		ORDER BY BOARD_DATE DESC
+	</select>
 	
 	<!-- 마이페이지 - 내 문의 내역 (황이주) -->
 	<select id="selectMyAsk" resultMap="BBFileResultSet">
@@ -68,5 +71,6 @@
 		AND BOARD_DIV IN ('BD1', 'BD2', 'BD3')
 		AND BSTATUS = 'Y'
 	</select>
+
 
 </mapper>

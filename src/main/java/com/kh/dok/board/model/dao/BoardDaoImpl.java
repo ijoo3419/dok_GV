@@ -43,8 +43,13 @@ public class BoardDaoImpl implements BoardDao{
 
 	@Override
 	public ArrayList selectNoticeList(SqlSessionTemplate sqlSession, BoardNBoardFile bbf) {
-
-		return (ArrayList) sqlSession.selectList("Board.selectNoticeList", bbf);
+		System.out.println("BoardDaoImpl selectNoticeList method in");
+		
+		ArrayList list = (ArrayList) sqlSession.selectList("Board.selectNoticeList", bbf);
+		System.out.println("BoardDaoImpl selectNoticList mapper 갔다와서 list : " + list);
+		
+		
+		return list;
 	}
 
 }
