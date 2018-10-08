@@ -38,7 +38,8 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public ArrayList selectNoticeList(BoardNBoardFile bbf) {
-
+		System.out.println("BoardServiceImpl selectNoticeList method in");
+		
 		return bd.selectNoticeList(sqlSession, bbf);
 	}
 

@@ -104,7 +104,7 @@
 								<th>날짜</th>
 							</tr>
 						</thead>
-						<%-- <c:set var="mid" value="${ loginUser.mid }" scope="session"/>
+						<c:set var="mid" value="${ loginUser.mid }" scope="session"/>
 						<c:if test="${ list == null }">
 							<tr>
 								<td>등록된 공지사항이 없습니다.</td>
@@ -112,42 +112,15 @@
 						</c:if>
 						<c:if test="${ list != null }">
 							<c:forEach var="list" items="${ list }">
-								<tr>
-									<th><c:out value="${ list.rownum }"/></th>
-									<th><c:out value="${ list.btitle }"/></th>
-									<th><c:out value="${ loginUser.email }"/></th>
-									<th><c:out value="${ list.bcount }"/></th>
-									<th><c:out value="${ list.board_date }"/></th>
+								<tr id="test">
+									<th>${ list.rownum }</th>
+									<th>${ list.btitle }</th>
+									<th>${ list.nickname }</th>
+									<th>${ list.bcount }</th>
+									<th>${ list.board_date }</th>
 								</tr>
 							</c:forEach>
-						</c:if> --%>
-						
-						
-						
-						
-						<!-- <tbody>
-							<tr>
-								<td>1</td>
-								<td>공지사항</td>
-								<td>고성희</td>
-								<td>349802</td>
-								<td width="150px">(2018.09.19)</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>공지사항</td>
-								<td>고성희</td>
-								<td>349802</td>
-								<td width="150px">(2018.09.19)</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>공지사항</td>
-								<td>고성희</td>
-								<td>349802</td>
-								<td width="150px">(2018.09.19)</td>
-							</tr>
-						</tbody> -->
+						</c:if>
 						<tfoot>
 					</table>
 				</div>
@@ -156,6 +129,11 @@
 					<button type="button" class="img_btn user cancel mr7"><a href="writeNotice.bo">공지작성</a></button>
 				</div>
 
+	<script>
+		$('#test').click(function(){
+			alert("dasdasdsasd");
+		});
+	</script>
 			
 			
 			
