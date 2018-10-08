@@ -101,7 +101,6 @@ img {
 													<th>좌석</th>
 													<th>예매일</th>
 													<th>상영일시</th>
-													<th>예매상태</th>
 													<th></th>
 												</tr>
 											</thead>
@@ -116,17 +115,16 @@ img {
 													<td>${ bk.seat_row }열 ${ bk.seat_column }</td>
 													<td>${ bk.reservation_date }</td>
 													<td>${ bk.turning_day }</td>
-													<td>${ bk.reservation_status }</td>
 													
-													<c:set var="status" value="${ bk.reservation_status }"/>
+													<c:set var="status" value="${ bk.status }"/>
 													<c:choose>
-														<c:when test="${ status eq '확인' }">
+														<c:when test="${ status eq '취소가능_리뷰불가' }">
 															<td><img src="${ contextPath }/resources/images/member/cancel.png" width="25" height="25" style="margin-left:10px; margin-top:10px;" id="cancel"></td>
 														</c:when>
 														<c:when test="${ status eq '예매중' }">
 															<td></td>
 														</c:when>
-														<c:when test="${ status eq '완료' }">
+														<c:when test="${ status eq '취소불가_리뷰가능' }">
 															<td><img src="${ contextPath }/resources/images/member/rating.png" width="25" height="25" style="margin-left:10px; margin-top:10px;" id="review"></td>
 														</c:when>
 													</c:choose>
