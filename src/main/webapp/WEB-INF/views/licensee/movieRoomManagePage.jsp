@@ -157,7 +157,7 @@ input[type="checkbox"] + label:before, input[type="radio"] + label:before{
 										<h3 align="left">1.상영관 이름</h3>
 												<input type="text" name="movieRoomName" id="demo-name" value="" placeholder="예)1관, 2관" />
 											</div>
-											
+											<label> </label><input type='hidden' name='table'> 
 											
 											
 											<div class="col-12">
@@ -213,8 +213,18 @@ input[type="checkbox"] + label:before, input[type="radio"] + label:before{
 
 									<hr />
 								</article>
+								<form action='ViewFiled.li' method='post'>
+	<h3>상영관 면적 보기</h3>
+	<label>상영관ID : </label><input type='text' name='name'>
+	<button type='submit' class="primary">보기</button>
+	
+	</form>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br>
+	
 </div>
 </div>
+
+	
 
 						
 

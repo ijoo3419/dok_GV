@@ -32,8 +32,8 @@ public class TestServlet extends HttpServlet {
 		String tableName = req.getParameter("table");
 		
 		//셀 조회 15x15
-//		String[][] num = new cellClass().test();
-//		System.out.println(num[0][0]);
+		String[][] num = new cellClass().test();
+		System.out.println(num[0][0]);
 		
 		if(tableName == ""){
 			//셀 값 삽입

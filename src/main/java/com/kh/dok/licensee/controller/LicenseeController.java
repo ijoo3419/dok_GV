@@ -2,6 +2,7 @@ package com.kh.dok.licensee.controller;
 
 import java.io.File;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.dok.cinema.model.vo.Cinema;
 import com.kh.dok.common.CommonUtils;
+import com.kh.dok.licensee.controller.sheetController.cellClass;
 import com.kh.dok.licensee.model.service.LicenseeService;
 import com.kh.dok.licensee.model.vo.MovieRoom;
 
@@ -96,6 +98,21 @@ public class LicenseeController {
 		
 		System.out.println("controller mr = " + mr);
 		System.out.println(mr.getMid());
+		String name = request.getParameter("movieRoomName");
+		String[] arr = request.getParameterValues("bak");
+		String tableName = request.getParameter("table");
+		
+		//셀 조회 15x15
+//		String[][] num = new cellClass().test();
+//		System.out.println(num[0][0]);
+		
+		if(tableName == ""){
+			//셀 값 삽입
+			new cellClass().createTeble(arr, name);
+		}else{
+			//셀 구매
+			new cellClass().insertCell(arr, name, tableName);
+		}
 		
 		
 		
@@ -112,6 +129,32 @@ public class LicenseeController {
 			return "common/errorPage";
 		}
 	
+
+	
 }
+	
+	@RequestMapping(value="ViewFiled.li")
+	public String insertMovieRoom(Model model, HttpServletRequest req){
+	
+	String name = req.getParameter("name");
+	
+	System.out.println(name);
+	String[][] arr = new cellClass().test(name);
+	
+	for(String[] str : arr){
+		for(String s : str)
+			System.out.print(s);
+		System.out.println();
+	}
+	
+	
+	req.setAttribute("field", arr);
+
+	return "licensee/ViewField";
+	
+}
+
+
+	
 }
 
