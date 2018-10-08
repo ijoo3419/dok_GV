@@ -20,7 +20,8 @@ import com.kh.dok.licensee.model.service.LicenseeService;
 import com.kh.dok.licensee.model.vo.MovieRoom;
 
 @Controller
-@SessionAttributes(value="loginUser")
+@SessionAttributes(value="loginUser, movieRoomData")
+
 public class LicenseeController {
 	@Autowired
 	private LicenseeService ls;
@@ -62,6 +63,7 @@ public class LicenseeController {
 								HttpServletRequest request, 
 								@RequestParam(name="photo", required=false)MultipartFile photo){
 		
+
 		System.out.println("controller cm : " + cm);
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		
@@ -91,17 +93,31 @@ public class LicenseeController {
 		}
 	}
 	
-	//정태 상영관 등록(엑셀 파일 전)
+	//정태 상영관 등록(엑셀 파일 완료)
 	@RequestMapping(value="movieRoomInsert.li")
-	public String insertMovieRoom(Model model, MovieRoom mr, Cinema cm,
+	public String insertMovieRoom(Model model, Cinema cm,
 								HttpServletRequest request){
 		
-		System.out.println("controller mr = " + mr);
+		MovieRoom mr = (MovieRoom)request.getSession().getAttribute("movieRoomData");
+		
+		System.out.println("getMovieRoomId = " + mr.getMovieRoomId());
+		
+		mr.setMovieRoomAddress(mr.getAddress1()+","+mr.getAddress2()+","+mr.getAddress3());
+	
+		
+	
+		System.out.println(mr.getMovieRoomAddress());
+		int result = ls.insertMovieRoom(mr);
+		
+		System.out.println("controller mr1 = " + mr);
 		System.out.println(mr.getMid());
-		String name = request.getParameter("movieRoomName");
+		
+		
+		String name = request.getParameter("movieRoomId");
 		String[] arr = request.getParameterValues("bak");
 		String tableName = request.getParameter("table");
 		
+		System.out.println("name = " + name);
 		//셀 조회 15x15
 //		String[][] num = new cellClass().test();
 //		System.out.println(num[0][0]);
@@ -115,21 +131,15 @@ public class LicenseeController {
 		}
 		
 		
-		
-		mr.setMovieRoomAddress(mr.getAddress1()+","+mr.getAddress2()+","+mr.getAddress3()); 
-		System.out.println(mr.getMovieRoomAddress());
-		int result = ls.insertMovieRoom(mr);
-		
-		
-		
 		if(result > 0){
 			return "licensee/movieRoomManagePage";
+
 		}else{
 			model.addAttribute("msg", "상영관 등록 실패");
 			return "common/errorPage";
 		}
 	
-
+	
 	
 }
 	

@@ -156,6 +156,7 @@ input[type="checkbox"] + label:before, input[type="radio"] + label:before{
 											
 										<h3 align="left">1.상영관 이름</h3>
 												<input type="text" name="movieRoomName" id="demo-name" value="" placeholder="예)1관, 2관" />
+												<input type="hidden" name="movieRoomId" value="${ requestScope.movieRoomData.theaterId }">
 											</div>
 											<label> </label><input type='hidden' name='table'> 
 											
