@@ -467,6 +467,7 @@ a{
 									width="30" height="30">
 							</button>
 							</a>
+							<input type='hidden' class='movieRoomId' name='name' val=''>
 							<input type="hidden" class="theater-id" value="">
 							
 							<hr>
@@ -844,6 +845,8 @@ a{
 							 	});
 								
 								$(".movieTimeMainDiv a").click(function(){
+									
+									
 									var movieTitle = $(this).find('.movie_title').text();
 									var movieType = $(this).find('.movie_type').text();
 									var areaName = $(this).find('.area_name').text();
@@ -873,6 +876,22 @@ a{
 									var c = $(".movieBtn").find("img").attr("src");
 									$(".seatPay").find("img").attr("src", c);
 									$(".seatPay").show();
+									
+									var movieRoomIdVal = $(this).find('.hiddenRoomId').val();
+									$('.movieRoomId').val(movieRoomIdVal);
+									alert(movieRoomIdVal);
+									
+									$.ajax({
+						    		url:"selectMovieRoom.mo",
+						    		type:"post",
+						    		data:{movieRoomIdVal:movieRoomIdVal},
+						    		success:function(data){
+						    		
+						    		},
+						    		error:function(data){
+						    			console.log(data);
+						    		}
+						 			});
 							 	});
 								
 						  	});

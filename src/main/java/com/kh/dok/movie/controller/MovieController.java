@@ -123,15 +123,21 @@ public class MovieController {
 	//박지용 @ResponseBody를 이용한 ajax 처리
 	@RequestMapping(value="selectPayCount.mo")
 	public @ResponseBody int selectPayCount(@RequestParam String roomId, @RequestParam String turningId){
-		
+
 		Movie v = new Movie();
-		
+
 		v.setMovieroom_id(roomId);
 		v.setTurning_id(turningId);
-		
+
 		int count = ms.selectPayCount(v);
 
 		return count;
+	}
+
+	//박지용 @ResponseBody를 이용한 ajax 처리
+	@RequestMapping(value="selectMovieRoom.mo")
+	public @ResponseBody void selectMovieRoom(@RequestParam String movieRoomIdVal){
+		System.out.println("영화관 출력하기: " + movieRoomIdVal);
 	}
 	
 }
