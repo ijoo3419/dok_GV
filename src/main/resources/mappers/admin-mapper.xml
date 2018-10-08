@@ -200,6 +200,10 @@
 		WHERE FILE_LEVEL=100 OR FILE_LEVEL=200 OR FILE_LEVEL=300 OR FILE_LEVEL = 400
 		ORDER BY FILE_LEVEL
 	</select>
+	
+	<insert id="setVisit">
+		INSERT INTO VISITOR VALUES(SYSDATE)
+	</insert>
 	<!-- 검색 결과 조회 카운트 인소진 -->
 	<!-- <select id="countId" resultType="_int">
 		SELECT COUNT(*)
