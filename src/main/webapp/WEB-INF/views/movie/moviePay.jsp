@@ -423,6 +423,9 @@ a{
 #movieTimeTable{
 	border: 1px solid #E6E6E6 !important;
 }
+.seatPay-btn-right{
+	color: white !important;
+}
 </style>
 <body>
 	<jsp:include page="../common/headBar.jsp"/>
@@ -815,6 +818,7 @@ a{
 								$tr.append($hiddenRoom);
 								$tr.append($hiddenRoomId);
 								$tr.append($hiddenTurning);
+								
 								
 								
 								$a.append($tr);
@@ -1427,7 +1431,7 @@ a{
 							<tr>
 								<td class="area-A5">
 									<input type="hidden" value="A5">
-									<font id="web-fontTitle-child">대전/춘천</font>
+									<font id="web-fontTitle-child">대전/충청</font>
 								</td>
 							</tr>
 							<tr>
@@ -1510,7 +1514,6 @@ a{
 		 							area_parents[key] = data[key].area_parents; //부모의 지역 아이디를 저장
 		 							
 		 							for(var i = 0; i < 9; i++){
-		 								
 		 								if($(".areaTable").find("td").eq(i).find("input").val() == area_parents[key]){ //부모의 지역 아이디에 해당 되는 td만 활성화 
 		 									$(".areaTable").find("td").eq(i).css({"cursor":"pointer"});
 		 									$(".areaTable").find("td").eq(i).hover().css({"background":"#F2F2F2"});
