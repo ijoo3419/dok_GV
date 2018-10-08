@@ -201,36 +201,9 @@
 		ORDER BY FILE_LEVEL
 	</select>
 	
-	<insert id="setVisit">
-		INSERT INTO VISITOR VALUES(SYSDATE)
+	<insert id="insertVisit">
+		INSERT INTO VISITOR
+		VALUES(VISITOR_VISIT_ID.NEXTVAL,NULL,SYSDATE,NULL,NULL)
 	</insert>
-	<!-- 검색 결과 조회 카운트 인소진 -->
-	<!-- <select id="countId" resultType="_int">
-		SELECT COUNT(*)
-		FROM MEMBER
-		WHERE 
-		<choose>
-			<when test="id != null">
-				MID LIKE '%' || #{id} || '%'
-			</when>
-			<when test="name != null">
-				USER_NAME LIKE '%' || #{name} || '%'
-			</when>
-		</choose>
-	</select> -->
 	
-	<!-- 회원 조회 인소진 -->
-	<!-- <select id="SearchMember" resultMap="searchResultSet">
-		SELECT *
-		FROM MEMBER
-		WHERE
-		<choose>
-			<when test="id != null">
-				MID LIKE '%' || #{id} || '%'
-			</when>
-			<when test="name != null">
-				USER_NAME LIKE '%' || #{name} || '%'
-			</when>
-		</choose>
-	</select> -->
 </mapper>
