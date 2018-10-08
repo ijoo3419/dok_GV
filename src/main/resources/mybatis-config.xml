@@ -20,7 +20,6 @@
 		
 		<typeAlias type="com.kh.dok.licensee.model.vo.MovieRoom" alias="MovieRoom"></typeAlias>
 		<typeAlias type="com.kh.dok.member.model.vo.MyReply" alias="MyReply"></typeAlias>
-
 	</typeAliases>
 	
 	<mappers>

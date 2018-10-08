@@ -40,4 +40,5 @@ public interface AdminDao {
 	int deleteFile(SqlSessionTemplate sqlSession);
 
 	ArrayList<BoardFile> selectFile(SqlSessionTemplate sqlSession) throws UploadException;
+	
 }
