@@ -172,7 +172,8 @@ public class AdminDaoImpl implements AdminDao{
 		return bf;
 	}
 
-
-
+	public int setTotalCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("Admin.insertVisit");
+	}
 
 }
