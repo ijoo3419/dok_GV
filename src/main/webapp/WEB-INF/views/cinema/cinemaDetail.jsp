@@ -11,7 +11,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <style>
@@ -292,7 +292,7 @@ hr {
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">좌석 수:</a><br>
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">주소: ${row1.theater_address}</a><br>
 			<br>
-			
+			<br>
 			<input type="button" value="상영시간표" style="float:right; ">
 			<input type="button" value="♥영화관 찜" style="float:right; margin-right:10px; text-decoration: none;">
 			<input type="button" value="문의하기" style="float:right;  margin-right:10px;">
@@ -301,58 +301,73 @@ hr {
 		<hr>
 		
 		<br>
-		<h2 align="left" style="margin-left:20px;">영화관 소개</h2>
+		<h2 align="left" style="margin-left:20px; margin-bottom: 0px!important;">영화관 소개</h2>
 		<div id="synopsis">
-			발휘하기 커다란 않는 반짝이는 우리 피부가 얼마나 넣는 피다. 
-			아름답고 얼마나 모래뿐일 튼튼하며, 것이다. 이상의 우리의 것이다.보라, 철환하였는가? 
-			아니더면, 무엇이 가장 가치를 하였으며, 그들의 실현에 천지는 거친 봄바람이다. 
-			그들의 관현악이며, 돋고, 것이다. 곧 속잎나고, 새 천지는 어디 보는 밥을 가는 교향악이다. 
-			그들의 인생을 가지에 생생하며, 곧 피가 얼음이 사라지지 것이다. 
-			천하를 속에 지혜는 바로 못할 피다. 귀는 속잎나고, 열락의 피고, 운다. 옷을 위하여, 미인을 때까지 무엇을 할지라도 그리하였는가?
+			${row1.theaterText }
 		</div>
 		
 		<!-- <h2 align="right" style="margin-right:0; width:100px !important;">지도</h2> -->
 		<div id="cinemamap">
-			<script src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=wWfCWSbi3oQIe4dEdk3L"></script>
+<div id="map" style="width:100%;height:398px;"></div>
 
-<style type="text/css">
 
-	.map_wrap {
-		text-align:center;
-	}
-	.map_wrap .map_div {
-		border-radius:5px;
-		border:4px solid gray;
-		box-sizing:border-box;
-		height:800px;
-		margin:0 auto;
-		width:95%;
-	}
-	.map_wrap .map_tit {
-		font-size:12pt !important;
-		padding:10px 0;
-	}
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=wWfCWSbi3oQIe4dEdk3L&submodules=geocoder"></script>
+<script> 
+    //지도 타입 설정하는 곳 ( 아무것도 설정 하지 않으면 자동으로 Normal로 적용된다 ) 초기화할 때 설정할수 있다. 
+    var map = new naver.maps.Map('map'); 
+    // 위성지도를 사용하려면 MapTypeId 객체의 SATELLITE 상수 값을 사용합니다. 
+    //var map = new naver.maps.Map('map', {mapTypeId: naver.maps.MapTypeId.SATELLITE}); 
+    // 위성지도에 지명을 적용하려면 MapTypeId 객체의 HYBRID 상수 값을 사용합니다. 
+    //var map = new naver.maps.Map('map', {mapTypeId: naver.maps.MapTypeId.HYBRID}); 
+    // 기본지도에 높낮이만 적용하려면 MapTypeId 객체의 TERRAIN 상수 값을 사용합니다. 
+    //var map = new naver.maps.Map('map', {mapTypeId: naver.maps.MapTypeId.TERRAIN});
+    var myaddress = '${row1.theater_address}';// 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!) 
+    // 주소가 있는지 체크
+    naver.maps.Service.geocode({address: myaddress}, function(status, response) { 
+        if (status !== naver.maps.Service.Status.OK) { 
+            return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러'); 
+        }
+        var result = response.result; 
+        // 검색 결과 갯수: result.total 
+        // 첫번째 결과 결과 주소: result.items[0].address 
+        // 첫번째 검색 결과 좌표: result.items[0].point.y, result.items[0].point.x 
+        var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y); 
+        map.setCenter(myaddr); // 검색된 좌표로 지도 이동 
+        // 마커 표시 ( 검색한 주소에 마커를 찍어둠 )
+        var marker = new naver.maps.Marker({ 
+            position: myaddr, 
+            map: map 
+        });
+        var contentString = [
+            '<div class="iw_inner">',
+            '   <h3>${row1.theaterName}</h3>',
+            '</div>'
+        ].join('');
 
-</style>
-
-<div class="map_wrap">
-	<div id="map_v3" class="map_div"></div>
-	<div class="map_tit">map v3</div>
-</div>
-
-<script>
-
-	// v3 버전 지도 생성
-	var map_v3 = new naver.maps.Map('map_v3', {
-		center : new naver.maps.LatLng(37.2900533, 127.1036797),
-		zoom : 10,
-		mapTypeControl : true // 일반, 위성 버튼 보이기 (v3 에서 바뀐 방식)
-	});
+    var infowindow = new naver.maps.InfoWindow({
+        content: contentString
+    });
+    
+    infowindow.open(map, marker);
+       /*  // 마커 클릭 이벤트 처리 ( 클릭할 경우 infowindow에 등록된 이미지와 이름이 뜸 )
+        naver.maps.Event.addListener(marker, "click", function(e) { 
+            if (infowindow.getMap()) { 
+            infowindow.close(); 
+        } else { 
+            infowindow.open(map, marker); 
+        } 
+    }); 
+    // 마크 클릭시 인포윈도우 오픈 
+    var infowindow = new naver.maps.InfoWindow({ 
+    //띄워줄 이름과 사이트 이미지, 클릭했을경우 이동할 url 주소를 입력해주면 된다.
+         content: '<h4> [네이버 개발자센터]</h4><a href="https://developers.naver.com" target="_blank"><img src="https://developers.naver.com/inc/devcenter/images/nd_img.png"></a>'
+    }); */
+});
 
 </script>
 		</div>
 		</c:forEach>
-		<br><br><br><br>
+		<br><br><br><br><br><br><br>
 		<a style="text-align:left; width:400px; margin-right:100px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important; float:right">오는길 찾기</a>
 		<br><br>
 		<hr>
@@ -361,12 +376,12 @@ hr {
 		<a style="text-align:left; width:100px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">영화관 뷰</a>
 			
 		<br>
-		<div align="center" id="imageview">
+		<!-- <div align="center" id="imageview">
 		
 		
-		</div>
+		</div> -->
 
-		 <br><br>
+		 <br>
 		<div class="container">
  
   <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
