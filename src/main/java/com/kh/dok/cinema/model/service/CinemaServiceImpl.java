@@ -26,5 +26,13 @@ public class CinemaServiceImpl implements CinemaService{
 		
 		return cienmaView;
 	}
+
+
+	@Override
+	public ArrayList<Cinema> selectCinemaDetail(Cinema ca) {
+		ArrayList<Cinema> cinemaDetail = cd.selectCinemaDetail(sqlSession,ca);
+		
+		return cinemaDetail;
+	}
 	
 }

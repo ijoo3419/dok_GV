@@ -14,10 +14,24 @@ public class CinemaDaoImpl implements CinemaDao{
 	public ArrayList<Cinema> selectCinema(SqlSessionTemplate sqlSession, Cinema c) {
 		ArrayList<Cinema> cienmaView =  null;
 				
-		cienmaView = (ArrayList)sqlSession.selectList("Cinema.selectCinema",c);
+		cienmaView = (ArrayList)sqlSession.selectList("Cinema.selectCinema");
 		
-		
+		System.out.println("영화관 Dao : " + cienmaView);
 		return cienmaView;
+	}
+
+	@Override
+	public ArrayList<Cinema> selectCinemaDetail(SqlSessionTemplate sqlSession, Cinema ca) {
+		
+		String id = ca.getTheaterId();
+		
+		
+		ArrayList<Cinema> cinemaDetail = null;
+		
+		cinemaDetail= (ArrayList)sqlSession.selectList("Cinema.cinemaDetail",id);
+		
+		
+		return cinemaDetail;
 	}
 
 }

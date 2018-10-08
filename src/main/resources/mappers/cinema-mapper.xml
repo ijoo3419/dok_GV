@@ -4,19 +4,36 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Cinema">
 	<resultMap type="Cinema" id="cinemaResultSet">
-		<id property="theater_id" column="THEATER_ID"/>
-		<result property="mid" column="MID"/>
-		<result property="theater_name" column="THEATER_NAME"/>
-		<result property="theater_root" column="THEATER_ROOT"/>
-		<result property="theater_text" column="THEATER_TEXT"/>
-	
+		<id column="THEATER_ID" property="theaterId"/>
+		<result column="MID" property="mid"/>
+		<result column="THEATER_NAME" property="theaterName"/>
+		<result column="THEATER_ROOT" property="theaterRoot"/>
+		<result column="THEATER_ADDRESS" property="theater_address"/>
+		<result column="AREA_ID" property="area_id"/>
+		<result column="FILE_SRC" property="file_src"/>
+		<result column="FILE_LEVEL" property="file_level"/>
 	</resultMap>
 	
 <!-- 영화관 추가하기~!~!~!~!~! -->
 <insert id="insertTheater" parameterType="Cinema">
 		INSERT INTO THEATER VALUES('TT' || TO_CHAR(THEATER_THEATER_ID.NEXTVAL), #{mid},
 		#{theaterName}, #{theaterRoot}, #{theaterText})
-	</insert>
-	
+</insert>
+<!-- 이진희 영화관 출력 -->
+<select id="selectCinema" parameterType="Cinema" resultMap="cinemaResultSet">
+SELECT C.THEATER_ID, C.MID, C.THEATER_NAME,
+        C.THEATER_ROOT, C.THEATER_TEXT,C.THEATER_ADDRESS, 
+		 C.AREA_ID
+		 FROM THEATER C, BOARD B 
+		 WHERE C.THEATER_ID = B.THEATER_ID
+</select>	
+<select id="cinemaDetail" parameterType="Cinema" resultMap="cinemaResultSet">
+SELECT C.THEATER_ID, C.MID, C.THEATER_NAME,
+        C.THEATER_ROOT, C.THEATER_TEXT,C.THEATER_ADDRESS, 
+		 C.AREA_ID
+		 FROM THEATER C, BOARD B 
+		 WHERE C.THEATER_ID = B.THEATER_ID
+		 AND C.THEATER_ID = ${id}
+</select>	
 	
 </mapper>

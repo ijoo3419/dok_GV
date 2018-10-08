@@ -10,4 +10,6 @@ public interface CinemaDao {
 
 	ArrayList<Cinema> selectCinema(SqlSessionTemplate sqlSession, Cinema c);
 
+	ArrayList<Cinema> selectCinemaDetail(SqlSessionTemplate sqlSession, Cinema ca);
+
 }

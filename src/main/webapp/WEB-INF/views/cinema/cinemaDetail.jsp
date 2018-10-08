@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <style>
@@ -272,8 +275,9 @@ hr {
 		<div id="sumnailimage">
 	
 		</div>
+		<c:forEach items="${cinemaDetail}" var="row1">
 		<div id="data">
-			<h2 align="left">독립영화관</h2>
+			<h2 align="left">${row1.theaterName}</h2>
 		<hr>
 			<a style="text-align:left; width:100px; margin:0; font-size:30px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">★★★☆☆</a>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -286,7 +290,7 @@ hr {
 			<br>
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">상영관 수:</a><br>
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">좌석 수:</a><br>
-			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">주소:</a><br>
+			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">주소: ${row1.theater_address}</a><br>
 			<br>
 			
 			<input type="button" value="상영시간표" style="float:right; ">
@@ -309,8 +313,45 @@ hr {
 		
 		<!-- <h2 align="right" style="margin-right:0; width:100px !important;">지도</h2> -->
 		<div id="cinemamap">
-			
+			<script src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=wWfCWSbi3oQIe4dEdk3L"></script>
+
+<style type="text/css">
+
+	.map_wrap {
+		text-align:center;
+	}
+	.map_wrap .map_div {
+		border-radius:5px;
+		border:4px solid gray;
+		box-sizing:border-box;
+		height:800px;
+		margin:0 auto;
+		width:95%;
+	}
+	.map_wrap .map_tit {
+		font-size:12pt !important;
+		padding:10px 0;
+	}
+
+</style>
+
+<div class="map_wrap">
+	<div id="map_v3" class="map_div"></div>
+	<div class="map_tit">map v3</div>
+</div>
+
+<script>
+
+	// v3 버전 지도 생성
+	var map_v3 = new naver.maps.Map('map_v3', {
+		center : new naver.maps.LatLng(37.2900533, 127.1036797),
+		zoom : 10,
+		mapTypeControl : true // 일반, 위성 버튼 보이기 (v3 에서 바뀐 방식)
+	});
+
+</script>
 		</div>
+		</c:forEach>
 		<br><br><br><br>
 		<a style="text-align:left; width:400px; margin-right:100px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important; float:right">오는길 찾기</a>
 		<br><br>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -298,7 +299,10 @@ hr {
   <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
       <h3>서울</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+     <c:forEach items="${cienmaView}" var="row1">
+      	<a href="cinemaDetail.ci?id=${row1.theaterId}">${row1.theaterName }</a>
+      </c:forEach>
+      
     </div>
     <div id="menu1" class="tab-pane fade">
       <h3>경기</h3>
