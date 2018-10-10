@@ -4,10 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MovieRoom">
 	<resultMap type="MovieRoom" id="movieRoomResultSet">
-		<id property="movieRoom_id" column="MOVIEROOM_ID"/>
-		<result property="theater_id" column="THEATER_ID"/>
-		<result property="movieRoom_name" column="MOVIEROOM_NAME"/>
-		<result property="movieRoom_address" column="MOVIEROOM_ADDRESS"/>
+		<id property="movieRoomId" column="MOVIEROOM_ID"/>
+		<result property="theaterId" column="THEATER_ID"/>
+		<result property="movieRoomName" column="MOVIEROOM_NAME"/>
+		<result property="movieRoomAddress" column="MOVIEROOM_ADDRESS"/>
 	
 	</resultMap>
 	
@@ -18,5 +18,12 @@
 		WHERE MID = #{mid}), #{movieRoomName}, #{movieRoomAddress})
 	</insert>
 	
+<!-- movieRoomId 값 가져오기 -->
+<select id="selectIdCheck" resultMap="movieRoomResultSet" parameterType="MovieRoom">
+	SELECT MOVIEROOM_ID 
+	FROM(SELECT ROWNUM RNUM, MOVIEROOM_ID FROM MOVIEROOM
+	ORDER BY MOVIEROOM_ID DESC)
+	WHERE RNUM = 1
+</select>
 
 </mapper>

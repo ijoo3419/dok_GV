@@ -19,6 +19,13 @@ public class LicenseeDaoImpl implements LicenseeDao{
 		return sqlSession.insert("MovieRoom.insertMovieRoom", mr);
 	}
 
+	@Override
+	public MovieRoom checkMovieRoomId(SqlSessionTemplate sqlSession, MovieRoom mr) {
+		MovieRoom movieRoomId = sqlSession.selectOne("MovieRoom.selectIdCheck", mr);
+		
+		return movieRoomId;
+	}
+
 	
 
 }

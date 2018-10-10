@@ -4,32 +4,40 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.core.io.DefaultResourceLoader;
+
+
 
 
 
 public class cellClass {
 
+	
 	//셀 값 읽기 17x17
-	public String[][] test(String name) {
+	public String[][] test(String name, HttpServletRequest request) {
 
 		XSSFRow row;
 		XSSFCell cell;
 		int type;
 		String[][] num = new String[15][15]; 
 		
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		
+		String filePath = root + "\\movieRoomFile";
+		
 		
 		System.out.println("name 은 : " + name);
 		try {
-
-			FileInputStream inputStream = new FileInputStream("C:/Users/qwertyJeong/Desktop/sheetTest/excel"+ name +".xlsx");
+		
+			
+			FileInputStream inputStream = new FileInputStream(filePath + "\\" + name +".xlsx");
 			XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
 
 			//sheet수 취득
@@ -69,13 +77,19 @@ public class cellClass {
 	
 	
 	//테이블 생성
-	public void createTeble(String[] arr, String name){
+	public void createTeble(String[] arr, String name, HttpServletRequest request){
 
 		FileInputStream inputStream = null;
 		FileOutputStream outputStream = null;
 		XSSFWorkbook workbook = null;
+		
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		
+		String filePath = root + "\\movieRoomFile";
+		
+		
 		try {
-				inputStream = new FileInputStream("C:/Users/qwertyJeong/Desktop/sheetTestExcelBox.xlsx");
+				inputStream = new FileInputStream(filePath + "//" + "sheetTestExcelBox.xlsx");
 				workbook = new XSSFWorkbook(inputStream);
 				
 				XSSFSheet sheet = workbook.getSheetAt(0);	//Class Data 시트
@@ -86,7 +100,7 @@ public class cellClass {
 					int col = n%15;
 					sheet.getRow(row).getCell(col).setCellValue("O");	//값 넣기
 				}
-				outputStream = new FileOutputStream("C:/Users/qwertyJeong/Desktop/sheetTest/excel"+ name +".xlsx");	//만들기
+				outputStream = new FileOutputStream(filePath + "\\" + name +".xlsx");	//만들기
 				workbook.write(outputStream);
 				outputStream.close();
 				
@@ -112,13 +126,18 @@ public class cellClass {
 	
 	
 	//셀 삽입
-	public void insertCell(String[] arr, String name, String tableName){
+	public void insertCell(String[] arr, String name, String tableName, HttpServletRequest request){
 
 		FileInputStream inputStream = null;
 		FileOutputStream outputStream = null;
 		XSSFWorkbook workbook = null;
+
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		
+		String filePath = root + "\\movieRoomFile";
+		
 		try {
-				inputStream = new FileInputStream("C:/Users/qwertyJeong/Desktop/sheetTest/excel"+tableName+".xlsx");
+				inputStream = new FileInputStream(filePath + "\\" + tableName +".xlsx");
 				workbook = new XSSFWorkbook(inputStream);
 				
 				XSSFSheet sheet = workbook.getSheetAt(0);	//Class Data 시트

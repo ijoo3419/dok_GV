@@ -31,6 +31,16 @@ public class LicenseeServiceImpl implements LicenseeService{
 	}
 
 
+	@Override
+	public MovieRoom checkMovieRoomId(MovieRoom mr) {
+		
+		MovieRoom movieRoomId = ld.checkMovieRoomId(sqlSession, mr);
+		
+		
+		return movieRoomId;
+	}
+
+
 	
 	
 	
