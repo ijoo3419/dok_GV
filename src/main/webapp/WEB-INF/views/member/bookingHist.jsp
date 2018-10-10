@@ -119,7 +119,7 @@ img {
 													<c:set var="status" value="${ bk.status }"/>
 													<c:choose>
 														<c:when test="${ status eq '취소가능_리뷰불가' }">
-															<td><img src="${ contextPath }/resources/images/member/cancel.png" width="25" height="25" style="margin-left:10px; margin-top:10px;" id="cancel"></td>
+															<td><img src="${ contextPath }/resources/images/member/delete.png" width="25" height="25" style="margin-left:10px; margin-top:10px;" id="cancel"></td>
 														</c:when>
 														<c:when test="${ status eq '예매중' }">
 															<td></td>

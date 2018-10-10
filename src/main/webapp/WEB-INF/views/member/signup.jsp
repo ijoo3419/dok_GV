@@ -388,7 +388,7 @@ body label {
     </div>
 
     <!-- Signup Form -->
-    <form action="insert.me" method="post">
+    <form action="insert.me" method="POST">
       <input type="text" id="email" class="fadeIn third" name="email" placeholder="* email" required onkeyup="checkSame()">
       <div id="checkSame"></div>
       <input type="button" class="fadeIn fourth" value="이메일 인증" id="emailBtn" onclick="checkMail()">
@@ -413,7 +413,7 @@ body label {
       <input type="text" id="phone" class="fadeIn second" name="phone" placeholder="phone">
       <input type="text" id="nickname" class="fadeIn second" name="nickname" placeholder="* nickname" required onkeyup="checkNick()">
       <div id="checkName"></div>
-      <input type="submit" class="fadeIn fourth" id="signupBtn" value="회원가입">
+      <input type="button" onclick="return check()" class="fadeIn fourth" id="signupBtn" value="회원가입">
       
     </form>
 
@@ -447,12 +447,11 @@ var email = $("#email").val();
 		url: "checkSame.me",
 		success: function(data){
 			
-			console.log("이메일 data: " + data);
 			
-			 if (data == '1'){
+			 if (data == 1){
 				document.getElementById('checkSame').innerHTML = "<span style='color: red;'> 중복되는 이메일입니다. 다른 이메일을 입력해주세요.  </span>"
 				emailCheck = 0;
-			} else if (data == '0'){
+			} else if (data == 0){
 				document.getElementById('checkSame').innerHTML = "<span style='color: green;'> 사용 가능한 이메일입니다. </span>"
 				emailCheck = 1;
 			}
@@ -547,6 +546,24 @@ function checkNick(){
 	
 	
 }
+
+
+function check(){
+	
+	console.log(emailCheck);
+	console.log(nickCheck);
+	console.log(authCheck);
+	console.log(pwdCheck);
+	
+	if(emailCheck == 1 && nickCheck == 1 && authCheck == 1 && pwdCheck == 1){
+		$("#signupBtn").attr("type", "submit");
+	} else {
+		alert("조건을 충족하지 않으셨습니다.");
+	}
+	
+	
+}
+
 
 
 
