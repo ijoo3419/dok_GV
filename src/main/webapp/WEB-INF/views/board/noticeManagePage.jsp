@@ -22,34 +22,29 @@
       href="${contextPath }/resources/css/noscript.css" />
 </noscript>
 
+<style>
+	#searchValue{
+		margin-left: 10px;
+		display: inline-block;
+	}
+	
+	#searchCondition{
+		width: 170px;
+		display: inline-block;
+		margin-left: 80px;
+	}
+</style>
+
 </head>
 <body class="is-preload">
 	<c:import url="../common/headBar.jsp" />
 
 
-	<!-- Wrapper -->
 	<div id="wrapper" class="fade-in">
-		<!-- Intro -->
-
-
-		<!-- <div id="intro">
-						<h1>This is<br />
-						Massively</h1>
-						<p>A free, fully responsive HTML5 + CSS3 site template designed by <a href="https://twitter.com/ajlkn">@ajlkn</a> for <a href="https://html5up.net">HTML5 UP</a><br />
-						and released for free under the <a href="https://html5up.net/license">Creative Commons license</a>.</p>
-						<ul class="actions">
-							<li><a href="#header" class="button icon solo fa-arrow-down scrolly">Continue</a></li>
-						</ul> 
-						
-					</div>
-			 -->
-		<!-- Header -->
 
 		<header id="header">
-			<!-- <a href="index.html" class="logo">Massively</a> -->
 		</header>
 
-	<!-- Nav -->
 	<c:set var="mid" value="${ loginUser.mid }" scope="session"/>
 	<nav id="nav">
 			<ul class="links">
@@ -63,47 +58,23 @@
 			</ul>
 		</nav>
 		
-			<!--  <ul class="icons">
-							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-							<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-							<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
-						</ul>-->
 		</nav>
 
-		<!-- Main -->
 		<div id="main">
 
-			<!-- Featured Post -->
 			<article class="post featured">
 			
 			<h2>공지사항</h2>
-			<!-- <div class="col-12">	
-				<div>
-				<h3>날짜 : &nbsp;&nbsp;  <select name="demo-category" id="demo-category">
-
-						<option value="">- 날 짜 -</option>
-						<option value="1">09/11</option>
-						<option value="1">09/12</option>
-						<option value="1">09/13</option>
-						<option value="1">09/14</option>
-					</select></h3>
-				</div>
-				</div>
-				<br><br> -->
 				<br><br>
-				<!-- Table -->
 				<div class="table-wrapper">
-					<table>
-						<thead>
+					<table id="boardArea" align="center" style="text-align:center">
 							<tr>
 								<th>글번호</th>
 								<th>제목</th>
 								<th>작성자</th>
 								<th>조회수</th>
-								<th>날짜</th>
+								<th>작성일</th>
 							</tr>
-						</thead>
 						<c:set var="mid" value="${ loginUser.mid }" scope="session"/>
 						<c:if test="${ list == null }">
 							<tr>
@@ -112,7 +83,7 @@
 						</c:if>
 						<c:if test="${ list != null }">
 							<c:forEach var="list" items="${ list }">
-								<tr id="test">
+								<tr>
 									<th>${ list.rownum }</th>
 									<th>${ list.btitle }</th>
 									<th>${ list.nickname }</th>
@@ -125,15 +96,76 @@
 					</table>
 				</div>
 				
+				<div class="search">
+					<select id="searchCondition" name="searchCondition">
+						<option value="" >검색기준</option>
+						<option value="btitle">제목</option>
+						<option value="bcontent">내용</option>
+					</select><input id="searchValue" name="searchValue" type="search" placeholder="검색" style="width:300px"><a href="#" class="button primary icon fa-search" onclick="searchBoard()">조회</a>
+				</div>
+				
+				<script>
+					function searchBoard(){
+						var searchCondition = $("select[name=searchCondition]").val();
+						var searchValue = $("input[name=searchValue]").val();
+						
+						location.href = "searchNoticeBoard.bo?currentPage=1&searchResult=" + searchResult 
+								+ "&searchCondition=" + searchCondition;
+						
+					}
+				</script>
+				
 				<div>
 					<button type="button" class="img_btn user cancel mr7"><a href="writeNotice.bo">공지작성</a></button>
 				</div>
+				
+				<div id="pagingArea" align="center">
+					<c:if test="${ pi.currentPage <= 1 }">
+						[이전] &nbsp;
+					</c:if>
+					<c:if test="${ pi.currentPage > 1 }">
+						<c:url var="blistBack" value="/selectList.bo">
+							<c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
+						</c:url>
+						<a href="${ blistBack }">[이전]</a> &nbsp;
+					</c:if>
+					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+						<c:if test="${ q eq pi.currentPAge }">
+							<font color="red" size="4"><b>[${ p }]</b></font>
+						</c:if>
+						<c:if test="${ p ne pi.currentPage }">
+							<c:url var="blistCheck" value="selectList.bo">
+								<c:param name="currentPage" value="${ p }"/>
+							</c:url>
+							<a href="${ blistCheck }">${ p }</a>
+						</c:if>
+					</c:forEach>
+					<c:if test="${ pi.currentPage >= pi.maxPage }">
+						&nbsp; [다음]
+					</c:if>
+					<c:if test="${ pi.currentPage < pi.maxPage }">
+						<c:url var="blistEnd" value="selectList.bo">
+							<c:param name="currentPage" value="${ pi.currentPage + 1 }" />
+						</c:url>
+						<a href="${ blistEnd }">&nbsp;[다음]</a>
+					</c:if>
+				</div>
 
-	<script>
-		$('#test').click(function(){
-			alert("dasdasdsasd");
-		});
-	</script>
+
+				<script>
+				$(function(){
+					$("#boardArea").find("td").mouseenter(function(){
+						$(this).parents("tr").css({"background":"orangered", "cursor":"pointer"});
+					}).mouseout(function(){
+						$(this).parents("tr").css({"background":"white"});
+					}).click(function(){
+						var bid = $(this).parents().children("td").eq(0).text();
+						//console.log(bid);
+						location.href = "selectOne.bo?bid=" + bid;
+					}); 
+				});
+				</script>
+	
 			
 			
 			

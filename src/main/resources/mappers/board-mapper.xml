@@ -71,6 +71,18 @@
 		AND BOARD_DIV IN ('BD1', 'BD2', 'BD3')
 		AND BSTATUS = 'Y'
 	</select>
-
-
+	
+	<!-- 공지사항 검색결과 조회(성희) -->
+	<select id="listCount" parameterType="Search" resultType="_int">
+		SELECT COUNT(*)
+		FROM BOARD
+		<choose>
+			<when test="searchCondition != null and searchCondition.equals('btitle')">
+				WHERE BTITLE LIKE '%' || #{searchResult} || '%'
+			</when>
+			<when test="searchCondition != null and searchCondition.equals('bcontent')">
+				WHERE BCONTENT LIKE '%' || #{searchResult} || '%'
+			</when>
+		</choose>
+	</select>
 </mapper>

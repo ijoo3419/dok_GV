@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dok.admin.model.vo.SearchCondition;
 import com.kh.dok.board.model.exception.BoardInsertException;
 import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.board.model.vo.BoardFile;
@@ -50,6 +51,15 @@ public class BoardDaoImpl implements BoardDao{
 		
 		
 		return list;
+	}
+
+	@Override
+	public int listCount(SqlSessionTemplate sqlSession, SearchCondition sc) {
+		System.out.println("listCount sc : " + sc);
+		
+		int listCount = sqlSession.selectOne("Board.listCount", sc);
+		
+		return 0;
 	}
 
 }
