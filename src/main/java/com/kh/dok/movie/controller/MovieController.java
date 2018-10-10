@@ -3,6 +3,8 @@ package com.kh.dok.movie.controller;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.dok.common.PageInfo;
+import com.kh.dok.common.Pagination;
 import com.kh.dok.movie.model.service.MovieService;
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieSumbnail;
@@ -24,13 +28,23 @@ public class MovieController {
 	
 	//이진희 전체영화 출력
 	@RequestMapping("movie.mo")
-	public String showmovieView(MovieSumbnail msn, Model model){
+	public String showmovieView(MovieSumbnail msn, Model model, HttpServletRequest request){
+		int currentPage =1;
 		
-		ArrayList<MovieSumbnail> movieView = ms.selectMovie(msn);
+		if(request.getParameter("currentPage") != null){
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		int listCount = ms.getlistCount();
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		
+		ArrayList<MovieSumbnail> movieView = ms.selectMovie(msn, pi);
 		ArrayList<MovieSumbnail> movieRank1 = ms.selectMovieRank1(msn);
 		ArrayList<MovieSumbnail> movieRank2 = ms.selectMovieRank2(msn);
 		ArrayList<MovieSumbnail> movieRank3 = ms.selectMovieRank3(msn);
 		
+		model.addAttribute("pi",pi);
 		model.addAttribute("movieView",movieView);
 		model.addAttribute("movieRank1",movieRank1);
 		model.addAttribute("movieRank2",movieRank2);
