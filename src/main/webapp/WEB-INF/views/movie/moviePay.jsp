@@ -34,401 +34,420 @@
 </head>
 <style>
 #myModal {
-	overflow: hidden !important;
-	width: 1400px !important;
-	height: 900px !important;
+	overflow: hidden ;
+	width: 1400px ;
+	height: 900px ;
 }
 
 #web-fontTitle {
-	font-family: 'Do Hyeon', sans-serif !important;
+	font-family: 'Do Hyeon', sans-serif ;
 	color: #3104B4;
 }
 
 #web-fontTitle-child {
-	font-family: 'Do Hyeon', sans-serif !important;
-	color: #585858 !important;
-	margin-left: 20px !important;
+	font-family: 'Do Hyeon', sans-serif ;
+	color: #585858 ;
+	margin-left: 20px ;
 }
 
 .areaTable #web-fontTitle-child {
-	font-family: 'Do Hyeon', sans-serif !important;
-	color: #E6E6E6 !important;
-	margin-left: 20px !important;
+	font-family: 'Do Hyeon', sans-serif ;
+	color: #E6E6E6 ;
+	margin-left: 20px ;
 }
 
 #web-fontTitle-child-two {
-	font-family: 'Do Hyeon', sans-serif !important;
-	font-size:20px !important;
-	color: #585858 !important;
+	font-family: 'Do Hyeon', sans-serif ;
+	font-size:20px ;
+	color: #585858 ;
 }
 
 #web-fontDate {
-	font-family: 'Do Hyeon', sans-serif !important;
-	font-size: 20px !important;
-	color: #585858 !important;
+	font-family: 'Do Hyeon', sans-serif ;
+	font-size: 20px ;
+	color: #585858 ;
 }
 
 td #web-fontDate {
-	font-family: 'Do Hyeon', sans-serif !important;
-	font-size: 20px !important;
-	color: #585858 !important;
-	margin-left:5px !important;
+	font-family: 'Do Hyeon', sans-serif ;
+	font-size: 20px ;
+	color: #585858 ;
+	margin-left:5px ;
 }
 
 .modal-content {
-	margin-top: 100px !important;
-	margin-left: 300px !important;
-	overflow: hidden !important;
-	width: 950px !important;
-	height: 580px !important;
+	margin-top: 100px ;
+	margin-left: 300px ;
+	overflow: hidden ;
+	width: 950px ;
+	height: 580px ;
 }
 
 #myModal2 .modal-content{
-	margin-top: 100px !important;
-	margin-left: 300px !important;
-	overflow: hidden !important;
-	width: 950px !important;
-	height: 670px !important;
+	margin-top: 100px ;
+	margin-left: 300px ;
+	overflow: hidden ;
+	width: 950px ;
+	height: 670px ;
 } 
 
 #myModal3 .modal-content{
-	margin-top: 100px !important;
-	margin-left: 300px !important;
-	overflow: hidden !important;
-	width: 670px !important;
-	height: 650px !important;
+	margin-top: 100px ;
+	margin-left: 300px ;
+	overflow: hidden ;
+	width: 670px ;
+	height: 650px ;
 }
 
 #myModal3 .modal-body{
-	width: 660px !important;
+	width: 660px ;
 }
 
 #myModal4 .modal-content{
-	width: 670px !important;
-	height: 600px !important;
+	width: 670px ;
+	height: 600px ;
 }
 
 .modal-dialog {
-	width: 100% !important;
-	height: 90% !important;
+	width: 100% ;
+	height: 90% ;
 }
 
 .model-left {
-	overflow: hidden !important;
-	width: 400px !important;
-	height: 500px !important;
-	display: inline-block !important;
-	float: left !important;
+	overflow: hidden ;
+	width: 400px ;
+	height: 500px ;
+	display: inline-block ;
+	float: left ;
 }
 
 .modal-title-div {
-	width: 100% !important;
-	height: 75px !important;
-	overflow: hidden !important;
-	border-bottom-style: solid !important;
-	border-bottom-width: 1px !important;
-	border-bottom-color: #E6E6E6 !important;
+	width: 100% ;
+	height: 75px ;
+	overflow: hidden ;
+	border-bottom-style: solid ;
+	border-bottom-width: 1px ;
+	border-bottom-color: #E6E6E6 ;
 }
 
 .modal-title-div .one, .two {
-	display: inline-block !important;
+	display: inline-block ;
 }
 
 .modal-title-div .two {
-	margin-left: 150px !important;
+	margin-left: 150px ;
 }
 
 .cinemaBtn {
-	width: 200px !important;
-	height: 80px !important;
-	background: #FAFAFA !important;
-	border: 1px solid #D8D8D8 !important;
+	width: 200px ;
+	height: 80px ;
+	background: #FAFAFA ;
+	border: 1px solid #D8D8D8 ;
 }
 
 .movieBtn {
-	width: 100px !important;
-	height: 150px !important;
-	background: #FAFAFA !important;
-	border: 1px solid #D8D8D8 !important;
+	width: 100px ;
+	height: 150px ;
+	background: #FAFAFA ;
+	border: 1px solid #D8D8D8 ;
 }
 
 .model-right {
-	overflow: hidden !important;
-	width: 500px !important;
-	height: 500px !important;
-	border-left-style: solid !important;
-	border-left-width: 1px !important;
-	border-left-color: #E6E6E6 !important;
+	overflow: hidden ;
+	width: 500px ;
+	height: 500px ;
+	border-left-style: solid ;
+	border-left-width: 1px ;
+	border-left-color: #E6E6E6 ;
 	display: inline-block;
 }
 
 .model-right-child {
-	margin-left: 20px !important;
+	margin-left: 20px ;
 }
 
 #myBtn-div {
-	margin-top: 50px !important;
-	margin-left: 200px !important;
+	margin-top: 50px ;
+	margin-left: 200px ;
 }
 
 #td-web-fontTitle {
-	font-family: 'Do Hyeon', sans-serif !important;
-	font-size: 17px !important;
+	font-family: 'Do Hyeon', sans-serif ;
+	font-size: 17px ;
 }
 
 /* 	-------------------------------------------------------------- */
 
 /* The Modal (background) */
 .modalTwo {
-	display: none !important; /* Hidden by default */
-	position: fixed !important; /* Stay in place */
-	z-index: 1 !important; /* Sit on top */
-	left: 0 !important;
-	top: 0 !important;
-	width: 100% !important; /* Full width */
-	height: 100% !important; /* Full height */
-	overflow: auto !important; /* Enable scroll if needed */
-	background-color: rgb(0, 0, 0) !important; /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4) !important; /* Black w/ opacity */
+	display: none ; /* Hidden by default */
+	position: fixed ; /* Stay in place */
+	z-index: 1 ; /* Sit on top */
+	left: 0 ;
+	top: 0 ;
+	width: 100% ; /* Full width */
+	height: 100% ; /* Full height */
+	overflow: auto ; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0) ; /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4) ; /* Black w/ opacity */
 }
 
 /* Modal Content/Box */
 .modal-content-two {
-	background-color: #fefefe !important;
-	margin: 15% auto !important; /* 15% from the top and centered */
-	padding: 20px !important;
-	border: 1px solid #888 !important;
-	width: 960px !important; /* Could be more or less, depending on screen size */
-	height: 660px !important;
-	overflow: hidden !important;
+	background-color: #fefefe ;
+	margin: 15% auto ; /* 15% from the top and centered */
+	padding: 20px ;
+	border: 1px solid #888 ;
+	width: 960px ; /* Could be more or less, depending on screen size */
+	height: 660px ;
+	overflow: hidden ;
 }
 /* The Close Button */
 .close {
-	color: #aaa !important;
-	float: right !important;
-	font-size: 28px !important;
-	font-weight: bold !important;
+	color: #aaa ;
+	float: right ;
+	font-size: 28px ;
+	font-weight: bold ;
 }
 
 .close:hover, .close:focus {
-	color: black !important;
-	text-decoration: none !important;
-	cursor: pointer !important;
+	color: black ;
+	text-decoration: none ;
+	cursor: pointer ;
 }
 
 .modal-content-two-count {
-	display: inline-block !important;
+	display: inline-block ;
 }
 
 .screen {
-	background: #D8D8D8 !important;
+	background: #D8D8D8 ;
 }
 
 .screen h4 {
-	font-color: black !important;
+	font-color: black ;
 }
 
 .seatDiv {
-	margin-top: 10px !important;
-	margin-left: 20px !important;
-	width: auto !important;
-	height: 500px !important;
-	border-style: solid !important;
-	border-width: 1px !important;
-	border-color: #E6E6E6 !important;
-	display: inline-block !important;
+	margin-top: 10px ;
+	margin-left: 20px ;
+	width: auto ;
+	height: 500px ;
+	border-style: solid ;
+	border-width: 1px ;
+	border-color: #E6E6E6 ;
+	display: inline-block ;
 }
 
 .seatCheck {
-	width: 550px !important;
-	height: auto !important;
-	display: inline-block !important;
-	float: left !important;
+	width: 550px ;
+	height: auto ;
+	display: inline-block ;
+	float: left ;
 }
 
 .seatPay {
-	margin-left: 10px !important;
-	display: inline-block !important;
-	float: right !important;
+	margin-left: 10px ;
+	display: inline-block ;
+	float: right ;
 }
 
 .seatPay table {
-	color: white !important;
-	background: #424242 !important;
+	color: white ;
+	background: #424242 ;
 }
 
 .seatPay-price {
-	margin-top: 70px !important;
-	float: right !important;
+	margin-top: 70px ;
+	float: right ;
 }
 
 .seatPay-btn {
-	margin-top: 10px !important;
-	height: 50px !important;
+	margin-top: 10px ;
+	height: 50px ;
 }
 
 .seatPay-btn-right {
-	background: #4B088A !important;
-	margin-left: 15px !important;
-	width: 80px !important;
-	height: 30px !important;
-	border: 1px solid #4B088A !important;
-	font-family: 'Do Hyeon', sans-serif !important;
+	background: #4B088A ;
+	margin-left: 15px ;
+	width: 80px ;
+	height: 30px ;
+	border: 1px solid #4B088A ;
+	font-family: 'Do Hyeon', sans-serif ;
 }
 
 .seatPay-btn-left {
-	margin-left: 15px !important;
-	width: 80px !important;
-	height: 30px !important;
-	border: 1px solid #F2F2F2 !important;
-	background: #D8D8D8 !important;
-	font-family: 'Do Hyeon', sans-serif !important;
-	color: #424242 !important;
+	margin-left: 15px ;
+	width: 80px ;
+	height: 30px ;
+	border: 1px solid #F2F2F2 ;
+	background: #D8D8D8 ;
+	font-family: 'Do Hyeon', sans-serif ;
+	color: #424242 ;
 }
 
 /* The Modal (background) */
 .modalTree {
-	display: none !important; /* Hidden by default */
-	position: fixed !important; /* Stay in place */
-	z-index: 1 !important; /* Sit on top */
-	left: 0 !important;
-	top: 0 !important;
-	width: 100% !important; /* Full width */
-	height: 100% !important; /* Full height */
-	overflow: auto !important; /* Enable scroll if needed */
-	background-color: rgb(0, 0, 0) !important; /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4) !important; /* Black w/ opacity */
+	display: none ; /* Hidden by default */
+	position: fixed ; /* Stay in place */
+	z-index: 1 ; /* Sit on top */
+	left: 0 ;
+	top: 0 ;
+	width: 100% ; /* Full width */
+	height: 100% ; /* Full height */
+	overflow: auto ; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0) ; /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4) ; /* Black w/ opacity */
 }
 
 /* Modal Content/Box */
 .modal-content-Tree {
-	background-color: #fefefe !important;
-	margin: 15% auto !important; /* 15% from the top and centered */
-	padding: 20px !important;
-	border: 1px solid #888 !important;
-	width: 675px !important; /* Could be more or less, depending on screen size */
-	height: 620px !important;
-	overflow: hidden !important;
+	background-color: #fefefe ;
+	margin: 15% auto ; /* 15% from the top and centered */
+	padding: 20px ;
+	border: 1px solid #888 ;
+	width: 675px ; /* Could be more or less, depending on screen size */
+	height: 620px ;
+	overflow: hidden ;
 }
 /* The Close Button */
 .close {
-	color: #aaa !important;
-	float: right !important;
-	font-size: 28px !important;
-	font-weight: bold !important;
+	color: #aaa ;
+	float: right ;
+	font-size: 28px ;
+	font-weight: bold ;
 }
 
 .close:hover, .close:focus {
-	color: black !important;
-	text-decoration: none !important;
-	cursor: pointer !important;
+	color: black ;
+	text-decoration: none ;
+	cursor: pointer ;
 }
 
 .pay-left {
-	width: 200px !important;
-	height: 515px !important;
-	display: inline-block !important;
-	float: left !important;
-	margin-left: 10px !important;
-	border-style: solid !important;
-	border-width: 1px !important;
-	border-color: #E6E6E6 !important;
+	width: 200px ;
+	height: 515px ;
+	display: inline-block ;
+	float: left ;
+	margin-left: 10px ;
+	border-style: solid ;
+	border-width: 1px ;
+	border-color: #E6E6E6 ;
 }
 
 .pay-center {
-	width: 200px !important;
-	height: 515px !important;
-	display: inline-block !important;
-	float: center !important;
-	margin-left: 10px !important;
-	border-style: solid !important;
-	border-width: 1px !important;
-	border-color: #E6E6E6 !important;
+	width: 200px ;
+	height: 515px ;
+	display: inline-block ;
+	float: center ;
+	margin-left: 10px ;
+	border-style: solid ;
+	border-width: 1px ;
+	border-color: #E6E6E6 ;
 }
 
 .pay-right {
-	width: 200px !important;
-	display: inline-block !important;
-	float: right !important;
-	margin-left: 10px !important;
-	border-style: solid !important;
-	border-width: 1px !important;
-	border-color: #E6E6E6 !important;
+	width: 200px ;
+	display: inline-block ;
+	float: right ;
+	margin-left: 10px ;
+	border-style: solid ;
+	border-width: 1px ;
+	border-color: #E6E6E6 ;
 }
 
 .pay-center>#web-fontTitle {
-	margin-left: 20px !important;
+	margin-left: 20px ;
 }
 
 .pay-right>table {
-	color: white !important;
-	background: #424242 !important;
+	color: white ;
+	background: #424242 ;
 }
 
 /* 	-------------------------------------------------------------- */
 #myBtn-divTwo {
-	margin-top: 50px !important;
-	margin-left: 200px !important;
+	margin-top: 50px ;
+	margin-left: 200px ;
 }
 
 /* The Modal (background) */
 .modalFour {
-	display: none !important; /* Hidden by default */
-	position: fixed !important; /* Stay in place */
-	z-index: 1 !important; /* Sit on top */
-	left: 0 !important;
-	top: 0 !important;
-	width: 100% !important; /* Full width */
-	height: 100% !important; /* Full height */
-	overflow: auto !important; /* Enable scroll if needed */
-	background-color: rgb(0, 0, 0) !important; /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4) !important; /* Black w/ opacity */
+	display: none ; /* Hidden by default */
+	position: fixed ; /* Stay in place */
+	z-index: 1 ; /* Sit on top */
+	left: 0 ;
+	top: 0 ;
+	width: 100% ; /* Full width */
+	height: 100% ; /* Full height */
+	overflow: auto ; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0) ; /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4) ; /* Black w/ opacity */
 }
 
 /* Modal Content/Box */
 .modal-content-Four {
-	background-color: #fefefe !important;
-	margin: 15% auto !important; /* 15% from the top and centered */
-	padding: 20px !important;
-	border: 1px solid #888 !important;
-	width: 680px !important; /* Could be more or less, depending on screen size */
-	height: 620px !important;
-	overflow: hidden !important;
+	background-color: #fefefe ;
+	margin: 15% auto ; /* 15% from the top and centered */
+	padding: 20px ;
+	border: 1px solid #888 ;
+	width: 680px ; /* Could be more or less, depending on screen size */
+	height: 620px ;
+	overflow: hidden ;
 }
 /* The Close Button */
 .close {
-	color: #aaa !important;
-	float: right !important;
-	font-size: 28px !important;
-	font-weight: bold !important;
+	color: #aaa ;
+	float: right ;
+	font-size: 28px ;
+	font-weight: bold ;
 }
 
 .close:hover, .close:focus {
-	color: black !important;
-	text-decoration: none !important;
-	cursor: pointer !important;
+	color: black ;
+	text-decoration: none ;
+	cursor: pointer ;
 }
 
 .movieTable>div {
-	margin-left: 5px !important;
-	display: inline-block !important;
+	margin-left: 5px ;
+	display: inline-block ;
 }
 
 .movieTable table {
-	background: #088A68 !important;
+	background: #088A68 ;
 }
 a{
-	color: white !important;
+	color: white ;
 }
 #movieTimeTable{
-	border: 1px solid #E6E6E6 !important;
+	border: 1px solid #E6E6E6 ;
 }
 .seatPay-btn-right{
-	color: white !important;
+	color: white ;
+}
+
+.checkbox-wrap { cursor: pointer; }
+.checkbox-wrap .check-icon  { 
+	display: inline-block; 
+	width: 30px; 
+	height: 18px; 
+	background: #848484; 
+	vertical-align: middle; 
+	transition-duration: .3s; 
+	margin-right:3px;
+}
+.checkbox-wrap input[type=checkbox] { 
+	display: none; 
+}
+.checkbox-wrap input[type=checkbox]:checked + .check-icon { 
+	background: #5F04B4; 
+}
+.checkFont{
+	color:white;
 }
 </style>
 <body>
-	<jsp:include page="../common/headBar.jsp"/>
 	<div class="contain_box">
 		<div class="container">
 			<div class="row">
@@ -590,12 +609,13 @@ a{
 			treeCheck = $("#movieCount option:selected").val();
 		}
 		
+		var userSeat = new Array(); //유저가 선택한 좌석
+		
 		$(function(){
 			$("#movieCount").change(function(){
-				
 				treeCheck = $("#movieCount option:selected").val();
-				
 				treePlue = 0;
+				userSeat = new Array();
 				
 				$("input:checkbox").prop("checked", false);
 				
@@ -607,10 +627,16 @@ a{
 					if(treePlue <= 1){
 						$("input[type='checkbox']").attr("disabled", false);
 						
-						$("input[type='checkbox']").click(function(){
+						if(treePlue < 1){
+							$("input[type='checkbox']").attr("disabled", false);
 							
+							$("input[type='checkbox']").off().on('click', function(){
+								++treePlue;
+							});
+							
+						}else{
 							$("input[type='checkbox']").attr("disabled", true);
-						});
+						}
 					}
 				}else if(treeCheck == 2){
 					$("input:checkbox").prop("checked", false);
@@ -621,6 +647,7 @@ a{
 						$("input[type='checkbox']").off().on('click', function(){
 							++treePlue;
 						});
+						
 					}else{
 						$("input[type='checkbox']").attr("disabled", true);
 					}
@@ -647,7 +674,12 @@ a{
 						$("input[type='checkbox']").off().on('click', function(){
 							++treePlue;
 						});
-					}else{
+					}else{/* 
+						for(var i = 0; i < 100; i++){
+							if($('.screenCheck').find('label').prop("checked") == true){
+								userSeat = $(this).text();
+							}
+						} */
 						$("input[type='checkbox']").attr("disabled", true);
 					}
 				}
@@ -659,19 +691,57 @@ a{
 				
 			    setTimeout(foo, 1000);
 			    
+			    var userSeat = new Array();
+			    
 			    if(treeCheck == 0){
 			    	$("input[type='checkbox']").attr("disabled", true);
+			    }else if(treeCheck == 1){
+			    	if(treePlue >= 1){
+			    		$("input[type='checkbox']").attr("disabled", true);
+			    		
+						var arr_Season = document.getElementsByName("checkbox");
+			    	    
+						for(var i = 0; i < arr_Season.length; i++){
+							if(arr_Season[i].checked == true){
+								userSeat += ", " + $('.screenCheck').find('label').eq(i).text();
+							}
+						}
+			    	}
 			    }else if(treeCheck == 2){
 			    	if(treePlue >= 2){
 			    		$("input[type='checkbox']").attr("disabled", true);
+			    		
+						var arr_Season = document.getElementsByName("checkbox");
+			    	    
+						for(var i = 0; i < arr_Season.length; i++){
+							if(arr_Season[i].checked == true){
+								userSeat += ", " + $('.screenCheck').find('label').eq(i).text();
+							}
+						}
 			    	}
 			    }else if(treeCheck == 3){
 			    	if(treePlue >= 3){
 			    		$("input[type='checkbox']").attr("disabled", true);
+			    		
+						var arr_Season = document.getElementsByName("checkbox");
+			    	    
+						for(var i = 0; i < arr_Season.length; i++){
+							if(arr_Season[i].checked == true){
+								userSeat += ", " + $('.screenCheck').find('label').eq(i).text();
+							}
+						}
 			    	}
 			    }else if(treeCheck == 4){
 			    	if(treePlue >= 4){
 			    		$("input[type='checkbox']").attr("disabled", true);
+			    		
+			    	    var arr_Season = document.getElementsByName("checkbox");
+			    	    
+						for(var i = 0; i < arr_Season.length; i++){
+							if(arr_Season[i].checked == true){
+								userSeat += ", " + $('.screenCheck').find('label').eq(i).text();
+							}
+						}
 			    	}
 			    }
 			    
@@ -881,12 +951,47 @@ a{
 									$('.movieRoomId').val(movieRoomIdVal);
 									alert(movieRoomIdVal);
 									
+									var userSeat = new Array(); //유저의 좌석배열
+									
 									$.ajax({
 						    		url:"selectMovieRoom.mo",
 						    		type:"post",
 						    		data:{movieRoomIdVal:movieRoomIdVal},
 						    		success:function(data){
-						    		
+						    			/* console.log(data); */
+						    			var $screenCheck = $('.screenCheck');
+						    			var numberCheck = 1; //좌석번호 변수
+						    			var rowCheck = 65; //열 알파벳 변수
+						    			var rowCheckIf = 0; //열 증가 조건
+						    			
+						    			$screenCheck.find('div').remove();
+						    			
+						    			/* ----------------------좌석 뿌리기---------------------- */
+						    			for(var i = 0; i < data.length; i++){
+						    				var $div = $("<div align='center'>");
+						    				numberCheck = 1; //이중 포문 종료후 다시 변수값 1로 초기화
+						    				
+						    				for(var y = 0; y < data[i].length; y++){
+						    					if(data[i][y] == 'O'){
+						    						var $checkBox = $("<label class='checkbox-wrap'><input type='checkbox' name='checkbox' value=''><i class='check-icon'><font class='checkFont'>" + String.fromCharCode(rowCheck) + "" + numberCheck + "</font></i></label>");
+						    						++numberCheck;
+						    						$div.append($checkBox);
+						    						rowCheckIf = 1;
+						    					}else{
+						    						$div.append("&nbsp;&nbsp;");
+						    						rowCheckIf = 0;
+						    					}
+						    				}
+						    				
+						    				if(rowCheckIf == 1){
+						    					++rowCheck;
+						    				}
+						    				
+						    				$screenCheck.append($div);
+						    			}
+						    			/* -------------------------------------------------- */
+						    			
+						    			$(".screenCheck").show();
 						    		},
 						    		error:function(data){
 						    			console.log(data);
@@ -932,42 +1037,9 @@ a{
 						<div class="screen" align="center">
 							<h4 id="web-fontTitle">SCREEN</h4>
 						</div>
-						<br> <br>
-						<div align="center">
-							<input type="checkbox"> <input type="checkbox"> <input
-								type="checkbox"> <input type="checkbox">
-							&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox"> <input
-								type="checkbox"> <input type="checkbox"> <input
-								type="checkbox"> &nbsp;&nbsp;&nbsp;&nbsp; <input
-								type="checkbox"> <input type="checkbox"> <input
-								type="checkbox"> <input type="checkbox">
-						</div>
-						<div align="center">
-							<input type="checkbox"> <input type="checkbox"> <input
-								type="checkbox"> <input type="checkbox">
-							&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox"> <input
-								type="checkbox"> <input type="checkbox"> <input
-								type="checkbox"> &nbsp;&nbsp;&nbsp;&nbsp; <input
-								type="checkbox"> <input type="checkbox"> <input
-								type="checkbox"> <input type="checkbox">
-						</div>
-						<div align="center">
-							<input type="checkbox"> <input type="checkbox"> <input
-								type="checkbox"> <input type="checkbox">
-							&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox"> <input
-								type="checkbox"> <input type="checkbox"> <input
-								type="checkbox"> &nbsp;&nbsp;&nbsp;&nbsp; <input
-								type="checkbox"> <input type="checkbox"> <input
-								type="checkbox"> <input type="checkbox">
-						</div>
-						<div align="center">
-							<input type="checkbox"> <input type="checkbox"> <input
-								type="checkbox"> <input type="checkbox">
-							&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox"> <input
-								type="checkbox"> <input type="checkbox"> <input
-								type="checkbox"> &nbsp;&nbsp;&nbsp;&nbsp; <input
-								type="checkbox"> <input type="checkbox"> <input
-								type="checkbox"> <input type="checkbox">
+						<br><br>
+						
+						<div class="screenCheck" align="center">
 						</div>
 					</div>
 
@@ -1254,8 +1326,7 @@ a{
 						<%-- <div>
 							<table>
 								<tr>
-									<td><img
-										src="${ contextPath }/resources/images/moviePay.PNG"
+									<td><img src="${ contextPath }/resources/images/moviePay.PNG"
 										width="150"></td>
 								</tr>
 								<tr>
@@ -1364,44 +1435,44 @@ a{
 	</div>
 	<style>
 		.myModal5-title{
-			height:30px !important;
+			height:30px ;
 		}
 		.myModal5-titleOne{
-			display:inline-block !important;
-			float:left !important;
-			height:50px !important;
+			display:inline-block ;
+			float:left ;
+			height:50px ;
 		}
 		.myModal5-titleOne #web-fontTitle{
-			margin-top:0px !important;
+			margin-top:0px ;
 		}
 		.myModal5-titleTwo{
-			display:inline-block !important;
-			float:right !important;
-			height:50px !important;
+			display:inline-block ;
+			float:right ;
+			height:50px ;
 		}
 		.areaDiv{
-			display:inline-block !important;
-			height:400px !important;
-			overflow:hidden !important;
-			float:left !important;
+			display:inline-block ;
+			height:400px ;
+			overflow:hidden ;
+			float:left ;
 		}
 		.areaDiv td{
-			width:150px !important;
-			height:40px !important;
-			border:1px solid #E6E6E6 !important;
+			width:150px ;
+			height:40px ;
+			border:1px solid #E6E6E6 ;
 			
 		}
 		.areaChild{
-			display:inline-block !important;
-			height:450px !important;
-			overflow:hidden !important;
-			border:1px solid #E6E6E6 !important;
+			display:inline-block ;
+			height:450px ;
+			overflow:hidden ;
+			border:1px solid #E6E6E6 ;
 		}
 		.areaChild td{
-			width:180px !important;
-			height:40px !important;
-			cursor:pointer !important;
-			/* border:1px solid #E6E6E6 !important; */
+			width:180px ;
+			height:40px ;
+			cursor:pointer ;
+			/* border:1px solid #E6E6E6 ; */
 		}
 	</style>
 	<!-- 5th modal -->
