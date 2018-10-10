@@ -331,7 +331,11 @@ hr {
         // 검색 결과 갯수: result.total 
         // 첫번째 결과 결과 주소: result.items[0].address 
         // 첫번째 검색 결과 좌표: result.items[0].point.y, result.items[0].point.x 
-        var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y); 
+        var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
+        var ex = result.items[0].point.x;
+        var ey = result.items[0].point.y;
+        console.log(ex);
+        console.log(ey);
         map.setCenter(myaddr); // 검색된 좌표로 지도 이동 
         // 마커 표시 ( 검색한 주소에 마커를 찍어둠 )
         var marker = new naver.maps.Marker({ 
@@ -366,9 +370,9 @@ hr {
 
 </script>
 		</div>
-		</c:forEach>
 		<br><br><br><br><br><br><br>
-		<a style="text-align:left; width:400px; margin-right:100px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important; float:right">오는길 찾기</a>
+		<a style="text-align:left; width:400px; margin-right:100px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important; float:right"
+		href="http://m.map.naver.com/route.nhn?menu=route&ename=${row1.theater_address}&ex='&{ex};'&ey='&{ey};'" onclick="window.open(this.href, '_blanck','width=600, height=600'); return false">오는길 찾기</a>
 		<br><br>
 		<hr>
 		<br>
@@ -376,6 +380,7 @@ hr {
 		<a style="text-align:left; width:100px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">영화관 뷰</a>
 			
 		<br>
+		</c:forEach>
 		<!-- <div align="center" id="imageview">
 		
 		

@@ -49,9 +49,29 @@ hr {
 		height:400px;
 		margin-left:20px;
 		margin-right:20px;
-		margin-top:20px;
+		margin-top:20px; 
 		float: left;
 	}
+	#sumnailimage1{
+		border: solid 1px;
+		display:inline-block;
+		width:300px;
+		height:400px;
+		/* margin-left:20px;
+		margin-right:20px;
+		margin-top:20px; */
+		float: left;
+	}
+	#rank{
+	/* border: solid 1px; */
+	display:inline-block;
+	width:300px;
+	height:460px;
+	margin-left:20px;
+	margin-right:20px;
+	/* margin-top:20px; */
+	float: left;
+}
 	#data{
 		display:inline-block;
 		width: 1200px;
@@ -145,6 +165,7 @@ hr {
 	height:100px;
 	float: left;
 }
+
 #gradeinsert{
 	display:inline-block;
 	border: solid 1px;
@@ -249,6 +270,19 @@ hr {
     background: skyblue;
     display: inline-block;
     margin-left: 10px;
+    margin-bottom: 10px;
+    margin-right:10px;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+    line-height:30px;
+}
+#age1{
+	width: 30px;
+    height: 30px;
+    background: #088A85;
+    display: inline-block;
+    /* margin-left: 10px; */
     margin-bottom: 10px;
     margin-right:10px;
     text-align: center;
@@ -424,7 +458,11 @@ hr {
 
       <div class="item active">
         <c:forEach items="${movieRank1 }" var="rank1">
-		<div id="sumnailimage">
+        <div id="rank">
+		<%! int i=1; %>
+      	  <div id ="age1"><%=i%></div>
+      	  <%i++;%>
+		<div id="sumnailimage1">
                    <${rank1.file_src} style="width:298px; height:270px;">
                    <c:set var="name" value="${rank1.movie_age}"/>
                     <c:choose>
@@ -448,12 +486,17 @@ hr {
 						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>			<!-- 영화 리스트에서 view연결 할 사람 여기로 -->
 					</div>	
 		</div>
+		</div>
                 </c:forEach>
       </div>
 
       <div class="item">
       	  <c:forEach items="${movieRank2 }" var="rank2">
-		<div id="sumnailimage">
+      	  <div id="rank">
+      	  <%! int j=4; %>
+      	  <div id ="age1"><%=j%></div>
+      	  <%j++;%>
+		<div id="sumnailimage1">
                    <${rank2.file_src} style="width:298px; height:270px;">
                    <c:set var="name" value="${rank2.movie_age}"/>
                     <c:choose>
@@ -477,13 +520,18 @@ hr {
 						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>			<!-- 영화 리스트에서 view연결 할 사람 여기로 -->
 					</div>	
 		</div>
+		</div>
                 </c:forEach>
     
       </div>
     
       <div class="item">
         <c:forEach items="${movieRank3 }" var="rank3">
-		<div id="sumnailimage">
+        <div id="rank">
+        <%! int k=7; %>
+      	  <div id ="age1"><%=k%></div>
+      	  <%k++;%>
+		<div id="sumnailimage1">
                    <${rank3.file_src} style="width:298px; height:270px;">
                    <c:set var="name" value="${rank3.movie_age}"/>
                     <c:choose>
@@ -506,6 +554,7 @@ hr {
                    <button id="detail" onclick="location.href='movieDetail.mo?id=${rank3.movie_id}'">상세보기</button>		<!-- view구현 할 사람 여기 사용 -->
 						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>			<!-- 영화 리스트에서 view연결 할 사람 여기로 -->
 					</div>	
+		</div>
 		</div>
                 </c:forEach>
       </div>
@@ -540,9 +589,9 @@ hr {
 			
 		</div>
 
-		 <br><br><br><br><br><br><br><br><br><br><br><br><br>
+		 <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		 <hr>
-		 <br>
+		 
 	<div id="data">
 		<h3 align="left">전체영화</h3>
 			
@@ -676,39 +725,69 @@ hr {
 		<br><br><br><br><br><br><br><br><br><br><br><br>
 		<br><br><br><br><br><br><br><br><br><br><br><br>
 		<br><br><br>
-		
-		 <div id="pagi" align="center">
+	    <div id="pagi" align="center">
+	     <div class="pagination" align="center">
+			<c:if test="${ pi.currentPage <= 1 }">
+				<a>이전 </a>
+			</c:if>
+			<c:if test="${ pi.currentPage > 1 }">
+				<c:url var="blistBack" value="/movie.mo">
+					<c:param name="currentPage" value="${pi.currentPage - 1 }"/>
+				</c:url>
+				<a href="${ blistBack }">이전</a>
+			</c:if>
+			<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+				<c:if test="${ p eq pi.currentPage }">
+					<font color="red" size="4"><a>${ p }</a></font>
+				</c:if>
+				<c:if test="${ p ne pi.currentPage }">
+					<c:url var="blistCheck" value="movie.mo">
+						<c:param name="currentPage" value="${ p }"/>
+					</c:url>
+					<a href="${ blistCheck }">${ p }</a>
+				</c:if>
+			</c:forEach>
+			<c:if test="${ pi.currentPage >= pi.maxPage }">
+				<a> 다음 </a>
+			</c:if>
+			<c:if test="${ pi.currentPage < pi.maxPage }">
+				<c:url var="blistEnd" value="movie.mo">
+					<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+				</c:url>
+				<a href="${ blistEnd }">다음</a>
+			</c:if>
+		</div>
+		</div>
+		 <%--  <div id="pagi" align="center">
              <div class="pagination" align="center">
              <br>
              	<a href="location.href='#'"><<</a>
-             	<%-- <% if(currentPage <= 1){ %> --%>
+             	 <% if(pi.currentPage <= 1){ %> 
              	<a disabled><</a>
-             <%-- 	<% }else{ %> --%>
+              	<% }else{ %> 
              	<a onclick="location.href='#'">&laquo;</a>
 
-             	<%-- <% } %>
-             	<% for(int p = startPage; p <= endPage; p++){
-             		if(p == currentPage){	
-             	%> --%>
+             	 <% } %>
+             	<% for(int p = pi.startPage; p <= pi.endPage; p++){
+             		if(p == pi.currentPage){	
+             	%> 
 
-             	<a class="active" disabled><%-- <%= p %> --%>1</a>
-             	<%-- <%  }else{ %> --%>
-             	<a onclick="location.href='#'"><%-- <%= p %> --%>2</a>
+             	<a class="active" disabled><%= p %>1</a>
+             	 <%  }else{ %> 
+             	<a onclick="location.href='#'"><%= p %>2</a>
 
-             <%-- 	<%  } %>
-             	<% } %> --%>
+              	<%  } %>
+             	<% } %> 
              	
-             	<%-- <% if(currentPage >= maxPage){ %> --%>
+             	 <% if(pi.currentPage >= pi.maxPage){ %>
              	<a disabled>></a>
-             	<%-- <% }else{ %> --%>
+             	 <% }else{ %> 
              	<a onclick="location.href='#'">></a>
-             	<%-- <% } %> --%>
+             	 <% } %>
              	<a onclick="location.href='#'">>></a>
              </div>
-         </div>
-	<!-- </div> -->
-				
-				
+         </div> --%>
+	<!-- </div> -->			
 							
 	 </article>
 	 

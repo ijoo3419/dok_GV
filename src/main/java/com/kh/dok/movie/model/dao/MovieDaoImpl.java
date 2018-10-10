@@ -4,9 +4,11 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dok.common.PageInfo;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieSumbnail;
@@ -18,10 +20,14 @@ public class MovieDaoImpl implements MovieDao{
 	//이진희 전체영화 출력
 	@Override
 
-	public ArrayList<MovieSumbnail> selectMovie(SqlSessionTemplate sqlSession, MovieSumbnail msn) {
+	public ArrayList<MovieSumbnail> selectMovie(SqlSessionTemplate sqlSession, MovieSumbnail msn, PageInfo pi) {
 		ArrayList<MovieSumbnail> movieView =  null;
 		
-		movieView = (ArrayList)sqlSession.selectList("MovieSumbnail.selectMovie");
+		int offset = (pi.getCurrentPage() -1 )* pi.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		
+		movieView = (ArrayList)sqlSession.selectList("MovieSumbnail.selectMovie",null,rowBounds);
 		
 		System.out.println("나오냐?: " + movieView);
 		return movieView;
@@ -126,6 +132,13 @@ public class MovieDaoImpl implements MovieDao{
 		int count = sqlSession.selectOne("Movie.selectPayCount", v);
 		
 		return count;
+	}
+
+	@Override
+	public int getlistCount(SqlSessionTemplate sqlSession) {
+		
+		int getlistCount = sqlSession.selectOne("MovieSumbnail.getlistCount");
+		return getlistCount;
 	}
 	
 }
