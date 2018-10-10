@@ -11,5 +11,7 @@ public interface LicenseeDao {
 
 	int insertMovieRoom(SqlSessionTemplate sqlSession, MovieRoom mr);
 
+	MovieRoom checkMovieRoomId(SqlSessionTemplate sqlSession, MovieRoom mr);
+
 	
 }
