@@ -3,6 +3,8 @@ package com.kh.dok.admin.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,7 @@ import com.kh.dok.admin.model.exception.SearchMemberException;
 import com.kh.dok.admin.model.exception.UploadException;
 import com.kh.dok.admin.model.vo.ReportHistory;
 import com.kh.dok.admin.model.vo.SearchCondition;
+import com.kh.dok.admin.model.vo.Visit;
 import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.member.model.vo.Member;
@@ -117,6 +120,11 @@ public class AdminServiceImpl implements AdminService{
 		return ad.selectFile(sqlSession);
 	}
 
+	@Override
+	public int insertvisit(String time,String ip) {
+		
+		return ad.insertVisit(sqlSession,time,ip);
+	}
 
 	
 }

@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.dok.common.PageInfo;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.movie.model.dao.MovieDao;
 import com.kh.dok.movie.model.vo.Movie;
@@ -24,10 +25,10 @@ public class MovieServiceImpl implements MovieService{
 	
 	//이진희 전체영화 출력
 	@Override
-	public ArrayList<MovieSumbnail> selectMovie(MovieSumbnail msn) {
+	public ArrayList<MovieSumbnail> selectMovie(MovieSumbnail msn, PageInfo pi) {
 		ArrayList<MovieSumbnail> movieView = null;
 		
-		movieView = md.selectMovie(sqlSession, msn);
+		movieView = md.selectMovie(sqlSession, msn, pi );
 		
 		return movieView;
 	}
@@ -134,6 +135,16 @@ public class MovieServiceImpl implements MovieService{
 		return count;
 	}
 
+
+
+	//이진희 전체영화수 조회
+	@Override
+	public int getlistCount() {
+		
+		int getlistCount = md.getlistCount(sqlSession);
+		
+		return getlistCount;
+	}
 
 
 

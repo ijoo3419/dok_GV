@@ -8,6 +8,14 @@
 <meta charset="UTF-8">
 <title>headBar</title>
 <style>
+
+@font-face { font-family: 'GoyangIlsan'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+body, div, p, li, h3, h1, h2, h4, h5, h6, input, th, tr, td, button, a {
+		font-family: 'GoyangIlsan' !important;
+	}
+
+
 .headerd {
 	position: fixed; 
 	height: 50px;
@@ -67,42 +75,7 @@ input[type=text], input[type=password] {
     box-sizing: border-box;
 }
 
-/* Set a style for all buttons */
- button {
-    background-color: white;
-    color: black;
-    cursor: pointer;
-    width: 100px;
-	display: inline-block;
-	height: 50px;
-	font-size: 17px;
-	border: none;
-	border-right: 1px solid #a9a5a5;
-    
-/*     width: 100px;
-	display: inline-block;
-	height: 50px;
-	font-size: 17px;
-	border-right: 1px solid #a9a5a5; */
-} 
 
-button:hover {
-    cursor: pointer;
-    color: #18bfef !important;
-}
-
-/* Extra styles for the cancel button */
-.cancelbtn {
-    width: auto  !important;
-    padding: 10px 18px  !important;
-    background-color: #f44336  !important;
-}
-
-.submitBtn {
-    width: auto  !important;
-    padding: 10px 18px  !important;
-    background-color: #5F4B8B  !important;
-}
 
 /* Center the image and position the close button */
 .imgcontainer {
@@ -202,11 +175,12 @@ a {
 </style>
 </head>
 <body>
+
 	<div class="headerd">
 		<div class="logo">
 		
-			<a href="upload.ad?gm=main"><img src="${contextPath }/resources/images/logo.jpg" height="40px"
-				width="150px"></a> <!-- 로고를 눌르면 메인으로 이동 -->
+			<a href="upload.ad?gm=main"><img src="${contextPath }/resources/images/popcorn.png" height="auto"
+				width="135px"></a> <!-- 로고를 눌르면 메인으로 이동 -->
 		</div>
 		<c:if test="${ empty sessionScope.loginUser }">
 		<ul class="nau" >	<!-- href="#"부분 자신한테 맞게 변경하기 ex) 로그인 : href="login.me"-->

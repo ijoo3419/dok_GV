@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ import com.kh.dok.admin.model.exception.UploadException;
 import com.kh.dok.admin.model.service.AdminService;
 import com.kh.dok.admin.model.vo.ReportHistory;
 import com.kh.dok.admin.model.vo.SearchCondition;
+import com.kh.dok.admin.model.vo.Visit;
 import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.common.CommonUtils;
 import com.kh.dok.common.PageInfo;
@@ -184,7 +186,7 @@ public class AdminController {
 	@RequestMapping(value="upload.ad")
 	public String upload(Model model, String gm,HttpServletRequest request, @RequestParam(name="file",required=false)MultipartFile photo,
 			@RequestParam(name="file2",required=false)MultipartFile photo2,@RequestParam(name="file3",required=false)MultipartFile photo3,
-			@RequestParam(name="file4",required=false)MultipartFile photo4){
+			@RequestParam(name="file4",required=false)MultipartFile photo4,HttpSession session){
 
 		String tab="tab-3";
 
@@ -247,6 +249,11 @@ public class AdminController {
 			if(gm == null){
 				return "admin/adminPage";
 			}else{
+				String time = (String)session.getAttribute("time");
+				String ip = (String)session.getAttribute("ip");
+				
+				
+				int iv = as.insertvisit(time,ip);
 				return "main/main";
 			}
 		} catch (UploadException e) {
@@ -286,5 +293,7 @@ public class AdminController {
 		
 		return "admin/adminPage";
 	}
+
+	
 }
 

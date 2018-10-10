@@ -14,11 +14,11 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-
+	
 	<listener>
-        <listener-class>com.kh.dok.admin.model.service.VisitSessionListener</listener-class>
-    </listener>
-
+		<listener-class>com.kh.dok.admin.model.service.VisitListener</listener-class>
+	</listener>
+	
 
 	<!-- member 이주 관리 부분 -->
 	<servlet>

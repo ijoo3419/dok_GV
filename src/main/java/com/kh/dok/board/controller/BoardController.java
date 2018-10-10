@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.dok.admin.model.vo.SearchCondition;
 import com.kh.dok.board.model.exception.BoardInsertException;
 import com.kh.dok.board.model.service.BoardService;
 import com.kh.dok.board.model.vo.Board;
@@ -120,7 +121,13 @@ public class BoardController {
 		}
 	   
 	   
-	   
+	   @RequestMapping(value="searchNoticeBoard.bo")
+	   public String searchNoticeBoard(Model model, int currentPage, String searchResult, String searchCondition){
+		   SearchCondition sc = new SearchCondition(searchResult, searchCondition);
+		   
+		   int listCount = bs.listCount(sc);
+		   
+	   }
 	   
 	   
 	   

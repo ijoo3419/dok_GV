@@ -12,6 +12,8 @@
 	display:inline-block !important;
 	margin-right:auto;
 	margin-left:auto;
+	width:1000px;
+	
 }
 .addressBox{
 	float:left;

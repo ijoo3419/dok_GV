@@ -110,13 +110,9 @@ public class MemberController {
    @RequestMapping(value="insert.me")
    public String insertMember(Model model, Member m){ 
 	   
-	   System.out.println("설마설마설마???" + m);
-
 	   m.setUser_pwd(passwordEncoder.encode(m.getUser_pwd()));
 	   
 	   int result = ms.insertMember(m);
-	   
-	   System.out.println("controller Member : " + m);
 	   
 		if(result > 0){
 			return "main/main";
@@ -180,13 +176,9 @@ public class MemberController {
    @RequestMapping("checkMail.me")
    public int emailAuth(HttpServletResponse response, HttpServletRequest request) throws Exception {
 	   
-	   System.out.println("오니?");
-	   
 	   String email = request.getParameter("email");
 	   String authNum = "";
 	   int authNumOrig = 0;
-	   
-	   System.out.println("이잉미멤일일" + email);
 	   
 	   authNum = RandomNum();
 	   authNumOrig = Integer.parseInt(authNum);

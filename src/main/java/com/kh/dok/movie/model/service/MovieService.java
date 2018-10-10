@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.kh.dok.common.PageInfo;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieSumbnail;
@@ -13,7 +14,7 @@ public interface MovieService {
 	
 
 		//이진희 전체영화 출력
-		ArrayList<MovieSumbnail> selectMovie(MovieSumbnail msn);
+		ArrayList<MovieSumbnail> selectMovie(MovieSumbnail msn, PageInfo pi);
 		
 		//박지용 영화 리스트 출력기능
 		ArrayList<Movie> selectMovieList();
@@ -47,6 +48,9 @@ public interface MovieService {
 
 		//박지용 예매 수 가져오기
 		int selectPayCount(Movie v);
+		
+		//이진희 전체영화수 조회
+		int getlistCount();
 
 
 }

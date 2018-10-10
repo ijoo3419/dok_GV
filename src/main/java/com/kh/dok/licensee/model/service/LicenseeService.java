@@ -9,4 +9,6 @@ public interface LicenseeService {
 
 	int insertMovieRoom(MovieRoom mr);
 
+	MovieRoom checkMovieRoomId(MovieRoom mr);
+
 }

@@ -11,6 +11,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <script src="http://code.jquery.com/jquery-1.11.0.js"></script>
   
 <title>Insert title here</title>
 <style>
@@ -341,7 +342,47 @@ hr {
 		<!-- </div> -->
 		<br><br><br><br><br><br><br>
 		<hr>
-		
+		<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=wWfCWSbi3oQIe4dEdk3L&submodules=geocoder"></script>
+<script> 
+    //지도 타입 설정하는 곳 ( 아무것도 설정 하지 않으면 자동으로 Normal로 적용된다 ) 초기화할 때 설정할수 있다. 
+    var map = new naver.maps.Map('map'); 
+    // 위성지도를 사용하려면 MapTypeId 객체의 SATELLITE 상수 값을 사용합니다. 
+    //var map = new naver.maps.Map('map', {mapTypeId: naver.maps.MapTypeId.SATELLITE}); 
+    // 위성지도에 지명을 적용하려면 MapTypeId 객체의 HYBRID 상수 값을 사용합니다. 
+    //var map = new naver.maps.Map('map', {mapTypeId: naver.maps.MapTypeId.HYBRID}); 
+    // 기본지도에 높낮이만 적용하려면 MapTypeId 객체의 TERRAIN 상수 값을 사용합니다. 
+    //var map = new naver.maps.Map('map', {mapTypeId: naver.maps.MapTypeId.TERRAIN});
+    var myaddress = '${row1.theater_address}';// 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!) 
+    // 주소가 있는지 체크
+    naver.maps.Service.geocode({address: myaddress}, function(status, response) { 
+        if (status !== naver.maps.Service.Status.OK) { 
+            return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러'); 
+        }
+        var result = response.result; 
+        // 검색 결과 갯수: result.total 
+        // 첫번째 결과 결과 주소: result.items[0].address 
+        // 첫번째 검색 결과 좌표: result.items[0].point.y, result.items[0].point.x 
+        var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
+        var ex = result.items[0].point.x;
+        var ey = result.items[0].point.y;
+        console.log(ex);
+        console.log(ey);
+        
+});
+    
+    $(function() {        
+    	navigator.geolocation.getCurrentPosition(function(position){
+			alert("위도 : " + position.coords.latitude + "\n" + 
+					"경도 : " + position.coords.longitude);
+			
+			var lat = position.coords.latitude;
+			var lon = position.coords.longitude;
+			console.log(lat);
+	        console.log(lon);
+
+    });
+
+</script>
 		<div id="data1">
 			<h3 align="left">가까운 영화관</h3>
 			

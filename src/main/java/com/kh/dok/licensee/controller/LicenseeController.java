@@ -20,7 +20,7 @@ import com.kh.dok.licensee.model.service.LicenseeService;
 import com.kh.dok.licensee.model.vo.MovieRoom;
 
 @Controller
-@SessionAttributes(value="loginUser, movieRoomData")
+@SessionAttributes(value="loginUser")
 
 public class LicenseeController {
 	@Autowired
@@ -95,25 +95,28 @@ public class LicenseeController {
 	
 	//정태 상영관 등록(엑셀 파일 완료)
 	@RequestMapping(value="movieRoomInsert.li")
-	public String insertMovieRoom(Model model, Cinema cm,
+	public String insertMovieRoom(Model model,MovieRoom mr, Cinema cm,
 								HttpServletRequest request){
 		
-		MovieRoom mr = (MovieRoom)request.getSession().getAttribute("movieRoomData");
+		/*MovieRoom mr = (MovieRoom)request.getSession().getAttribute("movieRoomData");*/
 		
-		System.out.println("getMovieRoomId = " + mr.getMovieRoomId());
+		System.out.println("mr.getMid = " + mr.getMid());
 		
 		mr.setMovieRoomAddress(mr.getAddress1()+","+mr.getAddress2()+","+mr.getAddress3());
 	
+		System.out.println("movieRoom Address = " + mr.getMovieRoomAddress());
 		
-	
-		System.out.println(mr.getMovieRoomAddress());
+		
 		int result = ls.insertMovieRoom(mr);
 		
+		MovieRoom movieRoomId = ls.checkMovieRoomId(mr);
+		
+		System.out.println("movieRoomId = " + movieRoomId);
+		
 		System.out.println("controller mr1 = " + mr);
-		System.out.println(mr.getMid());
+		mr.setMovieRoomId(movieRoomId.getMovieRoomId());		
 		
-		
-		String name = request.getParameter("movieRoomId");
+		String name = mr.getMovieRoomId();
 		String[] arr = request.getParameterValues("bak");
 		String tableName = request.getParameter("table");
 		
@@ -124,11 +127,12 @@ public class LicenseeController {
 		
 		if(tableName == ""){
 			//셀 값 삽입
-			new cellClass().createTeble(arr, name);
+			new cellClass().createTeble(arr, name, request);
 		}else{
 			//셀 구매
-			new cellClass().insertCell(arr, name, tableName);
+			new cellClass().insertCell(arr, name, tableName, request);
 		}
+		
 		
 		
 		if(result > 0){
@@ -144,12 +148,13 @@ public class LicenseeController {
 }
 	
 	@RequestMapping(value="ViewFiled.li")
-	public String insertMovieRoom(Model model, HttpServletRequest req){
+	public String insertMovieRoom(Model model, HttpServletRequest request){
 	
-	String name = req.getParameter("name");
+	String name = request.getParameter("name");
 	
 	System.out.println(name);
-	String[][] arr = new cellClass().test(name);
+	String[][] arr = new cellClass().test(name, request);
+
 	
 	for(String[] str : arr){
 		for(String s : str)
@@ -157,8 +162,7 @@ public class LicenseeController {
 		System.out.println();
 	}
 	
-	
-	req.setAttribute("field", arr);
+	request.setAttribute("field", arr);
 
 	return "licensee/ViewField";
 	

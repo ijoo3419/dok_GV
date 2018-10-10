@@ -19,6 +19,14 @@
 		<result property="mid" column="MID" />
 	</resultMap>
 	
+	<select id="getlistCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM MOVIE M, BOARD B, BOARD_FILE BF
+		WHERE M.MOVIE_ID = B.MOVIE_ID 
+		 AND B.BOARD_ID = BF.BOARD_ID
+		 AND BF.FILE_LEVEL='1' 
+	</select>
+	
 	<select id="selectMovie" resultMap="movieSumbnailResultSet" parameterType="MovieSumbnail">
 		SELECT M.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_ETITLE,
 		 M.MOVIE_CONTENT, M.OPEN_DATE,M.DIRECTOR_NAME, 

@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Member">
 	<resultMap type="Member" id="memberResultSet">    
-
+   
 		<id property="mid" column="MID"/>
 		<result property="email" column="EMAIL"/>
 		<result property="user_pwd" column="USER_PWD"/>
@@ -121,4 +121,36 @@
 		NICKNAME = '${nickname}'
 		WHERE EMAIL = '${email}'
 	</update>
+	
+	<!-- 판매자 등급 변경 -->
+	<update id="updateClass">
+		UPDATE MEMBER
+		SET USER_CLASS = 'SELLER'
+		WHERE EMAIL = '${email}'
+	</update>
+	
+	<!-- 위시리스트 COUNT -->
+	<select id="countWish" resultType="java.lang.Integer" parameterType="Member">
+		SELECT NVL(COUNT(*),0)
+    	FROM WISHLIST
+    	WHERE MID = #{ mid }
+	</select>
+	
+	<!-- 본 영화 COUNT -->
+	<select id="countWatched" resultType="java.lang.Integer" parameterType="Member">
+		SELECT NVL(COUNT(*),0)
+    	FROM RESERVATION
+    	WHERE MID = #{ mid }
+    	AND RESERVATION_STATUS = '완료'
+	</select>
+	
+	<!-- 내가 쓴 리뷰 COUNT -->
+	<select id="countReview" resultType="java.lang.Integer" parameterType="Member">
+		SELECT NVL(COUNT(*),0)
+    	FROM REPLY
+    	WHERE RWRITER = #{ mid }
+	</select>
+	
+	
+	
 </mapper>

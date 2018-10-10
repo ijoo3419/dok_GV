@@ -5,8 +5,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 <style>
-
+#playTable{
+border-collapse:collapse;
+}
 
 #playTable tr th {
 	font-size: 24px !important;
@@ -14,8 +18,10 @@
 	color: #935d8c;
 }
 
-#playTable tr td {
+
+#playTable tr th td {
 	color: black;
+	border
 }
 
 h2 {
@@ -93,7 +99,7 @@ h2 {
 									
 									
 				<!-- 상영 정보 기입 폼 -->
-				<form action="insert.me" method="post" encType="multipart/form-data">
+				<form action="" method="post" encType="multipart/form-data">
 
 					<div class="row gtr-uniform">
 						<h2 align="left">1. 영화</h2>
@@ -121,73 +127,63 @@ h2 {
 					<br>
 					<h2 align="left">3. 상영 정보</h2>
 					<div class="table-wrapper">
-						<table id="playTable">
-							<tr>
+				
+					<hr>
+						<table id="playTable" border="1" cellspacing="3">
+						<tr>
 								<th class="align-center">회차</th>
 								<th class="align-center">상영날짜</th>
-								<th class="align-center">가격</th>
 								<th class="align-center">상영시간</th>
-								<th class="align-center">상영관</th>
-							</tr>
-							<tr>
-								<td><input type=></td>
-								<td>09/18</td>
-								<td>6000</td>
-								<td>11:00</td>
-								<td>2관(45석)</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>09/18</td>
-								<td>6000</td>
-								<td>11:40</td>
-								<td>1관(30석)</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>09/19</td>
-								<td>6000</td>
-								<td>12:40</td>
-								<td>2관(45석)</td>
-							</tr>
-							<tr>
-								<td>4</td>
-								<td>09/19</td>
-								<td>6000</td>
-								<td>13:20</td>
-								<td>1관(30석)</td>
-							</tr>
-							<tr>
-								<td>5</td>
-								<td>09/20</td>
-								<td>6000</td>
-								<td>14:20</td>
-								<td>1관(30석)</td>
-							</tr>
-
+								<th class="align-center">상영관</th> 
+						</tr>
+							<tbody id="my-tbody">
+							</tbody>
 						</table>
 					</div>
+					<a id='btn-add-row'>행 추가하기</a>
+					<a id='btn-delete-row'>행 삭제하기</a>
 
-
-
-
-
-
-
-
+					<div class="col-12">
+						<ul class="actions">
+							<li align="center"><input type="submit" value="등록하기" class="primary" /></li>
+							<li align="center"><input type="reset" value="돌아가기" /></li>
+						</ul>
+					</div>
+											
 				</form>
 			</article>
 		</div>
 
 
+		
 
-		<!-- Scripts -->
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/jquery.scrollex.min.js"></script>
-		<script src="assets/js/jquery.scrolly.min.js"></script>
-		<script src="assets/js/browser.min.js"></script>
-		<script src="assets/js/breakpoints.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script>
+		<!-- js -->
+		<%-- <script src="${contextPath }/resources/js/jquery.min.js"></script>
+		<script src="${contextPath }/resources/js/jquery.scrollex.min.js"></script>
+		<script src="${contextPath }/resources/js/jquery.scrolly.min.js"></script>
+		<script src="${contextPath }/resources/js/browser.min.js"></script>
+		<script src="${contextPath }/resources/js/breakpoints.min.js"></script>
+		<script src="${contextPath }/resources/js/util.js"></script>
+		<script src="${contextPath }/resources/js/main.js"></script>
+		<script src="${contextPath }/resources/js/tab.js"></script> --%>
+		
+		<script src="//code.jquery.com/jquery.min.js"></script>
+<script>
+  var seq = 0;
+  $('#btn-add-row').click(function() {
+	
+	++seq;
+	
+    var time = new Date().toLocaleTimeString();
+    $('#mytable > tbody:last').append('<tr><td>안녕 친구들 </td><td>' + time + '</td></tr>');
+    $('#playTable > tbody:last').append('<tr><td>' + seq + '</td><td><input></td><td><input></td><td><input></td></tr>');
+  });
+  $('#btn-delete-row').click(function() {
+	  --seq;
+    $('#playTable > tbody:last > tr:last').remove();
+ 
+  });
+</script>
+		
 </body>
 </html>
