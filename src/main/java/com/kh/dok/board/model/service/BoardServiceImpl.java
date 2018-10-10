@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
 
+import com.kh.dok.admin.model.vo.SearchCondition;
 import com.kh.dok.board.model.dao.BoardDao;
 import com.kh.dok.board.model.exception.BoardInsertException;
 import com.kh.dok.board.model.vo.Board;
@@ -41,6 +42,13 @@ public class BoardServiceImpl implements BoardService{
 		System.out.println("BoardServiceImpl selectNoticeList method in");
 		
 		return bd.selectNoticeList(sqlSession, bbf);
+	}
+
+
+	@Override
+	public int listCount(SearchCondition sc) {
+		
+		return bd.listCount(sqlSession, sc);
 	}
 
 }

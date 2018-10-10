@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.kh.dok.admin.model.vo.SearchCondition;
 import com.kh.dok.board.model.exception.BoardInsertException;
 import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.board.model.vo.BoardFile;
@@ -14,5 +15,7 @@ public interface BoardDao {
 	int inserNotice(SqlSessionTemplate sqlSession, Board b, BoardFile bf) throws BoardInsertException;
 
 	ArrayList selectNoticeList(SqlSessionTemplate sqlSession, BoardNBoardFile bbf);
+
+	int listCount(SqlSessionTemplate sqlSession, SearchCondition sc);
 
 }
