@@ -13,6 +13,6 @@
 	<c:url var="main" value="upload.ad">
 		<c:param name="gm" value="main"/>
 	</c:url>
-	<jsp:forward page="${main }"/>
+	<jsp:forward page="${main}"/>
 </body>
 </html>

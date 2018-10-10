@@ -1,7 +1,13 @@
 package com.kh.dok.admin.model.dao;
 
+
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
 import java.util.HashMap;
+
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -13,6 +19,7 @@ import com.kh.dok.admin.model.exception.SearchMemberException;
 import com.kh.dok.admin.model.exception.UploadException;
 import com.kh.dok.admin.model.vo.ReportHistory;
 import com.kh.dok.admin.model.vo.SearchCondition;
+import com.kh.dok.admin.model.vo.Visit;
 import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.member.model.vo.Member;
@@ -23,13 +30,13 @@ public class AdminDaoImpl implements AdminDao{
 	//전체 회원 조회 메소드
 	@Override
 	public ArrayList<Member> searchAll(SqlSessionTemplate sqlSession,PageInfo pi,SearchCondition sc) throws MemberSelectListException {
-		
+
 		int offset = (pi.getCurrentPage()-1)* pi.getLimit();
-		
+
 		RowBounds rowBound = new RowBounds(offset, pi.getLimit());
-		
+
 		ArrayList<Member> mlist = (ArrayList)sqlSession.selectList("Admin.searchAll",sc, rowBound);
-		
+
 		if(mlist == null ){
 			throw new MemberSelectListException("전체 회원 조회 실패");
 		}
@@ -39,34 +46,34 @@ public class AdminDaoImpl implements AdminDao{
 	//일반 회원 조회 메소드
 	@Override
 	public ArrayList<Member> searchBu(SqlSessionTemplate sqlSession,PageInfo pi,SearchCondition sc) throws MemberSelectListException {
-		
+
 		int offset = (pi.getCurrentPage()-1) * pi.getLimit();
-		
+
 		RowBounds rowBound = new RowBounds(offset,pi.getLimit());
-		
+
 		ArrayList<Member> mlist = (ArrayList)sqlSession.selectList("Admin.searchBu",sc,rowBound);
-		
+
 		if(mlist == null ){
 			throw new MemberSelectListException("일반 회원 조회 실패");
 		}
-		
+
 		return mlist;
 	}
 
 	//판매자 회원 조회 메소드
 	@Override
 	public ArrayList<Member> searchSe(SqlSessionTemplate sqlSession,PageInfo pi,SearchCondition sc) throws MemberSelectListException {
-		
+
 		int offset = (pi.getCurrentPage()-1) * pi.getLimit();
-		
+
 		RowBounds rowBound = new RowBounds(offset,pi.getLimit());
-		
+
 		ArrayList<Member> mlist = (ArrayList)sqlSession.selectList("Admin.searchSe",sc,rowBound);
-		
+
 		if( mlist == null ){
 			throw new MemberSelectListException("판매자 회원 조회 실패");
 		}
-		
+
 		return mlist;
 	}
 
@@ -74,9 +81,9 @@ public class AdminDaoImpl implements AdminDao{
 	@Override
 	public int countAll(SqlSessionTemplate sqlSession, SearchCondition sc) throws MemberSelectListException {
 		System.out.println(sc);
-		
+
 		int countAll = sqlSession.selectOne("Admin.countAll",sc);
-		
+
 		if(countAll<0){
 			throw new MemberSelectListException("전체 회원 카운트 실패");
 		}
@@ -86,9 +93,9 @@ public class AdminDaoImpl implements AdminDao{
 	//일반 회원  조회 카운트 메소드
 	@Override
 	public int countBu(SqlSessionTemplate sqlSession,SearchCondition sc) throws MemberSelectListException {
-		
+
 		int countBu = sqlSession.selectOne("Admin.countBu",sc);
-		
+
 		if(countBu<0){
 			throw new MemberSelectListException("일반 회원 카운트 실패");
 		}
@@ -98,82 +105,115 @@ public class AdminDaoImpl implements AdminDao{
 	//판매자 회원 조회 카운트 메소드
 	@Override
 	public int countSe(SqlSessionTemplate sqlSession,SearchCondition sc) throws MemberSelectListException {
-		
+
 		int countSe = sqlSession.selectOne("Admin.countSe",sc);
-		
+
 		if(countSe<0){
 			throw new MemberSelectListException("판매자 회원 카운트 실패");
 		}
 		return countSe;
 	}
-	
+
 	//블랙리스트 회원 조회 카운트 메소드
 	@Override
 	public int countBl(SqlSessionTemplate sqlSession,SearchCondition sc) throws BlackMemberSelectListException {
-		
+
 		int countBl = sqlSession.selectOne("Admin.countBl",sc);
-		
+
 		if(countBl < 0){
 			throw new BlackMemberSelectListException("블랙리스트 회원 카운트 실패");
 		}
 		return countBl;
 	}
-	
+
 	//블랙리스트 회원 조회 메소드
 	@Override
 	public ArrayList<ReportHistory> searchBlack(SqlSessionTemplate sqlSession, PageInfo pi,SearchCondition sc) throws BlackMemberSelectListException {
-		
+
 		int offset = (pi.getCurrentPage()-1)*pi.getLimit();
-		
+
 		RowBounds rowBound = new RowBounds(offset,pi.getLimit());
-		
+
 		ArrayList<ReportHistory> blist = (ArrayList)sqlSession.selectList("Admin.searchBlack",sc,rowBound); 
 		if( blist == null){
 			throw new BlackMemberSelectListException("블랙리스트 회원 조회 실패");
 		}
-		
+
 		return blist;
 	}
 
 	@Override
 	public int insertFile(SqlSessionTemplate sqlSession, BoardFile adFile) throws UploadException {
 		int insert = sqlSession.insert("Admin.insertFile", adFile);
-		
+
 		if(insert < 1){
 			throw new UploadException("메인 슬라이드 업로드 실패");
 		}
-		
+
 		return insert;
 	}
 
 	@Override
 	public int updateFile(SqlSessionTemplate sqlSession,BoardFile adFile){
 		int update = sqlSession.update("Admin.updateFile",adFile);
-		
-		
+
+
 		return update;
 	}
-	
+
 	//슬라이드 사진 파일 삭제용 메소드
 	@Override
 	public int deleteFile(SqlSessionTemplate sqlSession){
 		int delete = sqlSession.delete("Admin.deleteFile");
-		
-		
+
+
 		return delete;
 	}
-	
+
 	//슬라이드 사진 select 메소드
 	@Override
 	public ArrayList<BoardFile> selectFile(SqlSessionTemplate sqlSession) throws UploadException {
 		ArrayList<BoardFile> bf = (ArrayList)sqlSession.selectList("Admin.selectFile");
 
-		
+
 		return bf;
 	}
 
-	public int setTotalCount(SqlSessionTemplate sqlSession) {
-		return sqlSession.insert("Admin.insertVisit");
+	@Override
+	public int insertVisit(SqlSessionTemplate sqlSession, String time, String ip) {
+
+		ArrayList<Visit> vl = (ArrayList)sqlSession.selectList("Admin.selectVisitList");
+		System.out.println("vl은 : "+vl);
+		System.out.println(vl.size());
+		if(vl.size() > 0){
+			Date t = new Date(0);
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+			long ltime = Long.parseLong(time);
+			t.setTime(ltime);
+			Visit vs = new Visit(ip,t);
+			System.out.println(vs);
+			int com = sqlSession.selectOne("Admin.selectVisit", vs);
+			Date lastTime = vl.get(vl.size()-1).getVisit_time();
+			String tempDate = sf.format(lastTime);
+			String originTempDate = sf.format(t);
+			if(tempDate.equals(originTempDate) && com < 1){
+				return sqlSession.insert("Admin.insertVisit", vs);
+			}else if(!tempDate.equals(originTempDate) && com < 1){
+				int dVisit = sqlSession.delete("Admin.deleteVisit",lastTime);
+				String dVisitStr = String.valueOf(dVisit);
+				Visit nvs = new Visit(dVisitStr,lastTime);
+				sqlSession.insert("Admin.insertVcount",nvs);
+				sqlSession.insert("Admin.insertgar",t);
+			}
+		}else if(vl.size() == 0){
+			Date t = new Date(0);
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+			long ltime = Long.parseLong(time);
+			t.setTime(ltime);
+			Visit vs = new Visit(ip,t);
+			sqlSession.insert("Admin.insertVisit", vs);
+		}
+		return 1;
 	}
 
 }

@@ -82,14 +82,16 @@
 	display: inline-block;
 	margin-left: 80px;
 }
+
 #searchbot {
 	width: 170px;
 	display: inline-block;
 	margin-left: 80px;
 }
-#file{
-	dispaly:none;
-	}
+
+#file {
+	dispaly: none;
+}
 </style>
 </head>
 <body class="is-preload">
@@ -109,15 +111,15 @@
 				href="searchAll.ad?currentPage=1&searchResult=M&searchCondition=id">회원
 					관리</a></li>
 			<li class="tab-link2" data-tab="tab-2"><a
-				href="searchBlack.ad?currentPage=1&searchResult=M&searchCondition=repedId">블랙리스트 관리 관리</a></li>
-			<li class="tab-link3" data-tab="tab-3"><a
-				href="upload.ad">메인페이지 관리</a></li>
-			<li class="tab-link4" data-tab="tab-4"><a
-				href="statistics.ad">통계</a></li>
+				href="searchBlack.ad?currentPage=1&searchResult=M&searchCondition=repedId">블랙리스트
+					관리 관리</a></li>
+			<li class="tab-link3" data-tab="tab-3"><a href="upload.ad">메인페이지
+					관리</a></li>
+			<li class="tab-link4" data-tab="tab-4"><a href="statistics.ad">통계</a></li>
 			<li class="tab-link5" data-tab="tab-5"><a>문의 사항</a></li>
 			<li class="tab-link6" data-tab="tab-6"><a>공지사항</a></li>
-			<li class="tab-link7" data-tab="tab-7"><a
-				href="addmovie.ad">영화 추가</a></li>
+			<li class="tab-link7" data-tab="tab-7"><a href="addmovie.ad">영화
+					추가</a></li>
 		</ul>
 	</nav>
 
@@ -270,8 +272,8 @@
 					<c:if test="${pi.currentPage > 1 }">
 						<c:url var="blistBack" value="searchBlack.ad">
 							<c:param name="currentPage" value="${pi.currentPage - 1 }" />
-							<c:param name="searchResult" value="${sc.searchResult }"/>
-							<c:param name="searchCondition" value="${sc.searchCondition }"/>
+							<c:param name="searchResult" value="${sc.searchResult }" />
+							<c:param name="searchCondition" value="${sc.searchCondition }" />
 						</c:url>
 						<a href="${blistBack }">&lt;이전&nbsp;</a>
 					</c:if>
@@ -284,8 +286,8 @@
 						<c:if test="${p ne pi.currentPage }">
 							<c:url var="blistCheck" value="searchBlack.ad">
 								<c:param name="currentPage" value="${p }" />
-								<c:param name="searchResult" value="${sc.searchResult }"/>
-								<c:param name="searchCondition" value="${sc.searchCondition }"/>
+								<c:param name="searchResult" value="${sc.searchResult }" />
+								<c:param name="searchCondition" value="${sc.searchCondition }" />
 							</c:url>
 							<a href="${blistCheck }">${p }</a>
 						</c:if>
@@ -296,8 +298,8 @@
 					<c:if test="${pi.currentPage < pi.maxPage }">
 						<c:url var="blistEnd" value="searchBlack.ad">
 							<c:param name="currentPage" value="${pi.currentPage + 1 }" />
-							<c:param name="searchResult" value="${sc.searchResult }"/>
-							<c:param name="searchResult" value="${sc.searchCondition }"/>
+							<c:param name="searchResult" value="${sc.searchResult }" />
+							<c:param name="searchResult" value="${sc.searchCondition }" />
 						</c:url>
 						<a href="${blistEnd }">&nbsp;다음&gt;</a>
 					</c:if>
@@ -323,70 +325,94 @@
 			<br>
 			<div class="box alt">
 				<div class="row gtr-50 gtr-uniform">
-					<div class="col-4" id="colsize">	
-						<form action="upload.ad" method="post" enctype="multipart/form-data">
-						<span>
-						<c:if test="${fn:length(bf) >= 1 }">
-							<img id="colimg"
-							src="${contextPath }/resources/uploadFiles/${bf.get(0).edit_name}" alt="" /></span>
-						</c:if>
-						<c:if test="${fn:length(bf) < 1 }">
-							<img id="colimg"
-							src="${contextPath }/resources/images/slide3jpg" alt="" /></span>
-						</c:if>
-							<a id="modimg" class="button primary" onclick="document.getElementById('file').click();">슬라이드1 수정</a>
-							<input type="file" id="file" name="file" onchange="document.getElementById('fsub').click();" style="display:none;">
-							<button type="submit" id="fsub" name="fsub" style="display:none;">
+					<div class="col-4" id="colsize">
+						<form action="upload.ad" method="post"
+							enctype="multipart/form-data">
+							<span> <c:if test="${fn:length(bf) >= 1 }">
+									<img id="colimg"
+										src="${contextPath }/resources/uploadFiles/${bf.get(0).edit_name}"
+										alt="" /></span>
+							</c:if>
+							<c:if test="${fn:length(bf) < 1 }">
+								<img id="colimg"
+									src="${contextPath }/resources/images/slide3jpg" alt="" />
+								</span>
+							</c:if>
+							<a id="modimg" class="button primary"
+								onclick="document.getElementById('file').click();">슬라이드1 수정</a>
+							<input type="file" id="file" name="file"
+								onchange="document.getElementById('fsub').click();"
+								style="display: none;">
+							<button type="submit" id="fsub" name="fsub"
+								style="display: none;">
 						</form>
 					</div>
 					<div class="col-4" id="colsize">
-						<form action="upload.ad" method="post" enctype="multipart/form-data">
-						<span>
-						<c:if test="${fn:length(bf) >= 2 }">
-							<img id="colimg"
-							src="${contextPath }/resources/uploadFiles/${bf.get(1).edit_name}" alt="" /></span>
-						</c:if>
-						<c:if test="${fn:length(bf) < 2 }">
-							<img id="colimg"
-							src="${contextPath }/resources/images/slide4.jpg" alt="" /></span>
-						</c:if>
-							<a id="modimg" class="button primary" onclick="document.getElementById('file2').click();">슬라이드2 수정</a>
-							<input type="file" id="file2" name="file2" onchange="document.getElementById('fsub2').click();" style="display:none;">
-							<button type="submit" id="fsub2" name="fsub" style="display:none;">
+						<form action="upload.ad" method="post"
+							enctype="multipart/form-data">
+							<span> <c:if test="${fn:length(bf) >= 2 }">
+									<img id="colimg"
+										src="${contextPath }/resources/uploadFiles/${bf.get(1).edit_name}"
+										alt="" /></span>
+							</c:if>
+							<c:if test="${fn:length(bf) < 2 }">
+								<img id="colimg"
+									src="${contextPath }/resources/images/slide4.jpg" alt="" />
+								</span>
+							</c:if>
+							<a id="modimg" class="button primary"
+								onclick="document.getElementById('file2').click();">슬라이드2 수정</a>
+							<input type="file" id="file2" name="file2"
+								onchange="document.getElementById('fsub2').click();"
+								style="display: none;">
+							<button type="submit" id="fsub2" name="fsub"
+								style="display: none;">
 						</form>
 					</div>
 					<div class="col-4" id="colsize">
-						<form action="upload.ad" method="post" enctype="multipart/form-data">
-						<span>
-						<c:if test="${fn:length(bf) >= 3 }">
-							<img id="colimg"
-							src="${contextPath }/resources/uploadFiles/${bf.get(2).edit_name}" alt="" /></span>
-						</c:if>
-						<c:if test="${fn:length(bf) < 3 }">
-							<img id="colimg"
-							src="${contextPath }/resources/images/slide1.jpg" alt="" /></span>
-						</c:if>
-							<a id="modimg" class="button primary" onclick="document.getElementById('file3').click();">슬라이드3 수정</a>
-							<input type="file" id="file3" name="file3" onchange="document.getElementById('fsub3').click();" style="display:none;">
-							<button type="submit" id="fsub3" name="fsub" style="display:none;">
+						<form action="upload.ad" method="post"
+							enctype="multipart/form-data">
+							<span> <c:if test="${fn:length(bf) >= 3 }">
+									<img id="colimg"
+										src="${contextPath }/resources/uploadFiles/${bf.get(2).edit_name}"
+										alt="" /></span>
+							</c:if>
+							<c:if test="${fn:length(bf) < 3 }">
+								<img id="colimg"
+									src="${contextPath }/resources/images/slide1.jpg" alt="" />
+								</span>
+							</c:if>
+							<a id="modimg" class="button primary"
+								onclick="document.getElementById('file3').click();">슬라이드3 수정</a>
+							<input type="file" id="file3" name="file3"
+								onchange="document.getElementById('fsub3').click();"
+								style="display: none;">
+							<button type="submit" id="fsub3" name="fsub"
+								style="display: none;">
 						</form>
 					</div>
 					<div class="col-4" id="colsize">
-						<form action="upload.ad" method="post" enctype="multipart/form-data">
-						<span>
-						<c:if test="${fn:length(bf) == 4 }">
-							<img id="colimg"
-							src="${contextPath }/resources/uploadFiles/${bf.get(3).edit_name}" alt="" /></span>
-						</c:if>
-						<c:if test="${fn:length(bf) < 4 }">
-							<img id="colimg"
-							src="${contextPath }/resources/images/slide2.jpg" alt="" /></span>
-						</c:if>
-							<a id="modimg" class="button primary" onclick="document.getElementById('file4').click();">슬라이드4 수정</a>
-							<input type="file" id="file4" name="file4" onchange="document.getElementById('fsub4').click();" style="display:none;">
-							<button type="submit" id="fsub4" name="fsub" style="display:none;">
+						<form action="upload.ad" method="post"
+							enctype="multipart/form-data">
+							<span> <c:if test="${fn:length(bf) == 4 }">
+									<img id="colimg"
+										src="${contextPath }/resources/uploadFiles/${bf.get(3).edit_name}"
+										alt="" /></span>
+							</c:if>
+							<c:if test="${fn:length(bf) < 4 }">
+								<img id="colimg"
+									src="${contextPath }/resources/images/slide2.jpg" alt="" />
+								</span>
+							</c:if>
+							<a id="modimg" class="button primary"
+								onclick="document.getElementById('file4').click();">슬라이드4 수정</a>
+							<input type="file" id="file4" name="file4"
+								onchange="document.getElementById('fsub4').click();"
+								style="display: none;">
+							<button type="submit" id="fsub4" name="fsub"
+								style="display: none;">
 						</form>
-					</div>		
+					</div>
 				</div>
 			</div>
 		</section>
@@ -395,31 +421,43 @@
 		<section id="tab-4" class="post">
 			<h2>통계</h2>
 			<br>
-			<div class="box alt">
-				<div class="row gtr-50 gtr-uniform">
-					<div class="col-4" id="graphsize">
-						<span><img id="colimg"
-							src="${contextPath }/resources/images/graph1.png" alt="" /></span> <a
-							href="#" id="modgraph" class="button primary">그래프 1</a>
-					</div>
-					<div class="col-4" id="graphsize">
-						<span><img id="colimg"
-							src="${contextPath }/resources/images/graph2.png" alt="" /></span> <a
-							href="#" id="modgraph" class="button primary">그래프2</a>
-					</div>
-					<div class="col-4" id="graphsize">
-						<span><img id="colimg"
-							src="${contextPath }/resources/images/graph3.png" alt="" /></span> <a
-							href="#" id="modgraph" class="button primary">그래프3</a>
-					</div>
-					<div class="col-4" id="graphsize">
-						<span><img id="colimg"
-							src="${contextPath }/resources/images/graph4.jpg" alt="" /></span> <a
-							href="#" id="modgraph" class="button primary">그래프4</a>
-					</div>
-
-				</div>
-			</div>
+			<div class="table-wrapper">
+				<table>
+					<thead>
+						<tr>
+							<th>1월</th>
+							<th>2월</th>
+							<th>3월</th>
+							<th>4월</th>
+							<th>5월</th>
+							<th>6월</th>
+							<th>7월</th>
+							<th>8월</th>
+							<th>9월</th>
+							<th>10월</th>
+							<th>11월</th>
+							<th>12월</th>
+							<th>today</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>2</td>
+							<td>3</td>
+							<td>4</td>
+							<td>5</td>
+							<td>6</td>
+							<td>7</td>
+							<td>8</td>
+							<td>9</td>
+							<td>10</td>
+							<td>11</td>
+							<td>12</td>
+							<td>value</td>
+						</tr>
+					</tbody>
+				</table>
 		</section>
 
 		<!-- 다섯번째 탭(문의 사항) : 성희 공간 -->
@@ -498,8 +536,9 @@
 			var searchResult = $("input[name=bgsearch]").val();
 			alert("hi");
 			console.log(searchCondition);
-			location.href = "searchBlack.ad?currentPage=1&searchResult="+ searchResult + "&searchCondition="+searchCondition;
-			}
+			location.href = "searchBlack.ad?currentPage=1&searchResult="
+					+ searchResult + "&searchCondition=" + searchCondition;
+		}
 	</script>
 	<!-- 기본 option값 설정 -->
 	<script>
@@ -526,7 +565,7 @@
 		})
 	</script>
 	<script>
-		function test(){
+		function test() {
 			alert("hi");
 		}
 	</script>
@@ -544,67 +583,4 @@
 
 
 
-<!-- <div id="pageid" class="pagination">
-					<a href="#" class="page">&lt&lt </a> <a href="#"
-						class="page active">1</a> <a href="#" class="page">2</a> <a
-						href="#" class="page">3</a> <a href="#" class="page">4</a> <a
-						href="#" class="page">5</a> <a href="#" class="page">&gt&gt</a>
-				</div> -->
 
-<%-- <c:if test="${va = 'all' }">
-				 		<c;set name="pval" value="searchAll.ad?currentPage="${pi.currentPage }">
-				 	</c:if> --%>
-<!-- <b><font color="#18bfef " size="4"></b></font> -->
-<%--  --%>
-
-
-
-<%-- <c:if test="${ pi.currentPage <= 1 }">
-				[이전] &nbsp;
-			</c:if>
-					<c:if test="${ pi.currentPage > 1 }">
-						<c:url var="blistBack" value="searchAll.ad">
-							<c:param name="currentPage" value="${pi.currentPage - 1 }" />
-						</c:url>
-						<a href="${ blistBack }">[이전]</a> &nbsp;
-			</c:if>
-					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-						<c:if test="${ p eq pi.currentPage }">
-							<font color="red" size="4"><b>[${ p }]</b></font>
-						</c:if>
-						<c:if test="${ p ne pi.currentPage }">
-							<c:url var="blistCheck" value="searchAll.ad">
-								<c:param name="currentPage" value="${ p }" />
-							</c:url>
-							<a href="${ blistCheck }">${ p }</a>
-						</c:if>
-					</c:forEach>
-					<c:if test="${ pi.currentPage >= pi.maxPage }">
-				&nbsp; [다음]
-			</c:if>
-					<c:if test="${ pi.currentPage < pi.maxPage }">
-						<c:url var="blistEnd" value="searchAll.ad">
-							<c:param name="currentPage" value="${ pi.currentPage + 1 }" />
-						</c:url>
-						<a href="${ blistEnd }">&nbsp;[다음]</a>
-					</c:if> --%>
-
-<!-- <script>
-		function searchAll(){
-			$.ajax({
-				url : "searchAll.ad",
-				type : "POST",
-				dataType: "json",
-				success : function(data){
-					var t1 = data.map;
-					console.log(t1);
-					var t2 = data.map[0].mid;
-					console.log(t2);
-				},
-				error : function(){
-					alert("에러 발생");
-				}
-			});
-		}
-	</script> -->
-<%-- <script src="${contextPath }/resources/js/selectIndex.js"></script> --%>

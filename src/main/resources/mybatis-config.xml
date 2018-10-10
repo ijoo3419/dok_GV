@@ -19,6 +19,7 @@
 		<typeAlias type="com.kh.dok.member.model.vo.BookingHistory" alias="BookingHistory"></typeAlias>
 		<typeAlias type="com.kh.dok.licensee.model.vo.MovieRoom" alias="MovieRoom"></typeAlias>
 		<typeAlias type="com.kh.dok.member.model.vo.MyReply" alias="MyReply"></typeAlias>
+		<typeAlias type="com.kh.dok.admin.model.vo.Visit" alias="Visit"></typeAlias>
 	</typeAliases>
 	
 	<mappers>
