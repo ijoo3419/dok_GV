@@ -9,7 +9,7 @@ import com.kh.dok.member.model.vo.BookingHistory;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.member.model.vo.MyReply;
 import com.kh.dok.movie.model.vo.Movie;
-import com.kh.dok.movie.model.vo.MovieSumbnail;
+import com.kh.dok.movie.model.vo.MovieThumbnail;
 
 public interface MemberDao {
 
@@ -38,7 +38,7 @@ public interface MemberDao {
 
 	int updateClass(SqlSessionTemplate sqlSession, Member m);
 
-	ArrayList<MovieSumbnail> selectWishList(SqlSessionTemplate sqlSession, MovieSumbnail msn, Member m);
+	ArrayList<MovieThumbnail> selectWishList(SqlSessionTemplate sqlSession, MovieThumbnail msn, Member m);
 
 	ArrayList<BookingHistory> selectBookingHist(SqlSessionTemplate sqlSession, Member m);
 

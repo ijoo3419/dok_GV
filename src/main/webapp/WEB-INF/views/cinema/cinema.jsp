@@ -12,6 +12,10 @@
   <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
    <script src="http://code.jquery.com/jquery-1.11.0.js"></script>
+   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   
 <title>Insert title here</title>
 <style>
@@ -301,37 +305,98 @@ hr {
     <div id="home" class="tab-pane fade in active">
       <h3>서울</h3>
      <c:forEach items="${cienmaView}" var="row1">
-      	<a href="cinemaDetail.ci?id=${row1.theaterId}">${row1.theaterName }</a>
+      <c:set var="name" value="${row1.area_id}"/>
+          <c:choose>
+		     <c:when test="${name eq 'A1'}">
+      			<a href="cinemaDetail.ci?id=${row1.theaterId}">${row1.theaterName }</a>  
+					        
+			 </c:when>
+		</c:choose>	
       </c:forEach>
-      
     </div>
     <div id="menu1" class="tab-pane fade">
       <h3>경기</h3>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <c:forEach items="${cienmaView}" var="row1">
+      <c:set var="name" value="${row1.area_id}"/>
+          <c:choose>
+		     <c:when test="${name eq 'A2'}">
+      			<a href="cinemaDetail.ci?id=${row1.theaterId}">${row1.theaterName }</a>  
+					        
+			 </c:when>
+		</c:choose>	
+      </c:forEach>
     </div>
     <div id="menu2" class="tab-pane fade">
       <h3>강원</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+      <c:forEach items="${cienmaView}" var="row1">
+      <c:set var="name" value="${row1.area_id}"/>
+          <c:choose>
+		     <c:when test="${name eq 'A3'}">
+      			<a href="cinemaDetail.ci?id=${row1.theaterId}">${row1.theaterName }</a>  
+					        
+			 </c:when>
+		</c:choose>	
+      </c:forEach>
     </div>
     <div id="menu3" class="tab-pane fade">
       <h3>대전/충청</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+      <c:forEach items="${cienmaView}" var="row1">
+      <c:set var="name" value="${row1.area_id}"/>
+          <c:choose>
+		     <c:when test="${name eq 'A4'}">
+      			<a href="cinemaDetail.ci?id=${row1.theaterId}">${row1.theaterName }</a>  
+					        
+			 </c:when>
+		</c:choose>	
+      </c:forEach>
     </div>
     <div id="menu4" class="tab-pane fade">
       <h3>대구</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+     <c:forEach items="${cienmaView}" var="row1">
+      <c:set var="name" value="${row1.area_id}"/>
+          <c:choose>
+		     <c:when test="${name eq 'A5'}">
+      			<a href="cinemaDetail.ci?id=${row1.theaterId}">${row1.theaterName }</a>  
+					        
+			 </c:when>
+		</c:choose>	
+      </c:forEach>
     </div>
     <div id="menu5" class="tab-pane fade">
       <h3>부산/울산</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+      <c:forEach items="${cienmaView}" var="row1">
+      <c:set var="name" value="${row1.area_id}"/>
+          <c:choose>
+		     <c:when test="${name eq 'A6'}">
+      			<a href="cinemaDetail.ci?id=${row1.theaterId}">${row1.theaterName }</a>  
+					        
+			 </c:when>
+		</c:choose>	
+      </c:forEach>
     </div>
     <div id="menu6" class="tab-pane fade">
       <h3>경상</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+      <c:forEach items="${cienmaView}" var="row1">
+      <c:set var="name" value="${row1.area_id}"/>
+          <c:choose>
+		     <c:when test="${name eq 'A7'}">
+      			<a href="cinemaDetail.ci?id=${row1.theaterId}">${row1.theaterName }</a>  
+					        
+			 </c:when>
+		</c:choose>	
+      </c:forEach>
     </div>
     <div id="menu7" class="tab-pane fade">
       <h3>광주/전라/제주</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+      <c:forEach items="${cienmaView}" var="row1">
+      <c:set var="name" value="${row1.area_id}"/>
+          <c:choose>
+		     <c:when test="${name eq 'A8' && name eq 'A9' }">
+      			<a href="cinemaDetail.ci?id=${row1.theaterId}">${row1.theaterName }</a>  
+					        
+			 </c:when>
+		</c:choose>	
+      </c:forEach>
     </div>
   </div>
 </div>
@@ -342,18 +407,39 @@ hr {
 		<!-- </div> -->
 		<br><br><br><br><br><br><br>
 		<hr>
+		<div id="data1">
+		<h3 align="left">가까운 영화관</h3>
+		<div id="map" style="width:100%;height:398px;">
+			
+		<%-- <div id="sumnailimage" onclick="location.href='${contextPath}/cinemaDetail.ci'">
+	
+		</div> --%>
+		
+		<!-- <div id="sumnailimage">
+	
+		</div>
+		
+		<div id="sumnailimage">
+	
+		</div> -->
+			
+		
+			
+		 <c:forEach items="${cienmaView}" var="row1">
 		<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=wWfCWSbi3oQIe4dEdk3L&submodules=geocoder"></script>
 <script> 
     //지도 타입 설정하는 곳 ( 아무것도 설정 하지 않으면 자동으로 Normal로 적용된다 ) 초기화할 때 설정할수 있다. 
-    var map = new naver.maps.Map('map'); 
+    /* var map = new naver.maps.Map('map');  */
     // 위성지도를 사용하려면 MapTypeId 객체의 SATELLITE 상수 값을 사용합니다. 
     //var map = new naver.maps.Map('map', {mapTypeId: naver.maps.MapTypeId.SATELLITE}); 
     // 위성지도에 지명을 적용하려면 MapTypeId 객체의 HYBRID 상수 값을 사용합니다. 
     //var map = new naver.maps.Map('map', {mapTypeId: naver.maps.MapTypeId.HYBRID}); 
     // 기본지도에 높낮이만 적용하려면 MapTypeId 객체의 TERRAIN 상수 값을 사용합니다. 
     //var map = new naver.maps.Map('map', {mapTypeId: naver.maps.MapTypeId.TERRAIN});
-    var myaddress = '${row1.theater_address}';// 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!) 
+    var myaddress = '${row1.theater_address}';// 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!)
     // 주소가 있는지 체크
+    /* var xx =1;
+    var yy=1; */
     naver.maps.Service.geocode({address: myaddress}, function(status, response) { 
         if (status !== naver.maps.Service.Status.OK) { 
             return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러'); 
@@ -365,25 +451,103 @@ hr {
         var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
         var ex = result.items[0].point.x;
         var ey = result.items[0].point.y;
-        console.log(ex);
-        console.log(ey);
+        console.log("ex : " + ex);
+        console.log("ey : " + ey);
         
-});
-    
-    $(function() {        
-    	navigator.geolocation.getCurrentPosition(function(position){
-			alert("위도 : " + position.coords.latitude + "\n" + 
-					"경도 : " + position.coords.longitude);
+        navigator.geolocation.getCurrentPosition(function(position){
+			/* alert("위도 : " + position.coords.latitude + "\n" + 
+					"경도 : " + position.coords.longitude); */
 			
 			var lat = position.coords.latitude;
 			var lon = position.coords.longitude;
-			console.log(lat);
-	        console.log(lon);
+			console.log("lat : " + lat);
+	        console.log("lon : " + lon);
+			
+			xx = lon - ex;
+		 	yy = lat - ey;
+			console.log(xx);
+			console.log(yy);
 
+			/* var allData = { "xx": xx, "yy": yy };
+			$.ajax({
+	    		url:"/cinema1.ci",
+	    		type:"POST",
+	    		async: false,
+	    		data: allData,
+	    		success:function(data){
+	    			console.log(allData);
+	    		}
+			});	 */
+			var html = '';
+            html += '<div id="sumnailimage">';
+            html += '${row1.theaterName }<br>;
+            html += '<hr>';
+            html += '<div id="buttonarea">';
+            html += '<button id="detail" onclick="location.href='cinemaDetail.ci?id=${row1.theaterId}'">상세보기</button>';
+            html += '</div>';
+            html += '</div>';
+            $("#map").after(html);
+				/* var $div = $(<div id="sumnailimage">d</div>);
+				var div = document.createElement('div');
+				var text = document.createTextNode('d');
+				div.appendChild(text); */
+		
+			
+			
+	  
+	<%-- <%String xx = "<script>document.writeln(xx)</script>";
+	  String yy = "<script>document.writeln(yy)</script>";
+	  pageContext.setAttribute("xx",xx);
+	  pageContext.setAttribute("yy",yy);
+	  %>  --%>
     });
+        
+});
+    
+    /* $(function() {        
+    	navigator.geolocation.getCurrentPosition(function(position){
+			/* alert("위도 : " + position.coords.latitude + "\n" + 
+					"경도 : " + position.coords.longitude); */
+			
+			/*var lat = position.coords.latitude;
+			var lon = position.coords.longitude;
+	        console.log(lon);
+			console.log(lat);
 
+    /*}); */
+  /* }); */
+  
 </script>
-		<div id="data1">
+
+	 <%-- <c:set var ="xx">
+	 	<script>document.write(xx);</script>
+	 </c:set>
+	 <c:out value="${pageScope.xx}" escapeXml="false"/>
+	 <c:if test = "${xx eq '1'}">
+      	<div id="sumnailimage">
+            ${row1.theaterName }<br>
+             <hr>
+             <div id="buttonarea">     
+             <button id="detail" onclick="location.href='cinemaDetail.ci?id=${row1.theaterId}'">상세보기</button>		<!-- view구현 할 사람 여기 사용 -->
+			 <button id="book" onclick="location.href='moviePay.mo'">예매하기</button>			<!-- 영화 리스트에서 view연결 할 사람 여기로 -->
+			</div>	
+		</div>			        
+	 </c:if>  --%>
+<%-- <div id="sumnailimage" onclick="location.href='${contextPath}/cinemaDetail.ci'">
+ 
+                    ${row1.theaterName }<br>
+                   <hr>
+                   <div id="buttonarea">     
+                   <button id="detail" onclick="location.href='cinemaDetail.ci?id=${row1.theaterId}'">상세보기</button>		<!-- view구현 할 사람 여기 사용 -->
+						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>			<!-- 영화 리스트에서 view연결 할 사람 여기로 -->
+					</div>	
+		
+                
+		</div> --%>
+      </c:forEach>
+		</div>
+		</div>
+		<%-- <div id="data1">
 			<h3 align="left">가까운 영화관</h3>
 			
 		<div id="sumnailimage" onclick="location.href='${contextPath}/cinemaDetail.ci'">
@@ -400,13 +564,14 @@ hr {
 			
 		
 			
-		</div>
+		</div> --%>
 
-		 <br><br><br><br><br><br><br><br><br><br><br><br><br>
-		 <hr>
-		 <br><br>
+		 <br><br><br><br><br><br><!-- <br><br> --><!-- <br><br><br><br><br> -->
+		<br><br><br><br><br><br><br>
+		<!--  <hr>
+		 <br><br> -->
 		 
-		 <div class="container1">
+<%-- 		 <div class="container1">
   <h2>공지사항</h2>          
   <table class="table table-hover">
     <thead>
@@ -487,32 +652,32 @@ hr {
              <div class="pagination" align="center">
              <br>
              	<a href="location.href='#'"><<</a>
-             	<%-- <% if(currentPage <= 1){ %> --%>
+             	<% if(currentPage <= 1){ %>
              	<a disabled><</a>
-             <%-- 	<% }else{ %> --%>
+             	<% }else{ %>
              	<a onclick="location.href='#'">&laquo;</a>
 
-             	<%-- <% } %>
+             	<% } %>
              	<% for(int p = startPage; p <= endPage; p++){
              		if(p == currentPage){	
-             	%> --%>
+             	%>
 
-             	<a class="active" disabled><%-- <%= p %> --%>1</a>
-             	<%-- <%  }else{ %> --%>
-             	<a onclick="location.href='#'"><%-- <%= p %> --%>2</a>
+             	<a class="active" disabled><%= p %>1</a>
+             	<%  }else{ %>
+             	<a onclick="location.href='#'"><%= p %>2</a>
 
-             <%-- 	<%  } %>
-             	<% } %> --%>
+             	<%  } %>
+             	<% } %>
              	
-             	<%-- <% if(currentPage >= maxPage){ %> --%>
+             	<% if(currentPage >= maxPage){ %>
              	<a disabled>></a>
-             	<%-- <% }else{ %> --%>
+             	<% }else{ %>
              	<a onclick="location.href='#'">></a>
-             	<%-- <% } %> --%>
+             	<% } %>
              	<a onclick="location.href='#'">>></a>
              </div>
          </div>
-	<!-- </div> -->
+	<!-- </div> --> --%>
 							
 	 </article>
 </div>
@@ -525,13 +690,13 @@ hr {
 		</div>			
 <br><br><br><br><br><br>
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
+			<!-- <script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script src="assets/js/main.js"></script> -->
 
 	</body>
 </html>

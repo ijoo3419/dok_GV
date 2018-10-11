@@ -4,7 +4,7 @@ import java.sql.Date;
 
 import org.springframework.stereotype.Repository;
 @Repository
-public class MovieSumbnail  implements java.io.Serializable{
+public class MovieThumbnail  implements java.io.Serializable{
 	private String movie_id;
 	private String movie_title;
 	private String movie_etitle;
@@ -19,7 +19,7 @@ public class MovieSumbnail  implements java.io.Serializable{
 	private int file_level;
 	private String mid;
 	
-	public MovieSumbnail(){}
+	public MovieThumbnail(){}
 
 	public String getMovie_id() {
 		return movie_id;
@@ -127,14 +127,14 @@ public class MovieSumbnail  implements java.io.Serializable{
 
 	@Override
 	public String toString() {
-		return "MovieSumbnail [movie_id=" + movie_id + ", movie_title=" + movie_title + ", movie_etitle=" + movie_etitle
+		return "MovieThumbnail [movie_id=" + movie_id + ", movie_title=" + movie_title + ", movie_etitle=" + movie_etitle
 				+ ", movie_content=" + movie_content + ", open_date=" + open_date + ", director_name=" + director_name
 				+ ", production_com=" + production_com + ", movie_age=" + movie_age + ", genre=" + genre
 				+ ", runnig_time=" + runnig_time + ", file_src=" + file_src + ", file_level=" + file_level + ", mid="
 				+ mid + "]";
 	}
 
-	public MovieSumbnail(String movie_id, String movie_title, String movie_etitle, String movie_content, Date open_date,
+	public MovieThumbnail(String movie_id, String movie_title, String movie_etitle, String movie_content, Date open_date,
 			String director_name, String production_com, String movie_age, String genre, int runnig_time,
 			String file_src, int file_level, String mid) {
 		super();
