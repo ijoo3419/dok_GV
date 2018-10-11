@@ -604,18 +604,25 @@ a{
 		var treeCheck = 0; //모달3에서 체크용 변수
 		var treePlue = 0;
 		/* 모달 3 체크용 변수 */
-		
+			
 		window.onload = function () {
 			treeCheck = $("#movieCount option:selected").val();
 		}
 		
 		var userSeat = new Array(); //유저가 선택한 좌석
+		var moneyCheck = 0; //영화 머니 계산 체크용 변수
 		
 		$(function(){
 			$("#movieCount").change(function(){
 				treeCheck = $("#movieCount option:selected").val();
 				treePlue = 0;
 				userSeat = new Array();
+
+				moneyCheck = 0;
+				
+				var basicPrice = $(".hiddenPrice").val();
+				
+				$(".seatPay-price").find("#td-web-fontTitle").text(basicPrice + "　"); //selectBox값이 바뀌면 가격 정보 다시 초기화
 				
 				$("input:checkbox").prop("checked", false);
 				
@@ -674,24 +681,23 @@ a{
 						$("input[type='checkbox']").off().on('click', function(){
 							++treePlue;
 						});
-					}else{/* 
-						for(var i = 0; i < 100; i++){
-							if($('.screenCheck').find('label').prop("checked") == true){
-								userSeat = $(this).text();
-							}
-						} */
+					}else{
 						$("input[type='checkbox']").attr("disabled", true);
 					}
 				}
 			});
 		});
 		
+		var seatSplit = new Array();
+		var excelSplit = new Array();
 		
 		$(function foo(){
 				
 			    setTimeout(foo, 1000);
 			    
-			    var userSeat = new Array();
+			    var userSeat = new Array(); //유저가 선택한 좌석 이름이 저장될 변수
+			    var userRow = new Array(); //열
+			    var userColumn = new Array(); //번째
 			    
 			    if(treeCheck == 0){
 			    	$("input[type='checkbox']").attr("disabled", true);
@@ -703,9 +709,21 @@ a{
 			    	    
 						for(var i = 0; i < arr_Season.length; i++){
 							if(arr_Season[i].checked == true){
-								userSeat += ", " + $('.screenCheck').find('label').eq(i).text();
+								userSeat += $('.screenCheck').find('label').eq(i).text() + ", ";
+								userRow += $('.screenCheck').find('label').eq(i).find('input').val() + ", ";
 							}
 						}
+
+						seatSplit = userSeat.split(", ");
+						excelSplit = userRow.split(", ");
+						
+						$(".seatPay").find("tr").eq(5).find('td').text(seatSplit);
+						
+						var basicPrice = $(".hiddenPrice").val();
+						
+						$('#myModal3 .pay-center').find('h4').eq(1).text(basicPrice).append('<font size="3" id="web-fontTitle-child">원</font>');
+						$('#myModal3 .pay-center').find('h4').eq(7).text(basicPrice).append('<font size="3" id="web-fontTitle-child">원</font>');
+						
 			    	}
 			    }else if(treeCheck == 2){
 			    	if(treePlue >= 2){
@@ -715,8 +733,28 @@ a{
 			    	    
 						for(var i = 0; i < arr_Season.length; i++){
 							if(arr_Season[i].checked == true){
-								userSeat += ", " + $('.screenCheck').find('label').eq(i).text();
+								userSeat += $('.screenCheck').find('label').eq(i).text() + ", ";
+								userRow += $('.screenCheck').find('label').eq(i).find('input').val() + ", ";
 							}
+						}
+
+						seatSplit = userSeat.split(", ");
+						excelSplit = userRow.split(", ");
+						
+						$(".seatPay").find("tr").eq(5).find('td').text(seatSplit);
+						
+						if(moneyCheck == 0){
+							var sum = $(".seatPay-price").find("#td-web-fontTitle").text();
+							var sumSplit = sum.split("　");
+							
+							var price = sumSplit[0] * 2;
+							
+							$(".seatPay-price").find("#td-web-fontTitle").text(price + "　");
+							
+							$('#myModal3 .pay-center').find('h4').eq(1).text(price).append('<font size="3" id="web-fontTitle-child">원</font>');
+							$('#myModal3 .pay-center').find('h4').eq(7).text(price).append('<font size="3" id="web-fontTitle-child">원</font>');
+							
+							moneyCheck = 1;
 						}
 			    	}
 			    }else if(treeCheck == 3){
@@ -727,8 +765,28 @@ a{
 			    	    
 						for(var i = 0; i < arr_Season.length; i++){
 							if(arr_Season[i].checked == true){
-								userSeat += ", " + $('.screenCheck').find('label').eq(i).text();
+								userSeat += $('.screenCheck').find('label').eq(i).text() + ", ";
+								userRow += $('.screenCheck').find('label').eq(i).find('input').val() + ", ";
 							}
+						}
+						
+						seatSplit = userSeat.split(", ");
+						excelSplit = userRow.split(", ");
+						
+						$(".seatPay").find("tr").eq(5).find('td').text(seatSplit);
+						
+						if(moneyCheck == 0){
+							var sum = $(".seatPay-price").find("#td-web-fontTitle").text();
+							var sumSplit = sum.split("　");
+							
+							var price = sumSplit[0] * 3;
+							
+							$(".seatPay-price").find("#td-web-fontTitle").text(price + "　");
+							
+							$('#myModal3 .pay-center').find('h4').eq(1).text(price).append('<font size="3" id="web-fontTitle-child">원</font>');
+							$('#myModal3 .pay-center').find('h4').eq(7).text(price).append('<font size="3" id="web-fontTitle-child">원</font>');
+							
+							moneyCheck = 1;
 						}
 			    	}
 			    }else if(treeCheck == 4){
@@ -739,11 +797,51 @@ a{
 			    	    
 						for(var i = 0; i < arr_Season.length; i++){
 							if(arr_Season[i].checked == true){
-								userSeat += ", " + $('.screenCheck').find('label').eq(i).text();
+								userSeat += $('.screenCheck').find('label').eq(i).text() + ", ";
+								userRow += $('.screenCheck').find('label').eq(i).find('input').val() + ", ";
 							}
+						}
+						
+						seatSplit = userSeat.split(", ");
+						excelSplit = userRow.split(", ");
+						
+						$(".arrayHidden").val(excelSplit);
+						$(".seatPay").find("tr").eq(5).find('td').text(seatSplit); //사용자가 선택한 좌석 이름
+						
+						if(moneyCheck == 0){
+							var sum = $(".seatPay-price").find("#td-web-fontTitle").text();
+							var sumSplit = sum.split("　");
+							
+							var price = sumSplit[0] * 4;
+							
+							$(".seatPay-price").find("#td-web-fontTitle").text(price + "　");
+							
+							$('#myModal3 .pay-center').find('h4').eq(1).text(price).append('<font size="3" id="web-fontTitle-child">원</font>');
+							$('#myModal3 .pay-center').find('h4').eq(7).text(price).append('<font size="3" id="web-fontTitle-child">원</font>');
+							
+							moneyCheck = 1;
 						}
 			    	}
 			    }
+			    
+			    $(".seatPay-btn-right").click(function(){ //결제 테이블로 이동시
+					var turningId = $('.hiddenTurning').val();
+					var movieRoomId = $('.movieRoomId').val();
+					
+					$.ajax({
+						url:"insertSeat.mo", 
+						type:"post",
+						data:{turningId:turningId,
+							  movieRoomId:movieRoomId,
+							  seatSplit:seatSplit
+							  },
+						success:function(data){
+							
+						},error:function(){
+							console.log("에러!");
+						}
+					});
+				});
 			    
 			    var arrayDate = new Array();
 			    
@@ -933,6 +1031,7 @@ a{
 									$(".seatPay").find("tr").eq(2).find('td').text(movieType);
 									$(".seatPay").find("tr").eq(3).find('td').text(areaName + " " + roomName);
 									$(".seatPay").find("tr").eq(4).find('td').text(str + "　" + time);
+									$(".seatPay").find("tr").eq(5).find('td').text("");
 									$(".seatPay-price").find("#td-web-fontTitle").text(money + "　");
 									
 									$(".pay-right").find("tr").eq(1).find('td').text(movieTitle);
@@ -966,30 +1065,35 @@ a{
 						    			
 						    			$screenCheck.find('div').remove();
 						    			
+						    			var $div = $("<div align='center'>");
 						    			/* ----------------------좌석 뿌리기---------------------- */
 						    			for(var i = 0; i < data.length; i++){
-						    				var $div = $("<div align='center'>");
 						    				numberCheck = 1; //이중 포문 종료후 다시 변수값 1로 초기화
 						    				
 						    				for(var y = 0; y < data[i].length; y++){
 						    					if(data[i][y] == 'O'){
-						    						var $checkBox = $("<label class='checkbox-wrap'><input type='checkbox' name='checkbox' value=''><i class='check-icon'><font class='checkFont'>" + String.fromCharCode(rowCheck) + "" + numberCheck + "</font></i></label>");
+						    						var $checkBox = $("<label class='checkbox-wrap'><input type='checkbox' name='checkbox' value='"+ i + "/" + y +"'><i class='check-icon'><font class='checkFont'>" + String.fromCharCode(rowCheck) + "" + numberCheck + "</font></i></label>");
 						    						++numberCheck;
 						    						$div.append($checkBox);
 						    						rowCheckIf = 1;
+						    						if(y == 14){
+						    							$div.append("<br>");
+						    						}
 						    					}else{
 						    						$div.append("&nbsp;&nbsp;");
 						    						rowCheckIf = 0;
+						    						if(y == 14){
+						    							$div.append("<br>");
+						    						}
 						    					}
 						    				}
 						    				
 						    				if(rowCheckIf == 1){
 						    					++rowCheck;
 						    				}
-						    				
-						    				$screenCheck.append($div);
 						    			}
 						    			/* -------------------------------------------------- */
+						    			$screenCheck.append($div);
 						    			
 						    			$(".screenCheck").show();
 						    		},
@@ -1015,6 +1119,7 @@ a{
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
+					<input type="hidden" class="arrayHidden" val="">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">×</button>
 					<h2 id="web-fontTitle">인원/좌석선택</h2>
@@ -1069,6 +1174,10 @@ a{
 							</tr>
 							<tr>
 								<td>2018. 09. 21 (금) 12:40
+								</td>
+							</tr>
+							<tr>
+								<td>?
 								</td>
 							</tr>
 							<tr class="seatPay-price">

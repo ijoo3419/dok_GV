@@ -3,10 +3,7 @@ package com.kh.dok.movie.controller;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,11 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kh.dok.licensee.controller.sheetController.cellClass;
-
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.common.Pagination;
-
+import com.kh.dok.licensee.controller.sheetController.cellClass;
 import com.kh.dok.movie.model.service.MovieService;
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieSumbnail;
@@ -171,6 +166,12 @@ public class MovieController {
 		}
 		
 		return arr;
+	}
+	
+	@RequestMapping(value="insertSeat.mo")
+	public @ResponseBody void insertSeat(@RequestParam String turningId, @RequestParam String movieRoomId, @RequestParam String seatSplit){
+
+		System.out.println(turningId + " " + movieRoomId + " " + seatSplit);
 	}
 	
 }
