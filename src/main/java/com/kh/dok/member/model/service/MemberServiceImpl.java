@@ -15,7 +15,7 @@ import com.kh.dok.member.model.vo.BookingHistory;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.member.model.vo.MyReply;
 import com.kh.dok.movie.model.vo.Movie;
-import com.kh.dok.movie.model.vo.MovieSumbnail;
+import com.kh.dok.movie.model.vo.MovieThumbnail;
 
 
 @Service
@@ -144,8 +144,8 @@ public class MemberServiceImpl implements MemberService{
 
 	//황이주 위시리스트 출력
 	@Override
-	public ArrayList<MovieSumbnail> selectWishList(MovieSumbnail msn, Member m) {
-		ArrayList<MovieSumbnail> wishlistView = null;
+	public ArrayList<MovieThumbnail> selectWishList(MovieThumbnail msn, Member m) {
+		ArrayList<MovieThumbnail> wishlistView = null;
 		
 		wishlistView = md.selectWishList(sqlSession, msn, m);
 		

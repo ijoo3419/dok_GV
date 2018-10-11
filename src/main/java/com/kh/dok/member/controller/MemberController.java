@@ -38,7 +38,7 @@ import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.member.model.vo.MyReply;
 import com.kh.dok.movie.model.service.MovieService;
 import com.kh.dok.movie.model.vo.Movie;
-import com.kh.dok.movie.model.vo.MovieSumbnail;
+import com.kh.dok.movie.model.vo.MovieThumbnail;
 
 @Controller
 @SessionAttributes("loginUser")
@@ -405,11 +405,11 @@ public class MemberController {
    
    //위시리스트 뷰 출력
 	@RequestMapping("wishlist.me")
-	public String wishlistView(MovieSumbnail msn, Model model, HttpServletRequest request){
+	public String wishlistView(MovieThumbnail msn, Model model, HttpServletRequest request){
 		
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		
-		ArrayList<MovieSumbnail> wishlistView = ms.selectWishList(msn, m);
+		ArrayList<MovieThumbnail> wishlistView = ms.selectWishList(msn, m);
 		
 		model.addAttribute("wishlistView", wishlistView);
 		

@@ -7,27 +7,27 @@ import java.util.HashMap;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.movie.model.vo.Movie;
-import com.kh.dok.movie.model.vo.MovieSumbnail;
+import com.kh.dok.movie.model.vo.MovieThumbnail;
 
 
 public interface MovieService {
 	
 
 		//이진희 전체영화 출력
-		ArrayList<MovieSumbnail> selectMovie(MovieSumbnail msn, PageInfo pi);
+		ArrayList<MovieThumbnail> selectMovie(MovieThumbnail msn, PageInfo pi);
 		
 		//박지용 영화 리스트 출력기능
 		ArrayList<Movie> selectMovieList();
 
 		//이진희 영화상세 출력
-		ArrayList<MovieSumbnail> selectMovieDetail(MovieSumbnail msn);
+		ArrayList<MovieThumbnail> selectMovieDetail(MovieThumbnail msn);
 
 		//이진희 영화 이미지컷 출력
-		ArrayList<MovieSumbnail> selectMovieImageCut(MovieSumbnail msn);
+		ArrayList<MovieThumbnail> selectMovieImageCut(MovieThumbnail msn);
 
 
 		//이진희 영화 비디오 출력
-		ArrayList<MovieSumbnail> selectMovieVideo(MovieSumbnail msn);
+		ArrayList<MovieThumbnail> selectMovieVideo(MovieThumbnail msn);
 
 		//박지용 상영 리스트 출력기능
 		ArrayList<Movie> selectTurningList(Movie v);
@@ -38,13 +38,13 @@ public interface MovieService {
 
 		
 		//이진희 영화순위1
-		ArrayList<MovieSumbnail> selectMovieRank1(MovieSumbnail msn);
+		ArrayList<MovieThumbnail> selectMovieRank1(MovieThumbnail msn);
 
 		//이진희 영화순위2
-		ArrayList<MovieSumbnail> selectMovieRank2(MovieSumbnail msn);
+		ArrayList<MovieThumbnail> selectMovieRank2(MovieThumbnail msn);
 
 		//이진희 영화순위3
-		ArrayList<MovieSumbnail> selectMovieRank3(MovieSumbnail msn);
+		ArrayList<MovieThumbnail> selectMovieRank3(MovieThumbnail msn);
 
 		//박지용 예매 수 가져오기
 		int selectPayCount(Movie v);
