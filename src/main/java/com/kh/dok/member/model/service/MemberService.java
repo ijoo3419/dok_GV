@@ -8,7 +8,7 @@ import com.kh.dok.member.model.vo.BookingHistory;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.member.model.vo.MyReply;
 import com.kh.dok.movie.model.vo.Movie;
-import com.kh.dok.movie.model.vo.MovieSumbnail;
+import com.kh.dok.movie.model.vo.MovieThumbnail;
 
 public interface MemberService {
 
@@ -38,7 +38,7 @@ public interface MemberService {
 
 	int updateClass(Member m);
 
-	ArrayList<MovieSumbnail> selectWishList(MovieSumbnail msn, Member m);
+	ArrayList<MovieThumbnail> selectWishList(MovieThumbnail msn, Member m);
 
 	ArrayList<BookingHistory> selectBookingHist(Member m);
 

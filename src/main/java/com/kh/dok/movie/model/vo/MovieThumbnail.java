@@ -4,7 +4,7 @@ import java.sql.Date;
 
 import org.springframework.stereotype.Repository;
 @Repository
-public class MovieSumbnail  implements java.io.Serializable{
+public class MovieThumbnail  implements java.io.Serializable{
 	private String movie_id;
 	private String movie_title;
 	private String movie_etitle;
@@ -18,9 +18,9 @@ public class MovieSumbnail  implements java.io.Serializable{
 	private String file_src;
 	private int file_level;
 	
-	public MovieSumbnail(){}
+	public MovieThumbnail(){}
 
-	public MovieSumbnail(String movie_id, String movie_title, String movie_etitle, String movie_content, Date open_date,
+	public MovieThumbnail(String movie_id, String movie_title, String movie_etitle, String movie_content, Date open_date,
 			String director_name, String production_com, String movie_age, String genre, int runnig_time,
 			String file_src, int file_level) {
 		super();

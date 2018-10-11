@@ -22,7 +22,7 @@ import com.kh.dok.common.Pagination;
 
 import com.kh.dok.movie.model.service.MovieService;
 import com.kh.dok.movie.model.vo.Movie;
-import com.kh.dok.movie.model.vo.MovieSumbnail;
+import com.kh.dok.movie.model.vo.MovieThumbnail;
 
 @Controller
 public class MovieController {
@@ -34,7 +34,7 @@ public class MovieController {
 	
 	//이진희 전체영화 출력
 	@RequestMapping("movie.mo")
-	public String showmovieView(MovieSumbnail msn, Model model, HttpServletRequest request){
+	public String showmovieView(MovieThumbnail msn, Model model, HttpServletRequest request){
 		int currentPage =1;
 		
 		if(request.getParameter("currentPage") != null){
@@ -45,10 +45,10 @@ public class MovieController {
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
-		ArrayList<MovieSumbnail> movieView = ms.selectMovie(msn, pi);
-		ArrayList<MovieSumbnail> movieRank1 = ms.selectMovieRank1(msn);
-		ArrayList<MovieSumbnail> movieRank2 = ms.selectMovieRank2(msn);
-		ArrayList<MovieSumbnail> movieRank3 = ms.selectMovieRank3(msn);
+		ArrayList<MovieThumbnail> movieView = ms.selectMovie(msn, pi);
+		ArrayList<MovieThumbnail> movieRank1 = ms.selectMovieRank1(msn);
+		ArrayList<MovieThumbnail> movieRank2 = ms.selectMovieRank2(msn);
+		ArrayList<MovieThumbnail> movieRank3 = ms.selectMovieRank3(msn);
 		
 		model.addAttribute("pi",pi);
 		model.addAttribute("movieView",movieView);
@@ -64,13 +64,13 @@ public class MovieController {
 	public String showmovieDetailView(@RequestParam String id, Model model){
 		
 		System.out.println("파라미터 옴?" +id);
-		MovieSumbnail msn = new MovieSumbnail();
+		MovieThumbnail msn = new MovieThumbnail();
 		
 		msn.setMovie_id(id);
 		
-		ArrayList<MovieSumbnail> movieDetail = ms.selectMovieDetail(msn);
-		ArrayList<MovieSumbnail> movieimagecut = ms.selectMovieImageCut(msn);
-		ArrayList<MovieSumbnail> movievideo= ms.selectMovieVideo(msn);
+		ArrayList<MovieThumbnail> movieDetail = ms.selectMovieDetail(msn);
+		ArrayList<MovieThumbnail> movieimagecut = ms.selectMovieImageCut(msn);
+		ArrayList<MovieThumbnail> movievideo= ms.selectMovieVideo(msn);
 		
 		model.addAttribute("movieDetail",movieDetail);
 		model.addAttribute("movieimagecut",movieimagecut);
@@ -156,13 +156,13 @@ public class MovieController {
 
 	//박지용 @ResponseBody를 이용한 ajax 처리
 	@RequestMapping(value="selectMovieRoom.mo")
-	public @ResponseBody String[][] selectMovieRoom(@RequestParam String movieRoomIdVal){
+	public @ResponseBody String[][] selectMovieRoom(@RequestParam String movieRoomIdVal, HttpServletRequest request){
 		System.out.println("영화관 출력하기: " + movieRoomIdVal);
 		
 		String name = movieRoomIdVal;
 		
 		System.out.println(name);
-		String[][] arr = new cellClass().test(name);
+		String[][] arr = new cellClass().test(name, request);
 		
 		for(String[] str : arr){
 			for(String s : str)

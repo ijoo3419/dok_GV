@@ -12,7 +12,7 @@ import com.kh.dok.common.PageInfo;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.movie.model.dao.MovieDao;
 import com.kh.dok.movie.model.vo.Movie;
-import com.kh.dok.movie.model.vo.MovieSumbnail;
+import com.kh.dok.movie.model.vo.MovieThumbnail;
 
 
 
@@ -25,8 +25,8 @@ public class MovieServiceImpl implements MovieService{
 	
 	//이진희 전체영화 출력
 	@Override
-	public ArrayList<MovieSumbnail> selectMovie(MovieSumbnail msn, PageInfo pi) {
-		ArrayList<MovieSumbnail> movieView = null;
+	public ArrayList<MovieThumbnail> selectMovie(MovieThumbnail msn, PageInfo pi) {
+		ArrayList<MovieThumbnail> movieView = null;
 		
 		movieView = md.selectMovie(sqlSession, msn, pi );
 		
@@ -47,8 +47,8 @@ public class MovieServiceImpl implements MovieService{
 
 	//이진희 영화상세 출력
 	@Override
-	public ArrayList<MovieSumbnail> selectMovieDetail(MovieSumbnail msn) {
-		ArrayList<MovieSumbnail> movieDetail = md.selectMovieDetail(sqlSession,msn);
+	public ArrayList<MovieThumbnail> selectMovieDetail(MovieThumbnail msn) {
+		ArrayList<MovieThumbnail> movieDetail = md.selectMovieDetail(sqlSession,msn);
 		
 		return movieDetail;
 	}
@@ -56,8 +56,8 @@ public class MovieServiceImpl implements MovieService{
 
 	//이진희 영화이미지컷 출력
 	@Override
-	public ArrayList<MovieSumbnail> selectMovieImageCut(MovieSumbnail msn) {
-		ArrayList<MovieSumbnail> movieimagecut = md.selectMovieImageCut(sqlSession,msn);
+	public ArrayList<MovieThumbnail> selectMovieImageCut(MovieThumbnail msn) {
+		ArrayList<MovieThumbnail> movieimagecut = md.selectMovieImageCut(sqlSession,msn);
 		
 		return movieimagecut;
 	}
@@ -66,8 +66,8 @@ public class MovieServiceImpl implements MovieService{
 
 	//이진희 영화상세 비디오 출력
 	@Override
-	public ArrayList<MovieSumbnail> selectMovieVideo(MovieSumbnail msn) {
-		ArrayList<MovieSumbnail> movievideo = md.selectMovieVideo(sqlSession,msn);
+	public ArrayList<MovieThumbnail> selectMovieVideo(MovieThumbnail msn) {
+		ArrayList<MovieThumbnail> movievideo = md.selectMovieVideo(sqlSession,msn);
 		
 		return movievideo;
 	}
@@ -94,8 +94,8 @@ public class MovieServiceImpl implements MovieService{
 
 	//이진희 영화순위1
 	@Override
-	public ArrayList<MovieSumbnail> selectMovieRank1(MovieSumbnail msn) {
-		ArrayList<MovieSumbnail> movieRank1 = null;
+	public ArrayList<MovieThumbnail> selectMovieRank1(MovieThumbnail msn) {
+		ArrayList<MovieThumbnail> movieRank1 = null;
 		
 		movieRank1 = md.selectMovieRank1(sqlSession, msn);
 		
@@ -106,8 +106,8 @@ public class MovieServiceImpl implements MovieService{
 
 	//이진희 영화순위2	
 	@Override
-	public ArrayList<MovieSumbnail> selectMovieRank2(MovieSumbnail msn) {
-		ArrayList<MovieSumbnail> movieRank2 = null;
+	public ArrayList<MovieThumbnail> selectMovieRank2(MovieThumbnail msn) {
+		ArrayList<MovieThumbnail> movieRank2 = null;
 		
 		movieRank2 = md.selectMovieRank2(sqlSession, msn);
 		
@@ -116,8 +116,8 @@ public class MovieServiceImpl implements MovieService{
 
 	//이진희 영화순위3
 	@Override
-	public ArrayList<MovieSumbnail> selectMovieRank3(MovieSumbnail msn) {
-		ArrayList<MovieSumbnail> movieRank3 = null;
+	public ArrayList<MovieThumbnail> selectMovieRank3(MovieThumbnail msn) {
+		ArrayList<MovieThumbnail> movieRank3 = null;
 		
 		movieRank3 = md.selectMovieRank3(sqlSession, msn);
 		

@@ -9,7 +9,7 @@
 		<typeAlias type="com.kh.dok.member.model.vo.Member" alias="Member"></typeAlias>
 		<typeAlias type="com.kh.dok.cinema.model.vo.Cinema" alias="Cinema"></typeAlias>
 		<typeAlias type="com.kh.dok.movie.model.vo.Movie" alias="Movie"></typeAlias>
-		<typeAlias type="com.kh.dok.movie.model.vo.MovieSumbnail" alias="MovieSumbnail"></typeAlias>
+		<typeAlias type="com.kh.dok.movie.model.vo.MovieThumbnail" alias="MovieThumbnail"></typeAlias>
 		<typeAlias type="com.kh.dok.area.model.vo.Area" alias="Area"></typeAlias>
 		<typeAlias type="com.kh.dok.admin.model.vo.ReportHistory" alias="ReportHistory"></typeAlias>
 		<typeAlias type="com.kh.dok.board.model.vo.Board" alias="Board"></typeAlias>
@@ -29,7 +29,7 @@
 		
 		<mapper resource="mappers/cinema-mapper.xml"/>
 
-		<mapper resource="mappers/movieSumbnail-mapper.xml"/>
+		<mapper resource="mappers/movieThumbnail-mapper.xml"/>
 		<mapper resource="mappers/movie-mapper.xml"/>
 
 

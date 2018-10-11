@@ -216,4 +216,9 @@ public class AdminDaoImpl implements AdminDao{
 		return 1;
 	}
 
+	public void setTotalCount(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
