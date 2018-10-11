@@ -51,15 +51,15 @@
 	
 	<!-- 관리자공지사항 글 불러오기(성희) -->
 	<select id="selectNoticeList" resultMap="BBFileResultSet">
-		SELECT ROWNUM, BOARD.BOARD_ID, BOARD.MID, BTITLE, BCONTENT, BOARD_SORT, BOARD_DATE, BCOUNT, 
-       	       FILE_ID, ORIGIN_NAME, EDIT_NAME, FILE_SRC, FILE_DATE, FILE_LEVEL, M.NICKNAME
+		SELECT TO_NUMBER(SUBSTR(BOARD.BOARD_ID, 2)) AS BOARD_ID, BOARD.MID, BTITLE, BCONTENT, BOARD_SORT, BOARD_DATE, BCOUNT, 
+       		   FILE_ID, ORIGIN_NAME, EDIT_NAME, FILE_SRC, FILE_DATE, FILE_LEVEL, M.NICKNAME
 		FROM BOARD, BOARD_FILE, MEMBER M
-		WHERE BOARD.BOARD_ID = BOARD_FILE.BOARD_ID
-    	AND BOARD.MID = M.MID
+		WHERE BOARD.BOARD_ID = BOARD_FILE.BOARD_ID(+)
+		AND BOARD.MID = M.MID
 		AND BOARD.MID = #{mId}
 		AND BSTATUS = 'Y'
 		AND BOARD_DIV = 'BD4'
-		ORDER BY BOARD_DATE DESC
+		ORDER BY BOARD_ID DESC
 	</select>
 	
 	<!-- 마이페이지 - 내 문의 내역 (황이주) -->
@@ -84,5 +84,20 @@
 				WHERE BCONTENT LIKE '%' || #{searchResult} || '%'
 			</when>
 		</choose>
+	</select>
+	
+	<!-- 공지사항 카운트 업데이트(성희) -->
+	<update id="updateCount" parameterType="java.lang.String">
+		UPDATE BOARD
+		SET BCOUNT = (SELECT BCOUNT FROM BOARD WHERE BOARD_ID = 'B' || #{board_id}) + 1
+		WHERE BOARD_ID = 'B' || #{board_id}
+	</update>
+	
+	<!-- 공지사항 상세보기(성희) -->
+	<select id="selectNoticeOne" parameterType="java.lang.String" resultMap="BBFileResultSet">
+		SELECT *
+		FROM BOARD, BOARD_FILE
+		WHERE BOARD.BOARD_ID = BOARD_FILE.BOARD_ID
+		AND BOARD.BOARD_ID = 'B' || #{board_id}
 	</select>
 </mapper>
