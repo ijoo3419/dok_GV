@@ -156,13 +156,13 @@ public class MovieController {
 
 	//박지용 @ResponseBody를 이용한 ajax 처리
 	@RequestMapping(value="selectMovieRoom.mo")
-	public @ResponseBody String[][] selectMovieRoom(@RequestParam String movieRoomIdVal){
+	public @ResponseBody String[][] selectMovieRoom(@RequestParam String movieRoomIdVal, HttpServletRequest request){
 		System.out.println("영화관 출력하기: " + movieRoomIdVal);
 		
 		String name = movieRoomIdVal;
 		
 		System.out.println(name);
-		String[][] arr = new cellClass().test(name);
+		String[][] arr = new cellClass().test(name, request);
 		
 		for(String[] str : arr){
 			for(String s : str)

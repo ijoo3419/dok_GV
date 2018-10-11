@@ -11,7 +11,7 @@
 
 @font-face { font-family: 'GoyangIlsan'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff') format('woff'); font-weight: normal; font-style: normal; }
 
-body, div, p, li, h3, h1, h2, h4, h5, h6, input, th, tr, td, button, a {
+body, div, p, li, h3, h1, h2, h4, h5, h6, input, th, tr, td, button, a, select, textarea {
 		font-family: 'GoyangIlsan' !important;
 	}
 

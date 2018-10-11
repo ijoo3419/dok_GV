@@ -307,16 +307,31 @@ public class MemberController {
    @ResponseBody
    @RequestMapping("insertWish.me")
    public int insertWishlist(Movie m, Model model){
-	   System.out.println(m);
+
+	   int result = 0;
+	   int dupliResult = 0;
 	   
-	   int result = ms.insertWish(m);
+	   //위시리스트에 중복 데이터 있는지 확인
+	   dupliResult = ms.checkDupli(m);
 	   
-	   if(result > 0){
-		   result = 1;
+	   if(dupliResult > 0){
+		   
+		   result = 3;
 		   return result;
+		   
 	   } else {
-		   result = 0;
-		   return result;
+		   
+		 //중복 없을 시 위시리스트에 insert
+		   result = ms.insertWish(m);
+
+		   if(result > 0){
+			   result = 1;
+			   return result;
+		   } else {
+			   result = 0;
+			   return result;
+		   }
+		   
 	   }
 	   
    }
@@ -335,9 +350,6 @@ public class MemberController {
 		   
 		   Member loginUser = ms.loginKakaoMember(m);
 		   
-		   
-		   
-		 
 		   model.addAttribute("loginUser", loginUser);
 
 		   return "member/insertMyInfo";
@@ -395,7 +407,7 @@ public class MemberController {
 	@RequestMapping("wishlist.me")
 	public String wishlistView(MovieSumbnail msn, Model model, HttpServletRequest request){
 		
-		 Member m = (Member)request.getSession().getAttribute("loginUser");
+		Member m = (Member)request.getSession().getAttribute("loginUser");
 		
 		ArrayList<MovieSumbnail> wishlistView = ms.selectWishList(msn, m);
 		

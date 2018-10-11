@@ -163,4 +163,12 @@ WHERE RNUM BETWEEN 7 AND 9
          AND W.MID = '${mid}'
 	</select>
 	
+	<!-- 위시리스트 중복 조회용 쿼리문 -->
+	<select id="checkDupli" parameterType="Movie" resultType="java.lang.Integer">
+    	SELECT NVL(COUNT(*),0)
+   	 	FROM WISHLIST
+    	WHERE MID = #{ mid }
+    	AND MOVIE_ID = #{ movie_id }
+	</select>
+	
 </mapper>

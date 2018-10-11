@@ -52,5 +52,8 @@ public interface MemberService {
 
 	ArrayList<Board> selectMyAsk(Member m);
 	
+	int checkDupli(Movie m);
+
+	
 }
      
