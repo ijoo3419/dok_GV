@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.dok.admin.model.vo.SearchCondition;
 import com.kh.dok.board.model.exception.BoardInsertException;
+import com.kh.dok.board.model.exception.BoardSelectOneException;
 import com.kh.dok.board.model.service.BoardService;
 import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.board.model.vo.BoardFile;
@@ -121,15 +122,45 @@ public class BoardController {
 		}
 	   
 	   
-	   @RequestMapping(value="searchNoticeBoard.bo")
-	   public void searchNoticeBoard(Model model, int currentPage, String searchResult, String searchCondition){
+
+	  /* @RequestMapping(value="searchNoticeBoard.bo")
+	   public String searchNoticeBoard(Model model, int currentPage, String searchResult, String searchCondition){
+
 		   SearchCondition sc = new SearchCondition(searchResult, searchCondition);
 		   
 		   int listCount = bs.listCount(sc);
 		   
 	   }
 	   
+	   @RequestMapping(value="noticeliPage.bo")
+	   public String noticeliPage(Model model, int currentPage, String searchResult, String searchCondition){
+		   SearchCondition sc = new SearchCondition(searchResult, searchCondition);
+		   
+		   int listCount;
+		   
+		   listCount = bs.countNoticePage(sc);
+	   }*/
 	   
+	   @RequestMapping(value="selectNoticeOne.bo")
+	   public String selectNoticeOne(Model model, String board_id){
+		   System.out.println("성희: BoardController selectNoticeOne board_id : " + board_id);
+		   
+		   try {
+			   BoardNBoardFile bbf = bs.selectNoticeOne(board_id);
+			   
+			   model.addAttribute("bbf", bbf);
+			
+		} catch (BoardSelectOneException e) {
+			model.addAttribute("msg", "updateCount 실패");
+			
+			return "common/errorPage";
+		}
+		   
+		   
+		   
+		   
+		   return "board/noticeManagePageDetail";
+	   }
 	   
 	   
 	   
