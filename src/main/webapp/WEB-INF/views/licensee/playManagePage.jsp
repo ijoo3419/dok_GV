@@ -5,9 +5,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 <style>
+
 #playTable{
 border-collapse:collapse;
 }
@@ -17,7 +19,13 @@ border-collapse:collapse;
 	font-weight: bold;
 	color: #935d8c;
 }
-
+.god{
+	border: 2px solid black;
+    display: inline-block;
+	width:100px;
+	height:50px;
+	
+}
 
 #playTable tr th td {
 	color: black;
@@ -128,7 +136,10 @@ h2 {
 					<h2 align="left">3. 상영 정보</h2>
 					<div class="table-wrapper">
 				
-					<hr>
+					<div class="god" id='btn-add-row'>행 추가하기</div>
+					<div class="god" id='btn-delete-row'>행 삭제하기</div>
+				<br><br>
+				
 						<table id="playTable" border="1" cellspacing="3">
 						<tr>
 								<th class="align-center">회차</th>
@@ -140,9 +151,7 @@ h2 {
 							</tbody>
 						</table>
 					</div>
-					<a id='btn-add-row'>행 추가하기</a>
-					<a id='btn-delete-row'>행 삭제하기</a>
-
+				
 					<div class="col-12">
 						<ul class="actions">
 							<li align="center"><input type="submit" value="등록하기" class="primary" /></li>
@@ -152,6 +161,11 @@ h2 {
 											
 				</form>
 			</article>
+			
+			<!-- <br>
+          <label for="fromDate" class="web-font"></label>
+          <input type="text" name="fromDate" id="fromDate" class="web-font"> -->
+         
 		</div>
 
 
@@ -170,13 +184,16 @@ h2 {
 		<script src="//code.jquery.com/jquery.min.js"></script>
 <script>
   var seq = 0;
+  var $date = $('<input type="text" name="fromDate" id="fromDate" class="web-font">');
+  var $dateText = $('<label for="fromDate" class="web-font"></label>');
   $('#btn-add-row').click(function() {
 	
 	++seq;
 	
     var time = new Date().toLocaleTimeString();
-    $('#mytable > tbody:last').append('<tr><td>안녕 친구들 </td><td>' + time + '</td></tr>');
-    $('#playTable > tbody:last').append('<tr><td>' + seq + '</td><td><input></td><td><input></td><td><input></td></tr>');
+    $('#playTable > tbody:last').append('<tr><td>' + seq + '</td><td>' + 
+     $date + $dateText
+    		+'</td><td><input></td><td><input></td></tr>');
   });
   $('#btn-delete-row').click(function() {
 	  --seq;
@@ -185,5 +202,28 @@ h2 {
   });
 </script>
 		
+<!-- datepicker 한국어로 -->
+<script>
+$(function() {
+	   
+	
+		//시작일.
+		$('#fromDate').datepicker({
+			showOn : "both", // 달력을 표시할 타이밍 (both: focus or button)
+			buttonText : "날짜선택", // 버튼의 대체 텍스트
+			dateFormat : "yy-mm-dd", // 날짜의 형식
+			changeMonth : true, // 월을 이동하기 위한 선택상자 표시여부
+			//minDate: 0,                       // 선택할수있는 최소날짜, ( 0 : 오늘 이전 날짜 선택 불가)
+			onClose : function(selectedDate) {
+				// 시작일(fromDate) datepicker가 닫힐때
+				// 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
+				$("#toDate").datepicker("option", "minDate", selectedDate);
+			}
+		});
+
+	
+	});
+</script>
+
 </body>
 </html>

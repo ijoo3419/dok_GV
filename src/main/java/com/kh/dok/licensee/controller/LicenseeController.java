@@ -1,8 +1,9 @@
 package com.kh.dok.licensee.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.dok.admin.model.exception.UploadException;
+import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.cinema.model.vo.Cinema;
 import com.kh.dok.common.CommonUtils;
 import com.kh.dok.licensee.controller.sheetController.cellClass;
@@ -54,45 +57,90 @@ public class LicenseeController {
 	@RequestMapping(value="theater.li")
 	public String showTheaterView(){
 		return "licensee/theaterManagePage";
-		
 	}
 	
 	//정태 영화관 등록 메소드(+파일 첨부)
 	@RequestMapping(value="theaterInsert.li")
-	public String insertTheater(Model model, Cinema cm, 
-								HttpServletRequest request, 
-								@RequestParam(name="photo", required=false)MultipartFile photo){
+	public String insertTheater(Model model, Cinema cm, HttpServletRequest request, 
+					@RequestParam(name="photo1", required=false)MultipartFile photo1,
+					@RequestParam(name="photo2", required=false)MultipartFile photo2,
+					@RequestParam(name="photo3", required=false)MultipartFile photo3,
+					@RequestParam(name="photo4", required=false)MultipartFile photo4){
 		
 
 		System.out.println("controller cm : " + cm);
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		
+		System.out.println("root : " + root);
 		String filePath = root + "\\uploadFiles";
+		System.out.println("filePath : " + filePath);
 		
-		String originFileName = photo.getOriginalFilename();
-		String ext = originFileName.substring(originFileName.lastIndexOf("."));
-		String changeName = CommonUtils.getRandomString();
-		
-		System.out.println(photo);
+		System.out.println("photo1 = " + photo1);
+		System.out.println("photo2 = " + photo2);
+		System.out.println("photo3 = " + photo3);
+		System.out.println("photo4 = " + photo4);
 		try {
-			photo.transferTo(new File(filePath + "\\" + changeName + ext));
+			if(photo1 != null){
 			
+			String originFileName = photo1.getOriginalFilename();
+			String ext = originFileName.substring(originFileName.lastIndexOf("."));
+			String changeName = CommonUtils.getRandomString();
+			String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
+			BoardFile adFile = new BoardFile("BT1", originFileName, ichangeName, filePath, "1");
+			int au = ls.insertFile(adFile);
+			
+			System.out.println("adFile = " + adFile);
+			photo1.transferTo(new File(filePath + "\\" + changeName + ext));
+			}else if(photo2 != null){
+				
+				String originFileName = photo2.getOriginalFilename();
+				String ext = originFileName.substring(originFileName.lastIndexOf("."));
+				String changeName = CommonUtils.getRandomString();
+				String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
+				BoardFile adFile = new BoardFile("BT1", originFileName, ichangeName, filePath, "2");
+				int au = ls.insertFile(adFile);
+			photo2.transferTo(new File(filePath + "\\" + changeName + ext));
+
+			}	else if(photo3 != null){
+				
+				String originFileName = photo3.getOriginalFilename();
+				String ext = originFileName.substring(originFileName.lastIndexOf("."));
+				String changeName = CommonUtils.getRandomString();
+				String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
+				BoardFile adFile = new BoardFile("BT1", originFileName, ichangeName, filePath, "2");
+				int au = ls.insertFile(adFile);
+				photo3.transferTo(new File(filePath + "\\" + changeName + ext));
+
+			}	else if(photo4 != null){
+				
+				String originFileName = photo4.getOriginalFilename();
+				String ext = originFileName.substring(originFileName.lastIndexOf("."));
+				String changeName = CommonUtils.getRandomString();
+				String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
+				BoardFile adFile = new BoardFile("BT1", originFileName, ichangeName, filePath, "2");
+				int au = ls.insertFile(adFile);
+				photo4.transferTo(new File(filePath + "\\" + changeName + ext));
+
+			}
+			ArrayList<BoardFile> bfile = ls.selectFile();
+			model.addAttribute("bf", bfile);
+			System.out.println("bfile = " + bfile);
 			
 			ls.insertTheater(cm);
+			System.out.println("controller cm : " + cm);
 			
-			return "licensee/theaterManagePage";
-		
-		} catch (Exception e){
-			new File(filePath + "\\" + changeName + ext).delete();
+			return "licensee/mainLicenseePage";
+		}catch (IllegalStateException e) {
+			model.addAttribute("msg", "영화관 추가 실패!");
 			
-			System.out.println("실패하면 여기로");
+			return "common/errorPage";
+		} catch (IOException e){
+			
 			model.addAttribute("msg", "영화관 추가 실패!");
 			
 			return "common/errorPage";
 			
-		}
 	}
-	
+}
 	//정태 상영관 등록(엑셀 파일 완료)
 	@RequestMapping(value="movieRoomInsert.li")
 	public String insertMovieRoom(Model model,MovieRoom mr, Cinema cm,
