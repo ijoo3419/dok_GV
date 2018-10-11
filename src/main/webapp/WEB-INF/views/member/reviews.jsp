@@ -45,7 +45,7 @@
 					<h6></h6>
 				</header>
 			</section>
-
+			
 			<div class="table-wrapper">
 			<c:forEach items="${ reviewsView }" var="rv">
 				<table>
@@ -60,7 +60,7 @@
 							<th></th>
 							<th></th>
 						</tr>
-					</thead>
+					</thead><!-- 영화 / 영화관 리뷰 따로 따로 나눠서 보여주기 -->
 					<tbody>
 						<tr>
 							<td><${ rv.file_src } style="width: auto; height:100px;"></td>

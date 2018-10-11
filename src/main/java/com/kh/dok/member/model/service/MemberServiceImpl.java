@@ -151,6 +151,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		return wishlistView;
 	}
+
 	
 	//황이주 예매내역 뷰 출력
 	@Override
@@ -198,6 +199,13 @@ public class MemberServiceImpl implements MemberService{
 		myAskView = md.selectMyAsk(sqlSession, m);
 		
 		return myAskView;
+	}
+	
+	//위시리스트 중복 조회
+	@Override
+	public int checkDupli(Movie m) {
+		System.out.println("위시리스트 중복조회 ServiceImpl" + m);
+		return md.checkDupli(sqlSession, m);
 	}
 
 }

@@ -122,8 +122,10 @@ public class BoardController {
 		}
 	   
 	   
+
 	  /* @RequestMapping(value="searchNoticeBoard.bo")
 	   public String searchNoticeBoard(Model model, int currentPage, String searchResult, String searchCondition){
+
 		   SearchCondition sc = new SearchCondition(searchResult, searchCondition);
 		   
 		   int listCount = bs.listCount(sc);

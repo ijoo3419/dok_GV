@@ -56,7 +56,7 @@
 			<h2>공지사항</h2>
 				<br><br>
 				<div class="table-wrapper">
-					<table id="boardArea" align="center" style="text-align:center">
+					<table id="boardArea" align="center">
 							<tr>
 								<th>글번호</th>
 								<th>제목</th>
@@ -99,13 +99,15 @@
 				
 				
 				<div class="search">
-					<select id="searchCondition" name="searchCondition">
-						<option value="" >검색기준</option>
+					<select id="searchCondition" name="searchCondition" style="width:150px; height: 40px">
+						<option value="">검색기준</option>
 						<option value="btitle">제목</option>
 						<option value="bcontent">내용</option>
+
 					</select><input id="searchValue" name="searchValue" type="text" placeholder="검색" style="width:300px"><a href="#" class="button primary icon fa-search" onclick="searchBoard()">조회</a>
+
 				</div>
-				
+				<br>
 				<script>
 					function searchBoard(){
 						var searchCondition = $("select[name=searchCondition]").val();

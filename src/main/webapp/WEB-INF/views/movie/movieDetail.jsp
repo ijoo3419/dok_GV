@@ -629,13 +629,18 @@ hr {
 					},
 					url: "insertWish.me",
 					success: function(data){
+						
+						console.log("insertWish.me의 data : " + data);
+						
 						if(data == '1'){
 							alert("위시리스트에 추가되었습니다.");
 							
 							location.href = "movie.mo";
 							
-						} else {
+						} else if (data == '0') {
 							alert("위시리스트 추가가 실패하였습니다 ㅠㅠ;;");
+						} else if (data == '3'){
+							alert("이미 위시리스트에 추가된 영화입니다.");
 						}
 					}
 					

@@ -52,5 +52,7 @@ public interface MemberDao {
 
 	ArrayList<Board> selectMyAsk(SqlSessionTemplate sqlSession, Member m);
 
+	int checkDupli(SqlSessionTemplate sqlSession, Movie m);
+
      
 }

@@ -165,6 +165,15 @@ public class MemberDaoImpl implements MemberDao {
 		myAskView = (ArrayList)sqlSession.selectList("Board.selectMyAsk", m);
 		return myAskView;
 	}
+
+	//위시리스트 중복 조회
+	@Override
+	public int checkDupli(SqlSessionTemplate sqlSession, Movie m) {
+		
+		int checkDupli = sqlSession.selectOne("MovieSumbnail.checkDupli", m);
+		
+		return checkDupli;
+	}
 	
 
 }
