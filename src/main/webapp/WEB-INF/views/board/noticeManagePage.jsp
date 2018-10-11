@@ -1,26 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
-
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
-<title>Massively by HTML5 UP</title>
-<meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<noscript><link rel="stylesheet"href="${contextPath }/resources/css/noscript.css" /></noscript>
 <link rel="stylesheet" href="${contextPath }/resources/css/main.css" />
-<script
-   src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<noscript>
-   <link rel="stylesheet"
-      href="${contextPath }/resources/css/noscript.css" />
-</noscript>
+<title>Insert title here</title>
 
 <style>
 	#searchValue{
@@ -46,7 +36,7 @@
 		</header>
 
 	<c:set var="mid" value="${ loginUser.mid }" scope="session"/>
-	<nav id="nav">
+		<nav id="nav">
 			<ul class="links">
 				<li><a href="play.li"><fontsize="4">상영등록</font></a></li>
 				<li><a href="theater.li"><font size="4">영화관등록</font></a></li>
@@ -58,7 +48,6 @@
 			</ul>
 		</nav>
 		
-		</nav>
 
 		<div id="main">
 
@@ -75,7 +64,6 @@
 								<th>조회수</th>
 								<th>작성일</th>
 							</tr>
-						<c:set var="mid" value="${ loginUser.mid }" scope="session"/>
 						<c:if test="${ list == null }">
 							<tr>
 								<td>등록된 공지사항이 없습니다.</td>
@@ -84,11 +72,11 @@
 						<c:if test="${ list != null }">
 							<c:forEach var="list" items="${ list }">
 								<tr>
-									<th>${ list.rownum }</th>
-									<th>${ list.btitle }</th>
-									<th>${ list.nickname }</th>
-									<th>${ list.bcount }</th>
-									<th>${ list.board_date }</th>
+									<td>${ list.board_id }</td>
+									<td>${ list.btitle }</td>
+									<td>${ list.nickname }</td>
+									<td>${ list.bcount }</td>
+									<td>${ list.board_date }</td>
 								</tr>
 							</c:forEach>
 						</c:if>
@@ -96,12 +84,26 @@
 					</table>
 				</div>
 				
+				<script>
+				$(function(){
+					$("#boardArea").find("td").mouseenter(function(){
+						console.log("클릭");
+						$(this).parents("tr").css({"cursor":"pointer"});
+					}).click(function(){
+						var board_id = $(this).parents().children("td").eq(0).text();
+						console.log(board_id);
+						location.href = "selectNoticeOne.bo?board_id=" + board_id;
+					}); 
+				});
+				</script>
+				
+				
 				<div class="search">
 					<select id="searchCondition" name="searchCondition">
 						<option value="" >검색기준</option>
 						<option value="btitle">제목</option>
 						<option value="bcontent">내용</option>
-					</select><input id="searchValue" name="searchValue" type="search" placeholder="검색" style="width:300px"><a href="#" class="button primary icon fa-search" onclick="searchBoard()">조회</a>
+					</select><input id="searchValue" name="searchValue" type="text" placeholder="검색" style="width:300px"><a href="#" class="button primary icon fa-search" onclick="searchBoard()">조회</a>
 				</div>
 				
 				<script>
@@ -119,62 +121,52 @@
 					<button type="button" class="img_btn user cancel mr7"><a href="writeNotice.bo">공지작성</a></button>
 				</div>
 				
-				<div id="pagingArea" align="center">
-					<c:if test="${ pi.currentPage <= 1 }">
-						[이전] &nbsp;
+				<!-- 페이징 처리 -->
+				<div id="pageid" class="pagination">
+					<c:if test="${pi.currentPage <=1 }">
+						<a>&lt;이전&nbsp;</a>
 					</c:if>
-					<c:if test="${ pi.currentPage > 1 }">
-						<c:url var="blistBack" value="/selectList.bo">
-							<c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
+					<c:if test="${pi.currentPage > 1 }">
+						<c:url var="blistBack" value="noticeliPage.bo">
+							<c:param name="currentPage" value="${pi.currentPage - 1 }" />
+							<c:param name="searchResult" value="${sc.searchResult }" />
+							<c:param name="searchCondition" value="${sc.searchCondition }" />
 						</c:url>
-						<a href="${ blistBack }">[이전]</a> &nbsp;
+						<a href="${blistBack }">&lt;이전&nbsp;</a>
 					</c:if>
-					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-						<c:if test="${ q eq pi.currentPAge }">
-							<font color="red" size="4"><b>[${ p }]</b></font>
+					<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+						<c:if test="${p eq pi.currentPage }">
+							<b><font color="#18bfef " size="4"></b>
+							</font>
+							<a><b><font color="#18bfef" size="4">${p }</font></b></a>
 						</c:if>
-						<c:if test="${ p ne pi.currentPage }">
-							<c:url var="blistCheck" value="selectList.bo">
-								<c:param name="currentPage" value="${ p }"/>
+						<c:if test="${p ne pi.currentPage }">
+							<c:url var="blistCheck" value="searchBlack.ad">
+								<c:param name="currentPage" value="${p }" />
+								<c:param name="searchResult" value="${sc.searchResult }" />
+								<c:param name="searchCondition" value="${sc.searchCondition }" />
 							</c:url>
-							<a href="${ blistCheck }">${ p }</a>
+							<a href="${blistCheck }">${p }</a>
 						</c:if>
 					</c:forEach>
-					<c:if test="${ pi.currentPage >= pi.maxPage }">
-						&nbsp; [다음]
+					<c:if test="${pi.currentPage >= pi.maxPage}">
+						&nbsp; <a>다음&gt;</a>
 					</c:if>
-					<c:if test="${ pi.currentPage < pi.maxPage }">
-						<c:url var="blistEnd" value="selectList.bo">
-							<c:param name="currentPage" value="${ pi.currentPage + 1 }" />
+					<c:if test="${pi.currentPage < pi.maxPage }">
+						<c:url var="blistEnd" value="searchBlack.ad">
+							<c:param name="currentPage" value="${pi.currentPage + 1 }" />
+							<c:param name="searchResult" value="${sc.searchResult }" />
+							<c:param name="searchResult" value="${sc.searchCondition }" />
 						</c:url>
-						<a href="${ blistEnd }">&nbsp;[다음]</a>
+						<a href="${blistEnd }">&nbsp;다음&gt;</a>
 					</c:if>
 				</div>
 
 
-				<script>
-				$(function(){
-					$("#boardArea").find("td").mouseenter(function(){
-						$(this).parents("tr").css({"background":"orangered", "cursor":"pointer"});
-					}).mouseout(function(){
-						$(this).parents("tr").css({"background":"white"});
-					}).click(function(){
-						var bid = $(this).parents().children("td").eq(0).text();
-						//console.log(bid);
-						location.href = "selectOne.bo?bid=" + bid;
-					}); 
-				});
-				</script>
-	
-			
-			
-			
 			
 			</article>
 		</div>
 	</div>
-
-
 
 
 	<!-- Scripts -->

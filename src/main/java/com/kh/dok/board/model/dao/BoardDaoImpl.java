@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.dok.admin.model.vo.SearchCondition;
 import com.kh.dok.board.model.exception.BoardInsertException;
+import com.kh.dok.board.model.exception.BoardSelectOneException;
 import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.board.model.vo.BoardNBoardFile;
@@ -14,6 +15,7 @@ import com.kh.dok.board.model.vo.BoardNBoardFile;
 @Repository
 public class BoardDaoImpl implements BoardDao{
 
+	//공지사항 등록
 	@Override
 	public int inserNotice(SqlSessionTemplate sqlSession, Board b, BoardFile bf) throws BoardInsertException {
 		int BResult = sqlSession.insert("Board.insertNotice", b);
@@ -42,6 +44,7 @@ public class BoardDaoImpl implements BoardDao{
 		
 	}
 
+	//공지사항 리스트 조회
 	@Override
 	public ArrayList selectNoticeList(SqlSessionTemplate sqlSession, BoardNBoardFile bbf) {
 		System.out.println("BoardDaoImpl selectNoticeList method in");
@@ -53,13 +56,37 @@ public class BoardDaoImpl implements BoardDao{
 		return list;
 	}
 
+	//페이징
 	@Override
 	public int listCount(SqlSessionTemplate sqlSession, SearchCondition sc) {
 		System.out.println("listCount sc : " + sc);
 		
 		int listCount = sqlSession.selectOne("Board.listCount", sc);
 		
-		return 0;
+		return listCount;
+	}
+
+	//페이징
+	@Override
+	public BoardNBoardFile selectNoticeOne(SqlSessionTemplate sqlSession, String board_id) {
+		System.out.println("성희: BoardDaoImpl selectNoticeOne board_id : " + board_id);
+		
+		return sqlSession.selectOne("Board.selectNoticeOne", board_id);
+	}
+
+	//조회수 업데이트
+	@Override
+	public int updateCount(SqlSessionTemplate sqlSession, String board_id) throws BoardSelectOneException {
+		System.out.println("성희: BoardDaoImpl updateCount board_id : " + board_id);
+		int result = -99;
+		
+		result = sqlSession.update("Board.updateCount", board_id);
+		
+		System.out.println("성희: BoardDaoImpl updateCount result : " + result);
+		
+		if(result > 0) return result;
+		else throw new BoardSelectOneException("성희: BoardDaoImpl updateCount 증가 실패");
+		
 	}
 
 }
