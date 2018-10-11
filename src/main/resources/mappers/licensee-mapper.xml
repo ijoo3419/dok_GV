@@ -2,13 +2,23 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="MovieRoom">
+<mapper namespace="Licensee">
 	<resultMap type="MovieRoom" id="movieRoomResultSet">
 		<id property="movieRoomId" column="MOVIEROOM_ID"/>
 		<result property="theaterId" column="THEATER_ID"/>
 		<result property="movieRoomName" column="MOVIEROOM_NAME"/>
 		<result property="movieRoomAddress" column="MOVIEROOM_ADDRESS"/>
 	
+	</resultMap>
+	
+		<resultMap type="BoardFile" id="SearchBoardFileSet">
+		<id property="file_id" column="FILE_ID" />
+		<result property="board_id" column="BOARD_ID" />
+		<result property="origin_name" column="ORIGIN_NAME" />
+		<result property="edit_name" column="EDIT_NAME" />
+		<result property="file_src" column="FILE_SRC" />
+		<result property="file_date" column="FILE_DATE" />
+		<result property="file_level" column="FILE_LEVEL" />
 	</resultMap>
 	
 <!-- 상영관 추가하기~!~!~!~!~! -->
@@ -25,5 +35,37 @@
 	ORDER BY MOVIEROOM_ID DESC)
 	WHERE RNUM = 1
 </select>
+
+<!-- 정태 영화관 사진 파일 추가 -->
+<insert id="insertFile" parameterType="BoardFile">
+	INSERT INTO BOARD_FILE
+		VALUES('BF' ||
+		BOARD_FILE_FILE_ID.NEXTVAL,#{board_id},#{origin_name},
+		#{edit_name},#{file_src},SYSDATE,#{file_level})
+</insert>
+
+<!-- 정태 영화관 사진 파일 수정 -->
+<!-- <update id="updateFile">
+	UPDATE BOARD_FILE
+	SET FILE_LEVEL=0
+	<choose>
+		<when test="file_level == 1">
+		WHERE FILE_LEVEL=1
+		</when>
+		<when test="file_level == 2">
+		WHERE FILE_LEVEL=2
+		</when>
+	</choose>
+</update> -->
+<!-- 영화관 사진 보기 -->
+<select id="selectFile" resultMap="SearchBoardFileSet">
+		SELECT *
+		FROM BOARD_FILE
+		WHERE
+		FILE_LEVEL=1 OR FILE_LEVEL = 2
+		ORDER BY FILE_LEVEL
+	</select>
+	
+	
 
 </mapper>

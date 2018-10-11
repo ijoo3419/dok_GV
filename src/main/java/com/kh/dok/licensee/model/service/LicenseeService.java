@@ -1,5 +1,9 @@
 package com.kh.dok.licensee.model.service;
 
+import java.util.ArrayList;
+
+import com.kh.dok.admin.model.exception.UploadException;
+import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.cinema.model.vo.Cinema;
 import com.kh.dok.licensee.model.vo.MovieRoom;
 
@@ -11,4 +15,9 @@ public interface LicenseeService {
 
 	MovieRoom checkMovieRoomId(MovieRoom mr);
 
+
+	int insertFile(BoardFile adFile);
+
+	ArrayList<BoardFile> selectFile();
+	
 }
