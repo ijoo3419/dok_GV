@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
-
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -15,8 +13,6 @@
 <noscript>
    <link rel="stylesheet" href="${contextPath }/resources/css/noscript.css" />
 </noscript>
-
-
 </head>
 <body class="is-preload">
 	<c:import url="../common/headBar.jsp" />
@@ -44,12 +40,10 @@
 		<div id="main">
 
 			<article class="post featured">
-			
 			<h2>공지사항 상세보기</h2>
 				<br><br>
 				
-				
-				<table align="center">
+				<table align="center" id="detail">
 					<tr>
 						<td width="100px">글번호</td>
 						<td><b>${ bbf.bcount }</b></td>

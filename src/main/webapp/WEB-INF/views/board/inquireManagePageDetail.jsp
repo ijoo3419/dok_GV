@@ -94,7 +94,7 @@
 					</tr>
 				</table>
 				<hr>
-				<c:if test="댓글갯수 > 0">
+				<%-- <c:if test="댓글갯수 > 0">
 					<table align="center">
 						<c:forEach var="r" item="댓글리스트">
 							<tr>
@@ -104,7 +104,7 @@
 							</tr>
 						</c:forEach>
 					</table>
-				</c:if>
+				</c:if> --%>
 	
 			
 			
