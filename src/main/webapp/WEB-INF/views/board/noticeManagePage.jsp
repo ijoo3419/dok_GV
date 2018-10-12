@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -11,7 +10,6 @@
 <noscript><link rel="stylesheet"href="${contextPath }/resources/css/noscript.css" /></noscript>
 <link rel="stylesheet" href="${contextPath }/resources/css/main.css" />
 <title>Insert title here</title>
-
 <style>
 	#searchValue{
 		margin-left: 10px;
@@ -118,7 +116,7 @@
 						
 					}
 				</script>
-				
+				                                                                                                        
 				<div>
 					<button type="button" class="img_btn user cancel mr7"><a href="writeNotice.bo">공지작성</a></button>
 				</div>
@@ -163,9 +161,6 @@
 						<a href="${blistEnd }">&nbsp;다음&gt;</a>
 					</c:if>
 				</div>
-
-
-			
 			</article>
 		</div>
 	</div>

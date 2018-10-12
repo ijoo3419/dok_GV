@@ -315,7 +315,7 @@ input[type=text]:placeholder, input[type=password]:placeholder {
     	<form action="loginCheck.me" method="post">
       		<input type="text" id="email" class="fadeIn second" name="email" placeholder="email">
       		<input type="password" id="user_pwd" class="fadeIn third" name="user_pwd" placeholder="password">
-      		<input type="submit" class="fadeIn fourth">
+      		<input type="submit" class="fadeIn fourth" value="login">
     	</form>
 	</div>
 	
@@ -340,7 +340,7 @@ input[type=text]:placeholder, input[type=password]:placeholder {
         			Kakao.API.request({
           				url: '/v2/user/me',
           				success: function(res) {
-            				alert(JSON.stringify(res));
+            				/* alert(JSON.stringify(res)); */
             				
             				var str = JSON.stringify(res);
             				var id = str.substring(str.indexOf('id'), str.length);
