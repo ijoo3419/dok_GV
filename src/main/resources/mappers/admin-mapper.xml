@@ -22,29 +22,34 @@
 	</resultMap>
 
 	<resultMap type="ReportHistory" id="searchBlackListSet">
-		<id property="rep_id" column="REP_ID"/>
-		<result property="rid" column="RID"/>
-		<result property="rep_userid" column="REP_USERID"/>
-		<result property="rep_level" column="REP_LEVEL"/>
-		<result property="rep_content" column="REP_CONTENT"/>
-		<result property="treat_date" column="TREAT_DATE"/>
-		<result property="reped_userid" column="REPED_USERID"/>
+		<id property="rep_id" column="REP_ID" />
+		<result property="rid" column="RID" />
+		<result property="rep_userid" column="REP_USERID" />
+		<result property="rep_level" column="REP_LEVEL" />
+		<result property="rep_content" column="REP_CONTENT" />
+		<result property="treat_date" column="TREAT_DATE" />
+		<result property="reped_userid" column="REPED_USERID" />
 	</resultMap>
 
 	<resultMap type="BoardFile" id="searchBoardFileSet">
-		<id property="file_id" column="FILE_ID"/>
-		<result property="board_id" column="BOARD_ID"/>
-		<result property="origin_name" column="ORIGIN_NAME"/>
-		<result property="edit_name" column="EDIT_NAME"/>
-		<result property="file_src" column="FILE_SRC"/>
-		<result property="file_date" column="FILE_DATE"/>
-		<result property="file_level" column="FILE_LEVEL"/>
+		<id property="file_id" column="FILE_ID" />
+		<result property="board_id" column="BOARD_ID" />
+		<result property="origin_name" column="ORIGIN_NAME" />
+		<result property="edit_name" column="EDIT_NAME" />
+		<result property="file_src" column="FILE_SRC" />
+		<result property="file_date" column="FILE_DATE" />
+		<result property="file_level" column="FILE_LEVEL" />
 	</resultMap>
-	<!-- 회원 전체 조회 인소진-->
+	
+	<resultMap type="Visit" id="visitListSet">
+		<id property="visit_id" column="VISIT_ID" />
+		<result property="visit_time" column="VISIT_TIME" />
+	</resultMap>
+	<!-- 회원 전체 조회 인소진 -->
 	<select id="searchAll" parameterType="Search" resultMap="searchResultSet">
 		SELECT *
 		FROM MEMBER
-		WHERE 
+		WHERE
 		<choose>
 			<when test="searchCondition != null and searchCondition.equals('id')">
 				MID LIKE '%' || #{searchResult} || '%'
@@ -58,7 +63,7 @@
 		</choose>
 		ORDER BY SUBSTR(MID,2)*1
 	</select>
-	
+
 	<!-- 일반 회원 조회 인소진 -->
 	<select id="searchBu" resultMap="searchResultSet">
 		SELECT *
@@ -74,7 +79,7 @@
 		</choose>
 		ORDER BY SUBSTR(MID,2)*1
 	</select>
-	
+
 	<!-- 판매자 회원 조회 인소진 -->
 	<select id="searchSe" parameterType="Search" resultMap="searchResultSet">
 		SELECT *
@@ -90,22 +95,22 @@
 		</choose>
 		ORDER BY SUBSTR(MID,2)*1
 	</select>
-	
+
 	<!-- 일반 회원 조회 카운트 결과 인소진 -->
 	<select id="countAll" parameterType="Search" resultType="_int">
-		SELECT COUNT(*) 
+		SELECT COUNT(*)
 		FROM MEMBER
 		<choose>
 			<when test="searchCondition != null and searchCondition.equals('id')">
 				WHERE MID LIKE '%' || #{searchResult} || '%'
 			</when>
-			<when test="searchCondition != null and searchCondition.equals('name')"> 
+			<when test="searchCondition != null and searchCondition.equals('name')">
 				WHERE USER_NAME LIKE '%' || #{searchResult} || '%'
 			</when>
 		</choose>
 		ORDER BY SUBSTR(MID,2)*1
 	</select>
-	
+
 	<!-- 일반 회원 조회 카운트 결과 인소진 -->
 	<select id="countBu" parameterType="Search" resultType="_int">
 		SELECT COUNT(*)
@@ -121,7 +126,7 @@
 		</choose>
 		ORDER BY SUBSTR(MID,2)*1
 	</select>
-	
+
 	<!-- 판매자 회원 조회 카운트 결과 인소진 -->
 	<select id="countSe" parameterType="Search" resultType="_int">
 		SELECT COUNT(*)
@@ -137,8 +142,8 @@
 		</choose>
 		ORDER BY SUBSTR(MID,2)*1
 	</select>
-	
-	<!-- 블랙리스트 이력 조회  인소진 -->
+
+	<!-- 블랙리스트 이력 조회 인소진 -->
 	<select id="searchBlack" parameterType="Search" resultMap="searchBlackListSet">
 		SELECT *
 		FROM REPORT_HISTORY
@@ -149,7 +154,7 @@
 		</choose>
 		ORDER BY SUBSTR(REP_ID,2)
 	</select>
-	
+
 	<!-- 블랙리스트 회원 조회 카운트 인소진 -->
 	<select id="countBl" parameterType="Search" resultType="_int">
 		SELECT COUNT(*)
@@ -160,13 +165,14 @@
 			</when>
 		</choose>
 	</select>
-	
+
 	<!-- 메인 슬라이드 사진 파일 추가 -->
 	<insert id="insertFile" parameterType="BoardFile">
 		INSERT INTO BOARD_FILE
-		VALUES('ADFILE' || BOARD_FILE_FILE_ID.NEXTVAL,#{board_id},#{origin_name},#{edit_name},#{file_src},SYSDATE,#{file_level})
+		VALUES('ADFILE' ||
+		BOARD_FILE_FILE_ID.NEXTVAL,#{board_id},#{origin_name},#{edit_name},#{file_src},SYSDATE,#{file_level})
 	</insert>
-	
+
 	<!-- 슬라이드 사진 파일 수정 -->
 	<update id="updateFile">
 		UPDATE BOARD_FILE
@@ -185,25 +191,49 @@
 				WHERE FILE_LEVEL=400
 			</when>
 		</choose>
-		
+
 	</update>
-	
-	<!-- 슬라이드 사진 삭제  -->
+
+	<!-- 슬라이드 사진 삭제 -->
 	<delete id="deleteFile">
 		DELETE BOARD_FILE
 		WHERE FILE_LEVEL=0
 	</delete>
-	
+
 	<select id="selectFile" resultMap="searchBoardFileSet">
 		SELECT *
 		FROM BOARD_FILE
-		WHERE FILE_LEVEL=100 OR FILE_LEVEL=200 OR FILE_LEVEL=300 OR FILE_LEVEL = 400
+		WHERE
+		FILE_LEVEL=100 OR FILE_LEVEL=200 OR FILE_LEVEL=300 OR FILE_LEVEL = 400
 		ORDER BY FILE_LEVEL
 	</select>
 	
-	<insert id="insertVisit">
-		INSERT INTO VISITOR
-		VALUES(VISITOR_VISIT_ID.NEXTVAL,NULL,SYSDATE,NULL,NULL)
+	<select id="selectVisit" parameterType="Visit" resultType="_int">
+		SELECT COUNT(*)
+		FROM VISIT
+		WHERE VISIT_ID = #{visit_id}
+	</select>
+	
+	<insert id="insertVisit" parameterType="Visit">
+		INSERT INTO VISIT
+		VALUES(#{visit_id},#{visit_time})
 	</insert>
 	
+	<select id="selectVisitList" resultMap="visitListSet">
+		SELECT *
+		FROM VISIT
+	</select>
+	
+	<delete id="deleteVisit" parameterType="date">
+		DELETE VISIT
+		WHERE VISIT_TIME = #{lastTime}
+	</delete>
+	<insert id="insertVcount" parameterType="Visit">
+		INSERT INTO VISIT
+		VALUES(#{visit_id},#{visit_time})
+	</insert>
+	<insert id="insertgar" parameterType="date">
+		INSERT INTO VISIT
+		VALUES(#{t},#{t})
+	</insert>
 </mapper>
