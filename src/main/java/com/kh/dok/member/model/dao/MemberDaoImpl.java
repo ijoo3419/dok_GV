@@ -205,6 +205,7 @@ public class MemberDaoImpl implements MemberDao {
 		
 		System.out.println("dao : " + authNumOrig);
 		return authNumOrig;
+	}
 
 	//비밀번호 변경
 	@Override
