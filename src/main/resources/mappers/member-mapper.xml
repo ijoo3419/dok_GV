@@ -151,6 +151,18 @@
     	WHERE RWRITER = #{ mid }
 	</select>
 	
+	<!-- 이진희 id찾기 -->
+	<select id="findId" resultType="java.lang.String" parameterType="Member">
+		SELECT EMAIL
+    	FROM MEMBER
+    	WHERE USER_NAME = #{ user_name }
+    	AND PHONE = #{phone}
+	</select>
 	
 	
+	<update id="findPassword">
+		UPDATE MEMBER
+		SET USER_PWD = '${user_pwd}'
+		WHERE EMAIL = '${email}'
+	</update>
 </mapper>

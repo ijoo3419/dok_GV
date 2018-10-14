@@ -399,7 +399,7 @@ input[type=text]:placeholder, input[type=password]:placeholder {
 
     <!-- Remind Passowrd -->
     <div id="formFooter">
-      <a class="underlineHover" href="#">Forgot Password?</a>
+      <a class="underlineHover" href="findIdPassword.me">Forgot Password?</a>
     </div>
 
   </div>

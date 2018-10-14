@@ -64,9 +64,11 @@ public class MovieController {
 		msn.setMovie_id(id);
 		
 		ArrayList<MovieThumbnail> movieDetail = ms.selectMovieDetail(msn);
+		/*ArrayList<MovieThumbnail> movieRanking = ms.selectMovieRanking(msn);*/
 		ArrayList<MovieThumbnail> movieimagecut = ms.selectMovieImageCut(msn);
 		ArrayList<MovieThumbnail> movievideo= ms.selectMovieVideo(msn);
 		
+	/*	model.addAttribute("movieRanking",movieRanking);*/
 		model.addAttribute("movieDetail",movieDetail);
 		model.addAttribute("movieimagecut",movieimagecut);
 		model.addAttribute("movievideo",movievideo);

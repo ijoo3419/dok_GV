@@ -54,5 +54,12 @@ public interface MemberDao {
 
 	int checkDupli(SqlSessionTemplate sqlSession, Movie m);
 
+	
+	//이진희 id찾기
+	String findId(SqlSessionTemplate sqlSession, Member m);
+
+	//이진희 password찾기
+	int findPassword(SqlSessionTemplate sqlSession, Member m);
+
      
 }

@@ -174,6 +174,28 @@ public class MemberDaoImpl implements MemberDao {
 		
 		return checkDupli;
 	}
+
+
+	
+	//이진희 id찾기
+	@Override
+	public String findId(SqlSessionTemplate sqlSession, Member m) {
+		String findlist = null;
+		
+		findlist = sqlSession.selectOne("Member.findId",m);
+		
+		System.out.println("dao id : " + findlist);
+		return findlist;
+	}
+
+	//이진희 password찾기
+	@Override
+	public int findPassword(SqlSessionTemplate sqlSession, Member m) {
+		int authNumOrig = sqlSession.update("Member.findPassword",m);
+		
+		System.out.println("dao : " + authNumOrig);
+		return authNumOrig;
+	}
 	
 
 }

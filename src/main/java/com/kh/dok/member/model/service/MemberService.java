@@ -54,6 +54,12 @@ public interface MemberService {
 	
 	int checkDupli(Movie m);
 
+	//이진희 id찾기
+	String findId(Member m);
+
+	//이진희 password찾기
+	int findPassword(Member m);
+
 	
 }
      
