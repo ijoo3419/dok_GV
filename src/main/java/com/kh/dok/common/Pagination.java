@@ -1,6 +1,9 @@
 package com.kh.dok.common;
 
+import org.springframework.stereotype.Repository;
+
 //인소진 작성 - 오류나면 말해줘
+@Repository
 public class Pagination {
 	
 	public static PageInfo getPageInfo(int currentPage, int listCount){
