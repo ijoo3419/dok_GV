@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -122,45 +122,48 @@
 				</div>
 				
 				<!-- 페이징 처리 -->
-				<div id="pageid" class="pagination">
-					<c:if test="${pi.currentPage <=1 }">
-						<a>&lt;이전&nbsp;</a>
-					</c:if>
-					<c:if test="${pi.currentPage > 1 }">
-						<c:url var="blistBack" value="noticeliPage.bo">
-							<c:param name="currentPage" value="${pi.currentPage - 1 }" />
-							<c:param name="searchResult" value="${sc.searchResult }" />
-							<c:param name="searchCondition" value="${sc.searchCondition }" />
-						</c:url>
-						<a href="${blistBack }">&lt;이전&nbsp;</a>
-					</c:if>
-					<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
-						<c:if test="${p eq pi.currentPage }">
-							<b><font color="#18bfef " size="4"></b>
-							</font>
-							<a><b><font color="#18bfef" size="4">${p }</font></b></a>
+				<div id="page" align="center">
+					<div class="pagination" align="center">
+						<c:if test="${ pi.currentPage <= 1 }">
+							<a>이전 </a>
 						</c:if>
-						<c:if test="${p ne pi.currentPage }">
-							<c:url var="blistCheck" value="searchBlack.ad">
-								<c:param name="currentPage" value="${p }" />
-								<c:param name="searchResult" value="${sc.searchResult }" />
-								<c:param name="searchCondition" value="${sc.searchCondition }" />
+						<c:if test="${ pi.currentPage > 1 }">
+							<c:url var="blistBack" value="NoticePaging.bo">
+								<c:param name="currentPage" value="${ pi.currentPage - 1 }" />
+								<c:param name="mId" value="${ mId }" />
 							</c:url>
-							<a href="${blistCheck }">${p }</a>
+							<a href="${ blistBack }">이전</a>
 						</c:if>
-					</c:forEach>
-					<c:if test="${pi.currentPage >= pi.maxPage}">
-						&nbsp; <a>다음&gt;</a>
-					</c:if>
-					<c:if test="${pi.currentPage < pi.maxPage }">
-						<c:url var="blistEnd" value="searchBlack.ad">
-							<c:param name="currentPage" value="${pi.currentPage + 1 }" />
-							<c:param name="searchResult" value="${sc.searchResult }" />
-							<c:param name="searchResult" value="${sc.searchCondition }" />
-						</c:url>
-						<a href="${blistEnd }">&nbsp;다음&gt;</a>
-					</c:if>
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+							<c:if test="${ p eq pi.currentPage }">
+								<font color="red" size="4"><a>${ p }</a></font>
+							</c:if>
+							<c:if test="${ p ne pi.currentPage }">
+								<c:url var="blistCheck" value="NoticePaging.bo">
+									<c:param name="currentPage" value="${ p }" />
+									<c:param name="mId" value="${ mId }" />
+								</c:url>
+								<a href="${ blistCheck }">${ p }</a>
+							</c:if>
+						</c:forEach>
+						<c:if test="${ pi.currentPage >= pi.maxPage }">
+							<a> 다음</a>
+						</c:if>
+						<c:if test="${ pi.currentPage < pi.maxPage }">
+							<c:url var="blistEnd" value="NoticePaging.bo">
+								<c:param name="currentPage" value="${ pi.currentPage + 1 }" />
+								<c:param name="mId" value="${ mId }" />
+							</c:url>
+							<a href="${ blistEnd }">다음</a>
+						</c:if>
+					</div>
 				</div>
+				
+				
+				
+				
+				
+				
 			</article>
 		</div>
 	</div>
