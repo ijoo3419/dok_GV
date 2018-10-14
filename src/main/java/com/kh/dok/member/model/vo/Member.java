@@ -21,12 +21,22 @@ public class Member implements java.io.Serializable{
 	private String withdraw_date;
 	private String nickname;
 	private String refreshToken;
+	private String new_pass;
 	
 	public Member(){}
 
+	@Override
+	public String toString() {
+		return "Member [mid=" + mid + ", email=" + email + ", user_pwd=" + user_pwd + ", user_name=" + user_name
+				+ ", birthday=" + birthday + ", gender=" + gender + ", phone=" + phone + ", user_class=" + user_class
+				+ ", status=" + status + ", login_class=" + login_class + ", blacklist_status=" + blacklist_status
+				+ ", join_date=" + join_date + ", withdraw_date=" + withdraw_date + ", nickname=" + nickname
+				+ ", refreshToken=" + refreshToken + ", new_pass=" + new_pass + "]";
+	}
+
 	public Member(String mid, String email, String user_pwd, String user_name, String birthday, String gender,
 			String phone, String user_class, String status, String login_class, String blacklist_status,
-			String join_date, String withdraw_date, String nickname, String refreshToken) {
+			String join_date, String withdraw_date, String nickname, String refreshToken, String new_pass) {
 		super();
 		this.mid = mid;
 		this.email = email;
@@ -43,6 +53,7 @@ public class Member implements java.io.Serializable{
 		this.withdraw_date = withdraw_date;
 		this.nickname = nickname;
 		this.refreshToken = refreshToken;
+		this.new_pass = new_pass;
 	}
 
 	public String getMid() {
@@ -165,14 +176,12 @@ public class Member implements java.io.Serializable{
 		this.refreshToken = refreshToken;
 	}
 
-	@Override
-	public String toString() {
-		return "Member [mid=" + mid + ", email=" + email + ", user_pwd=" + user_pwd + ", user_name=" + user_name
-				+ ", birthday=" + birthday + ", gender=" + gender + ", phone=" + phone + ", user_class=" + user_class
-				+ ", status=" + status + ", login_class=" + login_class + ", blacklist_status=" + blacklist_status
-				+ ", join_date=" + join_date + ", withdraw_date=" + withdraw_date + ", nickname=" + nickname
-				+ ", refreshToken=" + refreshToken + "]";
+	public String getNew_pass() {
+		return new_pass;
 	}
 
-	
+	public void setNew_pass(String new_pass) {
+		this.new_pass = new_pass;
+	}
+
 }

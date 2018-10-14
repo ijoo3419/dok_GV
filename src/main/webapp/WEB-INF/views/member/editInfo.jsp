@@ -4,6 +4,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style>
+#quit, #chgpwd {
+	cursor: pointer;
+}
+
+</style>
+
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="${contextPath }/resources/css/main.css" />
@@ -56,6 +64,10 @@
 						<thead>
 							<tr>
 								<th colspan="2">* 개인 정보를 확인 후 수정하실 수 있습니다. </th>
+								<th>
+									<img align="right" src="${ contextPath }/resources/images/member/mem_quit.PNG" alt="회원탈퇴" width=62px height=auto id="quit">
+									<img align="right" src="${ contextPath }/resources/images/member/change_pwd.PNG" alt="비밀번호 바꾸기" width=90px height=auto id="chgpwd">
+								</th>
 								
 							</tr>
 						</thead>
@@ -98,8 +110,41 @@
 					</div>
 					
 				</div>
-
+			</section>
+			
+			<div id="myModal" class="modal">
+				<div class="modal-content">
+					<br><br><br>
+					<h3 align="center">탈퇴하시겠습니까?</h3>
+						<div align="center">
+							<br><br><br>
+							<h4> 한 번 탈퇴한 이메일로는 다시 가입하실 수 없습니다.</h4>
+							<br><br><br>
+							<button id="confirm" onclick="member_quit()">확인</button>
+							<button id="close" onclick="cancelCancel()">취소</button>
+							<br><br><br>
+						</div>
+				</div>
+			</div>
+			
+			
+			<div id="myModal2" class="modal">
+				<div class="modal-content">
+					<br><br><br>
+					<h3 align="center">비밀번호를 변경하시겠습니까?</h3>
+						<div align="center">
+							<br><br><br>
+							<h4> 비밀번호를 변경하시기 전 회원 정보를 재입력 해주세요. </h4>
+							<br><br><br>
+							<button id="confirm" onclick="change_pwd()">확인</button>
+							<button id="close" onclick="cancelCancel2()">취소</button>
+							<br><br><br>
+						</div>
+				</div>
+			</div>
+			
 		</div>
+		
 
 		<!-- Copyright -->
 		<div id="copyright">
@@ -121,6 +166,33 @@
 	<script src="${contextPath }/resources/js/main.js"></script>
 	
 	<script>
+	
+	$('#quit').click(function(){
+		$('#myModal').show();
+	});
+  
+	function member_quit(){
+		location.href = "member_quit.me";
+	}
+		
+	function cancelCancel(){
+		$('#myModal').hide();
+	}
+		
+	
+	
+	$('#chgpwd').click(function(){
+		$('#myModal2').show();
+	});
+	
+	function change_pwd(){
+		location.href = "changePass.me";
+	}
+		
+	function cancelCancel2(){
+		$('#myModal2').hide();
+	}
+
 	
 	var nickCheck = 0;
 	
@@ -234,6 +306,7 @@
 			}
 
 		}
+		
 	
 	</script>
 	
