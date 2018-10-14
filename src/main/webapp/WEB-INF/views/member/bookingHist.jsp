@@ -138,8 +138,10 @@ img {
 			<div id="myModal" class="modal">
 				<div class="modal-content">
 					<h3 align="center">예매를 취소하시겠습니까?</h3>
-					<button id="confirm" onclick="cancelBooking()">확인</button>
-					<button id="close" onclick="cancelCancel()">취소</button>
+						<div align="center">
+							<button id="confirm" onclick="cancelBooking()">확인</button>
+							<button id="close" onclick="cancelCancel()">취소</button>
+						</div>
 				</div>
 			</div>
 			

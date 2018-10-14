@@ -131,11 +131,20 @@ public class MemberDaoImpl implements MemberDao {
 
 	//황이주 내가 쓴 리뷰 조회
 	@Override
-	public ArrayList<MyReply> selectMyReply(SqlSessionTemplate sqlSession, Member m) {
+	public ArrayList<MyReply> selectMovReply(SqlSessionTemplate sqlSession, Member m) {
 		
 		ArrayList<MyReply> reviewsView = null;
 		
 		reviewsView = (ArrayList)sqlSession.selectList("MyReply.selectReviews", m);
+		
+		return reviewsView;
+	}
+	@Override
+	public ArrayList<MyReply> selectCinReply(SqlSessionTemplate sqlSession, Member m) {
+		
+		ArrayList<MyReply> reviewsView = null;
+		
+		reviewsView = (ArrayList)sqlSession.selectList("MyReply.selectCineRev", m);
 		
 		return reviewsView;
 	}
@@ -173,6 +182,18 @@ public class MemberDaoImpl implements MemberDao {
 		int checkDupli = sqlSession.selectOne("MovieThumbnail.checkDupli", m);
 		
 		return checkDupli;
+	}
+
+	//비밀번호 변경
+	@Override
+	public int updatePwd(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("Member.updatePwd", m);
+	}
+
+	//회원 탈퇴
+	@Override
+	public int updateStatus(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("Member.updateStatus", m);
 	}
 	
 

@@ -80,6 +80,12 @@ public class MemberController {
    public String editInfoView(){
       return "member/editInfo";
    }
+   
+   //회원 정보 수정 - 비밀번호 변경
+   @RequestMapping("changePass.me")
+	public String editPassView(){
+		return "member/change_pwd";
+   }
 
    @RequestMapping("ask.me")
    public String myAskView(Model model, HttpServletRequest request){
@@ -129,6 +135,7 @@ public class MemberController {
 	   System.out.println("loginCheck MemberController : " + m);
 	   
       try {
+    	  
 		model.addAttribute("loginUser", ms.loginMember(m));
 		
 		return "main/main";
@@ -146,22 +153,22 @@ public class MemberController {
    @ResponseBody
    @RequestMapping("checkEditable.me")
    public int checkPass(Member m, Model model){
-	   
+
 	   int result;
-	   
-	try {
-		result = ms.checkPass(m);
-		return result;
-		
-	} catch (LoginException e) {
-		
-		result = 0;
-		return result;
-		
-	}
-	   
+
+	   try {
+		   result = ms.checkPass(m);
+		   return result;
+
+	   } catch (LoginException e) {
+
+		   result = 0;
+		   return result;
+
+	   }
+
    }
-   
+
    //암호화 처리 로그아웃(성희)
    @RequestMapping("logout.me")
    public String logout(SessionStatus status){
@@ -286,8 +293,6 @@ public class MemberController {
 	   
 	   int result = ms.updateInfo(m);
 	   
-	  
-	   
 	   if(result > 0){
 		   result = 1;
 		   
@@ -295,6 +300,30 @@ public class MemberController {
 		   model.addAttribute("loginUser", ms.selectUser(m));
 		   
 		   return result;
+	   } else {
+		   result = 0;
+		   return result;
+	   }
+	   
+   }
+   
+   //회원 정보 수정 - 비밀번호 변경
+   @ResponseBody
+   @RequestMapping("change_Pwd.me")
+   public int updatePwd(Member m, Model model){
+	   
+	   m.setUser_pwd(passwordEncoder.encode(m.getNew_pass()));
+	   
+	   int result = ms.updatePwd(m);
+	   
+	   if(result > 0){
+		   result = 1;
+		   
+		   //수정한 정보를 loginUser 세션에 업데이트
+		   model.addAttribute("loginUder", ms.selectUser(m));
+		   
+		   return result;
+		   
 	   } else {
 		   result = 0;
 		   return result;
@@ -435,11 +464,42 @@ public class MemberController {
 		  
 		  Member m = (Member)request.getSession().getAttribute("loginUser");
 		  
-		  ArrayList<MyReply> reviewsView = ms.selectReply(m);
+		  ArrayList<MyReply> movieReviews = ms.selectMovReply(m);
+		  ArrayList<MyReply> cinemaReviews = ms.selectCinReply(m);
 		  
-		  model.addAttribute("reviewsView", reviewsView);
+		  model.addAttribute("movieReviews", movieReviews);
+		  model.addAttribute("cinemaReviews", cinemaReviews);
 
 	     return "member/reviews";
+	  }
+	  
+	  //회원 탈퇴
+	  @RequestMapping("member_quit.me")
+	  public String memberQuitView(){
+		  return "member/member_quit";
+	  }
+	  
+	  @ResponseBody
+	  @RequestMapping("memberQuit.me")
+	  public int updateStatus(Member m){
+		  
+		int result;
+		  
+		try {
+			result = ms.checkPass(m);
+			if(result > 0){
+				  result = ms.updateStatus(m);
+				  return result;
+			  } else {
+				  result = 3;
+				  return result;
+			  }
+			
+		} catch (LoginException e) {
+			result = 0;
+			return result;
+		}
+		
 	  }
 
 }

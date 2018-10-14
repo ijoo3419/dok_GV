@@ -42,7 +42,9 @@ public interface MemberService {
 
 	ArrayList<BookingHistory> selectBookingHist(Member m);
 
-	ArrayList<MyReply> selectReply(Member m);
+	ArrayList<MyReply> selectMovReply(Member m);
+	
+	ArrayList<MyReply> selectCinReply(Member m);
 
 	int selectWishNum(Member m);
 	
@@ -53,6 +55,10 @@ public interface MemberService {
 	ArrayList<Board> selectMyAsk(Member m);
 	
 	int checkDupli(Movie m);
+
+	int updatePwd(Member m);
+
+	int updateStatus(Member m);
 
 	
 }

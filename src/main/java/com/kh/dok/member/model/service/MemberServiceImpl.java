@@ -165,10 +165,18 @@ public class MemberServiceImpl implements MemberService{
 	
 	//황이주 내가 쓴 리뷰 출력
 	@Override
-	public ArrayList<MyReply> selectReply(Member m) {
+	public ArrayList<MyReply> selectMovReply(Member m) {
 		ArrayList<MyReply> reviewsView = null;
 		
-		reviewsView = md.selectMyReply(sqlSession, m);
+		reviewsView = md.selectMovReply(sqlSession, m);
+		
+		return reviewsView;
+	}
+	@Override
+	public ArrayList<MyReply> selectCinReply(Member m) {
+		ArrayList<MyReply> reviewsView = null;
+		
+		reviewsView = md.selectCinReply(sqlSession, m);
 		
 		return reviewsView;
 	}
@@ -204,8 +212,18 @@ public class MemberServiceImpl implements MemberService{
 	//위시리스트 중복 조회
 	@Override
 	public int checkDupli(Movie m) {
-		System.out.println("위시리스트 중복조회 ServiceImpl" + m);
 		return md.checkDupli(sqlSession, m);
+	}
+	
+	//비밀번호 변경
+	@Override
+	public int updatePwd(Member m) {
+		return md.updatePwd(sqlSession, m);
+	}
+	
+	//탈퇴
+	public int updateStatus(Member m){
+		return md.updateStatus(sqlSession, m);
 	}
 
 }

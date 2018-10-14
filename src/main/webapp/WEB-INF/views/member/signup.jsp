@@ -550,11 +550,6 @@ function checkNick(){
 
 function check(){
 	
-	console.log(emailCheck);
-	console.log(nickCheck);
-	console.log(authCheck);
-	console.log(pwdCheck);
-	
 	if(emailCheck == 1 && nickCheck == 1 && authCheck == 1 && pwdCheck == 1){
 		$("#signupBtn").attr("type", "submit");
 	} else {
