@@ -259,7 +259,7 @@ hr {
 					</header>
 			    
 				<!-- Nav -->
-					<nav id="nav">
+					<!-- <nav id="nav">
 						<ul class="links">
 							<li><a href="../index.jsp">jsp상영등록</a></li>
 							<li><a href="findIdPassword.jsp">아이디/비밀번호 찾기</a></li>
@@ -269,13 +269,13 @@ hr {
 							<li><a href="movieDetail.jsp">영화상세보기</a></li>
 
 						</ul>
-						<!--  <ul class="icons">
+						 <ul class="icons">
 							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
 							<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
 							<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
-						</ul>-->
-					</nav>
+						</ul>
+					</nav> -->
 
 				<!-- Main -->
 					<div id="main">
@@ -292,16 +292,16 @@ hr {
 			<p style="font-size:2em;">비밀번호 찾기</p>
 			</div>
 		
-			<form id="form1" action="<%=request.getContextPath()%>/findUser" method="post" style="margin-left: 10%; display: inline-block;">
+			 <div id="form1" style="margin-left: 10%; margin-bottom:10%; display: inline-block;">
 				<table align="center">
 					<tr>
 						<!-- <td><label>아이디</label></td> -->
-						<td><input id="findName" type="text" name="findName"  style="width: 300px; height: 30px;"
+						<td style="width:300px !important;"><input id="findName" type="text" name="findName"  style="width: 300px; height: 30px;"
 						placeholder="이름"></td>
 					</tr>
 					<tr>
 						<!-- <td><label>비밀번호</label></td> -->
-						<td><input id="findTel" type="tel" name="findTel"  style="width: 300px; height: 30px;"
+						<td style="width:300px;"><input id="findTel" type="tel" name="findTel"  style="width: 300px; height: 30px;"
 						placeholder="전화번호"></td>
 					</tr>
 					<!-- <tr>
@@ -311,9 +311,10 @@ hr {
 					</tr> -->
 				</table>
 				<br>
-				<input id="web-font2" style="width: 300px; height: 40px;" type="submit" value="ID찾기">
-			</form>
-			<form id="form1" action="<%=request.getContextPath()%>/findPassword.me" method="post" style="margin-left: 20%; display: inline-block;">
+				<!-- <input id="web-font2" style="width: 300px; height: 40px;" type="submit" value="ID찾기"> -->
+				<button id="web-font2" style="width: 300px; height: 40px;" onclick="findId()">아이디 찾기</button>
+			</div> 
+			<div id="form1" style="margin-left: 20%; display: inline-block;">
 				<table align="center">
 					<tr>
 						<!-- <td><label>아이디</label></td> -->
@@ -327,13 +328,51 @@ hr {
 					</tr> -->
 				</table>
 				<br><br>
-				<input id="web-font2" style="width: 300px; height: 40px;" type="submit" value="비밀번호 찾기">
-			</form>
+				<button id="web-font2" style="width: 300px; height: 40px;" onclick="findPassword()">비밀번호 찾기</button>
+			 </div> 
 		</div>
 		
 	</div>
 	
 	<br><br><br><br><br><br>
+	<script>
+		function findId(){
+			var name = $("#findName").val();
+			var tel = $("#findTel").val();
+			
+			console.log(name);
+			console.log(tel);
+			
+			$.ajax({
+				url:"findUser.me",
+				type:"post",
+				data:{name:name, tel:tel},
+				success: function(data){
+					console.log(data);
+					alert("회원님의 아이디는 " + data + "입니다.");
+				}
+			});
+			
+		}
+		
+		function findPassword(){
+			var email = $("#findEmail").val();
+			
+			console.log(email);
+			
+			$.ajax({
+				url:"findPassword.me",
+				type:"post",
+				data:{email:email},
+				success: function(data){
+					console.log(data);
+					alert("회원님의 이메일로 임시비밀번호가 발송되었습니다.");
+				}
+			});
+			
+		}
+	
+	</script>
 							
 	 </article>
 </div>			

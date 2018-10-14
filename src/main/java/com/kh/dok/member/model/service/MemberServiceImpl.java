@@ -226,4 +226,36 @@ public class MemberServiceImpl implements MemberService{
 		return md.updateStatus(sqlSession, m);
 	}
 
+	//이진희 id찾기
+	/*@Override
+	public ArrayList<Member> findId(Member m) {
+		
+		ArrayList<Member> findlist = null;
+		
+		findlist = md.findId(sqlSession,m);
+		
+		System.out.println("service id : " + findlist);
+		
+		return findlist;
+	}*/
+	
+	@Override
+	public String findId(Member m) {
+		
+		String findlist = null;
+		
+		findlist = md.findId(sqlSession,m);
+		
+		System.out.println("service id : " + findlist);
+		
+		return findlist;
+	}
+
+	@Override
+	public int findPassword(Member m) {
+		
+		int authNumOrig = md.findPassword(sqlSession, m);
+		return authNumOrig;
+	}
+
 }

@@ -221,6 +221,21 @@ hr {
     	margin-top:2px;
     	height: 20px
     }
+      #detail {
+	width: 110px;
+	font-size : 9pt;
+}
+    #book {
+	font-size : 9pt;
+	width: 110px;
+	background-color : #212931;
+	box-shadow : none;
+	color : #ffffff !important;
+}
+#buttonarea{
+	margin-left:30px;
+	margin-top:10px;
+}
 </style>		
 		 <title>Massively by HTML5 UP</title>
 		<meta charset="utf-8" />
@@ -463,9 +478,9 @@ hr {
 			console.log("lat : " + lat);
 	        console.log("lon : " + lon);
 			
-			xx = lon - ex;
-		 	yy = lat - ey;
-			console.log(xx);
+			xx = ex - lon;
+		 	yy = ey - lat;
+			console.log(myaddress +" : " + xx);
 			console.log(yy);
 
 			/* var allData = { "xx": xx, "yy": yy };
@@ -478,15 +493,24 @@ hr {
 	    			console.log(allData);
 	    		}
 			});	 */
-			var html = '';
-            html += '<div id="sumnailimage">';
-            html += '${row1.theaterName }<br>;
-            html += '<hr>';
-            html += '<div id="buttonarea">';
-            html += '<button id="detail" onclick="location.href='cinemaDetail.ci?id=${row1.theaterId}'">상세보기</button>';
-            html += '</div>';
-            html += '</div>';
-            $("#map").after(html);
+			if(xx>=0.001 && xx<=0.1){
+				
+				var html = '';
+				var c = '<button id="detail" onclick="location.href=\'cinemaDetail.ci?id=${row1.theaterId}\'">상세보기</button>&nbsp';
+				var s = '<button id="book" onclick="location.href=\'moviePay.mo\'">예매하기</button>';
+	            html += '<div id="sumnailimage">';
+	            html += '${row1.theaterName }<br>';
+	            html += '<hr>';
+	            html += '<div id="buttonarea">';
+	            html += c;
+	          	html += s;
+	            html += '</div>';
+	            html += '</div>';
+	            
+            
+            $("#map").before(html);
+			
+			}
 				/* var $div = $(<div id="sumnailimage">d</div>);
 				var div = document.createElement('div');
 				var text = document.createTextNode('d');
