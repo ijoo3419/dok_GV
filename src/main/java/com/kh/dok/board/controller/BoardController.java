@@ -22,6 +22,8 @@ import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.board.model.vo.BoardNBoardFile;
 import com.kh.dok.common.CommonUtils;
+import com.kh.dok.common.PageInfo;
+import com.kh.dok.common.Pagination;
 
 @Controller
 public class BoardController {
@@ -72,7 +74,7 @@ public class BoardController {
 				
 				System.out.println("try result : " + result);
 				
-				return "licensee/noticeManagePage";
+				return "board/noticeManagePage";
 				
 			} catch (Exception e) {
 				System.out.println("BoardController catch~ catch~ in");
@@ -100,15 +102,27 @@ public class BoardController {
 	   @RequestMapping(value="notice.li")
 		public String showNoticeView(HttpServletRequest request, Model model){
 		   BoardNBoardFile bbf = new BoardNBoardFile();
-		   ArrayList list = new ArrayList();
 		   
 		   HttpSession session = request.getSession();
 		   String mid = (String)session.getAttribute("mid");
-		   System.out.println("찰리찰리 mid왔나요? YES, mid is " + mid);
-		   
 		   bbf.setmId(mid); 
 		   
-		   list = bs.selectNoticeList(bbf);
+		   //1페이지
+		   int currentPage = 1;
+		   
+		   int listCount = bs.getlistCount(mid);
+		   
+		   PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		   
+		   ArrayList<BoardNBoardFile> list = bs.selectNoticeList(pi, mid);
+		   
+		   
+		  
+		   
+		   model.addAttribute("pi", pi);
+		   
+		   
+		   /*list = bs.selectNoticeList(pi);*/
 		   
 		   model.addAttribute("list", list);
 		   
@@ -160,6 +174,32 @@ public class BoardController {
 		   
 		   
 		   return "board/noticeManagePageDetail";
+	   }
+	   
+	   //공지사항 페이징
+	   @RequestMapping(value="NoticePaging.bo")
+	   public String NoticePaging(Model model, HttpServletRequest request){
+		   String mId = (String)request.getParameter("mId");
+		   int currentPage = 1;
+		   
+		   System.out.println("성희 : BoardController NoticePaging mid : " + mId + ", currentPage : " + currentPage);
+		   if(request.getParameter("currentPage") != null){
+			   currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		   }
+		   
+		   int listCount = bs.getlistCount(mId);
+		   System.out.println("성희 : BoardController NoticePaging listCount : " + listCount);
+		   
+		   PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		   
+		   ArrayList<BoardNBoardFile> list = bs.selectNoticeList(pi, mId);
+		   System.out.println("성희 : BoardController NoticePaging list : " + list);
+		   
+		   model.addAttribute("list", list);
+		   model.addAttribute("pi", pi);
+		   
+		   return "board/noticeManagePage";
+		   
 	   }
 	   
 	   

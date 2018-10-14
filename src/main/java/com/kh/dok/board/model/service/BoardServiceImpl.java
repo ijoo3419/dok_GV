@@ -14,6 +14,7 @@ import com.kh.dok.board.model.exception.BoardSelectOneException;
 import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.board.model.vo.BoardNBoardFile;
+import com.kh.dok.common.PageInfo;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -38,12 +39,12 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 
-	@Override
+	/*@Override
 	public ArrayList selectNoticeList(BoardNBoardFile bbf) {
 		System.out.println("BoardServiceImpl selectNoticeList method in");
 		
 		return bd.selectNoticeList(sqlSession, bbf);
-	}
+	}*/
 
 
 	@Override
@@ -72,6 +73,27 @@ public class BoardServiceImpl implements BoardService{
 		if(result > 0) return bd.selectNoticeOne(sqlSession, board_id);
 		
 		return bbf; 
+	}
+
+
+	//판매자 공지사항 전체갯수 조회용 페이징(성희)
+	@Override
+	public int getlistCount(String mId) {
+
+		int listCount = bd.getlistCount(sqlSession, mId);
+		
+		return listCount;
+	}
+
+	//판매자 공지사항 글 불러오기(성희)
+	@Override
+	public ArrayList<BoardNBoardFile> selectNoticeList(PageInfo pi, String mId) {
+
+		ArrayList<BoardNBoardFile> list = bd.selectNoticeList(sqlSession, pi, mId);
+		
+		System.out.println("성희 : BoardServiceImpl selectNoticeList list : " + list);
+		
+		return list;
 	}
 
 }

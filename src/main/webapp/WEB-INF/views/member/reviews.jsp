@@ -47,7 +47,10 @@
 			</section>
 			
 			<div class="table-wrapper">
-			<c:forEach items="${ reviewsView }" var="rv">
+			
+			<h4> 영화 리뷰 </h4>
+			
+			<c:forEach items="${ movieReviews }" var="mv">
 				<table>
 					<thead>
 						<tr>
@@ -60,12 +63,12 @@
 							<th></th>
 							<th></th>
 						</tr>
-					</thead><!-- 영화 / 영화관 리뷰 따로 따로 나눠서 보여주기 -->
+					</thead>
 					<tbody>
 						<tr>
-							<td><${ rv.file_src } style="width: auto; height:100px;"></td>
-							<td>${ rv.movie_title }</td>
-							<c:set var="grade" value="${ rv.grade_count }" />
+							<td><${ mv.file_src } style="width: auto; height:100px;"></td>
+							<td>${ mv.movie_title }</td>
+							<c:set var="grade" value="${ mv.grade_count }" />
 							<c:choose>
 								<c:when test="${ grade eq 0 }">
 									<td>☆☆☆☆☆</td>
@@ -86,27 +89,66 @@
 									<td>★★★★★</td>
 								</c:when>
 							</c:choose>
-							<c:set var="division" value="${ rv.division }" />
-							<c:choose>
-								<c:when test="${ division eq 'MOVIE' }">
-									<td>[영화] ${ rv.rcontent }</td>
-								</c:when>
-								<c:when test="${ division eq 'THEATER' }">
-									<td>[영화관] ${ rv.rcontent }</td>
-								</c:when>
-							</c:choose>
-							<td><img src="${ contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;"> ${ rv.recommend_count } </td>
-							<td>${ rv.rcreate_date }</td>
+									<td>[영화] ${ mv.rcontent }</td>
+							<td><img src="${ contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;"> ${ mv.recommend_count } </td>
+							<td>${ mv.rcreate_date }</td>
 							<td><img src="${ contextPath }/resources/images/member/edit.png" width="20" height="20" style="margin-left:10px; margin-top:10px;"></td>
 							<td><img src="${ contextPath }/resources/images/member/delete.png" width="20" height="20" style="margin-left:10px; margin-top:10px;"></td>
 						</tr>
 				</table>
 				</c:forEach>
+				
+			<h4> 영화관 리뷰 </h4>
+				
+			<c:forEach items="${ cinemaReviews }" var="cr">
+				<table>
+					<thead>
+						<tr>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>${ cr.theater_name }</td>
+							<c:set var="grade" value="${ cr.grade_count }" />
+							<c:choose>
+								<c:when test="${ grade eq 0 }">
+									<td>☆☆☆☆☆</td>
+								</c:when>
+								<c:when test="${ grade eq 1 }">
+									<td>★☆☆☆☆</td>
+								</c:when>
+								<c:when test="${ grade eq 2 }">
+									<td>★★☆☆☆</td>
+								</c:when>
+								<c:when test="${ grade eq 3 }">
+									<td>★★★☆☆</td>
+								</c:when>
+								<c:when test="${ grade eq 4 }">
+									<td>★★★★☆</td>
+								</c:when>
+								<c:when test="${ grade eq 5 }">
+									<td>★★★★★</td>
+								</c:when>
+							</c:choose>
+									<td>[영화] ${ cr.rcontent }</td>
+							<td><img src="${ contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;"> ${ cr.recommend_count } </td>
+							<td>${ cr.rcreate_date }</td>
+							<td><img src="${ contextPath }/resources/images/member/edit.png" width="20" height="20" style="margin-left:10px; margin-top:10px;"></td>
+							<td><img src="${ contextPath }/resources/images/member/delete.png" width="20" height="20" style="margin-left:10px; margin-top:10px;"></td>
+						</tr>
+				</table>
+				</c:forEach>	
+				
+				
+				
 			</div>
-		
-
-
-
 		</div>
 	</div>
 

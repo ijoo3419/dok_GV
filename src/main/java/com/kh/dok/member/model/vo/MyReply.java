@@ -9,8 +9,16 @@ public class MyReply implements java.io.Serializable {
 	private String recommend_count;
 	private String rcreate_date;
 	private String division;
+	private String theater_name;
 	
 	public MyReply(){}
+
+	@Override
+	public String toString() {
+		return "MyReply [file_src=" + file_src + ", movie_title=" + movie_title + ", grade_count=" + grade_count
+				+ ", rcontent=" + rcontent + ", recommend_count=" + recommend_count + ", rcreate_date=" + rcreate_date
+				+ ", division=" + division + ", theater_name=" + theater_name + "]";
+	}
 
 	public String getFile_src() {
 		return file_src;
@@ -68,15 +76,16 @@ public class MyReply implements java.io.Serializable {
 		this.division = division;
 	}
 
-	@Override
-	public String toString() {
-		return "MyReply [file_src=" + file_src + ", movie_title=" + movie_title + ", grade_count=" + grade_count
-				+ ", rcontent=" + rcontent + ", recommend_count=" + recommend_count + ", rcreate_date=" + rcreate_date
-				+ ", division=" + division + "]";
+	public String getTheater_name() {
+		return theater_name;
+	}
+
+	public void setTheater_name(String theater_name) {
+		this.theater_name = theater_name;
 	}
 
 	public MyReply(String file_src, String movie_title, String grade_count, String rcontent, String recommend_count,
-			String rcreate_date, String division) {
+			String rcreate_date, String division, String theater_name) {
 		super();
 		this.file_src = file_src;
 		this.movie_title = movie_title;
@@ -85,9 +94,7 @@ public class MyReply implements java.io.Serializable {
 		this.recommend_count = recommend_count;
 		this.rcreate_date = rcreate_date;
 		this.division = division;
+		this.theater_name = theater_name;
 	}
-	
-	
-
 	
 }

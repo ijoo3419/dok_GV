@@ -42,7 +42,9 @@ public interface MemberService {
 
 	ArrayList<BookingHistory> selectBookingHist(Member m);
 
-	ArrayList<MyReply> selectReply(Member m);
+	ArrayList<MyReply> selectMovReply(Member m);
+	
+	ArrayList<MyReply> selectCinReply(Member m);
 
 	int selectWishNum(Member m);
 	
@@ -54,11 +56,17 @@ public interface MemberService {
 	
 	int checkDupli(Movie m);
 
+
 	//이진희 id찾기
 	String findId(Member m);
 
 	//이진희 password찾기
 	int findPassword(Member m);
+
+	int updatePwd(Member m);
+
+	int updateStatus(Member m);
+
 
 	
 }

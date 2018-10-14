@@ -42,7 +42,9 @@ public interface MemberDao {
 
 	ArrayList<BookingHistory> selectBookingHist(SqlSessionTemplate sqlSession, Member m);
 
-	ArrayList<MyReply> selectMyReply(SqlSessionTemplate sqlSession, Member m);
+	ArrayList<MyReply> selectMovReply(SqlSessionTemplate sqlSession, Member m);
+	
+	ArrayList<MyReply> selectCinReply(SqlSessionTemplate sqlSession, Member m);
 
 	int selectWishNum(SqlSessionTemplate sqlSession, Member m);
 	
@@ -54,12 +56,18 @@ public interface MemberDao {
 
 	int checkDupli(SqlSessionTemplate sqlSession, Movie m);
 
+
 	
 	//이진희 id찾기
 	String findId(SqlSessionTemplate sqlSession, Member m);
 
 	//이진희 password찾기
 	int findPassword(SqlSessionTemplate sqlSession, Member m);
+
+
+	int updatePwd(SqlSessionTemplate sqlSession, Member m);
+
+	int updateStatus(SqlSessionTemplate sqlSession, Member m);
 
      
 }

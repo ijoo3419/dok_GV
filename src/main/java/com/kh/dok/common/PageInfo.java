@@ -1,5 +1,8 @@
 package com.kh.dok.common;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class PageInfo implements java.io.Serializable{
 	private int currentPage;
 	private int listCount;
