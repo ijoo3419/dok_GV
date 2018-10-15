@@ -140,5 +140,33 @@ public class MovieDaoImpl implements MovieDao{
 		int getlistCount = sqlSession.selectOne("MovieThumbnail.getlistCount");
 		return getlistCount;
 	}
+
+	//박지용 영화 좌석예매
+	@Override
+	public int insertSeat(SqlSessionTemplate sqlSession, Movie m) {
+		
+		int seatCount = sqlSession.insert("Movie.insertSeat", m);
+		
+		return seatCount;
+	}
+
+	//박지용 좌석 ID 가져오기
+	@Override
+	public String selectSeatId(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("Movie.selectSeatId");
+	}
+
+	@Override
+	public int insertReservation(SqlSessionTemplate sqlSession, Movie m) {
+
+		return sqlSession.insert("Movie.insertReservation", m);
+	}
+
+	@Override
+	public ArrayList<Movie> selectPayList(SqlSessionTemplate sqlSession, Movie m) {
+		
+		return (ArrayList)sqlSession.selectList("Movie.selectPayList", m);
+	}
 	
 }
