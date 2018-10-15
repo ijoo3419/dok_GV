@@ -19,6 +19,7 @@ border-collapse:collapse;
 	font-weight: bold;
 	color: #935d8c;
 }
+
 .god{
 	border: 2px solid black;
     display: inline-block;
@@ -124,17 +125,7 @@ h2 {
 							
 							
 						</div>
-						<br>
-						<br>
-						<div class="col-6 col-12-xsmall">
-							<h2 align="left">2. 가격</h2>
-							<input type="text" name="price" id="demo-name" value=""
-								placeholder="금액을 입력하세요" />
-						</div>
-
-						<!-- Break -->
-
-					</div>
+						
 					<br>
 					<br>
 					<h2 align="left">3. 상영 정보</h2>
@@ -147,6 +138,7 @@ h2 {
 						<table id="playTable" border="1" cellspacing="3">
 						<tr>
 								<th class="align-center">회차</th>
+								<th class="align-center">가격</th>
 								<th class="align-center">상영날짜</th>
 								<th class="align-center">상영시간</th>
 								<th class="align-center">상영관</th> 
@@ -202,7 +194,7 @@ h2 {
     	
     $('#playTable > tbody:last').append('<tr><td>' + seq + '</td><td><input name="date" >'
     +	
-    		'</td><td><input name="time" ></td><td><input name="movieRoom" ></td></tr>');
+    		'</td><td><input name=""</td><td><input name="time" ></td><td><input name="movieRoom" ></td></tr>');
   });
   $('#btn-delete-row').click(function() {
 	  --seq;

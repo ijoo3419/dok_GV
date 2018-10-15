@@ -231,21 +231,22 @@ public class LicenseeController {
 	
 	
 }
-	
+	/* 정태 상영 등록  */
 	@RequestMapping(value="playInsert.li")
 	public String insertPlay(Model model, Play p, Turning t,
 								HttpServletRequest request){
 		
-	
+	System.out.println("movieName = " + p.getMovieName());	
+		
 		int resultPlay = ls.insertPlay(p);
 		
-		int resultTurning = ls.insertTurning(t);
+	/*	int resultTurning = ls.insertTurning(t);*/
 		
 		System.out.println("controller p = " + p);
-		System.out.println("controller t = " + t);
+	/*	System.out.println("controller t = " + t);*/
 		
 		
-		if(resultPlay > 0 && resultTurning > 0){
+		if(resultPlay > 0){
 			return "licensee/playManagePage";
 
 		}else{

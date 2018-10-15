@@ -37,6 +37,7 @@ public class LicenseeDaoImpl implements LicenseeDao{
 	public int insertTurning(SqlSessionTemplate sqlSession, Turning t) {
 		return sqlSession.insert("Licensee.insertTurning");
 	}
+}
 
 	/*@Override
 	public int insertFile(SqlSessionTemplate sqlSession, BoardFile adFile) {
@@ -48,14 +49,13 @@ public class LicenseeDaoImpl implements LicenseeDao{
 		return insert;
 	
 	}
-
-	@Override
+*/
+	/*@Override
 	public ArrayList<BoardFile> selectFile(SqlSessionTemplate sqlSession) {
 		ArrayList<BoardFile> bf = (ArrayList)sqlSession.selectList("Licensee.selectFile");
 
-
 		return bf;
-	}*/
+	}
 	
+	 */
 
-}
