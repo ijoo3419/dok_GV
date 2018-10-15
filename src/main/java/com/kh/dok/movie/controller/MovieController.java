@@ -1,7 +1,9 @@
 package com.kh.dok.movie.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -171,9 +173,67 @@ public class MovieController {
 	}
 	
 	@RequestMapping(value="insertSeat.mo")
-	public @ResponseBody void insertSeat(@RequestParam String turningId, @RequestParam String movieRoomId, @RequestParam String seatSplit){
-
-		System.out.println(turningId + " " + movieRoomId + " " + seatSplit);
+	public @ResponseBody int insertSeat(@RequestParam String turningId, @RequestParam String movieRoomId, @RequestParam String[] seatSplitAjax, 
+										@RequestParam String userId, @RequestParam String price){
+		int check = 1;
+		
+		String SeatId = "";
+		
+		/*System.out.println(turningId + " " + movieRoomId); 
+		
+		System.out.println(Arrays.toString(seatSplitAjax));*/
+		
+		for(int i = 0; i < seatSplitAjax.length; i++){
+			if(check != 0){
+				Movie m = new Movie();
+				
+				SeatId = seatSplitAjax[i];
+				m.setTurning_id(turningId);
+				m.setMovieroom_id(movieRoomId);
+				m.setSeat_name(SeatId);
+				m.setMid(userId);
+				m.setPrice(price);
+				
+				//좌석 예매 insert
+				check = ms.insertSeat(m);
+	
+				//예매된 좌석 id 가져오기
+				m.setSeat_id("S" + ms.selectSeatId());
+				
+				//예매 테이블 추가
+				ms.insertReservation(m);
+				
+			}else{
+				System.out.println(i + "번째 추가 안됨");
+			}
+		}
+		
+		return check;
+	}
+	
+	@RequestMapping(value="insertPay.mo")
+	public @ResponseBody int insertPay(@RequestParam String msg, @RequestParam String movieRoomId, @RequestParam String turningId){
+		int check = 1;
+		
+		String[] msgSplit = msg.split(",");
+		
+		System.out.println(msgSplit[3]);
+		System.out.println(movieRoomId);
+		System.out.println(turningId);
+		
+		Movie m = new Movie();
+		m.setMovie_id(movieRoomId);
+		m.setTurning_id(turningId);
+		m.setMsg(msgSplit[3]);
+		
+		//예매 ID 가져오기
+		ArrayList<Movie> pay = ms.selectPayList(m);
+		
+		for (int index = 0; index < pay.size(); index++) {
+			   System.out.println(pay.get(index));
+		}
+		
+		return check;
 	}
 	
 }

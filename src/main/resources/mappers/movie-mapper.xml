@@ -76,6 +76,10 @@
 	<resultMap type="Movie" id="movieResultSetFive">
 		<id property="pay_count" column="COUNT(*)"/>
 	</resultMap>
+
+	<resultMap type="Movie" id="movieResultSetSix">
+		<id property="seat_id" column="SEAT.SEAT_ID"/>
+	</resultMap>
 	
 	<!-- 박지용 영화 리스트를 가져오는 쿼리문 -->
 	<select id="selectMovieList" resultMap="movieResultSetTwo" parameterType="Movie">
@@ -130,7 +134,32 @@
 		AND SEAT.MOVIEROOM_ID = #{movieroom_id}
 		AND TURNING.TURNING_ID = #{turning_id}
 	</select>
-
-
+	
+	<!-- 박지용 좌석을 예약하는 쿼리문 -->
+	<insert id="insertSeat">
+		INSERT INTO SEAT VALUES('S' || TO_CHAR(SEAT_SEAT_ID.NEXTVAL), #{movieroom_id}, #{turning_id}, #{seat_name}, NULL, '예매중')
+	</insert>
+	
+	<!-- 박지용 좌석 id를 가져오는  쿼리문 -->
+	<select id="selectSeatId" resultType="string">
+		SELECT SEAT_SEAT_ID.CURRVAL 
+		FROM DUAL
+	</select>
+	
+	<!-- 박지용 예매 테이블에 저장하는 쿼리문 -->
+	<insert id="insertReservation">
+		INSERT INTO RESERVATION VALUES('RES' || TO_CHAR(RESERVATION_RESERVATION_ID.NEXTVAL), #{seat_id}, #{mid}, #{price}, SYSDATE, NULL)
+	</insert>
+	
+	<!-- 박지용 좌석 id를 가져오는  쿼리문 -->
+	<select id="selectPayList" resultMap="movieResultSetSix" parameterType="Movie">
+		SELECT SEAT.SEAT_ID
+		FROM SEAT, RESERVATION 
+		WHERE SEAT.SEAT_ID = RESERVATION.SEAT_ID 
+		AND MID = #{mid}
+		AND MOVIEROOM_ID = #{movieroom_id} 
+		AND TURNING_ID = #{turning_id}
+		ORDER BY SEAT_ROW
+	</select>
 
 </mapper>

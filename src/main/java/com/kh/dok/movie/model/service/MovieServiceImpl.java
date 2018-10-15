@@ -148,4 +148,42 @@ public class MovieServiceImpl implements MovieService{
 
 
 
+	//박지용 좌석예매
+	@Override
+	public int insertSeat(Movie m) {
+		
+		int seatCount = md.insertSeat(sqlSession, m);
+		
+		return seatCount;
+	}
+
+
+
+	//박지용 예매 테이블 insert
+	@Override
+	public int insertReservation(Movie m) {
+		
+		return md.insertReservation(sqlSession, m);
+	}
+
+
+
+	//박지용 좌석ID 가져오기
+	@Override
+	public String selectSeatId() {
+		
+		return md.selectSeatId(sqlSession);
+	}
+
+
+
+	//예매 ID 가져오기
+	@Override
+	public ArrayList<Movie> selectPayList(Movie m) {
+		
+		return md.selectPayList(sqlSession, m);
+	}
+
+
+
 }

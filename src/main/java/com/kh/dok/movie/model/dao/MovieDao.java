@@ -46,5 +46,17 @@ public interface MovieDao {
 
 	//이진희 전체영화 수 조회
 	int getlistCount(SqlSessionTemplate sqlSession);
+
+	//박지용 좌석 예매
+	int insertSeat(SqlSessionTemplate sqlSession, Movie m);
+
+	//박지용 좌석 ID 가져오기
+	String selectSeatId(SqlSessionTemplate sqlSession);
+
+	//박지용 예매 테이블 insert
+	int insertReservation(SqlSessionTemplate sqlSession, Movie m);
+
+	//예매 ID 가져오기
+	ArrayList<Movie> selectPayList(SqlSessionTemplate sqlSession, Movie m);
 	
 }

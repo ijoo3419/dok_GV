@@ -709,17 +709,20 @@ a{
 			    	    
 						for(var i = 0; i < arr_Season.length; i++){
 							if(arr_Season[i].checked == true){
-								userSeat += $('.screenCheck').find('label').eq(i).text() + ", ";
-								userRow += $('.screenCheck').find('label').eq(i).find('input').val() + ", ";
+								userSeat += $('.screenCheck').find('label').eq(i).text() + ",";
+								userRow += $('.screenCheck').find('label').eq(i).find('input').val() + ",";
 							}
 						}
 
-						seatSplit = userSeat.split(", ");
-						excelSplit = userRow.split(", ");
+						seatSplit = userSeat.split(",");
+						seatSplit.splice(seatSplit.length - 1, 1);
+						
+						excelSplit = userRow.split(",");
 						
 						$(".seatPay").find("tr").eq(5).find('td').text(seatSplit);
 						
 						var basicPrice = $(".hiddenPrice").val();
+						$(".seatPay-price").find("#td-web-fontTitle").val(basicPrice);
 						
 						$('#myModal3 .pay-center').find('h4').eq(1).text(basicPrice).append('<font size="3" id="web-fontTitle-child">원</font>');
 						$('#myModal3 .pay-center').find('h4').eq(7).text(basicPrice).append('<font size="3" id="web-fontTitle-child">원</font>');
@@ -733,13 +736,15 @@ a{
 			    	    
 						for(var i = 0; i < arr_Season.length; i++){
 							if(arr_Season[i].checked == true){
-								userSeat += $('.screenCheck').find('label').eq(i).text() + ", ";
-								userRow += $('.screenCheck').find('label').eq(i).find('input').val() + ", ";
+								userSeat += $('.screenCheck').find('label').eq(i).text() + ",";
+								userRow += $('.screenCheck').find('label').eq(i).find('input').val() + ",";
 							}
 						}
 
-						seatSplit = userSeat.split(", ");
-						excelSplit = userRow.split(", ");
+						seatSplit = userSeat.split(",");
+						seatSplit.splice(seatSplit.length - 1, 1);
+						
+						excelSplit = userRow.split(",");
 						
 						$(".seatPay").find("tr").eq(5).find('td').text(seatSplit);
 						
@@ -748,8 +753,10 @@ a{
 							var sumSplit = sum.split("　");
 							
 							var price = sumSplit[0] * 2;
+							var basicPrice = $(".hiddenPrice").val();
 							
 							$(".seatPay-price").find("#td-web-fontTitle").text(price + "　");
+							$(".seatPay-price").find("#td-web-fontTitle").val(basicPrice);
 							
 							$('#myModal3 .pay-center').find('h4').eq(1).text(price).append('<font size="3" id="web-fontTitle-child">원</font>');
 							$('#myModal3 .pay-center').find('h4').eq(7).text(price).append('<font size="3" id="web-fontTitle-child">원</font>');
@@ -765,13 +772,15 @@ a{
 			    	    
 						for(var i = 0; i < arr_Season.length; i++){
 							if(arr_Season[i].checked == true){
-								userSeat += $('.screenCheck').find('label').eq(i).text() + ", ";
-								userRow += $('.screenCheck').find('label').eq(i).find('input').val() + ", ";
+								userSeat += $('.screenCheck').find('label').eq(i).text() + ",";
+								userRow += $('.screenCheck').find('label').eq(i).find('input').val() + ",";
 							}
 						}
 						
-						seatSplit = userSeat.split(", ");
-						excelSplit = userRow.split(", ");
+						seatSplit = userSeat.split(",");
+						seatSplit.splice(seatSplit.length - 1, 1);
+						
+						excelSplit = userRow.split(",");
 						
 						$(".seatPay").find("tr").eq(5).find('td').text(seatSplit);
 						
@@ -780,8 +789,10 @@ a{
 							var sumSplit = sum.split("　");
 							
 							var price = sumSplit[0] * 3;
+							var basicPrice = $(".hiddenPrice").val();
 							
 							$(".seatPay-price").find("#td-web-fontTitle").text(price + "　");
+							$(".seatPay-price").find("#td-web-fontTitle").val(basicPrice);
 							
 							$('#myModal3 .pay-center').find('h4').eq(1).text(price).append('<font size="3" id="web-fontTitle-child">원</font>');
 							$('#myModal3 .pay-center').find('h4').eq(7).text(price).append('<font size="3" id="web-fontTitle-child">원</font>');
@@ -797,13 +808,15 @@ a{
 			    	    
 						for(var i = 0; i < arr_Season.length; i++){
 							if(arr_Season[i].checked == true){
-								userSeat += $('.screenCheck').find('label').eq(i).text() + ", ";
-								userRow += $('.screenCheck').find('label').eq(i).find('input').val() + ", ";
+								userSeat += $('.screenCheck').find('label').eq(i).text() + ",";
+								userRow += $('.screenCheck').find('label').eq(i).find('input').val() + ",";
 							}
 						}
 						
-						seatSplit = userSeat.split(", ");
-						excelSplit = userRow.split(", ");
+						seatSplit = userSeat.split(",");
+						seatSplit.splice(seatSplit.length - 1, 1);
+						
+						excelSplit = userRow.split(",");
 						
 						$(".arrayHidden").val(excelSplit);
 						$(".seatPay").find("tr").eq(5).find('td').text(seatSplit); //사용자가 선택한 좌석 이름
@@ -813,8 +826,10 @@ a{
 							var sumSplit = sum.split("　");
 							
 							var price = sumSplit[0] * 4;
+							var basicPrice = $(".hiddenPrice").val();
 							
 							$(".seatPay-price").find("#td-web-fontTitle").text(price + "　");
+							$(".seatPay-price").find("#td-web-fontTitle").val(basicPrice);
 							
 							$('#myModal3 .pay-center').find('h4').eq(1).text(price).append('<font size="3" id="web-fontTitle-child">원</font>');
 							$('#myModal3 .pay-center').find('h4').eq(7).text(price).append('<font size="3" id="web-fontTitle-child">원</font>');
@@ -824,23 +839,26 @@ a{
 			    	}
 			    }
 			    
-			    $(".seatPay-btn-right").click(function(){ //결제 테이블로 이동시
-					var turningId = $('.hiddenTurning').val();
+			    $("#myModal2 .seatPay-btn-right").off().on('click', function(){
+			    	var turningId = $('.hiddenTurning').val();
 					var movieRoomId = $('.movieRoomId').val();
+					var seatSplitAjax = seatSplit;
+					var userId = "${ sessionScope.loginUser.mid }";
+					var price = $(".seatPay-price").find("#td-web-fontTitle").val();
 					
 					$.ajax({
-						url:"insertSeat.mo", 
-						type:"post",
-						data:{turningId:turningId,
-							  movieRoomId:movieRoomId,
-							  seatSplit:seatSplit
-							  },
-						success:function(data){
-							
-						},error:function(){
-							console.log("에러!");
-						}
-					});
+			    		url:"insertSeat.mo",
+			    		type:"post",
+			    		traditional : true,
+			    		data: {turningId: turningId, movieRoomId: movieRoomId, seatSplitAjax: seatSplitAjax, userId: userId, price: price},
+			    		success:function(data){
+			    			console.log(data);
+			    		},
+			    		error:function(data){
+			    			console.log("에러!");
+			    		}
+			    	});
+			    	
 				});
 			    
 			    var arrayDate = new Array();
@@ -1181,7 +1199,7 @@ a{
 								</td>
 							</tr>
 							<tr class="seatPay-price">
-								<td id="td-web-fontTitle">6,000&nbsp;&nbsp;
+								<td id="td-web-fontTitle" val="">6,000&nbsp;&nbsp;
 								</td>
 								<td>원
 								</td>
@@ -1392,24 +1410,33 @@ a{
 		            buyer_postcode : '?',   // 구매자 우편번호
 		       }, function(rsp) {
 		       if ( rsp.success ) { // 성공시
-		          var msg = '결제가 완료되었습니다.';
-		          msg += '고유ID : ' + rsp.imp_uid;
-		          msg += '상점 거래ID : ' + rsp.merchant_uid;
-		          msg += '결제 금액 : ' + rsp.paid_amount;
-		          msg += '카드 승인번호 : ' + rsp.apply_num;
-		          //console.log();
-		          var contextPath = '<%=request.getContextPath()%>';
-		          <%-- var uid = rsp.imp_uid;
-		          var userNum = '<%=loginUser.getUserNumber()%>';
-		          var nuriNum = '<%=n.getNuriNum()%>';
-		          var cardNum = rsp.apply_num;
-		          var endDate ='<%=n.getEndDate()%>' --%>
-		          var loc = contextPath + '/payment.pms?imp=' + uid + "&userNum=" + userNum +"&nuriNum=" + nuriNum +"&endDate=" + endDate; 
-		          console.log(loc);
-		    
-		          location.href=loc;
-		       		alert(msg);
-		          /*m_redirect_url : // 결제 완료 후 보낼 컨트롤러의 메소드명 */
+		          var msg = '';
+		          msg += rsp.imp_uid + ","; //'고유ID: ' +
+		          msg += rsp.merchant_uid + ","; //'상점 거래ID: ' +
+		          msg += rsp.paid_amount + ","; //'결제 금액: ' +
+		          msg += rsp.apply_num; //'카드 승인번호: ' +
+		          
+		          console.log(msg);
+		       	  alert(msg);
+		       	  
+		       	  var userId = "${ sessionScope.loginUser.mid }"; //유저 id
+		       	  var movieRoomId = $('.movieRoomId').val();
+		       	  var turningId = $('.hiddenTurning').val();
+		       	  
+		       	$.ajax({
+		    		url:"insertPay.mo",
+		    		type:"post",
+		    		data:{msg: msg,
+		    			  movieRoomId: movieRoomId,
+		    			  turningId: turningId},
+		    		success:function(data){
+		    			
+		    		},
+		    		error:function(data){
+		    			console.log(data);
+		    		}
+		 		});
+		       	
 		       } else { // 실패시
 		          var msg = '결제에 실패하였습니다.';
 		          msg += '에러내용 : ' + rsp.error_msg;

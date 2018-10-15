@@ -52,5 +52,16 @@ public interface MovieService {
 		//이진희 전체영화수 조회
 		int getlistCount();
 
+		//박지용 좌석예매
+		int insertSeat(Movie m);
 
+		//박지용 예매테이블
+		int insertReservation(Movie m);
+
+		//박지용 생성된 좌석 ID 가져오기
+		String selectSeatId();
+
+		//예매 ID 가져오기
+		ArrayList<Movie> selectPayList(Movie m);
+		
 }
