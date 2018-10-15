@@ -224,7 +224,7 @@
 		FROM VISIT
 	</select>
 	
-	<delete id="deleteVisit" parameterType="date">
+	<delete id="deleteVisit" parameterType="date">  
 		DELETE VISIT
 		WHERE VISIT_TIME = #{lastTime}
 	</delete>

@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
+
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 <style>
@@ -24,7 +24,6 @@ border-collapse:collapse;
     display: inline-block;
 	width:100px;
 	height:50px;
-	
 }
 
 #playTable tr th td {
@@ -36,17 +35,15 @@ h2 {
 	color: #935d8c;
 }
 </style>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
 
 
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
-<title>Massively by HTML5 UP</title>
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="${contextPath }/resources/css/main.css" />
+<!-- datepicker 한국어로 -->
 <script
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <noscript>
@@ -57,6 +54,8 @@ h2 {
 </head>
 
 <body class="is-preload">
+
+	<jsp:include page="../common/datePicker_jeongtae.jsp"/>
 
 	<c:import url="../common/headBar.jsp" />
 
@@ -107,24 +106,29 @@ h2 {
 									
 									
 				<!-- 상영 정보 기입 폼 -->
-				<form action="" method="post" encType="multipart/form-data">
+				<form action="playInsert.li" method="post" encType="multipart/form-data">
 
 					<div class="row gtr-uniform">
 						<h2 align="left">1. 영화</h2>
 						<div class="col-12">
-							<select name="demo-category" id="demo-category">
+							<input type="text" name="movieName" id="demo-name" value=""
+								placeholder="영화를 입력하세요" />
+						
+							<!-- <select name="movieCondition" id="demo-category">
 								<option value="">- 영화 -</option>
-								<option value="1">내가만든영화</option>
+								<option value="1"></option>
 								<option value="1">너가만든영화</option>
 								<option value="1">우리가만든영화</option>
 								<option value="1">너네가만든영화</option>
-							</select>
+							</select> -->
+							
+							
 						</div>
 						<br>
 						<br>
 						<div class="col-6 col-12-xsmall">
 							<h2 align="left">2. 가격</h2>
-							<input type="text" name="demo-name" id="demo-name" value=""
+							<input type="text" name="price" id="demo-name" value=""
 								placeholder="금액을 입력하세요" />
 						</div>
 
@@ -158,19 +162,18 @@ h2 {
 							<li align="center"><input type="reset" value="돌아가기" /></li>
 						</ul>
 					</div>
+						
+						
 											
 				</form>
 			</article>
-			
-			<!-- <br>
-          <label for="fromDate" class="web-font"></label>
-          <input type="text" name="fromDate" id="fromDate" class="web-font"> -->
-         
+				<hr>
+				<br>
 		</div>
 
 
 		
-
+		
 		<!-- js -->
 		<%-- <script src="${contextPath }/resources/js/jquery.min.js"></script>
 		<script src="${contextPath }/resources/js/jquery.scrollex.min.js"></script>
@@ -182,7 +185,10 @@ h2 {
 		<script src="${contextPath }/resources/js/tab.js"></script> --%>
 		
 		<script src="//code.jquery.com/jquery.min.js"></script>
-<script>
+	
+	
+<!-- 테이블 행 추가 해주기 -->
+    <script>
   var seq = 0;
   var $date = $('<input type="text" name="fromDate" id="fromDate" class="web-font">');
   var $dateText = $('<label for="fromDate" class="web-font"></label>');
@@ -190,23 +196,26 @@ h2 {
 	
 	++seq;
 	
+	
     var time = new Date().toLocaleTimeString();
-    $('#playTable > tbody:last').append('<tr><td>' + seq + '</td><td>' + 
-     $date + $dateText
-    		+'</td><td><input></td><td><input></td></tr>');
+    
+    	
+    $('#playTable > tbody:last').append('<tr><td>' + seq + '</td><td><input name="date" >'
+    +	
+    		'</td><td><input name="time" ></td><td><input name="movieRoom" ></td></tr>');
   });
   $('#btn-delete-row').click(function() {
 	  --seq;
     $('#playTable > tbody:last > tr:last').remove();
  
   });
-</script>
+  
+</script>  
 		
-<!-- datepicker 한국어로 -->
-<script>
+		<!-- 이건 테이블 상에서 -->
+<!-- <script>
 $(function() {
 	   
-	
 		//시작일.
 		$('#fromDate').datepicker({
 			showOn : "both", // 달력을 표시할 타이밍 (both: focus or button)
@@ -223,7 +232,9 @@ $(function() {
 
 	
 	});
-</script>
+</script>   -->
+
+
 
 </body>
 </html>

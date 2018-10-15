@@ -1,23 +1,26 @@
 package com.kh.dok.licensee.model.service;
 
-import java.util.ArrayList;
-
-import com.kh.dok.admin.model.exception.UploadException;
-import com.kh.dok.board.model.vo.BoardFile;
-import com.kh.dok.cinema.model.vo.Cinema;
+import com.kh.dok.cinema.model.vo.Cinema2;
 import com.kh.dok.licensee.model.vo.MovieRoom;
+import com.kh.dok.licensee.model.vo.Play;
+import com.kh.dok.licensee.model.vo.Turning;
 
 public interface LicenseeService {
 
-	int insertTheater(Cinema cm);
+	int insertTheater(Cinema2 cm);
 
 	int insertMovieRoom(MovieRoom mr);
 
 	MovieRoom checkMovieRoomId(MovieRoom mr);
 
+	/* 상영 추가 */	
+	int insertPlay(Play p);
 
-	int insertFile(BoardFile adFile);
+	int insertTurning(Turning t);
 
-	ArrayList<BoardFile> selectFile();
+
+/*	int insertFile(BoardFile adFile);
+
+	ArrayList<BoardFile> selectFile();*/
 	
 }
