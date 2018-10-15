@@ -96,13 +96,13 @@
 				<hr>
 				<c:if test="댓글갯수 > 0">
 					<table align="center">
-						<c:forEach var="r" item="댓글리스트">
+					<%-- 	<c:forEach var="r" item="댓글리스트">
 							<tr>
 								<td width="100px">유저네임</td>
 								<td width="300px">댓글내용</td>
 								<td width="100px">날짜</td>
 							</tr>
-						</c:forEach>
+						</c:forEach> --%>
 					</table>
 				</c:if>
 	

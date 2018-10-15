@@ -21,6 +21,27 @@
 		<result property="file_level" column="FILE_LEVEL" />
 	</resultMap>
 	
+		<resultMap type="Play" id="PlayResultSet">
+		
+		<id property="play_id" column="PLAY_ID"/>
+		<result property="movie_id" column="MOVIE_ID"/>
+		<result property="movieRoom_id" column="MOVIEROOM_ID"/>
+		<result property="play_status" column="PLAY_STATUS"/>
+		
+		</resultMap>
+		
+		<resultMap type="Turning" id="TurningResultSet">
+		
+		<id property="turning_id" column="TURNING_ID"/>
+		<result property="play_id" column="PLAY_ID"/>
+		<result property="price" column="PRICE"/>
+		<result property="turning_day" column="TURNING_DAY"/>
+		<result property="turning_time" column="TURNING_TIME"/>
+		<result property="start_time" column="START_TIME"/>
+		<result property="end_time" column="END_TIME"/>
+
+		</resultMap>
+	
 <!-- 상영관 추가하기~!~!~!~!~! -->
 <insert id="insertMovieRoom" parameterType="MovieRoom">
 		INSERT INTO MOVIEROOM VALUES ('MR' || TO_CHAR(MOVIEROOM_MOVIEROOM_ID.NEXTVAL),
@@ -65,6 +86,12 @@
 		FILE_LEVEL=1 OR FILE_LEVEL = 2
 		ORDER BY FILE_LEVEL
 	</select>
+	
+	
+	
+	
+	
+	
 	
 	
 

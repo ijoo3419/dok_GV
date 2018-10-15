@@ -16,10 +16,11 @@
 	margin-bottom:5px;
 }
 
-
-input {
-	margin-right: 700px;
+.fileInput{
+	float:left;
 }
+
+
 
 input[type=submit], input[type=reset] {
 	float: left !important;
@@ -124,9 +125,10 @@ input[type=submit], input[type=reset] {
 					<h2 align="left">4.영화관 사진</h2>
 					<div class="col-12">
 
-						<input type="file" name="photo1"><br> <input
-							type="file" name="photo2"><br> <input type="file"
-							name="photo3"><br> <input type="file" name="photo4"><br>
+						<input class="fileInput" type="file" name="photo1"><br>
+						 <input	class="fileInput" type="file" name="photo2"><br> 
+						 <input class="fileInput" type="file"name="photo3"><br>
+						 <input class="fileInput" type="file" name="photo4"><br> 
 
 
 					</div>
@@ -134,40 +136,33 @@ input[type=submit], input[type=reset] {
 					<br>
 					<br>
 					<div class="col-6 col-12-xsmall">
-						<h3 align="left">5.주소</h3>
-						<br>
-						<div class="addressBox">
-							<input type="text" id="sample4_postcode" name="address1"
-								placeholder="우편번호"
-								style="height: 64px; width: 400px; float: left; margin-bottom: 15px;">
-							<input type="button" onclick="sample4_execDaumPostcode()"
-								value="우편번호 찾기"
-								style="margin-left: 320px; margin-top: 10px; width: 150px; height: 45px;"><br>
-						</div>
-						<input type="text" id="sample4_roadAddress" name="address2"
-							placeholder="도로명주소" style="width:300px; float:left;"> <input type="text"
-							id="sample4_jibunAddress" name="address3" placeholder="지번주소" 
-							style="width:300px; float:left;">
-						<span id="guide" style="color: #999"></span>
-
-					</div>
-					<br>
-					<br>
-					<br>
-					<!-- Break -->
-					<div class="col-12">
-						<ul class="actions">
-							<li align="center"><input type="submit" value="등록하기"
-								class="primary" /></li>
-							<li align="center"><input type="reset" value="돌아가기" /></li>
-						</ul>
-					</div>
-		</div>
+						 	<div class="col-6 col-12-xsmall">
+								<h3 align="left">5. 주소</h3>
+							<br>
+							<div class="addressBox">
+							<input type="text" id="sample4_postcode" name="address1" placeholder="우편번호" style=" height:64px; width:400px; float:left; margin-bottom:15px;">
+<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" style="margin-left:-380px; margin-top:10px; width:150px; height:45px;"><br> </div>
+<input type="text" id="sample4_roadAddress" name="address2" placeholder="도로명주소">
+<input type="text" id="sample4_jibunAddress" name="address3" placeholder="지번주소">
+<span id="guide" style="color:#999"></span>
+				
+											</div>			 
+											<br><br><br>
+											<!-- Break -->
+											<div class="col-12">
+												<ul class="actions">
+													<li align="center"><input type="submit" value="등록하기" class="primary" /></li>
+													<li align="center"><input type="reset" value="돌아가기" /></li>
+												</ul>
+											</div>
+										</div>
+				
 		</form>
-
-
 		</article>
-
+		</div>
+	
+		
+		
 	</div>
 
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>

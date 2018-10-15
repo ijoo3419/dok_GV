@@ -1,8 +1,6 @@
 package com.kh.dok.licensee.controller;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kh.dok.admin.model.exception.UploadException;
-import com.kh.dok.board.model.vo.BoardFile;
-import com.kh.dok.cinema.model.vo.Cinema;
+import com.kh.dok.cinema.model.vo.Cinema2;
 import com.kh.dok.common.CommonUtils;
 import com.kh.dok.licensee.controller.sheetController.cellClass;
 import com.kh.dok.licensee.model.service.LicenseeService;
 import com.kh.dok.licensee.model.vo.MovieRoom;
+import com.kh.dok.licensee.model.vo.Play;
+import com.kh.dok.licensee.model.vo.Turning;
 
 @Controller
 @SessionAttributes(value="loginUser")
@@ -61,6 +59,45 @@ public class LicenseeController {
 	
 	//정태 영화관 등록 메소드(+파일 첨부)
 	@RequestMapping(value="theaterInsert.li")
+	public String insertTheater(Model model, Cinema2 cm, 
+								HttpServletRequest request, 
+								@RequestParam(name="photo1", required=false)MultipartFile photo1){
+		
+		System.out.println(photo1);
+
+		System.out.println("controller cm : " + cm);
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		System.out.println("root : " + root);
+		String filePath = root + "\\uploadFiles";
+		System.out.println("filePath : " + filePath);
+		
+		String originFileName = photo1.getOriginalFilename();
+		String ext = originFileName.substring(originFileName.lastIndexOf("."));
+		String changeName = CommonUtils.getRandomString();
+		String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
+		
+		
+		try {
+			photo1.transferTo(new File(filePath + "\\" + changeName + ext));
+			
+			
+			ls.insertTheater(cm);
+			
+			return "licensee/theaterManagePage";
+		
+		} catch (Exception e){
+			new File(filePath + "\\" + changeName + ext).delete();
+			
+			System.out.println("실패하면 여기로");
+			model.addAttribute("msg", "영화관 추가 실패!");
+			
+			return "common/errorPage";
+			
+		}
+	}
+	
+	//정태 영화관 등록 메소드(+파일 첨부 + 게시판 테이블에 추가 아직 하는 중)
+	/*@RequestMapping(value="theaterInsert.li")
 	public String insertTheater(Model model, Cinema cm, HttpServletRequest request, 
 					@RequestParam(name="photo1", required=false)MultipartFile photo1,
 					@RequestParam(name="photo2", required=false)MultipartFile photo2,
@@ -140,10 +177,10 @@ public class LicenseeController {
 			return "common/errorPage";
 			
 	}
-}
+}*/
 	//정태 상영관 등록(엑셀 파일 완료)
 	@RequestMapping(value="movieRoomInsert.li")
-	public String insertMovieRoom(Model model,MovieRoom mr, Cinema cm,
+	public String insertMovieRoom(Model model,MovieRoom mr, Cinema2 cm,
 								HttpServletRequest request){
 		
 		/*MovieRoom mr = (MovieRoom)request.getSession().getAttribute("movieRoomData");*/
@@ -195,6 +232,30 @@ public class LicenseeController {
 	
 }
 	
+	@RequestMapping(value="playInsert.li")
+	public String insertPlay(Model model, Play p, Turning t,
+								HttpServletRequest request){
+		
+	
+		int resultPlay = ls.insertPlay(p);
+		
+		int resultTurning = ls.insertTurning(t);
+		
+		System.out.println("controller p = " + p);
+		System.out.println("controller t = " + t);
+		
+		
+		if(resultPlay > 0 && resultTurning > 0){
+			return "licensee/playManagePage";
+
+		}else{
+			model.addAttribute("msg", "상영 등록 실패");
+			return "common/errorPage";
+		}
+		
+	}
+	
+/*	 엑셀 파일 확인 
 	@RequestMapping(value="ViewFiled.li")
 	public String insertMovieRoom(Model model, HttpServletRequest request){
 	
@@ -214,7 +275,7 @@ public class LicenseeController {
 
 	return "licensee/ViewField";
 	
-}
+}*/
 
 
 	
