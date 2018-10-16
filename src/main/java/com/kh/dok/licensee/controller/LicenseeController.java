@@ -234,20 +234,31 @@ public class LicenseeController {
 }
 	/* 정태 상영 등록  */
 	@RequestMapping(value="playInsert.li")
-	public String insertPlay(Model model, Play p, Turning t, Movie mo,
+	public String insertPlay(Model model, Play p, Turning t, 
 								HttpServletRequest request){
 		
-	System.out.println("movie_title 지용 = " + p.getMovie_title());	
+	
 		
 		int resultPlay = ls.insertPlay(p);
+	
+		//시작, 끝 시간 조정
+		/*t.setStartTime(t.getTurningDay() + " " +t.getEndTime());
+		t.setEndTime(t.getTurningDay() + " " + t.getStartTime());
 		
-	/*	int resultTurning = ls.insertTurning(t);*/
+		
+		System.out.println("스타트타임 " + t.getStartTime());
+		System.out.println("엔드타임 " + t.getEndTime());*/
+		int resultTurning = ls.insertTurning(t);
+		
+		System.out.println("movie_title = " + p.getMovie_title());	
+		System.out.println("t.getPrice() = " + t.getPrice());
+		
 		
 		System.out.println("controller p = " + p);
-	/*	System.out.println("controller t = " + t);*/
+		System.out.println("controller t = " + t);
 		
 		
-		if(resultPlay > 0){
+		if(resultPlay > 0 || resultTurning > 0){
 			return "licensee/playManagePage";
 
 		}else{

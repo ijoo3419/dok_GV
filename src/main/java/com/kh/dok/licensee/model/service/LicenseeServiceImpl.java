@@ -53,11 +53,11 @@ public class LicenseeServiceImpl implements LicenseeService{
 		 return resultPlay;
 	}
 	
-/*	@Override
+	@Override
 	public int insertTurning(Turning t) {
 		
 		return ld.insertTurning(sqlSession, t);
-	}*/
+	}
 
 
 	/*@Override

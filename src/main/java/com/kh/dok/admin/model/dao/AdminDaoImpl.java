@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -218,7 +219,7 @@ public class AdminDaoImpl implements AdminDao{
 
 		return 1;
 	}
-		
+
 	@Override
 	public int[] countVisit(SqlSessionTemplate sqlSession,String time) {
 		int [] vlist = {0,0,0,0,0,0,0,0,0,0,0,0};
@@ -226,14 +227,19 @@ public class AdminDaoImpl implements AdminDao{
 		for(int i=1;i<13;i++){
 
 			Map vcount = new HashMap();
-
+			int countAll = 0;
 			vcount.put("count", i);
-			int counti = sqlSession.selectOne("Admin.countVisit",vcount);
-			System.out.println("i는"+i+"이고 카운터는"+counti);
-			vlist[i-1] = counti;
-			System.out.println(vlist[i-1]);
+			List<Integer> counti = (ArrayList)sqlSession.selectList("Admin.countVisit",vcount);
+			System.out.println("i는"+i+"이고 counti의 사이즈는 ?" + counti.size());
+			System.out.println(counti);
+			if(counti.size()!=0){
+				for(int c : counti){
+					countAll += c;
+				}
+				System.out.println(countAll);
+			}
+			vlist[i-1] = countAll;
 		}
-		System.out.println(vlist);
 		return vlist;
 	}
 
@@ -244,10 +250,10 @@ public class AdminDaoImpl implements AdminDao{
 		for(int i=1; i< 13; i++){
 
 			Map mcount = new HashMap();
-
+			int countAll = 0;
 			mcount.put("countm",i);
 			int countm = sqlSession.selectOne("Admin.countMember",mcount);
-			System.out.println("i는"+i+"이고 카운터는"+countm);
+			
 			mlist[i-1] = countm;
 			System.out.println(mlist[i-1]);
 		}

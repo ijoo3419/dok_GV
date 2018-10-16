@@ -43,7 +43,7 @@ hr {
     	/* margin: 0 auto; */
 	
 	}
-	#sumnailimage{
+	#thumnailimage{
 		border: solid 1px;
 		display:inline-block;
 		width:300px;
@@ -211,6 +211,9 @@ hr {
 		float: right;
 		margin-right:10px;
     }
+    #thumnail{
+    	width:298px; height:400px;
+    }
 </style>		
 		 <title>Massively by HTML5 UP</title>
 		<meta charset="utf-8" />
@@ -272,10 +275,12 @@ hr {
 	<h1 align="left" style="margin-left:20px;"> 영화관상세</h1>
 	<hr>
 	<!-- <div id="movieArea"> -->
-		<div id="sumnailimage">
-	
-		</div>
 		<c:forEach items="${cinemaDetail}" var="row1">
+		<div id="thumnailimage">
+			  <img id="thumnail" src="${row1.file_src}">
+			 
+			<%-- <img src="${row1.file_src}" style="width:298px; height:400px;"> --%>
+		</div>
 		<div id="data">
 			<h2 align="left">${row1.theaterName}</h2>
 		<hr>
