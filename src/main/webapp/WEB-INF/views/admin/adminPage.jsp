@@ -117,7 +117,7 @@
 					관리</a></li>
 			<li class="tab-link4" data-tab="tab-4"><a href="statistics.ad">통계</a></li>
 			<li class="tab-link5" data-tab="tab-5"><a>문의 사항</a></li>
-			<li class="tab-link6" data-tab="tab-6"><a>공지사항</a></li>
+			<li class="tab-link6" data-tab="tab-6"><a href="adminNotice.ad">공지사항</a></li>
 			<li class="tab-link7" data-tab="tab-7"><a href="addmovie.ad">영화
 					추가</a></li>
 		</ul>
@@ -467,7 +467,140 @@
 
 		</section>
 		<!-- 여섯번째 탭(공지사항) : 성희 공간-->
-		<section id="tab-6" class="post"></section>
+		<section id="tab-6" class="post">
+		<h2 align="center">공지사항</h2>
+				<br><br>
+				<div class="table-wrapper">
+					<table id="boardArea" align="center">
+							<tr>
+								<th>글번호</th>
+								<th>제목</th>
+								<th>작성자</th>
+								<th>조회수</th>
+								<th>작성일</th>
+							</tr>
+						<c:if test="${ list == null }">
+							<tr>
+								<td>등록된 공지사항이 없습니다.</td>
+							</tr>
+						</c:if>
+						<c:if test="${ list != null }">
+							<c:forEach var="list" items="${ list }">
+								<tr>
+									<td>${ list.board_id }</td>
+									<td>${ list.btitle }</td>
+									<td>${ list.nickname }</td>
+									<td>${ list.bcount }</td>
+									<td>${ list.board_date }</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+					</table>
+				</div>
+				
+				<script>
+				$(function(){
+					$("#boardArea").find("td").mouseenter(function(){
+						console.log("클릭");
+						$(this).parents("tr").css({"cursor":"pointer"});
+					}).click(function(){
+						var board_id = $(this).parents().children("td").eq(0).text();
+						console.log(board_id);
+						location.href = "selectAdminNoticeOne.bo?board_id=" + board_id;
+					}); 
+				});
+				</script>
+				
+				
+				<div class="search">
+					<select id="searchCondition" name="searchCondition" style="width:150px; height:40px; display:inline-block; margin-left:80px;">
+						<option value="">검색기준</option>
+						<option value="btitle">제목</option>
+						<option value="bcontent">내용</option>
+					</select> <input id="searchResult" name="searchValue" type="text" placeholder="검색" style="width:300px; margin-left:10px; display:inline-block"> <a href="#" class="button primary icon fa-search" onclick="searchBoard()">조회</a> <button type="button" class="img_btn user cancel mr7" align="right"><a href="writeNotice.bo">공지작성</a></button>
+				</div>
+				<br>
+				<script>
+					function searchBoard(){
+						var searchCondition = $("#searchCondition").val();
+						var searchValue = $("#searchValue").val();
+						
+						location.href = "searchNoticeBoard.bo?searchCondition=" + searchCondition 
+								+ "&searchValue=" + searchValue;
+						
+					}
+				</script>
+				                                                                                                        
+				
+				<!-- 페이징 처리 -->
+				<div id="page" align="center">
+					<div class="pagination" align="center">
+						<c:if test="${ pi.currentPage <= 1 }">
+							<a>이전 </a>
+						</c:if>
+						<c:if test="${ pi.currentPage > 1 }">
+							<c:url var="blistBack" value="notice.li">
+								<c:param name="currentPage" value="${ pi.currentPage - 1 }" />
+								<c:param name="mId" value="${ mId }" />
+							</c:url>
+							<a href="${ blistBack }">이전</a>
+						</c:if>
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+							<c:if test="${ p eq pi.currentPage }">
+								<font color="red" size="4"><a>${ p }</a></font>
+							</c:if>
+							<c:if test="${ p ne pi.currentPage }">
+								<c:url var="blistCheck" value="notice.li">
+									<c:param name="currentPage" value="${ p }" />
+									<c:param name="mId" value="${ mId }" />
+								</c:url>
+								<a href="${ blistCheck }">${ p }</a>
+							</c:if>
+						</c:forEach>
+						<c:if test="${ pi.currentPage >= pi.maxPage }">
+							<a> 다음</a>
+						</c:if>
+						<c:if test="${ pi.currentPage < pi.maxPage }">
+							<c:url var="blistEnd" value="notice.li">
+								<c:param name="currentPage" value="${ pi.currentPage + 1 }" />
+								<c:param name="mId" value="${ mId }" />
+							</c:url>
+							<a href="${ blistEnd }">다음</a>
+						</c:if>
+					</div>
+				</div>
+				
+				
+				
+				
+				
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		</section>
 		<!-- 일곱번째 탭(영화 추가) -->
 		<section id="tab-7" class="post">
 			<h2>영화 추가</h2>

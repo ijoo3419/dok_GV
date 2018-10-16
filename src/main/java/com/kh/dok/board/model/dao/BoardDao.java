@@ -10,6 +10,7 @@ import com.kh.dok.board.model.exception.BoardSelectOneException;
 import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.board.model.vo.BoardNBoardFile;
+import com.kh.dok.board.model.vo.SearchCondition1;
 import com.kh.dok.common.PageInfo;
 
 public interface BoardDao {
@@ -27,5 +28,11 @@ public interface BoardDao {
 	int getlistCount(SqlSessionTemplate sqlSession, String mId);
 
 	ArrayList<BoardNBoardFile> selectNoticeList(SqlSessionTemplate sqlSession, PageInfo pi, String mId);
+
+	int getSearchResultListCount(SqlSessionTemplate sqlSession, SearchCondition1 sc);
+
+	ArrayList<BoardNBoardFile> selectSearchNoticeList(SqlSessionTemplate sqlSession, PageInfo pi, SearchCondition1 sc);
+
+	BoardNBoardFile selectAdminNoticeOne(SqlSessionTemplate sqlSession, String board_id);
 
 }

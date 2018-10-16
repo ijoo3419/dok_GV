@@ -43,10 +43,51 @@
 			<h2>공지사항 상세보기</h2>
 				<br><br>
 				
-				<table align="center" id="detail">
+				
+
+				<input type="hidden" id="mId" name="mId" value="${ loginUser.mid }">
+					<div class="row gtr-uniform">
+						<div class="col-6 col-12-xsmall">
+							<input type="text" name="btitle" id="btitle" value="${ bbf.btitle }"/>				
+						</div>
+					</div>
+					<br>
+					<div class="col-12">
+						<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">${ bbf.bcontent }</a>
+					</div>
+					<br>
+					
+				
+				<button class="button" onclick="goBack()">목록</button>
+				<button class="button" onclick="modify()">수정</button>
+				
+				</div>
+				
+				
+				<script>
+					function goBack(){
+						location.href="notice.li";
+					}
+					
+					function modify(){
+						location.href="modifyNotice.bo";
+					}
+				</script>
+
+
+
+
+
+
+
+
+
+				
+				
+				<%-- <table align="center" id="detail">
 					<tr>
 						<td width="100px">글번호</td>
-						<td><b>${ bbf.bcount }</b></td>
+						<td><b>${ bbf.board_id }</b></td>
 					</tr>
 					<tr>
 						<td>제목</td>
@@ -54,7 +95,7 @@
 					</tr>
 					<tr>
 						<td>작성자</td>
-						<td><b>${ nickname }</b></td>
+						<td><b>${ bbfnickname }</b></td>
 					</tr>
 					<tr>
 						<td>조회수</td>
@@ -69,6 +110,9 @@
 						<td><p style="height:100px"><b>${ bbf.bcontent }</b></p></td>
 					</tr>
 				</table>
+				 --%>
+				
+				
 				<%-- <table align="center">
 					<tr>
 						<td>
