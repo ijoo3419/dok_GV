@@ -10,6 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 <style>
 
+
 table tr th{
 width:250px;
 
@@ -140,11 +141,11 @@ h2 {
 				
 						<table id="playTable" border="1" cellspacing="3">
 						<tr>
-								<th class="align-center">회차</th>
+								<th style=width:100px; class="align-center">회차</th>
 								<th class="align-center">가격</th>
 								<th class="align-center">상영날짜</th>
-								<th class="align-center">상영시간</th>
-								<th class="align-center">상영관</th> 
+								<th style=width:300px; class="align-center">상영시간</th>
+								<th style=width:150px; class="align-center">상영관</th> 
 						</tr>
 							<tbody id="my-tbody">
 							</tbody>
@@ -184,9 +185,18 @@ h2 {
 	
 <!-- 테이블 행 추가 해주기 -->
     <script>
-  var seq = 0;
+  var seq =  0;	//회차
   var $date = $('<input type="text" name="fromDate" id="fromDate" class="web-font">');
   var $dateText = $('<label for="fromDate" class="web-font"></label>');
+  
+  var $price = $('<td><input style="width:120px;"  name="pirce" >'); 	//가격
+  var $turningDay = $('<input style="width:130px;" name="turningDate" >');	//상영날짜
+  var $startTime = $('<input style="width:90px;"  name="startTime" >');	//상영 시작 시간
+  var $endTime = $('<input style="width:90px;"  name="endTime" >');	//상영 끝 시작
+  var $movieRoomName = $('<input style="width:80px;"  name="movieRoomName" >');	//상영관이름
+  
+  
+  
   $('#btn-add-row').click(function() {
 	
 	++seq;
@@ -194,10 +204,16 @@ h2 {
 	
     var time = new Date().toLocaleTimeString();
     
-    	
-    $('#playTable > tbody:last').append('<tr><td>' + seq + '</td><td><input name="date" >'
-    +	
-    		'</td><td><input name=""</td><td><input name="time" ></td><td><input name="movieRoom" ></td></tr>');
+    $('#my-tbody').append('<tr><td>')
+    $('#my-tbody').append(seq);
+    $('#my-tbody').append($price);
+    $('#my-tbody').append($turningDay);
+    $('#my-tbody').append($startTime);
+    $('#my-tbody').append($movieRoomName);
+    $('#my-tbody').appned('</td></tr>');
+    /* $('#playTable > tbody:last').append('<tr><td>' + seq + '</td><td>' + $price +
+    		'</td><td>' + $turningDay + '</td><td>' + $startTime + '</td><td>'
+    		 + $movieRoomName + '</td></tr>'); */
   });
   $('#btn-delete-row').click(function() {
 	  --seq;
