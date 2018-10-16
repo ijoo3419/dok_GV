@@ -449,7 +449,13 @@ a{
 .checkFont{
 	color:white;
 }
-
+.area_name{
+	color:black;
+}
+#movieTimeTable tr{
+	border: 1px solid #E6E6E6 ;
+	border-height: 60%;
+}
 </style>
 <body>
 	<div class="contain_box">
