@@ -12,6 +12,19 @@
 	
 	</resultMap>
 	
+	<resultMap type="MovieRoom" id="movieRoomResultSet2">
+		<id property="movie_id" column="MOVIE_ID"/>
+		<result property="movie_title" column="MOVIE_TITLE"/>
+		<result property="movie_etitle" column="MOVIE_ETITLE"/>
+		<result property="movie_content" column="MOVIE_CONTENT"/>
+		<result property="open_date" column="OPEN_DATE"/>
+		<result property="director_name" column="DIRECTOR_NAME"/>
+		<result property="production_com" column="PRODUCTION_COM"/>
+		<result property="movie_age" column="MOVIE_AGE"/>
+		<result property="genre" column="GENRE"/>
+		<result property="running_time" column="RUNNIG_TIME"/>
+	</resultMap>
+	
 		<resultMap type="BoardFile" id="SearchBoardFileSet">
 		<id property="fileId" column="FILE_ID" />
 		<result property="boardId" column="BOARD_ID" />
@@ -27,7 +40,6 @@
 		<id property="playId" column="PLAY_ID"/>
 		<result property="movieId" column="MOVIE_ID"/>
 		<result property="playStatus" column="PLAY_STATUS"/>
-		<result property="movieName" column="MOVIE_NAME"/>
 		</resultMap>
 		
 		<resultMap type="Turning" id="TurningResultSet">
@@ -89,9 +101,10 @@
 	
 	
 	<insert id="insertPlay" parameterType="Play">
-		 INSERT INTO PLAY VALUES ('P' || TO_CHAR(PLAY_PLAY_ID.NEXTVAL),
+		
+		  INSERT INTO PLAY VALUES ('P' || TO_CHAR(PLAY_PLAY_ID.NEXTVAL),
 		(SELECT MOVIE_ID FROM MOVIE
-		WHERE MOVIE_TITLE = #{movieName}), DEFAULT) 
+		WHERE MOVIE_TITLE = #{movie_title}), DEFAULT)  
 	</insert>
 	
 	

@@ -10,6 +10,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 <style>
 
+table tr th{
+width:250px;
+
+} 
 #playTable{
 border-collapse:collapse;
 }
@@ -56,7 +60,6 @@ h2 {
 
 <body class="is-preload">
 
-	<jsp:include page="../common/datePicker_jeongtae.jsp"/>
 
 	<c:import url="../common/headBar.jsp" />
 
@@ -112,7 +115,7 @@ h2 {
 					<div class="row gtr-uniform">
 						<h2 align="left">1. 영화</h2>
 						<div class="col-12">
-							<input type="text" name="movieName" id="demo-name" value=""
+							<input type="text" name="movie_title" id="demo-name" value=""
 								placeholder="영화를 입력하세요" />
 						
 							<!-- <select name="movieCondition" id="demo-category">
