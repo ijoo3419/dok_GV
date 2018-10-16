@@ -249,7 +249,7 @@
 	</select>
 	
 	<select id="countVisit" parameterType="map" resultType="_int">
-		SELECT COUNT(*)
+		SELECT VISIT_COUNT
 		FROM VISIT_HISTORY
 		<if test="count lt 10">
 			WHERE VISIT_TIME LIKE '18/0' || #{count} || '%'
