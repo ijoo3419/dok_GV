@@ -20,8 +20,10 @@
 		<typeAlias type="com.kh.dok.licensee.model.vo.MovieRoom" alias="MovieRoom"></typeAlias>
 		<typeAlias type="com.kh.dok.member.model.vo.MyReply" alias="MyReply"></typeAlias>
 
-		<typeAlias type="com.kh.dok.admin.model.vo.VisitHistory" alias="VisitHistory"></typeAlias>
+		<typeAlias type="com.kh.dok.licensee.model.vo.Play" alias="Play"></typeAlias>
+		<typeAlias type="com.kh.dok.licensee.model.vo.Turning" alias="Turning"></typeAlias>
 
+		<typeAlias type="com.kh.dok.admin.model.vo.VisitHistory" alias="VisitHistory"></typeAlias>
 		<typeAlias type="com.kh.dok.board.model.vo.SearchCondition1" alias="SearchCondition1"></typeAlias>
 
 	</typeAliases>

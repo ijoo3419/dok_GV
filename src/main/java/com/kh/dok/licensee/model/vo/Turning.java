@@ -14,6 +14,10 @@ public class Turning implements java.io.Serializable{
 	private String turningTime;
 	private Date startTime;
 	private Date endTime;
+	private String movieRoomId;
+	
+	
+	public Turning(){}
 	
 	public String getTurningId() {
 		return turningId;
@@ -58,7 +62,7 @@ public class Turning implements java.io.Serializable{
 		this.endTime = endTime;
 	}
 	public Turning(String turningId, String playId, int price, Date turningDay, String turningTime, Date startTime,
-			Date endTime) {
+			Date endTime, String movieRoomId) {
 		super();
 		this.turningId = turningId;
 		this.playId = playId;
@@ -67,15 +71,14 @@ public class Turning implements java.io.Serializable{
 		this.turningTime = turningTime;
 		this.startTime = startTime;
 		this.endTime = endTime;
+		this.movieRoomId = movieRoomId;
 	}
-	
 	@Override
 	public String toString() {
 		return "Turning [turningId=" + turningId + ", playId=" + playId + ", price=" + price + ", turningDay="
 				+ turningDay + ", turningTime=" + turningTime + ", startTime=" + startTime + ", endTime=" + endTime
-				+ "]";
+				+ ", movieRoomId=" + movieRoomId + "]";
 	}
-	
 	
 	
 }

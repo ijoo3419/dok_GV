@@ -219,6 +219,10 @@ public class AdminDaoImpl implements AdminDao{
 		return 1;
 	}
 
+
+	public void setTotalCount(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		
 	@Override
 	public int[] countVisit(SqlSessionTemplate sqlSession,String time) {
 		int [] vlist = {0,0,0,0,0,0,0,0,0,0,0,0};
@@ -283,6 +287,7 @@ public class AdminDaoImpl implements AdminDao{
 		}
 
 		return blist;
+
 	}
 
 }
