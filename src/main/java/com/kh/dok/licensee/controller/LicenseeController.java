@@ -19,6 +19,7 @@ import com.kh.dok.licensee.model.service.LicenseeService;
 import com.kh.dok.licensee.model.vo.MovieRoom;
 import com.kh.dok.licensee.model.vo.Play;
 import com.kh.dok.licensee.model.vo.Turning;
+import com.kh.dok.movie.model.vo.Movie;
 
 @Controller
 @SessionAttributes(value="loginUser")
@@ -59,8 +60,8 @@ public class LicenseeController {
 	
 	//정태 영화관 등록 메소드(+파일 첨부)
 	@RequestMapping(value="theaterInsert.li")
-	public String insertTheater(Model model, Cinema2 cm, 
-								HttpServletRequest request, 
+	public String insertTheater(Model model, Cinema2 cm,
+								HttpServletRequest request,
 								@RequestParam(name="photo1", required=false)MultipartFile photo1){
 		
 		System.out.println(photo1);
@@ -231,21 +232,22 @@ public class LicenseeController {
 	
 	
 }
-	
+	/* 정태 상영 등록  */
 	@RequestMapping(value="playInsert.li")
-	public String insertPlay(Model model, Play p, Turning t,
+	public String insertPlay(Model model, Play p, Turning t, Movie mo,
 								HttpServletRequest request){
 		
-	
+	System.out.println("movie_title 지용 = " + p.getMovie_title());	
+		
 		int resultPlay = ls.insertPlay(p);
 		
-		int resultTurning = ls.insertTurning(t);
+	/*	int resultTurning = ls.insertTurning(t);*/
 		
 		System.out.println("controller p = " + p);
-		System.out.println("controller t = " + t);
+	/*	System.out.println("controller t = " + t);*/
 		
 		
-		if(resultPlay > 0 && resultTurning > 0){
+		if(resultPlay > 0){
 			return "licensee/playManagePage";
 
 		}else{

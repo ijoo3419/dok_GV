@@ -10,6 +10,141 @@
 -->
 <html>
 <head>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['일반회원',     ${cslist[0]}],
+          ['판매자회원',    ${cslist[1]}]
+        ]);
+
+        var options = {
+          title: '홈페이지 회원 구성비(명/%)',
+          pieHole: 0.4,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('memberClass'));
+        chart.draw(data, options);
+      }
+    </script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['line']});
+    google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+
+    var data = new google.visualization.DataTable();
+    data.addColumn('number', '월(month)');
+    data.addColumn('number', '월 별 방문자 수');
+
+    data.addRows([
+      [1,  ${vslist[0]}],
+      [2,  ${vslist[1]}],
+      [3,  ${vslist[2]}],
+      [4,  ${vslist[3]}],
+      [5,  ${vslist[4]}],
+      [6,  ${vslist[5]}],
+      [7,  ${vslist[6]}],
+      [8,  ${vslist[7]}],
+      [9,  ${vslist[8]}],
+      [10, ${vslist[9]}],
+      [11, ${vslist[10]}],
+      [12, ${vslist[11]}],
+    ]);
+
+    var options = {
+      chart: {
+        title: '월 별 방문자 현황(명/월)',
+      },
+      width: 850,
+      height: 500
+    };
+
+    var chart = new google.charts.Line(document.getElementById('visitCount'));
+
+    chart.draw(data, google.charts.Line.convertOptions(options));
+  }
+    </script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['line']});
+    google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+
+    var data = new google.visualization.DataTable();
+    data.addColumn('number', '월(month)');
+    data.addColumn('number', '월 별 가입자 수');
+
+    data.addRows([
+      [1,  ${vslist2[0]}],
+      [2,  ${vslist2[1]}],
+      [3,  ${vslist2[2]}],
+      [4,  ${vslist2[3]}],
+      [5,  ${vslist2[4]}],
+      [6,  ${vslist2[5]}],
+      [7,  ${vslist2[6]}],
+      [8,  ${vslist2[7]}],
+      [9,  ${vslist2[8]}],
+      [10, ${vslist2[9]}],
+      [11, ${vslist2[10]}],
+      [12, ${vslist2[11]}],
+    ]);
+
+    var options = {
+      chart: {
+        title: '월 별 가입자 현황(명/월)',
+      },
+      width: 850,
+      height: 500
+    };
+
+    var chart = new google.charts.Line(document.getElementById('joinCount'));
+
+    chart.draw(data, google.charts.Line.convertOptions(options));
+  }
+    </script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['line']});
+    google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+
+    var data = new google.visualization.DataTable();
+    data.addColumn('number', '월(month)');
+    data.addColumn('number', '월 별 예매 수');
+
+    data.addRows([
+      [1,  ${vslist2[0]}],
+      [2,  ${vslist2[1]}],
+      [3,  ${vslist2[2]}],
+      [4,  ${vslist2[3]}],
+      [5,  ${vslist2[4]}],
+      [6,  ${vslist2[5]}],
+      [7,  ${vslist2[6]}],
+      [8,  ${vslist2[7]}],
+      [9,  ${vslist2[8]}],
+      [10, ${vslist2[9]}],
+      [11, ${vslist2[10]}],
+      [12, ${vslist2[11]}],
+    ]);
+
+    var options = {
+      chart: {
+        title: '월 별 예매 현황(예매 건수/월)',
+      },
+      width: 850,
+      height: 500
+    };
+
+    var chart = new google.charts.Line(document.getElementById('bookCount'));
+
+    chart.draw(data, google.charts.Line.convertOptions(options));
+  }
+    </script>
 <title>Elements Reference - Massively by HTML5 UP</title>
 <meta charset="utf-8" />
 <meta name="viewport"
@@ -117,7 +252,7 @@
 					관리</a></li>
 			<li class="tab-link4" data-tab="tab-4"><a href="statistics.ad">통계</a></li>
 			<li class="tab-link5" data-tab="tab-5"><a>문의 사항</a></li>
-			<li class="tab-link6" data-tab="tab-6"><a>공지사항</a></li>
+			<li class="tab-link6" data-tab="tab-6"><a href="adminNotice.ad">공지사항</a></li>
 			<li class="tab-link7" data-tab="tab-7"><a href="addmovie.ad">영화
 					추가</a></li>
 		</ul>
@@ -422,42 +557,13 @@
 			<h2>통계</h2>
 			<br>
 			<div class="table-wrapper">
-				<table>
-					<thead>
-						<tr>
-							<th>1월</th>
-							<th>2월</th>
-							<th>3월</th>
-							<th>4월</th>
-							<th>5월</th>
-							<th>6월</th>
-							<th>7월</th>
-							<th>8월</th>
-							<th>9월</th>
-							<th>10월</th>
-							<th>11월</th>
-							<th>12월</th>
-							<th>today</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>1</td>
-							<td>2</td>
-							<td>3</td>
-							<td>4</td>
-							<td>5</td>
-							<td>6</td>
-							<td>7</td>
-							<td>8</td>
-							<td>9</td>
-							<td>10</td>
-							<td>11</td>
-							<td>12</td>
-							<td>value</td>
-						</tr>
-					</tbody>
-				</table>
+				<div id="visitCount" style="width: 850px; height: 500px;"></div>
+				<hr style="border: solid 1px #D0A9F5">
+				<div id="joinCount" style="width: 850px; height: 500px;"></div>
+				<hr style="border: solid 1px #D0A9F5">
+				<div id="memberClass" style="width: 850px; height: 500px;"></div>
+				<hr style="border: solid 1px #D0A9F5">
+				<div id="bookCount" style="width: 850px; height: 500px"></div>
 		</section>
 
 		<!-- 다섯번째 탭(문의 사항) : 성희 공간 -->
@@ -467,7 +573,140 @@
 
 		</section>
 		<!-- 여섯번째 탭(공지사항) : 성희 공간-->
-		<section id="tab-6" class="post"></section>
+		<section id="tab-6" class="post">
+		<h2 align="center">공지사항</h2>
+				<br><br>
+				<div class="table-wrapper">
+					<table id="boardArea" align="center">
+							<tr>
+								<th>글번호</th>
+								<th>제목</th>
+								<th>작성자</th>
+								<th>조회수</th>
+								<th>작성일</th>
+							</tr>
+						<c:if test="${ list == null }">
+							<tr>
+								<td>등록된 공지사항이 없습니다.</td>
+							</tr>
+						</c:if>
+						<c:if test="${ list != null }">
+							<c:forEach var="list" items="${ list }">
+								<tr>
+									<td>${ list.board_id }</td>
+									<td>${ list.btitle }</td>
+									<td>${ list.nickname }</td>
+									<td>${ list.bcount }</td>
+									<td>${ list.board_date }</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+					</table>
+				</div>
+				
+				<script>
+				$(function(){
+					$("#boardArea").find("td").mouseenter(function(){
+						console.log("클릭");
+						$(this).parents("tr").css({"cursor":"pointer"});
+					}).click(function(){
+						var board_id = $(this).parents().children("td").eq(0).text();
+						console.log(board_id);
+						location.href = "selectAdminNoticeOne.bo?board_id=" + board_id;
+					}); 
+				});
+				</script>
+				
+				
+				<div class="search">
+					<select id="searchCondition" name="searchCondition" style="width:150px; height:40px; display:inline-block; margin-left:80px;">
+						<option value="">검색기준</option>
+						<option value="btitle">제목</option>
+						<option value="bcontent">내용</option>
+					</select> <input id="searchResult" name="searchValue" type="text" placeholder="검색" style="width:300px; margin-left:10px; display:inline-block"> <a href="#" class="button primary icon fa-search" onclick="searchBoard()">조회</a> <button type="button" class="img_btn user cancel mr7" align="right"><a href="writeNotice.bo">공지작성</a></button>
+				</div>
+				<br>
+				<script>
+					function searchBoard(){
+						var searchCondition = $("#searchCondition").val();
+						var searchValue = $("#searchValue").val();
+						
+						location.href = "searchNoticeBoard.bo?searchCondition=" + searchCondition 
+								+ "&searchValue=" + searchValue;
+						
+					}
+				</script>
+				                                                                                                        
+				
+				<!-- 페이징 처리 -->
+				<div id="page" align="center">
+					<div class="pagination" align="center">
+						<c:if test="${ pi.currentPage <= 1 }">
+							<a>이전 </a>
+						</c:if>
+						<c:if test="${ pi.currentPage > 1 }">
+							<c:url var="blistBack" value="notice.li">
+								<c:param name="currentPage" value="${ pi.currentPage - 1 }" />
+								<c:param name="mId" value="${ mId }" />
+							</c:url>
+							<a href="${ blistBack }">이전</a>
+						</c:if>
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+							<c:if test="${ p eq pi.currentPage }">
+								<font color="red" size="4"><a>${ p }</a></font>
+							</c:if>
+							<c:if test="${ p ne pi.currentPage }">
+								<c:url var="blistCheck" value="notice.li">
+									<c:param name="currentPage" value="${ p }" />
+									<c:param name="mId" value="${ mId }" />
+								</c:url>
+								<a href="${ blistCheck }">${ p }</a>
+							</c:if>
+						</c:forEach>
+						<c:if test="${ pi.currentPage >= pi.maxPage }">
+							<a> 다음</a>
+						</c:if>
+						<c:if test="${ pi.currentPage < pi.maxPage }">
+							<c:url var="blistEnd" value="notice.li">
+								<c:param name="currentPage" value="${ pi.currentPage + 1 }" />
+								<c:param name="mId" value="${ mId }" />
+							</c:url>
+							<a href="${ blistEnd }">다음</a>
+						</c:if>
+					</div>
+				</div>
+				
+				
+				
+				
+				
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		</section>
 		<!-- 일곱번째 탭(영화 추가) -->
 		<section id="tab-7" class="post">
 			<h2>영화 추가</h2>

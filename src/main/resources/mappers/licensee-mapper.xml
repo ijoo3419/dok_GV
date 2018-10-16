@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Licensee">
+
 	<resultMap type="MovieRoom" id="movieRoomResultSet">
 		<id property="movieRoomId" column="MOVIEROOM_ID"/>
 		<result property="theaterId" column="THEATER_ID"/>
@@ -11,36 +12,47 @@
 	
 	</resultMap>
 	
-		<resultMap type="BoardFile" id="SearchBoardFileSet">
-		<id property="file_id" column="FILE_ID" />
-		<result property="board_id" column="BOARD_ID" />
-		<result property="origin_name" column="ORIGIN_NAME" />
-		<result property="edit_name" column="EDIT_NAME" />
-		<result property="file_src" column="FILE_SRC" />
-		<result property="file_date" column="FILE_DATE" />
-		<result property="file_level" column="FILE_LEVEL" />
+	<resultMap type="MovieRoom" id="movieRoomResultSet2">
+		<id property="movie_id" column="MOVIE_ID"/>
+		<result property="movie_title" column="MOVIE_TITLE"/>
+		<result property="movie_etitle" column="MOVIE_ETITLE"/>
+		<result property="movie_content" column="MOVIE_CONTENT"/>
+		<result property="open_date" column="OPEN_DATE"/>
+		<result property="director_name" column="DIRECTOR_NAME"/>
+		<result property="production_com" column="PRODUCTION_COM"/>
+		<result property="movie_age" column="MOVIE_AGE"/>
+		<result property="genre" column="GENRE"/>
+		<result property="running_time" column="RUNNIG_TIME"/>
 	</resultMap>
 	
-		<resultMap type="Play" id="PlayResultSet">
+		<resultMap type="BoardFile" id="SearchBoardFileSet">
+		<id property="fileId" column="FILE_ID" />
+		<result property="boardId" column="BOARD_ID" />
+		<result property="originName" column="ORIGIN_NAME" />
+		<result property="editName" column="EDIT_NAME" />
+		<result property="fileSrc" column="FILE_SRC" />
+		<result property="fileDate" column="FILE_DATE" />
+		<result property="fileLevel" column="FILE_LEVEL" />
+	</resultMap>
+	
+	    <resultMap type="Play" id="PlayResultSet">
 		
-		<id property="play_id" column="PLAY_ID"/>
-		<result property="movie_id" column="MOVIE_ID"/>
-		<result property="movieRoom_id" column="MOVIEROOM_ID"/>
-		<result property="play_status" column="PLAY_STATUS"/>
-		
+		<id property="playId" column="PLAY_ID"/>
+		<result property="movieId" column="MOVIE_ID"/>
+		<result property="playStatus" column="PLAY_STATUS"/>
 		</resultMap>
 		
 		<resultMap type="Turning" id="TurningResultSet">
 		
-		<id property="turning_id" column="TURNING_ID"/>
-		<result property="play_id" column="PLAY_ID"/>
+		<id property="turningId" column="TURNING_ID"/>
+		<result property="playId" column="PLAY_ID"/>
 		<result property="price" column="PRICE"/>
-		<result property="turning_day" column="TURNING_DAY"/>
-		<result property="turning_time" column="TURNING_TIME"/>
-		<result property="start_time" column="START_TIME"/>
-		<result property="end_time" column="END_TIME"/>
-
-		</resultMap>
+		<result property="turningDay" column="TURNING_DAY"/>
+		<result property="turningTime" column="TURNING_TIME"/>
+		<result property="startTime" column="START_TIME"/>
+		<result property="endTime" column="END_TIME"/>
+		<result property="movieRoomId" column="MOVIEROOM_ID"/>
+		</resultMap> 
 	
 <!-- 상영관 추가하기~!~!~!~!~! -->
 <insert id="insertMovieRoom" parameterType="MovieRoom">
@@ -58,12 +70,12 @@
 </select>
 
 <!-- 정태 영화관 사진 파일 추가 -->
-<insert id="insertFile" parameterType="BoardFile">
+<!-- <insert id="insertFile" parameterType="BoardFile">
 	INSERT INTO BOARD_FILE
 		VALUES('BF' ||
 		BOARD_FILE_FILE_ID.NEXTVAL,#{board_id},#{origin_name},
 		#{edit_name},#{file_src},SYSDATE,#{file_level})
-</insert>
+</insert> -->
 
 <!-- 정태 영화관 사진 파일 수정 -->
 <!-- <update id="updateFile">
@@ -79,19 +91,29 @@
 	</choose>
 </update> -->
 <!-- 영화관 사진 보기 -->
-<select id="selectFile" resultMap="SearchBoardFileSet">
+<!-- <select id="selectFile" resultMap="SearchBoardFileSet">
 		SELECT *
 		FROM BOARD_FILE
 		WHERE
 		FILE_LEVEL=1 OR FILE_LEVEL = 2
 		ORDER BY FILE_LEVEL
-	</select>
+	</select> -->
 	
 	
+	<insert id="insertPlay" parameterType="Play">
+		
+		  INSERT INTO PLAY VALUES ('P' || TO_CHAR(PLAY_PLAY_ID.NEXTVAL),
+		(SELECT MOVIE_ID FROM MOVIE
+		WHERE MOVIE_TITLE = #{movie_title}), DEFAULT)  
+	</insert>
 	
 	
-	
-	
+	<insert id="insertTurning" parameterType="Turning">
+		 INSERT INTO TURNING
+		VALUES ('T' || TO_CHAR(TURNING_TURNING_ID.NEXTVAL), 'P21', 7000, '181015' , '12:00 ~ 13:20' ,
+		'181015 12:00:00', '181015 13:20:00', 'MR51')
+		
+	</insert>
 	
 	
 

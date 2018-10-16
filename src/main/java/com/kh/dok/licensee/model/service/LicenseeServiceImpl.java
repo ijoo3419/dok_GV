@@ -2,6 +2,7 @@ package com.kh.dok.licensee.model.service;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.kh.dok.cinema.model.vo.Cinema2;
@@ -11,11 +12,13 @@ import com.kh.dok.licensee.model.vo.Play;
 import com.kh.dok.licensee.model.vo.Turning;
 
 @Service
+
 public class LicenseeServiceImpl implements LicenseeService{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	@Autowired
 	private LicenseeDao ld;
+	
 	
 	
 	@Override
@@ -45,16 +48,16 @@ public class LicenseeServiceImpl implements LicenseeService{
 
 	@Override
 	public int insertPlay(Play p) {
-		
-		return ld.insertPlay(sqlSession, p);
+		 int resultPlay = ld.insertPlay(sqlSession, p);
+		 
+		 return resultPlay;
 	}
-
-
-	@Override
+	
+/*	@Override
 	public int insertTurning(Turning t) {
 		
 		return ld.insertTurning(sqlSession, t);
-	}
+	}*/
 
 
 	/*@Override

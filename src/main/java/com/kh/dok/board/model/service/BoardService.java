@@ -8,6 +8,7 @@ import com.kh.dok.board.model.exception.BoardSelectOneException;
 import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.board.model.vo.BoardNBoardFile;
+import com.kh.dok.board.model.vo.SearchCondition1;
 import com.kh.dok.common.PageInfo;
 
 public interface BoardService {
@@ -25,5 +26,11 @@ public interface BoardService {
 	int getlistCount(String mId);
 
 	ArrayList<BoardNBoardFile> selectNoticeList(PageInfo pi, String mId);
+
+	int getSearchResultListCount(SearchCondition1 sc);
+
+	ArrayList<BoardNBoardFile> selectSearchNoticeList(PageInfo pi, SearchCondition1 sc);
+
+	BoardNBoardFile selectAdminNoticeOne(String board_id) throws BoardSelectOneException;
 
 }
