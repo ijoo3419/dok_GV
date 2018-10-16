@@ -13,7 +13,6 @@ import com.kh.dok.admin.model.exception.SearchMemberException;
 import com.kh.dok.admin.model.exception.UploadException;
 import com.kh.dok.admin.model.vo.ReportHistory;
 import com.kh.dok.admin.model.vo.SearchCondition;
-import com.kh.dok.admin.model.vo.Visit;
 import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.member.model.vo.Member;
@@ -45,5 +44,13 @@ public interface AdminService {
 	ArrayList<BoardFile> selectFile() throws UploadException;
 
 	int insertvisit(String time, String ip);
+
+	int[] countVisit(String time);
+
+	int[] countMember();
+
+	int[] countClass();
+
+	int[] countBook();
 
 }

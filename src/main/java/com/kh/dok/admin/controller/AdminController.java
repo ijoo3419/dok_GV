@@ -29,7 +29,6 @@ import com.kh.dok.admin.model.exception.UploadException;
 import com.kh.dok.admin.model.service.AdminService;
 import com.kh.dok.admin.model.vo.ReportHistory;
 import com.kh.dok.admin.model.vo.SearchCondition;
-import com.kh.dok.admin.model.vo.Visit;
 import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.common.CommonUtils;
 import com.kh.dok.common.PageInfo;
@@ -245,6 +244,7 @@ public class AdminController {
 			ArrayList<BoardFile> bfile = as.selectFile();
 			model.addAttribute("bf", bfile);
 			model.addAttribute("tab", tab);
+			
 			System.out.println(bfile);
 			if(gm == null){
 				return "admin/adminPage";
@@ -254,6 +254,8 @@ public class AdminController {
 				
 				
 				int iv = as.insertvisit(time,ip);
+				/*int[] vcList = as.selectVlist(time);*/
+ 				model.addAttribute("iv", iv);
 				return "main/main";
 			}
 		} catch (UploadException e) {
@@ -276,11 +278,28 @@ public class AdminController {
 	
 	//통계 페이지
 	@RequestMapping("statistics.ad")
-	public String statistics(Model model){
+	public String statistics(Model model,HttpSession session){
 		String tab = "tab-4";
-		
+		String time = (String)session.getAttribute("time");
+		int[] vlist = as.countVisit(time);
+		int[] mlist = as.countMember();
+		int[] clist = as.countClass();
+		int[] rlist = as.countBook();
 		model.addAttribute("tab", tab);
+		String[] vslist = {"0","0","0","0","0","0","0","0","0","0","0","0"};
+		String[] vslist2 = {"0","0","0","0","0","0","0","0","0","0","0","0"};
+		String[] cslist = {"0","0"};
 		
+		for(int i=0;i<vlist.length;i++){
+			vslist[i] = String.valueOf(vlist[i]);
+			vslist2[i] = String.valueOf(mlist[i]);
+		}
+		for(int i=0; i<clist.length; i++){
+			cslist[i] = String.valueOf(clist[i]);
+		}
+		model.addAttribute("vslist", vslist);
+		model.addAttribute("vslist2",vslist2);
+		model.addAttribute("cslist", cslist);
 		return "admin/adminPage";
 	}
 	

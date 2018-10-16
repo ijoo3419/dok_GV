@@ -10,8 +10,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 		
-		 <title>Massively by HTML5 UP</title>
-		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="${contextPath }/resources/css/main.css" />
 	<link rel="stylesheet"
@@ -22,29 +20,11 @@
 	<c:import url="../common/headBar.jsp" />
 
 			
-		<!-- Wrapper -->
 			<div id="wrapper" class="fade-in">
-				<!-- Intro -->
-				
-				
-					<!-- <div id="intro">
-						<h1>This is<br />
-						Massively</h1>
-						<p>A free, fully responsive HTML5 + CSS3 site template designed by <a href="https://twitter.com/ajlkn">@ajlkn</a> for <a href="https://html5up.net">HTML5 UP</a><br />
-						and released for free under the <a href="https://html5up.net/license">Creative Commons license</a>.</p>
-						<ul class="actions">
-							<li><a href="#header" class="button icon solo fa-arrow-down scrolly">Continue</a></li>
-						</ul> 
-						
-					</div>
-			 -->
-				<!-- Header -->
 					
 					<header id="header">
-						<!-- <a href="index.html" class="logo">Massively</a> -->
 					</header>
 			    
-				<!-- Nav -->
 	<c:set var="mid" value="${ loginUser.mid }" scope="session"/>
 	<nav id="nav">
 			<ul class="links">
@@ -58,28 +38,12 @@
 			</ul>
 		</nav>
 
-				<!-- Main -->
 		<div id="main">
 
-			<!-- Featured Post -->
 			<article class="post featured">
 			
 			<h2>문의내역</h2>
-			<!-- <div class="col-12">	
-				<div>
-				<h3>날짜 : &nbsp;&nbsp;  <select name="demo-category" id="demo-category">
-
-						<option value="">- 날 짜 -</option>
-						<option value="1">09/11</option>
-						<option value="1">09/12</option>
-						<option value="1">09/13</option>
-						<option value="1">09/14</option>
-					</select></h3>
-				</div>
-				</div>
-				<br><br> -->
 				<br><br>
-				<!-- Table -->
 				<div class="table-wrapper">
 					<table>
 						<thead>

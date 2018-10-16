@@ -30,7 +30,7 @@
 	<!-- 공지등록 -->
 	<insert id="insertNotice" parameterType="board">
 		INSERT INTO BOARD
-		VALUES('B' || BOARD_BOARD_ID.NEXTVAL, #{mId}, #{btitle}, #{bcontent}, 'BOARD', 
+		VALUES('B' || BOARD_BOARD_ID_SND.NEXTVAL, #{mId}, #{btitle}, #{bcontent}, 'BOARD', 
 				SYSDATE, NULL, 'Y', DEFAULT, NULL, NULL, NULL, 'BD4')
 	</insert>
 	
@@ -116,4 +116,58 @@
 		WHERE BSTATUS = 'Y'
 		ORDER BY BOARD_ID DESC
 	</select>
+	
+	<!-- 검색 결과 수 조회용 쿼리문 -->
+	<select id="getSearchResultListCount" parameterType="SearchCondition1" resultType="_int">
+		SELECT COUNT(*)
+		FROM BOARD B
+		JOIN MEMBER M ON (B.MID = M.MID)
+		WHERE B.BSTATUS = 'Y'
+		<choose>
+			<when test="btitle != null">
+				AND BTITLE LIKE '%' || #{btitle} || '%'
+			</when>
+			<otherwise>
+				AND BCONTENT LIKE '%' || #{bcontent} || '%'
+			</otherwise>
+		</choose>
+	</select>
+	
+	<!-- 검색결과 리스트 조회용 메소드 -->
+	<select id="selectSearchNoticeList" parameterType="SearchCondition1" resultMap="BBFileResultSet">
+		SELECT TO_NUMBER(SUBSTR(BOARD.BOARD_ID, 2)) AS BOARD_ID, BOARD.MID, BTITLE, BCONTENT, BOARD_SORT, BOARD_DATE, BCOUNT, 
+       		   FILE_ID, ORIGIN_NAME, EDIT_NAME, FILE_SRC, FILE_DATE, FILE_LEVEL, M.NICKNAME
+		FROM BOARD, BOARD_FILE, MEMBER M
+		WHERE BOARD.BOARD_ID = BOARD_FILE.BOARD_ID(+)
+		AND BOARD.MID = M.MID
+		AND BOARD.BSTATUS = 'Y'
+		AND BOARD_DIV = 'BD4'
+		<choose>
+			<when test="btitle != null">
+				AND BTITLE LIKE '%' || #{btitle} || '%'
+			</when>
+			<otherwise>
+				AND BCONTENT LIKE '%' || #{bcontent} || '%'
+			</otherwise>
+		</choose>
+		ORDER BY BOARD_ID DESC
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

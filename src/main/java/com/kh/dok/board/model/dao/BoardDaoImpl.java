@@ -13,6 +13,7 @@ import com.kh.dok.board.model.exception.BoardSelectOneException;
 import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.board.model.vo.BoardNBoardFile;
+import com.kh.dok.board.model.vo.SearchCondition1;
 import com.kh.dok.common.PageInfo;
 
 @Repository
@@ -116,6 +117,35 @@ public class BoardDaoImpl implements BoardDao{
 		
 		
 		return list;
+	}
+	
+	//검색결과 갯수 불러오기(성희)
+	@Override
+	public int getSearchResultListCount(SqlSessionTemplate sqlSession, SearchCondition1 sc) {
+		int result = sqlSession.selectOne("Board.getSearchResultListCount", sc);
+		
+		return result; 
+	}
+
+	//검색결과 리스트 불러오기 (성희)
+	@Override
+	public ArrayList<BoardNBoardFile> selectSearchNoticeList(SqlSessionTemplate sqlSession, PageInfo pi, SearchCondition1 sc) {
+		ArrayList<BoardNBoardFile> list = null;
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		
+		list = (ArrayList)sqlSession.selectList("Board.selectSearchNoticeList", sc, rowBounds);
+		
+		System.out.println("성희 : dao 검색결과 리스트 가져옴 list : " + list);
+		
+		return list;
+	}
+
+	@Override
+	public BoardNBoardFile selectAdminNoticeOne(SqlSessionTemplate sqlSession, String board_id) {
+		return sqlSession.selectOne("Board.selectNoticeOne", board_id);
 	}
 
 	

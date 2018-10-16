@@ -101,25 +101,20 @@
 						<option value="">검색기준</option>
 						<option value="btitle">제목</option>
 						<option value="bcontent">내용</option>
-
-					</select><input id="searchValue" name="searchValue" type="text" placeholder="검색" style="width:300px"><a href="#" class="button primary icon fa-search" onclick="searchBoard()">조회</a>
-
+					</select> <input id="searchResult" name="searchValue" type="text" placeholder="검색" style="width:300px"> <a href="#" class="button primary icon fa-search" onclick="searchBoard()">조회</a> <button type="button" class="img_btn user cancel mr7" align="right"><a href="writeNotice.bo">공지작성</a></button>
 				</div>
 				<br>
 				<script>
 					function searchBoard(){
-						var searchCondition = $("select[name=searchCondition]").val();
-						var searchValue = $("input[name=searchValue]").val();
+						var searchCondition = $("#searchCondition").val();
+						var searchValue = $("#searchValue").val();
 						
-						location.href = "searchNoticeBoard.bo?currentPage=1&searchResult=" + searchResult 
-								+ "&searchCondition=" + searchCondition;
+						location.href = "searchNoticeBoard.bo?searchCondition=" + searchCondition 
+								+ "&searchValue=" + searchValue;
 						
 					}
 				</script>
 				                                                                                                        
-				<div>
-					<button type="button" class="img_btn user cancel mr7"><a href="writeNotice.bo">공지작성</a></button>
-				</div>
 				
 				<!-- 페이징 처리 -->
 				<div id="page" align="center">
@@ -128,7 +123,7 @@
 							<a>이전 </a>
 						</c:if>
 						<c:if test="${ pi.currentPage > 1 }">
-							<c:url var="blistBack" value="NoticePaging.bo">
+							<c:url var="blistBack" value="notice.li">
 								<c:param name="currentPage" value="${ pi.currentPage - 1 }" />
 								<c:param name="mId" value="${ mId }" />
 							</c:url>
@@ -139,7 +134,7 @@
 								<font color="red" size="4"><a>${ p }</a></font>
 							</c:if>
 							<c:if test="${ p ne pi.currentPage }">
-								<c:url var="blistCheck" value="NoticePaging.bo">
+								<c:url var="blistCheck" value="notice.li">
 									<c:param name="currentPage" value="${ p }" />
 									<c:param name="mId" value="${ mId }" />
 								</c:url>
@@ -150,7 +145,7 @@
 							<a> 다음</a>
 						</c:if>
 						<c:if test="${ pi.currentPage < pi.maxPage }">
-							<c:url var="blistEnd" value="NoticePaging.bo">
+							<c:url var="blistEnd" value="notice.li">
 								<c:param name="currentPage" value="${ pi.currentPage + 1 }" />
 								<c:param name="mId" value="${ mId }" />
 							</c:url>

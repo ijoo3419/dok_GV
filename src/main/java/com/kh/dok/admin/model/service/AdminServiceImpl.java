@@ -16,7 +16,6 @@ import com.kh.dok.admin.model.exception.SearchMemberException;
 import com.kh.dok.admin.model.exception.UploadException;
 import com.kh.dok.admin.model.vo.ReportHistory;
 import com.kh.dok.admin.model.vo.SearchCondition;
-import com.kh.dok.admin.model.vo.Visit;
 import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.member.model.vo.Member;
@@ -119,11 +118,39 @@ public class AdminServiceImpl implements AdminService{
 		
 		return ad.selectFile(sqlSession);
 	}
-
+	
+	
 	@Override
 	public int insertvisit(String time,String ip) {
 		
 		return ad.insertVisit(sqlSession,time,ip);
+	}
+	
+	//방문자수 카운트
+	@Override
+	public int[] countVisit(String time) {
+		
+		return ad.countVisit(sqlSession,time);
+	}
+
+	//가입 시기 카운트
+	@Override
+	public int[] countMember() {
+		
+		return ad.countMember(sqlSession);
+	}
+	
+	//멤버 등급 카운트
+	@Override
+	public int[] countClass() {
+		
+		return ad.countClass(sqlSession);
+	}
+
+	@Override
+	public int[] countBook() {
+		
+		return ad.countBook(sqlSession);
 	}
 
 	
