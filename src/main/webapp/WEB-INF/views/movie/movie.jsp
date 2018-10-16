@@ -455,13 +455,12 @@ hr {
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
-
       <div class="item active">
         <c:forEach items="${movieRank1 }" var="rank1">
         <div id="rank">
-		<%! int i=1; %>
-      	  <div id ="age1"><%=i%></div>
-      	  <%i++;%>
+	  	<div id ="age1">
+	  		${rank1.rnum}
+	  	</div> 
 		<div id="sumnailimage1">
                    <${rank1.file_src} style="width:298px; height:270px;">
                    <c:set var="name" value="${rank1.movie_age}"/>
@@ -493,9 +492,7 @@ hr {
       <div class="item">
       	  <c:forEach items="${movieRank2 }" var="rank2">
       	  <div id="rank">
-      	  <%! int j=4; %>
-      	  <div id ="age1"><%=j%></div>
-      	  <%j++;%>
+      	  <div id ="age1">${rank2.rnum}</div>
 		<div id="sumnailimage1">
                    <${rank2.file_src} style="width:298px; height:270px;">
                    <c:set var="name" value="${rank2.movie_age}"/>
@@ -528,9 +525,7 @@ hr {
       <div class="item">
         <c:forEach items="${movieRank3 }" var="rank3">
         <div id="rank">
-        <%! int k=7; %>
-      	  <div id ="age1"><%=k%></div>
-      	  <%k++;%>
+      	  <div id ="age1">${rank3.rnum}</div>
 		<div id="sumnailimage1">
                    <${rank3.file_src} style="width:298px; height:270px;">
                    <c:set var="name" value="${rank3.movie_age}"/>

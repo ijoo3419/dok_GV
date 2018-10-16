@@ -8,7 +8,7 @@ import com.kh.dok.member.model.vo.BookingHistory;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.member.model.vo.MyReply;
 import com.kh.dok.movie.model.vo.Movie;
-import com.kh.dok.movie.model.vo.MovieSumbnail;
+import com.kh.dok.movie.model.vo.MovieThumbnail;
 
 public interface MemberService {
 
@@ -38,11 +38,13 @@ public interface MemberService {
 
 	int updateClass(Member m);
 
-	ArrayList<MovieSumbnail> selectWishList(MovieSumbnail msn, Member m);
+	ArrayList<MovieThumbnail> selectWishList(MovieThumbnail msn, Member m);
 
 	ArrayList<BookingHistory> selectBookingHist(Member m);
 
-	ArrayList<MyReply> selectReply(Member m);
+	ArrayList<MyReply> selectMovReply(Member m);
+	
+	ArrayList<MyReply> selectCinReply(Member m);
 
 	int selectWishNum(Member m);
 	
@@ -51,6 +53,21 @@ public interface MemberService {
 	int selectReviewNum(Member m);
 
 	ArrayList<Board> selectMyAsk(Member m);
+	
+	int checkDupli(Movie m);
+
+
+	//이진희 id찾기
+	String findId(Member m);
+
+	//이진희 password찾기
+	int findPassword(Member m);
+
+	int updatePwd(Member m);
+
+	int updateStatus(Member m);
+
+
 	
 }
      

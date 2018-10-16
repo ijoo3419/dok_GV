@@ -25,6 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -38,7 +39,7 @@ import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.member.model.vo.MyReply;
 import com.kh.dok.movie.model.service.MovieService;
 import com.kh.dok.movie.model.vo.Movie;
-import com.kh.dok.movie.model.vo.MovieSumbnail;
+import com.kh.dok.movie.model.vo.MovieThumbnail;
 
 @Controller
 @SessionAttributes("loginUser")
@@ -79,6 +80,12 @@ public class MemberController {
    @RequestMapping("editInfo.me")
    public String editInfoView(){
       return "member/editInfo";
+   }
+   
+   //회원 정보 수정 - 비밀번호 변경
+   @RequestMapping("changePass.me")
+	public String editPassView(){
+		return "member/change_pwd";
    }
 
    @RequestMapping("ask.me")
@@ -129,6 +136,7 @@ public class MemberController {
 	   System.out.println("loginCheck MemberController : " + m);
 	   
       try {
+    	  
 		model.addAttribute("loginUser", ms.loginMember(m));
 		
 		return "main/main";
@@ -146,22 +154,22 @@ public class MemberController {
    @ResponseBody
    @RequestMapping("checkEditable.me")
    public int checkPass(Member m, Model model){
-	   
+
 	   int result;
-	   
-	try {
-		result = ms.checkPass(m);
-		return result;
-		
-	} catch (LoginException e) {
-		
-		result = 0;
-		return result;
-		
-	}
-	   
+
+	   try {
+		   result = ms.checkPass(m);
+		   return result;
+
+	   } catch (LoginException e) {
+
+		   result = 0;
+		   return result;
+
+	   }
+
    }
-   
+
    //암호화 처리 로그아웃(성희)
    @RequestMapping("logout.me")
    public String logout(SessionStatus status){
@@ -286,8 +294,6 @@ public class MemberController {
 	   
 	   int result = ms.updateInfo(m);
 	   
-	  
-	   
 	   if(result > 0){
 		   result = 1;
 		   
@@ -302,21 +308,60 @@ public class MemberController {
 	   
    }
    
+   //회원 정보 수정 - 비밀번호 변경
+   @ResponseBody
+   @RequestMapping("change_Pwd.me")
+   public int updatePwd(Member m, Model model){
+	   
+	   m.setUser_pwd(passwordEncoder.encode(m.getNew_pass()));
+	   
+	   int result = ms.updatePwd(m);
+	   
+	   if(result > 0){
+		   result = 1;
+		   
+		   //수정한 정보를 loginUser 세션에 업데이트
+		   model.addAttribute("loginUder", ms.selectUser(m));
+		   
+		   return result;
+		   
+	   } else {
+		   result = 0;
+		   return result;
+	   }
+	   
+   }
+   
 
    //위시리스트(보고싶어) DB에 저장 (황이주)
    @ResponseBody
    @RequestMapping("insertWish.me")
    public int insertWishlist(Movie m, Model model){
-	   System.out.println(m);
+
+	   int result = 0;
+	   int dupliResult = 0;
 	   
-	   int result = ms.insertWish(m);
+	   //위시리스트에 중복 데이터 있는지 확인
+	   dupliResult = ms.checkDupli(m);
 	   
-	   if(result > 0){
-		   result = 1;
+	   if(dupliResult > 0){
+		   
+		   result = 3;
 		   return result;
+		   
 	   } else {
-		   result = 0;
-		   return result;
+		   
+		 //중복 없을 시 위시리스트에 insert
+		   result = ms.insertWish(m);
+
+		   if(result > 0){
+			   result = 1;
+			   return result;
+		   } else {
+			   result = 0;
+			   return result;
+		   }
+		   
 	   }
 	   
    }
@@ -335,9 +380,6 @@ public class MemberController {
 		   
 		   Member loginUser = ms.loginKakaoMember(m);
 		   
-		   
-		   
-		 
 		   model.addAttribute("loginUser", loginUser);
 
 		   return "member/insertMyInfo";
@@ -393,11 +435,11 @@ public class MemberController {
    
    //위시리스트 뷰 출력
 	@RequestMapping("wishlist.me")
-	public String wishlistView(MovieSumbnail msn, Model model, HttpServletRequest request){
+	public String wishlistView(MovieThumbnail msn, Model model, HttpServletRequest request){
 		
-		 Member m = (Member)request.getSession().getAttribute("loginUser");
+		Member m = (Member)request.getSession().getAttribute("loginUser");
 		
-		ArrayList<MovieSumbnail> wishlistView = ms.selectWishList(msn, m);
+		ArrayList<MovieThumbnail> wishlistView = ms.selectWishList(msn, m);
 		
 		model.addAttribute("wishlistView", wishlistView);
 		
@@ -423,11 +465,165 @@ public class MemberController {
 		  
 		  Member m = (Member)request.getSession().getAttribute("loginUser");
 		  
-		  ArrayList<MyReply> reviewsView = ms.selectReply(m);
+		  ArrayList<MyReply> movieReviews = ms.selectMovReply(m);
+		  ArrayList<MyReply> cinemaReviews = ms.selectCinReply(m);
 		  
-		  model.addAttribute("reviewsView", reviewsView);
+		  model.addAttribute("movieReviews", movieReviews);
+		  model.addAttribute("cinemaReviews", cinemaReviews);
 
 	     return "member/reviews";
 	  }
+	  
+
+	  
+	  @RequestMapping("findIdPassword.me")
+	   public String findIdPassword(){
+		   
+		   return "member/findIdPassword";
+
+	   }
+	  
+	 
+	 /*//이진희 id찾기 
+	  @ResponseBody
+	   @RequestMapping("findUser.me")
+	   public ArrayList<Member> findId(@RequestParam String name, @RequestParam String tel){
+		  
+		  Member m = new Member();
+		  
+		  m.setUser_name(name);
+		  m.setPhone(tel);
+		  
+		  ArrayList<Member> findlist = ms.findId(m);
+		  
+		  return findlist; 
+	   }*/
+	  
+	//이진희 id찾기 
+	  
+	   @RequestMapping(value="findUser.me")
+	   public @ResponseBody String findId(@RequestParam String name, @RequestParam String tel){
+		  
+		  Member m = new Member();
+		  
+		  m.setUser_name(name);
+		  m.setPhone(tel);
+		  
+		  String findlist = ms.findId(m);
+		  
+		  return findlist; 
+	   }
+	  
+	  
+	 //이진희 비밀번호 찾기
+	  
+		   @ResponseBody
+		   @RequestMapping("findPassword.me")
+		   public int findPassWord(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		  
+		   String email = request.getParameter("email");
+		   String authNum = "";
+		   int authNumOrig = 0;
+		   
+		   authNum = RandomNum1();
+		  authNumOrig = Integer.parseInt(authNum);
+
+		   findEmail(email.toString(),authNum);
+		
+		   return authNumOrig;
+		     
+	   }
+	   
+	   private void findEmail(String email, String authNum){
+		   String host = "smtp.gmail.com";
+		   String subject = "회원님의 임시비밀번호 입니다! 로그인 후 비밀번호를 변경해주세요.";
+		   String fromName = "독GV";
+		   String from = "dokdokdokGV@gmail.com";
+		   String to1 = email;
+		   
+		   String content = "임시비밀번호[" + authNum + "]";
+		   
+		   System.out.println("이멜로 간 인증번호" +  authNum);
+		   
+		   try {
+			   
+			   Properties props = new Properties();
+			   
+			   props.put("mail.smtp.starttls.enable", "true");
+			   props.put("mail.transport.protocol", "smtp");
+			   props.put("mail.smtp.host", host);
+			   props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			   props.put("mail.smtp.port", "465");
+			   props.put("mail.smtp.user", from);
+			   props.put("mail.smtp.auth", "true");
+			   
+			   Session mailSession = Session.getInstance(props, new javax.mail.Authenticator() {
+				   protected PasswordAuthentication getPasswordAuthentication(){
+					   return new PasswordAuthentication("dokdokdokGV", "dokdokdok123"); //이거 username 바꿔가면서 try
+				   }
+			   });
+			   
+			  Message msg = new MimeMessage(mailSession);
+			  msg.setFrom(new InternetAddress(from, MimeUtility.encodeText(fromName, "UTF-8", "B")));
+			  
+			  InternetAddress[] address1 = { new InternetAddress(to1) };
+			  msg.setRecipients(Message.RecipientType.TO, address1);
+			  msg.setSubject(subject);
+			  msg.setSentDate(new java.util.Date());
+			  msg.setContent(content, "text/html;charset=euc-kr");
+			  
+			  Transport.send(msg);
+			  
+			  Member m = new Member();
+			   m.setEmail(email);
+			   m.setUser_pwd(passwordEncoder.encode(authNum));
+			   
+			   int updatePwd = ms.findPassword(m);
+			   
+		   } catch (MessagingException e) {
+			   e.printStackTrace();
+		   } catch (Exception e) {
+			   e.printStackTrace();
+		   }
+	   }
+
+	public String RandomNum1(){
+		   StringBuffer buffer = new StringBuffer();
+		   for (int i = 0; i < 6; i++){
+			   int n = (int) (Math.random() * 10);
+			   buffer.append(n);
+		   }
+		   return buffer.toString();
+	   }
+
+	  //회원 탈퇴
+	  @RequestMapping("member_quit.me")
+	  public String memberQuitView(){
+		  return "member/member_quit";
+	  }
+	  
+	  @ResponseBody
+	  @RequestMapping("memberQuit.me")
+	  public int updateStatus(Member m){
+		  
+		int result;
+		  
+		try {
+			result = ms.checkPass(m);
+			if(result > 0){
+				  result = ms.updateStatus(m);
+				  return result;
+			  } else {
+				  result = 3;
+				  return result;
+			  }
+			
+		} catch (LoginException e) {
+			result = 0;
+			return result;
+		}
+		
+	  }
+
 
 }

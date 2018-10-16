@@ -216,12 +216,12 @@ input[type="checkbox"] + label:before, input[type="radio"] + label:before{
 
 									<hr />
 								</article>
-								<form action='ViewFiled.li' method='post'>
+								<!-- <form action='ViewFiled.li' method='post'>
 	<h3>상영관 면적 보기</h3>
 	<label>상영관ID : </label><input type='text' name='name'>
 	<button type='submit' class="primary">보기</button>
 	
-	</form>
+	</form> -->
 	<br><br><br><br><br><br><br><br><br><br><br><br><br>
 	
 </div>

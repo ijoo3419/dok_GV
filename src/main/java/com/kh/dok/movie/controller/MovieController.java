@@ -1,12 +1,11 @@
 package com.kh.dok.movie.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.GregorianCalendar;
+import java.util.List;
 
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,14 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kh.dok.licensee.controller.sheetController.cellClass;
-
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.common.Pagination;
-
+import com.kh.dok.licensee.controller.sheetController.cellClass;
 import com.kh.dok.movie.model.service.MovieService;
 import com.kh.dok.movie.model.vo.Movie;
-import com.kh.dok.movie.model.vo.MovieSumbnail;
+import com.kh.dok.movie.model.vo.MovieThumbnail;
 
 @Controller
 public class MovieController {
@@ -34,7 +31,7 @@ public class MovieController {
 	
 	//이진희 전체영화 출력
 	@RequestMapping("movie.mo")
-	public String showmovieView(MovieSumbnail msn, Model model, HttpServletRequest request){
+	public String showmovieView(MovieThumbnail msn, Model model, HttpServletRequest request){
 		int currentPage =1;
 		
 		if(request.getParameter("currentPage") != null){
@@ -45,10 +42,10 @@ public class MovieController {
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
-		ArrayList<MovieSumbnail> movieView = ms.selectMovie(msn, pi);
-		ArrayList<MovieSumbnail> movieRank1 = ms.selectMovieRank1(msn);
-		ArrayList<MovieSumbnail> movieRank2 = ms.selectMovieRank2(msn);
-		ArrayList<MovieSumbnail> movieRank3 = ms.selectMovieRank3(msn);
+		ArrayList<MovieThumbnail> movieView = ms.selectMovie(msn, pi);
+		ArrayList<MovieThumbnail> movieRank1 = ms.selectMovieRank1(msn);
+		ArrayList<MovieThumbnail> movieRank2 = ms.selectMovieRank2(msn);
+		ArrayList<MovieThumbnail> movieRank3 = ms.selectMovieRank3(msn);
 		
 		model.addAttribute("pi",pi);
 		model.addAttribute("movieView",movieView);
@@ -64,14 +61,16 @@ public class MovieController {
 	public String showmovieDetailView(@RequestParam String id, Model model){
 		
 		System.out.println("파라미터 옴?" +id);
-		MovieSumbnail msn = new MovieSumbnail();
+		MovieThumbnail msn = new MovieThumbnail();
 		
 		msn.setMovie_id(id);
 		
-		ArrayList<MovieSumbnail> movieDetail = ms.selectMovieDetail(msn);
-		ArrayList<MovieSumbnail> movieimagecut = ms.selectMovieImageCut(msn);
-		ArrayList<MovieSumbnail> movievideo= ms.selectMovieVideo(msn);
+		ArrayList<MovieThumbnail> movieDetail = ms.selectMovieDetail(msn);
+		/*ArrayList<MovieThumbnail> movieRanking = ms.selectMovieRanking(msn);*/
+		ArrayList<MovieThumbnail> movieimagecut = ms.selectMovieImageCut(msn);
+		ArrayList<MovieThumbnail> movievideo= ms.selectMovieVideo(msn);
 		
+	/*	model.addAttribute("movieRanking",movieRanking);*/
 		model.addAttribute("movieDetail",movieDetail);
 		model.addAttribute("movieimagecut",movieimagecut);
 		model.addAttribute("movievideo",movievideo);
@@ -156,7 +155,9 @@ public class MovieController {
 
 	//박지용 @ResponseBody를 이용한 ajax 처리
 	@RequestMapping(value="selectMovieRoom.mo")
-	public @ResponseBody String[][] selectMovieRoom(@RequestParam String movieRoomIdVal,HttpServletRequest request){
+
+	public @ResponseBody String[][] selectMovieRoom(@RequestParam String movieRoomIdVal, HttpServletRequest request){
+
 		System.out.println("영화관 출력하기: " + movieRoomIdVal);
 		
 		String name = movieRoomIdVal;
@@ -171,6 +172,70 @@ public class MovieController {
 		}
 		
 		return arr;
+	}
+	
+	@RequestMapping(value="insertSeat.mo")
+	public @ResponseBody int insertSeat(@RequestParam String turningId, @RequestParam String movieRoomId, @RequestParam String[] seatSplitAjax, 
+										@RequestParam String userId, @RequestParam String price){
+		int check = 1;
+		
+		String SeatId = "";
+		
+		/*System.out.println(turningId + " " + movieRoomId); 
+		
+		System.out.println(Arrays.toString(seatSplitAjax));*/
+		
+		for(int i = 0; i < seatSplitAjax.length; i++){
+			if(check != 0){
+				Movie m = new Movie();
+				
+				SeatId = seatSplitAjax[i];
+				m.setTurning_id(turningId);
+				m.setMovieroom_id(movieRoomId);
+				m.setSeat_name(SeatId);
+				m.setMid(userId);
+				m.setPrice(price);
+				
+				//좌석 예매 insert
+				check = ms.insertSeat(m);
+	
+				//예매된 좌석 id 가져오기
+				m.setSeat_id("S" + ms.selectSeatId());
+				
+				//예매 테이블 추가
+				ms.insertReservation(m);
+				
+			}else{
+				System.out.println(i + "번째 추가 안됨");
+			}
+		}
+		
+		return check;
+	}
+	
+	@RequestMapping(value="insertPay.mo")
+	public @ResponseBody int insertPay(@RequestParam String msg, @RequestParam String movieRoomId, @RequestParam String turningId){
+		int check = 1;
+		
+		String[] msgSplit = msg.split(",");
+		
+		System.out.println(msgSplit[3]);
+		System.out.println(movieRoomId);
+		System.out.println(turningId);
+		
+		Movie m = new Movie();
+		m.setMovie_id(movieRoomId);
+		m.setTurning_id(turningId);
+		m.setMsg(msgSplit[3]);
+		
+		//예매 ID 가져오기
+		ArrayList<Movie> pay = ms.selectPayList(m);
+		
+		for (int index = 0; index < pay.size(); index++) {
+			   System.out.println(pay.get(index));
+		}
+		
+		return check;
 	}
 	
 }

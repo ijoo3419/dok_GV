@@ -11,7 +11,7 @@
 
 @font-face { font-family: 'GoyangIlsan'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GoyangIlsan.woff') format('woff'); font-weight: normal; font-style: normal; }
 
-body, div, p, li, h3, h1, h2, h4, h5, h6, input, th, tr, td, button, a {
+body, div, p, li, h3, h1, h2, h4, h5, h6, input, th, tr, td, button, a, select, textarea {
 		font-family: 'GoyangIlsan' !important;
 	}
 
@@ -187,7 +187,7 @@ a {
 			<li class="nli" style="border-left: 1px solid #a9a5a5;"><a href="movie.mo" title="영화 바로가기"><p>영화</p></a></li>
 			<li class="nli"><a href="cinema.ci" title="극장 바로가기"><p>극장</p></a></li>
 			<li class="nli"><a href="#" title="예매 바로가기"><p>예매</p></a></li>
-			<li class="nli"><a href="#" title="공지사항 바로가기"><p>공지사항</p></a></li>
+			<li class="nli"><a href="goNoticeMain.bo" title="공지사항 바로가기"><p>공지사항</p></a></li>
 			<li class="nli"><a href="login.me"><p>로그인</p></a></li>
 		</ul>
 		</c:if>
@@ -196,7 +196,7 @@ a {
 			<li class="nli" style="border-left: 1px solid #a9a5a5;"><a href="movie.mo" title="영화 바로가기"><p>영화</p></a></li>
 			<li class="nli"><a href="cinema.ci" title="극장 바로가기"><p>극장</p></a></li>
 			<li class="nli"><a href="#" title="예매 바로가기"><p>예매</p></a></li>
-			<li class="nli"><a href="#" title="공지사항 바로가기"><p>공지사항</p></a></li>
+			<li class="nli"><a href="goNoticeMain.bo" title="공지사항 바로가기"><p>공지사항</p></a></li>
 			<li class="nli"><a href="logout.me" title="로그아웃 하기"><p>로그아웃</p></a></li>
       
 			<li class="nli"><a href="member.me" title="마이페이지 바로가기"><p>마이페이지</p></a></li>

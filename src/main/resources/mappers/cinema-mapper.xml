@@ -15,10 +15,10 @@
 		<result column="FILE_LEVEL" property="file_level"/>
 	</resultMap>
 	
-<!-- 영화관 추가하기~!~!~!~!~! -->
+<!-- 정태 영화관 추가하기~!~!~!~!~! -->
 <insert id="insertTheater" parameterType="Cinema">
 		INSERT INTO THEATER VALUES('TT' || TO_CHAR(THEATER_THEATER_ID.NEXTVAL), #{mid},
-		#{theaterName}, #{theaterRoot}, #{theaterText})
+		#{theaterName}, #{theaterRoot}, #{theaterText},'은평구' ,'A1')
 </insert>
 <!-- 이진희 영화관 출력 -->
 <select id="selectCinema" parameterType="Cinema" resultMap="cinemaResultSet">

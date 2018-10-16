@@ -227,8 +227,10 @@
 		ORDER BY VISIT_ID
 	</select>
 	
+
 	<delete id="deleteVisit" parameterType="date">
 		DELETE VISIT_HISTORY
+
 		WHERE VISIT_TIME = #{lastTime}
 	</delete>
 	<insert id="insertVcount" parameterType="VisitHistory">

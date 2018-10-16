@@ -10,7 +10,7 @@ import com.kh.dok.member.model.vo.BookingHistory;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.member.model.vo.MyReply;
 import com.kh.dok.movie.model.vo.Movie;
-import com.kh.dok.movie.model.vo.MovieSumbnail;
+import com.kh.dok.movie.model.vo.MovieThumbnail;
 
 
 @Repository
@@ -110,10 +110,10 @@ public class MemberDaoImpl implements MemberDao {
 
 	//황이주 위시리스트 출력
 	@Override
-	public ArrayList<MovieSumbnail> selectWishList(SqlSessionTemplate sqlSession, MovieSumbnail msn, Member m) {
-		ArrayList<MovieSumbnail> wishlistView =  null;
+	public ArrayList<MovieThumbnail> selectWishList(SqlSessionTemplate sqlSession, MovieThumbnail msn, Member m) {
+		ArrayList<MovieThumbnail> wishlistView =  null;
 		
-		wishlistView = (ArrayList)sqlSession.selectList("MovieSumbnail.selectWishlist", m);
+		wishlistView = (ArrayList)sqlSession.selectList("MovieThumbnail.selectWishlist", m);
 		
 		return wishlistView;
 	}
@@ -131,11 +131,20 @@ public class MemberDaoImpl implements MemberDao {
 
 	//황이주 내가 쓴 리뷰 조회
 	@Override
-	public ArrayList<MyReply> selectMyReply(SqlSessionTemplate sqlSession, Member m) {
+	public ArrayList<MyReply> selectMovReply(SqlSessionTemplate sqlSession, Member m) {
 		
 		ArrayList<MyReply> reviewsView = null;
 		
 		reviewsView = (ArrayList)sqlSession.selectList("MyReply.selectReviews", m);
+		
+		return reviewsView;
+	}
+	@Override
+	public ArrayList<MyReply> selectCinReply(SqlSessionTemplate sqlSession, Member m) {
+		
+		ArrayList<MyReply> reviewsView = null;
+		
+		reviewsView = (ArrayList)sqlSession.selectList("MyReply.selectCineRev", m);
 		
 		return reviewsView;
 	}
@@ -164,6 +173,51 @@ public class MemberDaoImpl implements MemberDao {
 		ArrayList<Board> myAskView = null;
 		myAskView = (ArrayList)sqlSession.selectList("Board.selectMyAsk", m);
 		return myAskView;
+	}
+
+	//위시리스트 중복 조회
+	@Override
+	public int checkDupli(SqlSessionTemplate sqlSession, Movie m) {
+		
+		int checkDupli = sqlSession.selectOne("MovieThumbnail.checkDupli", m);
+		
+		return checkDupli;
+	}
+
+
+
+	
+	//이진희 id찾기
+	@Override
+	public String findId(SqlSessionTemplate sqlSession, Member m) {
+		String findlist = null;
+		
+		findlist = sqlSession.selectOne("Member.findId",m);
+		
+		System.out.println("dao id : " + findlist);
+		return findlist;
+	}
+
+	//이진희 password찾기
+	@Override
+	public int findPassword(SqlSessionTemplate sqlSession, Member m) {
+		int authNumOrig = sqlSession.update("Member.findPassword",m);
+		
+		System.out.println("dao : " + authNumOrig);
+		return authNumOrig;
+	}
+
+	//비밀번호 변경
+	@Override
+	public int updatePwd(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("Member.updatePwd", m);
+	}
+
+	//회원 탈퇴
+	@Override
+	public int updateStatus(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("Member.updateStatus", m);
+
 	}
 	
 

@@ -43,6 +43,11 @@ public class Movie  implements java.io.Serializable{
 	
 	private int pay_count;
 	
+	private String seat_id;
+	private String seat_name;
+	
+	private String msg;
+	
 	//황이주 추가
 	private String mid;
 	
@@ -53,7 +58,7 @@ public class Movie  implements java.io.Serializable{
 			String turning_id, String play_id, String price, Date turning_day, String turning_time, String movieroom_id,
 			String movieroom_name, String play_status, String area_id, String area_name, String area_level,
 			String area_parents, String theater_id, String theater_name, String movie_type, String file_src,
-			int pay_count, String mid) {
+			int pay_count, String seat_id, String seat_name, String msg, String mid) {
 		super();
 		this.movie_id = movie_id;
 		this.movie_title = movie_title;
@@ -82,6 +87,9 @@ public class Movie  implements java.io.Serializable{
 		this.movie_type = movie_type;
 		this.file_src = file_src;
 		this.pay_count = pay_count;
+		this.seat_id = seat_id;
+		this.seat_name = seat_name;
+		this.msg = msg;
 		this.mid = mid;
 	}
 
@@ -191,6 +199,18 @@ public class Movie  implements java.io.Serializable{
 
 	public int getPay_count() {
 		return pay_count;
+	}
+
+	public String getSeat_id() {
+		return seat_id;
+	}
+
+	public String getSeat_name() {
+		return seat_name;
+	}
+
+	public String getMsg() {
+		return msg;
 	}
 
 	public String getMid() {
@@ -305,6 +325,18 @@ public class Movie  implements java.io.Serializable{
 		this.pay_count = pay_count;
 	}
 
+	public void setSeat_id(String seat_id) {
+		this.seat_id = seat_id;
+	}
+
+	public void setSeat_name(String seat_name) {
+		this.seat_name = seat_name;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
 	public void setMid(String mid) {
 		this.mid = mid;
 	}
@@ -319,7 +351,8 @@ public class Movie  implements java.io.Serializable{
 				+ movieroom_id + ", movieroom_name=" + movieroom_name + ", play_status=" + play_status + ", area_id="
 				+ area_id + ", area_name=" + area_name + ", area_level=" + area_level + ", area_parents=" + area_parents
 				+ ", theater_id=" + theater_id + ", theater_name=" + theater_name + ", movie_type=" + movie_type
-				+ ", file_src=" + file_src + ", pay_count=" + pay_count + ", mid=" + mid + "]";
+				+ ", file_src=" + file_src + ", pay_count=" + pay_count + ", seat_id=" + seat_id + ", seat_name="
+				+ seat_name + ", msg=" + msg + ", mid=" + mid + "]";
 	}
 	
 }

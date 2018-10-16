@@ -2,9 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="MovieSumbnail">
-	<resultMap type="MovieSumbnail" id="movieSumbnailResultSet">
+<mapper namespace="MovieThumbnail">
+	<resultMap type="MovieThumbnail" id="movieThumbnailResultSet">
 		<id property="movie_id" column="MOVIE_ID"/>
+		<result property="rnum" column="RNUM"/>
 		<result property="movie_title" column="MOVIE_TITLE"/>
 		<result property="movie_etitle" column="MOVIE_ETITLE"/>
 		<result property="movie_content" column="MOVIE_CONTENT"/>
@@ -17,6 +18,8 @@
 		<result property="file_src" column="FILE_SRC" />
 		<result property="file_level" column="FILE_LEVEL" />
 		<result property="mid" column="MID" />
+		<result property="movie_actor" column="MOVIE_ACTOR" />
+		<result property="movie_type" column="MOVIE_TYPE" />
 	</resultMap>
 	
 	<select id="getlistCount" resultType="_int">
@@ -27,9 +30,9 @@
 		 AND BF.FILE_LEVEL='1' 
 	</select>
 	
-	<select id="selectMovie" resultMap="movieSumbnailResultSet" parameterType="MovieSumbnail">
+	<select id="selectMovie" resultMap="movieThumbnailResultSet" parameterType="MovieThumbnail">
 		SELECT M.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_ETITLE,
-		 M.MOVIE_CONTENT, M.OPEN_DATE,M.DIRECTOR_NAME, 
+		 M.OPEN_DATE,M.DIRECTOR_NAME, 
 		 M.PRODUCTION_COM, M.MOVIE_AGE,M.GENRE, 
 		 M.RUNNIG_TIME, BF.FILE_SRC, BF.FILE_LEVEL
 		 FROM MOVIE M, BOARD B, BOARD_FILE BF
@@ -38,8 +41,8 @@
 		 AND BF.FILE_LEVEL='1' 
 	 </select>
 	 
-	 <select id="movieDetail" resultMap="movieSumbnailResultSet" parameterType="MovieSumbnail">
-		SELECT M.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_ETITLE,
+	 <select id="movieDetail" resultMap="movieThumbnailResultSet" parameterType="MovieThumbnail">
+		<!-- SELECT M.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_ETITLE,
 		 M.MOVIE_CONTENT, M.OPEN_DATE,M.DIRECTOR_NAME, 
 		 M.PRODUCTION_COM, M.MOVIE_AGE,M.GENRE, 
 		 M.RUNNIG_TIME, BF.FILE_SRC, BF.FILE_LEVEL
@@ -47,10 +50,35 @@
 		 WHERE M.MOVIE_ID = B.MOVIE_ID 
 		 AND B.BOARD_ID = BF.BOARD_ID
 		 AND M.MOVIE_ID = #{id}
-		 AND BF.FILE_LEVEL='1'
+		 AND BF.FILE_LEVEL='1' -->
+		 
+		  SELECT RNUM, MOVIE_ID, MOVIE_TITLE, MOVIE_ETITLE,
+		 MOVIE_CONTENT, OPEN_DATE, DIRECTOR_NAME, 
+		 PRODUCTION_COM,MOVIE_AGE,GENRE, 
+		 RUNNIG_TIME, FILE_SRC, FILE_LEVEL, MOVIE_ACTOR, MOVIE_TYPE
+	FROM (SELECT ROWNUM RNUM, MOVIE_ID, MOVIE_TITLE, MOVIE_ETITLE, MOVIE_CONTENT, OPEN_DATE, DIRECTOR_NAME, 
+	      PRODUCTION_COM, MOVIE_AGE,GENRE, 
+	      RUNNIG_TIME, FILE_SRC, FILE_LEVEL, MOVIE_ACTOR, MOVIE_TYPE
+	      FROM(SELECT M.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_ETITLE, TO_CHAR(DBMS_LOB.SUBSTR(M.MOVIE_CONTENT, 4000))AS MOVIE_CONTENT, 
+                M.OPEN_DATE, M.DIRECTOR_NAME, 
+	             M.PRODUCTION_COM, M.MOVIE_AGE, M.GENRE, 
+	             M.RUNNIG_TIME, BF.FILE_SRC, BF.FILE_LEVEL, M.MOVIE_ACTOR, M.MOVIE_TYPE, TU.TURNING_ID, COUNT(RE.SEAT_ID)
+	             FROM MOVIE M, BOARD B, BOARD_FILE BF, PLAY PL, TURNING TU, SEAT SE, RESERVATION RE
+	             WHERE M.MOVIE_ID = B.MOVIE_ID 
+	             AND B.BOARD_ID = BF.BOARD_ID
+	             AND M.MOVIE_ID = PL.MOVIE_ID
+	             AND PL.PLAY_ID = TU.PLAY_ID
+	             AND TU.TURNING_ID = SE.TURNING_ID
+	             AND SE.SEAT_ID = RE.SEAT_ID(+)
+	             AND BF.FILE_LEVEL='1'
+	             GROUP BY M.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_ETITLE, TO_CHAR(DBMS_LOB.SUBSTR(M.MOVIE_CONTENT, 4000)),
+                 M.OPEN_DATE,M.DIRECTOR_NAME, M.PRODUCTION_COM, M.MOVIE_AGE, M.GENRE, M.RUNNIG_TIME, 
+	             BF.FILE_SRC, BF.FILE_LEVEL, M.MOVIE_ACTOR, M.MOVIE_TYPE,TU.TURNING_ID
+	             ORDER BY COUNT(RE.SEAT_ID) DESC))  
+WHERE MOVIE_ID = #{id}
 	 </select>
 	 
-	 <select id="movieImageCut" resultMap="movieSumbnailResultSet" parameterType="MovieSumbnail">
+	 <select id="movieImageCut" resultMap="movieThumbnailResultSet" parameterType="MovieThumbnail">
 		SELECT M.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_ETITLE,
 		 M.MOVIE_CONTENT, M.OPEN_DATE,M.DIRECTOR_NAME, 
 		 M.PRODUCTION_COM, M.MOVIE_AGE,M.GENRE, 
@@ -62,7 +90,7 @@
 		 AND BF.FILE_LEVEL = '2'
 	 </select>
 	
-	<select id="movieVideo" resultMap="movieSumbnailResultSet" parameterType="MovieSumbnail">
+	<select id="movieVideo" resultMap="movieThumbnailResultSet" parameterType="MovieThumbnail">
 		SELECT M.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_ETITLE,
 		 M.MOVIE_CONTENT, M.OPEN_DATE,M.DIRECTOR_NAME, 
 		 M.PRODUCTION_COM, M.MOVIE_AGE,M.GENRE, 
@@ -74,8 +102,8 @@
 		 AND BF.FILE_LEVEL = '3'
 	 </select>
 	
-	<select id="selectMovieRank1" resultMap="movieSumbnailResultSet" parameterType="MovieSumbnail">
-	SELECT MOVIE_ID, MOVIE_TITLE, MOVIE_ETITLE, OPEN_DATE, DIRECTOR_NAME, 
+	<select id="selectMovieRank1" resultMap="movieThumbnailResultSet" parameterType="MovieThumbnail">
+	SELECT RNUM, MOVIE_ID, MOVIE_TITLE, MOVIE_ETITLE, OPEN_DATE, DIRECTOR_NAME, 
 	PRODUCTION_COM, MOVIE_AGE,GENRE, 
 	RUNNIG_TIME, FILE_SRC, FILE_LEVEL
 	FROM (SELECT ROWNUM RNUM, MOVIE_ID, MOVIE_TITLE, MOVIE_ETITLE, OPEN_DATE, DIRECTOR_NAME, 
@@ -83,24 +111,24 @@
 	      RUNNIG_TIME, FILE_SRC, FILE_LEVEL
 	      FROM(SELECT M.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_ETITLE, M.OPEN_DATE,M.DIRECTOR_NAME, 
 	             M.PRODUCTION_COM, M.MOVIE_AGE,M.GENRE, 
-	             M.RUNNIG_TIME, BF.FILE_SRC, BF.FILE_LEVEL, TU.TURNING_ID, COUNT(TU.TURNING_ID)
+	             M.RUNNIG_TIME, BF.FILE_SRC, BF.FILE_LEVEL, TU.TURNING_ID, COUNT(RE.SEAT_ID)
 	             FROM MOVIE M, BOARD B, BOARD_FILE BF, PLAY PL, TURNING TU, SEAT SE, RESERVATION RE
 	             WHERE M.MOVIE_ID = B.MOVIE_ID 
 	             AND B.BOARD_ID = BF.BOARD_ID
 	             AND M.MOVIE_ID = PL.MOVIE_ID
 	             AND PL.PLAY_ID = TU.PLAY_ID
 	             AND TU.TURNING_ID = SE.TURNING_ID
-	             AND SE.SEAT_ID = RE.SEAT_ID
+	             AND SE.SEAT_ID = RE.SEAT_ID(+)
 	             AND BF.FILE_LEVEL='1'
 	             group by M.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_ETITLE, M.OPEN_DATE, 
 	             M.DIRECTOR_NAME, M.PRODUCTION_COM, M.MOVIE_AGE, M.GENRE, M.RUNNIG_TIME, 
 	             BF.FILE_SRC, BF.FILE_LEVEL, TU.TURNING_ID
-	             ORDER BY COUNT(TU.TURNING_ID) DESC))     
+	             ORDER BY COUNT(RE.SEAT_ID) DESC))     
 WHERE RNUM BETWEEN 1 AND 3
 	</select>
 	
-		<select id="selectMovieRank2" resultMap="movieSumbnailResultSet" parameterType="MovieSumbnail">
-	SELECT MOVIE_ID, MOVIE_TITLE, MOVIE_ETITLE, OPEN_DATE, DIRECTOR_NAME, 
+		<select id="selectMovieRank2" resultMap="movieThumbnailResultSet" parameterType="MovieThumbnail">
+	SELECT RNUM, MOVIE_ID, MOVIE_TITLE, MOVIE_ETITLE, OPEN_DATE, DIRECTOR_NAME, 
 PRODUCTION_COM, MOVIE_AGE,GENRE, 
 RUNNIG_TIME, FILE_SRC, FILE_LEVEL
 FROM (SELECT ROWNUM RNUM, MOVIE_ID, MOVIE_TITLE, MOVIE_ETITLE, OPEN_DATE, DIRECTOR_NAME, 
@@ -108,24 +136,24 @@ FROM (SELECT ROWNUM RNUM, MOVIE_ID, MOVIE_TITLE, MOVIE_ETITLE, OPEN_DATE, DIRECT
       RUNNIG_TIME, FILE_SRC, FILE_LEVEL
       FROM(SELECT M.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_ETITLE, M.OPEN_DATE,M.DIRECTOR_NAME, 
              M.PRODUCTION_COM, M.MOVIE_AGE,M.GENRE, 
-             M.RUNNIG_TIME, BF.FILE_SRC, BF.FILE_LEVEL, TU.TURNING_ID, COUNT(TU.TURNING_ID)
+             M.RUNNIG_TIME, BF.FILE_SRC, BF.FILE_LEVEL, TU.TURNING_ID, COUNT(RE.SEAT_ID)
              FROM MOVIE M, BOARD B, BOARD_FILE BF, PLAY PL, TURNING TU, SEAT SE, RESERVATION RE
              WHERE M.MOVIE_ID = B.MOVIE_ID 
              AND B.BOARD_ID = BF.BOARD_ID
              AND M.MOVIE_ID = PL.MOVIE_ID
              AND PL.PLAY_ID = TU.PLAY_ID
              AND TU.TURNING_ID = SE.TURNING_ID
-             AND SE.SEAT_ID = RE.SEAT_ID
+             AND SE.SEAT_ID = RE.SEAT_ID(+)
              AND BF.FILE_LEVEL='1'
              group by M.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_ETITLE, M.OPEN_DATE, 
              M.DIRECTOR_NAME, M.PRODUCTION_COM, M.MOVIE_AGE, M.GENRE, M.RUNNIG_TIME, 
              BF.FILE_SRC, BF.FILE_LEVEL, TU.TURNING_ID
-             ORDER BY COUNT(TU.TURNING_ID) DESC))     
+             ORDER BY COUNT(RE.SEAT_ID) DESC))     
 WHERE RNUM BETWEEN 4 AND 6
 	</select>		
 	
-	<select id="selectMovieRank3" resultMap="movieSumbnailResultSet" parameterType="MovieSumbnail">
-SELECT MOVIE_ID, MOVIE_TITLE, MOVIE_ETITLE, OPEN_DATE, DIRECTOR_NAME, 
+	<select id="selectMovieRank3" resultMap="movieThumbnailResultSet" parameterType="MovieThumbnail">
+SELECT RNUM, MOVIE_ID, MOVIE_TITLE, MOVIE_ETITLE, OPEN_DATE, DIRECTOR_NAME, 
 PRODUCTION_COM, MOVIE_AGE,GENRE, 
 RUNNIG_TIME, FILE_SRC, FILE_LEVEL
 FROM (SELECT ROWNUM RNUM, MOVIE_ID, MOVIE_TITLE, MOVIE_ETITLE, OPEN_DATE, DIRECTOR_NAME, 
@@ -133,24 +161,26 @@ FROM (SELECT ROWNUM RNUM, MOVIE_ID, MOVIE_TITLE, MOVIE_ETITLE, OPEN_DATE, DIRECT
       RUNNIG_TIME, FILE_SRC, FILE_LEVEL
       FROM(SELECT M.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_ETITLE, M.OPEN_DATE,M.DIRECTOR_NAME, 
              M.PRODUCTION_COM, M.MOVIE_AGE,M.GENRE, 
-             M.RUNNIG_TIME, BF.FILE_SRC, BF.FILE_LEVEL, TU.TURNING_ID, COUNT(TU.TURNING_ID)
+             M.RUNNIG_TIME, BF.FILE_SRC, BF.FILE_LEVEL, TU.TURNING_ID, COUNT(RE.SEAT_ID)
              FROM MOVIE M, BOARD B, BOARD_FILE BF, PLAY PL, TURNING TU, SEAT SE, RESERVATION RE
              WHERE M.MOVIE_ID = B.MOVIE_ID 
              AND B.BOARD_ID = BF.BOARD_ID
              AND M.MOVIE_ID = PL.MOVIE_ID
              AND PL.PLAY_ID = TU.PLAY_ID
              AND TU.TURNING_ID = SE.TURNING_ID
-             AND SE.SEAT_ID = RE.SEAT_ID
+             AND SE.SEAT_ID = RE.SEAT_ID(+)
              AND BF.FILE_LEVEL='1'
              group by M.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_ETITLE, M.OPEN_DATE, 
              M.DIRECTOR_NAME, M.PRODUCTION_COM, M.MOVIE_AGE, M.GENRE, M.RUNNIG_TIME, 
              BF.FILE_SRC, BF.FILE_LEVEL, TU.TURNING_ID
-             ORDER BY COUNT(TU.TURNING_ID) DESC))     
+             ORDER BY COUNT(RE.SEAT_ID) DESC))     
 WHERE RNUM BETWEEN 7 AND 9
-	</select>		
+	</select>
+	
+
 	
 	<!-- 위시리스트 뷰 뿌리기용 쿼리문 -->
-	<select id="selectWishlist" resultMap="movieSumbnailResultSet" parameterType="MovieSumbnail">
+	<select id="selectWishlist" resultMap="movieThumbnailResultSet" parameterType="MovieThumbnail">
 	SELECT M.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_ETITLE,
 		 M.MOVIE_CONTENT, M.OPEN_DATE,M.DIRECTOR_NAME, 
 		 M.PRODUCTION_COM, M.MOVIE_AGE,M.GENRE, 
@@ -161,6 +191,14 @@ WHERE RNUM BETWEEN 7 AND 9
          AND W.MOVIE_ID = M.MOVIE_ID
 		 AND BF.FILE_LEVEL='1'
          AND W.MID = '${mid}'
+	</select>
+	
+	<!-- 위시리스트 중복 조회용 쿼리문 -->
+	<select id="checkDupli" parameterType="Movie" resultType="java.lang.Integer">
+    	SELECT NVL(COUNT(*),0)
+   	 	FROM WISHLIST
+    	WHERE MID = #{ mid }
+    	AND MOVIE_ID = #{ movie_id }
 	</select>
 	
 </mapper>

@@ -32,7 +32,7 @@ public class VisitListener implements HttpSessionListener{
 	@Override
 	public void sessionCreated(HttpSessionEvent arg0) {
 		HttpSession session = arg0.getSession();
-		session.setMaxInactiveInterval(10);
+		session.setMaxInactiveInterval(60*30);
 		
 		String time = session.getCreationTime()+"";
 		String ip = session.getId();

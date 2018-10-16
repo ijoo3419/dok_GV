@@ -15,7 +15,7 @@ import com.kh.dok.member.model.vo.BookingHistory;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.member.model.vo.MyReply;
 import com.kh.dok.movie.model.vo.Movie;
-import com.kh.dok.movie.model.vo.MovieSumbnail;
+import com.kh.dok.movie.model.vo.MovieThumbnail;
 
 
 @Service
@@ -144,13 +144,14 @@ public class MemberServiceImpl implements MemberService{
 
 	//황이주 위시리스트 출력
 	@Override
-	public ArrayList<MovieSumbnail> selectWishList(MovieSumbnail msn, Member m) {
-		ArrayList<MovieSumbnail> wishlistView = null;
+	public ArrayList<MovieThumbnail> selectWishList(MovieThumbnail msn, Member m) {
+		ArrayList<MovieThumbnail> wishlistView = null;
 		
 		wishlistView = md.selectWishList(sqlSession, msn, m);
 		
 		return wishlistView;
 	}
+
 	
 	//황이주 예매내역 뷰 출력
 	@Override
@@ -164,10 +165,18 @@ public class MemberServiceImpl implements MemberService{
 	
 	//황이주 내가 쓴 리뷰 출력
 	@Override
-	public ArrayList<MyReply> selectReply(Member m) {
+	public ArrayList<MyReply> selectMovReply(Member m) {
 		ArrayList<MyReply> reviewsView = null;
 		
-		reviewsView = md.selectMyReply(sqlSession, m);
+		reviewsView = md.selectMovReply(sqlSession, m);
+		
+		return reviewsView;
+	}
+	@Override
+	public ArrayList<MyReply> selectCinReply(Member m) {
+		ArrayList<MyReply> reviewsView = null;
+		
+		reviewsView = md.selectCinReply(sqlSession, m);
 		
 		return reviewsView;
 	}
@@ -198,6 +207,55 @@ public class MemberServiceImpl implements MemberService{
 		myAskView = md.selectMyAsk(sqlSession, m);
 		
 		return myAskView;
+	}
+	
+	//위시리스트 중복 조회
+	@Override
+	public int checkDupli(Movie m) {
+		return md.checkDupli(sqlSession, m);
+	}
+	
+	//비밀번호 변경
+	@Override
+	public int updatePwd(Member m) {
+		return md.updatePwd(sqlSession, m);
+	}
+	
+	//탈퇴
+	public int updateStatus(Member m){
+		return md.updateStatus(sqlSession, m);
+	}
+
+	//이진희 id찾기
+	/*@Override
+	public ArrayList<Member> findId(Member m) {
+		
+		ArrayList<Member> findlist = null;
+		
+		findlist = md.findId(sqlSession,m);
+		
+		System.out.println("service id : " + findlist);
+		
+		return findlist;
+	}*/
+	
+	@Override
+	public String findId(Member m) {
+		
+		String findlist = null;
+		
+		findlist = md.findId(sqlSession,m);
+		
+		System.out.println("service id : " + findlist);
+		
+		return findlist;
+	}
+
+	@Override
+	public int findPassword(Member m) {
+		
+		int authNumOrig = md.findPassword(sqlSession, m);
+		return authNumOrig;
 	}
 
 }

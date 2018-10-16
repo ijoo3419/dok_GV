@@ -275,13 +275,13 @@ hr {
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<hr width="1px" size="40px" color="black" id="hrline">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">예매율 7위 30.4%</a>
+			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">예매율 ${row.rnum }위</a>
 			<input type="button" value="예매하기" style="background:purple; font-clolr:white; float:right;  margin-top:10px;">
 			<br>
-			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">타입:</a><br>
+			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">타입: ${row.movie_type}</a><br>
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">개봉일: ${row.open_date }</a><br>
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">감독: ${row.director_name}</a><br>
-			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">출연진:</a><br>
+			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">출연진: ${row.movie_actor }</a><br>
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">장르: ${row.genre}</a><br>
 			
 			<input type="button" value="상영시간표" style="float:right; ">
@@ -353,9 +353,9 @@ hr {
 	  </div>
 	</div>
 	    </div>
-	    <div id="menu1" class="tab-pane fade">
+	    <div id="menu1" class="tab-pane fade" style="margin-left:10%;">
 	    <c:forEach items="${movievideo }" var="row2">
-			 <video width="500" height="400" controls>
+			 <video width="900" height="600" controls>
 			  <${row2.file_src } type="video/mp4">
 			  </video>
 			</c:forEach>
@@ -629,13 +629,18 @@ hr {
 					},
 					url: "insertWish.me",
 					success: function(data){
+						
+						console.log("insertWish.me의 data : " + data);
+						
 						if(data == '1'){
 							alert("위시리스트에 추가되었습니다.");
 							
 							location.href = "movie.mo";
 							
-						} else {
+						} else if (data == '0') {
 							alert("위시리스트 추가가 실패하였습니다 ㅠㅠ;;");
+						} else if (data == '3'){
+							alert("이미 위시리스트에 추가된 영화입니다.");
 						}
 					}
 					

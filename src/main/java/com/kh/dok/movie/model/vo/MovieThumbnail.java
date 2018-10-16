@@ -4,7 +4,8 @@ import java.sql.Date;
 
 import org.springframework.stereotype.Repository;
 @Repository
-public class MovieSumbnail  implements java.io.Serializable{
+public class MovieThumbnail  implements java.io.Serializable{
+	private int rnum;
 	private String movie_id;
 	private String movie_title;
 	private String movie_etitle;
@@ -17,25 +18,14 @@ public class MovieSumbnail  implements java.io.Serializable{
 	private int runnig_time;
 	private String file_src;
 	private int file_level;
+	private String mid;
+	private String movie_actor;
+	private String movie_type;
 	
-	public MovieSumbnail(){}
+	public MovieThumbnail(){}
 
-	public MovieSumbnail(String movie_id, String movie_title, String movie_etitle, String movie_content, Date open_date,
-			String director_name, String production_com, String movie_age, String genre, int runnig_time,
-			String file_src, int file_level) {
-		super();
-		this.movie_id = movie_id;
-		this.movie_title = movie_title;
-		this.movie_etitle = movie_etitle;
-		this.movie_content = movie_content;
-		this.open_date = open_date;
-		this.director_name = director_name;
-		this.production_com = production_com;
-		this.movie_age = movie_age;
-		this.genre = genre;
-		this.runnig_time = runnig_time;
-		this.file_src = file_src;
-		this.file_level = file_level;
+	public int getRnum() {
+		return rnum;
 	}
 
 	public String getMovie_id() {
@@ -86,6 +76,22 @@ public class MovieSumbnail  implements java.io.Serializable{
 		return file_level;
 	}
 
+	public String getMid() {
+		return mid;
+	}
+
+	public String getMovie_actor() {
+		return movie_actor;
+	}
+
+	public String getMovie_type() {
+		return movie_type;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+
 	public void setMovie_id(String movie_id) {
 		this.movie_id = movie_id;
 	}
@@ -134,14 +140,48 @@ public class MovieSumbnail  implements java.io.Serializable{
 		this.file_level = file_level;
 	}
 
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
+
+	public void setMovie_actor(String movie_actor) {
+		this.movie_actor = movie_actor;
+	}
+
+	public void setMovie_type(String movie_type) {
+		this.movie_type = movie_type;
+	}
+
 	@Override
 	public String toString() {
-		return "MovieSumbnail [movie_id=" + movie_id + ", movie_title=" + movie_title + ", movie_etitle=" + movie_etitle
-				+ ", movie_content=" + movie_content + ", open_date=" + open_date + ", director_name=" + director_name
-				+ ", production_com=" + production_com + ", movie_age=" + movie_age + ", genre=" + genre
-				+ ", runnig_time=" + runnig_time + ", file_src=" + file_src + ", file_level=" + file_level + "]";
+		return "MovieThumbnail [rnum=" + rnum + ", movie_id=" + movie_id + ", movie_title=" + movie_title
+				+ ", movie_etitle=" + movie_etitle + ", movie_content=" + movie_content + ", open_date=" + open_date
+				+ ", director_name=" + director_name + ", production_com=" + production_com + ", movie_age=" + movie_age
+				+ ", genre=" + genre + ", runnig_time=" + runnig_time + ", file_src=" + file_src + ", file_level="
+				+ file_level + ", mid=" + mid + ", movie_actor=" + movie_actor + ", movie_type=" + movie_type + "]";
+	}
+
+	public MovieThumbnail(int rnum, String movie_id, String movie_title, String movie_etitle, String movie_content,
+			Date open_date, String director_name, String production_com, String movie_age, String genre,
+			int runnig_time, String file_src, int file_level, String mid, String movie_actor, String movie_type) {
+		super();
+		this.rnum = rnum;
+		this.movie_id = movie_id;
+		this.movie_title = movie_title;
+		this.movie_etitle = movie_etitle;
+		this.movie_content = movie_content;
+		this.open_date = open_date;
+		this.director_name = director_name;
+		this.production_com = production_com;
+		this.movie_age = movie_age;
+		this.genre = genre;
+		this.runnig_time = runnig_time;
+		this.file_src = file_src;
+		this.file_level = file_level;
+		this.mid = mid;
+		this.movie_actor = movie_actor;
+		this.movie_type = movie_type;
 	}
 	
 	
-
 }

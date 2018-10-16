@@ -9,7 +9,7 @@ import com.kh.dok.member.model.vo.BookingHistory;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.member.model.vo.MyReply;
 import com.kh.dok.movie.model.vo.Movie;
-import com.kh.dok.movie.model.vo.MovieSumbnail;
+import com.kh.dok.movie.model.vo.MovieThumbnail;
 
 public interface MemberDao {
 
@@ -38,11 +38,13 @@ public interface MemberDao {
 
 	int updateClass(SqlSessionTemplate sqlSession, Member m);
 
-	ArrayList<MovieSumbnail> selectWishList(SqlSessionTemplate sqlSession, MovieSumbnail msn, Member m);
+	ArrayList<MovieThumbnail> selectWishList(SqlSessionTemplate sqlSession, MovieThumbnail msn, Member m);
 
 	ArrayList<BookingHistory> selectBookingHist(SqlSessionTemplate sqlSession, Member m);
 
-	ArrayList<MyReply> selectMyReply(SqlSessionTemplate sqlSession, Member m);
+	ArrayList<MyReply> selectMovReply(SqlSessionTemplate sqlSession, Member m);
+	
+	ArrayList<MyReply> selectCinReply(SqlSessionTemplate sqlSession, Member m);
 
 	int selectWishNum(SqlSessionTemplate sqlSession, Member m);
 	
@@ -51,6 +53,21 @@ public interface MemberDao {
 	int selectReviewNum(SqlSessionTemplate sqlSession, Member m);
 
 	ArrayList<Board> selectMyAsk(SqlSessionTemplate sqlSession, Member m);
+
+	int checkDupli(SqlSessionTemplate sqlSession, Movie m);
+
+
+	
+	//이진희 id찾기
+	String findId(SqlSessionTemplate sqlSession, Member m);
+
+	//이진희 password찾기
+	int findPassword(SqlSessionTemplate sqlSession, Member m);
+
+
+	int updatePwd(SqlSessionTemplate sqlSession, Member m);
+
+	int updateStatus(SqlSessionTemplate sqlSession, Member m);
 
      
 }
