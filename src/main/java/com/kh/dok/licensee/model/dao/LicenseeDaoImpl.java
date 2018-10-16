@@ -5,8 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.dok.cinema.model.vo.Cinema2;
 import com.kh.dok.licensee.model.vo.MovieRoom;
-import com.kh.dok.licensee.model.vo.Play;
-import com.kh.dok.licensee.model.vo.Turning;
 
 @Repository
 public class LicenseeDaoImpl implements LicenseeDao{
@@ -28,15 +26,6 @@ public class LicenseeDaoImpl implements LicenseeDao{
 		return movieRoomId;
 	}
 
-	@Override
-	public int insertPlay(SqlSessionTemplate sqlSession, Play p) {
-		return sqlSession.insert("Licensee.insertPlay");
-	}
-
-	@Override
-	public int insertTurning(SqlSessionTemplate sqlSession, Turning t) {
-		return sqlSession.insert("Licensee.insertTurning");
-	}
 
 	/*@Override
 	public int insertFile(SqlSessionTemplate sqlSession, BoardFile adFile) {

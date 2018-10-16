@@ -4,8 +4,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.dok.cinema.model.vo.Cinema2;
 import com.kh.dok.licensee.model.vo.MovieRoom;
-import com.kh.dok.licensee.model.vo.Play;
-import com.kh.dok.licensee.model.vo.Turning;
 
 public interface LicenseeDao {
 
@@ -15,9 +13,6 @@ public interface LicenseeDao {
 
 	MovieRoom checkMovieRoomId(SqlSessionTemplate sqlSession, MovieRoom mr);
 
-	int insertPlay(SqlSessionTemplate sqlSession, Play p);
-
-	int insertTurning(SqlSessionTemplate sqlSession, Turning t);
 
 /*	int insertFile(SqlSessionTemplate sqlSession, BoardFile adFile);
 

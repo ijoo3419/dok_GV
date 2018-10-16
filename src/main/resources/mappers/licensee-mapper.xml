@@ -21,7 +21,7 @@
 		<result property="file_level" column="FILE_LEVEL" />
 	</resultMap>
 	
-		<resultMap type="Play" id="PlayResultSet">
+	<!-- 	<resultMap type="Play" id="PlayResultSet">
 		
 		<id property="play_id" column="PLAY_ID"/>
 		<result property="movie_id" column="MOVIE_ID"/>
@@ -40,7 +40,7 @@
 		<result property="start_time" column="START_TIME"/>
 		<result property="end_time" column="END_TIME"/>
 
-		</resultMap>
+		</resultMap> -->
 	
 <!-- 상영관 추가하기~!~!~!~!~! -->
 <insert id="insertMovieRoom" parameterType="MovieRoom">

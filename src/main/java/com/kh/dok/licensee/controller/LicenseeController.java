@@ -17,8 +17,6 @@ import com.kh.dok.common.CommonUtils;
 import com.kh.dok.licensee.controller.sheetController.cellClass;
 import com.kh.dok.licensee.model.service.LicenseeService;
 import com.kh.dok.licensee.model.vo.MovieRoom;
-import com.kh.dok.licensee.model.vo.Play;
-import com.kh.dok.licensee.model.vo.Turning;
 
 @Controller
 @SessionAttributes(value="loginUser")
@@ -232,28 +230,6 @@ public class LicenseeController {
 	
 }
 	
-	@RequestMapping(value="playInsert.li")
-	public String insertPlay(Model model, Play p, Turning t,
-								HttpServletRequest request){
-		
-	
-		int resultPlay = ls.insertPlay(p);
-		
-		int resultTurning = ls.insertTurning(t);
-		
-		System.out.println("controller p = " + p);
-		System.out.println("controller t = " + t);
-		
-		
-		if(resultPlay > 0 && resultTurning > 0){
-			return "licensee/playManagePage";
-
-		}else{
-			model.addAttribute("msg", "상영 등록 실패");
-			return "common/errorPage";
-		}
-		
-	}
 	
 /*	 엑셀 파일 확인 
 	@RequestMapping(value="ViewFiled.li")

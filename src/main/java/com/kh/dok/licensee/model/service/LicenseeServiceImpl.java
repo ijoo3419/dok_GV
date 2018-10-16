@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 import com.kh.dok.cinema.model.vo.Cinema2;
 import com.kh.dok.licensee.model.dao.LicenseeDao;
 import com.kh.dok.licensee.model.vo.MovieRoom;
-import com.kh.dok.licensee.model.vo.Play;
-import com.kh.dok.licensee.model.vo.Turning;
 
 @Service
 public class LicenseeServiceImpl implements LicenseeService{
@@ -43,18 +41,6 @@ public class LicenseeServiceImpl implements LicenseeService{
 	}
 
 
-	@Override
-	public int insertPlay(Play p) {
-		
-		return ld.insertPlay(sqlSession, p);
-	}
-
-
-	@Override
-	public int insertTurning(Turning t) {
-		
-		return ld.insertTurning(sqlSession, t);
-	}
 
 
 	/*@Override
