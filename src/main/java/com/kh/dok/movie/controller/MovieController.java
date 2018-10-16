@@ -214,25 +214,33 @@ public class MovieController {
 	}
 	
 	@RequestMapping(value="insertPay.mo")
-	public @ResponseBody int insertPay(@RequestParam String msg, @RequestParam String movieRoomId, @RequestParam String turningId){
+	public @ResponseBody int insertPay(@RequestParam String msg, @RequestParam String movieRoomId, @RequestParam String turningId, @RequestParam String userId){
 		int check = 1;
+		int checkTwo = 1;
+		int checkTree = 1;
 		
 		String[] msgSplit = msg.split(",");
 		
-		System.out.println(msgSplit[3]);
-		System.out.println(movieRoomId);
-		System.out.println(turningId);
-		
 		Movie m = new Movie();
-		m.setMovie_id(movieRoomId);
+		m.setMovieroom_id(movieRoomId);
 		m.setTurning_id(turningId);
 		m.setMsg(msgSplit[3]);
+		m.setMid(userId);
 		
 		//예매 ID 가져오기
 		ArrayList<Movie> pay = ms.selectPayList(m);
 		
 		for (int index = 0; index < pay.size(); index++) {
-			   System.out.println(pay.get(index));
+			   System.out.println(pay.get(index).getReservation_id());
+			   
+			   m.setReservation_id(pay.get(index).getReservation_id());
+			   m.setMsg(msgSplit[3]);
+			   
+			   check = ms.insertPay(m);
+			   checkTwo = ms.updateRes(m);
+			   m.setSeat_id(ms.selectSeatIdTwo(m));
+			   
+			   checkTree = ms.updateSeat(m);
 		}
 		
 		return check;

@@ -29,7 +29,7 @@ public class MovieDaoImpl implements MovieDao{
 		
 		movieView = (ArrayList)sqlSession.selectList("MovieThumbnail.selectMovie",null,rowBounds);
 		
-		System.out.println("나오냐?: " + movieView);
+		//System.out.println("나오냐?: " + movieView);
 		return movieView;
 	}
 
@@ -50,7 +50,7 @@ public class MovieDaoImpl implements MovieDao{
 		
 		ArrayList<MovieThumbnail> movieDetail = (ArrayList)sqlSession.selectList("MovieThumbnail.movieDetail",id);
 		
-		System.out.println("영화상세 : " + movieDetail);
+		//System.out.println("영화상세 : " + movieDetail);
 		return movieDetail;
 	}
 	
@@ -62,7 +62,7 @@ public class MovieDaoImpl implements MovieDao{
 		
 		ArrayList<MovieThumbnail> movieimagecut = (ArrayList)sqlSession.selectList("MovieThumbnail.movieImageCut",id);
 		
-		System.out.println("영화이미지컷 : " + movieimagecut);
+		//System.out.println("영화이미지컷 : " + movieimagecut);
 		return movieimagecut;
 	}
 	
@@ -73,7 +73,7 @@ public class MovieDaoImpl implements MovieDao{
 		
 		ArrayList<MovieThumbnail> movievideo = (ArrayList)sqlSession.selectList("MovieThumbnail.movieVideo",id);
 		
-		System.out.println("영화이미지컷 : " + movievideo);
+		//System.out.println("영화이미지컷 : " + movievideo);
 		return movievideo;
 	}
 
@@ -101,7 +101,7 @@ public class MovieDaoImpl implements MovieDao{
 		
 		movieRank1 = (ArrayList)sqlSession.selectList("MovieThumbnail.selectMovieRank1");
 		
-		System.out.println("랭크1: " + movieRank1);
+		//System.out.println("랭크1: " + movieRank1);
 		return movieRank1;
 	}
 	//이진희 영화순위2
@@ -111,7 +111,7 @@ public class MovieDaoImpl implements MovieDao{
 		
 		movieRank2 = (ArrayList)sqlSession.selectList("MovieThumbnail.selectMovieRank2");
 		
-		System.out.println("랭크2: " + movieRank2);
+		//System.out.println("랭크2: " + movieRank2);
 		return movieRank2;
 	}
 	//이진희 영화순위3
@@ -121,7 +121,7 @@ public class MovieDaoImpl implements MovieDao{
 		
 		movieRank3 = (ArrayList)sqlSession.selectList("MovieThumbnail.selectMovieRank3");
 		
-		System.out.println("랭크3: " + movieRank3);
+		//System.out.println("랭크3: " + movieRank3);
 		return movieRank3;
 	}
 
@@ -157,16 +157,44 @@ public class MovieDaoImpl implements MovieDao{
 		return sqlSession.selectOne("Movie.selectSeatId");
 	}
 
+	//박지용
 	@Override
 	public int insertReservation(SqlSessionTemplate sqlSession, Movie m) {
 
 		return sqlSession.insert("Movie.insertReservation", m);
 	}
 
+	//박지용
 	@Override
 	public ArrayList<Movie> selectPayList(SqlSessionTemplate sqlSession, Movie m) {
+		ArrayList<Movie> selectPayList = (ArrayList)sqlSession.selectList("Movie.selectPayList", m);
 		
-		return (ArrayList)sqlSession.selectList("Movie.selectPayList", m);
+		return selectPayList;
+	}
+
+	//박지용
+	@Override
+	public int insertPay(SqlSessionTemplate sqlSession, Movie m) {
+		
+		return sqlSession.insert("Movie.insertPay", m);
+	}
+
+	@Override
+	public int updateRes(SqlSessionTemplate sqlSession, Movie m) {
+		
+		return sqlSession.update("Movie.updateRes", m);
+	}
+
+	@Override
+	public String selectSeatIdTwo(SqlSessionTemplate sqlSession, Movie m) {
+		
+		return sqlSession.selectOne("Movie.selectSeatIdTwo", m);
+	}
+
+	@Override
+	public int updateSeat(SqlSessionTemplate sqlSession, Movie m) {
+		
+		return sqlSession.update("Movie.updateSeat", m);
 	}
 	
 }
