@@ -220,7 +220,6 @@ public class AdminDaoImpl implements AdminDao{
 		return 1;
 	}
 
-	
 	@Override
 	public int[] countVisit(SqlSessionTemplate sqlSession,String time) {
 		int [] vlist = {0,0,0,0,0,0,0,0,0,0,0,0};
@@ -292,5 +291,7 @@ public class AdminDaoImpl implements AdminDao{
 		return blist;
 
 	}
+
+
 
 }
