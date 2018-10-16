@@ -20,6 +20,7 @@
 		<result property="withdraw_date" column="WITHDRAW_DATE"/>
 		<result property="nickname" column="NICKNAME"/>
 		<result property="refreshToken" column="REFRESHTOKEN"/>
+
 	</resultMap>
 	   
 	 <!--  로그인 정보 조회용 쿼리문  / 고성희 -->
@@ -129,6 +130,13 @@
 		WHERE EMAIL = '${email}'
 	</update>
 	
+	<!-- 비밀번호 수정 -->
+	<update id="updatePwd">
+		UPDATE MEMBER
+		SET USER_PWD = #{ user_pwd }
+		WHERE EMAIL = #{ email }
+	</update>
+	
 	<!-- 위시리스트 COUNT -->
 	<select id="countWish" resultType="java.lang.Integer" parameterType="Member">
 		SELECT NVL(COUNT(*),0)
@@ -151,6 +159,25 @@
     	WHERE RWRITER = #{ mid }
 	</select>
 	
+	<!-- 이진희 id찾기 -->
+	<select id="findId" resultType="java.lang.String" parameterType="Member">
+		SELECT EMAIL
+    	FROM MEMBER
+    	WHERE USER_NAME = #{ user_name }
+    	AND PHONE = #{phone}
+	</select>
 	
-	
+	<!-- 탈퇴 -->
+	<update id="updateStatus">
+		UPDATE MEMBER
+		SET STATUS = 'Y'
+		WHERE EMAIL = #{ email }
+	</update>
+
+  <!-- 비밀번호 찾기 -->
+	<update id="findPassword">
+		UPDATE MEMBER
+		SET USER_PWD = '${user_pwd}'
+		WHERE EMAIL = '${email}'
+	</update>
 </mapper>

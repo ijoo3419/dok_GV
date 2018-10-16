@@ -16,7 +16,7 @@ public interface LicenseeService {
 	/* 상영 추가 */	
 	int insertPlay(Play p);
 
-	int insertTurning(Turning t);
+//	int insertTurning(Turning t);
 
 
 /*	int insertFile(BoardFile adFile);

@@ -48,15 +48,16 @@ public class LicenseeServiceImpl implements LicenseeService{
 
 	@Override
 	public int insertPlay(Play p) {
-		
-		return ld.insertPlay(sqlSession, p);
+		 int resultPlay = ld.insertPlay(sqlSession, p);
+		 
+		 return resultPlay;
 	}
 	
-	@Override
+/*	@Override
 	public int insertTurning(Turning t) {
 		
 		return ld.insertTurning(sqlSession, t);
-	}
+	}*/
 
 
 	/*@Override

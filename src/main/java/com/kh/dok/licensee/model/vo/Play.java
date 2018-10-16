@@ -8,37 +8,70 @@ public class Play implements java.io.Serializable{
 	private String playId;
 	private String movieId;
 	private String playStatus;
-	private String movieName;
+	private String movie_title;
 	
 	
 	
 	public Play(){}
 	
-	
-	
-	
-	
-	public Play(String playId, String movieId, String playStatus, String movieName) {
+
+
+
+	@Override
+	public String toString() {
+		return "Play [playId=" + playId + ", movieId=" + movieId + ", playStatus=" + playStatus + ", movie_title="
+				+ movie_title + "]";
+	}
+
+
+
+
+
+
+
+
+
+
+	public Play(String playId, String movieId, String playStatus, String movie_title) {
 		super();
 		this.playId = playId;
 		this.movieId = movieId;
 		this.playStatus = playStatus;
-		this.movieName = movieName;
+		this.movie_title = movie_title;
 	}
 
 
 
 
 
-	public String getMovieName() {
-		return movieName;
+
+
+
+
+
+	public String getMovie_title() {
+		return movie_title;
 	}
 
 
 
-	public void setMovieName(String movieName) {
-		this.movieName = movieName;
+
+
+
+
+
+
+
+	public void setMovie_title(String movie_title) {
+		this.movie_title = movie_title;
 	}
+
+
+
+
+
+
+
 
 
 
@@ -65,13 +98,6 @@ public class Play implements java.io.Serializable{
 
 
 
-	@Override
-	public String toString() {
-		return "Play [playId=" + playId + ", movieId=" + movieId + ", playStatus=" + playStatus + ", movieName="
-				+ movieName + "]";
-	}
-	
-	
 	
 	
 	
