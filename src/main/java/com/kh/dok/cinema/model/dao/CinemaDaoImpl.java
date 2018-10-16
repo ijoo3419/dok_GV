@@ -31,6 +31,7 @@ public class CinemaDaoImpl implements CinemaDao{
 		cinemaDetail= (ArrayList)sqlSession.selectList("Cinema.cinemaDetail",id);
 		
 		System.out.println("디테일 DAO"+ cinemaDetail);
+		
 		return cinemaDetail;
 	}
 

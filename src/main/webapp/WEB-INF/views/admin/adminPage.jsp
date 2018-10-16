@@ -478,6 +478,7 @@
 					class="button icon fa-download"> 업데이트 </a>
 			</div> -->
 				<form action="" method="post"
+			
 					encType="multipart/form-data">
 					<div class="row gtr-uniform">
 

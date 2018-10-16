@@ -38,6 +38,7 @@ SELECT C.THEATER_ID, C.MID, C.THEATER_NAME,
 		 AND C.THEATER_ID = #{id}
 		 AND BF.FILE_LEVEL='1' 
 		 
+		 
 </select>	
 	
 </mapper>
