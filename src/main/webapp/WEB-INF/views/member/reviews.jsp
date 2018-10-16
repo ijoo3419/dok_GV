@@ -30,7 +30,7 @@
 				<li><a href="wishlist.me">위시리스트</a></li>
 				<li class="active"><a href="reviews.me">내가 쓴 리뷰</a></li>
 				<c:if test="${ sessionScope.loginUser.user_class eq 'BUYER'}">
-					<li><a href="theaterAdd.me">영화관 등록</a></li>
+					<li><a href="theaterAdd.me">판매자 등록</a></li>
 				</c:if>
 			</ul>
 

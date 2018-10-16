@@ -48,7 +48,7 @@
 				<input type="hidden" id="mId" name="mId" value="${ loginUser.mid }">
 					<div class="row gtr-uniform">
 						<div class="col-6 col-12-xsmall">
-							<input type="text" name="btitle" id="btitle" value="${ bbf.btitle }"/>				
+							<input type="text" name="btitle" id="btitle" readonly value="${ bbf.btitle }"/>				
 						</div>
 					</div>
 					<br>
