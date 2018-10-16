@@ -10,6 +10,141 @@
 -->
 <html>
 <head>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['일반회원',     ${cslist[0]}],
+          ['판매자회원',    ${cslist[1]}]
+        ]);
+
+        var options = {
+          title: '홈페이지 회원 구성비(명/%)',
+          pieHole: 0.4,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('memberClass'));
+        chart.draw(data, options);
+      }
+    </script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['line']});
+    google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+
+    var data = new google.visualization.DataTable();
+    data.addColumn('number', '월(month)');
+    data.addColumn('number', '월 별 방문자 수');
+
+    data.addRows([
+      [1,  ${vslist[0]}],
+      [2,  ${vslist[1]}],
+      [3,  ${vslist[2]}],
+      [4,  ${vslist[3]}],
+      [5,  ${vslist[4]}],
+      [6,  ${vslist[5]}],
+      [7,  ${vslist[6]}],
+      [8,  ${vslist[7]}],
+      [9,  ${vslist[8]}],
+      [10, ${vslist[9]}],
+      [11, ${vslist[10]}],
+      [12, ${vslist[11]}],
+    ]);
+
+    var options = {
+      chart: {
+        title: '월 별 방문자 현황(명/월)',
+      },
+      width: 850,
+      height: 500
+    };
+
+    var chart = new google.charts.Line(document.getElementById('visitCount'));
+
+    chart.draw(data, google.charts.Line.convertOptions(options));
+  }
+    </script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['line']});
+    google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+
+    var data = new google.visualization.DataTable();
+    data.addColumn('number', '월(month)');
+    data.addColumn('number', '월 별 가입자 수');
+
+    data.addRows([
+      [1,  ${vslist2[0]}],
+      [2,  ${vslist2[1]}],
+      [3,  ${vslist2[2]}],
+      [4,  ${vslist2[3]}],
+      [5,  ${vslist2[4]}],
+      [6,  ${vslist2[5]}],
+      [7,  ${vslist2[6]}],
+      [8,  ${vslist2[7]}],
+      [9,  ${vslist2[8]}],
+      [10, ${vslist2[9]}],
+      [11, ${vslist2[10]}],
+      [12, ${vslist2[11]}],
+    ]);
+
+    var options = {
+      chart: {
+        title: '월 별 가입자 현황(명/월)',
+      },
+      width: 850,
+      height: 500
+    };
+
+    var chart = new google.charts.Line(document.getElementById('joinCount'));
+
+    chart.draw(data, google.charts.Line.convertOptions(options));
+  }
+    </script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['line']});
+    google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+
+    var data = new google.visualization.DataTable();
+    data.addColumn('number', '월(month)');
+    data.addColumn('number', '월 별 예매 수');
+
+    data.addRows([
+      [1,  ${vslist2[0]}],
+      [2,  ${vslist2[1]}],
+      [3,  ${vslist2[2]}],
+      [4,  ${vslist2[3]}],
+      [5,  ${vslist2[4]}],
+      [6,  ${vslist2[5]}],
+      [7,  ${vslist2[6]}],
+      [8,  ${vslist2[7]}],
+      [9,  ${vslist2[8]}],
+      [10, ${vslist2[9]}],
+      [11, ${vslist2[10]}],
+      [12, ${vslist2[11]}],
+    ]);
+
+    var options = {
+      chart: {
+        title: '월 별 예매 현황(예매 건수/월)',
+      },
+      width: 850,
+      height: 500
+    };
+
+    var chart = new google.charts.Line(document.getElementById('bookCount'));
+
+    chart.draw(data, google.charts.Line.convertOptions(options));
+  }
+    </script>
 <title>Elements Reference - Massively by HTML5 UP</title>
 <meta charset="utf-8" />
 <meta name="viewport"
@@ -422,42 +557,13 @@
 			<h2>통계</h2>
 			<br>
 			<div class="table-wrapper">
-				<table>
-					<thead>
-						<tr>
-							<th>1월</th>
-							<th>2월</th>
-							<th>3월</th>
-							<th>4월</th>
-							<th>5월</th>
-							<th>6월</th>
-							<th>7월</th>
-							<th>8월</th>
-							<th>9월</th>
-							<th>10월</th>
-							<th>11월</th>
-							<th>12월</th>
-							<th>today</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>1</td>
-							<td>2</td>
-							<td>3</td>
-							<td>4</td>
-							<td>5</td>
-							<td>6</td>
-							<td>7</td>
-							<td>8</td>
-							<td>9</td>
-							<td>10</td>
-							<td>11</td>
-							<td>12</td>
-							<td>value</td>
-						</tr>
-					</tbody>
-				</table>
+				<div id="visitCount" style="width: 850px; height: 500px;"></div>
+				<hr style="border: solid 1px #D0A9F5">
+				<div id="joinCount" style="width: 850px; height: 500px;"></div>
+				<hr style="border: solid 1px #D0A9F5">
+				<div id="memberClass" style="width: 850px; height: 500px;"></div>
+				<hr style="border: solid 1px #D0A9F5">
+				<div id="bookCount" style="width: 850px; height: 500px"></div>
 		</section>
 
 		<!-- 다섯번째 탭(문의 사항) : 성희 공간 -->
