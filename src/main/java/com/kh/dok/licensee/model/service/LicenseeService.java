@@ -18,6 +18,9 @@ public interface LicenseeService {
 
 	int insertTurning(Turning t);
 
+	MovieRoom checkMovieRoomId();
+
+
 
 /*	int insertFile(BoardFile adFile);
 

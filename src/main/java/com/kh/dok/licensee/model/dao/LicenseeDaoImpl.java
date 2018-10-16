@@ -27,7 +27,6 @@ public class LicenseeDaoImpl implements LicenseeDao{
 		
 		return movieRoomId;
 	}
-
 	@Override
 	public int insertPlay(SqlSessionTemplate sqlSession, Play p) {
 		int resultPlay = sqlSession.insert("Licensee.insertPlay", p);
