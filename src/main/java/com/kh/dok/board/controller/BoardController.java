@@ -14,16 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kh.dok.admin.model.vo.SearchCondition;
 import com.kh.dok.board.model.exception.BoardInsertException;
 import com.kh.dok.board.model.exception.BoardSelectOneException;
 import com.kh.dok.board.model.service.BoardService;
 import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.board.model.vo.BoardNBoardFile;
+import com.kh.dok.board.model.vo.SearchCondition1;
 import com.kh.dok.common.CommonUtils;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.common.Pagination;
+import com.kh.dok.member.model.vo.Member;
 
 @Controller
 public class BoardController {
@@ -38,6 +39,19 @@ public class BoardController {
 	   @RequestMapping("writeNotice.bo")
 	   public String writeNoticeView(){
 	      return "board/writeNotice";
+	   }
+	   
+	   @RequestMapping("modifyNotice.bo")
+	   public String modifyNotice(){
+		   return "board/noticeManagePageModify";
+	   }
+	   
+	   @RequestMapping("modifyAdminNotice.bo")
+	   public String modifyAdminNotice(Model model){
+		   String tab = "tab-6";
+		   model.addAttribute("tab", tab);
+		   
+		   return "board/adminNoticeModify";
 	   }
 	   
 	   //공지사항 등록
@@ -98,21 +112,23 @@ public class BoardController {
 		   
 	   }
 	
-	   //공지사항 페이지로
+	   //판매자 공지사항 페이지로
 	   @RequestMapping(value="notice.li")
-		public String showNoticeView(HttpServletRequest request, Model model){
+		public String showNoticeView(PageInfo p, HttpServletRequest request, Model model){
 		   BoardNBoardFile bbf = new BoardNBoardFile();
 		   
 		   HttpSession session = request.getSession();
 		   String mid = (String)session.getAttribute("mid");
 		   bbf.setmId(mid); 
 		   
-		   //1페이지
-		   int currentPage = 1;
+		   if(p.getCurrentPage() == 0){
+			   p.setCurrentPage(1);
+		   }
+		   
 		   
 		   int listCount = bs.getlistCount(mid);
 		   
-		   PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		   PageInfo pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
 		   
 		   ArrayList<BoardNBoardFile> list = bs.selectNoticeList(pi, mid);
 		   
@@ -129,23 +145,87 @@ public class BoardController {
 		   return "board/noticeManagePage";
 		}
 	   
+	   //메인공지 페이지로
+	   @RequestMapping(value="goNoticeMain.bo")
+		public String goNoticeMain(PageInfo p, HttpServletRequest request, Model model){
+		   BoardNBoardFile bbf = new BoardNBoardFile();
+		   
+		   //관리자가 쓴 공지만 가져오게 바꾸기
+		   Member m = (Member)request.getSession().getAttribute("loginUser");
+		   String mid = m.getMid();
+		   
+		   if(p.getCurrentPage() == 0){
+			   p.setCurrentPage(1);
+		   }
+		   
+		   
+		   int listCount = bs.getlistCount(mid);
+		   
+		   PageInfo pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
+		   
+		   ArrayList<BoardNBoardFile> list = bs.selectNoticeList(pi, mid);
+		   
+		   
+		  
+		   
+		   model.addAttribute("pi", pi);
+		   
+		   
+		   /*list = bs.selectNoticeList(pi);*/
+		   
+		   model.addAttribute("list", list);
+		   
+		   return "board/NoticeMain";
+		}
+	   
+	   
 	   //문의사항 페이지로
 	   @RequestMapping(value="inquire.li")
-		public String showInquireView(){
+		public String showInquireView(PageInfo p, HttpServletRequest request, Model model){
+		   BoardNBoardFile bbf = new BoardNBoardFile();
+		   
+		   
+		   
+		   
+		   
 			return "board/inquireManagePage";
 		}
 	   
 	   
 
-	  /* @RequestMapping(value="searchNoticeBoard.bo")
-	   public String searchNoticeBoard(Model model, int currentPage, String searchResult, String searchCondition){
-
-		   SearchCondition sc = new SearchCondition(searchResult, searchCondition);
-		   
-		   int listCount = bs.listCount(sc);
+	  @RequestMapping(value="searchNoticeBoard.bo")
+	   public String searchNoticeBoard(Model model, String searchCondition, String searchValue, HttpServletRequest request, PageInfo p){
+		  SearchCondition1 sc = new SearchCondition1();
+		  
+		  if(searchCondition.equals("btitle")){
+			  sc.setBtitle(searchValue);
+		  }
+		  if(searchCondition.equals("bcontent")){
+			  sc.setBcontent(searchValue);
+		  }
+		  
+		  
+		  if(p.getCurrentPage() == 0){
+			  p.setCurrentPage(1);
+		  }
+		  
+		  int listCount = bs.getSearchResultListCount(sc);
+		  
+		  PageInfo pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
+		  
+		  ArrayList<BoardNBoardFile> list = bs.selectSearchNoticeList(pi, sc);
+		  
+		  System.out.println("성희 : 컨트롤러 검색결과 list 조회해옴 list : " + list);
+		  
+		  model.addAttribute("pi", pi);
+		  model.addAttribute("list", list);
+		  
+		  return "board/noticeManagePage";
+		 
 		   
 	   }
-	   
+	  
+	  /* 
 	   @RequestMapping(value="noticeliPage.bo")
 	   public String noticeliPage(Model model, int currentPage, String searchResult, String searchCondition){
 		   SearchCondition sc = new SearchCondition(searchResult, searchCondition);
@@ -155,6 +235,7 @@ public class BoardController {
 		   listCount = bs.countNoticePage(sc);
 	   }*/
 	   
+	  //판매자 공지사항 클릭시
 	   @RequestMapping(value="selectNoticeOne.bo")
 	   public String selectNoticeOne(Model model, String board_id){
 		   System.out.println("성희: BoardController selectNoticeOne board_id : " + board_id);
@@ -176,9 +257,34 @@ public class BoardController {
 		   return "board/noticeManagePageDetail";
 	   }
 	   
+	   
+	   //관리자 공지사항 클릭시
+	   @RequestMapping(value="selectAdminNoticeOne.bo")
+	   public String selectAdminNoticeOne(Model model, String board_id){
+		   System.out.println("성희: BoardController selectAdminNoticeOne board_id : " + board_id);
+		   String tab = "tab-6";
+		   
+		   try {
+			   BoardNBoardFile bbf = bs.selectAdminNoticeOne(board_id);
+			   model.addAttribute("bbf", bbf);
+			  model.addAttribute("tab", tab);
+			
+		} catch (BoardSelectOneException e) {
+			model.addAttribute("msg", "updateCount 실패");
+			
+			
+			return "common/errorPage";
+		}
+		   
+		   
+		   
+		   
+		   return "board/adminNoticeDetail";
+	   }
+	   
 	   //공지사항 페이징
-	   @RequestMapping(value="NoticePaging.bo")
-	   public String NoticePaging(Model model, HttpServletRequest request){
+	  /* @RequestMapping(value="NoticePaging.bo")
+	   public String NoticePaging(PageInfo p, Model model, HttpServletRequest request){
 		   String mId = (String)request.getParameter("mId");
 		   int currentPage = 1;
 		   
@@ -186,6 +292,7 @@ public class BoardController {
 		   if(request.getParameter("currentPage") != null){
 			   currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		   }
+		   
 		   
 		   int listCount = bs.getlistCount(mId);
 		   System.out.println("성희 : BoardController NoticePaging listCount : " + listCount);
@@ -200,24 +307,47 @@ public class BoardController {
 		   
 		   return "board/noticeManagePage";
 		   
+	   }*/
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   //관리자 부분 게시글
+	   //관리자 공지사항 페이지로
+	   @RequestMapping(value="adminNotice.ad")
+	   public String showAdminNotice(PageInfo p, HttpServletRequest request, Model model){
+		   BoardNBoardFile bbf = new BoardNBoardFile();
+		   
+		   //관리자 계정으로 바꾸기
+		   Member m = (Member)request.getSession().getAttribute("loginUser");
+		   String mid = m.getMid();
+		   bbf.setmId(mid);
+		   
+		   if(p.getCurrentPage() == 0){
+			   p.setCurrentPage(1);
+		   }
+		   
+		   int listCount = bs.getlistCount(mid);
+		   
+		   PageInfo pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
+		   
+		   ArrayList<BoardNBoardFile> list = bs.selectNoticeList(pi, mid);
+		   
+		   String tab = "tab-6";
+		   model.addAttribute("tab", tab);
+		   model.addAttribute("pi", pi);
+		   model.addAttribute("list", list);
+		   
+		   
+		   
+		   return "admin/adminPage";
+		   
 	   }
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
 	   
 
 }
