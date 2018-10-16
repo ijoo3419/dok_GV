@@ -32,15 +32,14 @@ public class LicenseeDaoImpl implements LicenseeDao{
 	public int insertPlay(SqlSessionTemplate sqlSession, Play p) {
 		int resultPlay = sqlSession.insert("Licensee.insertPlay", p);
 		
-		System.out.println("daoResult = " + resultPlay);
 		return resultPlay;
 	}
-}
-/*	@Override
+
+	@Override
 	public int insertTurning(SqlSessionTemplate sqlSession, Turning t) {
-		return sqlSession.insert("Licensee.insertTurning");
+		return sqlSession.insert("Licensee.insertTurning", t);
 	}
-}*/
+}
 
 	/*@Override
 	public int insertFile(SqlSessionTemplate sqlSession, BoardFile adFile) {

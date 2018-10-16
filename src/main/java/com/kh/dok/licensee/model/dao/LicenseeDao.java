@@ -19,7 +19,7 @@ public interface LicenseeDao {
 
 	int insertPlay(SqlSessionTemplate sqlSession, Play p);
 
-	/*int insertTurning(SqlSessionTemplate sqlSession, Turning t);*/
+	int insertTurning(SqlSessionTemplate sqlSession, Turning t);
 
 /*	int insertFile(SqlSessionTemplate sqlSession, BoardFile adFile);
 
