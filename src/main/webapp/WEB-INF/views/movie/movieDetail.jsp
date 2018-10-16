@@ -276,7 +276,7 @@ hr {
 			<hr width="1px" size="40px" color="black" id="hrline">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">예매율 ${row.rnum }위</a>
-			<input type="button" value="예매하기" style="background:purple; font-clolr:white; float:right;  margin-top:10px;">
+			<input type="button" value="예매하기" style="background:#e879fc; float:right;  margin-top:10px;">
 			<br>
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">타입: ${row.movie_type}</a><br>
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">개봉일: ${row.open_date }</a><br>
