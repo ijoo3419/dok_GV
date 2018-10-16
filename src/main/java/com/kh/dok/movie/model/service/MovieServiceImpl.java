@@ -177,11 +177,48 @@ public class MovieServiceImpl implements MovieService{
 
 
 
-	//예매 ID 가져오기
+	//박지용 예매 ID 가져오기
 	@Override
 	public ArrayList<Movie> selectPayList(Movie m) {
+		ArrayList<Movie> selectPayList =  md.selectPayList(sqlSession, m);
 		
-		return md.selectPayList(sqlSession, m);
+		return selectPayList;
+	}
+
+
+
+	//박지용 결제 insert
+	@Override
+	public int insertPay(Movie m) {
+		
+		return md.insertPay(sqlSession, m);
+	}
+
+
+
+	//박지용 업데이트
+	@Override
+	public int updateRes(Movie m) {
+		
+		return md.updateRes(sqlSession, m);
+	}
+
+
+
+
+	@Override
+	public String selectSeatIdTwo(Movie m) {
+		
+		return md.selectSeatIdTwo(sqlSession, m);
+	}
+
+
+
+
+	@Override
+	public int updateSeat(Movie m) {
+		
+		return md.updateSeat(sqlSession, m);
 	}
 
 

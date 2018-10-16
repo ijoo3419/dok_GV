@@ -417,6 +417,9 @@ td #web-fontDate {
 .movieTable table {
 	background: #088A68 ;
 }
+.movieName{
+	background:white;
+}
 a{
 	color: white ;
 }
@@ -446,6 +449,7 @@ a{
 .checkFont{
 	color:white;
 }
+
 </style>
 <body>
 	<div class="contain_box">
@@ -548,7 +552,7 @@ a{
 						var $trTwo = $("<tr>");
 						var $tdOne = $("<td>");
 						var $tdhiddenTitle = $("<input type='hidden' class='hidden-movie-list' value=''>");
-						var $tdTwo = $("<td id='web-fontTitle-child'>");
+						var $tdTwo = $("<td id='web-fontTitle-child' class='movieName'>");
 						
 						$tdhiddenTitle.val(data[key].movie_id);
 						$tdTwo.text(data[key].movie_title);
@@ -845,7 +849,8 @@ a{
 					var seatSplitAjax = seatSplit;
 					var userId = "${ sessionScope.loginUser.mid }";
 					var price = $(".seatPay-price").find("#td-web-fontTitle").val();
-					
+			       	var msg = $('.hiddenTurning').val();
+			       	
 					$.ajax({
 			    		url:"insertSeat.mo",
 			    		type:"post",
@@ -855,7 +860,7 @@ a{
 			    			console.log(data);
 			    		},
 			    		error:function(data){
-			    			console.log("에러!");
+			    			alert("로그인이 필요합니다!!");
 			    		}
 			    	});
 			    	
@@ -1428,7 +1433,8 @@ a{
 		    		type:"post",
 		    		data:{msg: msg,
 		    			  movieRoomId: movieRoomId,
-		    			  turningId: turningId},
+		    			  turningId: turningId,
+		    			  userId: userId},
 		    		success:function(data){
 		    			
 		    		},

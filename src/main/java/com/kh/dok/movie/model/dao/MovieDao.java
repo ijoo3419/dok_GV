@@ -56,7 +56,17 @@ public interface MovieDao {
 	//박지용 예매 테이블 insert
 	int insertReservation(SqlSessionTemplate sqlSession, Movie m);
 
-	//예매 ID 가져오기
+	//박지용 예매 ID 가져오기
 	ArrayList<Movie> selectPayList(SqlSessionTemplate sqlSession, Movie m);
+
+	//박지용 결제 insert
+	int insertPay(SqlSessionTemplate sqlSession, Movie m);
+
+	//박지용 업데이트
+	int updateRes(SqlSessionTemplate sqlSession, Movie m);
+
+	String selectSeatIdTwo(SqlSessionTemplate sqlSession, Movie m);
+
+	int updateSeat(SqlSessionTemplate sqlSession, Movie m);
 	
 }

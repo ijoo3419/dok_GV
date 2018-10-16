@@ -61,7 +61,19 @@ public interface MovieService {
 		//박지용 생성된 좌석 ID 가져오기
 		String selectSeatId();
 
-		//예매 ID 가져오기
+		//박지용 예매 ID 가져오기
 		ArrayList<Movie> selectPayList(Movie m);
+
+		//박지용 결제 insert
+		int insertPay(Movie m);
+
+		//박지용 업데이트
+		int updateRes(Movie m);
+
+		//박지용 selectSeatIdTwo
+		String selectSeatIdTwo(Movie m);
+
+		//박지용 updateSeat
+		int updateSeat(Movie m);
 		
 }

@@ -48,6 +48,8 @@ public class Movie  implements java.io.Serializable{
 	
 	private String msg;
 	
+	private String reservation_id;
+	
 	//황이주 추가
 	private String mid;
 	
@@ -58,7 +60,7 @@ public class Movie  implements java.io.Serializable{
 			String turning_id, String play_id, String price, Date turning_day, String turning_time, String movieroom_id,
 			String movieroom_name, String play_status, String area_id, String area_name, String area_level,
 			String area_parents, String theater_id, String theater_name, String movie_type, String file_src,
-			int pay_count, String seat_id, String seat_name, String msg, String mid) {
+			int pay_count, String seat_id, String seat_name, String msg, String reservation_id, String mid) {
 		super();
 		this.movie_id = movie_id;
 		this.movie_title = movie_title;
@@ -90,6 +92,7 @@ public class Movie  implements java.io.Serializable{
 		this.seat_id = seat_id;
 		this.seat_name = seat_name;
 		this.msg = msg;
+		this.reservation_id = reservation_id;
 		this.mid = mid;
 	}
 
@@ -211,6 +214,10 @@ public class Movie  implements java.io.Serializable{
 
 	public String getMsg() {
 		return msg;
+	}
+
+	public String getReservation_id() {
+		return reservation_id;
 	}
 
 	public String getMid() {
@@ -337,6 +344,10 @@ public class Movie  implements java.io.Serializable{
 		this.msg = msg;
 	}
 
+	public void setReservation_id(String reservation_id) {
+		this.reservation_id = reservation_id;
+	}
+
 	public void setMid(String mid) {
 		this.mid = mid;
 	}
@@ -352,7 +363,9 @@ public class Movie  implements java.io.Serializable{
 				+ area_id + ", area_name=" + area_name + ", area_level=" + area_level + ", area_parents=" + area_parents
 				+ ", theater_id=" + theater_id + ", theater_name=" + theater_name + ", movie_type=" + movie_type
 				+ ", file_src=" + file_src + ", pay_count=" + pay_count + ", seat_id=" + seat_id + ", seat_name="
-				+ seat_name + ", msg=" + msg + ", mid=" + mid + "]";
+				+ seat_name + ", msg=" + msg + ", reservation_id=" + reservation_id + ", mid=" + mid + "]";
 	}
+
+	
 	
 }

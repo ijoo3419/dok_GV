@@ -78,7 +78,7 @@
 	</resultMap>
 
 	<resultMap type="Movie" id="movieResultSetSix">
-		<id property="seat_id" column="SEAT.SEAT_ID"/>
+		<id property="reservation_id" column="RESERVATION_ID"/>
 	</resultMap>
 	
 	<!-- 박지용 영화 리스트를 가져오는 쿼리문 -->
@@ -99,13 +99,14 @@
 		FROM TURNING, PLAY, MOVIE, MOVIEROOM, THEATER, AREA
 		WHERE PLAY.PLAY_ID = TURNING.PLAY_ID 
 		AND MOVIE.MOVIE_ID = PLAY.MOVIE_ID 
-		AND MOVIEROOM.MOVIEROOM_ID = PLAY.MOVIEROOM_ID
 		AND THEATER.THEATER_ID = MOVIEROOM.THEATER_ID
 		AND AREA.AREA_ID = THEATER.AREA_ID
+		AND MOVIEROOM.MOVIEROOM_ID = TURNING.MOVIEROOM_ID
 		AND PLAY_STATUS = 'Y' 
 		AND TURNING_DAY = #{turning_day}
 		AND AREA.AREA_ID = #{area_id}
 		AND MOVIE.MOVIE_ID = #{movie_id}
+		ORDER BY START_TIME
 	</select>
 	
 	<!-- 박지용 날짜 리스트를 가져오는 쿼리문 -->
@@ -114,10 +115,9 @@
 		FROM TURNING, PLAY, MOVIE, MOVIEROOM, THEATER, AREA
 		WHERE PLAY.PLAY_ID = TURNING.PLAY_ID 
 		AND MOVIE.MOVIE_ID = PLAY.MOVIE_ID 
-		AND MOVIEROOM.MOVIEROOM_ID = PLAY.MOVIEROOM_ID
 		AND THEATER.THEATER_ID = MOVIEROOM.THEATER_ID
 		AND AREA.AREA_ID = THEATER.AREA_ID
-		AND PLAY_STATUS = 'Y' 
+		AND PLAY_STATUS = 'Y'
 		AND AREA.AREA_ID = #{area_id}
 		AND MOVIE.MOVIE_ID = #{movie_id}
 	</select>
@@ -148,18 +148,35 @@
 	
 	<!-- 박지용 예매 테이블에 저장하는 쿼리문 -->
 	<insert id="insertReservation">
-		INSERT INTO RESERVATION VALUES('RES' || TO_CHAR(RESERVATION_RESERVATION_ID.NEXTVAL), #{seat_id}, #{mid}, #{price}, SYSDATE, NULL)
+		INSERT INTO RESERVATION VALUES('RES' || TO_CHAR(RESERVATION_RESERVATION_ID.NEXTVAL), #{seat_id}, #{mid}, #{price}, SYSDATE, '예매중')
 	</insert>
 	
 	<!-- 박지용 좌석 id를 가져오는  쿼리문 -->
 	<select id="selectPayList" resultMap="movieResultSetSix" parameterType="Movie">
-		SELECT SEAT.SEAT_ID
+		SELECT RESERVATION.RESERVATION_ID
 		FROM SEAT, RESERVATION 
 		WHERE SEAT.SEAT_ID = RESERVATION.SEAT_ID 
 		AND MID = #{mid}
 		AND MOVIEROOM_ID = #{movieroom_id} 
 		AND TURNING_ID = #{turning_id}
+		AND SEAT_STATUS = '예매중'
 		ORDER BY SEAT_ROW
 	</select>
+	
+	<insert id="insertPay">
+		INSERT INTO PAY VALUES('PA' || TO_CHAR(PAY_PAY_ID.NEXTVAL), #{reservation_id}, 'PAY', 'CARD', #{msg}, NULL, 'N')
+	</insert>
+	
+	<update id="updateRes">
+		UPDATE RESERVATION SET RESERVATION_STATUS = '예매완료' WHERE RESERVATION_ID = #{reservation_id}
+	</update>
+	
+	<select id="selectSeatIdTwo" resultType="string">
+		SELECT SEAT_ID FROM RESERVATION WHERE RESERVATION_ID = #{reservation_id}
+	</select>
+	
+	<update id="updateSeat">
+		UPDATE SEAT SET SEAT_STATUS = '예매완료' WHERE SEAT_ID = #{seat_id}
+	</update>
 
 </mapper>
