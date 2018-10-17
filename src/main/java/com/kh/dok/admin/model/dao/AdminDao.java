@@ -51,5 +51,7 @@ public interface AdminDao {
 
 	int[] countClass(SqlSessionTemplate sqlSession);
 
-	int[] countBook(SqlSessionTemplate sqlSession);	
+	int[] countBook(SqlSessionTemplate sqlSession);
+
+	ArrayList<String> selectGenre(String mid, SqlSessionTemplate sqlSession);	
 }

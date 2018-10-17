@@ -53,4 +53,6 @@ public interface AdminService {
 
 	int[] countBook();
 
+	ArrayList<String> selectGenre(String mid);
+
 }

@@ -286,4 +286,8 @@
 		SELECT COUNT(*)
 		FROM RESERVATION
 	</select>
+	
+	<select id="selectGenre" parameterType="String" resultType="String">
+		SELECT GENRE
+	</select>
 </mapper>

@@ -280,8 +280,8 @@ img.ui-datepicker-trigger {
 			<li class="tab-link4" data-tab="tab-4"><a href="statistics.ad">통계</a></li>
 			<li class="tab-link5" data-tab="tab-5"><a>문의 사항</a></li>
 			<li class="tab-link6" data-tab="tab-6"><a href="adminNotice.ad">공지사항</a></li>
-			<li class="tab-link7" data-tab="tab-7"><a href="addmovie.ad">영화
-					추가</a></li>
+			<li class="tab-link7" data-tab="tab-7"><a href="addmovie.ad">영화 추가</a></li>
+			<li class="tab-link8" data-tab="tab-8"><a href="recomend.ad"></a></li>
 		</ul>
 	</nav>
 
@@ -304,7 +304,7 @@ img.ui-datepicker-trigger {
 
 
 			<div class="table-wrapper">
-				<table>
+				<table id="memberArea">
 					<thead>
 						<tr>
 							<th>No</th>
@@ -950,6 +950,15 @@ $( function() {
 			alert("hi");
 		}
 	</script>
+	<script>
+				$(function(){
+					$("#memberArea").find("td").mouseenter(function(){
+						$(this).parents("tr").css({"cursor":"pointer"});
+					}).click(function(){
+						var mid = $(this).parents().children("td").eq(0).text();
+						location.href = "recomend.ad?mid=" + mid;
+					}); 
+				});
 	</script>
 	<!-- 템플릿 관련 js파일들 -->
 	<%-- <script src="${contextPath }/resources/js/jquery.min.js"></script> --%>
