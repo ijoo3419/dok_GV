@@ -185,6 +185,24 @@ public class BoardController {
 		public String showInquireView(PageInfo p, HttpServletRequest request, Model model){
 		   BoardNBoardFile bbf = new BoardNBoardFile();
 		   
+		   Member m = (Member)request.getSession().getAttribute("loginUser");
+		   String mid = m.getMid();
+		   
+		   if(p.getCurrentPage() == 0){
+			   p.setCurrentPage(1);
+		   }
+		   
+		   String TheaterId = bs.getTheaterId(mid);
+		   
+		   int listCount = bs.getInquirelistCount(TheaterId);
+		   
+		   PageInfo pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
+		   
+		   ArrayList<BoardNBoardFile> list = bs.selectINquireList(pi, TheaterId);
+		   
+		   model.addAttribute("pi", pi);
+		   model.addAttribute("list", list);
+		   
 		   
 		   
 		   
@@ -347,6 +365,23 @@ public class BoardController {
 		   
 		   
 		   return "admin/adminPage";
+		   
+	   }
+	   
+	   //판매자 문의사항 클릭시
+	   @RequestMapping(value="selectInquireOne.bo")
+	   public String selectInquireOne(Model model, String board_id){
+		   try {
+			BoardNBoardFile bbf = bs.selectInquireOne(board_id);
+			
+			model.addAttribute("bbf", bbf);
+		} catch (BoardSelectOneException e) {
+			model.addAttribute("msg", "updateCount 실패");
+			
+			return "common/errorPage";
+		}
+		   
+		   return "board/inquireManagePageDetail";
 		   
 	   }
 	   

@@ -148,6 +148,34 @@ public class BoardDaoImpl implements BoardDao{
 		return sqlSession.selectOne("Board.selectNoticeOne", board_id);
 	}
 
+	@Override
+	public int getInquirelistCount(SqlSessionTemplate sqlSession, String TheaterId) {
+
+		return sqlSession.selectOne("Board.getInquirelistCount", TheaterId);
+	}
+
+	//getThearterId
+	@Override
+	public String getTheaterId(SqlSessionTemplate sqlSession, String mid) {
+		return sqlSession.selectOne("Board.getTheaterId", mid);
+	}
+
+	//판매자 문의사항 글 제목 10개 불러오기
+	@Override
+	public ArrayList<BoardNBoardFile> selectINquireList(SqlSessionTemplate sqlSession, PageInfo pi, String theaterId) {
+		ArrayList<BoardNBoardFile> list = null;
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		
+		list = (ArrayList)sqlSession.selectList("Board.selectINquireList", theaterId, rowBounds);
+		
+		
+		
+		return list;
+	}
+
 	
 
 }

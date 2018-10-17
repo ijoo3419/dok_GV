@@ -35,4 +35,10 @@ public interface BoardDao {
 
 	BoardNBoardFile selectAdminNoticeOne(SqlSessionTemplate sqlSession, String board_id);
 
+	int getInquirelistCount(SqlSessionTemplate sqlSession, String TheaterId);
+
+	String getTheaterId(SqlSessionTemplate sqlSession, String mid);
+
+	ArrayList<BoardNBoardFile> selectINquireList(SqlSessionTemplate sqlSession, PageInfo pi, String theaterId);
+
 }

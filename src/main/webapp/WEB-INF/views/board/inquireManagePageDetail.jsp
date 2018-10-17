@@ -51,35 +51,27 @@
 
 			<article class="post featured">
 			
-			<h2>공지사항 상세보기</h2>
+			<h2>문의사항 상세보기</h2>
 				<br><br>
 				
-				<table align="center">
-					<tr>
-						<td width="100px">글번호</td>
-						<td><b>글번호</b></td>
-					</tr>
-					<tr>
-						<td>제목</td>
-						<td><b>제목</b></td>
-					</tr>
-					<tr>
-						<td>작성자</td>
-						<td><b>작성자</b></td>
-					</tr>
-					<tr>
-						<td>조회수</td>
-						<td><b>조회수</b></td>
-					</tr>
-					<tr>
-						<td>작성일</td>
-						<td><b>작성일</b></td>
-					</tr>
-					<tr>
-						<td>내용</td>
-						<td><p style="height:100px"><b>내용</b></p></td>
-					</tr>
-				</table>
+				<div id="detailView">
+               <table border="" summary="">
+                        <h4 align="left" id="title"> ${ bbf.nickname } </h4><h2 style="margin-top:20px" align="center" id="title"> ${ bbf.btutle }</h2><h4 align="right" id="title"> ${ bbf.bcount } </h4>
+                  <tbody>
+                     <tr>
+                        <td bgcolor="white">
+                         ${ bbf.bcontent }<br><br><br><br><br>
+                           
+                        </td>
+               
+                     </tr>
+                  </tbody>
+
+               </table>
+            </div>
+            
+            
+            
 				<table align="center">
 					<tr>
 						<td>
@@ -94,6 +86,18 @@
 					</tr>
 				</table>
 				<hr>
+				
+				 <button class="button" onclick="goBack()">목록</button>
+				
+				<script>
+               function goBack(){
+                  location.href="notice.li";
+               }
+               
+            </script>
+				
+				
+				
 				<%-- <c:if test="댓글갯수 > 0">
 					<table align="center">
 					<%-- 	<c:forEach var="r" item="댓글리스트">

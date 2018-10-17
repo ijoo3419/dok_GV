@@ -33,4 +33,12 @@ public interface BoardService {
 
 	BoardNBoardFile selectAdminNoticeOne(String board_id) throws BoardSelectOneException;
 
+	int getInquirelistCount(String mid);
+
+	String getTheaterId(String TheaterId);
+
+	ArrayList<BoardNBoardFile> selectINquireList(PageInfo pi, String theaterId);
+
+	BoardNBoardFile selectInquireOne(String board_id) throws BoardSelectOneException;
+
 }

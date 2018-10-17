@@ -153,6 +153,34 @@
 		ORDER BY BOARD_ID DESC
 	</select>
 	
+	<!-- 관리자 문의사항 getInquirelistCount(성희) -->
+	<select id="getInquirelistCount" parameterType="java.lang.String" resultType="_int">
+		SELECT COUNT(*)
+		FROM BOARD B, THEATER T
+		WHERE T.THEATER_ID = B.THEATER_ID
+		AND B.THEATER_ID = #{TheaterId}
+	</select>
+	
+	<!-- getTheaterId(성희) -->
+	<select id="getTheaterId" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT THEATER_ID
+		FROM THEATER
+		WHERE MID = #{mid}
+	</select>
+	
+	<!-- 관리자 문의사항 제목 10 개 불러오기 (성희) -->
+	<select id="selectINquireList" parameterType="java.lang.String" resultMap="BBFileResultSet">
+		SELECT TO_NUMBER(SUBSTR(BOARD.BOARD_ID, 2)) AS BOARD_ID, BOARD.MID, BTITLE, BCONTENT, BOARD_SORT, BOARD_DATE, BCOUNT, 
+       		   FILE_ID, ORIGIN_NAME, EDIT_NAME, FILE_SRC, FILE_DATE, FILE_LEVEL, M.NICKNAME
+		FROM BOARD, BOARD_FILE, MEMBER M
+		WHERE BOARD.BOARD_ID = BOARD_FILE.BOARD_ID(+)
+		AND BOARD.MID = M.MID
+		AND BOARD.THEATER_ID = #{theaterId}
+		AND BSTATUS = 'Y'
+		AND BOARD_DIV = 'BD1'
+		ORDER BY BOARD_ID DESC
+	</select>
+	
 	
 	
 	
