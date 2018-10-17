@@ -12,6 +12,9 @@ public class MovieRoom implements java.io.Serializable{
 	private String movieRoomName;
 	private String movieRoomAddress;
 	
+	private int ID;
+	
+	
 	private String address1;
 	private String address2;
 	private String address3;
@@ -31,7 +34,6 @@ public class MovieRoom implements java.io.Serializable{
 	
 	public MovieRoom(){}
 
-	
 	public String getMovieRoomId() {
 		return movieRoomId;
 	}
@@ -62,6 +64,14 @@ public class MovieRoom implements java.io.Serializable{
 
 	public void setMovieRoomAddress(String movieRoomAddress) {
 		this.movieRoomAddress = movieRoomAddress;
+	}
+
+	public int getID() {
+		return ID;
+	}
+
+	public void setID(int iD) {
+		ID = iD;
 	}
 
 	public String getAddress1() {
@@ -96,108 +106,87 @@ public class MovieRoom implements java.io.Serializable{
 		this.mid = mid;
 	}
 
-
 	public String getMovie_id() {
 		return movie_id;
 	}
-
 
 	public void setMovie_id(String movie_id) {
 		this.movie_id = movie_id;
 	}
 
-
 	public String getMovie_title() {
 		return movie_title;
 	}
-
 
 	public void setMovie_title(String movie_title) {
 		this.movie_title = movie_title;
 	}
 
-
 	public String getMovie_etitle() {
 		return movie_etitle;
 	}
-
 
 	public void setMovie_etitle(String movie_etitle) {
 		this.movie_etitle = movie_etitle;
 	}
 
-
 	public String getMovie_content() {
 		return movie_content;
 	}
-
 
 	public void setMovie_content(String movie_content) {
 		this.movie_content = movie_content;
 	}
 
-
 	public Date getOpen_date() {
 		return open_date;
 	}
-
 
 	public void setOpen_date(Date open_date) {
 		this.open_date = open_date;
 	}
 
-
 	public String getDirector_name() {
 		return director_name;
 	}
-
 
 	public void setDirector_name(String director_name) {
 		this.director_name = director_name;
 	}
 
-
 	public String getProduction_com() {
 		return production_com;
 	}
-
 
 	public void setProduction_com(String production_com) {
 		this.production_com = production_com;
 	}
 
-
 	public String getMovie_age() {
 		return movie_age;
 	}
-
 
 	public void setMovie_age(String movie_age) {
 		this.movie_age = movie_age;
 	}
 
-
 	public String getGenre() {
 		return genre;
 	}
-
 
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
 
-
 	public int getRunnig_time() {
 		return runnig_time;
 	}
-
 
 	public void setRunnig_time(int runnig_time) {
 		this.runnig_time = runnig_time;
 	}
 
-
-	public MovieRoom(String movieRoomId, String theaterId, String movieRoomName, String movieRoomAddress,
+	public MovieRoom(String movieRoomId, String theaterId, String movieRoomName, String movieRoomAddress, int iD,
 			String address1, String address2, String address3, String mid, String movie_id, String movie_title,
 			String movie_etitle, String movie_content, Date open_date, String director_name, String production_com,
 			String movie_age, String genre, int runnig_time) {
@@ -206,6 +195,7 @@ public class MovieRoom implements java.io.Serializable{
 		this.theaterId = theaterId;
 		this.movieRoomName = movieRoomName;
 		this.movieRoomAddress = movieRoomAddress;
+		ID = iD;
 		this.address1 = address1;
 		this.address2 = address2;
 		this.address3 = address3;
@@ -222,19 +212,17 @@ public class MovieRoom implements java.io.Serializable{
 		this.runnig_time = runnig_time;
 	}
 
-
 	@Override
 	public String toString() {
 		return "MovieRoom [movieRoomId=" + movieRoomId + ", theaterId=" + theaterId + ", movieRoomName=" + movieRoomName
-				+ ", movieRoomAddress=" + movieRoomAddress + ", address1=" + address1 + ", address2=" + address2
-				+ ", address3=" + address3 + ", mid=" + mid + ", movie_id=" + movie_id + ", movie_title=" + movie_title
-				+ ", movie_etitle=" + movie_etitle + ", movie_content=" + movie_content + ", open_date=" + open_date
-				+ ", director_name=" + director_name + ", production_com=" + production_com + ", movie_age=" + movie_age
-				+ ", genre=" + genre + ", runnig_time=" + runnig_time + "]";
+				+ ", movieRoomAddress=" + movieRoomAddress + ", ID=" + ID + ", address1=" + address1 + ", address2="
+				+ address2 + ", address3=" + address3 + ", mid=" + mid + ", movie_id=" + movie_id + ", movie_title="
+				+ movie_title + ", movie_etitle=" + movie_etitle + ", movie_content=" + movie_content + ", open_date="
+				+ open_date + ", director_name=" + director_name + ", production_com=" + production_com + ", movie_age="
+				+ movie_age + ", genre=" + genre + ", runnig_time=" + runnig_time + "]";
 	}
 
-
-
+	
 
 	
 	

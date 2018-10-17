@@ -1,6 +1,9 @@
 package com.kh.dok.licensee.controller;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,7 +22,6 @@ import com.kh.dok.licensee.model.service.LicenseeService;
 import com.kh.dok.licensee.model.vo.MovieRoom;
 import com.kh.dok.licensee.model.vo.Play;
 import com.kh.dok.licensee.model.vo.Turning;
-import com.kh.dok.movie.model.vo.Movie;
 
 @Controller
 @SessionAttributes(value="loginUser")
@@ -234,28 +236,78 @@ public class LicenseeController {
 }
 	/* 정태 상영 등록  */
 	@RequestMapping(value="playInsert.li")
-	public String insertPlay(Model model, Play p, Turning t, 
+	public String insertPlay(Model model, Play p, Turning t, MovieRoom mr, 
 								HttpServletRequest request){
 		
+		System.out.println("play : "+p);
+		System.out.println("turning : "+t);
 	
-		
 		int resultPlay = ls.insertPlay(p);
-	
+	/*	request.setAttribute("price", price);
+		
+		System.out.println("가격시발 : " + price);*/
+		
+		
 		//시작, 끝 시간 조정
 		/*t.setStartTime(t.getTurningDay() + " " +t.getEndTime());
 		t.setEndTime(t.getTurningDay() + " " + t.getStartTime());
 		
 		
+		
 		System.out.println("스타트타임 " + t.getStartTime());
 		System.out.println("엔드타임 " + t.getEndTime());*/
 		int resultTurning = ls.insertTurning(t);
-		
-		System.out.println("movie_title = " + p.getMovie_title());	
-		System.out.println("t.getPrice() = " + t.getPrice());
-		
-		
-		System.out.println("controller p = " + p);
+		System.out.println("movieRoom : "+ mr);
+
+/*		System.out.println(mr.getMovieRoomName());
+*/		System.out.println("controller p = " + p);
 		System.out.println("controller t = " + t);
+		
+		
+		MovieRoom movieRoomId = ls.checkMovieRoomId(mr);
+		
+		
+		System.out.println("movieRoomId = " + movieRoomId);
+		
+		System.out.println("controller mr1 = " + mr);
+		mr.setMovieRoomId(movieRoomId.getMovieRoomId());		
+		System.out.println(mr.getMovieRoomId());
+		
+		//String name = "TT1";
+		/*String[] arr = request.getParameterValues("bak");*/
+		/*String tableName = request.getParameter("table");*/
+		//String tableName = "TT1";
+		
+		/*System.out.println("tableName = " + tableName);
+		System.out.println("name = " + name);
+		//셀 조회 15x15
+//		String[][] num = new cellClass().test();
+//		System.out.println(num[0][0]);
+		
+		if(tableName == ""){
+			//셀 값 삽입
+			new cellClass().createTurningTeble(name, request);
+		}else{
+			//셀 구매
+			new cellClass().insertTurningCell(name, tableName, request);
+		}*/
+			
+			//스트링 변수를 데이트 변수로 바꾸는 것 하는중 안되 ㅠㅠㅠ
+		/*	String qweasad = "2011-01-18 00:00:00.0";
+			Date endTimeStr = (Date)new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse(t.getEndTime_pre());
+			Date startTimeStr = (Date)new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse(t.getStartTime_pre());
+			Date turningDayStr = (Date)new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse(t.getTurningDay_pre());
+			
+			System.out.println("endTimeStr = " + endTimeStr);
+			System.out.println("startTimeStr = " + startTimeStr);
+			System.out.println("turningDateStr = " + turningDayStr);*/
+
+			
+			
+	
+		
+		
+		
 		
 		
 		if(resultPlay > 0 || resultTurning > 0){
@@ -266,7 +318,9 @@ public class LicenseeController {
 			return "common/errorPage";
 		}
 		
+		
 	}
+}
 	
 /*	 엑셀 파일 확인 
 	@RequestMapping(value="ViewFiled.li")
@@ -292,5 +346,5 @@ public class LicenseeController {
 
 
 	
-}
+
 

@@ -21,6 +21,7 @@ public interface LicenseeDao {
 
 	int insertTurning(SqlSessionTemplate sqlSession, Turning t);
 
+
 /*	int insertFile(SqlSessionTemplate sqlSession, BoardFile adFile);
 
 	ArrayList<BoardFile> selectFile(SqlSessionTemplate sqlSession);

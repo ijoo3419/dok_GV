@@ -10,6 +10,7 @@
 
 <style>
 #detailView{
+
    /* display:inline-block; */
    border: solid 1px;
    width:900px;
@@ -20,6 +21,7 @@
 #title {
    display: inline;
    padding: 100px;
+
 }
 
 </style>
@@ -33,6 +35,7 @@
 </noscript>
 </head>
 <body class="is-preload">
+
    <c:import url="../common/headBar.jsp" />
 
 
@@ -192,6 +195,7 @@
    <script src="assets/js/breakpoints.min.js"></script>
    <script src="assets/js/util.js"></script>
    <script src="assets/js/main.js"></script>
+
 
 </body>
 </html>
