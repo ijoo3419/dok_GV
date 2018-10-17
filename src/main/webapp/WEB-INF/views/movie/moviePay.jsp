@@ -258,7 +258,7 @@ td #web-fontDate {
 }
 
 .seatPay-price {
-	margin-top: 70px ;
+	margin-top: 45px ;
 	float: right ;
 }
 
@@ -455,6 +455,17 @@ a{
 #movieTimeTable tr{
 	border: 1px solid #E6E6E6 ;
 	border-height: 60%;
+}
+.turning_time_font{
+	color:black;
+}
+.fontFive{
+	margin-left: 5px;
+	border: 2px solid #01A9DB;
+	border-radius: 5px;
+	background:#01A9DB;
+	color:white;
+	font-size:13px;
 }
 </style>
 <body>
@@ -892,7 +903,7 @@ a{
 			    			var div = $(".movieTimeDiv");
 			    			
 			    			for(var key in data){
-			    				var str = moment("/Date(" + data[key].turning_day +")/").format("YY/MM/DD"); //json string
+			    				var str = moment("/Date(" + data[key].turning_day +")/").format("YY. MM. DD"); //json string
 			   
 			    				arrayDate[key] = str.toString();
 			    				
@@ -967,11 +978,12 @@ a{
 							for(var key in data){
 								var $a = $("<a data-toggle='modal' href='#myModal2'>");
 								var $tr = $("<tr>");
+								var $font = $("<font class='turning_time_font'>");
 								var $fontOne = $("<font id='web-fontDate'>");
 								var $fontTwo = $("<font id='web-fontDate' class='movie_title'>");
 								var $fontTree = $("<font id='web-fontDate'>");
 								var $fontFour = $("<br><font id='web-fontDate' class='movie_type'>");
-								var $fontFive = $("<font id='web-fontDate'>");
+								var $fontFive = $("<font class='fontFive'>");
 								var $fontSix = $("<br><font class='area_name'>");
 								
 								var $hiddenPrice = $("<input type='hidden' class='hiddenPrice' val=''>");
@@ -986,7 +998,11 @@ a{
 								var $tdTwo = $("<td width='300' height='50'>");
 								var $tdTree = $("<td width='100' height='50' align='center'>");
 								
-								$fontOne.text(data[key].turning_time);
+								var time = data[key].turning_time;
+								var timeSplit = time.split("~");
+								
+								$fontOne.text(timeSplit[0]);
+								$font.text("~" + timeSplit[1]);
 								$fontTwo.text(data[key].movie_title);
 								$fontTree.text(data[key].area_name);
 								$fontFour.text(data[key].movie_type);
@@ -1000,6 +1016,7 @@ a{
 								$hiddenTurning.val(data[key].turning_id);
 								
 								$tdOne.append($fontOne);
+								$tdOne.append($font);
 								$tdTwo.append($fontFive);
 								$tdTwo.append($fontTwo);
 								$tdTwo.append($fontFour);
@@ -1052,15 +1069,15 @@ a{
 									var money = $(this).find('.hiddenPrice').val();
 									var roomName = $(this).find('.hiddenRoom').val();
 									
-									var str = moment("/Date(" + date +")/").format("YYYY/MM/DD"); //json string
+									var str = moment("/Date(" + date +")/").format("YYYY. MM. DD"); //json string
 									   
 				    				arrayDate[key] = str.toString();
 									
 									$(".seatPay").find("tr").eq(1).find('td').text(movieTitle);
 									$(".seatPay").find("tr").eq(2).find('td').text(movieType);
 									$(".seatPay").find("tr").eq(3).find('td').text(areaName + " " + roomName);
-									$(".seatPay").find("tr").eq(4).find('td').text(str + "　" + time);
-									$(".seatPay").find("tr").eq(5).find('td').text("");
+									$(".seatPay").find("tr").eq(4).find('td').text(str + "　　" + time);
+									$(".seatPay").find("tr").eq(5).find('td').text("　");
 									$(".seatPay-price").find("#td-web-fontTitle").text(money + "　");
 									
 									$(".pay-right").find("tr").eq(1).find('td').text(movieTitle);
@@ -1077,7 +1094,6 @@ a{
 									
 									var movieRoomIdVal = $(this).find('.hiddenRoomId').val();
 									$('.movieRoomId').val(movieRoomIdVal);
-									alert(movieRoomIdVal);
 									
 									var userSeat = new Array(); //유저의 좌석배열
 									
@@ -1332,6 +1348,10 @@ a{
 								<td>2018. 09. 21 (금) 12:40
 								</td>
 							</tr>
+							<tr>
+								<td>?
+								</td>
+							</tr>
 							<tr class="seatPay-price">
 								<td id="td-web-fontTitle">7,000&nbsp;&nbsp;
 								</td>
@@ -1426,9 +1446,6 @@ a{
 		          msg += rsp.merchant_uid + ","; //'상점 거래ID: ' +
 		          msg += rsp.paid_amount + ","; //'결제 금액: ' +
 		          msg += rsp.apply_num; //'카드 승인번호: ' +
-		          
-		          console.log(msg);
-		       	  alert(msg);
 		       	  
 		       	  var userId = "${ sessionScope.loginUser.mid }"; //유저 id
 		       	  var movieRoomId = $('.movieRoomId').val();
@@ -1442,7 +1459,7 @@ a{
 		    			  turningId: turningId,
 		    			  userId: userId},
 		    		success:function(data){
-		    			
+		    			alert("결제가 완료되었습니다.");
 		    		},
 		    		error:function(data){
 		    			console.log(data);

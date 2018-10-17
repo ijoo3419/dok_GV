@@ -49,7 +49,7 @@ img {
 <link rel="stylesheet" href="${contextPath }/resources/css/main.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script type="text/javascript" src="/Example.Modal.js"></script>
+	<!-- <script type="text/javascript" src="/Example.Modal.js"></script> -->
 		<script src="${ contextPath }/resources/js/jquery.min.js"></script>
 	<script src="${ contextPath }/resources/js/jquery.scrollex.min.js"></script>
 	<script src="${ contextPath }/resources/js/jquery.scrolly.min.js"></script>
@@ -160,6 +160,23 @@ img {
       
  		function cancelBooking(){
  			alert("status 취소로 바꾸러 가기");
+ 			
+ 			var mid = "${ sessionScope.loginUser.mid }";
+ 			var resId = $('.table-wrapper').find('table').find('tbody').eq(0).find('tr').text();
+ 			
+ 			alert(mid + resId);
+ 				
+ 			/* $.ajax({
+ 				url:"deleteSeat.mo", 
+				type:"post",
+				data:{fromDate:fromDate},
+				success:function(data){
+					
+				},
+				error:function(){
+					console.log("에러!");
+				}
+ 			}); */
  		}
  		
  		function cancelCancel(){
