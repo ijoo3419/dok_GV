@@ -130,4 +130,38 @@ public class BoardServiceImpl implements BoardService{
 		return bbf; 
 	}
 
+	//관리자 문의사항 getlistCount
+	@Override
+	public int getInquirelistCount(String TheaterId) {
+
+		return bd.getInquirelistCount(sqlSession, TheaterId);
+	}
+
+
+	//getThearterId
+	@Override
+	public String getTheaterId(String mid) {
+		return bd.getTheaterId(sqlSession, mid);
+	}
+
+	//관리자 문의사항 글 리스트 불러오기
+	@Override
+	public ArrayList<BoardNBoardFile> selectINquireList(PageInfo pi, String theaterId) {
+		ArrayList<BoardNBoardFile> list = bd.selectINquireList(sqlSession, pi, theaterId);
+		
+		return list;
+	}
+
+	//판매자 문의사항 클릭시
+	@Override
+	public BoardNBoardFile selectInquireOne(String board_id) throws BoardSelectOneException {
+		BoardNBoardFile bbf = null;
+		
+		int result = bd.updateCount(sqlSession, board_id);
+		
+		if(result > 0) return bd.selectNoticeOne(sqlSession, board_id);
+		
+		return bbf;
+	}
+
 }
