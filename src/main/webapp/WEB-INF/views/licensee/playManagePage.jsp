@@ -8,6 +8,7 @@
 
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
 <style>
 
 
@@ -159,13 +160,7 @@ h2 {
 						</ul>
 					</div>
 						
-						
-											
-				</form>
-			</article>
-				<hr>
-				<br>
-		</div>
+			
 
 
 		
@@ -185,16 +180,34 @@ h2 {
 	
 <!-- 테이블 행 추가 해주기 -->
     <script>
-  var seq =  0;	//회차
+    
+    
+    /* for(var i = 0; i < arrayDate.length; i++){
+       if(i == 0){
+          strDate += str2;
+       }else if(i == str2.length - 1){
+          strDate += ", " + str2;
+       }else{
+          strDate += ", " + str2;
+       }
+    } */
+    
+    
+  var seq =  0;	//just 순번
   var $date = $('<input type="text" name="fromDate" id="fromDate" class="web-font">');
   var $dateText = $('<label for="fromDate" class="web-font"></label>');
+  var $price = $('<td><input style="width:120px;"  name="price" >'); 	//가격
+  var $turningDay = $('<td><input style="width:130px;" name="turningDay_pre" >');	//상영날짜
+  var $startTime = $('<input style="width:90px;"  name="turningTime_pre" >');	//상영 시작 시간
+  var $endTime = $('<input style="width:90px;"  name="endTime_pre" >');	//상영 끝 시작
+  var $movieRoomName = $('<td><input style="width:80px;"  name="movieRoomName" >');	//상영관이름
   
-  var $price = $('<td><input style="width:120px;"  name="pirce" >'); 	//가격
-  var $turningDay = $('<input style="width:130px;" name="turningDate" >');	//상영날짜
-  var $startTime = $('<input style="width:90px;"  name="startTime" >');	//상영 시작 시간
-  var $endTime = $('<input style="width:90px;"  name="endTime" >');	//상영 끝 시작
-  var $movieRoomName = $('<input style="width:80px;"  name="movieRoomName" >');	//상영관이름
+ /*  var str = moment("/Date(" + $turningDay +")/").format("YY/MM/DD"); //json string
   
+  var str2 = str.toString();
+   */
+  
+  var strDate = "";
   
   
   $('#btn-add-row').click(function() {
@@ -204,13 +217,14 @@ h2 {
 	
     var time = new Date().toLocaleTimeString();
     
-    $('#my-tbody').append('<tr><td>')
-    $('#my-tbody').append(seq);
-    $('#my-tbody').append($price);
-    $('#my-tbody').append($turningDay);
-    $('#my-tbody').append($startTime);
-    $('#my-tbody').append($movieRoomName);
-    $('#my-tbody').appned('</td></tr>');
+    $('#playTable > tbody:last').append('<tr>')
+    $('#playTable > tbody:last').append('<td>' + seq);
+    $('#playTable > tbody:last').append($price);
+    $('#playTable > tbody:last').append($turningDay);
+    $('#playTable > tbody:last').append($startTime);
+    $('#playTable > tbody:last').append('~');
+    $('#playTable > tbody:last').append($endTime); 
+    $('#playTable > tbody:last').append($movieRoomName);
     /* $('#playTable > tbody:last').append('<tr><td>' + seq + '</td><td>' + $price +
     		'</td><td>' + $turningDay + '</td><td>' + $startTime + '</td><td>'
     		 + $movieRoomName + '</td></tr>'); */
@@ -244,7 +258,13 @@ $(function() {
 	
 	});
 </script>   -->
-
+			
+											
+				</form>
+			</article>
+				<hr>
+				<br>
+		</div>
 
 
 </body>

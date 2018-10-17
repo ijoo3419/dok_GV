@@ -63,10 +63,11 @@
 	
 <!-- movieRoomId 값 가져오기 -->
 <select id="selectIdCheck" resultMap="movieRoomResultSet" parameterType="MovieRoom">
-	SELECT MOVIEROOM_ID 
-	FROM(SELECT ROWNUM RNUM, MOVIEROOM_ID FROM MOVIEROOM
-	ORDER BY MOVIEROOM_ID DESC)
-	WHERE RNUM = 1
+
+ SELECT MOVIEROOM_ID
+    FROM(SELECT ROWNUM RNUM, MOVIEROOM_ID FROM MOVIEROOM ORDER BY MOVIEROOM_ID DESC)
+    WHERE RNUM=1
+	
 </select>
 
 <!-- 정태 영화관 사진 파일 추가 -->

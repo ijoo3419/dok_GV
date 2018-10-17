@@ -60,6 +60,13 @@ public class LicenseeServiceImpl implements LicenseeService{
 	}
 
 
+	@Override
+	public MovieRoom checkMovieRoomId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	/*@Override
 	public int insertFile(BoardFile adFile){
 	
