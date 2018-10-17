@@ -155,7 +155,6 @@ public class MovieController {
 
 	//박지용 @ResponseBody를 이용한 ajax 처리
 	@RequestMapping(value="selectMovieRoom.mo")
-
 	public @ResponseBody String[][] selectMovieRoom(@RequestParam String movieRoomIdVal, HttpServletRequest request){
 
 		System.out.println("영화관 출력하기: " + movieRoomIdVal);
@@ -245,6 +244,26 @@ public class MovieController {
 		
 		return check;
 	}
+	
+	/* //박지용 @ResponseBody를 이용한 ajax 처리
+	@RequestMapping(value="deleteSeat.mo")
+	public @ResponseBody String[][] deleteSeat(@RequestParam String mid){
+
+		System.out.println("영화관 출력하기: " + movieRoomIdVal);
+
+		String name = movieRoomIdVal;
+
+		System.out.println(name);
+		String[][] arr = new cellClass().test(name, request);
+
+		for(String[] str : arr){
+			for(String s : str)
+				System.out.print(s);
+			System.out.println();
+		}
+
+		return arr;
+	} */
 	
 }
 

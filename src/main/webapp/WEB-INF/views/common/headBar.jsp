@@ -187,7 +187,7 @@ a {
 			<li class="nli" style="border-left: 1px solid #a9a5a5;"><a href="movie.mo" title="영화 바로가기"><p>영화</p></a></li>
 			<li class="nli"><a href="cinema.ci" title="극장 바로가기"><p>극장</p></a></li>
 
-			<li class="nli"><a href="#" title="예매 바로가기"><p>예매</p></a></li>
+			<li class="nli"><a href="moviePay.mo" title="예매 바로가기"><p>예매</p></a></li>
 			<li class="nli"><a href="goNoticeMain.bo" title="공지사항 바로가기"><p>공지사항</p></a></li>
 
 			<li class="nli"><a href="login.me"><p>로그인</p></a></li>
@@ -198,7 +198,7 @@ a {
 			<li class="nli" style="border-left: 1px solid #a9a5a5;"><a href="movie.mo" title="영화 바로가기"><p>영화</p></a></li>
 			<li class="nli"><a href="cinema.ci" title="극장 바로가기"><p>극장</p></a></li>
 
-			<li class="nli"><a href="#" title="예매 바로가기"><p>예매</p></a></li>
+			<li class="nli"><a href="moviePay.mo" title="예매 바로가기"><p>예매</p></a></li>
 			<li class="nli"><a href="goNoticeMain.bo" title="공지사항 바로가기"><p>공지사항</p></a></li>
 
 			<li class="nli"><a href="logout.me" title="로그아웃 하기"><p>로그아웃</p></a></li>
