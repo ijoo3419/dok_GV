@@ -12,13 +12,14 @@
 <head>
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
-	 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <!--  <link rel="stylesheet" href="/resources/demos/style.css"> -->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- datepicker 한국어로 -->
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
 
-<script type="text/javascript">
+ <script type="text/javascript">
 
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
@@ -158,12 +159,12 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="${contextPath }/resources/css/main.css" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<noscript>
+ <!-- <script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+ <noscript>
 	<link rel="stylesheet"
 		href="${contextPath }/resources/css/noscript.css" />
-</noscript>
+</noscript> 
 <style>
 .post {
 	display: none;
@@ -241,6 +242,17 @@ img.ui-datepicker-trigger {
 #fromDate, #toDate {
    	width:300px !important;
    	height:50px !important;
+}
+.ui-datepicker-header {
+	font-color:white !important;
+	background: #04B4AE !important;
+}
+.ui-datepicker-calendar{
+	font-family: 'Jua', sans-serif !important;
+}
+.ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year {
+    width: 50% !important;
+    height: 20%;
 }
 </style>
 </head>
@@ -726,7 +738,7 @@ img.ui-datepicker-trigger {
 		<section id="tab-7" class="post">
 			<h2>영화 추가</h2>
 			<br>
-			<div>
+			 <div>
 				<!-- <span>영화 업데이트</span> <a id="update" href="#"
 					class="button icon fa-download"> 업데이트 </a> -->
 				<form action="" method="post"
@@ -740,8 +752,8 @@ img.ui-datepicker-trigger {
 							<input type="text" name="theaterName" id="demo-name" value=""
 								placeholder="영화 제목을 입력하세요." />
 								<br><br>
-								<h2 align="left">2.영어 제목</h2>
-								<input type="text" name="theaterName" id="demo-name" value=""
+							<h2 align="left">2.영어 제목</h2>
+							<input type="text" name="theaterName" id="demo-name" value=""
 								placeholder="영어 제목을 입력하세요." />
 						</div>
 					</div>
@@ -756,69 +768,66 @@ img.ui-datepicker-trigger {
 					<br>
 					<h2 align="left">3.개봉일자</h2>
 					<!-- Break -->
-					<div class="col-12">
+				<!-- 	<div class="col-12"> -->
 					
-					<input type="text" name="fromDate" id="fromDate" class="web-font" value="">
+					<input type="text" name="fromDate" id="fromDate" class="web-font">
 					
 						<!-- <textarea name="theaterRoot" id="demo-message"
 							placeholder="찾아오는 길을 입력해 주세요" rows="6"></textarea> -->
-					</div>
-					<script type="text/javascript">
-$(function() {
-	    //오늘 날짜를 출력
-		/* $("#today").text(new Date().toLocaleDateString()); */
+					<!-- </div> -->
 
-		//datepicker 한국어로 사용하기 위한 언어설정
-		/* $.datepicker.setDefaults($.datepicker.regional['ko']); */
-
-		// 시작일(fromDate)은 종료일(toDate) 이후 날짜 선택 불가
-		// 종료일(toDate)은 시작일(fromDate) 이전 날짜 선택 불가
-
-		//시작일.
-		$('#fromDate').datepicker({
-			showOn : "text", // 달력을 표시할 타이밍 (both: focus or button)
-			buttonImage : "${ contextPath }/resources/images/date.png", // 버튼 이미지
-			buttonImageOnly : true, // 버튼 이미지만 표시할지 여부
-			buttonText : "날짜선택", // 버튼의 대체 텍스트
-			dateFormat : "yy-mm-dd", // 날짜의 형식
-			changeMonth : true, // 월을 이동하기 위한 선택상자 표시여부
-			minDate: 0,                       // 선택할수있는 최소날짜, ( 0 : 오늘 이전 날짜 선택 불가)
-			/* onClose : function(selectedDate) {
-				// 시작일(fromDate) datepicker가 닫힐때
-				// 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
-				$("#toDate").datepicker("option", "minDate", selectedDate);
-			} */
-		});
-	});
+<script>
+$( function() {
+	$.datepicker.setDefaults($.datepicker.regional['ko']);
+  $( "#fromDate" ).datepicker({
+	  showOn : "both", // 달력을 표시할 타이밍 (both: focus or button)
+		buttonImage : "${ contextPath }/resources/images/date.png", // 버튼 이미지
+		buttonImageOnly : true, // 버튼 이미지만 표시할지 여부
+		buttonText : "날짜선택", // 버튼의 대체 텍스트
+		dateFormat : "yy-mm-dd", // 날짜의 형식
+		changeMonth : true
+  });
+});
 </script>
 					<br>
 					<br>
 					<h2 align="left">4.영화관 사진</h2>
 					<div class="col-12">
 
+						<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">포스터 : </a>
 						<input class="fileInput" type="file" name="photo1"><br>
-						 <input	class="fileInput" type="file" name="photo2"><br> 
+						<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">스틸이미지1 : </a>
+						 <input	class="fileInput" type="file" name="photo2"><br>
+						 <a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">스틸이미지2 : </a> 
 						 <input class="fileInput" type="file"name="photo3"><br>
-						 <input class="fileInput" type="file" name="photo4"><br> 
+						 <a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">스틸이미지3 : </a>
+						 <input class="fileInput" type="file" name="photo4"><br>
+						 <a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">예고편 : </a>
+						 <input class="fileInput" type="file" name="video1"><br> 
 
 
 					</div>
 					<br>
-					<br>
-					<br>
 					<div class="col-6 col-12-xsmall">
-						 	<div class="col-6 col-12-xsmall">
-								<h3 align="left">5. 주소</h3>
-							<br>
-							<div class="addressBox">
-							<input type="text" id="sample4_postcode" name="address1" placeholder="우편번호" style=" height:64px; width:400px; float:left; margin-bottom:15px;">
-<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" style="margin-left:-380px; margin-top:10px; width:150px; height:45px;"><br> </div>
-<input type="text" id="sample4_roadAddress" name="address2" placeholder="도로명주소">
-<input type="text" id="sample4_jibunAddress" name="address3" placeholder="지번주소">
+						 	 <div class="row gtr-uniform"> 
+					<div class="col-6 col-12-xsmall">
+							<h2 align="left">5. 감독</h2>
+							
+							<input type="text" id="sample4_postcode" name="address1" placeholder="감독이름을 입력하세요" style=" height:64px; width:430px; float:left; margin-bottom:15px;">
+ 							<h2 align="left">6. 제작사</h2>
+							<input type="text" id="sample4_roadAddress" name="address2" placeholder="제작사를 입력하세요" style=" height:64px; width:430px; float:left; margin-bottom:15px;">
+							<h2 align="left">7. 등급</h2>
+							<input type="text" id="sample4_roadAddress" name="address2" placeholder="등급을 입력하세요" style=" height:64px; width:430px; float:left; margin-bottom:15px;">
+ 							<h2 align="left">8. 출연</h2>
+							<input type="text" id="sample4_roadAddress" name="address2" placeholder="출연을 입력하세요" style=" height:64px; width:430px; float:left; margin-bottom:15px;">
+  							<h2 align="left">9. 타입</h2>
+							<input type="text" id="sample4_roadAddress" name="address2" placeholder="타입을 입력하세요" style=" height:64px; width:430px; float:left; margin-bottom:15px;">
+  </div>  
+</div>
 <span id="guide" style="color:#999"></span>
 				
 											</div>			 
-											<br><br><br>
+											<br><br>
 											<!-- Break -->
 											<div class="col-12">
 												<ul class="actions">
@@ -829,7 +838,24 @@ $(function() {
 										</div>
 				
 		</form>
-					
+		<!-- <script type="text/javascript">
+		var xhr = new XMLHttpRequest(); 
+		var url = 'http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json.jsp?collection=kmdb_new&nation=대한민국'; /*URL*/ 
+		var queryParams = '?' + encodeURIComponent('ServiceKey=X37KK7J990E70R184739'); /*Service Key*/ 
+		queryParams += '&' + encodeURIComponent('val001') + '=' + encodeURIComponent('2018'); /*상영년도*/ 
+		queryParams += '&' + encodeURIComponent('val002') + '=' + encodeURIComponent('01'); /*상영월*/ 
+		xhr.open('GET', url + queryParams); 
+		xhr.onreadystatechange = function () { 
+			if (this.readyState == 4) { 
+			
+			 alert('Status: '+this.status+'Headers: '+JSON.stringify(this.getAllResponseHeaders())+'Body: '+this.responseText + this.title); } 
+		
+		
+		console.log(xhr);
+		};
+			 xhr.send('');
+			/* alert(xhr); */
+		</script>	 -->
 			</div>
 
 		</section>
@@ -926,7 +952,7 @@ $(function() {
 	</script>
 	</script>
 	<!-- 템플릿 관련 js파일들 -->
-	<script src="${contextPath }/resources/js/jquery.min.js"></script>
+	<%-- <script src="${contextPath }/resources/js/jquery.min.js"></script> --%>
 	<script src="${contextPath }/resources/js/jquery.scrollex.min.js"></script>
 	<script src="${contextPath }/resources/js/jquery.scrolly.min.js"></script>
 	<script src="${contextPath }/resources/js/browser.min.js"></script>
