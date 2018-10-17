@@ -89,7 +89,7 @@
 									<td>★★★★★</td>
 								</c:when>
 							</c:choose>
-									<td><textarea readonly>[영화] ${ mv.rcontent }</textarea></td>
+									<td>[영화] ${ mv.rcontent }</td>
 							<td><img src="${ contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;"> ${ mv.recommend_count } </td>
 							<td>${ mv.rcreate_date }</td>
 							<td><img src="${ contextPath }/resources/images/member/edit.png" width="20" height="20" style="margin-left:10px; margin-top:10px;"></td>

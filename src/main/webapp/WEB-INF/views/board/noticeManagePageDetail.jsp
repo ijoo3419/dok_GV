@@ -7,6 +7,24 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style>
+#detailView{
+	/* display:inline-block; */
+	border: solid 1px;
+	width:900px;
+	height:100%;
+	float: left;
+}
+
+#title {
+	display: inline;
+	padding: 100px;
+}
+
+</style>
+
+
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="${contextPath }/resources/css/main.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -35,7 +53,6 @@
 			</ul>
 		</nav>
 		
-		</nav>
 
 		<div id="main">
 
@@ -44,23 +61,59 @@
 				<br><br>
 				
 				
+				
+				<div id="detailView">
+					<table border="" summary="">
+						
+								<h4 align="left" id="title"> 작성자 </h4><h2 style="margin-top:20px" align="center" id="title">제목</h2><h4 align="right" id="title"> 조회수</h4>
+						<tbody>
+							<tr>
+								<td bgcolor="white">
+									여기에 내용 불러오기^^
+									여기에 내용 불러오기^^<br>
+									여기에 내용 불러오기^^<br>
+									여기에 내용 불러오기^^<br>
+									여기에 내용 불러오기^^<br>
+									여기에 내용 불러오기^^<br>
+									여기에 내용 불러오기^^<br>
+									여기에 내용 불러오기^^<br>
+									여기에 내용 불러오기^^<br>
+									여기에 내용 불러오기^^<br>
+									여기에 내용 불러오기^^<br>
+									여기에 내용 불러오기^^<br>
+									여기에 내용 불러오기^^<br>
+									여기에 내용 불러오기^^<br>
+									여기에 내용 불러오기^^<br>
+									여기에 내용 불러오기^^<br>
+									여기에 내용 불러오기^^<br>
+									여기에 내용 불러오기^^<br>
+									여기에 내용 불러오기^^<br>
+									
+								</td>
+					
+							</tr>
+						</tbody>
+
+					</table>
+				</div>
+				
+				
 
 				<input type="hidden" id="mId" name="mId" value="${ loginUser.mid }">
 					<div class="row gtr-uniform">
-						<div class="col-6 col-12-xsmall">
+<%-- 						<div class="col-6 col-12-xsmall">
 							<input type="text" name="btitle" id="btitle" readonly value="${ bbf.btitle }"/>				
-						</div>
-					</div>
-					<br>
-					<div class="col-12">
-						<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">${ bbf.bcontent }</a>
+						</div> --%>
 					</div>
 					<br>
 					
+					<br>
+					<br><br><br><br>
 				
 				<button class="button" onclick="goBack()">목록</button>
 				<button class="button" onclick="modify()">수정</button>
 				
+				</article>
 				</div>
 				
 				
