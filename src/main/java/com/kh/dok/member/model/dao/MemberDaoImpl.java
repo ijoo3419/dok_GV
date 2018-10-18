@@ -68,9 +68,11 @@ public class MemberDaoImpl implements MemberDao {
 		System.out.println("Dao kakaoUserCheck Member : " + kakaoUserCheck);
 		
 		if(kakaoUserCheck == null){
+			System.out.println("카카오 새로운 유저이다");
 			//새유저
 			return 11;
 		}else{
+			System.out.println("카카오 기존 회원이다");
 			//기존유저
 			return 22;
 		}
@@ -82,8 +84,11 @@ public class MemberDaoImpl implements MemberDao {
 	//카카오 새 유저 회원가입
 	@Override
 	public int insertKakaoMember(SqlSessionTemplate sqlSession, Member m) {
+		System.out.println("dao 카카오 새 유저 회원가입에서 Member : " + m);
 		
-		return sqlSession.insert("Member.insertKakaoMember", m);
+		int result = sqlSession.insert("Member.insertKakaoMember", m);
+		
+		return result;
 	}
 
 	
