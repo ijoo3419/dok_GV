@@ -6,7 +6,7 @@
 	<resultMap type="BookingHistory" id="bookingHistoryResultSet">
 		<id property="reservation_id" column="RESERVATION_ID" />
 		<result property="mid" column="mid" />
-		<result property="reservation_id" column="RESERVATION_ID"/>
+		<result property="approval_number" column="APPROVAL_NUMBER"/>
 		<result property="movie_title" column="MOVIE_TITLE" />
 		<result property="theater_name" column="THEATER_NAME" />
 		<result property="movieroom_name" column="MOVIEROOM_NAME" />
@@ -18,20 +18,22 @@
 	</resultMap>
 	
 	<select id="selectBookingHist" resultMap="bookingHistoryResultSet">
-	SELECT R.RESERVATION_ID, M.MOVIE_TITLE, TH.THEATER_NAME, MR.MOVIEROOM_NAME,
+	SELECT PA.APPROVAL_NUMBER, M.MOVIE_TITLE, TH.THEATER_NAME, MR.MOVIEROOM_NAME,
         S.SEAT_ROW, S.SEAT_COLUMN, R.RESERVATION_DATE, T.TURNING_DAY, 
         CASE WHEN R.RESERVATION_STATUS = '확인'
         AND SYSDATE > T.END_TIME 
         THEN '취소불가_리뷰가능'
         ELSE '취소가능_리뷰불가'
-        END AS STATUS
-	FROM RESERVATION R, MOVIEROOM MR, MOVIE M, TURNING T, THEATER TH, SEAT S, PLAY P
-	WHERE R.SEAT_ID = S.SEAT_ID
-	AND S.TURNING_ID = T.TURNING_ID
-	AND T.PLAY_ID = P.PLAY_ID
-	AND P.MOVIE_ID = M.MOVIE_ID
-	AND MR.THEATER_ID = TH.THEATER_ID
-	AND R.RESERVATION_STATUS != '취소'
+        END AS STATUS  
+    FROM RESERVATION R
+    JOIN PAY PA ON (R.RESERVATION_ID = PA.RESERVATION_ID)
+    JOIN SEAT S ON (R.SEAT_ID = S.SEAT_ID)
+    JOIN TURNING T ON (S.TURNING_ID = T.TURNING_ID)
+    JOIN PLAY P ON (T.PLAY_ID = P.PLAY_ID)
+    JOIN MOVIE M ON (P.MOVIE_ID = M.MOVIE_ID)
+    JOIN MOVIEROOM MR ON (T.MOVIEROOM_ID = MR.MOVIEROOM_ID)
+    JOIN THEATER TH ON (MR.THEATER_ID = TH.THEATER_ID)
+    WHERE R.RESERVATION_STATUS != '취소'
 	AND R.MID = #{ mid }
 	</select>
 	
