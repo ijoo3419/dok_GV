@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="Review">
+	<resultMap type="Reply" id="ReplySet">
+		<id property="rid" column="RID"/>
+		<result property="bid" column="BID"/>
+		<result property="rwriter" column="RWRITER"/>
+		<result property="rcontent" column="RCONTENT"/>
+		<result property="rcreate_date" column="RCREATE_DATE"/>
+		<result property="rmodify_date" column="RMODIFY_DATE"/>
+		<result property="status" column="STATUS"/>
+		<result property="recommend_count" column="RECOMMEND_COUNT"/>
+		<result property="division" column="DIVISION"/>
+		<result property="theater_id" column="THEATER_ID"/>
+		<result property="movie_id" column="MOVIE_ID"/>
+		<result property="grade_count" column="GRADE_COUNT"/>
+	</resultMap>
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

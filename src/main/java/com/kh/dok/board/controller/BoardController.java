@@ -4,6 +4,7 @@ package com.kh.dok.board.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,8 +12,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.dok.board.model.exception.BoardInsertException;
@@ -26,6 +29,9 @@ import com.kh.dok.common.CommonUtils;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.common.Pagination;
 import com.kh.dok.member.model.vo.Member;
+import com.kh.dok.review.model.vo.Reply;
+
+import net.sf.json.JSONArray;
 
 @Controller
 public class BoardController {
@@ -372,7 +378,9 @@ public class BoardController {
 	   @RequestMapping(value="selectInquireOne.bo")
 	   public String selectInquireOne(Model model, String board_id){
 		   try {
+			   System.out.println("성희 : 보드컨트롤러 board_id : " + board_id);
 			BoardNBoardFile bbf = bs.selectInquireOne(board_id);
+			System.out.println("성희 : 지금 볼라고 한거 bbf : " + bbf);
 			
 			model.addAttribute("bbf", bbf);
 		} catch (BoardSelectOneException e) {
@@ -384,6 +392,55 @@ public class BoardController {
 		   return "board/inquireManagePageDetail";
 		   
 	   }
+	   
+	   //댓글등록
+	   @RequestMapping(value="addComment.bo")
+	   public String ajax_addComment(@ModelAttribute("Reply") Reply reply, String bid, String comment, HttpServletRequest request, Model model){
+		  System.out.println("댓글 등록할 때 ajax 동작함");
+		  System.out.println("방금 보려고한 board_id : " + bid);
+		  
+		   HttpSession session = request.getSession();
+		   Member loginUser = (Member)session.getAttribute("loginUser");
+
+		   
+		   reply.setBid(bid);
+		   reply.setRwriter(loginUser.getMid());
+		   reply.setRcontent(comment);
+		   
+		   int result = bs.addComment(reply);
+		   if(result > 0){
+			   System.out.println("댓글 등록 갓다옴 ");
+			   return "board/inquireManagePageDetail";
+		   }else{
+			   model.addAttribute("msg", "댓글등록 실패");
+			   return "common/errorPage";
+		   }
+		   
+	   }
+	   
+	   //게시물 댓글 불러오기
+	   @RequestMapping(value="commentList.bo")
+	   public @ResponseBody HashMap<String, Object> ajax_commentList(@ModelAttribute("Reply") Reply reply, HttpServletRequest request, Model model){
+		   System.out.println("댓글 불러올 때 ajax 동작함");
+		   
+		   String bid = reply.getBid();
+		   System.out.println("보드컨트롤러 댓글 bid : " + bid);
+		   ArrayList<Reply> list = bs.selectReply(bid);
+		   
+		   System.out.println("보드컨트롤러에서 댓글 list : " + list);
+		  
+		   HashMap<String, Object> hmap = new HashMap<String, Object>();
+		   hmap.put("list", list);
+		   
+		  /*JSONArray json = new JSONArray();
+		  json.add(list);
+		  
+		  model.addAttribute("json", json);*/
+		  
+		  return hmap;
+	   }
+	   
+	   
 	   
 
 }

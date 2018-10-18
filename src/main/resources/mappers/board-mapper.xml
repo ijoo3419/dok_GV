@@ -27,6 +27,21 @@
 		<result property="nickname" column="NICKNAME" />
 	</resultMap>
 	
+	<resultMap type="Reply" id="ReplyResultSet">
+		<id property="rid" column="RID"/>
+		<result property="bid" column="BID"/>
+		<result property="rwriter" column="RWRITER"/>
+		<result property="rcontent" column="RCONTENT"/>
+		<result property="rcreate_date" column="RCREATE_DATE"/>
+		<result property="rmodify_date" column="RMODIFY_DATE"/>
+		<result property="status" column="STATUS"/>
+		<result property="recommend_count" column="RECOMMEND_COUNT"/>
+		<result property="division" column="DIVISION"/>
+		<result property="theater_id" column="THEATER_ID"/>
+		<result property="movie_id" column="MOVIE_ID"/>
+		<result property="grade_count" column="GRADE_COUNT"/>
+	</resultMap>
+	
 	<!-- 공지등록 -->
 	<insert id="insertNotice" parameterType="board">
 		INSERT INTO BOARD
@@ -95,10 +110,14 @@
 	
 	<!-- 공지사항 상세보기(성희) -->
 	<select id="selectNoticeOne" parameterType="java.lang.String" resultMap="BBFileResultSet">
-		SELECT *
-		FROM BOARD, BOARD_FILE
-		WHERE BOARD.BOARD_ID = BOARD_FILE.BOARD_ID
+		SELECT TO_NUMBER(SUBSTR(BOARD.BOARD_ID, 2)) AS BOARD_ID, BOARD.MID, BTITLE, BCONTENT, BOARD_SORT, BOARD_DATE, BCOUNT, 
+       		   FILE_ID, ORIGIN_NAME, EDIT_NAME, FILE_SRC, FILE_DATE, FILE_LEVEL, M.NICKNAME
+		FROM BOARD, BOARD_FILE, MEMBER M
+		WHERE BOARD.BOARD_ID = BOARD_FILE.BOARD_ID(+)
+		AND BOARD.MID = M.MID
 		AND BOARD.BOARD_ID = 'B' || #{board_id}
+		AND BSTATUS = 'Y'
+		AND BOARD_DIV = 'BD1'
 	</select>
 	
 	<!-- 공지사항 페이징 getListCount(성희) -->
@@ -181,10 +200,20 @@
 		ORDER BY BOARD_ID DESC
 	</select>
 	
+	<!-- 댓글 등록 -->
+	<insert id="addComment" parameterType="Reply">
+		INSERT INTO REPLY
+		VALUES('R' || REPLY_RID.NEXTVAL, 'B' || #{bid}, #{rwriter}, #{rcontent}, SYSDATE, NULL, DEFAULT, DEFAULT, NULL, NULL, NULL, NULL) 
+	</insert>
 	
 	
-	
-	
+	<!-- 댓글리스트 불러오기 -->
+	<select id="selectReply" parameterType="java.lang.String" resultMap="ReplyResultSet">
+		SELECT *
+		FROM REPLY
+		WHERE BID = 'B' || #{bid}
+		AND STATUS = 'Y'
+	</select>
 	
 	
 	

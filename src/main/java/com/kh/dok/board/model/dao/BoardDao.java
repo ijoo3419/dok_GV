@@ -12,6 +12,7 @@ import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.board.model.vo.BoardNBoardFile;
 import com.kh.dok.board.model.vo.SearchCondition1;
 import com.kh.dok.common.PageInfo;
+import com.kh.dok.review.model.vo.Reply;
 
 public interface BoardDao {
 
@@ -40,5 +41,9 @@ public interface BoardDao {
 	String getTheaterId(SqlSessionTemplate sqlSession, String mid);
 
 	ArrayList<BoardNBoardFile> selectINquireList(SqlSessionTemplate sqlSession, PageInfo pi, String theaterId);
+
+	int addComment(SqlSessionTemplate sqlSession, Reply reply);
+
+	ArrayList<Reply> selectReply(SqlSessionTemplate sqlSession, String bid);
 
 }

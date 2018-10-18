@@ -10,6 +10,7 @@ import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.board.model.vo.BoardNBoardFile;
 import com.kh.dok.board.model.vo.SearchCondition1;
 import com.kh.dok.common.PageInfo;
+import com.kh.dok.review.model.vo.Reply;
 
 public interface BoardService {
 
@@ -40,5 +41,9 @@ public interface BoardService {
 	ArrayList<BoardNBoardFile> selectINquireList(PageInfo pi, String theaterId);
 
 	BoardNBoardFile selectInquireOne(String board_id) throws BoardSelectOneException;
+
+	int addComment(Reply reply);
+
+	ArrayList<Reply> selectReply(String bid);
 
 }
