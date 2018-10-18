@@ -111,7 +111,7 @@
 	
 	<insert id="insertTurning" parameterType="Turning">
 		INSERT INTO TURNING
-		VALUES ('T' || TO_CHAR(TURNING_TURNING_ID.NEXTVAL), 'P21', 7000, '181015' , '12:00 ~ 13:20' ,'181015 12:00:00', '181015 13:20:00', 
+		VALUES ('TU' || TO_CHAR(TURNING_TURNING_ID.NEXTVAL), 'P21', 7000, '181015' , '12:00 ~ 13:20' ,'181015 12:00:00', '181015 13:20:00', 
         'MR51')
 		
 	</insert>

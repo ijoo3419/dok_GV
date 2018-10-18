@@ -1,9 +1,9 @@
 package com.kh.dok.licensee.controller;
 
 import java.io.File;
+import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -239,37 +239,41 @@ public class LicenseeController {
 	public String insertPlay(Model model, Play p, Turning t, MovieRoom mr, 
 								HttpServletRequest request){
 		
-		System.out.println("play : "+p);
-		System.out.println("turning : "+t);
+		t.setTurningTime(t.getStartTime_pre() + " ~ " + t.getEndTime_pre());
+
+		t.setStartTime_pre(t.getTurningDay() + " " + t.getStartTime_pre());
+		
+		System.out.println(t.getStartTime_pre());
+		
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			Date to = transFormat.parse(t.getStartTime_pre());
+			t.setStartTime((java.sql.Date)to);
+			
+			System.out.println("play : "+ p);
+			System.out.println("turning : "+ t);
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
 	
 		int resultPlay = ls.insertPlay(p);
-	/*	request.setAttribute("price", price);
 		
-		System.out.println("가격시발 : " + price);*/
-		
-		
-		//시작, 끝 시간 조정
-		/*t.setStartTime(t.getTurningDay() + " " +t.getEndTime());
-		t.setEndTime(t.getTurningDay() + " " + t.getStartTime());
-		
-		
-		
-		System.out.println("스타트타임 " + t.getStartTime());
-		System.out.println("엔드타임 " + t.getEndTime());*/
 		int resultTurning = ls.insertTurning(t);
 		System.out.println("movieRoom : "+ mr);
-
-/*		System.out.println(mr.getMovieRoomName());
-*/		System.out.println("controller p = " + p);
-		System.out.println("controller t = " + t);
+		
+		
+/*		System.out.println(mr.getMovieRoomName());*/
+		
+		
+		System.out.println("controller p = " + p);
 		
 		
 		MovieRoom movieRoomId = ls.checkMovieRoomId(mr);
 		
-		
 		System.out.println("movieRoomId = " + movieRoomId);
 		
-		System.out.println("controller mr1 = " + mr);
 		mr.setMovieRoomId(movieRoomId.getMovieRoomId());		
 		System.out.println(mr.getMovieRoomId());
 		
@@ -302,14 +306,6 @@ public class LicenseeController {
 			System.out.println("startTimeStr = " + startTimeStr);
 			System.out.println("turningDateStr = " + turningDayStr);*/
 
-			
-			
-	
-		
-		
-		
-		
-		
 		if(resultPlay > 0 || resultTurning > 0){
 			return "licensee/playManagePage";
 
