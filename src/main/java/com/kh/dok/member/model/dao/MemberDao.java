@@ -69,5 +69,6 @@ public interface MemberDao {
 
 	int updateStatus(SqlSessionTemplate sqlSession, Member m);
 
+
      
 }

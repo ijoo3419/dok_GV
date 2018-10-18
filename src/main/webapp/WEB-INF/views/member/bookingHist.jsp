@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -108,13 +109,13 @@ img {
 											<c:forEach items="${ bookingHistView }" var="bk">
 											<tbody>
 												<tr>
-													<td>${ bk.reservation_id }</td>
+													<td>${ bk.approval_number }</td>
 													<td>${ bk.movie_title }</td>
 													<td>${ bk.theater_name }</td>
 													<td>${ bk.movieroom_name }</td>
-													<td>${ bk.seat_row }열 ${ bk.seat_column }</td>
-													<td>${ bk.reservation_date }</td>
-													<td>${ bk.turning_day }</td>
+													<td>${ bk.seat_row }</td>
+													<td>${ fn:substring(bk.reservation_date, 0,10) }</td>
+													<td>${ fn:substring(bk.turning_day, 5, 16) }</td>
 													
 													<c:set var="status" value="${ bk.status }"/>
 													<c:choose>

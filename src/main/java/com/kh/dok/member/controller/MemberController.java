@@ -453,8 +453,42 @@ public class MemberController {
 		 Member m = (Member)request.getSession().getAttribute("loginUser");
 		 
 		 ArrayList<BookingHistory> bookingHistView = ms.selectBookingHist(m);
+		 ArrayList<BookingHistory> list = new ArrayList<BookingHistory>();
+		 for(int i = 0; i < bookingHistView.size(); i++){
+			 if(i == 0){
+				 BookingHistory b = new BookingHistory();
+				 b.setapproval_number(bookingHistView.get(i).getapproval_number());
+				 b.setMovie_title(bookingHistView.get(i).getMovie_title());
+				 b.setTheater_name(bookingHistView.get(i).getTheater_name());
+				 b.setMovieroom_name(bookingHistView.get(i).getMovieroom_name());
+				 b.setSeat_row(bookingHistView.get(i).getSeat_row());
+				 b.setReservation_date(bookingHistView.get(i).getReservation_date());
+				 b.setTurning_day(bookingHistView.get(i).getTurning_day());
+				 b.setStatus(bookingHistView.get(i).getStatus());
+				 list.add(b);
+				 
+			 }else{
+				 if(!bookingHistView.get(i-1).getapproval_number().equals(bookingHistView.get(i).getapproval_number())){
+					 BookingHistory b = new BookingHistory();
+					 b.setapproval_number(bookingHistView.get(i).getapproval_number());
+					 b.setMovie_title(bookingHistView.get(i).getMovie_title());
+					 b.setTheater_name(bookingHistView.get(i).getTheater_name());
+					 b.setMovieroom_name(bookingHistView.get(i).getMovieroom_name());
+					 b.setSeat_row(bookingHistView.get(i).getSeat_row());
+					 b.setReservation_date(bookingHistView.get(i).getReservation_date());
+					 b.setTurning_day(bookingHistView.get(i).getTurning_day());
+					 b.setStatus(bookingHistView.get(i).getStatus());
+					 list.add(b);
+				 }else{
+					 int length = list.size() - 1;
+					 list.get(length).setSeat_row(list.get(length).getSeat_row() + " , " + bookingHistView.get(i).getSeat_row());
+				 }
+			 }
+			 
+		 }
 		 
-		 model.addAttribute("bookingHistView", bookingHistView);
+		 System.out.println(list);
+		 model.addAttribute("bookingHistView", list);
 		
 	    return "member/bookingHist";
 	 }

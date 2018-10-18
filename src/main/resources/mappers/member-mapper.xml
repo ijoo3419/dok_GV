@@ -149,7 +149,7 @@
 		SELECT NVL(COUNT(*),0)
     	FROM RESERVATION
     	WHERE MID = #{ mid }
-    	AND RESERVATION_STATUS = '완료'
+    	AND RESERVATION_STATUS != '취소'
 	</select>
 	
 	<!-- 내가 쓴 리뷰 COUNT -->

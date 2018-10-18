@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 public class BookingHistory {
 	
 	private int mid;
-	private String reservation_id;
+	private String approval_number;
 	private String movie_title;
 	private String theater_name;
 	private String movieroom_name;
@@ -19,6 +19,23 @@ public class BookingHistory {
 	
 	public BookingHistory(){}
 
+	public BookingHistory(int mid, String approval_number, String movie_title, String theater_name,
+			String movieroom_name, String seat_row, String seat_column, String reservation_date, String turning_day,
+			String reservation_status, String status) {
+		super();
+		this.mid = mid;
+		this.approval_number = approval_number;
+		this.movie_title = movie_title;
+		this.theater_name = theater_name;
+		this.movieroom_name = movieroom_name;
+		this.seat_row = seat_row;
+		this.seat_column = seat_column;
+		this.reservation_date = reservation_date;
+		this.turning_day = turning_day;
+		this.reservation_status = reservation_status;
+		this.status = status;
+	}
+
 	public int getMid() {
 		return mid;
 	}
@@ -27,12 +44,12 @@ public class BookingHistory {
 		this.mid = mid;
 	}
 
-	public String getReservation_id() {
-		return reservation_id;
+	public String getapproval_number() {
+		return approval_number;
 	}
 
-	public void setReservation_id(String reservation_id) {
-		this.reservation_id = reservation_id;
+	public void setapproval_number(String approval_number) {
+		this.approval_number = approval_number;
 	}
 
 	public String getMovie_title() {
@@ -109,29 +126,11 @@ public class BookingHistory {
 
 	@Override
 	public String toString() {
-		return "BookingHistory [mid=" + mid + ", reservation_id=" + reservation_id + ", movie_title=" + movie_title
+		return "BookingHistory [mid=" + mid + ", approval_number=" + approval_number + ", movie_title=" + movie_title
 				+ ", theater_name=" + theater_name + ", movieroom_name=" + movieroom_name + ", seat_row=" + seat_row
 				+ ", seat_column=" + seat_column + ", reservation_date=" + reservation_date + ", turning_day="
 				+ turning_day + ", reservation_status=" + reservation_status + ", status=" + status + "]";
 	}
 
-	public BookingHistory(int mid, String reservation_id, String movie_title, String theater_name,
-			String movieroom_name, String seat_row, String seat_column, String reservation_date, String turning_day,
-			String reservation_status, String status) {
-		super();
-		this.mid = mid;
-		this.reservation_id = reservation_id;
-		this.movie_title = movie_title;
-		this.theater_name = theater_name;
-		this.movieroom_name = movieroom_name;
-		this.seat_row = seat_row;
-		this.seat_column = seat_column;
-		this.reservation_date = reservation_date;
-		this.turning_day = turning_day;
-		this.reservation_status = reservation_status;
-		this.status = status;
-	}
-
-	
 	
 }
