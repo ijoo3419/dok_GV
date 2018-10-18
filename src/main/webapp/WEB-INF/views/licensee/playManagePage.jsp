@@ -9,8 +9,11 @@
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
-<style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+
+<style>
 
 table tr th{
 width:250px;
@@ -177,36 +180,18 @@ h2 {
 		
 		<script src="//code.jquery.com/jquery.min.js"></script>
 	
-	
 <!-- 테이블 행 추가 해주기 -->
     <script>
     
+    $(function () {
+    	$("#datepicker").datepicker();
+    });
     
-    /* for(var i = 0; i < arrayDate.length; i++){
-       if(i == 0){
-          strDate += str2;
-       }else if(i == str2.length - 1){
-          strDate += ", " + str2;
-       }else{
-          strDate += ", " + str2;
-       }
-    } */
-    
-    
-  var seq =  0;	//just 순번
   var $date = $('<input type="text" name="fromDate" id="fromDate" class="web-font">');
-  var $dateText = $('<label for="fromDate" class="web-font"></label>');
-  var $price = $('<td><input style="width:120px;"  name="price" >'); 	//가격
-  var $turningDay = $('<td><input style="width:130px;" name="turningDay_pre" >');	//상영날짜
-  var $startTime = $('<input style="width:90px;"  name="turningTime_pre" >');	//상영 시작 시간
-  var $endTime = $('<input style="width:90px;"  name="endTime_pre" >');	//상영 끝 시작
-  var $movieRoomName = $('<td><input style="width:80px;"  name="movieRoomName" >');	//상영관이름
+  var $dateText = $('<label fordh="fromDate" class="web-font"></label>');
   
- /*  var str = moment("/Date(" + $turningDay +")/").format("YY/MM/DD"); //json string
-  
-  var str2 = str.toString();
-   */
-  
+  var seq =  0;	//just 순번
+
   var strDate = "";
   
   
@@ -214,29 +199,22 @@ h2 {
 	
 	++seq;
 	
-	
-    var time = new Date().toLocaleTimeString();
+ /*  var $price = $('<input style="width:120px;"  name="price" >'); 	//가격
+  var $turningDay = $('<input style="width:130px;" name="turningDay_pre" >');	//상영날짜
+  var $startTime = $('<input style="width:90px;"  name="turningTime_pre" >');	//상영 시작 시간
+  var $endTime = $('<input style="width:90px;"  name="endTime_pre" >');	//상영 끝 시작
+  var $movieRoomName = $('<input style="width:80px;"  name="movieRoomName" >');	//상영관이름 */
     
-    $('#playTable > tbody:last').append('<tr>')
-    $('#playTable > tbody:last').append('<td>' + seq);
-    $('#playTable > tbody:last').append($price);
-    $('#playTable > tbody:last').append($turningDay);
-    $('#playTable > tbody:last').append($startTime);
-    $('#playTable > tbody:last').append('~');
-    $('#playTable > tbody:last').append($endTime); 
-    $('#playTable > tbody:last').append($movieRoomName);
-    /* $('#playTable > tbody:last').append('<tr><td>' + seq + '</td><td>' + $price +
-    		'</td><td>' + $turningDay + '</td><td>' + $startTime + '</td><td>'
-    		 + $movieRoomName + '</td></tr>'); */
+     $('#playTable > tbody:last').append('<tr><td>' + seq 
+     + '</td><td><input style="width:160px;" name= "price"><td><input type="date" style="width:150px;" name="turningDay"><td><input style="width:120px;"  name="startTime_pre">~<input style="width:120px;" name="endTime_pre"><td><input style="width:80px;"  name=" movieRoomName"></td></tr>');
   });
   $('#btn-delete-row').click(function() {
 	  --seq;
     $('#playTable > tbody:last > tr:last').remove();
- 
   });
   
-</script>  
-		
+</script>
+
 		<!-- 이건 테이블 상에서 -->
 <!-- <script>
 $(function() {
@@ -254,11 +232,8 @@ $(function() {
 				$("#toDate").datepicker("option", "minDate", selectedDate);
 			}
 		});
-
-	
 	});
 </script>   -->
-			
 											
 				</form>
 			</article>

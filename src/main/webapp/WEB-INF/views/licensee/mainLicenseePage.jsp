@@ -153,7 +153,8 @@ li {
 			<!-- Post -->
 			<section class="post">
 				<header class="major">
-					<h4>loginUser님, 오늘도 영화 같은 하루 보내세요.</h4>
+					<h4>${ sessionScope.loginUser.user_name }님, 오늘도 영화 같은 하루 보내세요.</h4>
+				<input type="hidden" value=${ sessionScope.loginUser.mid } id="mid"/>
 				</header>
 
 				<!-- Text stuff -->
@@ -172,8 +173,8 @@ li {
 						</div>
 						<br>
 						<ul>
-							<li>휴대폰 : </li>
-							<li>선호 장르 : </li>
+							<li></li>
+							<li></li>
 						</ul>
 					</div>
 					
@@ -184,7 +185,7 @@ li {
 						</div>
 						<br>
 						<ul>
-							<p> 문의 내역이 없습니다. </p>
+							<p>통계 내역이 없습니다. </p>
 						</ul>
 						</div>
 						
@@ -199,7 +200,7 @@ li {
 						<br>
 						</div>
 						
-								<p>(영화포스터)(영화제목)(예매시간)(영화관)</p>
+								<p>상영 정보가 없습니다.</p>
 							
 							<p>-</p>
 								
@@ -234,7 +235,7 @@ li {
 						
 						
 							
-							<p>(영화포스터)(영화제목)(예매시간)(영화관)</p>
+							<p>공지사항 내역이 없습니다.</p>
 							<p>-</p>
 							
 					</div>
@@ -249,7 +250,7 @@ li {
 						
 						
 							
-							<p>(영화포스터)(영화제목)(예매시간)(영화관)</p>
+							<p>문의 내역이 없습니다.</p>
 							<p>-</p>
 							
 					</div>
