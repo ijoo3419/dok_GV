@@ -15,6 +15,7 @@ import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.board.model.vo.BoardNBoardFile;
 import com.kh.dok.board.model.vo.SearchCondition1;
 import com.kh.dok.common.PageInfo;
+import com.kh.dok.review.model.vo.Reply;
 
 @Repository
 public class BoardDaoImpl implements BoardDao{
@@ -75,7 +76,10 @@ public class BoardDaoImpl implements BoardDao{
 	public BoardNBoardFile selectNoticeOne(SqlSessionTemplate sqlSession, String board_id) {
 		System.out.println("성희: BoardDaoImpl selectNoticeOne board_id : " + board_id);
 		
-		return sqlSession.selectOne("Board.selectNoticeOne", board_id);
+		BoardNBoardFile bbf = sqlSession.selectOne("Board.selectNoticeOne", board_id);
+		
+		System.out.println("성희 : 보드 다오에서 보려고 한거  bbf : " + bbf);
+		return bbf;
 	}
 
 	//조회수 업데이트
@@ -172,6 +176,26 @@ public class BoardDaoImpl implements BoardDao{
 		list = (ArrayList)sqlSession.selectList("Board.selectINquireList", theaterId, rowBounds);
 		
 		
+		
+		return list;
+	}
+
+	@Override
+	public int addComment(SqlSessionTemplate sqlSession, Reply reply) {
+		System.out.println("성희 : addComment dao reply : " + reply);
+
+		int result = sqlSession.insert("Board.addComment", reply);
+		System.out.println("리절트~~! : " + result);
+		return result;
+	}
+
+	@Override
+	public ArrayList<Reply> selectReply(SqlSessionTemplate sqlSession, String bid) {
+		
+		ArrayList<Reply> list = null;
+		list = (ArrayList)sqlSession.selectList("Board.selectReply", bid);
+		
+		System.out.println("보드다오임플 댓글 list : " + list);
 		
 		return list;
 	}

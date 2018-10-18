@@ -16,6 +16,7 @@ import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.board.model.vo.BoardNBoardFile;
 import com.kh.dok.board.model.vo.SearchCondition1;
 import com.kh.dok.common.PageInfo;
+import com.kh.dok.review.model.vo.Reply;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -159,9 +160,25 @@ public class BoardServiceImpl implements BoardService{
 		
 		int result = bd.updateCount(sqlSession, board_id);
 		
+		System.out.println("성희 : 판매자 문의사항 result : " + result +", board_id : " + board_id);
+		
 		if(result > 0) return bd.selectNoticeOne(sqlSession, board_id);
 		
 		return bbf;
+	}
+
+	//댓글 등록하기
+	@Override
+	public int addComment(Reply reply) {
+
+		return bd.addComment(sqlSession, reply);
+	}
+
+
+	@Override
+	public ArrayList<Reply> selectReply(String bid) {
+
+		return bd.selectReply(sqlSession, bid);
 	}
 
 }

@@ -99,7 +99,7 @@
 						<option value="">검색기준</option>
 						<option value="btitle">제목</option>
 						<option value="bcontent">내용</option>
-					</select> <input id="searchResult" name="searchValue" type="text" placeholder="검색" style="width:300px"> <a href="#" class="button primary icon fa-search" onclick="searchBoard()">조회</a> <button type="button" class="img_btn user cancel mr7" align="right"><a href="writeNotice.bo">공지작성</a></button>
+					</select> <input id="searchResult" name="searchValue" type="text" placeholder="검색" style="width:300px"> <a href="#" class="button primary icon fa-search" onclick="searchBoard()">조회</a>
 				</div>
 				<br>
 				<script>
