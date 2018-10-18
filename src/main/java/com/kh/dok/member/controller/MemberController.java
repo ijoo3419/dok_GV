@@ -376,7 +376,9 @@ public class MemberController {
 	   
 	   //2. 새 유저면 회원가입
 	   if(kakaoUserCheck == 11){
+		   System.out.println("새 유저면 회원가입으로 들어오지");
 		   int insertresult = ms.insertKakaoMember(m);
+		   System.out.println("카카오톡 로그인 회원가입 햇니ㅣ?? insertResult : " + insertresult);
 		   
 		   Member loginUser = ms.loginKakaoMember(m);
 		   
