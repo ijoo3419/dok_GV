@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 	session = request.getSession(true);
@@ -30,7 +31,7 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 
-<title>Insert title here</title>
+<title>독GV</title>
 </head>
 <style>
 #myModal {
@@ -467,17 +468,36 @@ a{
 	color:white;
 	font-size:13px;
 }
+/* #Progress_Loading
+{
+ position: absolute;
+ left: 50%;
+ top: 50%;
+ background: #ffffff;
+} */
+.page-header div{
+	display: inline-block;
+}
 </style>
 <body>
 	<div class="contain_box">
 		<div class="container">
 			<div class="row">
 				<div class="page-header">
-					<h2>멀티모달 테스트</h2>
+					<div>
+						<img src="${ contextPath }/resources/images/Progress_Loading.gif"/>
+					</div>
+					<div>
+						<h2>&nbsp;영화를 예매 중 입니다.</h2>
+					</div>
 				</div>
+	    <!--    
+	    		<div id = "Progress_Loading">
+					<img src="${ contextPath }/resources/images/Progress_Loading.gif"/>
+				</div> 
+		-->
 			</div>
-			<a data-toggle="modal" href="#myModal" class="btn btn-primary">Launch
-				modal</a>
+			<a data-toggle="modal" href="#myModal" class="btn btn-primary">영화예매</a>
 			<div class="row 2nd"></div>
 		</div>
 	</div>
@@ -503,8 +523,7 @@ a{
 							<h2 id="web-fontTitle">극장</h2>
 							<a data-toggle="modal" href="#myModal5" class="movieB">
 							<button class="cinemaBtn">
-								<img src="${ contextPath }/resources/images/plusBtn.PNG"
-									width="30" height="30">
+								<img src="${ contextPath }/resources/images/plusBtn.PNG" width="30" height="30">
 							</button>
 							</a>
 							<input type='hidden' class='movieRoomId' name='name' val=''>
@@ -643,7 +662,7 @@ a{
 				
 				var basicPrice = $(".hiddenPrice").val();
 				
-				$(".seatPay-price").find("#td-web-fontTitle").text(basicPrice + "　"); //selectBox값이 바뀌면 가격 정보 다시 초기화
+				$(".seatPay-price").find("#td-web-fontTitle").text(numberWithCommas(basicPrice) + "　"); //selectBox값이 바뀌면 가격 정보 다시 초기화
 				
 				$("input:checkbox").prop("checked", false);
 				
@@ -709,8 +728,16 @@ a{
 			});
 		});
 		
+		function numberWithCommas(x) {
+		    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
+		
 		var seatSplit = new Array();
 		var excelSplit = new Array();
+		
+		$(document).ready(function(){
+			   $('#Progress_Loading').show(); //첫 시작시 로딩바를 숨겨준다.
+		})
 		
 		$(function foo(){
 				
@@ -745,8 +772,8 @@ a{
 						var basicPrice = $(".hiddenPrice").val();
 						$(".seatPay-price").find("#td-web-fontTitle").val(basicPrice);
 						
-						$('#myModal3 .pay-center').find('h4').eq(1).text(basicPrice).append('<font size="3" id="web-fontTitle-child">원</font>');
-						$('#myModal3 .pay-center').find('h4').eq(7).text(basicPrice).append('<font size="3" id="web-fontTitle-child">원</font>');
+						$('#myModal3 .pay-center').find('h4').eq(1).text(numberWithCommas(basicPrice)).append('<font size="3" id="web-fontTitle-child">원</font>');
+						$('#myModal3 .pay-center').find('h4').eq(7).text(numberWithCommas(basicPrice)).append('<font size="3" id="web-fontTitle-child">원</font>');
 						
 			    	}
 			    }else if(treeCheck == 2){
@@ -770,13 +797,13 @@ a{
 						$(".seatPay").find("tr").eq(5).find('td').text(seatSplit);
 						
 						if(moneyCheck == 0){
-							var sum = $(".seatPay-price").find("#td-web-fontTitle").text();
+							var sum = $(".hiddenPrice").val();
 							var sumSplit = sum.split("　");
 							
 							var price = sumSplit[0] * 2;
 							var basicPrice = $(".hiddenPrice").val();
 							
-							$(".seatPay-price").find("#td-web-fontTitle").text(price + "　");
+							$(".seatPay-price").find("#td-web-fontTitle").text(numberWithCommas(price) + "　");
 							$(".seatPay-price").find("#td-web-fontTitle").val(basicPrice);
 							
 							$('#myModal3 .pay-center').find('h4').eq(1).text(price).append('<font size="3" id="web-fontTitle-child">원</font>');
@@ -806,13 +833,14 @@ a{
 						$(".seatPay").find("tr").eq(5).find('td').text(seatSplit);
 						
 						if(moneyCheck == 0){
-							var sum = $(".seatPay-price").find("#td-web-fontTitle").text();
+							var sum = $(".hiddenPrice").val();
 							var sumSplit = sum.split("　");
-							
+
 							var price = sumSplit[0] * 3;
+							
 							var basicPrice = $(".hiddenPrice").val();
 							
-							$(".seatPay-price").find("#td-web-fontTitle").text(price + "　");
+							$(".seatPay-price").find("#td-web-fontTitle").text(numberWithCommas(price) + "　");
 							$(".seatPay-price").find("#td-web-fontTitle").val(basicPrice);
 							
 							$('#myModal3 .pay-center').find('h4').eq(1).text(price).append('<font size="3" id="web-fontTitle-child">원</font>');
@@ -841,15 +869,17 @@ a{
 						
 						$(".arrayHidden").val(excelSplit);
 						$(".seatPay").find("tr").eq(5).find('td').text(seatSplit); //사용자가 선택한 좌석 이름
+						$(".pay-right").find("tr").eq(5).find('td').text(seatSplit);
+						
 						
 						if(moneyCheck == 0){
-							var sum = $(".seatPay-price").find("#td-web-fontTitle").text();
+							var sum = $(".hiddenPrice").val();
 							var sumSplit = sum.split("　");
 							
 							var price = sumSplit[0] * 4;
 							var basicPrice = $(".hiddenPrice").val();
 							
-							$(".seatPay-price").find("#td-web-fontTitle").text(price + "　");
+							$(".seatPay-price").find("#td-web-fontTitle").text(numberWithCommas(price) + "　");
 							$(".seatPay-price").find("#td-web-fontTitle").val(basicPrice);
 							
 							$('#myModal3 .pay-center').find('h4').eq(1).text(price).append('<font size="3" id="web-fontTitle-child">원</font>');
@@ -860,24 +890,32 @@ a{
 			    	}
 			    }
 			    
+			    function numberWithCommas(x) {
+				    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+				}
+			    
 			    $("#myModal2 .seatPay-btn-right").off().on('click', function(){
 			    	var turningId = $('.hiddenTurning').val();
 					var movieRoomId = $('.movieRoomId').val();
 					var seatSplitAjax = seatSplit;
+					var excelSplitAjax = excelSplit;
 					var userId = "${ sessionScope.loginUser.mid }";
 					var price = $(".seatPay-price").find("#td-web-fontTitle").val();
 			       	var msg = $('.hiddenTurning').val();
+			       	
+			       	alert(excelSplitAjax);
 			       	
 					$.ajax({
 			    		url:"insertSeat.mo",
 			    		type:"post",
 			    		traditional : true,
-			    		data: {turningId: turningId, movieRoomId: movieRoomId, seatSplitAjax: seatSplitAjax, userId: userId, price: price},
+			    		data: {turningId: turningId, movieRoomId: movieRoomId, seatSplitAjax: seatSplitAjax, 
+			    			   userId: userId, price: price, excelSplitAjax: excelSplitAjax},
 			    		success:function(data){
 			    			console.log(data);
 			    		},
 			    		error:function(data){
-			    			alert("로그인이 필요합니다!!");
+			    			alert("이미 예약된 좌석입니다.");
 			    		}
 			    	});
 			    	
@@ -1008,6 +1046,8 @@ a{
 								$fontFour.text(data[key].movie_type);
 								$fontFive.text(data[key].movie_age);
 								$fontSix.text(data[key].theater_name);
+								
+								$hiddenPrice.val();
 								$hiddenPrice.val(data[key].price);
 								$hiddenTime.val(data[key].turning_time);
 								$hiddenDate.val(data[key].turning_day);
@@ -1067,6 +1107,8 @@ a{
 									var date = $(this).find('.hiddenDate').val();
 									var time = $(this).find('.hiddenTime').val();
 									var money = $(this).find('.hiddenPrice').val();
+									var moneyTwo = numberWithCommas(money);
+									
 									var roomName = $(this).find('.hiddenRoom').val();
 									
 									var str = moment("/Date(" + date +")/").format("YYYY. MM. DD"); //json string
@@ -1078,7 +1120,7 @@ a{
 									$(".seatPay").find("tr").eq(3).find('td').text(areaName + " " + roomName);
 									$(".seatPay").find("tr").eq(4).find('td').text(str + "　　" + time);
 									$(".seatPay").find("tr").eq(5).find('td').text("　");
-									$(".seatPay-price").find("#td-web-fontTitle").text(money + "　");
+									$(".seatPay-price").find("#td-web-fontTitle").text(moneyTwo + "　");
 									
 									$(".pay-right").find("tr").eq(1).find('td').text(movieTitle);
 									$(".pay-right").find("tr").eq(2).find('td').text(movieType);
@@ -1090,10 +1132,15 @@ a{
 									
 									var c = $(".movieBtn").find("img").attr("src");
 									$(".seatPay").find("img").attr("src", c);
+									$(".seatPay").find("img").attr("style", "width:200px; height:280px;");
 									$(".seatPay").show();
 									
-									var movieRoomIdVal = $(this).find('.hiddenRoomId').val();
-									$('.movieRoomId').val(movieRoomIdVal);
+									$("#myModal3").find(".pay-right").find("table").find("tr").eq(0).find("td").find("img").attr("src", c);
+									$("#myModal3").find(".pay-right").find("table").find("tr").eq(0).find("td").find("img").attr("style", "width:200px; height:280px;");
+									
+									var movieRoomIdVal = $(this).find(".hiddenTurning").val();
+									var movieRoomIdValTree = $(this).find(".hiddenRoomId").val();
+									$('.movieRoomId').val(movieRoomIdValTree);
 									
 									var userSeat = new Array(); //유저의 좌석배열
 									
@@ -1107,6 +1154,7 @@ a{
 						    			var numberCheck = 1; //좌석번호 변수
 						    			var rowCheck = 65; //열 알파벳 변수
 						    			var rowCheckIf = 0; //열 증가 조건
+						    			var rowCheckIfTwo = 0; //열 알파벳 변수
 						    			
 						    			$screenCheck.find('div').remove();
 						    			
@@ -1114,26 +1162,26 @@ a{
 						    			/* ----------------------좌석 뿌리기---------------------- */
 						    			for(var i = 0; i < data.length; i++){
 						    				numberCheck = 1; //이중 포문 종료후 다시 변수값 1로 초기화
-						    				
+						    				rowCheckIfTwo = 0;
 						    				for(var y = 0; y < data[i].length; y++){
 						    					if(data[i][y] == 'O'){
 						    						var $checkBox = $("<label class='checkbox-wrap'><input type='checkbox' name='checkbox' value='"+ i + "/" + y +"'><i class='check-icon'><font class='checkFont'>" + String.fromCharCode(rowCheck) + "" + numberCheck + "</font></i></label>");
-						    						++numberCheck;
 						    						$div.append($checkBox);
+						    						++numberCheck;
 						    						rowCheckIf = 1;
+						    						rowCheckIfTwo = 1;
 						    						if(y == 14){
 						    							$div.append("<br>");
 						    						}
 						    					}else{
 						    						$div.append("&nbsp;&nbsp;");
-						    						rowCheckIf = 0;
 						    						if(y == 14){
 						    							$div.append("<br>");
 						    						}
 						    					}
 						    				}
 						    				
-						    				if(rowCheckIf == 1){
+						    				if(rowCheckIf == 1 && rowCheckIfTwo > 0){
 						    					++rowCheck;
 						    				}
 						    			}
@@ -1148,6 +1196,9 @@ a{
 						 			});
 							 	});
 								
+								function numberWithCommas(x) {
+								    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+								}
 						  	});
 							
 			    		},
@@ -1222,7 +1273,7 @@ a{
 								</td>
 							</tr>
 							<tr>
-								<td>?
+								<td>
 								</td>
 							</tr>
 							<tr class="seatPay-price">
@@ -1329,7 +1380,7 @@ a{
 							<tr>
 								<td><img
 									src="${ contextPath }/resources/images/moviePay.PNG"
-									width="200px">
+									width="200px" height="280px">
 								</td>
 							</tr>
 							<tr>
@@ -1349,7 +1400,7 @@ a{
 								</td>
 							</tr>
 							<tr>
-								<td>?
+								<td>　
 								</td>
 							</tr>
 							<tr class="seatPay-price">

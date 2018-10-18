@@ -178,34 +178,43 @@ public class MovieController {
 	
 	@RequestMapping(value="insertSeat.mo")
 	public @ResponseBody int insertSeat(@RequestParam String turningId, @RequestParam String movieRoomId, @RequestParam String[] seatSplitAjax, 
-										@RequestParam String userId, @RequestParam String price){
+										@RequestParam String userId, @RequestParam String price, @RequestParam String[] excelSplitAjax, HttpServletRequest request){
+		
+		cellClass c = new cellClass();
+		
 		int check = 1;
 		
-		String SeatId = "";
+		String seatId = "";
+		String[] excel = new String[2];
 		
-		/*System.out.println(turningId + " " + movieRoomId); 
-		
-		System.out.println(Arrays.toString(seatSplitAjax));*/
+		for(int y = 0; y < excelSplitAjax.length - 1; y++){ //3번을 반복
+			excel = excelSplitAjax[y].split("/"); 
+			System.out.println("excel: " + y + "열" + excel[0]);
+			System.out.println("excel: " + y + "번호 " + excel[1]);
+			c.insertPayTurningCell(excel, turningId, turningId, request);
+		}
+				
 		
 		for(int i = 0; i < seatSplitAjax.length; i++){
+			
 			if(check != 0){
 				Movie m = new Movie();
 				
-				SeatId = seatSplitAjax[i];
+				seatId = seatSplitAjax[i];
 				m.setTurning_id(turningId);
 				m.setMovieroom_id(movieRoomId);
-				m.setSeat_name(SeatId);
+				m.setSeat_name(seatId);
 				m.setMid(userId);
 				m.setPrice(price);
 				
-				//좌석 예매 insert
+				/*//좌석 예매 insert
 				check = ms.insertSeat(m);
 	
 				//예매된 좌석 id 가져오기
 				m.setSeat_id("S" + ms.selectSeatId());
 				
 				//예매 테이블 추가
-				ms.insertReservation(m);
+				ms.insertReservation(m);*/
 				
 			}else{
 				System.out.println(i + "번째 추가 안됨");

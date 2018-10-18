@@ -151,6 +151,7 @@ public class cellClass {
 					int col = n%15;
 					sheet.getRow(row).getCell(col).setCellValue(String.valueOf(name));	//값 넣기
 				}
+				
 				outputStream = new FileOutputStream("C:/Users/qwertyJeong/Desktop/sheetTest/excel"+ tableName +".xlsx");	//만들기
 				workbook.write(outputStream);
 				outputStream.close();
@@ -172,7 +173,55 @@ public class cellClass {
 		}
 	}
 	
-	
+	//박지용 특정 셀값 수정하기
+	public void insertPayTurningCell(String[] arr, String name, String tableName, HttpServletRequest request){
+
+		FileInputStream inputStream = null;
+		FileOutputStream outputStream = null;
+		XSSFWorkbook workbook = null;
+		XSSFCell cell;
+
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		
+		String filePath = root + "\\movieRoomFile";
+		
+		try {
+				inputStream = new FileInputStream(filePath + "\\" + tableName +".xlsx");
+				workbook = new XSSFWorkbook(inputStream);
+				
+				XSSFSheet sheet = workbook.getSheetAt(0);	//Class Data 시트
+				
+				cell = sheet.getRow(Integer.parseInt(arr[0])).getCell(Integer.parseInt(arr[1]));
+				
+				if(cell.getStringCellValue().equals("O")){
+					sheet.getRow(Integer.parseInt(arr[0])).getCell(Integer.parseInt(arr[1])).setCellValue('P');	//값 넣기
+				}
+				else if(cell.getStringCellValue().equals("P")){
+					System.out.println("이미 예약된 좌석입니다.");
+				}
+				else{
+					System.out.println("예약할 수 없는 좌석입니다.");
+				}
+				
+				outputStream = new FileOutputStream(filePath + "\\" + tableName +".xlsx");
+				workbook.write(outputStream);
+				outputStream.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				inputStream.close();
+				workbook.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}
+	}
+
+
 	//여기부터 정태부분 회차등록할 때 상영관 파일을 만들어주는 것~~
 	public String[][] TurningTest(String name, HttpServletRequest request) {
 
