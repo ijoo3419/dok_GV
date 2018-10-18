@@ -328,7 +328,7 @@ hr {
 					</tr> -->
 				</table>
 				<br><br>
-				<button id="web-font2" style="width: 300px; height: 40px;" onclick="findPassword()">비밀번호 찾기</button>
+				<button id="web-font2" style="width: 300px; height: 40px;" onclick="findPassword()">임시비밀번호 발급</button>
 			 </div> 
 		</div>
 		

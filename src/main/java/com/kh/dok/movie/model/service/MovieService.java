@@ -75,5 +75,11 @@ public interface MovieService {
 
 		//박지용 updateSeat
 		int updateSeat(Movie m);
+
+		//영화 검색
+		ArrayList<MovieThumbnail> selectmovieone(MovieThumbnail msn);
+
+		//영화 등록
+		int inserMovie(MovieThumbnail msn);
 		
 }

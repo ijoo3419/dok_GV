@@ -736,37 +736,37 @@ img.ui-datepicker-trigger {
 		</section>
 		<!-- 일곱번째 탭(영화 추가) -->
 		<section id="tab-7" class="post">
-			<h2>영화 추가</h2>
+			<h1>영화 추가</h1>
 			<br>
 			 <div>
 				<!-- <span>영화 업데이트</span> <a id="update" href="#"
 					class="button icon fa-download"> 업데이트 </a> -->
-				<form action="" method="post"
+				<form action="movieInsert.mo" method="post"
 					encType="multipart/form-data">
 					<div class="row gtr-uniform">
 
 						<input type="hidden" name="mid"
-							value="${ requestScope.loginUser.mid }">
+							value="${loginUser.mid }">
 						<div class="col-6 col-12-xsmall">
-							<h2 align="left">1.영화 제목</h2>
-							<input type="text" name="theaterName" id="demo-name" value=""
+							<h2 align="left">영화 제목</h2>
+							<input type="text" name="movie_title" id="movie_title" value=""
 								placeholder="영화 제목을 입력하세요." />
 								<br><br>
-							<h2 align="left">2.영어 제목</h2>
-							<input type="text" name="theaterName" id="demo-name" value=""
+							<h2 align="left">영어 제목</h2>
+							<input type="text" name="movie_etitle" id="movie_etitle" value=""
 								placeholder="영어 제목을 입력하세요." />
 						</div>
 					</div>
 					<br>
-					<h2 align="left">2.영화 줄거리</h2>
+					<h2 align="left">영화 줄거리</h2>
 					<!-- Break -->
 					<div class="col-12">
-						<textarea name="theaterText" id="demo-message"
+						<textarea name="movie_content" id="movie_content"
 							placeholder="영화 줄거리를 입력해 주세요" rows="6"></textarea>
 					</div>
 					<br>
 					<br>
-					<h2 align="left">3.개봉일자</h2>
+					<h2 align="left">개봉일자</h2>
 					<!-- Break -->
 				<!-- 	<div class="col-12"> -->
 					
@@ -779,7 +779,7 @@ img.ui-datepicker-trigger {
 <script>
 $( function() {
 	$.datepicker.setDefaults($.datepicker.regional['ko']);
-  $( "#fromDate" ).datepicker({
+  $( '#fromDate' ).datepicker({
 	  showOn : "both", // 달력을 표시할 타이밍 (both: focus or button)
 		buttonImage : "${ contextPath }/resources/images/date.png", // 버튼 이미지
 		buttonImageOnly : true, // 버튼 이미지만 표시할지 여부
@@ -791,7 +791,7 @@ $( function() {
 </script>
 					<br>
 					<br>
-					<h2 align="left">4.영화관 사진</h2>
+					<h2 align="left">영화관 사진</h2>
 					<div class="col-12">
 
 						<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">포스터 : </a>
@@ -811,17 +811,20 @@ $( function() {
 					<div class="col-6 col-12-xsmall">
 						 	 <div class="row gtr-uniform"> 
 					<div class="col-6 col-12-xsmall">
-							<h2 align="left">5. 감독</h2>
-							
-							<input type="text" id="sample4_postcode" name="address1" placeholder="감독이름을 입력하세요" style=" height:64px; width:430px; float:left; margin-bottom:15px;">
- 							<h2 align="left">6. 제작사</h2>
-							<input type="text" id="sample4_roadAddress" name="address2" placeholder="제작사를 입력하세요" style=" height:64px; width:430px; float:left; margin-bottom:15px;">
-							<h2 align="left">7. 등급</h2>
-							<input type="text" id="sample4_roadAddress" name="address2" placeholder="등급을 입력하세요" style=" height:64px; width:430px; float:left; margin-bottom:15px;">
- 							<h2 align="left">8. 출연</h2>
-							<input type="text" id="sample4_roadAddress" name="address2" placeholder="출연을 입력하세요" style=" height:64px; width:430px; float:left; margin-bottom:15px;">
-  							<h2 align="left">9. 타입</h2>
-							<input type="text" id="sample4_roadAddress" name="address2" placeholder="타입을 입력하세요" style=" height:64px; width:430px; float:left; margin-bottom:15px;">
+							<h2 align="left">감독</h2>
+							<input type="text" id="director_name" name="director_name" placeholder="감독이름을 입력하세요" style=" height:64px; width:430px; float:left; margin-bottom:15px;">
+ 							<h2 align="left">제작사</h2>
+							<input type="text" id="production_com" name="production_com" placeholder="제작사를 입력하세요" style=" height:64px; width:430px; float:left; margin-bottom:15px;">
+							<h2 align="left">등급</h2>
+							<input type="text" id="movie_age" name="movie_age" placeholder="등급을 입력하세요" style=" height:64px; width:430px; float:left; margin-bottom:15px;">
+ 							<h2 align="left">장르</h2>
+							<input type="text" id="genre" name="genre" placeholder="장르를 입력하세요" style=" height:64px; width:430px; float:left; margin-bottom:15px;">
+							<h2 align="left">러닝타임</h2>
+							<input type="text" id="runnig_time" name="runnig_time" placeholder="러닝타임을 입력하세요" style=" height:64px; width:430px; float:left; margin-bottom:15px;">
+ 							<h2 align="left">출연</h2>
+							<input type="text" id="movie_actor" name="movie_actor" placeholder="출연을 입력하세요" style=" height:64px; width:430px; float:left; margin-bottom:15px;">
+  							<h2 align="left">타입</h2>
+							<input type="text" id="movie_type" name="movie_type" placeholder="타입을 입력하세요" style=" height:64px; width:430px; float:left; margin-bottom:15px;">
   </div>  
 </div>
 <span id="guide" style="color:#999"></span>
