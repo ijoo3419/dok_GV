@@ -177,6 +177,7 @@ FROM (SELECT ROWNUM RNUM, MOVIE_ID, MOVIE_TITLE, MOVIE_ETITLE, OPEN_DATE, DIRECT
 WHERE RNUM BETWEEN 7 AND 9
 	</select>
 	
+	
 
 	
 	<!-- 위시리스트 뷰 뿌리기용 쿼리문 -->
@@ -200,5 +201,18 @@ WHERE RNUM BETWEEN 7 AND 9
     	WHERE MID = #{ mid }
     	AND MOVIE_ID = #{ movie_id }
 	</select>
+	
+	<select id="movieSelectOne" resultMap="movieThumbnailResultSet" parameterType="MovieThumbnail">
+		SELECT MOVIE_ID, MOVIE_TITLE, MOVIE_ETITLE,
+		 MOVIE_CONTENT, OPEN_DATE,DIRECTOR_NAME, 
+		 PRODUCTION_COM, MOVIE_AGE,GENRE, 
+		 RUNNIG_TIME, MOVIE_ACTOR, MOVIE_TYPE
+		 FROM MOVIE 
+		 WHERE  MOVIE_TITLE = #{id}
+	</select>
+	
+	<insert id="insertMovie">
+		INSERT INTO MOVIE VALUES('MO' || TO_CHAR(MOVIE_MOVIE_ID.NEXTVAL), #{movie_title}, #{movie_etitle}, #{movie_content}, #{open_date} , #{director_name}, #{production_com}, #{movie_age}, #{genre}, #{running_time}, #{movie_actor}, #{movie_type})
+	</insert>
 	
 </mapper>

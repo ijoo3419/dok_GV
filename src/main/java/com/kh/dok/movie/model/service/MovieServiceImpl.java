@@ -223,4 +223,26 @@ public class MovieServiceImpl implements MovieService{
 
 
 
+	//영화검색
+	@Override
+	public ArrayList<MovieThumbnail> selectmovieone(MovieThumbnail msn) {
+		ArrayList<MovieThumbnail> list = null;
+		
+		list = md.selectmovieone(sqlSession, msn);
+		
+		return list;
+	}
+
+
+
+
+	@Override
+	public int inserMovie(MovieThumbnail msn) {
+		
+		return md.insertMovie(sqlSession, msn);
+		
+	}
+
+
+
 }

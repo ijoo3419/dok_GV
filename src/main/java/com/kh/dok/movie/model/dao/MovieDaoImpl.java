@@ -196,5 +196,21 @@ public class MovieDaoImpl implements MovieDao{
 		
 		return sqlSession.update("Movie.updateSeat", m);
 	}
+
+	@Override
+	public ArrayList<MovieThumbnail> selectmovieone(SqlSessionTemplate sqlSession, MovieThumbnail msn) {
+		String id = msn.getMovie_title();
+		
+		ArrayList<MovieThumbnail> list = (ArrayList)sqlSession.selectList("MovieThumbnail.movieSelectOne",id);
+		
+		System.out.println(list);
+		
+		return list;
+	}
+
+	@Override
+	public int insertMovie(SqlSessionTemplate sqlSession, MovieThumbnail msn) {
+		return sqlSession.insert("MovieThumbnail.insertMovie", msn);
+	}
 	
 }

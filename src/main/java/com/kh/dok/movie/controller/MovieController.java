@@ -1,9 +1,9 @@
 package com.kh.dok.movie.controller;
 
+import java.io.File;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,7 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.dok.board.model.vo.Board;
+import com.kh.dok.common.CommonUtils;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.common.Pagination;
 import com.kh.dok.licensee.controller.sheetController.cellClass;
@@ -265,5 +268,108 @@ public class MovieController {
 		return arr;
 	} */
 	
+	@RequestMapping("movieInsert.mo")
+	public String insertMovie(MovieThumbnail msn, Model model, HttpServletRequest request,
+			@RequestParam(name="photo1", required=false)MultipartFile photo1,
+			@RequestParam(name="photo2", required=false)MultipartFile photo2,
+			@RequestParam(name="photo3", required=false)MultipartFile photo3,
+			@RequestParam(name="photo4", required=false)MultipartFile photo4,
+			@RequestParam(name="video1", required=false)MultipartFile video1,
+			Date fromDate){
+		
+		System.out.println(photo1);
+		System.out.println(photo2);
+		System.out.println(photo3);
+		System.out.println(photo4);
+		System.out.println(video1);
+		
+		System.out.println("moviecontroll : " + msn);
+		System.out.println(fromDate);
+		
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		System.out.println("root : " + root);
+		String filePath = root + "\\uploadFiles";
+		System.out.println("filePath : " + filePath);
+		
+		ArrayList<MovieThumbnail> list = ms.selectmovieone(msn);
+		
+		msn.setOpen_date(fromDate);
+		
+		if(list == null){
+			
+			ms.inserMovie(msn);
+		}
+		else{
+			/*String id = list.g
+			ArrayList<Board> list1 = ms.selectBoardone();*/
+			
+		}
+		
+		
+		/*String originFileName2 = photo3.getOriginalFilename();
+		String originFileName3 = photo4.getOriginalFilename();
+		String originFileName4 = video1.getOriginalFilename();*/
+		
+		
+		/*String ext1 = originFileName1.substring(originFileName1.lastIndexOf("."));
+		String ext2 = originFileName2.substring(originFileName2.lastIndexOf("."));
+		String ext3 = originFileName3.substring(originFileName3.lastIndexOf("."));
+		String ext4 = originFileName4.substring(originFileName4.lastIndexOf("."));*/
+		
+		String ext = null;
+		String changeName = null;
+		String ichangeName = null;
+		
+		
+		try {
+				if(photo1 != null){
+					String originFileName = photo1.getOriginalFilename();
+					ext = originFileName.substring(originFileName.lastIndexOf("."));
+					changeName = CommonUtils.getRandomString();
+					ichangeName = changeName.substring(originFileName.lastIndexOf("."));
+					photo1.transferTo(new File(filePath + "\\" + changeName + ext));
+				
+				}else if(photo2 !=null){
+					String originFileName1 = photo2.getOriginalFilename();
+					ext = originFileName1.substring(originFileName1.lastIndexOf("."));
+					changeName = CommonUtils.getRandomString();
+					ichangeName = changeName.substring(originFileName1.lastIndexOf("."));
+					photo2.transferTo(new File(filePath + "\\" + changeName + ext));
+				}else if(photo3 !=null){
+					String originFileName2 = photo3.getOriginalFilename();
+					ext = originFileName2.substring(originFileName2.lastIndexOf("."));
+					changeName = CommonUtils.getRandomString();
+					ichangeName = changeName.substring(originFileName2.lastIndexOf("."));
+					photo3.transferTo(new File(filePath + "\\" + changeName + ext));
+				}
+				else if(photo4 !=null){
+					String originFileName3 = photo4.getOriginalFilename();
+					ext = originFileName3.substring(originFileName3.lastIndexOf("."));
+					changeName = CommonUtils.getRandomString();
+					ichangeName = changeName.substring(originFileName3.lastIndexOf("."));
+					photo4.transferTo(new File(filePath + "\\" + changeName + ext));
+				}
+				else if(video1 !=null){
+					String originFileName4 = video1.getOriginalFilename();
+					ext = originFileName4.substring(originFileName4.lastIndexOf("."));
+					changeName = CommonUtils.getRandomString();
+					ichangeName = changeName.substring(originFileName4.lastIndexOf("."));
+					video1.transferTo(new File(filePath + "\\" + changeName + ext));
+				}
+								
+				/*ls.insertTheater(cm);*/
+				
+				return "admin/adminPage";
+		
+		} catch (Exception e){
+			new File(filePath + "\\" + changeName + ext).delete();
+			
+			System.out.println("실패하면 여기로");
+			model.addAttribute("msg", "영화관 추가 실패!");
+			
+			return "common/errorPage";
+		
+		}
+	}
 }
 

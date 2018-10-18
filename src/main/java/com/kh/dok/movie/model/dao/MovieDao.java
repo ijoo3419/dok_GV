@@ -68,5 +68,11 @@ public interface MovieDao {
 	String selectSeatIdTwo(SqlSessionTemplate sqlSession, Movie m);
 
 	int updateSeat(SqlSessionTemplate sqlSession, Movie m);
+
+	//영화검색
+	ArrayList<MovieThumbnail> selectmovieone(SqlSessionTemplate sqlSession, MovieThumbnail msn);
+
+	//영화등록
+	int insertMovie(SqlSessionTemplate sqlSession, MovieThumbnail msn);
 	
 }
