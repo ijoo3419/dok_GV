@@ -15,11 +15,37 @@
 		<result column="FILE_LEVEL" property="file_level"/>
 	</resultMap>
 	
-<!-- 정태 영화관 추가하기~!~!~!~!~! -->
+<!-- 정태 영화관(THEATER) 추가하기~!~!~!~!~! -->
 <insert id="insertTheater" parameterType="Cinema">
 		INSERT INTO THEATER VALUES('TT' || TO_CHAR(THEATER_THEATER_ID.NEXTVAL), #{mid},
 		#{theaterName}, #{theaterRoot}, #{theaterText},'은평구' ,'A1')
-</insert>
+	</insert>
+	<!--  정태 영화관(BOARD) 추가하기 -->
+	<insert id="insertTheaterBoard" parameterType="Cinema">
+	   INSERT INTO BOARD (BOARD_ID, MID, BTITLE, BCONTENT, BOARD_SORT, 
+		BOARD_DATE, MODIFY_DATE, BSTATUS, BCOUNT, CINEMA_DIV, THEATER_ID) 
+		 VALUES ('B' || TO_CHAR(BOARD_BOARD_ID.NEXTVAL), 
+        #{mid}, #{theaterName}, #{theaterText}, 'MC', SYSDATE, SYSDATE, 'Y', '0', 'CINEMA',
+        (SELECT THEATER_ID FROM THEATER WHERE MID = #{mid}))
+	</insert>
+	<!-- 정태 영화관(BOARD_FILE) 추가하기 -->
+	<insert id="insertTheaterBoardFile" parameterType="Cinema">
+	INSERT INTO BOARD_FILE (FILE_ID, BOARD_ID, ORIGIN_NAME, EDIT_NAME, FILE_SRC, FILE_DATE, FILE_LEVEL)
+	VALUES ('BF' || TO_CHAR(BOARD_FILE_FILE_ID.NEXTVAL), #{board_id},
+	  #{origin_name}, #{edit_name}, #{file_src}, SYSDATE, #{file_level})
+	
+	</insert>
+	<select id="selectOneBoardId" resultType="string">
+	
+	SELECT BOARD_BOARD_ID.CURRVAL 
+	FROM DUAL
+	</select>
+	
+	<select id="selectOnePlayPlayId" resultType="string">
+	SELECT PLAY_PLAY_ID.CURRVAL
+	FROM DUAL 
+	</select>
+	
 <!-- 이진희 영화관 출력 -->
 <select id="selectCinema" parameterType="Cinema" resultMap="cinemaResultSet">
 SELECT C.THEATER_ID, C.MID, C.THEATER_NAME,
