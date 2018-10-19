@@ -189,9 +189,12 @@ public class MovieController {
 		
 		for(int y = 0; y < excelSplitAjax.length - 1; y++){ //3번을 반복
 			excel = excelSplitAjax[y].split("/"); 
-			System.out.println("excel: " + y + "열" + excel[0]);
-			System.out.println("excel: " + y + "번호 " + excel[1]);
-			c.insertPayTurningCell(excel, turningId, turningId, request);
+			/*System.out.println("excel: " + y + "열" + excel[0]);
+			System.out.println("excel: " + y + "번호 " + excel[1]);*/
+			check = c.insertPayTurningCell(excel, turningId, turningId, request);
+			if(check == 0){
+				return check;
+			}
 		}
 				
 		
@@ -207,14 +210,14 @@ public class MovieController {
 				m.setMid(userId);
 				m.setPrice(price);
 				
-				/*//좌석 예매 insert
+				//좌석 예매 insert
 				check = ms.insertSeat(m);
 	
 				//예매된 좌석 id 가져오기
 				m.setSeat_id("S" + ms.selectSeatId());
 				
 				//예매 테이블 추가
-				ms.insertReservation(m);*/
+				ms.insertReservation(m);
 				
 			}else{
 				System.out.println(i + "번째 추가 안됨");
@@ -257,11 +260,11 @@ public class MovieController {
 		return check;
 	}
 	
-	/* //박지용 @ResponseBody를 이용한 ajax 처리
-	@RequestMapping(value="deleteSeat.mo")
-	public @ResponseBody String[][] deleteSeat(@RequestParam String mid){
+	//박지용 @ResponseBody를 이용한 ajax 처리
+	@RequestMapping(value="updateRefund.mo")
+	public @ResponseBody String deleteSeat(@RequestParam String mid){
 
-		System.out.println("영화관 출력하기: " + movieRoomIdVal);
+		/*System.out.println("영화관 출력하기: " + movieRoomIdVal);
 
 		String name = movieRoomIdVal;
 
@@ -272,10 +275,10 @@ public class MovieController {
 			for(String s : str)
 				System.out.print(s);
 			System.out.println();
-		}
+		}*/
 
-		return arr;
-	} */
+		return "arr";
+	}
 	
 	@RequestMapping("movieInsert.mo")
 	public String insertMovie(MovieThumbnail msn, Model model, HttpServletRequest request,
