@@ -2,6 +2,7 @@ package com.kh.dok.member.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.dok.admin.model.vo.UserMovie;
 import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.member.model.exception.LoginException;
 import com.kh.dok.member.model.vo.BookingHistory;
@@ -71,6 +72,20 @@ public interface MemberService {
 	//리뷰 삭제
 	int deleteReview(Member m);
 
+	
+	//소진 mid찾기
+	String selectMid(String email);
+
+	
+
+	
+	
+	//소진 전체 MID 조회
+	ArrayList<String> selectAllMid();
+
+	ArrayList<UserMovie> selectAllUserMovie(ArrayList<String> midList);
+
+	ArrayList<String> selectUserMovie(String mid);
 	
 
 
