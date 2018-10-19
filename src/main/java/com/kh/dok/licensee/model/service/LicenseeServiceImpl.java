@@ -28,6 +28,24 @@ public class LicenseeServiceImpl implements LicenseeService{
 		return result;
 	}
 
+	@Override
+	public int insertTheaterBoard(Cinema2 cm) {
+		int insertTheaterBoard = ld.insertTheaterBoard(sqlSession, cm);
+				
+				return insertTheaterBoard;
+	}
+	
+	@Override
+	public int insertTheaterBoardFile(Cinema2 cm) {
+		return ld.insertTheaterBoardFile(sqlSession, cm);
+	}
+	
+	@Override
+	public String selectOneBoardId() {
+		return ld.selectOneBoardId(sqlSession);
+	}
+
+	
 
 	@Override
 	public int insertMovieRoom(MovieRoom mr) {
@@ -54,17 +72,27 @@ public class LicenseeServiceImpl implements LicenseeService{
 	}
 	
 	@Override
-	public int insertTurning(Turning t) {
+	public int insertTurning( Turning t) {
 		
 		return ld.insertTurning(sqlSession, t);
 	}
 
 
+
+
 	@Override
-	public MovieRoom checkMovieRoomId() {
-		// TODO Auto-generated method stub
-		return null;
+	public String selectOnePlayId() {
+		
+		String selectPlayId = ld.selectOnePlayId(sqlSession);
+		return selectPlayId;
 	}
+
+
+	
+
+
+
+
 
 
 	/*@Override

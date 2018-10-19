@@ -52,7 +52,4 @@ public interface AdminService {
 	int[] countClass();
 
 	int[] countBook();
-
-	ArrayList<String> selectGenre(String mid);
-
 }

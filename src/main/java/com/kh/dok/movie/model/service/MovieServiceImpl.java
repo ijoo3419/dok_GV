@@ -8,6 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.dok.board.model.vo.Board;
+import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.movie.model.dao.MovieDao;
@@ -237,10 +239,63 @@ public class MovieServiceImpl implements MovieService{
 
 
 	@Override
-	public int inserMovie(MovieThumbnail msn) {
+	public int insertMovie(MovieThumbnail msn) {
+		int result =md.insertMovie(sqlSession, msn);
 		
-		return md.insertMovie(sqlSession, msn);
 		
+		return result;
+		
+	}
+
+
+
+
+	@Override
+	public ArrayList<Board> selectBoardone(String id) {
+		ArrayList<Board> list1 = null;
+		
+		list1 = md.selectBoardone(sqlSession, id);
+		
+		return list1;
+	}
+
+
+	@Override
+	public int insertBoard(MovieThumbnail msn, String id) {
+		int result1 = md.insertBoard(sqlSession, msn, id);
+		
+		return result1;
+	}
+
+
+
+
+	@Override
+	public ArrayList<BoardFile> selectBoardfile(String id1) {
+		ArrayList<BoardFile> list2 = null;
+		
+		list2 = md.selectBoardFile(sqlSession, id1);
+		
+		return list2;
+	}
+
+
+
+
+	@Override
+	public int insertBoardfile(String originFileName, String changeName, String id1, String root1) {
+		
+		return md.insertBoardfile(sqlSession, originFileName, changeName, id1, root1);
+	}
+
+	@Override
+	public int insertBoardfile1(String originFileName, String changeName, String id1, String root1) {
+		return md.insertBoardfile1(sqlSession, originFileName, changeName, id1, root1);
+	}
+
+	@Override
+	public int insertBoardfile2(String originFileName, String changeName, String id1, String root1) {
+		return md.insertBoardfile2(sqlSession, originFileName, changeName, id1, root1);
 	}
 
 

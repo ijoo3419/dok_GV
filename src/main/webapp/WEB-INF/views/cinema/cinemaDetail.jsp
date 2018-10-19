@@ -277,7 +277,8 @@ hr {
 	<!-- <div id="movieArea"> -->
 		<c:forEach items="${cinemaDetail}" var="row1">
 		<div id="thumnailimage">
-			  <img id="thumnail" src="${row1.file_src}">
+			  <%-- <img id="thumnail" src="${row1.file_src}"> --%>
+			  <img id="thumnail" src="${contextPath}\resources\uploadFiles/${row1.edit_name}">
 			 
 			<%-- <img src="${row1.file_src}" style="width:298px; height:400px;"> --%>
 		</div>

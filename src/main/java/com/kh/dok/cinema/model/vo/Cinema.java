@@ -15,12 +15,13 @@ public class Cinema implements Serializable{
 	private String area_id;
 	private String file_src;
 	private int file_level;
+	private String edit_name;
 
 	
 	public Cinema(){}
 
 	public Cinema(String theaterId, String mid, String theaterName, String theaterRoot, String theaterText,
-			String theater_address, String area_id, String file_src, int file_level) {
+			String theater_address, String area_id, String file_src, int file_level, String edit_name) {
 		super();
 		this.theaterId = theaterId;
 		this.mid = mid;
@@ -31,6 +32,7 @@ public class Cinema implements Serializable{
 		this.area_id = area_id;
 		this.file_src = file_src;
 		this.file_level = file_level;
+		this.edit_name = edit_name;
 	}
 
 
@@ -79,6 +81,9 @@ public class Cinema implements Serializable{
 		return file_level;
 	}
 
+	public String getEdit_name() {
+		return edit_name;
+	}
 
 	public void setTheaterId(String theaterId) {
 		this.theaterId = theaterId;
@@ -115,7 +120,7 @@ public class Cinema implements Serializable{
 	}
 
 
-	public void setFile_scr(String file_src) {
+	public void setFile_src(String file_src) {
 		this.file_src = file_src;
 	}
 
@@ -123,12 +128,15 @@ public class Cinema implements Serializable{
 	public void setFile_level(int file_level) {
 		this.file_level = file_level;
 	}
+	public void setEdit_name(String edit_name) {
+		this.edit_name = edit_name;
+	}
 
 	@Override
 	public String toString() {
 		return "Cinema [theaterId=" + theaterId + ", mid=" + mid + ", theaterName=" + theaterName + ", theaterRoot="
 				+ theaterRoot + ", theaterText=" + theaterText + ", theater_address=" + theater_address + ", area_id="
-				+ area_id + ", file_src=" + file_src + ", file_level=" + file_level + "]";
+				+ area_id + ", file_src=" + file_src + ", file_level=" + file_level + ",edit_name" + edit_name +  "]";
 	}
 
 	

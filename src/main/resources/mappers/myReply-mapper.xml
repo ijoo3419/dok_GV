@@ -25,7 +25,7 @@
 
 	<!-- 내가 쓴 리뷰 VIEW (영화 리뷰 조회) -->
 	<select id="selectReviews" resultMap="myReplyResultSet">
-	SELECT BF.FILE_SRC, M.MOVIE_TITLE, R.GRADE_COUNT, R.RCONTENT, R.RECOMMEND_COUNT, R.RCREATE_DATE, R.DIVISION
+	SELECT BF.FILE_SRC, M.MOVIE_TITLE, R.GRADE_COUNT, R.RCONTENT, R.RECOMMEND_COUNT, R.RCREATE_DATE, R.DIVISION, R.RID
 		FROM REPLY R
 		JOIN MOVIE M ON (R.MOVIE_ID = M.MOVIE_ID)
 		JOIN BOARD_FILE BF ON(R.BID = BF.BOARD_ID)
@@ -37,7 +37,7 @@
 	
 	<!-- 내가 쓴 리뷰 VIEW (영화관 리뷰 조회) -->
 	<select id="selectCineRev" resultMap="myReplyResultSet">
-	SELECT TH.THEATER_NAME, R.GRADE_COUNT, R.RCONTENT, R.RECOMMEND_COUNT, R.RCREATE_DATE
+	SELECT TH.THEATER_NAME, R.GRADE_COUNT, R.RCONTENT, R.RECOMMEND_COUNT, R.RCREATE_DATE, R.RID
     	FROM THEATER TH
         JOIN BOARD B ON (TH.THEATER_ID = B.THEATER_ID)
         JOIN REPLY R ON (B.BOARD_ID = R.BID)
@@ -48,5 +48,13 @@
     	AND B.CINEMA_DIV = 'CINEMA'
     	AND R.STATUS = 'Y'
 	</select>
+	
+	<!-- 리뷰 삭제 -->
+	<update id="deleteReview">
+	UPDATE REPLY
+	SET STATUS = 'N'
+	WHERE RWRITER = #{ mid }
+	AND RID = #{ rid }
+	</update>
 	
 </mapper>

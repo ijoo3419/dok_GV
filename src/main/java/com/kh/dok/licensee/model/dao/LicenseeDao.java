@@ -21,6 +21,14 @@ public interface LicenseeDao {
 
 	int insertTurning(SqlSessionTemplate sqlSession, Turning t);
 
+	String selectOnePlayId(SqlSessionTemplate sqlSession);
+
+	int insertTheaterBoard(SqlSessionTemplate sqlSession, Cinema2 cm);
+
+	int insertTheaterBoardFile(SqlSessionTemplate sqlSession, Cinema2 cm);
+
+	String selectOneBoardId(SqlSessionTemplate sqlSession);
+
 
 /*	int insertFile(SqlSessionTemplate sqlSession, BoardFile adFile);
 

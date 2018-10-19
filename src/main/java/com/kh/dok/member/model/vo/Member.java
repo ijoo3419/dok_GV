@@ -22,39 +22,9 @@ public class Member implements java.io.Serializable{
 	private String nickname;
 	private String refreshToken;
 	private String new_pass;
+	private String rid;
 	
 	public Member(){}
-
-	@Override
-	public String toString() {
-		return "Member [mid=" + mid + ", email=" + email + ", user_pwd=" + user_pwd + ", user_name=" + user_name
-				+ ", birthday=" + birthday + ", gender=" + gender + ", phone=" + phone + ", user_class=" + user_class
-				+ ", status=" + status + ", login_class=" + login_class + ", blacklist_status=" + blacklist_status
-				+ ", join_date=" + join_date + ", withdraw_date=" + withdraw_date + ", nickname=" + nickname
-				+ ", refreshToken=" + refreshToken + ", new_pass=" + new_pass + "]";
-	}
-
-	public Member(String mid, String email, String user_pwd, String user_name, String birthday, String gender,
-			String phone, String user_class, String status, String login_class, String blacklist_status,
-			String join_date, String withdraw_date, String nickname, String refreshToken, String new_pass) {
-		super();
-		this.mid = mid;
-		this.email = email;
-		this.user_pwd = user_pwd;
-		this.user_name = user_name;
-		this.birthday = birthday;
-		this.gender = gender;
-		this.phone = phone;
-		this.user_class = user_class;
-		this.status = status;
-		this.login_class = login_class;
-		this.blacklist_status = blacklist_status;
-		this.join_date = join_date;
-		this.withdraw_date = withdraw_date;
-		this.nickname = nickname;
-		this.refreshToken = refreshToken;
-		this.new_pass = new_pass;
-	}
 
 	public String getMid() {
 		return mid;
@@ -183,5 +153,47 @@ public class Member implements java.io.Serializable{
 	public void setNew_pass(String new_pass) {
 		this.new_pass = new_pass;
 	}
+
+	public String getRid() {
+		return rid;
+	}
+
+	public void setRid(String rid) {
+		this.rid = rid;
+	}
+
+	@Override
+	public String toString() {
+		return "Member [mid=" + mid + ", email=" + email + ", user_pwd=" + user_pwd + ", user_name=" + user_name
+				+ ", birthday=" + birthday + ", gender=" + gender + ", phone=" + phone + ", user_class=" + user_class
+				+ ", status=" + status + ", login_class=" + login_class + ", blacklist_status=" + blacklist_status
+				+ ", join_date=" + join_date + ", withdraw_date=" + withdraw_date + ", nickname=" + nickname
+				+ ", refreshToken=" + refreshToken + ", new_pass=" + new_pass + ", rid=" + rid + "]";
+	}
+
+	public Member(String mid, String email, String user_pwd, String user_name, String birthday, String gender,
+			String phone, String user_class, String status, String login_class, String blacklist_status,
+			String join_date, String withdraw_date, String nickname, String refreshToken, String new_pass, String rid) {
+		super();
+		this.mid = mid;
+		this.email = email;
+		this.user_pwd = user_pwd;
+		this.user_name = user_name;
+		this.birthday = birthday;
+		this.gender = gender;
+		this.phone = phone;
+		this.user_class = user_class;
+		this.status = status;
+		this.login_class = login_class;
+		this.blacklist_status = blacklist_status;
+		this.join_date = join_date;
+		this.withdraw_date = withdraw_date;
+		this.nickname = nickname;
+		this.refreshToken = refreshToken;
+		this.new_pass = new_pass;
+		this.rid = rid;
+	}
+
+	
 
 }

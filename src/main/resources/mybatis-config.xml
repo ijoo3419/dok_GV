@@ -24,7 +24,6 @@
 		<typeAlias type="com.kh.dok.admin.model.vo.VisitHistory" alias="VisitHistory"></typeAlias>
 		<typeAlias type="com.kh.dok.board.model.vo.SearchCondition1" alias="SearchCondition1"></typeAlias>
 		<typeAlias type="com.kh.dok.review.model.vo.Reply" alias="Reply"></typeAlias>
-
 	</typeAliases>
 	
 	<mappers>

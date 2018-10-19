@@ -5,6 +5,8 @@ import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.kh.dok.board.model.vo.Board;
+import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.movie.model.vo.Movie;
@@ -74,5 +76,24 @@ public interface MovieDao {
 
 	//영화등록
 	int insertMovie(SqlSessionTemplate sqlSession, MovieThumbnail msn);
+
+	//보드 검색
+	ArrayList<Board> selectBoardone(SqlSessionTemplate sqlSession, String id);
+
+	//보드 등록
+	int insertBoard(SqlSessionTemplate sqlSession, MovieThumbnail msn, String id);
+
+	//파일 검색
+	ArrayList<BoardFile> selectBoardFile(SqlSessionTemplate sqlSession, String id1);
+
+	//파일등록
+	int insertBoardfile(SqlSessionTemplate sqlSession, String originFileName, String changeName, String id1,
+			String root1);
+
+	int insertBoardfile1(SqlSessionTemplate sqlSession, String originFileName, String changeName, String id1,
+			String root1);
+
+	int insertBoardfile2(SqlSessionTemplate sqlSession, String originFileName, String changeName, String id1,
+			String root1);
 	
 }

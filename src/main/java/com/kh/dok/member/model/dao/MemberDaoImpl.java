@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dok.admin.model.vo.UserMovie;
 import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.member.model.vo.BookingHistory;
 import com.kh.dok.member.model.vo.Member;
@@ -68,9 +69,11 @@ public class MemberDaoImpl implements MemberDao {
 		System.out.println("Dao kakaoUserCheck Member : " + kakaoUserCheck);
 		
 		if(kakaoUserCheck == null){
+			System.out.println("카카오 새로운 유저이다");
 			//새유저
 			return 11;
 		}else{
+			System.out.println("카카오 기존 회원이다");
 			//기존유저
 			return 22;
 		}
@@ -82,8 +85,11 @@ public class MemberDaoImpl implements MemberDao {
 	//카카오 새 유저 회원가입
 	@Override
 	public int insertKakaoMember(SqlSessionTemplate sqlSession, Member m) {
+		System.out.println("dao 카카오 새 유저 회원가입에서 Member : " + m);
 		
-		return sqlSession.insert("Member.insertKakaoMember", m);
+		int result = sqlSession.insert("Member.insertKakaoMember", m);
+		
+		return result;
 	}
 
 	
@@ -218,6 +224,67 @@ public class MemberDaoImpl implements MemberDao {
 	public int updateStatus(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("Member.updateStatus", m);
 
+	}
+
+
+
+	@Override
+	public String selectMid(SqlSessionTemplate sqlSession, String email) {
+		
+		return sqlSession.selectOne("Member.selectMid", email);
+	}
+
+
+	@Override
+	public ArrayList<String> selectUserMovie(SqlSessionTemplate sqlSession, String mid) {
+		
+		return (ArrayList)sqlSession.selectList("Member.selectUserMovie",mid);
+	}
+
+
+	@Override
+	public ArrayList<String> selectAllMid(SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("Member.selectAllMid");
+	}
+
+
+	@Override
+	public ArrayList<UserMovie> selectAllUserMovie(SqlSessionTemplate sqlSession, ArrayList<String> midList) {
+		ArrayList<UserMovie> umList = new ArrayList<UserMovie>();
+		
+		
+		for(int i=0;i<midList.size();i++){
+			UserMovie um = new UserMovie();
+			/*um.setMid(midList.get(i));
+			ArrayList<String> movieList = (ArrayList)sqlSession.selectList("Member.selectUserMovie",midList.get(i));
+			if(movieList != null){
+			um.setMovieId(movieList);
+			}else{
+				um.setMovieId(moviezero);
+			}*/
+			um.setMid(midList.get(i));
+			ArrayList<String> movieList = (ArrayList)sqlSession.selectList("Member.selectUserMovie",midList.get(i));
+			if(movieList.size() != 0){
+				um.setMovieId(movieList);
+			}else{
+				ArrayList<String> moviezero = new ArrayList<String>();
+				String history = "nohistory";
+				moviezero.add(history);
+				um.setMovieId(moviezero);
+			}
+			System.out.println(um);
+			umList.add(um);
+		}
+		System.out.println(umList);
+		return umList;
+	}
+
+
+	//댓글 삭제
+	@Override
+	public int deleteReview(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("MyReply.deleteReview", m);
 	}
 
 	

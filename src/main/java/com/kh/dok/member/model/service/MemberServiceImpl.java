@@ -8,6 +8,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.kh.dok.admin.model.vo.UserMovie;
 import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.member.model.dao.MemberDao;
 import com.kh.dok.member.model.exception.LoginException;
@@ -94,7 +95,9 @@ public class MemberServiceImpl implements MemberService{
 	//카카오 로그인 유저 체크
 	@Override
 	public int kakaoUserCheck(Member m) {
+		System.out.println("카카오 로그인  유저체크 in");
 		int kakaoUserCheck = md.kakaoUserCheck(sqlSession, m);
+		System.out.println("체크했니? " + kakaoUserCheck);
 		
 		return kakaoUserCheck;
 	}
@@ -102,6 +105,7 @@ public class MemberServiceImpl implements MemberService{
 	//카카오 새 유저 회원가입
 	@Override
 	public int insertKakaoMember(Member m) {
+		System.out.println("멤버서비스 임플 카카오새유저 회원가입 Member : " + m);
 		int insertresult = md.insertKakaoMember(sqlSession, m);
 		
 		return insertresult;
@@ -257,5 +261,40 @@ public class MemberServiceImpl implements MemberService{
 		int authNumOrig = md.findPassword(sqlSession, m);
 		return authNumOrig;
 	}
+	
+	//리뷰 삭제
+	@Override
+	public int deleteReview(Member m) {
+		return md.deleteReview(sqlSession, m);
+	}
 
+	@Override
+	public String selectMid(String email) {
+		
+		return md.selectMid(sqlSession,email);
+	}
+
+	@Override
+	public ArrayList<String> selectUserMovie(String mid) {
+		
+		return md.selectUserMovie(sqlSession,mid);
+	}
+
+	
+
+	@Override
+	public ArrayList<String> selectAllMid() {
+		
+		return md.selectAllMid(sqlSession);
+	}
+
+	@Override
+	public ArrayList<UserMovie> selectAllUserMovie(ArrayList<String> midList) {
+		
+		return md.selectAllUserMovie(sqlSession,midList);
+	}
+
+	
+	
+	
 }
