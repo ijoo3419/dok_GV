@@ -510,6 +510,19 @@ public class MemberController {
 	     return "member/reviews";
 	  }
 	  
+	  //내가 쓴 리뷰 삭제
+	  @ResponseBody
+	  @RequestMapping("deleteReview.me")
+	  public int deleteReview(Model model, HttpServletRequest request, Member m){
+		  
+		  System.out.println("ㅇㅁㅇㅁ뉴ㅠㅠㅠㅠ" + m);
+		  
+		  int result = ms.deleteReview(m);
+		  
+		  return result;
+		  
+	  }
+	  
 
 	  
 	  @RequestMapping("findIdPassword.me")

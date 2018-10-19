@@ -69,6 +69,9 @@ public interface MemberDao {
 
 	int updateStatus(SqlSessionTemplate sqlSession, Member m);
 
+	//리뷰 삭제
+	int deleteReview(SqlSessionTemplate sqlSession, Member m);
+
 
      
 }

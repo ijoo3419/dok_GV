@@ -260,5 +260,11 @@ public class MemberServiceImpl implements MemberService{
 		int authNumOrig = md.findPassword(sqlSession, m);
 		return authNumOrig;
 	}
+	
+	//리뷰 삭제
+	@Override
+	public int deleteReview(Member m) {
+		return md.deleteReview(sqlSession, m);
+	}
 
 }
