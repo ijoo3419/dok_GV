@@ -47,5 +47,9 @@ public interface AdminDao {
 
 	int[] countVisit(SqlSessionTemplate sqlSession, String time);
 
-	int[] countMember(SqlSessionTemplate sqlSession);	
+	int[] countMember(SqlSessionTemplate sqlSession);
+
+	int[] countClass(SqlSessionTemplate sqlSession);
+
+	int[] countBook(SqlSessionTemplate sqlSession);	
 }

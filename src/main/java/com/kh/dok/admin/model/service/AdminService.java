@@ -49,4 +49,8 @@ public interface AdminService {
 
 	int[] countMember();
 
+	int[] countClass();
+
+	int[] countBook();
+
 }

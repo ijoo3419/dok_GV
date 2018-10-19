@@ -198,7 +198,7 @@ public class AdminDaoImpl implements AdminDao{
 			String tempDate = sf.format(lastTime);				//마지막 행의 시간
 			String originTempDate = sf.format(t);
 			if(tempDate.equals(originTempDate) && com < 1){
-				 sqlSession.insert("Admin.insertVisit", vs);
+				sqlSession.insert("Admin.insertVisit", vs);
 			}else if(!tempDate.equals(originTempDate) && com < 1){
 				int dVisit = sqlSession.delete("Admin.deleteVisit",lastTime);
 				/*String dVisitStr = String.valueOf(dVisit)+" "+tempDate;*/
@@ -215,18 +215,18 @@ public class AdminDaoImpl implements AdminDao{
 			VisitHistory vs = new VisitHistory(ip,0,t);
 			sqlSession.insert("Admin.insertVisit", vs);
 		}
-		
+
 		return 1;
 	}
 
 	@Override
 	public int[] countVisit(SqlSessionTemplate sqlSession,String time) {
 		int [] vlist = {0,0,0,0,0,0,0,0,0,0,0,0};
-		
+
 		for(int i=1;i<13;i++){
-			
+
 			Map vcount = new HashMap();
-			
+
 			vcount.put("count", i);
 			int counti = sqlSession.selectOne("Admin.countVisit",vcount);
 			System.out.println("i는"+i+"이고 카운터는"+counti);
@@ -240,11 +240,11 @@ public class AdminDaoImpl implements AdminDao{
 	@Override
 	public int[] countMember(SqlSessionTemplate sqlSession) {
 		int [] mlist = {0,0,0,0,0,0,0,0,0,0,0,0};
-		
+
 		for(int i=1; i< 13; i++){
-			
+
 			Map mcount = new HashMap();
-			
+
 			mcount.put("countm",i);
 			int countm = sqlSession.selectOne("Admin.countMember",mcount);
 			System.out.println("i는"+i+"이고 카운터는"+countm);
@@ -252,6 +252,37 @@ public class AdminDaoImpl implements AdminDao{
 			System.out.println(mlist[i-1]);
 		}
 		return mlist;
+	}
+
+	@Override
+	public int[] countClass(SqlSessionTemplate sqlSession) {
+		int [] clist = {0,0};
+
+		int countb = sqlSession.selectOne("Admin.countB");
+		int counts = sqlSession.selectOne("Admin.countS");
+
+		clist[0] = countb;
+		clist[1] = counts;
+
+		return clist;
+	}
+	
+	//예매수 카운트
+	@Override
+	public int[] countBook(SqlSessionTemplate sqlSession) {
+		int [] blist = {0,0,0,0,0,0,0,0,0,0,0,0};
+
+		for(int i=1; i< 13; i++){
+
+			Map bcount = new HashMap();
+
+			bcount.put("countb",i);
+			int countb = sqlSession.selectOne("Admin.countBook",bcount);
+			blist[i-1] = countb;
+			
+		}
+
+		return blist;
 	}
 
 }

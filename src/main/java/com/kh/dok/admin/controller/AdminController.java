@@ -283,13 +283,23 @@ public class AdminController {
 		String time = (String)session.getAttribute("time");
 		int[] vlist = as.countVisit(time);
 		int[] mlist = as.countMember();
+		int[] clist = as.countClass();
+		int[] rlist = as.countBook();
 		model.addAttribute("tab", tab);
 		String[] vslist = {"0","0","0","0","0","0","0","0","0","0","0","0"};
+		String[] vslist2 = {"0","0","0","0","0","0","0","0","0","0","0","0"};
+		String[] cslist = {"0","0"};
+		
 		for(int i=0;i<vlist.length;i++){
 			vslist[i] = String.valueOf(vlist[i]);
+			vslist2[i] = String.valueOf(mlist[i]);
+		}
+		for(int i=0; i<clist.length; i++){
+			cslist[i] = String.valueOf(clist[i]);
 		}
 		model.addAttribute("vslist", vslist);
-		
+		model.addAttribute("vslist2",vslist2);
+		model.addAttribute("cslist", cslist);
 		return "admin/adminPage";
 	}
 	

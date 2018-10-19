@@ -245,6 +245,7 @@
 		SELECT TO_CHAR(SYSDATE,'YYYYMMDD')
 		FROM DUAL
 	</select>
+	
 	<select id="countVisit" parameterType="map" resultType="_int">
 		SELECT COUNT(*)
 		FROM VISIT_HISTORY
@@ -255,6 +256,7 @@
 			WHERE VISIT_TIME LIKE '18/' || #{count} || '%'
 		</if>
 	</select>
+	
 	<select id="countMember" parameterType="map" resultType="_int">
 		SELECT COUNT(*)
 		FROM MEMBER
@@ -264,5 +266,22 @@
 		<if test="countm gt 9">
 			WHERE JOIN_DATE LIKE '18/' || #{countm} || '%'
 		</if>
+	</select>
+	
+	<select id="countB" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE USER_CLASS = 'BUYER'
+	</select>
+	
+	<select id="countS" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE USER_CLASS = 'SELLER'
+	</select>
+	
+	<select id="countBook" parameterType="map" resultType="_int">
+		SELECT COUNT(*)
+		FROM RESERVATION
 	</select>
 </mapper>
