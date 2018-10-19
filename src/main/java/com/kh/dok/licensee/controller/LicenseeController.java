@@ -1,12 +1,12 @@
 package com.kh.dok.licensee.controller;
 
 import java.io.File;
-import java.util.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.poi.ddf.EscherColorRef.SysIndexProcedure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.dok.board.model.vo.BoardFile;
+import com.kh.dok.cinema.model.vo.Cinema;
 import com.kh.dok.cinema.model.vo.Cinema2;
 import com.kh.dok.common.CommonUtils;
 import com.kh.dok.licensee.controller.sheetController.cellClass;
@@ -64,32 +66,120 @@ public class LicenseeController {
 	@RequestMapping(value="theaterInsert.li")
 	public String insertTheater(Model model, Cinema2 cm,
 								HttpServletRequest request,
-								@RequestParam(name="photo1", required=false)MultipartFile photo1){
+								@RequestParam(name="photo1", required=false)MultipartFile photo1,
+								@RequestParam(name="photo2", required=false)MultipartFile photo2,
+								@RequestParam(name="photo3", required=false)MultipartFile photo3,
+								@RequestParam(name="photo4", required=false)MultipartFile photo4){
 		
 		System.out.println(photo1);
-
 		System.out.println("controller cm : " + cm);
+
+	
+		
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		System.out.println("root : " + root);
 		String filePath = root + "\\uploadFiles";
 		System.out.println("filePath : " + filePath);
+		
+		try{
+		if(photo1 != null){
+			
 		
 		String originFileName = photo1.getOriginalFilename();
 		String ext = originFileName.substring(originFileName.lastIndexOf("."));
 		String changeName = CommonUtils.getRandomString();
 		String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
 		
+		cm.setOrigin_name(originFileName); 
+		cm.setEdit_name(changeName);
+		cm.setFile_src(filePath);
+		cm.setFile_level(1);
 		
-		try {
-			photo1.transferTo(new File(filePath + "\\" + changeName + ext));
+		ls.insertTheater(cm);
+		
+		ls.insertTheaterBoard(cm);
+		
+		String board_id = "B";
+		
+		board_id += ls.selectOneBoardId();
+		cm.setBoard_id(board_id);
+		
+		ls.insertTheaterBoardFile(cm);
+		photo1.transferTo(new File(filePath + "\\" + changeName + ext));
+		}if(photo2 != null){
+			String originFileName = photo2.getOriginalFilename();
+			String ext = originFileName.substring(originFileName.lastIndexOf("."));
+			String changeName = CommonUtils.getRandomString();
+			String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
 			
+			cm.setOrigin_name(originFileName); 
+			cm.setEdit_name(changeName);
+			cm.setFile_src(filePath);
+			cm.setFile_level(2);
 			
 			ls.insertTheater(cm);
 			
-			return "licensee/theaterManagePage";
-		
-		} catch (Exception e){
-			new File(filePath + "\\" + changeName + ext).delete();
+			ls.insertTheaterBoard(cm);
+			
+			String board_id = "B";
+			
+			board_id += ls.selectOneBoardId();
+			cm.setBoard_id(board_id);
+			
+			ls.insertTheaterBoardFile(cm);
+			photo2.transferTo(new File(filePath + "\\" + changeName + ext));
+			
+		}if(photo3 != null){
+			String originFileName = photo3.getOriginalFilename();
+			String ext = originFileName.substring(originFileName.lastIndexOf("."));
+			String changeName = CommonUtils.getRandomString();
+			String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
+			
+			cm.setOrigin_name(originFileName); 
+			cm.setEdit_name(changeName);
+			cm.setFile_src(filePath);
+			cm.setFile_level(2);
+			
+			ls.insertTheater(cm);
+			
+			ls.insertTheaterBoard(cm);
+			
+			String board_id = "B";
+			
+			board_id += ls.selectOneBoardId();
+			cm.setBoard_id(board_id);
+			
+			ls.insertTheaterBoardFile(cm);
+			photo3.transferTo(new File(filePath + "\\" + changeName + ext));
+			
+		}if(photo4 != null){
+			String originFileName = photo4.getOriginalFilename();
+			String ext = originFileName.substring(originFileName.lastIndexOf("."));
+			String changeName = CommonUtils.getRandomString();
+			String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
+			
+			cm.setOrigin_name(originFileName); 
+			cm.setEdit_name(changeName);
+			cm.setFile_src(filePath);
+			cm.setFile_level(2);
+			
+			ls.insertTheater(cm);
+			
+			ls.insertTheaterBoard(cm);
+			
+			String board_id = "B";
+			
+			board_id += ls.selectOneBoardId();
+			cm.setBoard_id(board_id);
+			
+			ls.insertTheaterBoardFile(cm);
+			photo4.transferTo(new File(filePath + "\\" + changeName + ext));
+			
+		}
+		return "licensee/mainLicenseePage";
+	
+	}
+		catch (Exception e){
 			
 			System.out.println("실패하면 여기로");
 			model.addAttribute("msg", "영화관 추가 실패!");
@@ -180,7 +270,9 @@ public class LicenseeController {
 			return "common/errorPage";
 			
 	}
-}*/
+}
+	*/
+	
 	//정태 상영관 등록(엑셀 파일 완료)
 	@RequestMapping(value="movieRoomInsert.li")
 	public String insertMovieRoom(Model model,MovieRoom mr, Cinema2 cm,
@@ -239,28 +331,42 @@ public class LicenseeController {
 	public String insertPlay(Model model, Play p, Turning t, MovieRoom mr, 
 								HttpServletRequest request){
 		
+		//11:00 ~ 12:00 이런식으로 나오는 값
 		t.setTurningTime(t.getStartTime_pre() + " ~ " + t.getEndTime_pre());
 
+		
+		//이 값이 startTime_pre
 		t.setStartTime_pre(t.getTurningDay() + " " + t.getStartTime_pre());
+
+		//이 값이 endTime_pre
+		t.setEndTime_pre(t.getTurningDay() + " " + t.getEndTime_pre());
 		
-		System.out.println(t.getStartTime_pre());
 		
-		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		try {
-			Date to = transFormat.parse(t.getStartTime_pre());
-			t.setStartTime((java.sql.Date)to);
-			
-			System.out.println("play : "+ p);
-			System.out.println("turning : "+ t);
-			
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		MovieRoom movieRoomId = ls.checkMovieRoomId(mr);
 		
-	
+		System.out.println("movieRoomId = " + movieRoomId);
+		
+		mr.setMovieRoomId(movieRoomId.getMovieRoomId());		
+		
+		//MovieRoom_id 값 가져오기
+		System.out.println(mr.getMovieRoomId());
+		
+		
 		int resultPlay = ls.insertPlay(p);
+		String selectPlayId = "P";
 		
+		//play_id 값 알아오기
+		selectPlayId += ls.selectOnePlayId();
+		
+		System.out.println("PlayId = " + selectPlayId);
+		//객체에 넣어주자
+		t.setPlayId(selectPlayId);
+		
+		System.out.println("controller p = " + p);
+		System.out.println("controller t = " + t);
 		int resultTurning = ls.insertTurning(t);
+		
+		
 		System.out.println("movieRoom : "+ mr);
 		
 		
@@ -270,12 +376,6 @@ public class LicenseeController {
 		System.out.println("controller p = " + p);
 		
 		
-		MovieRoom movieRoomId = ls.checkMovieRoomId(mr);
-		
-		System.out.println("movieRoomId = " + movieRoomId);
-		
-		mr.setMovieRoomId(movieRoomId.getMovieRoomId());		
-		System.out.println(mr.getMovieRoomId());
 		
 		//String name = "TT1";
 		/*String[] arr = request.getParameterValues("bak");*/

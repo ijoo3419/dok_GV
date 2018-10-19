@@ -110,12 +110,20 @@
 	
 	
 	<insert id="insertTurning" parameterType="Turning">
-		INSERT INTO TURNING
-		VALUES ('TU' || TO_CHAR(TURNING_TURNING_ID.NEXTVAL), 'P21', 7000, '181015' , '12:00 ~ 13:20' ,'181015 12:00:00', '181015 13:20:00', 
-        'MR51')
+		INSERT INTO "DOK"."TURNING" (TURNING_ID, PLAY_ID, PRICE, TURNING_DAY, TURNING_TIME, START_TIME, END_TIME, MOVIEROOM_ID) 
+		VALUES('TU' || TO_CHAR(TURNING_TURNING_ID.NEXTVAL), #{playId}, #{price}, 
+		TO_DATE(#{turningDay}, 'YYYY-MM-DD HH24:MI:SS'), #{turningTime},
+		TO_DATE(#{startTime_pre}, 'YYYY-MM-DD HH24:MI:SS'),
+		TO_DATE(#{endTime_pre}, 'YYYY-MM-DD HH24:MI:SS'),
+		(SELECT MOVIEROOM_ID FROM MOVIEROOM
+		WHERE MOVIEROOM_NAME = #{movieRoomName}))
 		
 	</insert>
+	<select id="selectOnePlayPlayId" resultType="string">
+	SELECT PLAY_PLAY_ID.CURRVAL
+	FROM DUAL 
+	</select>
 	
-	
+
 
 </mapper>

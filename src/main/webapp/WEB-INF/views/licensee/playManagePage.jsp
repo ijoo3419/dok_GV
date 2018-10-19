@@ -163,7 +163,35 @@ h2 {
 						</ul>
 					</div>
 						
+			<script>
+				//가격(반복) 가져오기
+				$(function(){
+					$('.primary').click(function(){
+						 prices = new Array();
+						 turningDays = new Array();
+						 startTimes = new Array();
+						 endTimes = new Array();
+						 movieRoomNames = new Array();
+						 $('#playTable tr').each(function() {
+                             prices.push($(this).find(".priceTest").val());
+                             prices.push($(this).find(".turningDayTest").val());
+                             prices.push($(this).find(".startTimeTest").val());
+                             prices.push($(this).find(".endTimeTest").val());
+                             prices.push($(this).find(".movieRoomNameTest").val());
+
+                             console.log(prices);
+                             console.log(turningDays);
+                             console.log(startTimes);
+                             console.log(endTimes);
+                             console.log(movieRoomNames);
+                         });
+					});
+				});
+				
 			
+				
+				
+			</script>
 
 
 		
@@ -206,7 +234,7 @@ h2 {
   var $movieRoomName = $('<input style="width:80px;"  name="movieRoomName" >');	//상영관이름 */
     
      $('#playTable > tbody:last').append('<tr><td>' + seq 
-     + '</td><td><input style="width:160px;" name= "price"><td><input type="date" style="width:150px;" name="turningDay"><td><input style="width:120px;"  name="startTime_pre">~<input style="width:120px;" name="endTime_pre"><td><input style="width:80px;"  name=" movieRoomName"></td></tr>');
+     + '</td><td><input style="width:160px;" name= "price" class="priceTest"><td><input type="date" class="turningDayTest" style="width:150px;" name="turningDay"><td><input style="width:120px;" class="startTimeTest" name="startTime_pre">~<input style="width:120px;" class="endTimeTest" name="endTime_pre"><td><input style="width:80px;" class="movieRoomNameTest" name=" movieRoomName"></td></tr>');
   });
   $('#btn-delete-row').click(function() {
 	  --seq;
