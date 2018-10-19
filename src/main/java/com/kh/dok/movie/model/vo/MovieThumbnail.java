@@ -10,7 +10,7 @@ public class MovieThumbnail  implements java.io.Serializable{
 	private String movie_title;
 	private String movie_etitle;
 	private String movie_content;
-	private Date open_date;
+	private String open_date;
 	private String director_name;
 	private String production_com;
 	private String movie_age;
@@ -44,7 +44,7 @@ public class MovieThumbnail  implements java.io.Serializable{
 		return movie_content;
 	}
 
-	public Date getOpen_date() {
+	public String getOpen_date() {
 		return open_date;
 	}
 
@@ -108,7 +108,7 @@ public class MovieThumbnail  implements java.io.Serializable{
 		this.movie_content = movie_content;
 	}
 
-	public void setOpen_date(Date open_date) {
+	public void setOpen_date(String open_date) {
 		this.open_date = open_date;
 	}
 
@@ -162,7 +162,7 @@ public class MovieThumbnail  implements java.io.Serializable{
 	}
 
 	public MovieThumbnail(int rnum, String movie_id, String movie_title, String movie_etitle, String movie_content,
-			Date open_date, String director_name, String production_com, String movie_age, String genre,
+			String open_date, String director_name, String production_com, String movie_age, String genre,
 			int runnig_time, String file_src, int file_level, String mid, String movie_actor, String movie_type) {
 		super();
 		this.rnum = rnum;
