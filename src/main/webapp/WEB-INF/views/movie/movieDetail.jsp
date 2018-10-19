@@ -217,6 +217,17 @@ hr {
 	display: inline-block;
 	 margin-left: 10px;
 }
+
+.starR{
+  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+  background-size: auto 100%;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  text-indent: -9999px;
+  cursor: pointer;
+}
+.starR.on{background-position:0 0;}
 </style>		
 		 <title>Massively by HTML5 UP</title>
 		<meta charset="utf-8" />
@@ -372,17 +383,35 @@ hr {
 			<img src="${contextPath }/resources/images/logo.jpg" width="100" height="100">
 		</div>
 		
+		
+		
+		<form method="post" id="commentForm" name="commentForm">
+		
+		
+		
 		<div id="user">
 			<div id="grade">
-				<a style="text-align:center; width:100px; margin-left:30px; font-size:30px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">☆☆☆☆☆</a>
+				<div class="starRev" align="center">
+					<span id="1"class="starR on" onclick="star1();">별1</span>
+					<span id="2" class="starR" onclick="star2();">별2</span>
+					<span id="3" class="starR" onclick="star3();">별3</span>
+					<span id="4" class="starR" onclick="star4();">별4</span>
+					<span id="5" class="starR" onclick="star5();">별5</span>
+				</div>
+				
 				<a style="text-align:center; width:100px; margin-left:40px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">평점을 입력하세요.</a>
 			</div>
 			<div id="gradeinsert">
-				<input type="text" style="width:600px; height:98px; margin:0 !important;">
+				<input type="text" id="comment" name="comment" placeholder="리뷰를 입력해주세요!" style="width:600px; height:98px; margin:0 !important;">
 			</div>
 			<input type="button" value="등록" style="width:100px; height:100px;">
-			
+			<a href="#" onclick="fn_comment('${ result.code}')" class="btn pull-right btn-success">등록</a>
 		</div>
+		
+		<input type="hidden" id="movie_id" name="movie_id" value="${ movie_id }"/>
+		</form>
+		
+		
 		<div id="check">
 			<a style="text-align:center; width:50px; margin-left:10px; margin-right:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">최신순</a>
 			<hr width="1px" size="40px" color="black" id="hrline" style="height:15px;">
@@ -583,9 +612,110 @@ hr {
              	<a onclick="location.href='#'">>></a>
              </div>
          </div>
-	<!-- </div> -->
 							
 		</article>
+		
+		<script>
+		var star = 1;
+		function star1(){
+			star = 1;
+			console.log("star : " + star);
+		}
+		function star2(){
+			star = 2;
+			console.log("star : " + star);
+		}
+		function star3(){
+			star = 3;
+			console.log("star : " + star);
+		}
+		function star4(){
+			star = 4;
+			console.log("star : " + star);
+		}
+		function star5(){
+			star = 5;
+			console.log("star : " + star);
+		}
+		
+		
+		
+		$('.starRev span').click(function(){
+			  $(this).parent().children('span').removeClass('on');
+			  $(this).addClass('on').prevAll('span').addClass('on');
+			  return false;
+			});
+		
+		
+		
+		
+		
+		
+		
+		//댓글 등록하기
+    	function fn_comment(code){
+    		$.ajax({
+    			type : 'POST',
+    			url : "addComment.bo",
+    			data : $("#commentForm").serialize(),
+    			success : function(data){
+    					console.log("ㅇㅇㅇ");
+    					getCommentList();
+    					$("#comment").val("");
+    			},
+    			error:function(request, status, error){
+    				console.log("댓글등록실패 ajax");
+    			}
+    		});
+    		
+    	}
+    	
+    	//초기 페이지 로딩시 댓글 불러오기
+    	$(function(){
+    		getCommentList();
+    	});
+    	
+    	//댓글 불러오기
+    	function getCommentList(){
+    		$.ajax({
+    			type:'GET',
+    			url:"commentList.bo",
+    			data:$("#commentForm").serialize(),
+    			success:function(data){
+    				console.log(data);
+    				 /* data.list[0]. */
+    				var html = "";
+    				var cCnt = data.list.length;
+    				
+    				if(data.list.length > 0){
+    					
+    					for(i = 0; i < data.list.length; i++){
+    						html += "<div>";
+    						html += "<div><table class='table'><tr><td width='100px'><h6><strong>"+ data.list[i].rwriter +"</strong></h6></td>";
+    						html += "<td align='left'>"+data.list[i].rcontent+"</td>";
+    						html += "<td width='200px'>" + data.list[i].rcreate_date + "</td></tr>";
+    						html += "</table></div>";
+    						html += "</div>";
+    					}
+    				}else{
+    					html += "<div>";
+    	                html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
+    	                html += "</table></div>";
+    	                html += "</div>";
+    				}
+    				
+    				$("#cCnt").html(cCnt);
+    				$("#commentList").html(html);
+    				
+    			},
+    			error:function(request, status, error){
+    				console.log("에러!!!!");
+    			}
+    		});
+    	}
+		
+		
+		</script>
 		
 		
 </div>
