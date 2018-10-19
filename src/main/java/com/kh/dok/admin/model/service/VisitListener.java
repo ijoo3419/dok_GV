@@ -22,7 +22,6 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.kh.dok.admin.controller.AdminController;
 import com.kh.dok.admin.model.dao.AdminDao;
 import com.kh.dok.admin.model.dao.AdminDaoImpl;
-import com.kh.dok.admin.model.vo.Visit;
 
 
 @Repository
@@ -36,7 +35,6 @@ public class VisitListener implements HttpSessionListener{
 		session.setMaxInactiveInterval(10);
 		
 		String time = session.getCreationTime()+"";
-		System.out.println("보내버릴 time : " + time);
 		String ip = session.getId();
 		
 		

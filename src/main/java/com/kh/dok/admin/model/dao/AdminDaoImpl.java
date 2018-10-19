@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,7 +20,7 @@ import com.kh.dok.admin.model.exception.SearchMemberException;
 import com.kh.dok.admin.model.exception.UploadException;
 import com.kh.dok.admin.model.vo.ReportHistory;
 import com.kh.dok.admin.model.vo.SearchCondition;
-import com.kh.dok.admin.model.vo.Visit;
+import com.kh.dok.admin.model.vo.VisitHistory;
 import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.member.model.vo.Member;
@@ -182,38 +183,75 @@ public class AdminDaoImpl implements AdminDao{
 	@Override
 	public int insertVisit(SqlSessionTemplate sqlSession, String time, String ip) {
 
-		ArrayList<Visit> vl = (ArrayList)sqlSession.selectList("Admin.selectVisitList");
+		ArrayList<VisitHistory> vl = (ArrayList)sqlSession.selectList("Admin.selectVisitList");
 		System.out.println("vl은 : "+vl);
 		System.out.println(vl.size());
 		if(vl.size() > 0){
 			Date t = new Date(0);
 			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 			long ltime = Long.parseLong(time);
-			t.setTime(ltime);
-			Visit vs = new Visit(ip,t);
+			t.setTime(ltime);	//받아온 시간
+			VisitHistory vs = new VisitHistory(ip,0,t);
 			System.out.println(vs);
 			int com = sqlSession.selectOne("Admin.selectVisit", vs);
 			Date lastTime = vl.get(vl.size()-1).getVisit_time();
-			String tempDate = sf.format(lastTime);
+			String tempDate = sf.format(lastTime);				//마지막 행의 시간
 			String originTempDate = sf.format(t);
 			if(tempDate.equals(originTempDate) && com < 1){
-				return sqlSession.insert("Admin.insertVisit", vs);
+				 sqlSession.insert("Admin.insertVisit", vs);
 			}else if(!tempDate.equals(originTempDate) && com < 1){
 				int dVisit = sqlSession.delete("Admin.deleteVisit",lastTime);
-				String dVisitStr = String.valueOf(dVisit);
-				Visit nvs = new Visit(dVisitStr,lastTime);
+				/*String dVisitStr = String.valueOf(dVisit)+" "+tempDate;*/
+				VisitHistory nvs = new VisitHistory(dVisit,lastTime);
+				VisitHistory newvs = new VisitHistory(ip,0,t);
 				sqlSession.insert("Admin.insertVcount",nvs);
-				sqlSession.insert("Admin.insertgar",t);
+				sqlSession.insert("Admin.insertVisit",newvs);
 			}
 		}else if(vl.size() == 0){
 			Date t = new Date(0);
 			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 			long ltime = Long.parseLong(time);
 			t.setTime(ltime);
-			Visit vs = new Visit(ip,t);
+			VisitHistory vs = new VisitHistory(ip,0,t);
 			sqlSession.insert("Admin.insertVisit", vs);
 		}
+		
 		return 1;
+	}
+
+	@Override
+	public int[] countVisit(SqlSessionTemplate sqlSession,String time) {
+		int [] vlist = {0,0,0,0,0,0,0,0,0,0,0,0};
+		
+		for(int i=1;i<13;i++){
+			
+			Map vcount = new HashMap();
+			
+			vcount.put("count", i);
+			int counti = sqlSession.selectOne("Admin.countVisit",vcount);
+			System.out.println("i는"+i+"이고 카운터는"+counti);
+			vlist[i-1] = counti;
+			System.out.println(vlist[i-1]);
+		}
+		System.out.println(vlist);
+		return vlist;
+	}
+
+	@Override
+	public int[] countMember(SqlSessionTemplate sqlSession) {
+		int [] mlist = {0,0,0,0,0,0,0,0,0,0,0,0};
+		
+		for(int i=1; i< 13; i++){
+			
+			Map mcount = new HashMap();
+			
+			mcount.put("countm",i);
+			int countm = sqlSession.selectOne("Admin.countMember",mcount);
+			System.out.println("i는"+i+"이고 카운터는"+countm);
+			mlist[i-1] = countm;
+			System.out.println(mlist[i-1]);
+		}
+		return mlist;
 	}
 
 }

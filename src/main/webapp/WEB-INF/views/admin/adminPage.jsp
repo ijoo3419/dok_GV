@@ -437,24 +437,36 @@
 							<th>10월</th>
 							<th>11월</th>
 							<th>12월</th>
-							<th>today</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>1</td>
-							<td>2</td>
-							<td>3</td>
-							<td>4</td>
-							<td>5</td>
-							<td>6</td>
-							<td>7</td>
-							<td>8</td>
-							<td>9</td>
-							<td>10</td>
-							<td>11</td>
-							<td>12</td>
-							<td>value</td>
+							<td>${vslist[0] }</td>
+							<td>${vslist[1] }</td>
+							<td>${vslist[2] }</td>
+							<td>${vslist[3] }</td>
+							<td>${vslist[4] }</td>
+							<td>${vslist[5] }</td>
+							<td>${vslist[6] }</td>
+							<td>${vslist[7] }</td>
+							<td>${vslist[8] }</td>
+							<td>${vslist[9] }</td>
+							<td>${vslist[10] }</td>
+							<td>${vslist[11] }</td>
+						</tr>
+						<tr>
+							<th>1월</th>
+							<th>2월</th>
+							<th>3월</th>
+							<th>4월</th>
+							<th>5월</th>
+							<th>6월</th>
+							<th>7월</th>
+							<th>8월</th>
+							<th>9월</th>
+							<th>10월</th>
+							<th>11월</th>
+							<th>12월</th>
 						</tr>
 					</tbody>
 				</table>

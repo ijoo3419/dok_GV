@@ -13,7 +13,6 @@ import com.kh.dok.admin.model.exception.SearchMemberException;
 import com.kh.dok.admin.model.exception.UploadException;
 import com.kh.dok.admin.model.vo.ReportHistory;
 import com.kh.dok.admin.model.vo.SearchCondition;
-import com.kh.dok.admin.model.vo.Visit;
 import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.member.model.vo.Member;
@@ -46,5 +45,7 @@ public interface AdminDao {
 
 	int insertVisit(SqlSessionTemplate sqlSession, String time, String ip);
 
-	
+	int[] countVisit(SqlSessionTemplate sqlSession, String time);
+
+	int[] countMember(SqlSessionTemplate sqlSession);	
 }

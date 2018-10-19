@@ -41,9 +41,11 @@
 		<result property="file_level" column="FILE_LEVEL" />
 	</resultMap>
 	
-	<resultMap type="Visit" id="visitListSet">
+	<resultMap type="VisitHistory" id="visitListSet">
 		<id property="visit_id" column="VISIT_ID" />
+		<result property="visit_count" column="VISIT_COUNT"/>
 		<result property="visit_time" column="VISIT_TIME" />
+		<result property="visit_ip" column="VISIT_IP"/>
 	</resultMap>
 	<!-- 회원 전체 조회 인소진 -->
 	<select id="searchAll" parameterType="Search" resultMap="searchResultSet">
@@ -169,7 +171,7 @@
 	<!-- 메인 슬라이드 사진 파일 추가 -->
 	<insert id="insertFile" parameterType="BoardFile">
 		INSERT INTO BOARD_FILE
-		VALUES('ADFILE' ||
+		VALUES('BF' ||
 		BOARD_FILE_FILE_ID.NEXTVAL,#{board_id},#{origin_name},#{edit_name},#{file_src},SYSDATE,#{file_level})
 	</insert>
 
@@ -208,32 +210,59 @@
 		ORDER BY FILE_LEVEL
 	</select>
 	
-	<select id="selectVisit" parameterType="Visit" resultType="_int">
+	<select id="selectVisit" parameterType="VisitHistory" resultType="_int">
 		SELECT COUNT(*)
-		FROM VISIT
-		WHERE VISIT_ID = #{visit_id}
+		FROM VISIT_HISTORY
+		WHERE VISIT_IP = #{visit_ip}
 	</select>
 	
-	<insert id="insertVisit" parameterType="Visit">
-		INSERT INTO VISIT
-		VALUES(#{visit_id},#{visit_time})
+	<insert id="insertVisit" parameterType="VisitHistory">
+		INSERT INTO VISIT_HISTORY
+		VALUES(VISIT_HISTORY_VISIT_ID.NEXTVAL,#{visit_count},#{visit_time},#{visit_ip})
 	</insert>
 	
 	<select id="selectVisitList" resultMap="visitListSet">
 		SELECT *
-		FROM VISIT
+		FROM VISIT_HISTORY
+		ORDER BY VISIT_ID
 	</select>
 	
 	<delete id="deleteVisit" parameterType="date">
-		DELETE VISIT
+		DELETE VISIT_HISTORY
 		WHERE VISIT_TIME = #{lastTime}
 	</delete>
-	<insert id="insertVcount" parameterType="Visit">
-		INSERT INTO VISIT
-		VALUES(#{visit_id},#{visit_time})
+	<insert id="insertVcount" parameterType="VisitHistory">
+		INSERT INTO VISIT_HISTORY
+		VALUES(VISIT_HISTORY_VISIT_ID.NEXTVAL,#{visit_count},#{visit_time}, 'record')
 	</insert>
+	
 	<insert id="insertgar" parameterType="date">
 		INSERT INTO VISIT
-		VALUES(#{t},#{t})
+		VALUES('gValue',#{t})
 	</insert>
+	
+	<select id="selectTime" resultType="String">
+		SELECT TO_CHAR(SYSDATE,'YYYYMMDD')
+		FROM DUAL
+	</select>
+	<select id="countVisit" parameterType="map" resultType="_int">
+		SELECT COUNT(*)
+		FROM VISIT_HISTORY
+		<if test="count lt 10">
+			WHERE VISIT_TIME LIKE '18/0' || #{count} || '%'
+		</if>
+		<if test="count gt 9">
+			WHERE VISIT_TIME LIKE '18/' || #{count} || '%'
+		</if>
+	</select>
+	<select id="countMember" parameterType="map" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		<if test="countm lt 10">
+			WHERE JOIN_DATE LIKE '18/0' || #{countm} || '%'
+		</if>
+		<if test="countm gt 9">
+			WHERE JOIN_DATE LIKE '18/' || #{countm} || '%'
+		</if>
+	</select>
 </mapper>

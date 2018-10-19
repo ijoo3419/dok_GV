@@ -16,7 +16,6 @@ import com.kh.dok.admin.model.exception.SearchMemberException;
 import com.kh.dok.admin.model.exception.UploadException;
 import com.kh.dok.admin.model.vo.ReportHistory;
 import com.kh.dok.admin.model.vo.SearchCondition;
-import com.kh.dok.admin.model.vo.Visit;
 import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.member.model.vo.Member;
@@ -124,6 +123,18 @@ public class AdminServiceImpl implements AdminService{
 	public int insertvisit(String time,String ip) {
 		
 		return ad.insertVisit(sqlSession,time,ip);
+	}
+
+	@Override
+	public int[] countVisit(String time) {
+		
+		return ad.countVisit(sqlSession,time);
+	}
+
+	@Override
+	public int[] countMember() {
+		
+		return ad.countMember(sqlSession);
 	}
 
 	
