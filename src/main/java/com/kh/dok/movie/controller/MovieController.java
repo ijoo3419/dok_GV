@@ -77,6 +77,7 @@ public class MovieController {
 		model.addAttribute("movieDetail",movieDetail);
 		model.addAttribute("movieimagecut",movieimagecut);
 		model.addAttribute("movievideo",movievideo);
+		model.addAttribute("movie_id", id);
 		
 		return "movie/movieDetail";
 	}
