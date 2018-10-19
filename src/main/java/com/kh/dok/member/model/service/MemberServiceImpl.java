@@ -95,7 +95,9 @@ public class MemberServiceImpl implements MemberService{
 	//카카오 로그인 유저 체크
 	@Override
 	public int kakaoUserCheck(Member m) {
+		System.out.println("카카오 로그인  유저체크 in");
 		int kakaoUserCheck = md.kakaoUserCheck(sqlSession, m);
+		System.out.println("체크했니? " + kakaoUserCheck);
 		
 		return kakaoUserCheck;
 	}
@@ -103,6 +105,7 @@ public class MemberServiceImpl implements MemberService{
 	//카카오 새 유저 회원가입
 	@Override
 	public int insertKakaoMember(Member m) {
+		System.out.println("멤버서비스 임플 카카오새유저 회원가입 Member : " + m);
 		int insertresult = md.insertKakaoMember(sqlSession, m);
 		
 		return insertresult;
@@ -257,6 +260,12 @@ public class MemberServiceImpl implements MemberService{
 		
 		int authNumOrig = md.findPassword(sqlSession, m);
 		return authNumOrig;
+	}
+	
+	//리뷰 삭제
+	@Override
+	public int deleteReview(Member m) {
+		return md.deleteReview(sqlSession, m);
 	}
 
 	@Override

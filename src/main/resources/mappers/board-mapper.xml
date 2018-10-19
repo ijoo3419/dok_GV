@@ -42,6 +42,16 @@
 		<result property="grade_count" column="GRADE_COUNT"/>
 	</resultMap>
 	
+	<resultMap type="BoardFile" id="BoardFileSet">
+		<id property="fileId" column="FILE_ID" />
+		<result property="boardId" column="BOARD_ID" />
+		<result property="originName" column="ORIGIN_NAME" />
+		<result property="editName" column="EDIT_NAME" />
+		<result property="fileSrc" column="FILE_SRC" />
+		<result property="fileDate" column="FILE_DATE" />
+		<result property="fileLevel" column="FILE_LEVEL" />
+	</resultMap>
+	
 	<!-- 공지등록 -->
 	<insert id="insertNotice" parameterType="board">
 		INSERT INTO BOARD
@@ -215,15 +225,40 @@
 		AND STATUS = 'Y'
 	</select>
 	
+	<!-- 이진희 보드검색 -->
+	<select id="selectBoardone" resultMap="BBFileResultSet" parameterType="BoardNBoardFile">
+		SELECT *
+		 FROM BOARD 
+		 WHERE MOVIE_ID = #{id}
+	 </select>
 	
 	
+	<insert id="insertBoard" parameterType="BoardNBoardFile">
+		INSERT INTO BOARD VALUES('B' || TO_CHAR(BOARD_BOARD_ID.NEXTVAL), #{mid}, #{movie_title}, #{movie_content}
+		,'MC', SYSDATE, SYSDATE,'Y',0,'MOVIE',(null),#{movie_id},(null))
+	</insert>
 	
 	
+	<select id="selectfile" resultMap="BoardFileSet" parameterType="BoardFile">
+		SELECT *
+		 FROM BOARD_FILE
+		 WHERE BOARD_ID = #{id1}
+	 </select>
 	
+	<insert id="insertfile" parameterType="BoardFile">
+		INSERT INTO BOARD_FILE VALUES('BF' || TO_CHAR(BOARD_BOARD_ID.NEXTVAL), #{board_id}, #{origin_name}, #{edit_name}
+		,#{file_src}, SYSDATE, 1)
+	</insert>
 	
+	<insert id="insertfile1" parameterType="BoardFile">
+		INSERT INTO BOARD_FILE VALUES('BF' || TO_CHAR(BOARD_BOARD_ID.NEXTVAL), #{board_id}, #{origin_name}, #{edit_name}
+		,#{file_src}, SYSDATE, 2)
+	</insert>
 	
-	
-	
+	<insert id="insertfile2" parameterType="BoardFile">
+		INSERT INTO BOARD_FILE VALUES('BF' || TO_CHAR(BOARD_BOARD_ID.NEXTVAL), #{board_id}, #{origin_name}, #{edit_name}
+		,#{file_src}, SYSDATE, 3)
+	</insert>
 	
 	
 	

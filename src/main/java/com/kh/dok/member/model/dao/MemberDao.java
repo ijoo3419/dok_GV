@@ -81,6 +81,9 @@ public interface MemberDao {
 	//모든 유저 mid찾기
 	ArrayList<String> selectAllMid(SqlSessionTemplate sqlSession);
 
+	//리뷰 삭제
+	int deleteReview(SqlSessionTemplate sqlSession, Member m);
+
 
      
 }

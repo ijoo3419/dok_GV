@@ -6,6 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style>
+
+#edit, #delete {
+	cursor:pointer;
+}
+
+</style>
+
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="${contextPath }/resources/css/main.css" />
@@ -51,7 +60,7 @@
 			<h4> 영화 리뷰 </h4>
 			
 			<c:forEach items="${ movieReviews }" var="mv">
-				<table>
+				<table id="tableArea">
 					<thead>
 						<tr>
 							<th></th>
@@ -92,8 +101,8 @@
 									<td>[영화] ${ mv.rcontent }</td>
 							<td><img src="${ contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;"> ${ mv.recommend_count } </td>
 							<td>${ mv.rcreate_date }</td>
-							<td><img src="${ contextPath }/resources/images/member/edit.png" width="20" height="20" style="margin-left:10px; margin-top:10px;"></td>
-							<td><img src="${ contextPath }/resources/images/member/delete.png" width="20" height="20" style="margin-left:10px; margin-top:10px;"></td>
+							<td><img id="edit" src="${ contextPath }/resources/images/member/edit.png" width="20" height="20" style="margin-left:10px; margin-top:10px;"></td>
+							<td><img id="delete" src="${ contextPath }/resources/images/member/delete.png" width="20" height="20" style="margin-left:10px; margin-top:10px;"></td>
 						</tr>
 				</table>
 				</c:forEach>
@@ -101,7 +110,7 @@
 			<h4> 영화관 리뷰 </h4>
 				
 			<c:forEach items="${ cinemaReviews }" var="cr">
-				<table>
+				<table id="tableArea">
 					<thead>
 						<tr>
 							<th></th>
@@ -115,6 +124,8 @@
 					</thead>
 					<tbody>
 						<tr>
+							<td><input type="hidden" value="${ cr.rid }" id="rid"/></td>
+							<td><input type="hidden" value="${ sessionScope.loginUser.mid }" id="mid" /></td>
 							<td>${ cr.theater_name }</td>
 							<c:set var="grade" value="${ cr.grade_count }" />
 							<c:choose>
@@ -140,13 +151,79 @@
 									<td>[영화관] ${ cr.rcontent }</td>
 							<td><img src="${ contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;"> ${ cr.recommend_count } </td>
 							<td>${ cr.rcreate_date }</td>
-							<td><img src="${ contextPath }/resources/images/member/edit.png" width="20" height="20" style="margin-left:10px; margin-top:10px;"></td>
-							<td><img src="${ contextPath }/resources/images/member/delete.png" width="20" height="20" style="margin-left:10px; margin-top:10px;"></td>
+							<td><img src="${ contextPath }/resources/images/member/edit.png" width="20" height="20" style="margin-left:10px; margin-top:10px;" id="edit"></td>
+							<td><img src="${ contextPath }/resources/images/member/delete.png" width="20" height="20" style="margin-left:10px; margin-top:10px;" id="delete"></td>
 						</tr>
 				</table>
 				</c:forEach>	
 				
+				<script>
 				
+				
+				
+				
+				
+				$(function(){
+					$("#tableArea tr").find("#edit").click(function(){
+						
+						var str = ""
+						var tdArr = new Array();
+						
+						var tr = $(this);
+						var td = tr.children();
+						
+						alert("edit");
+						
+						td.each(function(i){
+							tdArr.push(td.eq(i).text());
+						});
+						
+						var rid = $("#rid").val();
+						alert("rid"+rid);
+						
+					});
+				});
+				
+				$(function(){
+					$("#tableArea tr").find("#delete").click(function(){
+						
+						/* var str = ""
+						var tdArr = new Array();
+						
+						var tr = $(this);
+						var td = tr.children();
+						
+						alert("delete");
+						
+						td.each(function(i){
+							tdArr.push(td.eq(i).text());
+						}); */
+						
+						var rid = $("#rid").val();
+						var mid = $("#mid").val();
+					
+						alert("rid" + rid);
+						alert("mid" + mid);
+						
+						/* $.ajax({
+							url:"deleteReview.me",
+							type:"post",
+							data:{
+								rid:rid,
+								mid:mid
+								},
+							success:function(data){
+								alert("다녀옴!" + data);
+							},
+							error:function(){
+								alert("에러남!" + rid);
+							}
+						}); */
+						
+					});
+				});
+				
+				</script>
 				
 			</div>
 		</div>
@@ -163,13 +240,13 @@
 
 
 	<!-- Scripts -->
-	<script src="${contextPath }/resources/js/jquery.min.js"></script>
-	<script src="${contextPath }/resources/js/jquery.scrollex.min.js"></script>
-	<script src="${contextPath }/resources/js/jquery.scrolly.min.js"></script>
-	<script src="${contextPath }/resources/js/browser.min.js"></script>
-	<script src="${contextPath }/resources/js/breakpoints.min.js"></script>
-	<script src="${contextPath }/resources/js/util.js"></script>
-	<script src="${contextPath }/resources/js/main.js"></script>
+	<script src="${ contextPath }/resources/js/jquery.min.js"></script>
+	<script src="${ contextPath }/resources/js/jquery.scrollex.min.js"></script>
+	<script src="${ contextPath }/resources/js/jquery.scrolly.min.js"></script>
+	<script src="${ contextPath }/resources/js/browser.min.js"></script>
+	<script src="${ contextPath }/resources/js/breakpoints.min.js"></script>
+	<script src="${ contextPath }/resources/js/util.js"></script>
+	<script src="${ contextPath }/resources/js/main.js"></script>
 
 </body>
 </html>

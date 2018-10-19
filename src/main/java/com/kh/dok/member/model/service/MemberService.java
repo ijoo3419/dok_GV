@@ -56,7 +56,7 @@ public interface MemberService {
 	ArrayList<Board> selectMyAsk(Member m);
 	
 	int checkDupli(Movie m);
-
+	
 
 	//이진희 id찾기
 	String findId(Member m);
@@ -67,6 +67,11 @@ public interface MemberService {
 	int updatePwd(Member m);
 
 	int updateStatus(Member m);
+
+	
+	//리뷰 삭제
+	int deleteReview(Member m);
+
 	
 	//소진 mid찾기
 	String selectMid(String email);

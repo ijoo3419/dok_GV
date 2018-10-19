@@ -30,7 +30,7 @@ public class CinemaDaoImpl implements CinemaDao{
 		
 		cinemaDetail= (ArrayList)sqlSession.selectList("Cinema.cinemaDetail",id);
 		
-		
+		System.out.println("영화관 상세:  "+cinemaDetail);
 		return cinemaDetail;
 	}
 

@@ -92,7 +92,7 @@ img {
 			</section>
 			
 			<div class="table-wrapper">
-										<table>
+										<table id="tableArea">
 											<thead>
 												<tr>
 													<th>예매번호</th>
@@ -120,13 +120,13 @@ img {
 													<c:set var="status" value="${ bk.status }"/>
 													<c:choose>
 														<c:when test="${ status eq '취소가능_리뷰불가' }">
-															<td><img src="${ contextPath }/resources/images/member/delete.png" width="25" height="25" style="margin-left:10px; margin-top:10px;" id="cancel"></td>
+															<td><img id="cancel" src="${ contextPath }/resources/images/member/delete.png" width="25" height="25" style="margin-left:10px; margin-top:10px;"></td>
 														</c:when>
 														<c:when test="${ status eq '예매중' }">
 															<td></td>
 														</c:when>
 														<c:when test="${ status eq '취소불가_리뷰가능' }">
-															<td><img src="${ contextPath }/resources/images/member/rating.png" width="25" height="25" style="margin-left:10px; margin-top:10px;" id="review"></td>
+															<td><img id="review" src="${ contextPath }/resources/images/member/rating.png" width="25" height="25" style="margin-left:10px; margin-top:10px;"></td>
 														</c:when>
 													</c:choose>
 												</tr>
@@ -155,9 +155,49 @@ img {
 			
 		<script>
 		
-		$('#cancel').click(function(){
-			$('#myModal').show();
+		$(function(){
+			$("#tableArea tr").find("#cancel").click(function(){
+				
+				var str = ""
+				var tdArr = new Array();
+				
+				var tr = $(this);
+				var td = tr.children();
+				
+				alert("클릭");
+				
+				td.each(function(i){
+					tdArr.push(td.eq(i).text());
+				});
+				
+				alert("tdArr" + tdArr);
+				
+			});
 		});
+		
+		$(function(){
+			$("#tableArea tr").find("#review").click(function(){
+				
+				var str = ""
+				var tdArr = new Array();
+				
+				var tr = $(this);
+				var td = tr.children();
+				
+				alert("클릭");
+				
+				td.each(function(i){
+					tdArr.push(td.eq(i).text());
+				});
+				
+				alert("tdArr" + tdArr);
+				
+			});
+		});
+		
+		/* $('#cancel').click(function(){
+			$('#myModal').show();
+		}); */
       
  		function cancelBooking(){
  			alert("status 취소로 바꾸러 가기");

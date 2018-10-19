@@ -212,7 +212,7 @@ WHERE RNUM BETWEEN 7 AND 9
 	</select>
 	
 	<insert id="insertMovie">
-		INSERT INTO MOVIE VALUES('MO' || TO_CHAR(MOVIE_MOVIE_ID.NEXTVAL), #{movie_title}, #{movie_etitle}, #{movie_content}, #{open_date} , #{director_name}, #{production_com}, #{movie_age}, #{genre}, #{running_time}, #{movie_actor}, #{movie_type})
+		INSERT INTO MOVIE VALUES('MO' || TO_CHAR(MOVIE_MOVIE_ID.NEXTVAL), #{movie_title}, #{movie_etitle}, #{movie_content}, #{open_date} , #{director_name}, #{production_com}, #{movie_age}, #{genre}, #{runnig_time}, #{movie_actor}, #{movie_type})
 	</insert>
 	
 </mapper>

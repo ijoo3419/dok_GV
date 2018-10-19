@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.kh.dok.board.model.vo.Board;
+import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.movie.model.vo.Movie;
@@ -80,6 +82,22 @@ public interface MovieService {
 		ArrayList<MovieThumbnail> selectmovieone(MovieThumbnail msn);
 
 		//영화 등록
-		int inserMovie(MovieThumbnail msn);
+		int insertMovie(MovieThumbnail msn);
+		
+		//보드 검색
+		ArrayList<Board> selectBoardone(String id);
+
+		//보드등록
+		int insertBoard(MovieThumbnail msn, String id);
+		
+		//파일검색
+		ArrayList<BoardFile> selectBoardfile(String id1);
+
+		//파일 등록
+		int insertBoardfile(String originFileName, String changeName, String id1, String root1);
+
+		int insertBoardfile1(String originFileName, String changeName, String id1, String root1);
+
+		int insertBoardfile2(String originFileName, String changeName, String id1, String root1);
 		
 }

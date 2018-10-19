@@ -1,7 +1,8 @@
 package com.kh.dok.member.model.vo;
 
 public class MyReply implements java.io.Serializable {
-
+	
+	private String rid;
 	private String file_src;
 	private String movie_title;
 	private String grade_count;
@@ -10,14 +11,16 @@ public class MyReply implements java.io.Serializable {
 	private String rcreate_date;
 	private String division;
 	private String theater_name;
+	private String mid;
 	
 	public MyReply(){}
 
-	@Override
-	public String toString() {
-		return "MyReply [file_src=" + file_src + ", movie_title=" + movie_title + ", grade_count=" + grade_count
-				+ ", rcontent=" + rcontent + ", recommend_count=" + recommend_count + ", rcreate_date=" + rcreate_date
-				+ ", division=" + division + ", theater_name=" + theater_name + "]";
+	public String getRid() {
+		return rid;
+	}
+
+	public void setRid(String rid) {
+		this.rid = rid;
 	}
 
 	public String getFile_src() {
@@ -84,9 +87,25 @@ public class MyReply implements java.io.Serializable {
 		this.theater_name = theater_name;
 	}
 
-	public MyReply(String file_src, String movie_title, String grade_count, String rcontent, String recommend_count,
-			String rcreate_date, String division, String theater_name) {
+	public String getMid() {
+		return mid;
+	}
+
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
+
+	@Override
+	public String toString() {
+		return "MyReply [rid=" + rid + ", file_src=" + file_src + ", movie_title=" + movie_title + ", grade_count="
+				+ grade_count + ", rcontent=" + rcontent + ", recommend_count=" + recommend_count + ", rcreate_date="
+				+ rcreate_date + ", division=" + division + ", theater_name=" + theater_name + ", mid=" + mid + "]";
+	}
+
+	public MyReply(String rid, String file_src, String movie_title, String grade_count, String rcontent,
+			String recommend_count, String rcreate_date, String division, String theater_name, String mid) {
 		super();
+		this.rid = rid;
 		this.file_src = file_src;
 		this.movie_title = movie_title;
 		this.grade_count = grade_count;
@@ -95,6 +114,10 @@ public class MyReply implements java.io.Serializable {
 		this.rcreate_date = rcreate_date;
 		this.division = division;
 		this.theater_name = theater_name;
+		this.mid = mid;
 	}
+
+	
+	
 	
 }

@@ -8,6 +8,8 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dok.board.model.vo.Board;
+import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.movie.model.vo.Movie;
@@ -210,7 +212,68 @@ public class MovieDaoImpl implements MovieDao{
 
 	@Override
 	public int insertMovie(SqlSessionTemplate sqlSession, MovieThumbnail msn) {
-		return sqlSession.insert("MovieThumbnail.insertMovie", msn);
+		int result = sqlSession.insert("MovieThumbnail.insertMovie", msn);
+		
+		return result;
+	}
+
+	@Override
+	public ArrayList<Board> selectBoardone(SqlSessionTemplate sqlSession, String id) {
+		
+		ArrayList<Board> list1 = (ArrayList)sqlSession.selectList("Board.selectBoardone",id);
+		
+		return list1;
+	}
+
+	@Override
+	public int insertBoard(SqlSessionTemplate sqlSession, MovieThumbnail msn, String id) {
+		msn.setMovie_id(id);
+		
+		int result1 = sqlSession.insert("Board.insertBoard", msn);
+		
+		System.out.println("dao result1 : " + result1);
+		return result1;
+	}
+
+	@Override
+	public ArrayList<BoardFile> selectBoardFile(SqlSessionTemplate sqlSession, String id1) {
+		
+		ArrayList<BoardFile> list2 = (ArrayList)sqlSession.selectList("Board.selectfile", id1);
+		
+		return list2;
+	}
+
+	@Override
+	public int insertBoardfile(SqlSessionTemplate sqlSession, String originFileName, String changeName, String id1,
+			String root1) {
+		BoardFile f = new BoardFile();
+		f.setBoard_id(id1);
+		f.setOrigin_name(originFileName);
+		f.setEdit_name(changeName);
+		
+		return sqlSession.insert("Board.insertfile",f);
+	}
+
+	@Override
+	public int insertBoardfile1(SqlSessionTemplate sqlSession, String originFileName, String changeName, String id1,
+			String root1) {
+		BoardFile f = new BoardFile();
+		f.setBoard_id(id1);
+		f.setOrigin_name(originFileName);
+		f.setEdit_name(changeName);
+		
+		return sqlSession.insert("Board.insertfile1",f);
+	}
+
+	@Override
+	public int insertBoardfile2(SqlSessionTemplate sqlSession, String originFileName, String changeName, String id1,
+			String root1) {
+		BoardFile f = new BoardFile();
+		f.setBoard_id(id1);
+		f.setOrigin_name(originFileName);
+		f.setEdit_name(changeName);
+		
+		return sqlSession.insert("Board.insertfile2",f);
 	}
 	
 }
