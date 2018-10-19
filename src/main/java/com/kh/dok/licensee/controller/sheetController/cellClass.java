@@ -174,12 +174,13 @@ public class cellClass {
 	}
 	
 	//박지용 특정 셀값 수정하기
-	public void insertPayTurningCell(String[] arr, String name, String tableName, HttpServletRequest request){
+	public int insertPayTurningCell(String[] arr, String name, String tableName, HttpServletRequest request){
 
 		FileInputStream inputStream = null;
 		FileOutputStream outputStream = null;
 		XSSFWorkbook workbook = null;
 		XSSFCell cell;
+		int check = 1;
 
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		
@@ -194,18 +195,19 @@ public class cellClass {
 				cell = sheet.getRow(Integer.parseInt(arr[0])).getCell(Integer.parseInt(arr[1]));
 				
 				if(cell.getStringCellValue().equals("O")){
-					sheet.getRow(Integer.parseInt(arr[0])).getCell(Integer.parseInt(arr[1])).setCellValue('P');	//값 넣기
+					sheet.getRow(Integer.parseInt(arr[0])).getCell(Integer.parseInt(arr[1])).setCellValue("P");	//값 넣기
 				}
 				else if(cell.getStringCellValue().equals("P")){
-					System.out.println("이미 예약된 좌석입니다.");
+					check = 0;
 				}
 				else{
-					System.out.println("예약할 수 없는 좌석입니다.");
+					check = 0;
 				}
 				
 				outputStream = new FileOutputStream(filePath + "\\" + tableName +".xlsx");
 				workbook.write(outputStream);
 				outputStream.close();
+				
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -219,6 +221,8 @@ public class cellClass {
 			}
 			
 		}
+		
+		return check;
 	}
 
 

@@ -441,6 +441,15 @@ a{
 	transition-duration: .3s; 
 	margin-right:3px;
 }
+.checkbox-wrap .check-icon-pay  { 
+	display: inline-block; 
+	width: 30px; 
+	height: 18px; 
+	background: #D8D8D8; 
+	vertical-align: middle; 
+	transition-duration: .3s; 
+	margin-right:3px;
+}
 .checkbox-wrap input[type=checkbox] { 
 	display: none; 
 }
@@ -673,9 +682,11 @@ a{
 					
 					if(treePlue <= 1){
 						$("input[type='checkbox']").attr("disabled", false);
+						$(".checkNot").attr("disabled", true);
 						
 						if(treePlue < 1){
 							$("input[type='checkbox']").attr("disabled", false);
+							$(".checkNot").attr("disabled", true);
 							
 							$("input[type='checkbox']").off().on('click', function(){
 								++treePlue;
@@ -690,6 +701,7 @@ a{
 					
 					if(treePlue < 2){
 						$("input[type='checkbox']").attr("disabled", false);
+						$(".checkNot").attr("disabled", true);
 						
 						$("input[type='checkbox']").off().on('click', function(){
 							++treePlue;
@@ -704,6 +716,7 @@ a{
 					
 					if(treePlue < 3){
 						$("input[type='checkbox']").attr("disabled", false);
+						$(".checkNot").attr("disabled", true);
 						
 						$("input[type='checkbox']").off().on('click', function(){
 							++treePlue;
@@ -717,6 +730,7 @@ a{
 					
 					if(treePlue < 4){
 						$("input[type='checkbox']").attr("disabled", false);
+						$(".checkNot").attr("disabled", true);
 						
 						$("input[type='checkbox']").off().on('click', function(){
 							++treePlue;
@@ -903,8 +917,6 @@ a{
 					var price = $(".seatPay-price").find("#td-web-fontTitle").val();
 			       	var msg = $('.hiddenTurning').val();
 			       	
-			       	alert(excelSplitAjax);
-			       	
 					$.ajax({
 			    		url:"insertSeat.mo",
 			    		type:"post",
@@ -912,10 +924,20 @@ a{
 			    		data: {turningId: turningId, movieRoomId: movieRoomId, seatSplitAjax: seatSplitAjax, 
 			    			   userId: userId, price: price, excelSplitAjax: excelSplitAjax},
 			    		success:function(data){
-			    			console.log(data);
+			    			if(data == 0){
+			    				alert("이미 예약된 좌석입니다.");
+			    				$('#myModal3').trigger('click');
+			    				$("#myModal3").find(".close").click(function(){
+			    					alert("다시 예매 해주세요");
+			    				});
+			    			}
 			    		},
 			    		error:function(data){
 			    			alert("이미 예약된 좌석입니다.");
+			    			$('#myModal3').trigger('click');
+			    			$("#myModal3").find(".close").click(function(){
+			    				alert("다시 예매 해주세요");
+			    			});
 			    		}
 			    	});
 			    	
@@ -1099,7 +1121,7 @@ a{
 							 	});
 								
 								$(".movieTimeMainDiv a").click(function(){
-									
+									$("select option[value='0']").attr("selected", true);
 									
 									var movieTitle = $(this).find('.movie_title').text();
 									var movieType = $(this).find('.movie_type').text();
@@ -1166,6 +1188,15 @@ a{
 						    				for(var y = 0; y < data[i].length; y++){
 						    					if(data[i][y] == 'O'){
 						    						var $checkBox = $("<label class='checkbox-wrap'><input type='checkbox' name='checkbox' value='"+ i + "/" + y +"'><i class='check-icon'><font class='checkFont'>" + String.fromCharCode(rowCheck) + "" + numberCheck + "</font></i></label>");
+						    						$div.append($checkBox);
+						    						++numberCheck;
+						    						rowCheckIf = 1;
+						    						rowCheckIfTwo = 1;
+						    						if(y == 14){
+						    							$div.append("<br>");
+						    						}
+						    					}else if(data[i][y] == 'P'){
+						    						var $checkBox = $("<label class='checkbox-wrap'><input type='checkbox' name='checkbox' value='"+ i + "/" + y +"' class='checkNot'><i class='check-icon-pay'><font class='checkFont'>X</font></i></label>");
 						    						$div.append($checkBox);
 						    						++numberCheck;
 						    						rowCheckIf = 1;

@@ -9,8 +9,8 @@
 <style>
 
 img {
-		cursor: pointer;
-	}
+      cursor: pointer;
+   }
 
 .modal {
             display: none; /* Hidden by default */
@@ -42,23 +42,24 @@ img {
 }
 
 
-	
+   
 </style>
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="${contextPath }/resources/css/main.css" />
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<!-- <script type="text/javascript" src="/Example.Modal.js"></script> -->
-		<script src="${ contextPath }/resources/js/jquery.min.js"></script>
-	<script src="${ contextPath }/resources/js/jquery.scrollex.min.js"></script>
-	<script src="${ contextPath }/resources/js/jquery.scrolly.min.js"></script>
-	<script src="${ contextPath }/resources/js/browser.min.js"></script>
-	<script src="${ contextPath }/resources/js/breakpoints.min.js"></script>
-	<script src="${ contextPath }/resources/js/util.js"></script>
-	<script src="${ contextPath }/resources/js/main.js"></script>
+   src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <!-- <script type="text/javascript" src="/Example.Modal.js"></script> -->
+      <script src="${ contextPath }/resources/js/jquery.min.js"></script>
+   <script src="${ contextPath }/resources/js/jquery.scrollex.min.js"></script>
+   <script src="${ contextPath }/resources/js/jquery.scrolly.min.js"></script>
+   <script src="${ contextPath }/resources/js/browser.min.js"></script>
+   <script src="${ contextPath }/resources/js/breakpoints.min.js"></script>
+   <script src="${ contextPath }/resources/js/util.js"></script>
+   <script src="${ contextPath }/resources/js/main.js"></script>
 </head>
+
 	<body class="is-preload">
 			
 			<%@ include file="../common/headBar.jsp"%>
@@ -198,31 +199,57 @@ img {
 		/* $('#cancel').click(function(){
 			$('#myModal').show();
 		}); */
+
       
- 		function cancelBooking(){
- 			alert("status 취소로 바꾸러 가기");
- 			
- 			var mid = "${ sessionScope.loginUser.mid }";
- 			var resId = $('.table-wrapper').find('table').find('tbody').eq(0).find('tr').text();
- 			
- 			alert(mid + resId);
- 				
- 			/* $.ajax({
- 				url:"deleteSeat.mo", 
-				type:"post",
-				data:{fromDate:fromDate},
-				success:function(data){
-					
-				},
-				error:function(){
-					console.log("에러!");
-				}
- 			}); */
- 		}
- 		
- 		function cancelCancel(){
- 			$('#myModal').hide();
- 		}
+      $(function(){
+         $("#tableArea tr").find("#cancel").click(function(){
+            
+            var str = ""
+            var tdArr = new Array();
+            
+            var tr = $(this);
+            var td = tr.children();
+            
+            var payNumber = $(this).parent().parent().find('td').eq(0).text(); //예매번호 가져오기(박지용)
+            
+            //환불 신청 Ajax(박지용)
+	         $.ajax({
+	            url:"updateRefund.mo", 
+	           type:"post",
+	           data:{payNumber:payNumber},
+	           success:function(data){
+	              
+	           },
+	           error:function(){
+	              console.log("에러!");
+	           }
+	         });
+            
+            /* td.each(function(i){
+               tdArr.push(td.eq(i).text());
+            });
+            
+            alert("tdArr" + tdArr); */
+            
+         });
+      });
+      
+      /* $('#cancel').click(function(){
+         $('#myModal').show();
+      }); */
+      
+       function cancelBooking(){
+          alert("status 취소로 바꾸러 가기");
+          
+          var mid = "${ sessionScope.loginUser.mid }";
+          var resId = $('.table-wrapper').find('table').find('tbody').eq(0).find('tr').text();
+          
+          alert(mid + resId);
+       }
+       
+       function cancelCancel(){
+          $('#myModal').hide();
+       }
         
     </script>
 
@@ -230,5 +257,5 @@ img {
 
 
 
-	</body>
+   </body>
 </html>
