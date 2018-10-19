@@ -239,7 +239,7 @@
 img.ui-datepicker-trigger {
 	margin-left:5px !important; vertical-align:middle !important; cursor:pointer !important;
 }
-#fromDate, #toDate {
+#open_date, #toDate {
    	width:300px !important;
    	height:50px !important;
 }
@@ -770,7 +770,7 @@ img.ui-datepicker-trigger {
 					<!-- Break -->
 				<!-- 	<div class="col-12"> -->
 					
-					<input type="text" name="fromDate" id="fromDate" class="web-font">
+					<input type="text" name="open_date" id="open_date" class="web-font">
 					
 						<!-- <textarea name="theaterRoot" id="demo-message"
 							placeholder="찾아오는 길을 입력해 주세요" rows="6"></textarea> -->
@@ -779,7 +779,7 @@ img.ui-datepicker-trigger {
 <script>
 $( function() {
 	$.datepicker.setDefaults($.datepicker.regional['ko']);
-  $( '#fromDate' ).datepicker({
+  $( '#open_date' ).datepicker({
 	  showOn : "both", // 달력을 표시할 타이밍 (both: focus or button)
 		buttonImage : "${ contextPath }/resources/images/date.png", // 버튼 이미지
 		buttonImageOnly : true, // 버튼 이미지만 표시할지 여부
