@@ -313,6 +313,17 @@ public class AdminController {
 		return "admin/adminPage";
 	}
 
+	//사용자 맞춤 영화 추천
+	@RequestMapping("recomend.ad")
+	public String recomend(Model model,String mid){
+		String tab = "tab-8";
 	
+		model.addAttribute("tab", tab);
+		
+		ArrayList<String> genreList = as.selectGenre(mid);
+		
+		model.addAttribute("genreList", genreList);
+		return "admin/adminPage";
+	}
 }
 
