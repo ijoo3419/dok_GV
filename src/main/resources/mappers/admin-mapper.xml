@@ -238,10 +238,10 @@
 		VALUES(VISIT_HISTORY_VISIT_ID.NEXTVAL,#{visit_count},#{visit_time}, 'record')
 	</insert>
 	
-	<insert id="insertgar" parameterType="date">
+	<!-- <insert id="insertgar" parameterType="date">
 		INSERT INTO VISIT
 		VALUES('gValue',#{t})
-	</insert>
+	</insert> -->
 	
 	<select id="selectTime" resultType="String">
 		SELECT TO_CHAR(SYSDATE,'YYYYMMDD')
@@ -287,7 +287,4 @@
 		FROM RESERVATION
 	</select>
 	
-	<select id="selectGenre" parameterType="String" resultType="String">
-		SELECT GENRE
-	</select>
 </mapper>

@@ -8,6 +8,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.kh.dok.admin.model.vo.UserMovie;
 import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.member.model.dao.MemberDao;
 import com.kh.dok.member.model.exception.LoginException;
@@ -258,4 +259,33 @@ public class MemberServiceImpl implements MemberService{
 		return authNumOrig;
 	}
 
+	@Override
+	public String selectMid(String email) {
+		
+		return md.selectMid(sqlSession,email);
+	}
+
+	@Override
+	public ArrayList<String> selectUserMovie(String mid) {
+		
+		return md.selectUserMovie(sqlSession,mid);
+	}
+
+	
+
+	@Override
+	public ArrayList<String> selectAllMid() {
+		
+		return md.selectAllMid(sqlSession);
+	}
+
+	@Override
+	public ArrayList<UserMovie> selectAllUserMovie(ArrayList<String> midList) {
+		
+		return md.selectAllUserMovie(sqlSession,midList);
+	}
+
+	
+	
+	
 }

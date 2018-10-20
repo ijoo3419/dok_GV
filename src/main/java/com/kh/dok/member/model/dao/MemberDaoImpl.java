@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dok.admin.model.vo.UserMovie;
 import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.member.model.vo.BookingHistory;
 import com.kh.dok.member.model.vo.Member;
@@ -219,6 +220,65 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.update("Member.updateStatus", m);
 
 	}
+
+
+	@Override
+	public String selectMid(SqlSessionTemplate sqlSession, String email) {
+		
+		return sqlSession.selectOne("Member.selectMid", email);
+	}
+
+
+	@Override
+	public ArrayList<String> selectUserMovie(SqlSessionTemplate sqlSession, String mid) {
+		
+		return (ArrayList)sqlSession.selectList("Member.selectUserMovie",mid);
+	}
+
+
+	@Override
+	public ArrayList<String> selectAllMid(SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("Member.selectAllMid");
+	}
+
+
+	@Override
+	public ArrayList<UserMovie> selectAllUserMovie(SqlSessionTemplate sqlSession, ArrayList<String> midList) {
+		ArrayList<UserMovie> umList = new ArrayList<UserMovie>();
+		
+		
+		for(int i=0;i<midList.size();i++){
+			UserMovie um = new UserMovie();
+			/*um.setMid(midList.get(i));
+			ArrayList<String> movieList = (ArrayList)sqlSession.selectList("Member.selectUserMovie",midList.get(i));
+			if(movieList != null){
+			um.setMovieId(movieList);
+			}else{
+				um.setMovieId(moviezero);
+			}*/
+			um.setMid(midList.get(i));
+			ArrayList<String> movieList = (ArrayList)sqlSession.selectList("Member.selectUserMovie",midList.get(i));
+			if(movieList.size() != 0){
+				um.setMovieId(movieList);
+			}else{
+				ArrayList<String> moviezero = new ArrayList<String>();
+				String history = "nohistory";
+				moviezero.add(history);
+				um.setMovieId(moviezero);
+			}
+			System.out.println(um);
+			umList.add(um);
+		}
+		System.out.println(umList);
+		return umList;
+	}
+
+
+	
+
+
+	
 
 	
 

@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.dok.admin.model.vo.UserMovie;
 import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.member.model.exception.LoginException;
 import com.kh.dok.member.model.service.MemberService;
@@ -138,7 +139,14 @@ public class MemberController {
       try {
     	  
 		model.addAttribute("loginUser", ms.loginMember(m));
-		
+		String email = m.getEmail();
+		String mid = ms.selectMid(email);
+		ArrayList<String> mlist = ms.selectUserMovie(mid);
+		ArrayList<String> midList = ms.selectAllMid();
+		ArrayList<UserMovie> allUserMovie = ms.selectAllUserMovie(midList);
+		System.out.println(mlist);
+		System.out.println(midList);
+		System.out.println(allUserMovie);
 		return "main/main";
 		
       	} catch (LoginException e) {

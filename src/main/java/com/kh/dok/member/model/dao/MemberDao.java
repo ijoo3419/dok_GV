@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.kh.dok.admin.model.vo.UserMovie;
 import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.member.model.vo.BookingHistory;
 import com.kh.dok.member.model.vo.Member;
@@ -68,6 +69,17 @@ public interface MemberDao {
 	int updatePwd(SqlSessionTemplate sqlSession, Member m);
 
 	int updateStatus(SqlSessionTemplate sqlSession, Member m);
+	
+	//소진 추천영화
+	String selectMid(SqlSessionTemplate sqlSession, String email);
+
+	//사용자 영화 찾기
+	ArrayList<String> selectUserMovie(SqlSessionTemplate sqlSession, String mid);
+	//모든 유저 본 영화 찾기
+	ArrayList<UserMovie> selectAllUserMovie(SqlSessionTemplate sqlSession, ArrayList<String> midList);
+	
+	//모든 유저 mid찾기
+	ArrayList<String> selectAllMid(SqlSessionTemplate sqlSession);
 
 
      

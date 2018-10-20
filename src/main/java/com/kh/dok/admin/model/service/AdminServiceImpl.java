@@ -153,11 +153,5 @@ public class AdminServiceImpl implements AdminService{
 		return ad.countBook(sqlSession);
 	}
 
-	@Override
-	public ArrayList<String> selectGenre(String mid) {
-		
-		return ad.selectGenre(mid,sqlSession);
-	}
-
 	
 }

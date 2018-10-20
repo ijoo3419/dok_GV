@@ -292,14 +292,5 @@ public class AdminDaoImpl implements AdminDao{
 
 	}
 
-	@Override
-	public ArrayList<String> selectGenre(String mid, SqlSessionTemplate sqlSession) {
-		
-		ArrayList<String> genreList = (ArrayList)sqlSession.selectList("Admin.selectGenre",mid);
-		System.out.println(genreList);
-		return null;
-	}
-
-
 
 }
