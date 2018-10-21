@@ -76,10 +76,16 @@
 						<input type="file" name="file">
 					</div>
 				<!-- <button class="button"><a href="insertNotice.bo">공지등록</a></button> -->
-				<button type="submit" class="button">공지등록</button>
+				<button type="submit" class="button" onclick="insertNotice();">공지등록</button>
 				
 				</div>
 				</form>
+				
+				<script>
+					function insertNotice(){
+						location.href = "insertNotice.bo";
+					}
+				</script>
 				
 			</article>
 		</div>

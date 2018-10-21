@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.board.model.vo.BoardFile;
+import com.kh.dok.board.model.vo.BoardNBoardFile;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.movie.model.vo.Movie;
@@ -85,7 +86,7 @@ public interface MovieService {
 		int insertMovie(MovieThumbnail msn);
 		
 		//보드 검색
-		ArrayList<Board> selectBoardone(String id);
+		ArrayList<BoardNBoardFile> selectBoardone(String id);
 
 		//보드등록
 		int insertBoard(MovieThumbnail msn, String id);
@@ -94,11 +95,7 @@ public interface MovieService {
 		ArrayList<BoardFile> selectBoardfile(String id1);
 
 		//파일 등록
-		int insertBoardfile(String originFileName, String changeName, String id1, String root1);
-
-		int insertBoardfile1(String originFileName, String changeName, String id1, String root1);
-
-		int insertBoardfile2(String originFileName, String changeName, String id1, String root1);
+		int insertBoardfile(BoardFile bf);
 		
 		//박지용 기본키 가져오기
 		ArrayList<Movie> selectPrimariKey(String imp);

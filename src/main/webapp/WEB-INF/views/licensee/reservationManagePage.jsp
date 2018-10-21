@@ -111,36 +111,24 @@ progress {
 </noscript>
 </head>
 <body class="is-preload">
-	<c:import url="../common/headBar.jsp" />
 
+	<%@ include file="../common/headBar.jsp"%>
 
-	<!-- Wrapper -->
-	<div id="wrapper" class="fade-in">
-		<!-- Intro -->
+<form action="play.li" method="post" name="frm">
 
-
-		<!-- <div id="intro">
-						<h1>This is<br />
-						Massively</h1>
-						<p>A free, fully responsive HTML5 + CSS3 site template designed by <a href="https://twitter.com/ajlkn">@ajlkn</a> for <a href="https://html5up.net">HTML5 UP</a><br />
-						and released for free under the <a href="https://html5up.net/license">Creative Commons license</a>.</p>
-						<ul class="actions">
-							<li><a href="#header" class="button icon solo fa-arrow-down scrolly">Continue</a></li>
-						</ul> 
-						
-					</div>
-			 -->
-		<!-- Header -->
-
-		<header id="header">
-			<!-- <a href="index.html" class="logo">Massively</a> -->
+		<input type="hidden" value=${ sessionScope.loginUser.mid } name="mid" />
+		
+		
+			<div id="wrapper" class="fade-in">
+		
+	<header id="header">
 		</header>
 
 		<!-- Nav -->
 	<c:set var="mid" value="${ loginUser.mid }" scope="session"/>
 	<nav id="nav">
 			<ul class="links">
-				<li><a href="play.li"><font size="4">상영등록</font></a></li>
+				<li><a href="javascript:play();"><font size="4">상영등록</font></a></li>
 				<li><a href="theater.li"><font size="4">영화관등록</font></a></li>
 				<li><a href="movieRoom.li"><font size="4">상영관등록</font></a></li>
 				<li><a href="stats.li"><font size="4">통계/관리</font></a></li>
@@ -149,6 +137,7 @@ progress {
 				<li><a href="inquire.li"><font size="4">문의내역</font></a></li>
 			</ul>
 		</nav>
+</form>
 
 		<!-- Main -->
 		<div id="main">
@@ -293,8 +282,16 @@ progress {
 
 			</article>
 		</div>
-	</div>
 
+<script>
+		function play(){
+			document.frm.method="post";
+			document.frm.action="play.li";
+			document.frm.submit();
+			
+		}
+	</script>
+	
 
 	<!-- Scripts -->
 	<script src="assets/js/jquery.min.js"></script>

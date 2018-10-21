@@ -9,6 +9,8 @@ public interface CinemaService {
 		ArrayList<Cinema> selectCinema(Cinema c);
 
 		ArrayList<Cinema> selectCinemaDetail(Cinema ca);
+
+		ArrayList<Cinema> selectCinemaImageCut(Cinema ca);
 		
 
 }

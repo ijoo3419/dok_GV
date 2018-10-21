@@ -1,6 +1,9 @@
+
 package com.kh.dok.movie.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -14,16 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.google.gson.Gson;
 import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.board.model.vo.BoardFile;
+import com.kh.dok.board.model.vo.BoardNBoardFile;
 import com.kh.dok.common.CommonUtils;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.common.Pagination;
 import com.kh.dok.licensee.controller.sheetController.cellClass;
-import com.kh.dok.movie.model.service.IamportClient;
 import com.kh.dok.movie.model.service.MovieService;
-import com.kh.dok.movie.model.vo.CancelData;
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieThumbnail;
 
@@ -242,7 +243,7 @@ public class MovieController {
 		Movie m = new Movie();
 		m.setMovieroom_id(movieRoomId);
 		m.setTurning_id(turningId);
-		m.setMsg(msgSplit[0]);
+		m.setMsg(msgSplit[3]);
 		m.setMid(userId);
 		
 		//예매 ID 가져오기
@@ -252,7 +253,7 @@ public class MovieController {
 			   System.out.println(pay.get(index).getReservation_id());
 			   
 			   m.setReservation_id(pay.get(index).getReservation_id());
-			   m.setMsg(msgSplit[0]);
+			   m.setMsg(msgSplit[3]);
 			   
 			   check = ms.insertPay(m);
 			   checkTwo = ms.updateRes(m);
@@ -266,49 +267,22 @@ public class MovieController {
 	
 	//박지용 @ResponseBody를 이용한 ajax 처리
 	@RequestMapping(value="updateRefund.mo")
-	public @ResponseBody String deleteSeat(@RequestParam String payNumber){
-		int check = 0; //체크
-		String msg = "";
-		String imp = payNumber; //결제번호
-		
-		CancelData cd = null;
-		
-		cd = new CancelData(imp,true);
-		
-		IamportClient ic = new IamportClient();
-		
-		try {
-			ic.cancelPayment(cd);//환불 성공
-			check = 1;
-		} catch (Exception e) {
-			msg = "환불에 실패하였습니다. 결제 번호를 다시 한번 확인해주세요";
-			e.printStackTrace();
-		}
-		
-		if(check == 1){
-			ArrayList<Movie> primaryKey = ms.selectPrimariKey(imp);
-			
-			for(int i = 0; i < primaryKey.size(); i++){
-				String pay_id = primaryKey.get(i).getPay_id();
-				check = ms.updateRefundPay(pay_id);
-				
-				if(check > 0){
-					String res_id = primaryKey.get(i).getReservation_id();
-					check = ms.updateRefundRes(res_id);
-				}
-				
-				if(check > 0){
-					String seat_id = primaryKey.get(i).getSeat_id();
-					check = ms.updateRefundSeat(seat_id);
-				}
-			}
-			
-			if(check > 0){
-				msg = "환불이 성공적으로 처리되었습니다.";
-			}
-		}
+	public @ResponseBody String deleteSeat(@RequestParam String mid){
 
-		return msg;
+		/*System.out.println("영화관 출력하기: " + movieRoomIdVal);
+
+		String name = movieRoomIdVal;
+
+		System.out.println(name);
+		String[][] arr = new cellClass().test(name, request);
+
+		for(String[] str : arr){
+			for(String s : str)
+				System.out.print(s);
+			System.out.println();
+		}*/
+
+		return "arr";
 	}
 	
 	@RequestMapping("movieInsert.mo")
@@ -337,10 +311,6 @@ public class MovieController {
 		ArrayList<MovieThumbnail> list = ms.selectmovieone(msn);
 		
 		/*msn.setOpen_date(fromDate);*/
-		
-		String ext = null;
-		String changeName = null;
-		String ichangeName = null;
 			if(list.isEmpty()){
 				int result = ms.insertMovie(msn);
 				System.out.println("result : " + result);
@@ -349,7 +319,7 @@ public class MovieController {
 					if(list != null){
 						String id = list.get(0).getMovie_id();
 						System.out.println(id);
-						ArrayList<Board> list1 = ms.selectBoardone(id);
+						ArrayList<BoardNBoardFile> list1 = ms.selectBoardone(id);
 						System.out.println("list1: " + list1);
 						if(list1.isEmpty()){
 							int result1 = ms.insertBoard(msn, id);
@@ -361,97 +331,102 @@ public class MovieController {
 									String id1 = list1.get(0).getBoard_id();
 									ArrayList<BoardFile> list2 = ms.selectBoardfile(id1);
 									if(list2.isEmpty()){
-										if(photo1 != null){
-											String originFileName = photo1.getOriginalFilename();
-											ext = originFileName.substring(originFileName.lastIndexOf("."));
-											changeName = CommonUtils.getRandomString();
-											ichangeName = changeName.substring(originFileName.lastIndexOf("."));
-											try {
-												photo1.transferTo(new File(filePath + "\\" + changeName + ext));
-												String root1 =filePath + "\\" + changeName + ext;
-												ms.insertBoardfile(originFileName, changeName, id1, root1);
-											} catch (Exception e ) {
-												new File(filePath + "\\" + changeName + ext).delete();
-												
-												System.out.println("실패하면 여기로");
-												model.addAttribute("msg", "영화 추가 실패!");
-												
-												return "common/errorPage";
+										BoardFile bf = new BoardFile();
+										try{
+											 if(photo1 != null){
+												 String originFileName = photo1.getOriginalFilename();
+												 String ext = originFileName.substring(originFileName.lastIndexOf("."));
+												 String	changeName = CommonUtils.getRandomString();
+												 String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
+												 String changeNmae1 = changeName + ext;
+												 
+												 bf.setBoard_id(id1);
+												 bf.setOrigin_name(originFileName);
+												 bf.setEdit_name(changeNmae1);
+												 bf.setFile_src(filePath);
+												 bf.setFile_level("1");
+												 
+												 photo1.transferTo(new File(filePath + "\\" + changeName + ext));
+												 ms.insertBoardfile(bf);
+											 }
+											 
+											 if(photo2 !=null){
+													String originFileName = photo2.getOriginalFilename();
+													String ext = originFileName.substring(originFileName.lastIndexOf("."));
+													String changeName = CommonUtils.getRandomString();
+													String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
+													String changeNmae1 = changeName + ext;
+													
+													bf.setBoard_id(id1);
+													bf.setOrigin_name(originFileName);
+													bf.setEdit_name(changeNmae1);
+													bf.setFile_src(filePath);
+													bf.setFile_level("2");
+													photo2.transferTo(new File(filePath + "\\" + changeName + ext));
+														
+													ms.insertBoardfile(bf);
 											}
 											
-											
-										}else if(photo2 !=null){
-											String originFileName = photo2.getOriginalFilename();
-											ext = originFileName.substring(originFileName.lastIndexOf("."));
-											changeName = CommonUtils.getRandomString();
-											ichangeName = changeName.substring(originFileName.lastIndexOf("."));
-											try {
-												photo2.transferTo(new File(filePath + "\\" + changeName + ext));
-												
-											} catch (Exception e ) {
-												new File(filePath + "\\" + changeName + ext).delete();
-												
-												System.out.println("실패하면 여기로");
-												model.addAttribute("msg", "영화 추가 실패!");
-												
-												return "common/errorPage";
+											 if(photo3 !=null){
+													String originFileName = photo3.getOriginalFilename();
+													String ext = originFileName.substring(originFileName.lastIndexOf("."));
+													String changeName = CommonUtils.getRandomString();
+													String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
+													String changeNmae1 = changeName + ext;
+													
+													bf.setBoard_id(id1);
+													bf.setOrigin_name(originFileName);
+													bf.setEdit_name(changeNmae1);
+													bf.setFile_src(filePath);
+													bf.setFile_level("2");
+													
+													photo3.transferTo(new File(filePath + "\\" + changeName + ext));
+														
+													ms.insertBoardfile(bf);
+													
 											}
-											String root1 =filePath + "\\" + changeName + ext;
-											ms.insertBoardfile1(originFileName, changeName, id1, root1);
-										}else if(photo3 !=null){
-											String originFileName = photo3.getOriginalFilename();
-											ext = originFileName.substring(originFileName.lastIndexOf("."));
-											changeName = CommonUtils.getRandomString();
-											ichangeName = changeName.substring(originFileName.lastIndexOf("."));
-											try {
-												photo3.transferTo(new File(filePath + "\\" + changeName + ext));
-												String root1 =filePath + "\\" + changeName + ext;
-												ms.insertBoardfile1(originFileName, changeName, id1, root1);
-											} catch (Exception e) {
-												new File(filePath + "\\" + changeName + ext).delete();
-												
-												System.out.println("실패하면 여기로");
-												model.addAttribute("msg", "영화 추가 실패!");
-												
-												return "common/errorPage";
+											 
+											 if(photo4 !=null){
+													String originFileName = photo4.getOriginalFilename();
+													String ext = originFileName.substring(originFileName.lastIndexOf("."));
+													String changeName = CommonUtils.getRandomString();
+													String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
+													String changeNmae1 = changeName + ext;
+													
+													bf.setBoard_id(id1);
+													bf.setOrigin_name(originFileName);
+													bf.setEdit_name(changeNmae1);
+													bf.setFile_src(filePath);
+													bf.setFile_level("2");
+													
+													photo4.transferTo(new File(filePath + "\\" + changeName + ext));
+														
+													ms.insertBoardfile(bf); 
+											 }
+											 
+											 if(video1 !=null){
+													String originFileName = video1.getOriginalFilename();
+													String ext = originFileName.substring(originFileName.lastIndexOf("."));
+													String changeName = CommonUtils.getRandomString();
+													String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
+													String changeNmae1 = changeName + ext;
+													
+													bf.setBoard_id(id1);
+													bf.setOrigin_name(originFileName);
+													bf.setEdit_name(changeNmae1);
+													bf.setFile_src(filePath);
+													bf.setFile_level("3");
+													
+													video1.transferTo(new File(filePath + "\\" + changeName + ext));
+													
+													ms.insertBoardfile(bf);
 											}
+										}catch(Exception e){
+											System.out.println("실패하면 여기로");
+									         model.addAttribute("msg", "영화이미지 추가 실패!");
+									         
+									         return "common/errorPage";
 										}
-										else if(photo4 !=null){
-											String originFileName = photo4.getOriginalFilename();
-											ext = originFileName.substring(originFileName.lastIndexOf("."));
-											changeName = CommonUtils.getRandomString();
-											ichangeName = changeName.substring(originFileName.lastIndexOf("."));
-											try {
-												photo4.transferTo(new File(filePath + "\\" + changeName + ext));
-												String root1 =filePath + "\\" + changeName + ext;
-												ms.insertBoardfile1(originFileName, changeName, id1, root1);
-											} catch (Exception e) {
-												new File(filePath + "\\" + changeName + ext).delete();
-												
-												System.out.println("실패하면 여기로");
-												model.addAttribute("msg", "영화 추가 실패!");
-												
-												return "common/errorPage";
-											}
-										}
-										else if(video1 !=null){
-											String originFileName = video1.getOriginalFilename();
-											ext = originFileName.substring(originFileName.lastIndexOf("."));
-											changeName = CommonUtils.getRandomString();
-											ichangeName = changeName.substring(originFileName.lastIndexOf("."));
-											try {
-												video1.transferTo(new File(filePath + "\\" + changeName + ext));
-												String root1 =filePath + "\\" + changeName + ext;
-												ms.insertBoardfile2(originFileName, changeName, id1, root1);
-											} catch (Exception e) {
-												new File(filePath + "\\" + changeName + ext).delete();
-												
-												System.out.println("실패하면 여기로");
-												model.addAttribute("msg", "영화 추가 실패!");
-												
-												return "common/errorPage";
-											}
-									}
 								}
 							}
 						}
@@ -469,3 +444,4 @@ public class MovieController {
 	
 	}
 }
+
