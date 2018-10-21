@@ -567,7 +567,7 @@ public class MemberController {
 		 Member m = (Member)request.getSession().getAttribute("loginUser");
 		 
 		 ArrayList<BookingHistory> bookingHistView = ms.selectBookingHist(m);
-		 ArrayList<BookingHistory> list = new ArrayList<BookingHistory>();
+		/* ArrayList<BookingHistory> list = new ArrayList<BookingHistory>();
 		 for(int i = 0; i < bookingHistView.size(); i++){
 			 if(i == 0){
 				 BookingHistory b = new BookingHistory();
@@ -601,8 +601,8 @@ public class MemberController {
 			 
 		 }
 		 
-		 System.out.println(list);
-		 model.addAttribute("bookingHistView", list);
+		 System.out.println(list);*/
+		 model.addAttribute("bookingHistView", bookingHistView);
 		
 	    return "member/bookingHist";
 	 }
@@ -625,14 +625,21 @@ public class MemberController {
 	  //내가 쓴 리뷰 삭제
 	  @ResponseBody
 	  @RequestMapping("deleteReview.me")
-	  public int deleteReview(Model model, HttpServletRequest request, Member m){
-		  
-		  System.out.println("ㅇㅁㅇㅁ뉴ㅠㅠㅠㅠ" + m);
+	  public int deleteReview(Member m){
 		  
 		  int result = ms.deleteReview(m);
 		  
 		  return result;
 		  
+	  }
+	  
+	  //내가 쓴 리뷰 수정
+	  @ResponseBody
+	  @RequestMapping("updateReview.me")
+	  public int updateReview(MyReply m){
+		  System.out.println(m);
+		  int result = ms.updateReview(m);
+		return result;
 	  }
 	  
 

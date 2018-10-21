@@ -57,4 +57,12 @@
 	AND RID = #{ rid }
 	</update>
 	
+	<!-- 리뷰 수정 -->
+	<update id="updateReview">
+	UPDATE REPLY
+	SET RCONTENT = #{ rcontent }
+	WHERE RWRITER = #{ mid }
+	AND RID = #{ rid }
+	</update>
+	
 </mapper>

@@ -293,6 +293,13 @@ public class MemberServiceImpl implements MemberService{
 		
 		return md.selectAllUserMovie(sqlSession,midList);
 	}
+	
+	//리뷰 수정
+	@Override
+	public int updateReview(MyReply m) {
+		System.out.println("서비스에 담긴 m" + m);
+		return md.updateReview(sqlSession, m);
+	}
 
 	@Override
 	public ArrayList selectRecommend(ArrayList<String> fourCount) {

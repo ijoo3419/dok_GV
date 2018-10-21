@@ -71,25 +71,27 @@ public interface MemberService {
 	
 	//리뷰 삭제
 	int deleteReview(Member m);
+	
+	//리뷰 수정
+	int updateReview(MyReply m);
 
 	
 	//소진 mid찾기
 	String selectMid(String email);
 
-	
-
-	
-	
 	//소진 전체 MID 조회
 	ArrayList<String> selectAllMid();
 
 	ArrayList<UserMovie> selectAllUserMovie(ArrayList<String> midList);
 
 	ArrayList<String> selectUserMovie(String mid);
+
+
 	
 	//소진 추천 영화 조회
 	ArrayList selectRecommend(ArrayList<String> fourCount);
 	
+
 
 
 
