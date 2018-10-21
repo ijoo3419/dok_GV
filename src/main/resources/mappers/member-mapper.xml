@@ -208,6 +208,6 @@
 	<select id="selectRecommend" resultType="String" parameterType="String">
 		SELECT BF.ORIGIN_NAME
 		FROM BOARD B,BOARD_FILE BF
-		WHERE B.BOARD_ID = BF.BOARD_ID <!-- AND B.MOVIE_ID = #{movie_id} -->
+		WHERE B.BOARD_ID = BF.BOARD_ID AND B.MOVIE_ID = #{pmovie}
 	</select>
 </mapper>
