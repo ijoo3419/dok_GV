@@ -92,11 +92,11 @@ public interface MovieDao {
 	int insertBoardfile(SqlSessionTemplate sqlSession, String originFileName, String changeName, String id1,
 			String root1);
 
-	int insertBoardfile1(SqlSessionTemplate sqlSession, String originFileName, String changeName, String id1,
-			String root1);
+	/*int insertBoardfile1(SqlSessionTemplate sqlSession, String originFileName, String changeName, String id1,
+			String root1);*/
 
-	int insertBoardfile2(SqlSessionTemplate sqlSession, String originFileName, String changeName, String id1,
-			String root1);
+	/*int insertBoardfile2(SqlSessionTemplate sqlSession, String originFileName, String changeName, String id1,
+			String root1);*/
 
 	//박지용 기본키 가져오기
 	ArrayList<Movie> selectPrimaryKey(SqlSessionTemplate sqlSession, String imp);

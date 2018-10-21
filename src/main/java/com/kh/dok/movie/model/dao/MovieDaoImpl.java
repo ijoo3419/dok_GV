@@ -275,5 +275,13 @@ public class MovieDaoImpl implements MovieDao{
 		
 		return sqlSession.update("Movie.updateRefundSeat", seat_id);
 	}
+
+	@Override
+	public int insertBoardfile(SqlSessionTemplate sqlSession, String originFileName, String changeName, String id1,
+			String root1) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	
 }

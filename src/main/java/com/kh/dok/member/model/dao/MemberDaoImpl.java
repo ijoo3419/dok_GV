@@ -285,7 +285,9 @@ public class MemberDaoImpl implements MemberDao {
 	public int updateReview(SqlSessionTemplate sqlSession, MyReply m) {
 		return sqlSession.update("MyReply.updateReview", m);
 
-
+		
+	}
+	
 	@Override
 	public ArrayList selectRecommened(SqlSessionTemplate sqlSession, ArrayList<String> fourCount) {
 		
