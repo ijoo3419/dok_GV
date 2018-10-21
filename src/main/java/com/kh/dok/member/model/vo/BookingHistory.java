@@ -16,25 +16,9 @@ public class BookingHistory {
 	private String turning_day;
 	private String reservation_status;
 	private String status;
+	private String seats;
 	
 	public BookingHistory(){}
-
-	public BookingHistory(int mid, String approval_number, String movie_title, String theater_name,
-			String movieroom_name, String seat_row, String seat_column, String reservation_date, String turning_day,
-			String reservation_status, String status) {
-		super();
-		this.mid = mid;
-		this.approval_number = approval_number;
-		this.movie_title = movie_title;
-		this.theater_name = theater_name;
-		this.movieroom_name = movieroom_name;
-		this.seat_row = seat_row;
-		this.seat_column = seat_column;
-		this.reservation_date = reservation_date;
-		this.turning_day = turning_day;
-		this.reservation_status = reservation_status;
-		this.status = status;
-	}
 
 	public int getMid() {
 		return mid;
@@ -44,11 +28,11 @@ public class BookingHistory {
 		this.mid = mid;
 	}
 
-	public String getapproval_number() {
+	public String getApproval_number() {
 		return approval_number;
 	}
 
-	public void setapproval_number(String approval_number) {
+	public void setApproval_number(String approval_number) {
 		this.approval_number = approval_number;
 	}
 
@@ -124,13 +108,41 @@ public class BookingHistory {
 		this.status = status;
 	}
 
+	public String getSeats() {
+		return seats;
+	}
+
+	public void setSeats(String seats) {
+		this.seats = seats;
+	}
+
 	@Override
 	public String toString() {
 		return "BookingHistory [mid=" + mid + ", approval_number=" + approval_number + ", movie_title=" + movie_title
 				+ ", theater_name=" + theater_name + ", movieroom_name=" + movieroom_name + ", seat_row=" + seat_row
 				+ ", seat_column=" + seat_column + ", reservation_date=" + reservation_date + ", turning_day="
-				+ turning_day + ", reservation_status=" + reservation_status + ", status=" + status + "]";
+				+ turning_day + ", reservation_status=" + reservation_status + ", status=" + status + ", seats=" + seats
+				+ "]";
 	}
 
+	public BookingHistory(int mid, String approval_number, String movie_title, String theater_name,
+			String movieroom_name, String seat_row, String seat_column, String reservation_date, String turning_day,
+			String reservation_status, String status, String seats) {
+		super();
+		this.mid = mid;
+		this.approval_number = approval_number;
+		this.movie_title = movie_title;
+		this.theater_name = theater_name;
+		this.movieroom_name = movieroom_name;
+		this.seat_row = seat_row;
+		this.seat_column = seat_column;
+		this.reservation_date = reservation_date;
+		this.turning_day = turning_day;
+		this.reservation_status = reservation_status;
+		this.status = status;
+		this.seats = seats;
+	}
+
+	
 	
 }

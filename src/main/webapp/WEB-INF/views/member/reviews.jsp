@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html>
 <head>
@@ -8,6 +9,10 @@
 <title>Insert title here</title>
 
 <style>
+
+.noresize {
+  resize: none; /* 사용자 임의 변경 불가 */
+}
 
 #edit, #delete {
 	cursor:pointer;
@@ -75,7 +80,8 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><${ mv.file_src } style="width: auto; height:100px;"></td>
+							<td><input type="hidden" value="${ mv.rid }" id="rid" /> </td>
+							<td style="vertical-align:middle"><${ mv.file_src } style="width: auto; height:100px;"></td>
 							<td>${ mv.movie_title }</td>
 							<c:set var="grade" value="${ mv.grade_count }" />
 							<c:choose>
@@ -98,11 +104,11 @@
 									<td>★★★★★</td>
 								</c:when>
 							</c:choose>
-									<td>[영화] ${ mv.rcontent }</td>
+									<td><textarea class="noresize" rows="2" cols="25" readonly id="rcontent${ mv.rid }">${ mv.rcontent }</textarea> </td>
 							<td><img src="${ contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;"> ${ mv.recommend_count } </td>
-							<td>${ mv.rcreate_date }</td>
-							<td><img id="edit" src="${ contextPath }/resources/images/member/edit.png" width="20" height="20" style="margin-left:10px; margin-top:10px;"></td>
-							<td><img id="delete" src="${ contextPath }/resources/images/member/delete.png" width="20" height="20" style="margin-left:10px; margin-top:10px;"></td>
+							<td>${ fn:substring(mv.rcreate_date, 0, 10) }</td>
+							<td><img id="edit${ mv.rid }" src="${ contextPath }/resources/images/member/edit.png" width="20" height="20" style="margin-left:10px; margin-top:10px;" onclick='edit("${mv.rid}");'></td>
+							<td><img id="delete" src="${ contextPath }/resources/images/member/delete.png" width="20" height="20" style="margin-left:10px; margin-top:10px;" onclick='test("${mv.rid}");'></td>
 						</tr>
 				</table>
 				</c:forEach>
@@ -124,9 +130,9 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><input type="hidden" value="${ cr.rid }" id="rid"/></td>
 							<td><input type="hidden" value="${ sessionScope.loginUser.mid }" id="mid" /></td>
-							<td>${ cr.theater_name }</td>
+							<td><input type="hidden" value="${ cr.rid }" id="mid" /> </td>
+							<td> ${ cr.theater_name }</td>
 							<c:set var="grade" value="${ cr.grade_count }" />
 							<c:choose>
 								<c:when test="${ grade eq 0 }">
@@ -148,11 +154,11 @@
 									<td>★★★★★</td>
 								</c:when>
 							</c:choose>
-									<td>[영화관] ${ cr.rcontent }</td>
+									<td><textarea class="noresize" rows="2" cols="25" readonly id="rcontent${ cr.rid }">${ cr.rcontent }</textarea></td>
 							<td><img src="${ contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;"> ${ cr.recommend_count } </td>
-							<td>${ cr.rcreate_date }</td>
-							<td><img src="${ contextPath }/resources/images/member/edit.png" width="20" height="20" style="margin-left:10px; margin-top:10px;" id="edit"></td>
-							<td><img src="${ contextPath }/resources/images/member/delete.png" width="20" height="20" style="margin-left:10px; margin-top:10px;" id="delete"></td>
+							<td>${ fn:substring(cr.rcreate_date, 0, 10) }</td>
+							<td><img src="${ contextPath }/resources/images/member/edit.png" width="20" height="20" style="margin-left:10px; margin-top:10px;" id="edit${ cr.rid }" onclick='edit("${cr.rid}");'></td>
+							<td><img src="${ contextPath }/resources/images/member/delete.png" width="20" height="20" style="margin-left:10px; margin-top:10px;" id="delete" onclick='test("${cr.rid}");'></td>
 						</tr>
 				</table>
 				</c:forEach>	
@@ -160,52 +166,57 @@
 				<script>
 				
 				
-				
-				
-				
-				$(function(){
-					$("#tableArea tr").find("#edit").click(function(){
+				function edit(rid){
+					
+					var mid = $("#mid").val();
+					
+					$("#rcontent" + rid).prop('readonly', false);
+					$("#rcontent" + rid).focus();
+					$("#edit" + rid).attr("src", "${ contextPath }/resources/images/member/enter.png");
+					$("#edit" + rid).attr("onclick", 'updateRcontent();');
+					$("#edit" + rid).attr("id", "submit");
+					
+					
+					 $("#submit").click(function updateRcontent(){
+						var rcontent = $("#rcontent" + rid).val();
 						
-						var str = ""
-						var tdArr = new Array();
-						
-						var tr = $(this);
-						var td = tr.children();
-						
-						alert("edit");
-						
-						td.each(function(i){
-							tdArr.push(td.eq(i).text());
+						$.ajax({
+							url: "updateReview.me",
+							type:"post",
+							data:{
+								rid:rid,
+								mid:mid,
+								rcontent:rcontent
+							},
+							success:function(data){
+								alert("성공함!!!");
+								location.href = "reviews.me";
+							},
+							error:function(data){
+								alert("실패함 ㅠㅠ");
+								location.href = "review.me";
+							}
 						});
 						
-						var rid = $("#rid").val();
-						alert("rid"+rid);
-						
-					});
-				});
-				
-				$(function(){
-					$("#tableArea tr").find("#delete").click(function(){
-						
-						/* var str = ""
-						var tdArr = new Array();
-						
-						var tr = $(this);
-						var td = tr.children();
-						
-						alert("delete");
-						
-						td.each(function(i){
-							tdArr.push(td.eq(i).text());
-						}); */
-						
-						var rid = $("#rid").val();
-						var mid = $("#mid").val();
 					
-						alert("rid" + rid);
-						alert("mid" + mid);
-						
-						/* $.ajax({
+					 }); 
+					
+				}
+				
+				/* function updateRcontent(rid){
+					
+					alert(rid);
+					alert(rcontent);
+				}
+				 */
+				function test(rid){
+					
+					var mid = $("#mid").val();
+					
+					if(confirm('해당 한줄평을 삭제하시겠습니까?')){
+					
+					
+					 $.ajax({
 							url:"deleteReview.me",
 							type:"post",
 							data:{
@@ -213,15 +224,53 @@
 								mid:mid
 								},
 							success:function(data){
-								alert("다녀옴!" + data);
+								location.href = "reviews.me";
 							},
 							error:function(){
-								alert("에러남!" + rid);
+								alert("댓글 삭제에 실패했습니다.");
 							}
-						}); */
+						}); 
+					 
+				}
+					
+				}
+				
+				
+				/* $(function(){
+					$("#tableArea tr").find("#delete").click(function(){
+						
+						var tdArr = new Array();
+						
+						var tr = $(this);
+						var td = tr.children();
+						
+						td.each(function(i){
+							tdArr.push(td.eq(i).text());
+						});
+						
+						var rid = td.eq(1).text();
+						var mid = $("#mid").val();
+						
+						console.log("tdArr" + tdArr);
+						alert("rid" + rid);
+						
+						 $.ajax({
+							url:"deleteReview.me",
+							type:"post",
+							data:{
+								rid:rid,
+								mid:mid
+								},
+							success:function(data){
+								location.href = "reviews.me";
+							},
+							error:function(){
+								alert("댓글 삭제에 실패했습니다.");
+							}
+						}); 
 						
 					});
-				});
+				}); */
 				
 				</script>
 				

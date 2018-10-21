@@ -114,7 +114,7 @@ img {
 													<td>${ bk.movie_title }</td>
 													<td>${ bk.theater_name }</td>
 													<td>${ bk.movieroom_name }</td>
-													<td>${ bk.seat_row }</td>
+													<td>${ bk.seats }</td>
 													<td>${ fn:substring(bk.reservation_date, 0,10) }</td>
 													<td>${ fn:substring(bk.turning_day, 5, 16) }</td>
 													

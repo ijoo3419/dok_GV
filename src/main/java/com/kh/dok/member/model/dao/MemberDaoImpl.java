@@ -281,10 +281,16 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 
-	//댓글 삭제
+	//한줄평 삭제
 	@Override
 	public int deleteReview(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("MyReply.deleteReview", m);
+	}
+
+	//한줄평 수정
+	@Override
+	public int updateReview(SqlSessionTemplate sqlSession, MyReply m) {
+		return sqlSession.update("MyReply.updateReview", m);
 	}
 
 	

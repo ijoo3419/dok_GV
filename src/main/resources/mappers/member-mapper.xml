@@ -147,9 +147,10 @@
 	
 	<!-- 본 영화 COUNT -->
 	<select id="countWatched" resultType="java.lang.Integer" parameterType="Member">
-		SELECT NVL(COUNT(*),0)
-    	FROM RESERVATION
-    	WHERE MID = #{ mid }
+		SELECT NVL(COUNT(DISTINCT P.APPROVAL_NUMBER),0)
+		FROM RESERVATION R
+		JOIN PAY P ON (R.RESERVATION_ID = P.RESERVATION_ID)
+		WHERE MID = #{ mid }
     	AND RESERVATION_STATUS != '취소'
 	</select>
 	
@@ -158,6 +159,7 @@
 		SELECT NVL(COUNT(*),0)
     	FROM REPLY
     	WHERE RWRITER = #{ mid }
+    	AND STATUS = 'Y'
 	</select>
 	
 	<!-- 이진희 id찾기 -->

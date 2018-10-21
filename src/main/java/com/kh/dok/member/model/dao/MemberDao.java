@@ -12,7 +12,7 @@ import com.kh.dok.member.model.vo.MyReply;
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieThumbnail;
 
-public interface MemberDao {
+public interface MemberDao {  
 
 	String selectEncPassword(SqlSessionTemplate sqlSession, Member m);
 
@@ -83,6 +83,9 @@ public interface MemberDao {
 
 	//리뷰 삭제
 	int deleteReview(SqlSessionTemplate sqlSession, Member m);
+	
+	//리부 수정
+	int updateReview(SqlSessionTemplate sqlSession, MyReply m);
 
 
      
