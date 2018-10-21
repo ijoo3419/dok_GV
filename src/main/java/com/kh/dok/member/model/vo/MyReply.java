@@ -1,5 +1,8 @@
 package com.kh.dok.member.model.vo;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class MyReply implements java.io.Serializable {
 	
 	private String rid;

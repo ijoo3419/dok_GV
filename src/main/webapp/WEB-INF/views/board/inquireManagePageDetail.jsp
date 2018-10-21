@@ -164,7 +164,7 @@
             					
             					for(i = 0; i < data.list.length; i++){
             						html += "<div>";
-            						html += "<div><table class='table'><tr><td width='100px'><h6><strong>"+ data.list[i].rwriter +"</strong></h6></td>";
+            						html += "<div><table class='table'><tr><td width='100px'><h6><strong>"+ data.list[i].nickname +"</strong></h6></td>";
             						html += "<td align='left'>"+data.list[i].rcontent+"</td>";
             						html += "<td width='200px'>" + data.list[i].rcreate_date + "</td></tr>";
             						html += "</table></div>";

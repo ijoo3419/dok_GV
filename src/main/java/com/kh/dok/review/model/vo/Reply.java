@@ -18,11 +18,13 @@ public class Reply implements java.io.Serializable{
 	private String theater_id;
 	private String movie_id;
 	private int grade_count;
+	private String nickname;
 	
 	public Reply(){}
 
 	public Reply(String rid, String bid, String rwriter, String rcontent, String rcreate_date, Date rmodify_date,
-			String status, int recommend_count, String division, String theater_id, String movie_id, int grade_count) {
+			String status, int recommend_count, String division, String theater_id, String movie_id, int grade_count,
+			String nickname) {
 		super();
 		this.rid = rid;
 		this.bid = bid;
@@ -36,6 +38,7 @@ public class Reply implements java.io.Serializable{
 		this.theater_id = theater_id;
 		this.movie_id = movie_id;
 		this.grade_count = grade_count;
+		this.nickname = nickname;
 	}
 
 	public String getRid() {
@@ -134,13 +137,22 @@ public class Reply implements java.io.Serializable{
 		this.grade_count = grade_count;
 	}
 
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
 	@Override
 	public String toString() {
 		return "Reply [rid=" + rid + ", bid=" + bid + ", rwriter=" + rwriter + ", rcontent=" + rcontent
 				+ ", rcreate_date=" + rcreate_date + ", rmodify_date=" + rmodify_date + ", status=" + status
 				+ ", recommend_count=" + recommend_count + ", division=" + division + ", theater_id=" + theater_id
-				+ ", movie_id=" + movie_id + ", grade_count=" + grade_count + "]";
+				+ ", movie_id=" + movie_id + ", grade_count=" + grade_count + ", nickname=" + nickname + "]";
 	}
+
 	
 	
 }
