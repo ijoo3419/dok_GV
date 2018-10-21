@@ -16,10 +16,12 @@
 		<result column="EDIT_NAME" property="edit_name"/>
 	</resultMap>
 	
+
+	
 <!-- 정태 영화관(THEATER) 추가하기~!~!~!~!~! -->
 <insert id="insertTheater" parameterType="Cinema">
 		INSERT INTO THEATER VALUES('TT' || TO_CHAR(THEATER_THEATER_ID.NEXTVAL), #{mid},
-		#{theaterName}, #{theaterRoot}, #{theaterText},'은평구' ,'A1')
+		#{theaterName}, #{theaterRoot}, #{theaterText}, #{theaterAddress} ,#{areaId})
 	</insert>
 	<!--  정태 영화관(BOARD) 추가하기 -->
 	<insert id="insertTheaterBoard" parameterType="Cinema">

@@ -12,6 +12,13 @@ public class Cinema2  implements java.io.Serializable{
 	private String theaterName;
 	private String theaterRoot;
 	private String theaterText;
+	private String theaterAddress;
+	private String areaId;
+	
+	private String theaterAddress1;
+	private String theaterAddress2;
+	private String theaterAddress3;
+	
 
 	//Board 부분
 	private String board_id;
@@ -318,30 +325,35 @@ public class Cinema2  implements java.io.Serializable{
 
 
 
-	@Override
-	public String toString() {
-		return "Cinema2 [theaterId=" + theaterId + ", mid=" + mid + ", theaterName=" + theaterName + ", theaterRoot="
-				+ theaterRoot + ", theaterText=" + theaterText + ", board_id=" + board_id + ", mId=" + mId + ", btitle="
-				+ btitle + ", bcontent=" + bcontent + ", board_sort=" + board_sort + ", board_date=" + board_date
-				+ ", modify_date=" + modify_date + ", bstatus=" + bstatus + ", bcount=" + bcount + ", cinema_div="
-				+ cinema_div + ", theater_id=" + theater_id + ", movie_id=" + movie_id + ", board_biv=" + board_biv
-				+ ", file_id=" + file_id + ", origin_name=" + origin_name + ", edit_name=" + edit_name + ", file_src="
-				+ file_src + ", file_date=" + file_date + ", file_level=" + file_level + "]";
+	public String getAreaId() {
+		return areaId;
+	}
+
+
+
+	public void setAreaId(String areaId) {
+		this.areaId = areaId;
 	}
 
 
 
 	public Cinema2(String theaterId, String mid, String theaterName, String theaterRoot, String theaterText,
-			String board_id, String mId2, String btitle, String bcontent, String board_sort, Date board_date,
-			Date modify_date, String bstatus, int bcount, String cinema_div, String theater_id, String movie_id,
-			String board_biv, String file_id, String origin_name, String edit_name, String file_src, String file_date,
-			int file_level) {
+			String theaterAddress, String areaId, String theaterAddress1, String theaterAddress2,
+			String theaterAddress3, String board_id, String mId2, String btitle, String bcontent, String board_sort,
+			Date board_date, Date modify_date, String bstatus, int bcount, String cinema_div, String theater_id,
+			String movie_id, String board_biv, String file_id, String origin_name, String edit_name, String file_src,
+			String file_date, int file_level) {
 		super();
 		this.theaterId = theaterId;
 		this.mid = mid;
 		this.theaterName = theaterName;
 		this.theaterRoot = theaterRoot;
 		this.theaterText = theaterText;
+		this.theaterAddress = theaterAddress;
+		this.areaId = areaId;
+		this.theaterAddress1 = theaterAddress1;
+		this.theaterAddress2 = theaterAddress2;
+		this.theaterAddress3 = theaterAddress3;
 		this.board_id = board_id;
 		mId = mId2;
 		this.btitle = btitle;
@@ -364,6 +376,71 @@ public class Cinema2  implements java.io.Serializable{
 	}
 
 
+
+	public String getTheaterAddress() {
+		return theaterAddress;
+	}
+
+
+
+	public void setTheaterAddress(String theaterAddress) {
+		this.theaterAddress = theaterAddress;
+	}
+
+
+
+	public String getTheaterAddress1() {
+		return theaterAddress1;
+	}
+
+
+
+	public void setTheaterAddress1(String theaterAddress1) {
+		this.theaterAddress1 = theaterAddress1;
+	}
+
+
+
+	public String getTheaterAddress2() {
+		return theaterAddress2;
+	}
+
+
+
+	public void setTheaterAddress2(String theaterAddress2) {
+		this.theaterAddress2 = theaterAddress2;
+	}
+
+
+
+	public String getTheaterAddress3() {
+		return theaterAddress3;
+	}
+
+
+
+	public void setTheaterAddress3(String theaterAddress3) {
+		this.theaterAddress3 = theaterAddress3;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Cinema2 [theaterId=" + theaterId + ", mid=" + mid + ", theaterName=" + theaterName + ", theaterRoot="
+				+ theaterRoot + ", theaterText=" + theaterText + ", theaterAddress=" + theaterAddress + ", areaId="
+				+ areaId + ", theaterAddress1=" + theaterAddress1 + ", theaterAddress2=" + theaterAddress2
+				+ ", theaterAddress3=" + theaterAddress3 + ", board_id=" + board_id + ", mId=" + mId + ", btitle="
+				+ btitle + ", bcontent=" + bcontent + ", board_sort=" + board_sort + ", board_date=" + board_date
+				+ ", modify_date=" + modify_date + ", bstatus=" + bstatus + ", bcount=" + bcount + ", cinema_div="
+				+ cinema_div + ", theater_id=" + theater_id + ", movie_id=" + movie_id + ", board_biv=" + board_biv
+				+ ", file_id=" + file_id + ", origin_name=" + origin_name + ", edit_name=" + edit_name + ", file_src="
+				+ file_src + ", file_date=" + file_date + ", file_level=" + file_level + "]";
+	}
+
+
+
+	
 
 	
 	

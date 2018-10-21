@@ -282,7 +282,7 @@ public class cellClass {
 	}
 	
 	//여기있는 값을 가져온다.
-	public void createTurningTeble(String name, HttpServletRequest request){
+	public void createTurningTeble(String name, String movieRoomRealId, HttpServletRequest request){
 
 		FileInputStream inputStream = null;
 		FileOutputStream outputStream = null;
@@ -294,11 +294,8 @@ public class cellClass {
 		
 		
 		try {
-				inputStream = new FileInputStream(filePath + "//" + name + ".xlsx");
+				inputStream = new FileInputStream(filePath + "//" + movieRoomRealId + ".xlsx");
 				workbook = new XSSFWorkbook(inputStream);
-				
-				XSSFSheet sheet = workbook.getSheetAt(0);	//Class Data 시트
-				
 				
 				outputStream = new FileOutputStream(filePath + "\\" + name +".xlsx");	//만들기
 				workbook.write(outputStream);
@@ -312,15 +309,6 @@ public class cellClass {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
-			try {
-				inputStream.close();
-				workbook.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
 		}
 	}
 	

@@ -183,5 +183,11 @@
 	<update id="updateSeat">
 		UPDATE SEAT SET SEAT_STATUS = '확인' WHERE SEAT_ID = #{seat_id}
 	</update>
+<!-- 정태 -->
+	<select id="selectMovieTiltle" resultMap="movieResultSet" parameterType="Movie">
+	  SELECT MOVIE_TITLE, MOVIE_ID
+   	 FROM MOVIE
+	</select>
+	
 
 </mapper>
