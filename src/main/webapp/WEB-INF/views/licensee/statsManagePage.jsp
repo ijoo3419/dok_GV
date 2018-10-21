@@ -63,7 +63,7 @@ table tr th{
 	<c:set var="mid" value="${ loginUser.mid }" scope="session"/>
 	<nav id="nav">
 			<ul class="links">
-				<li><a href="play.li"><font size="4">상영등록</font></a></li>
+				<li><a href="javascript:play();"><font size="4">상영등록</font></a></li>
 				<li><a href="theater.li"><font size="4">영화관등록</font></a></li>
 				<li><a href="movieRoom.li"><font size="4">상영관등록</font></a></li>
 				<li class="active"><a href="stats.li"><font size="4">통계/관리</font></a></li>

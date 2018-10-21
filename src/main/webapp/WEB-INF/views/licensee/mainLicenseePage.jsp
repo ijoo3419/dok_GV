@@ -125,19 +125,30 @@ li {
 <body class="is-preload">
 
 	<%@ include file="../common/headBar.jsp"%>
-
+	<form action="play.li" method="post" name="frm">
+			
+					<input type="hidden" value=${ sessionScope.loginUser.mid } name="mid"/>
 	<!-- Wrapper -->
 	<div id="wrapper" class="fade-in">
 
+	
+			
 		<header id="header">
 			<!-- <a href="index.html" class="logo">Massively</a> -->
 		</header>
 
 		<!-- Nav -->
-	<c:set var="mid" value="${ loginUser.mid }" scope="session"/>
+		
+		
+		
+				
+						
+			
+							
+							
 	<nav id="nav">
 			<ul class="links">
-				<li><a href="play.li"><font size="4">상영등록</font></a></li>
+				<li><a href="javascript:play();"><font size="4">상영등록</font></a></li>
 				<li><a href="theater.li"><font size="4">영화관등록</font></a></li>
 				<li><a href="movieRoom.li"><font size="4">상영관등록</font></a></li>
 				<li><a href="stats.li"><font size="4">통계/관리</font></a></li>
@@ -146,7 +157,8 @@ li {
 				<li><a href="inquire.li"><font size="4">문의내역</font></a></li>
 			</ul>
 		</nav>
-
+			</form>
+			
 			<!-- Main -->
 		<div id="main">
 
@@ -154,7 +166,7 @@ li {
 			<section class="post">
 				<header class="major">
 					<h4>${ sessionScope.loginUser.user_name }님, 오늘도 영화 같은 하루 보내세요.</h4>
-				<input type="hidden" value=${ sessionScope.loginUser.mid } id="mid"/>
+					
 				</header>
 
 				<!-- Text stuff -->
@@ -261,7 +273,16 @@ li {
 			</section>
 		</div>
 		
+	<script>
+		function play(){
+			document.frm.method="post";
+			document.frm.action="play.li";
+			document.frm.submit();
+			
+		}
 	
+	
+	</script>
 	<script>
 		function goToEdit(){
 			location.href = "editInfo.jsp";
