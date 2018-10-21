@@ -275,5 +275,31 @@ public class MovieDaoImpl implements MovieDao{
 		
 		return sqlSession.insert("Board.insertfile2",f);
 	}
+
+	@Override
+	public ArrayList<Movie> selectPrimaryKey(SqlSessionTemplate sqlSession, String imp) {
+		
+		return (ArrayList)sqlSession.selectList("Movie.selectPrimaryKey", imp);
+	}
+
+	//박지용 pay테이블 환불 처리 업데이트
+	@Override
+	public int updateRefundPay(SqlSessionTemplate sqlSession, String pay_id) {
+		
+		return sqlSession.update("Movie.updateRefundPay", pay_id);
+	}
+
+	//박지용 RESERVATION 테이블 환출 처리 업데이트
+	@Override
+	public int updateRefundRes(SqlSessionTemplate sqlSession, String res_id) {
+		
+		return sqlSession.update("Movie.updateRefundRes", res_id);
+	}
+
+	@Override
+	public int updateRefundSeat(SqlSessionTemplate sqlSession, String seat_id) {
+		
+		return sqlSession.update("Movie.updateRefundSeat", seat_id);
+	}
 	
 }

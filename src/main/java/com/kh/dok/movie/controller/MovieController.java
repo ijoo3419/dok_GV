@@ -1,8 +1,6 @@
 package com.kh.dok.movie.controller;
 
 import java.io.File;
-import java.io.IOException;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -16,13 +14,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
 import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.common.CommonUtils;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.common.Pagination;
 import com.kh.dok.licensee.controller.sheetController.cellClass;
+import com.kh.dok.movie.model.service.IamportClient;
 import com.kh.dok.movie.model.service.MovieService;
+import com.kh.dok.movie.model.vo.CancelData;
 import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieThumbnail;
 
@@ -241,7 +242,7 @@ public class MovieController {
 		Movie m = new Movie();
 		m.setMovieroom_id(movieRoomId);
 		m.setTurning_id(turningId);
-		m.setMsg(msgSplit[3]);
+		m.setMsg(msgSplit[0]);
 		m.setMid(userId);
 		
 		//예매 ID 가져오기
@@ -251,7 +252,7 @@ public class MovieController {
 			   System.out.println(pay.get(index).getReservation_id());
 			   
 			   m.setReservation_id(pay.get(index).getReservation_id());
-			   m.setMsg(msgSplit[3]);
+			   m.setMsg(msgSplit[0]);
 			   
 			   check = ms.insertPay(m);
 			   checkTwo = ms.updateRes(m);
@@ -265,22 +266,49 @@ public class MovieController {
 	
 	//박지용 @ResponseBody를 이용한 ajax 처리
 	@RequestMapping(value="updateRefund.mo")
-	public @ResponseBody String deleteSeat(@RequestParam String mid){
+	public @ResponseBody String deleteSeat(@RequestParam String payNumber){
+		int check = 0; //체크
+		String msg = "";
+		String imp = payNumber; //결제번호
+		
+		CancelData cd = null;
+		
+		cd = new CancelData(imp,true);
+		
+		IamportClient ic = new IamportClient();
+		
+		try {
+			ic.cancelPayment(cd);//환불 성공
+			check = 1;
+		} catch (Exception e) {
+			msg = "환불에 실패하였습니다. 결제 번호를 다시 한번 확인해주세요";
+			e.printStackTrace();
+		}
+		
+		if(check == 1){
+			ArrayList<Movie> primaryKey = ms.selectPrimariKey(imp);
+			
+			for(int i = 0; i < primaryKey.size(); i++){
+				String pay_id = primaryKey.get(i).getPay_id();
+				check = ms.updateRefundPay(pay_id);
+				
+				if(check > 0){
+					String res_id = primaryKey.get(i).getReservation_id();
+					check = ms.updateRefundRes(res_id);
+				}
+				
+				if(check > 0){
+					String seat_id = primaryKey.get(i).getSeat_id();
+					check = ms.updateRefundSeat(seat_id);
+				}
+			}
+			
+			if(check > 0){
+				msg = "환불이 성공적으로 처리되었습니다.";
+			}
+		}
 
-		/*System.out.println("영화관 출력하기: " + movieRoomIdVal);
-
-		String name = movieRoomIdVal;
-
-		System.out.println(name);
-		String[][] arr = new cellClass().test(name, request);
-
-		for(String[] str : arr){
-			for(String s : str)
-				System.out.print(s);
-			System.out.println();
-		}*/
-
-		return "arr";
+		return msg;
 	}
 	
 	@RequestMapping("movieInsert.mo")
