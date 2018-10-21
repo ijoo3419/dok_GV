@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.board.model.vo.BoardFile;
+import com.kh.dok.board.model.vo.BoardNBoardFile;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.movie.model.dao.MovieDao;
@@ -251,8 +252,8 @@ public class MovieServiceImpl implements MovieService{
 
 
 	@Override
-	public ArrayList<Board> selectBoardone(String id) {
-		ArrayList<Board> list1 = null;
+	public ArrayList<BoardNBoardFile> selectBoardone(String id) {
+		ArrayList<BoardNBoardFile> list1 = null;
 		
 		list1 = md.selectBoardone(sqlSession, id);
 		
@@ -280,22 +281,10 @@ public class MovieServiceImpl implements MovieService{
 	}
 
 
-
-
 	@Override
-	public int insertBoardfile(String originFileName, String changeName, String id1, String root1) {
+	public int insertBoardfile(BoardFile bf) {
+		return md.insertBoardfile(sqlSession,bf);
 		
-		return md.insertBoardfile(sqlSession, originFileName, changeName, id1, root1);
-	}
-
-	@Override
-	public int insertBoardfile1(String originFileName, String changeName, String id1, String root1) {
-		return md.insertBoardfile1(sqlSession, originFileName, changeName, id1, root1);
-	}
-
-	@Override
-	public int insertBoardfile2(String originFileName, String changeName, String id1, String root1) {
-		return md.insertBoardfile2(sqlSession, originFileName, changeName, id1, root1);
 	}
 
 

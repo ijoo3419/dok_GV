@@ -247,19 +247,8 @@
 	
 	<insert id="insertfile" parameterType="BoardFile">
 		INSERT INTO BOARD_FILE VALUES('BF' || TO_CHAR(BOARD_BOARD_ID.NEXTVAL), #{board_id}, #{origin_name}, #{edit_name}
-		,#{file_src}, SYSDATE, 1)
+		,#{file_src}, SYSDATE, #{file_level})
 	</insert>
-	
-	<insert id="insertfile1" parameterType="BoardFile">
-		INSERT INTO BOARD_FILE VALUES('BF' || TO_CHAR(BOARD_BOARD_ID.NEXTVAL), #{board_id}, #{origin_name}, #{edit_name}
-		,#{file_src}, SYSDATE, 2)
-	</insert>
-	
-	<insert id="insertfile2" parameterType="BoardFile">
-		INSERT INTO BOARD_FILE VALUES('BF' || TO_CHAR(BOARD_BOARD_ID.NEXTVAL), #{board_id}, #{origin_name}, #{edit_name}
-		,#{file_src}, SYSDATE, 3)
-	</insert>
-	
 	
 	
 </mapper>

@@ -34,4 +34,17 @@ public class CinemaDaoImpl implements CinemaDao{
 		return cinemaDetail;
 	}
 
+	@Override
+	public ArrayList<Cinema> selectCinemaImageCut(SqlSessionTemplate sqlSession, Cinema ca) {
+		String id = ca.getTheaterId();
+		
+		
+		ArrayList<Cinema> cinemaimagecut = null;
+		
+		cinemaimagecut= (ArrayList)sqlSession.selectList("Cinema.cinemaImageCut",id);
+		
+		System.out.println("영화관 image:  "+cinemaimagecut);
+		return cinemaimagecut;
+	}
+
 }
