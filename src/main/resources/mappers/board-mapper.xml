@@ -40,6 +40,7 @@
 		<result property="theater_id" column="THEATER_ID"/>
 		<result property="movie_id" column="MOVIE_ID"/>
 		<result property="grade_count" column="GRADE_COUNT"/>
+		<result property="nickname" column="NICKNAME"/>
 	</resultMap>
 	
 	<resultMap type="BoardFile" id="BoardFileSet">
@@ -219,10 +220,11 @@
 	
 	<!-- 댓글리스트 불러오기 -->
 	<select id="selectReply" parameterType="java.lang.String" resultMap="ReplyResultSet">
-		SELECT *
-		FROM REPLY
-		WHERE BID = 'B' || #{bid}
-		AND STATUS = 'Y'
+		SELECT R.RID, R.BID, R.RWRITER, R.RCONTENT, R.RCREATE_DATE, R.RMODIFY_DATE, R.STATUS, R.RECOMMEND_COUNT, R.DIVISION, R.THEATER_ID, R.MOVIE_ID, R.GRADE_COUNT, M.NICKNAME
+		FROM REPLY R, MEMBER M
+		WHERE R.RWRITER = M.MID
+		AND BID = 'B' || #{bid}
+		AND R.STATUS = 'Y'
 	</select>
 	
 	<!-- 이진희 보드검색 -->
