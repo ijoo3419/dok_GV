@@ -462,7 +462,8 @@ hr {
 	  		${rank1.rnum}
 	  	</div> 
 		<div id="sumnailimage1">
-                   <${rank1.file_src} style="width:298px; height:270px;">
+                   <!-- <${rank1.file_src} style="width:298px; height:270px;"> -->
+                   <img src="${ contextPath }/resources/uploadFiles/${rank1.edit_name}" style="width:298px; height:270px;">
                    <c:set var="name" value="${rank1.movie_age}"/>
                     <c:choose>
 					    <c:when test="${name eq '12'}">
@@ -494,7 +495,8 @@ hr {
       	  <div id="rank">
       	  <div id ="age1">${rank2.rnum}</div>
 		<div id="sumnailimage1">
-                   <${rank2.file_src} style="width:298px; height:270px;">
+                   <!-- <${rank2.file_src} style="width:298px; height:270px;"> -->
+                   <img src="${ contextPath }/resources/uploadFiles/${rank2.edit_name}" style="width:298px; height:270px;">
                    <c:set var="name" value="${rank2.movie_age}"/>
                     <c:choose>
 					    <c:when test="${name eq '12'}">
@@ -527,7 +529,8 @@ hr {
         <div id="rank">
       	  <div id ="age1">${rank3.rnum}</div>
 		<div id="sumnailimage1">
-                   <${rank3.file_src} style="width:298px; height:270px;">
+                  <!--  <${rank3.file_src} style="width:298px; height:270px;"> -->
+                  <img src="${ contextPath }/resources/uploadFiles/${rank3.edit_name}" style="width:298px; height:270px;">
                    <c:set var="name" value="${rank3.movie_age}"/>
                     <c:choose>
 					    <c:when test="${name eq '12'}">
@@ -592,7 +595,8 @@ hr {
 			
 			<c:forEach items="${ movieView }" var="row">
 		<div id="sumnailimage">
-                   <${row.file_src} style="width:298px; height:270px;">
+                   <!-- <${row.file_src} style="width:298px; height:270px;"> -->
+                   <img src="${ contextPath }/resources/uploadFiles/${row.edit_name}" style="width:298px; height:270px;">
                    <c:set var="name" value="${row.movie_age}"/>
                     <c:choose>
 					    <c:when test="${name eq '12'}">

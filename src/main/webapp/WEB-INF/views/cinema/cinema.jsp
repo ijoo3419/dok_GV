@@ -307,12 +307,13 @@ hr {
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">서울</a></li>
     <li><a data-toggle="tab" href="#menu1">경기</a></li>
-    <li><a data-toggle="tab" href="#menu2">강원</a></li>
-    <li><a data-toggle="tab" href="#menu3">대전/충청</a></li>
-    <li><a data-toggle="tab" href="#menu4">대구</a></li>
-    <li><a data-toggle="tab" href="#menu5">부산/울산</a></li>
-    <li><a data-toggle="tab" href="#menu6">경상</a></li>
-    <li><a data-toggle="tab" href="#menu7">광주/전라/제주</a></li>
+    <li><a data-toggle="tab" href="#menu2">인천</a></li>
+    <li><a data-toggle="tab" href="#menu3">강원</a></li>
+    <li><a data-toggle="tab" href="#menu4">대전/충청</a></li>
+    <li><a data-toggle="tab" href="#menu5">대구</a></li>
+    <li><a data-toggle="tab" href="#menu6">부산/울산</a></li>
+    <li><a data-toggle="tab" href="#menu7">경상</a></li>
+    <li><a data-toggle="tab" href="#menu8">광주/전라/제주</a></li>
     
   </ul>
 
@@ -342,7 +343,7 @@ hr {
       </c:forEach>
     </div>
     <div id="menu2" class="tab-pane fade">
-      <h3>강원</h3>
+      <h3>인천</h3>
       <c:forEach items="${cienmaView}" var="row1">
       <c:set var="name" value="${row1.area_id}"/>
           <c:choose>
@@ -354,7 +355,7 @@ hr {
       </c:forEach>
     </div>
     <div id="menu3" class="tab-pane fade">
-      <h3>대전/충청</h3>
+      <h3>강원</h3>
       <c:forEach items="${cienmaView}" var="row1">
       <c:set var="name" value="${row1.area_id}"/>
           <c:choose>
@@ -366,8 +367,8 @@ hr {
       </c:forEach>
     </div>
     <div id="menu4" class="tab-pane fade">
-      <h3>대구</h3>
-     <c:forEach items="${cienmaView}" var="row1">
+      <h3>대전/충청</h3>
+      <c:forEach items="${cienmaView}" var="row1">
       <c:set var="name" value="${row1.area_id}"/>
           <c:choose>
 		     <c:when test="${name eq 'A5'}">
@@ -378,8 +379,8 @@ hr {
       </c:forEach>
     </div>
     <div id="menu5" class="tab-pane fade">
-      <h3>부산/울산</h3>
-      <c:forEach items="${cienmaView}" var="row1">
+      <h3>대구</h3>
+     <c:forEach items="${cienmaView}" var="row1">
       <c:set var="name" value="${row1.area_id}"/>
           <c:choose>
 		     <c:when test="${name eq 'A6'}">
@@ -390,7 +391,7 @@ hr {
       </c:forEach>
     </div>
     <div id="menu6" class="tab-pane fade">
-      <h3>경상</h3>
+      <h3>부산/울산</h3>
       <c:forEach items="${cienmaView}" var="row1">
       <c:set var="name" value="${row1.area_id}"/>
           <c:choose>
@@ -402,11 +403,23 @@ hr {
       </c:forEach>
     </div>
     <div id="menu7" class="tab-pane fade">
+      <h3>경상</h3>
+      <c:forEach items="${cienmaView}" var="row1">
+      <c:set var="name" value="${row1.area_id}"/>
+          <c:choose>
+		     <c:when test="${name eq 'A8'}">
+      			<a href="cinemaDetail.ci?id=${row1.theaterId}">${row1.theaterName }</a>  
+					        
+			 </c:when>
+		</c:choose>	
+      </c:forEach>
+    </div>
+    <div id="menu8" class="tab-pane fade">
       <h3>광주/전라/제주</h3>
       <c:forEach items="${cienmaView}" var="row1">
       <c:set var="name" value="${row1.area_id}"/>
           <c:choose>
-		     <c:when test="${name eq 'A8' && name eq 'A9' }">
+		     <c:when test="${name eq 'A9'}">
       			<a href="cinemaDetail.ci?id=${row1.theaterId}">${row1.theaterName }</a>  
 					        
 			 </c:when>

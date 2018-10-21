@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.board.model.vo.BoardFile;
+import com.kh.dok.board.model.vo.BoardNBoardFile;
 import com.kh.dok.common.CommonUtils;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.common.Pagination;
@@ -309,10 +310,6 @@ public class MovieController {
 		ArrayList<MovieThumbnail> list = ms.selectmovieone(msn);
 		
 		/*msn.setOpen_date(fromDate);*/
-		
-		String ext = null;
-		String changeName = null;
-		String ichangeName = null;
 			if(list.isEmpty()){
 				int result = ms.insertMovie(msn);
 				System.out.println("result : " + result);
@@ -321,7 +318,7 @@ public class MovieController {
 					if(list != null){
 						String id = list.get(0).getMovie_id();
 						System.out.println(id);
-						ArrayList<Board> list1 = ms.selectBoardone(id);
+						ArrayList<BoardNBoardFile> list1 = ms.selectBoardone(id);
 						System.out.println("list1: " + list1);
 						if(list1.isEmpty()){
 							int result1 = ms.insertBoard(msn, id);
@@ -333,97 +330,102 @@ public class MovieController {
 									String id1 = list1.get(0).getBoard_id();
 									ArrayList<BoardFile> list2 = ms.selectBoardfile(id1);
 									if(list2.isEmpty()){
-										if(photo1 != null){
-											String originFileName = photo1.getOriginalFilename();
-											ext = originFileName.substring(originFileName.lastIndexOf("."));
-											changeName = CommonUtils.getRandomString();
-											ichangeName = changeName.substring(originFileName.lastIndexOf("."));
-											try {
-												photo1.transferTo(new File(filePath + "\\" + changeName + ext));
-												String root1 =filePath + "\\" + changeName + ext;
-												ms.insertBoardfile(originFileName, changeName, id1, root1);
-											} catch (Exception e ) {
-												new File(filePath + "\\" + changeName + ext).delete();
-												
-												System.out.println("실패하면 여기로");
-												model.addAttribute("msg", "영화 추가 실패!");
-												
-												return "common/errorPage";
+										BoardFile bf = new BoardFile();
+										try{
+											 if(photo1 != null){
+												 String originFileName = photo1.getOriginalFilename();
+												 String ext = originFileName.substring(originFileName.lastIndexOf("."));
+												 String	changeName = CommonUtils.getRandomString();
+												 String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
+												 String changeNmae1 = changeName + ext;
+												 
+												 bf.setBoard_id(id1);
+												 bf.setOrigin_name(originFileName);
+												 bf.setEdit_name(changeNmae1);
+												 bf.setFile_src(filePath);
+												 bf.setFile_level("1");
+												 
+												 photo1.transferTo(new File(filePath + "\\" + changeName + ext));
+												 ms.insertBoardfile(bf);
+											 }
+											 
+											 if(photo2 !=null){
+													String originFileName = photo2.getOriginalFilename();
+													String ext = originFileName.substring(originFileName.lastIndexOf("."));
+													String changeName = CommonUtils.getRandomString();
+													String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
+													String changeNmae1 = changeName + ext;
+													
+													bf.setBoard_id(id1);
+													bf.setOrigin_name(originFileName);
+													bf.setEdit_name(changeNmae1);
+													bf.setFile_src(filePath);
+													bf.setFile_level("2");
+													photo2.transferTo(new File(filePath + "\\" + changeName + ext));
+														
+													ms.insertBoardfile(bf);
 											}
 											
-											
-										}else if(photo2 !=null){
-											String originFileName = photo2.getOriginalFilename();
-											ext = originFileName.substring(originFileName.lastIndexOf("."));
-											changeName = CommonUtils.getRandomString();
-											ichangeName = changeName.substring(originFileName.lastIndexOf("."));
-											try {
-												photo2.transferTo(new File(filePath + "\\" + changeName + ext));
-												
-											} catch (Exception e ) {
-												new File(filePath + "\\" + changeName + ext).delete();
-												
-												System.out.println("실패하면 여기로");
-												model.addAttribute("msg", "영화 추가 실패!");
-												
-												return "common/errorPage";
+											 if(photo3 !=null){
+													String originFileName = photo3.getOriginalFilename();
+													String ext = originFileName.substring(originFileName.lastIndexOf("."));
+													String changeName = CommonUtils.getRandomString();
+													String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
+													String changeNmae1 = changeName + ext;
+													
+													bf.setBoard_id(id1);
+													bf.setOrigin_name(originFileName);
+													bf.setEdit_name(changeNmae1);
+													bf.setFile_src(filePath);
+													bf.setFile_level("2");
+													
+													photo3.transferTo(new File(filePath + "\\" + changeName + ext));
+														
+													ms.insertBoardfile(bf);
+													
 											}
-											String root1 =filePath + "\\" + changeName + ext;
-											ms.insertBoardfile1(originFileName, changeName, id1, root1);
-										}else if(photo3 !=null){
-											String originFileName = photo3.getOriginalFilename();
-											ext = originFileName.substring(originFileName.lastIndexOf("."));
-											changeName = CommonUtils.getRandomString();
-											ichangeName = changeName.substring(originFileName.lastIndexOf("."));
-											try {
-												photo3.transferTo(new File(filePath + "\\" + changeName + ext));
-												String root1 =filePath + "\\" + changeName + ext;
-												ms.insertBoardfile1(originFileName, changeName, id1, root1);
-											} catch (Exception e) {
-												new File(filePath + "\\" + changeName + ext).delete();
-												
-												System.out.println("실패하면 여기로");
-												model.addAttribute("msg", "영화 추가 실패!");
-												
-												return "common/errorPage";
+											 
+											 if(photo4 !=null){
+													String originFileName = photo4.getOriginalFilename();
+													String ext = originFileName.substring(originFileName.lastIndexOf("."));
+													String changeName = CommonUtils.getRandomString();
+													String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
+													String changeNmae1 = changeName + ext;
+													
+													bf.setBoard_id(id1);
+													bf.setOrigin_name(originFileName);
+													bf.setEdit_name(changeNmae1);
+													bf.setFile_src(filePath);
+													bf.setFile_level("2");
+													
+													photo4.transferTo(new File(filePath + "\\" + changeName + ext));
+														
+													ms.insertBoardfile(bf); 
+											 }
+											 
+											 if(video1 !=null){
+													String originFileName = video1.getOriginalFilename();
+													String ext = originFileName.substring(originFileName.lastIndexOf("."));
+													String changeName = CommonUtils.getRandomString();
+													String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
+													String changeNmae1 = changeName + ext;
+													
+													bf.setBoard_id(id1);
+													bf.setOrigin_name(originFileName);
+													bf.setEdit_name(changeNmae1);
+													bf.setFile_src(filePath);
+													bf.setFile_level("3");
+													
+													video1.transferTo(new File(filePath + "\\" + changeName + ext));
+													
+													ms.insertBoardfile(bf);
 											}
+										}catch(Exception e){
+											System.out.println("실패하면 여기로");
+									         model.addAttribute("msg", "영화이미지 추가 실패!");
+									         
+									         return "common/errorPage";
 										}
-										else if(photo4 !=null){
-											String originFileName = photo4.getOriginalFilename();
-											ext = originFileName.substring(originFileName.lastIndexOf("."));
-											changeName = CommonUtils.getRandomString();
-											ichangeName = changeName.substring(originFileName.lastIndexOf("."));
-											try {
-												photo4.transferTo(new File(filePath + "\\" + changeName + ext));
-												String root1 =filePath + "\\" + changeName + ext;
-												ms.insertBoardfile1(originFileName, changeName, id1, root1);
-											} catch (Exception e) {
-												new File(filePath + "\\" + changeName + ext).delete();
-												
-												System.out.println("실패하면 여기로");
-												model.addAttribute("msg", "영화 추가 실패!");
-												
-												return "common/errorPage";
-											}
-										}
-										else if(video1 !=null){
-											String originFileName = video1.getOriginalFilename();
-											ext = originFileName.substring(originFileName.lastIndexOf("."));
-											changeName = CommonUtils.getRandomString();
-											ichangeName = changeName.substring(originFileName.lastIndexOf("."));
-											try {
-												video1.transferTo(new File(filePath + "\\" + changeName + ext));
-												String root1 =filePath + "\\" + changeName + ext;
-												ms.insertBoardfile2(originFileName, changeName, id1, root1);
-											} catch (Exception e) {
-												new File(filePath + "\\" + changeName + ext).delete();
-												
-												System.out.println("실패하면 여기로");
-												model.addAttribute("msg", "영화 추가 실패!");
-												
-												return "common/errorPage";
-											}
-									}
 								}
 							}
 						}

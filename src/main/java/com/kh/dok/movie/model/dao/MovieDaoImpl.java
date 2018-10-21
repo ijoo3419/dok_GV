@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.board.model.vo.BoardFile;
+import com.kh.dok.board.model.vo.BoardNBoardFile;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.movie.model.vo.Movie;
@@ -218,9 +219,9 @@ public class MovieDaoImpl implements MovieDao{
 	}
 
 	@Override
-	public ArrayList<Board> selectBoardone(SqlSessionTemplate sqlSession, String id) {
+	public ArrayList<BoardNBoardFile> selectBoardone(SqlSessionTemplate sqlSession, String id) {
 		
-		ArrayList<Board> list1 = (ArrayList)sqlSession.selectList("Board.selectBoardone",id);
+		ArrayList<BoardNBoardFile> list1 = (ArrayList)sqlSession.selectList("Board.selectBoardone",id);
 		
 		return list1;
 	}
@@ -244,36 +245,9 @@ public class MovieDaoImpl implements MovieDao{
 	}
 
 	@Override
-	public int insertBoardfile(SqlSessionTemplate sqlSession, String originFileName, String changeName, String id1,
-			String root1) {
-		BoardFile f = new BoardFile();
-		f.setBoard_id(id1);
-		f.setOrigin_name(originFileName);
-		f.setEdit_name(changeName);
+	public int insertBoardfile(SqlSessionTemplate sqlSession, BoardFile bf) {
 		
-		return sqlSession.insert("Board.insertfile",f);
-	}
-
-	@Override
-	public int insertBoardfile1(SqlSessionTemplate sqlSession, String originFileName, String changeName, String id1,
-			String root1) {
-		BoardFile f = new BoardFile();
-		f.setBoard_id(id1);
-		f.setOrigin_name(originFileName);
-		f.setEdit_name(changeName);
-		
-		return sqlSession.insert("Board.insertfile1",f);
-	}
-
-	@Override
-	public int insertBoardfile2(SqlSessionTemplate sqlSession, String originFileName, String changeName, String id1,
-			String root1) {
-		BoardFile f = new BoardFile();
-		f.setBoard_id(id1);
-		f.setOrigin_name(originFileName);
-		f.setEdit_name(changeName);
-		
-		return sqlSession.insert("Board.insertfile2",f);
+		return sqlSession.insert("Board.insertfile",bf);
 	}
 	
 }

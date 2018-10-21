@@ -408,20 +408,15 @@ hr {
     <div class="carousel-inner" role="listbox">
 
       <div class="item active">
-        <img src="${contextPath }/resources/images/logo.jpg" alt="Chania" width="460" height="345">
+        <div style="background:black; width:500px; height:450px;"></div>
       </div>
 
-      <div class="item">
-        <img src="${contextPath }/resources/images/logo.jpg" alt="Chania" width="460" height="345">
-      </div>
-    
-      <div class="item">
-        <img src="${contextPath }/resources/images/logo.jpg" alt="Flower" width="460" height="345">
-      </div>
-
-      <div class="item">
-        <img src="${contextPath }/resources/images/logo.jpg" alt="Flower" width="460" height="345">
-      </div>
+      <c:forEach items="${cinemaimagecut }" var="row1">
+			 <div class="item">	
+				<!-- <${row1.file_src} style="width:500px; height:450px;"> -->
+				<img src="${ contextPath }/resources/uploadFiles/${row1.edit_name}" style="width:500px; height:450px;">
+			</div>
+			</c:forEach>
   
     </div>
 

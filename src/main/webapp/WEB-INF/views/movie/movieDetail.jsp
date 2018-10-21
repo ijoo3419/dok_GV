@@ -255,7 +255,8 @@ hr {
 	<hr>
 
 		<div id="sumnailimage">
-			 <${row.file_src} style="width:298px; height:400px;">
+			 <!-- <${row.file_src} style="width:298px; height:400px;"> -->
+			  <img src="${ contextPath }/resources/uploadFiles/${row.edit_name}" style="width:298px; height:400px;">
 		</div>
 		<div id="data">
 			<c:set var="name" value="${row.movie_age}"/>
@@ -347,7 +348,8 @@ hr {
 			
 		 <c:forEach items="${movieimagecut }" var="row1">
 			 <div class="item">	
-				<${row1.file_src} style="width:500px; height:450px;">
+				<!-- <${row1.file_src} style="width:500px; height:450px;"> -->
+				<img src="${ contextPath }/resources/uploadFiles/${row1.edit_name}" style="width:500px; height:450px;">
 			</div>
 			</c:forEach>	 	
 	    </div>
@@ -367,7 +369,7 @@ hr {
 	    <div id="menu1" class="tab-pane fade" style="margin-left:10%;">
 	    <c:forEach items="${movievideo }" var="row2">
 			 <video width="900" height="600" controls>
-			  <${row2.file_src } type="video/mp4">
+			  <source src="${ contextPath }/resources/uploadFiles/${row2.edit_name}" type="video/mp4">
 			  </video>
 			</c:forEach>
 	    </div>

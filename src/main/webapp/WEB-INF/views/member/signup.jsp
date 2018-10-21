@@ -479,6 +479,7 @@ function checkMail(){
 		success:function(data){
 			alert("이메일 인증 번호가 발급되었습니다. 이메일을 확인해주세요.");
 			authNumOrig = data;	
+			
 			}
 	});
 	} else {
@@ -490,6 +491,8 @@ function checkMail(){
   function checkAuth(){
 	
 	var authNum = $("#authNum").val();
+	
+	console.log(authNumOrig);
 	
 	if(authNum != "" && authNum != authNumOrig){
 		document.getElementById('checkCode').innerHTML = "<span style='color: red;'>인증번호가 일치하지 않습니다.</span>"
