@@ -294,6 +294,12 @@ public class MemberServiceImpl implements MemberService{
 		return md.selectAllUserMovie(sqlSession,midList);
 	}
 
+	@Override
+	public ArrayList selectRecommend(ArrayList<String> fourCount) {
+		
+		return md.selectRecommened(sqlSession,fourCount);
+	}
+
 	
 	
 	

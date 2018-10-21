@@ -201,4 +201,11 @@
 		SELECT MID
 		FROM MEMBER
 	</select>
+	
+	<!-- 추천 영화 검색 -->
+	<select id="selectRecommend" resultType="String" parameterType="String">
+		SELECT BF.ORIGIN_NAME
+		FROM BOARD B,BOARD_FILE BF
+		WHERE B.BOARD_ID = BF.BOARD_ID AND B.MOVIE_ID = #{}
+	</select>
 </mapper>
