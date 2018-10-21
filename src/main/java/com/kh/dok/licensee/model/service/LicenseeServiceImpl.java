@@ -1,5 +1,7 @@
 package com.kh.dok.licensee.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,6 +12,7 @@ import com.kh.dok.licensee.model.dao.LicenseeDao;
 import com.kh.dok.licensee.model.vo.MovieRoom;
 import com.kh.dok.licensee.model.vo.Play;
 import com.kh.dok.licensee.model.vo.Turning;
+import com.kh.dok.movie.model.vo.Movie;
 
 @Service
 
@@ -85,6 +88,34 @@ public class LicenseeServiceImpl implements LicenseeService{
 		
 		String selectPlayId = ld.selectOnePlayId(sqlSession);
 		return selectPlayId;
+	}
+
+
+	@Override
+	public ArrayList<Movie> selectMovieTiltle() {
+		return ld.selectMovieTiltle(sqlSession);
+	}
+
+	@Override
+	public String selectOneMovieRoomId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<MovieRoom> selectMovieRoomName(MovieRoom mr) {
+		return ld.selectMovieRoomName(sqlSession, mr);
+	}
+
+	@Override
+	public String selectOneTurningId() {
+		return ld.selectOneTurningId(sqlSession);
+	}
+
+	@Override
+	public Turning selectOneMovieRoomIdId(Turning t) {
+		
+		return ld.selectOneMovieRoomIdId(sqlSession, t);
 	}
 
 

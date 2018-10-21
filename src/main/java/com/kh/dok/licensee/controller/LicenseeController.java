@@ -1,22 +1,20 @@
 package com.kh.dok.licensee.controller;
 
 import java.io.File;
-import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.poi.ddf.EscherColorRef.SysIndexProcedure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kh.dok.board.model.vo.BoardFile;
-import com.kh.dok.cinema.model.vo.Cinema;
 import com.kh.dok.cinema.model.vo.Cinema2;
 import com.kh.dok.common.CommonUtils;
 import com.kh.dok.licensee.controller.sheetController.cellClass;
@@ -24,6 +22,7 @@ import com.kh.dok.licensee.model.service.LicenseeService;
 import com.kh.dok.licensee.model.vo.MovieRoom;
 import com.kh.dok.licensee.model.vo.Play;
 import com.kh.dok.licensee.model.vo.Turning;
+import com.kh.dok.movie.model.vo.Movie;
 
 @Controller
 @SessionAttributes(value="loginUser")
@@ -35,10 +34,23 @@ public class LicenseeController {
 	@RequestMapping(value="licensee.li")
 	public String showLicenseeMainView(){
 		return "licensee/mainLicenseePage";
-	}	
+	}
 
 	@RequestMapping(value="play.li")
-	public String showPlayView(){
+	public String showPlayView(Model model, MovieRoom mr,
+			HttpServletRequest request){
+	
+		ArrayList< Movie> movieTitle= ls.selectMovieTiltle();
+		System.out.println("movieTilte : "+ movieTitle);
+		System.out.println("mr.getMid() = " + mr.getMid());
+		
+		ArrayList<MovieRoom> movieRoomName= ls.selectMovieRoomName(mr);
+		System.out.println("controller mr = " + mr );
+		System.out.println("movieRoomName = " + movieRoomName);
+		
+		
+		model.addAttribute("movieTitle",movieTitle);
+		model.addAttribute("movieRoomName", movieRoomName);
 		return "licensee/playManagePage";
 	}
 
@@ -58,7 +70,9 @@ public class LicenseeController {
 	}
 
 	@RequestMapping(value="theater.li")
-	public String showTheaterView(){
+	public String showTheaterView(Model model ){
+	
+		
 		return "licensee/theaterManagePage";
 	}
 	
@@ -74,12 +88,93 @@ public class LicenseeController {
 		System.out.println(photo1);
 		System.out.println("controller cm : " + cm);
 
-	
+		cm.setTheaterAddress(cm.getTheaterAddress1()+","+cm.getTheaterAddress2()+","+cm.getTheaterAddress3());
+		
+		System.out.println("movieRoom Address = " + cm.getTheaterAddress());
+		
+		String areaName = cm.getTheaterAddress2().substring(0, 2);
+		String areaId = "";
+		System.out.println("areaName = " + areaName);
+		
+		if(areaName.equals("서울")){
+			System.out.println("여기에 온다면 소리질러~!");
+			areaId = "A1";
+			System.out.println("areaId = " + areaId);
+			cm.setAreaId(areaId);
+
+			System.out.println("areaId는 ? = "+cm.getAreaId());
+			ls.insertTheater(cm);
+		}if(areaName.equals("경기")){
+			areaId = "A2";
+			cm.setAreaId(areaId);
+			System.out.println("areaId = " + areaId);
+
+			System.out.println("areaId는 ? = "+cm.getAreaId());
+			ls.insertTheater(cm);
+		}if(areaName.equals("인천")){
+			areaId = "A3";
+			cm.setAreaId(areaId);
+			System.out.println("areaId = " + areaId);
+
+			System.out.println("areaId는 ? = "+cm.getAreaId());
+			ls.insertTheater(cm);
+		}if(areaName.equals("강원")){
+			areaId = "A4";
+			cm.setAreaId(areaId);
+			System.out.println("areaId = " + areaId);
+
+			System.out.println("areaId는 ? = "+cm.getAreaId());
+			ls.insertTheater(cm);
+		}if(areaName.equals("대전") || areaName.equals("충남") || areaName.equals("충북")){
+			areaId = "A5";
+			cm.setAreaId(areaId);
+			System.out.println("areaId = " + areaId);
+
+			System.out.println("areaId는 ? = "+cm.getAreaId());
+			ls.insertTheater(cm);
+		}if(areaName.equals("대구")){
+			areaId = "A6";
+			cm.setAreaId(areaId);
+			System.out.println("areaId = " + areaId);
+
+			System.out.println("areaId는 ? = "+cm.getAreaId());
+			ls.insertTheater(cm);
+		}if(areaName.equals("부산") || areaName.equals("울산")){
+			areaId = "A7";
+			cm.setAreaId(areaId);
+			System.out.println("areaId = " + areaId);
+
+			System.out.println("areaId는 ? = "+cm.getAreaId());
+			ls.insertTheater(cm);
+		}if(areaName.equals("경남") || areaName.equals("경북") ){
+			areaId = "A8";
+			cm.setAreaId(areaId);
+			System.out.println("areaId = " + areaId);
+
+			System.out.println("areaId는 ? = "+cm.getAreaId());
+			ls.insertTheater(cm);
+		}if(areaName.equals("전남") || areaName.equals("전북") || areaName.equals("제주")){
+			areaId = "A9";
+			cm.setAreaId(areaId);
+			System.out.println("areaId = " + areaId);
+			System.out.println("areaId는 ? = "+cm.getAreaId());
+			ls.insertTheater(cm);
+		}
+		
 		
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		System.out.println("root : " + root);
 		String filePath = root + "\\uploadFiles";
 		System.out.println("filePath : " + filePath);
+		
+	
+		
+		ls.insertTheaterBoard(cm);
+		
+		String board_id = "B";
+		
+		board_id += ls.selectOneBoardId();
+		cm.setBoard_id(board_id);
 		
 		try{
 		if(photo1 != null){
@@ -95,18 +190,10 @@ public class LicenseeController {
 		cm.setFile_src(filePath);
 		cm.setFile_level(1);
 		
-		ls.insertTheater(cm);
-		
-		ls.insertTheaterBoard(cm);
-		
-		String board_id = "B";
-		
-		board_id += ls.selectOneBoardId();
-		cm.setBoard_id(board_id);
-		
 		ls.insertTheaterBoardFile(cm);
 		photo1.transferTo(new File(filePath + "\\" + changeName + ext));
-		}if(photo2 != null){
+		}
+		if(photo2 != null){
 			String originFileName = photo2.getOriginalFilename();
 			String ext = originFileName.substring(originFileName.lastIndexOf("."));
 			String changeName = CommonUtils.getRandomString();
@@ -116,15 +203,6 @@ public class LicenseeController {
 			cm.setEdit_name(changeName);
 			cm.setFile_src(filePath);
 			cm.setFile_level(2);
-			
-			ls.insertTheater(cm);
-			
-			ls.insertTheaterBoard(cm);
-			
-			String board_id = "B";
-			
-			board_id += ls.selectOneBoardId();
-			cm.setBoard_id(board_id);
 			
 			ls.insertTheaterBoardFile(cm);
 			photo2.transferTo(new File(filePath + "\\" + changeName + ext));
@@ -140,15 +218,6 @@ public class LicenseeController {
 			cm.setFile_src(filePath);
 			cm.setFile_level(2);
 			
-			ls.insertTheater(cm);
-			
-			ls.insertTheaterBoard(cm);
-			
-			String board_id = "B";
-			
-			board_id += ls.selectOneBoardId();
-			cm.setBoard_id(board_id);
-			
 			ls.insertTheaterBoardFile(cm);
 			photo3.transferTo(new File(filePath + "\\" + changeName + ext));
 			
@@ -162,16 +231,7 @@ public class LicenseeController {
 			cm.setEdit_name(changeName);
 			cm.setFile_src(filePath);
 			cm.setFile_level(2);
-			
-			ls.insertTheater(cm);
-			
-			ls.insertTheaterBoard(cm);
-			
-			String board_id = "B";
-			
-			board_id += ls.selectOneBoardId();
-			cm.setBoard_id(board_id);
-			
+	
 			ls.insertTheaterBoardFile(cm);
 			photo4.transferTo(new File(filePath + "\\" + changeName + ext));
 			
@@ -189,96 +249,11 @@ public class LicenseeController {
 		}
 	}
 	
-	//정태 영화관 등록 메소드(+파일 첨부 + 게시판 테이블에 추가 아직 하는 중)
-	/*@RequestMapping(value="theaterInsert.li")
-	public String insertTheater(Model model, Cinema cm, HttpServletRequest request, 
-					@RequestParam(name="photo1", required=false)MultipartFile photo1,
-					@RequestParam(name="photo2", required=false)MultipartFile photo2,
-					@RequestParam(name="photo3", required=false)MultipartFile photo3,
-					@RequestParam(name="photo4", required=false)MultipartFile photo4){
-		
-
-		System.out.println("controller cm : " + cm);
-		String root = request.getSession().getServletContext().getRealPath("resources");
-		System.out.println("root : " + root);
-		String filePath = root + "\\uploadFiles";
-		System.out.println("filePath : " + filePath);
-		
-		System.out.println("photo1 = " + photo1);
-		System.out.println("photo2 = " + photo2);
-		System.out.println("photo3 = " + photo3);
-		System.out.println("photo4 = " + photo4);
-		try {
-			if(photo1 != null){
-			
-			String originFileName = photo1.getOriginalFilename();
-			String ext = originFileName.substring(originFileName.lastIndexOf("."));
-			String changeName = CommonUtils.getRandomString();
-			String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
-			BoardFile adFile = new BoardFile("BT1", originFileName, ichangeName, filePath, "1");
-			int au = ls.insertFile(adFile);
-			
-			System.out.println("adFile = " + adFile);
-			photo1.transferTo(new File(filePath + "\\" + changeName + ext));
-			}else if(photo2 != null){
-				
-				String originFileName = photo2.getOriginalFilename();
-				String ext = originFileName.substring(originFileName.lastIndexOf("."));
-				String changeName = CommonUtils.getRandomString();
-				String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
-				BoardFile adFile = new BoardFile("BT1", originFileName, ichangeName, filePath, "2");
-				int au = ls.insertFile(adFile);
-			photo2.transferTo(new File(filePath + "\\" + changeName + ext));
-
-			}	else if(photo3 != null){
-				
-				String originFileName = photo3.getOriginalFilename();
-				String ext = originFileName.substring(originFileName.lastIndexOf("."));
-				String changeName = CommonUtils.getRandomString();
-				String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
-				BoardFile adFile = new BoardFile("BT1", originFileName, ichangeName, filePath, "2");
-				int au = ls.insertFile(adFile);
-				photo3.transferTo(new File(filePath + "\\" + changeName + ext));
-
-			}	else if(photo4 != null){
-				
-				String originFileName = photo4.getOriginalFilename();
-				String ext = originFileName.substring(originFileName.lastIndexOf("."));
-				String changeName = CommonUtils.getRandomString();
-				String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
-				BoardFile adFile = new BoardFile("BT1", originFileName, ichangeName, filePath, "2");
-				int au = ls.insertFile(adFile);
-				photo4.transferTo(new File(filePath + "\\" + changeName + ext));
-
-			}
-			ArrayList<BoardFile> bfile = ls.selectFile();
-			model.addAttribute("bf", bfile);
-			System.out.println("bfile = " + bfile);
-			
-			ls.insertTheater(cm);
-			System.out.println("controller cm : " + cm);
-			
-			return "licensee/mainLicenseePage";
-		}catch (IllegalStateException e) {
-			model.addAttribute("msg", "영화관 추가 실패!");
-			
-			return "common/errorPage";
-		} catch (IOException e){
-			
-			model.addAttribute("msg", "영화관 추가 실패!");
-			
-			return "common/errorPage";
-			
-	}
-}
-	*/
-	
 	//정태 상영관 등록(엑셀 파일 완료)
 	@RequestMapping(value="movieRoomInsert.li")
 	public String insertMovieRoom(Model model,MovieRoom mr, Cinema2 cm,
 								HttpServletRequest request){
 		
-		/*MovieRoom mr = (MovieRoom)request.getSession().getAttribute("movieRoomData");*/
 		
 		System.out.println("mr.getMid = " + mr.getMid());
 		
@@ -294,9 +269,9 @@ public class LicenseeController {
 		System.out.println("movieRoomId = " + movieRoomId);
 		
 		System.out.println("controller mr1 = " + mr);
-		mr.setMovieRoomId(movieRoomId.getMovieRoomId());		
+		mr.setMovieRoomId(movieRoomId.getMovieRoomId());
 		
-		String name = mr.getMovieRoomId();
+		String name = mr.getMovieRoomId();		//저장할 이름
 		String[] arr = request.getParameterValues("bak");
 		String tableName = request.getParameter("table");
 		
@@ -314,7 +289,6 @@ public class LicenseeController {
 		}
 		
 		
-		
 		if(result > 0){
 			return "licensee/movieRoomManagePage";
 
@@ -328,7 +302,7 @@ public class LicenseeController {
 }
 	/* 정태 상영 등록  */
 	@RequestMapping(value="playInsert.li")
-	public String insertPlay(Model model, Play p, Turning t, MovieRoom mr, 
+	public String insertPlay(Model model, Play p, Turning t, MovieRoom mr,
 								HttpServletRequest request){
 		
 		//11:00 ~ 12:00 이런식으로 나오는 값
@@ -337,23 +311,29 @@ public class LicenseeController {
 		
 		//이 값이 startTime_pre
 		t.setStartTime_pre(t.getTurningDay() + " " + t.getStartTime_pre());
-
+	/*	Date startTime_rel = Date.valueOf(t.getStartTime_pre());
+		
+		System.out.println("Date로 만든 변수 = " + startTime_rel);*/
 		//이 값이 endTime_pre
 		t.setEndTime_pre(t.getTurningDay() + " " + t.getEndTime_pre());
 		
 		
-		MovieRoom movieRoomId = ls.checkMovieRoomId(mr);
+		String movieRoomId = "MR";
 		
-		System.out.println("movieRoomId = " + movieRoomId);
-		
-		mr.setMovieRoomId(movieRoomId.getMovieRoomId());		
+		movieRoomId += ls.selectOneMovieRoomId();
+		mr.setMovieRoomId(movieRoomId);
+			
+		t.setMovieRoomId(movieRoomId);
 		
 		//MovieRoom_id 값 가져오기
-		System.out.println(mr.getMovieRoomId());
+		System.out.println("무비룸 아이디 가져오기 = " +  mr.getMovieRoomId());
 		
 		
 		int resultPlay = ls.insertPlay(p);
-		String selectPlayId = "P";
+		
+		System.out.println("상영 등록은 완료 ");
+
+		String selectPlayId = "PL";
 		
 		//play_id 값 알아오기
 		selectPlayId += ls.selectOnePlayId();
@@ -367,44 +347,41 @@ public class LicenseeController {
 		int resultTurning = ls.insertTurning(t);
 		
 		
-		System.out.println("movieRoom : "+ mr);
 		
 		
-/*		System.out.println(mr.getMovieRoomName());*/
+		System.out.println(mr.getMovieRoomName());
 		
 		
 		System.out.println("controller p = " + p);
 		
 		
 		
-		//String name = "TT1";
-		/*String[] arr = request.getParameterValues("bak");*/
-		/*String tableName = request.getParameter("table");*/
-		//String tableName = "TT1";
+		//name 값은 터닝아이디 값 CURVAL로 가져오자
+		String name = "PL";
 		
-		/*System.out.println("tableName = " + tableName);
+		name += ls.selectOneTurningId();
+		String tableName = "";
+		
 		System.out.println("name = " + name);
-		//셀 조회 15x15
-//		String[][] num = new cellClass().test();
-//		System.out.println(num[0][0]);
+		System.out.println("MovieRoom 객체 = " +  mr);
+		
+		//내가 선택한 movieRoomId값 가져오기
+		Turning movieRoomIdd = ls.selectOneMovieRoomIdId(t);
+		System.out.println("movieRoomIdd = " + movieRoomIdd);
+		
+		String movieRoomRealId = movieRoomIdd.getMovieRoomId();
+		
+		
+		
 		
 		if(tableName == ""){
 			//셀 값 삽입
-			new cellClass().createTurningTeble(name, request);
+			new cellClass().createTurningTeble(name, movieRoomRealId ,request);
 		}else{
 			//셀 구매
-			new cellClass().insertTurningCell(name, tableName, request);
-		}*/
+			/*new cellClass().insertTurningCell(name, tableName, request);*/
+		}
 			
-			//스트링 변수를 데이트 변수로 바꾸는 것 하는중 안되 ㅠㅠㅠ
-		/*	String qweasad = "2011-01-18 00:00:00.0";
-			Date endTimeStr = (Date)new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse(t.getEndTime_pre());
-			Date startTimeStr = (Date)new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse(t.getStartTime_pre());
-			Date turningDayStr = (Date)new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse(t.getTurningDay_pre());
-			
-			System.out.println("endTimeStr = " + endTimeStr);
-			System.out.println("startTimeStr = " + startTimeStr);
-			System.out.println("turningDateStr = " + turningDayStr);*/
 
 		if(resultPlay > 0 || resultTurning > 0){
 			return "licensee/playManagePage";
@@ -416,6 +393,7 @@ public class LicenseeController {
 		
 		
 	}
+
 }
 	
 /*	 엑셀 파일 확인 

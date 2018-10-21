@@ -1,5 +1,7 @@
 package com.kh.dok.licensee.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -7,6 +9,7 @@ import com.kh.dok.cinema.model.vo.Cinema2;
 import com.kh.dok.licensee.model.vo.MovieRoom;
 import com.kh.dok.licensee.model.vo.Play;
 import com.kh.dok.licensee.model.vo.Turning;
+import com.kh.dok.movie.model.vo.Movie;
 
 @Repository
 public class LicenseeDaoImpl implements LicenseeDao{
@@ -73,28 +76,40 @@ public class LicenseeDaoImpl implements LicenseeDao{
 		return sqlSession.selectOne("Licensee.selectOnePlayPlayId");
 	}
 
+	@Override
+	public ArrayList<Movie> selectMovieTiltle(SqlSessionTemplate sqlSession) {
+
+		ArrayList<Movie> list =(ArrayList)sqlSession.selectList("Movie.selectMovieTiltle");
+		
+		return list;
+	}
+
+	@Override
+	public ArrayList<MovieRoom> selectMovieRoomName(SqlSessionTemplate sqlSession, MovieRoom mr) {
+		
+		ArrayList<MovieRoom> list = (ArrayList)sqlSession.selectList("Licensee.selectMovieRoomName", mr);
+		return list;
+	}
+
+	@Override
+	public Turning selectOneMovieRoomIdId(SqlSessionTemplate sqlSession, Turning t) {
+		
+		return sqlSession.selectOne("Licensee.selectMovieRoomIdId", t);
+	}
+
+	@Override
+	public String selectOneTurningId(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("Licensee.selectOneTurningId");
+	}
+
+
 	
 	
 	
 }
 
-	/*@Override
-	public int insertFile(SqlSessionTemplate sqlSession, BoardFile adFile) {
-		int insert = sqlSession.insert("Licensee.insertFile",adFile);
-		
-		if(insert < 1){
-			throw new UploadException("파일 업로드 실패");
-		}
-		return insert;
 	
-	}
-*/
-	/*@Override
-	public ArrayList<BoardFile> selectFile(SqlSessionTemplate sqlSession) {
-		ArrayList<BoardFile> bf = (ArrayList)sqlSession.selectList("Licensee.selectFile");
-
-		return bf;
-	}
 	
-	 */
+	 
 

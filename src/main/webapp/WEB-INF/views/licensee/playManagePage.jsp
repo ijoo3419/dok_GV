@@ -66,8 +66,11 @@ h2 {
 <body class="is-preload">
 
 
-	<c:import url="../common/headBar.jsp" />
-
+	<%@ include file="../common/headBar.jsp"%>	
+	
+	<form action="play.li" method="post">
+	
+		<input type="hidden" value=${ sessionScope.loginUser.mid } name="mid"/>
 	<!-- Wrapper -->
 	<div id="wrapper" class="fade-in">
 		<!-- Intro -->
@@ -91,10 +94,13 @@ h2 {
 
 
 		<!-- Nav -->
-	<c:set var="mid" value="${ loginUser.mid }" scope="session"/>
+
+					
+					
+							
 	<nav id="nav">
 			<ul class="links">
-				<li class="active"><a href="play.li"><font size="4">상영등록</font></a></li>
+				<li class="active"><a href="javascript:play();"><font size="4">상영등록</font></a></li>
 				<li><a href="theater.li"><font size="4">영화관등록</font></a></li>
 				<li><a href="movieRoom.li"><font size="4">상영관등록</font></a></li>
 				<li><a href="stats.li"><font size="4">통계/관리</font></a></li>
@@ -103,12 +109,15 @@ h2 {
 				<li><a href="inquire.li"><font size="4">문의내역</font></a></li>
 			</ul>
 		</nav>
-
 		<!-- Main -->
+		</form>
+		
 		<div id="main">
 
 			<!-- Featured Post -->
 			<!-- 이부분이 하얀 네모박스~~ -->
+			
+			
 			<article class="post featured">
 
 
@@ -120,8 +129,13 @@ h2 {
 					<div class="row gtr-uniform">
 						<h2 align="left">1. 영화</h2>
 						<div class="col-12">
-							<input type="text" name="movie_title" id="demo-name" value=""
-								placeholder="영화를 입력하세요" />
+						<select name="movie_title">
+						<c:forEach var="item" items="${movieTitle }">
+						 <option value="${item.movie_title}">${item.movie_title}</option> 
+						</c:forEach>
+						</select>
+							<!-- <input type="text" name="movie_title" id="demo-name" value=""
+								placeholder="영화를 입력하세요" /> -->
 						
 							<!-- <select name="movieCondition" id="demo-category">
 								<option value="">- 영화 -</option>
@@ -131,9 +145,8 @@ h2 {
 								<option value="1">너네가만든영화</option>
 							</select> -->
 							
-							
 						</div>
-						
+					</div>
 					<br>
 					<br>
 					<h2 align="left">3. 상영 정보</h2>
@@ -164,7 +177,7 @@ h2 {
 					</div>
 						
 			<script>
-				//가격(반복) 가져오기
+				// 테이블 행 반복해서 가져오기
 				$(function(){
 					$('.primary').click(function(){
 						 prices = new Array();
@@ -208,8 +221,28 @@ h2 {
 		
 		<script src="//code.jquery.com/jquery.min.js"></script>
 	
+	
+		<script>
+		function play(){
+			document.frm.method="post";
+			document.frm.action="play.li";
+			document.frm.submit();
+			
+		}
+	</script>
+	
+	<script>
+	
+	var selectedTitle = $("#셀렉트박스ID option:selected").val();
+
+	
+	
+	
+	</script>
 <!-- 테이블 행 추가 해주기 -->
     <script>
+    
+   
     
     $(function () {
     	$("#datepicker").datepicker();
@@ -234,10 +267,13 @@ h2 {
   var $movieRoomName = $('<input style="width:80px;"  name="movieRoomName" >');	//상영관이름 */
     
      $('#playTable > tbody:last').append('<tr><td>' + seq 
-     + '</td><td><input style="width:160px;" name= "price" class="priceTest"><td><input type="date" class="turningDayTest" style="width:150px;" name="turningDay"><td><input style="width:120px;" class="startTimeTest" name="startTime_pre">~<input style="width:120px;" class="endTimeTest" name="endTime_pre"><td><input style="width:80px;" class="movieRoomNameTest" name=" movieRoomName"></td></tr>');
+     + '</td><td><input style="width:160px;" name= "price" class="priceTest"><td><input type="date" class="turningDayTest" style="width:150px;" name="turningDay"><td><input style="width:120px;" class="startTimeTest" name="startTime_pre">~<input style="width:120px;" class="endTimeTest" name="endTime_pre"><td><select name="movieRoomName"><c:forEach var="item" items="${movieRoomName }"><option value="${item.movieRoomName}" style="width:80px;" class="movieRoomNameTest" name="movieRoomName">${item.movieRoomName }</option></c:forEach></select></td></tr>');
   });
+  
+  
   $('#btn-delete-row').click(function() {
 	  --seq;
+	
     $('#playTable > tbody:last > tr:last').remove();
   });
   
@@ -262,13 +298,10 @@ $(function() {
 		});
 	});
 </script>   -->
-											
 				</form>
 			</article>
-				<hr>
-				<br>
 		</div>
-
+	</div>
 
 </body>
 </html>

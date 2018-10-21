@@ -38,6 +38,7 @@ public class BoardController {
 	@Autowired
 	private BoardService bs;
 	
+	
 	   @RequestMapping("writeQna.bo")
 	   public String writeQnaView(){
 	      return "board/writeQna";
@@ -94,6 +95,9 @@ public class BoardController {
 				int result = bs.insertNotice(b,bf);
 				
 				System.out.println("try result : " + result);
+				
+				PageInfo p = new PageInfo();
+				showNoticeView(p, request, model);
 				
 				return "board/noticeManagePage";
 				
@@ -193,6 +197,8 @@ public class BoardController {
 		   
 		   Member m = (Member)request.getSession().getAttribute("loginUser");
 		   String mid = m.getMid();
+		   
+		   System.out.println("판매자페이지 문의사항이동 mid : " + mid);
 		   
 		   if(p.getCurrentPage() == 0){
 			   p.setCurrentPage(1);
@@ -438,6 +444,11 @@ public class BoardController {
 		  model.addAttribute("json", json);*/
 		  
 		  return hmap;
+	   }
+	   
+	   @RequestMapping(value="writeRequire.bo")
+	   public String writeRequire(){
+		   return "board/writeRequiremp";
 	   }
 	   
 	   

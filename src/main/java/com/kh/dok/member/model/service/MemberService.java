@@ -88,5 +88,13 @@ public interface MemberService {
 
 
 	
+	//소진 추천 영화 조회
+	ArrayList selectRecommend(ArrayList<String> fourCount);
+	
+
+
+
+
+	
 }
      

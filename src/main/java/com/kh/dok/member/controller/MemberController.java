@@ -3,6 +3,7 @@ package com.kh.dok.member.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.Random;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -137,26 +138,129 @@ public class MemberController {
 	   System.out.println("loginCheck MemberController : " + m);
 	   
       try {
-    	  
+    	ArrayList<String> recommendUser = new ArrayList<String>();
+    	ArrayList<String> recommendMovie = new ArrayList<String>();
+    	ArrayList<String> fourCount = new ArrayList<String>();
 		model.addAttribute("loginUser", ms.loginMember(m));
 		String email = m.getEmail();
 		String mid = ms.selectMid(email);
+		System.out.println(mid);
 		ArrayList<String> mlist = ms.selectUserMovie(mid);
+		int midListSize = mlist.size();
 		ArrayList<String> midList = ms.selectAllMid();
 		ArrayList<UserMovie> allUserMovie = ms.selectAllUserMovie(midList);
-		System.out.println(mlist);
-		System.out.println(midList);
-		System.out.println(allUserMovie);
-		return "main/main";
+		int allUserSize = allUserMovie.size();
+		int count = 0;
+		int userCount = 0;
+		int[] scount;
+		int[] random = new int[4];
+		scount = new int[allUserSize];
+		for(int i=0; i<allUserSize; i++){
+			if(!allUserMovie.get(i).getMid().equals(mid) && midListSize >2 && allUserMovie.get(i).getMovieId().size() >= midListSize){
+				System.out.println(allUserMovie.get(i).getMid());
+				for(int j = 0;j<midListSize;j++){
+					for(int k = 0; k<allUserMovie.get(i).getMovieId().size();k++){
+						if(mlist.get(j).equals(allUserMovie.get(i).getMovieId().get(k))){
+							count++;
+						}
+					}
+				}
+			}else if(!allUserMovie.get(i).getMid().equals(mid) && midListSize > 2 && allUserMovie.get(i).getMovieId().size() < midListSize){
+				for(int j = 0;j<allUserMovie.get(i).getMovieId().size();j++){
+					for(int k = 0; k<midListSize ; k++){
+						if(allUserMovie.get(i).getMovieId().get(j).equals(mlist.get(k))){
+							count++;
+						}
+					}
+				}
+			}else if(allUserMovie.get(i).getMid().equals(mid)){
+				count = 0;
+			}
+			System.out.println(count);
+			scount[i] = count;
+			count = 0;
+		}
+		recommendUser.add(mid);
 		
-      	} catch (LoginException e) {
+		for(int i=0 ; i<allUserSize;i++){	
+			if(scount[i]/(float)midListSize > 0.5){
+				System.out.println(scount[i]/(float)midListSize);
+				System.out.println(scount[i]);
+				System.out.println(allUserMovie.get(i).getMid());
+				recommendUser.add(allUserMovie.get(i).getMid());
+				System.out.println(recommendUser.get(userCount++));
+			}
+		}
+		System.out.println(recommendUser);
+		System.out.println(userCount);
+		for(int i=0; i<userCount ; i++){
+			int rcount = 0;
+			ArrayList<Integer> rcountList = new ArrayList<Integer>(); 
+			ArrayList<String> otherList = ms.selectUserMovie(recommendUser.get(i+1));
+			int[] countA = new int[otherList.size()];
+			System.out.println("otherList사이즈는"+otherList.size());
+			System.out.println("countA길이는"+countA.length);
+			if(i==0){
+				for(int j=0; j<midListSize; j++){
+					for(int k=0; k< otherList.size(); k++){
+						if(!mlist.get(j).equals(otherList.get(k))){
+							countA[k]++;
+							if(countA[k] == midListSize){
+								rcountList.add(k);
+							}
+						}
+					}
+				}
+			}
+			else{
+				for(int j=0; j<recommendMovie.size(); j++){
+					for(int k=0; k<otherList.size(); k++){
+						if(!recommendMovie.get(j).equals(otherList.get(k))){
+							countA[k]++;
+							if(countA[k] == recommendMovie.size()){
+								rcountList.add(k);
+							}
+						}
+					}
+				}
+				System.out.println("test");
+			}
+			for(int v=0;v<rcountList.size();v++){
+				recommendMovie.add(otherList.get(rcountList.get(v)));
+			}
+			
+			System.out.println("r카운터 사이즈는? "+rcountList.size());
+		}
+		for(int i=0;i<midListSize;i++){
+			for(int j=0;j<recommendMovie.size();j++){
+				if(mlist.get(i).equals(recommendMovie.get(j))){
+					recommendMovie.remove(j);
+				}
+			}
+		}
+		System.out.println("추천 영화는"+recommendMovie);
+		Random randomCount = new Random();
+		for(int i=0; i<4; i++){
+			random[i] = randomCount.nextInt(recommendMovie.size());
+			System.out.println(random[i]);
+			
+			fourCount.add(recommendMovie.get(random[i]));
+		}
+		
+		ArrayList fourMovie = ms.selectRecommend(fourCount);
+		System.out.println("최종 추천 영화는"+fourMovie);
+		return "main/main";
+      	}
+   
+        catch (LoginException e) {
       		
 		model.addAttribute("msg", e.getMessage());
 		
 		return "common/errorPage";
+        }
 	}
       
-   }
+   
    
    //회원 정보 수정 - 비밀번호 비교
    @ResponseBody

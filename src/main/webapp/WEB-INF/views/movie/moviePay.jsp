@@ -753,6 +753,10 @@ a{
 			   $('#Progress_Loading').show(); //첫 시작시 로딩바를 숨겨준다.
 		})
 		
+		$(function myFunction(){
+			run = 0;
+		});
+		
 		$(function foo(){
 				
 			    setTimeout(foo, 1000);
@@ -979,18 +983,18 @@ a{
 			    					}
 			    				}
 			    				
-			    				/* var dateSplit = new Array();
-			    				dateSplit = arrayDate[key].split('/'); 
+			    				var dateSplit = new Array();
+			    				dateSplit = arrayDate[key].split('/');
 			    				
-			    				for(var i = 0; i < dateSplit.length; i++){
-			    					if(dateSplit[1] == "10"){
-			    						$('select[class="ui-datepicker-month"]').val('9').attr('selected', true);
-			    					}else if(dateSplit[1] == "11"){
-			    						$('select[class="ui-datepicker-month"]').val('10').attr('selected', true);
-			    					}else if(dateSplit[1] == "12"){
-			    						$('select[class="ui-datepicker-month"]').val('11').attr('selected', true);
-			    					}
-			    				}  */
+			    				dateArray = arrayDate[key].split('.');
+			    				
+			    				/* if(dateArray[1] == "10"){
+			    					$('select[class="ui-datepicker-month"]').val('9').attr('selected', true);
+			    				}else if(dateArray[1] == "11"){
+			    					$('select[class="ui-datepicker-month"]').val('10').attr('selected', true);
+			    				}else if(dateArray[1] == "12"){
+			    					$('select[class="ui-datepicker-month"]').val('11').attr('selected', true);
+			    				} */
 			    				
 			    				var $input = $("<input type='hidden' value=''>");
 			    				
@@ -1533,7 +1537,7 @@ a{
 		       	  var movieRoomId = $('.movieRoomId').val();
 		       	  var turningId = $('.hiddenTurning').val();
 		       	  
-		       	$.ajax({
+		       $.ajax({
 		    		url:"insertPay.mo",
 		    		type:"post",
 		    		data:{msg: msg,

@@ -19,6 +19,27 @@
 		<result property="grade_count" column="GRADE_COUNT"/>
 	</resultMap>
 	
+	<!-- 무비아이디로 보드아이디 불러오기 -->
+	<select id="selectBid" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT BOARD_ID
+		FROM BOARD
+		WHERE MOVIE_ID = #{movie_id}
+	</select>
+	
+	<!-- 리뷰등록 -->
+	<insert id="addReview" parameterType="Reply">
+		INSERT INTO REPLY
+		VALUES ('R' || REPLY_RID.NEXTVAL, #{bid}, #{rwriter}, #{rcontent}, SYSDATE, NULL, DEFAULT, DEFAULT, NULL, NULL, #{movie_id}, #{grade_count})
+	</insert>
+	
+	<!-- 리뷰리스트 불러오기 -->
+	<select id="selectReview" parameterType="java.lang.String" resultMap="ReplySet">
+		SELECT *
+		FROM REPLY
+		WHERE BID = #{bid}
+		AND STATUS = 'Y'
+	</select>
+	
 
 	
 	

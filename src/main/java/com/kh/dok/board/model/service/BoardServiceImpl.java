@@ -177,6 +177,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public ArrayList<Reply> selectReply(String bid) {
+		System.out.println("boardService 리플리스트 불러오는 서비스 bid : " + bid);
 
 		return bd.selectReply(sqlSession, bid);
 	}

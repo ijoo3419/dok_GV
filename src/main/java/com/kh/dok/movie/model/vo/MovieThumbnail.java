@@ -21,6 +21,7 @@ public class MovieThumbnail  implements java.io.Serializable{
 	private String mid;
 	private String movie_actor;
 	private String movie_type;
+	private String edit_name;
 	
 	public MovieThumbnail(){}
 
@@ -88,6 +89,10 @@ public class MovieThumbnail  implements java.io.Serializable{
 		return movie_type;
 	}
 
+	public String getEdit_name() {
+		return edit_name;
+	}
+
 	public void setRnum(int rnum) {
 		this.rnum = rnum;
 	}
@@ -152,18 +157,24 @@ public class MovieThumbnail  implements java.io.Serializable{
 		this.movie_type = movie_type;
 	}
 
+	public void setEdit_name(String edit_name) {
+		this.edit_name = edit_name;
+	}
+
 	@Override
 	public String toString() {
 		return "MovieThumbnail [rnum=" + rnum + ", movie_id=" + movie_id + ", movie_title=" + movie_title
 				+ ", movie_etitle=" + movie_etitle + ", movie_content=" + movie_content + ", open_date=" + open_date
 				+ ", director_name=" + director_name + ", production_com=" + production_com + ", movie_age=" + movie_age
 				+ ", genre=" + genre + ", runnig_time=" + runnig_time + ", file_src=" + file_src + ", file_level="
-				+ file_level + ", mid=" + mid + ", movie_actor=" + movie_actor + ", movie_type=" + movie_type + "]";
+				+ file_level + ", mid=" + mid + ", movie_actor=" + movie_actor + ", movie_type=" + movie_type
+				+ ", edit_name=" + edit_name + "]";
 	}
 
 	public MovieThumbnail(int rnum, String movie_id, String movie_title, String movie_etitle, String movie_content,
 			String open_date, String director_name, String production_com, String movie_age, String genre,
-			int runnig_time, String file_src, int file_level, String mid, String movie_actor, String movie_type) {
+			int runnig_time, String file_src, int file_level, String mid, String movie_actor, String movie_type,
+			String edit_name) {
 		super();
 		this.rnum = rnum;
 		this.movie_id = movie_id;
@@ -181,7 +192,9 @@ public class MovieThumbnail  implements java.io.Serializable{
 		this.mid = mid;
 		this.movie_actor = movie_actor;
 		this.movie_type = movie_type;
+		this.edit_name = edit_name;
 	}
+
 	
 	
 }

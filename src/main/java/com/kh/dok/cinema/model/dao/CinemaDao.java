@@ -12,4 +12,6 @@ public interface CinemaDao {
 
 	ArrayList<Cinema> selectCinemaDetail(SqlSessionTemplate sqlSession, Cinema ca);
 
+	ArrayList<Cinema> selectCinemaImageCut(SqlSessionTemplate sqlSession, Cinema ca);
+
 }

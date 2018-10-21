@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.dok.cinema.model.service.CinemaService;
 import com.kh.dok.cinema.model.vo.Cinema;
+import com.kh.dok.movie.model.vo.MovieThumbnail;
 
 @Controller
 public class CinemaController {
@@ -55,8 +56,10 @@ public class CinemaController {
 		ca.setTheaterId(id);
 		
 		ArrayList<Cinema> cinemaDetail = cs.selectCinemaDetail(ca);
+		ArrayList<Cinema> cinemaimagecut = cs.selectCinemaImageCut(ca);
 		
 		model.addAttribute("cinemaDetail",cinemaDetail);
+		model.addAttribute("cinemaimagecut",cinemaimagecut);
 		
 		return "cinema/cinemaDetail";
 	}

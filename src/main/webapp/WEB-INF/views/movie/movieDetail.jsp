@@ -228,6 +228,37 @@ hr {
   cursor: pointer;
 }
 .starR.on{background-position:0 0;}
+
+.reviewre{
+	text-align:center; 
+	width:50px; 
+	margin-top:100px; 
+	margin-left:5px; 
+	font-size:15px; 
+	text-decoration:none !important; 
+	border-bottom: dotted 0px !important; 
+	color:black !important;
+}
+
+.reviewstar{
+	text-align:center; 
+	width:50px; 
+	margin-left:15px; 
+	font-size:15px; 
+	text-decoration:none !important; 
+	border-bottom: dotted 0px !important; 
+	color:black !important;
+}
+.reviewchu{
+	text-align:center; 
+	width:50px; 
+	margin-top:100px; 
+	margin-left:10px; 
+	font-size:15px; 
+	text-decoration:none !important; 
+	border-bottom: dotted 0px !important; 
+	color:black !important;
+}
 </style>		
 		 <title>Massively by HTML5 UP</title>
 		<meta charset="utf-8" />
@@ -255,7 +286,8 @@ hr {
 	<hr>
 
 		<div id="sumnailimage">
-			 <${row.file_src} style="width:298px; height:400px;">
+			 <!-- <${row.file_src} style="width:298px; height:400px;"> -->
+			  <img src="${ contextPath }/resources/uploadFiles/${row.edit_name}" style="width:298px; height:400px;">
 		</div>
 		<div id="data">
 			<c:set var="name" value="${row.movie_age}"/>
@@ -347,7 +379,8 @@ hr {
 			
 		 <c:forEach items="${movieimagecut }" var="row1">
 			 <div class="item">	
-				<${row1.file_src} style="width:500px; height:450px;">
+				<!-- <${row1.file_src} style="width:500px; height:450px;"> -->
+				<img src="${ contextPath }/resources/uploadFiles/${row1.edit_name}" style="width:500px; height:450px;">
 			</div>
 			</c:forEach>	 	
 	    </div>
@@ -367,7 +400,7 @@ hr {
 	    <div id="menu1" class="tab-pane fade" style="margin-left:10%;">
 	    <c:forEach items="${movievideo }" var="row2">
 			 <video width="900" height="600" controls>
-			  <${row2.file_src } type="video/mp4">
+			  <source src="${ contextPath }/resources/uploadFiles/${row2.edit_name}" type="video/mp4">
 			  </video>
 			</c:forEach>
 	    </div>
@@ -386,9 +419,6 @@ hr {
 		
 		
 		<form method="post" id="commentForm" name="commentForm">
-		
-		
-		
 		<div id="user">
 			<div id="grade">
 				<div class="starRev" align="center">
@@ -401,11 +431,18 @@ hr {
 				
 				<a style="text-align:center; width:100px; margin-left:40px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">평점을 입력하세요.</a>
 			</div>
+			<c:if test="${ !empty session.Scope.loginUser }">
 			<div id="gradeinsert">
 				<input type="text" id="comment" name="comment" placeholder="리뷰를 입력해주세요!" style="width:600px; height:98px; margin:0 !important;">
 			</div>
-			<input type="button" value="등록" style="width:100px; height:100px;">
-			<a href="#" onclick="fn_comment('${ result.code}')" class="btn pull-right btn-success">등록</a>
+			<input type="button" onclick="fn_comment('${ result.code}')" value="등록" style="width:100px; height:100px;">
+			</c:if>
+			<c:if test="${ empty session.Scope.loginUser }">
+			<div id="gradeinsert">
+				<input type="text" id="comment" name="comment" placeholder="로그인 후 리뷰를 등록하실 수 있습니다." style="width:600px; height:98px; margin:0 !important;" readonly>
+			</div>
+			<input type="button" onclick="#" value="등록" style="width:100px; height:100px;">
+			</c:if>
 		</div>
 		
 		<input type="hidden" id="movie_id" name="movie_id" value="${ movie_id }"/>
@@ -420,7 +457,7 @@ hr {
 			<a style="text-align:center; width:50px; margin-left:10px; margin-right:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">평점순</a>
 		</div>
 		<div id="usergrade">
-			<table border="1" summary="" style="width:900px; height:600px;">
+			<%-- <table border="1" summary="" style="width:900px; height:600px;">
 				<tr>
 					<td>
 						<div id="gradeimage">
@@ -591,7 +628,7 @@ hr {
 						</div>
 					</td>
 				</tr>
-			</table>
+			</table> --%>
 		</div>
 		
 		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -616,7 +653,7 @@ hr {
 		</article>
 		
 		<script>
-		var star = 1;
+		star = 1;
 		function star1(){
 			star = 1;
 			console.log("star : " + star);
@@ -654,22 +691,31 @@ hr {
 		
 		//댓글 등록하기
     	function fn_comment(code){
+			var comment = $("#comment").val();
+			var movie_id = $("#movie_id").val();
+			console.log("스타 : " + star);
+			console.log("코멘트 : " + comment);
+			console.log("무비 : " + movie_id);
+			console.log("리뷰등록으로 옴");
     		$.ajax({
     			type : 'POST',
-    			url : "addComment.bo",
-    			data : $("#commentForm").serialize(),
+    			url : "addReview.re",
+    			data : {star : star, comment : comment, movie_id : movie_id},
     			success : function(data){
-    					console.log("ㅇㅇㅇ");
-    					getCommentList();
+
+    				/* getCommentList(); */
     					$("#comment").val("");
+    					console.log(data);
     			},
     			error:function(request, status, error){
-    				console.log("댓글등록실패 ajax");
+    				console.log("리뷰뷰등록실패 ajax");
     			}
     		});
     		
     	}
-    	
+		
+		
+		
     	//초기 페이지 로딩시 댓글 불러오기
     	$(function(){
     		getCommentList();
@@ -677,35 +723,133 @@ hr {
     	
     	//댓글 불러오기
     	function getCommentList(){
+			var movie_id = $("#movie_id").val();
+			
     		$.ajax({
     			type:'GET',
-    			url:"commentList.bo",
-    			data:$("#commentForm").serialize(),
+    			url:"ReviewList.re",
+    			data: {movie_id : movie_id},
     			success:function(data){
+    				console.log("리뷰리스트 불러오기 성공");
     				console.log(data);
     				 /* data.list[0]. */
     				var html = "";
     				var cCnt = data.list.length;
     				
+    				var like = '${contextPath }/resources/images/like.png';
+    				var garbage = '${contextPath }/resources/images/garbage.png';
+    				
     				if(data.list.length > 0){
+    					html += "<table border='1' summary='' style='width:900px; height:600px;'>";
     					
-    					for(i = 0; i < data.list.length; i++){
-    						html += "<div>";
-    						html += "<div><table class='table'><tr><td width='100px'><h6><strong>"+ data.list[i].rwriter +"</strong></h6></td>";
-    						html += "<td align='left'>"+data.list[i].rcontent+"</td>";
-    						html += "<td width='200px'>" + data.list[i].rcreate_date + "</td></tr>";
-    						html += "</table></div>";
-    						html += "</div>";
+    					if(data.list.length % 2 == 0){
+    						for(i = 0; i < data.list.length; i+2){
+    							html += "<tr>";
+    							html += "<td>";
+    							html += "<div id='gradeimage'>";
+    							html += "<img src='${contextPath }/resources/images/review.jpg' width='100' height='100'>";
+    							html += "</div>";
+    							html += "<div id='gardetext'>";
+    							html += "<a style='text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i].rwriter + "</a><br>";
+    							/* html += "<a style='text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i].rcreate_date;
+    							html += "</a>"; */
+    							if(data.list[i].grade_count == 1){
+    								html += "<a class='reviewstar'>★☆☆☆☆ </a><br>";
+    							}else if(data.list[i].grade_count == 2){
+    								html += "<a class='reviewstar'>★★☆☆☆ </a><br>";
+    							}else if(data.list[i].grade_count == 3){
+    								html += "<a class='reviewstar'>★★★☆☆ </a><br>";
+    							}else if(data.list[i].grade_count == 4){
+    								html += "<a class='reviewstar'>★★★★☆ </a><br>";
+    							}else if(data.list[i].grade_count == 5){
+    								html += "<a class='reviewstar'>★★★★★ </a><br>";
+    							}else{
+    								html += "<a class='reviewstar'>등록된 평점이 없습니다! </a><br>";
+    							}
+    							html += "<a style='text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i].rcontent + "</a><br>";
+    							html += "<img src='src/main/webapp/resources/images/like.png' width='20' height='20' style='margin-left:10px; margin-top:10px;'>";
+    							html += "<a class='reviewchu'>추천</a>";
+    							html += "<a style='text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i].recommend_count + "</a>";
+    							html += "<img src='" + garbage + "' width='20' height='20' style='margin-left:10px; margin-top:10px;'>";
+     							html += "<a class='reviewre'>신고하기</a>";
+    							html += "</div>";
+    							html += "</td>";
+    							
+    							html += "<td>";
+    							html += "<div id='gradeimage'>";
+    							html += "<img src='${contextPath }/resources/images/review.jpg' width='100' height='100'>";
+    							html += "</div>";
+    							html += "<div id='gardetext'>";
+     							html += "<a style='text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i+1].rwriter + "</a><br>";
+     							html += "<a style='text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i+1].rcreate_date;
+     							html += "</a>";
+    							if(data.list[i+1].grade_count == 1){
+    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★☆☆☆☆ </a><br>";
+    							}else if(data.list[i+1].grade_count == 2){
+    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★★☆☆☆ </a><br>";
+    							}else if(data.list[i+1].grade_count == 3){
+    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★★★☆☆ </a><br>";
+    							}else if(data.list[i+1].grade_count == 4){
+    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★★★★☆ </a><br>";
+    							}else if(data.list[i+1].grade_count == 5){
+    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★★★★★ </a><br>";
+    							}else{
+    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>등록된 평점이 없습니다! </a><br>";
+    							}
+    							html += "<a style='text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i+1].rcontent+ "</a><br>";
+    							html += "<img src='${contextPath }/resources/images/like.png' width='20' height='20' style='margin-left:10px; margin-top:10px;'>";
+    							html += "<a style='text-align:center; width:50px; margin-top:100px; margin-left:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>추천</a>";
+    							html += "<a style='text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i+1].recommend_count + "</a>";
+    							html += "<img src='${contextPath }/resources/images/garbage.png' width='20' height='20' style='margin-left:10px; margin-top:10px;'>";
+    							html += "<a style='text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>신고하기</a>";
+    							html += "</div>";
+    							html += "</td>";
+    							html += "</tr>";
+    						}
+    					}else{
+    						for(i = 0; i < data.list.length; i++){
+    							html += "<tr>";
+    							html += "<td>";
+    							html += "<div id='gradeimage'>";
+    							html += "<img src='${contextPath }/resources/images/review.jpg' width='100' height='100'>";
+    							html += "</div>";
+    							html += "<div id='gardetext'>";
+    							html += "<a style='text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i].rwriter + "</a><br>";
+    							html += "<a style='text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i].rcreate_date + "</a>";
+    							if(data.list[i].grade_count == 1){
+    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★☆☆☆☆ </a><br>";
+    							}else if(data.list[i].grade_count == 2){
+    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★★☆☆☆ </a><br>";
+    							}else if(data.list[i].grade_count == 3){
+    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★★★☆☆ </a><br>";
+    							}else if(data.list[i].grade_count == 4){
+    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★★★★☆ </a><br>";
+    							}else if(data.list[i].grade_count == 5){
+    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★★★★★ </a><br>";
+    							}else{
+    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>등록된 평점이 없습니다! </a><br>";
+    							}
+    							html += "<a style='text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i].rcontent+ "</a><br>";
+    							html += "<img src='${contextPath }/resources/images/like.png' width='20' height='20' style='margin-left:10px; margin-top:10px;'>";
+    							html += "<a class='reviewchu'>추천</a>";
+    							html += "<a style='text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i].recommend_count + "</a>";
+    							html += "<img src='${contextPath }/resources/images/garbage.png' width='20' height='20' style='margin-left:10px; margin-top:10px;'>";
+    							html += "<a style='text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>신고하기</a>";
+    							html += "</div>";
+    							html += "</td>";
+    							html += "</tr>";
+    						}
+    						
     					}
-    				}else{
-    					html += "<div>";
-    	                html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
-    	                html += "</table></div>";
-    	                html += "</div>";
-    				}
+    					html += "</table>";
+    					
+    			}else{
+    				html += "<br><br><br><h3 align='center'>등록된 리뷰가 없습니다. 가장 먼저 리뷰를 남겨보세요!<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></h3>";
+    			}
+    				
     				
     				$("#cCnt").html(cCnt);
-    				$("#commentList").html(html);
+    				$("#usergrade").html(html);
     				
     			},
     			error:function(request, status, error){
@@ -715,6 +859,8 @@ hr {
     	}
 		
 		
+    	
+    	
 		</script>
 		
 		

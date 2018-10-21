@@ -256,13 +256,6 @@ public class MemberDaoImpl implements MemberDao {
 		
 		for(int i=0;i<midList.size();i++){
 			UserMovie um = new UserMovie();
-			/*um.setMid(midList.get(i));
-			ArrayList<String> movieList = (ArrayList)sqlSession.selectList("Member.selectUserMovie",midList.get(i));
-			if(movieList != null){
-			um.setMovieId(movieList);
-			}else{
-				um.setMovieId(moviezero);
-			}*/
 			um.setMid(midList.get(i));
 			ArrayList<String> movieList = (ArrayList)sqlSession.selectList("Member.selectUserMovie",midList.get(i));
 			if(movieList.size() != 0){
@@ -273,7 +266,6 @@ public class MemberDaoImpl implements MemberDao {
 				moviezero.add(history);
 				um.setMovieId(moviezero);
 			}
-			System.out.println(um);
 			umList.add(um);
 		}
 		System.out.println(umList);
@@ -287,10 +279,26 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.update("MyReply.deleteReview", m);
 	}
 
+
 	//한줄평 수정
 	@Override
 	public int updateReview(SqlSessionTemplate sqlSession, MyReply m) {
 		return sqlSession.update("MyReply.updateReview", m);
+
+
+	@Override
+	public ArrayList selectRecommened(SqlSessionTemplate sqlSession, ArrayList<String> fourCount) {
+		
+		ArrayList<String> fourMovie = new ArrayList<String>();
+		
+		for(int i=0 ; i<4 ; i++){
+			String pmovie = fourCount.get(i);
+			String movie = sqlSession.selectOne("Member.selectRecommend", pmovie);
+			fourMovie.add(i, movie);
+		}
+		
+		return fourMovie;
+
 	}
 
 	
