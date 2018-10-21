@@ -83,6 +83,9 @@ public interface MemberDao {
 
 	//리뷰 삭제
 	int deleteReview(SqlSessionTemplate sqlSession, Member m);
+	
+	//소진 추천 영화 조회
+	ArrayList selectRecommened(SqlSessionTemplate sqlSession, ArrayList<String> fourCount);
 
 
      
