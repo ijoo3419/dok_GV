@@ -88,6 +88,29 @@ public interface MovieDao {
 	ArrayList<BoardFile> selectBoardFile(SqlSessionTemplate sqlSession, String id1);
 
 	//파일등록
+
+	int insertBoardfile(SqlSessionTemplate sqlSession, String originFileName, String changeName, String id1,
+			String root1);
+
+	int insertBoardfile1(SqlSessionTemplate sqlSession, String originFileName, String changeName, String id1,
+			String root1);
+
+	int insertBoardfile2(SqlSessionTemplate sqlSession, String originFileName, String changeName, String id1,
+			String root1);
+
+	//박지용 기본키 가져오기
+	ArrayList<Movie> selectPrimaryKey(SqlSessionTemplate sqlSession, String imp);
+
+	//박지용 pay테이블 환불 처리 업데이트
+	int updateRefundPay(SqlSessionTemplate sqlSession, String pay_id);
+
+	//박지용 RESERVATION 테이블 환불 처리 업데이트
+	int updateRefundRes(SqlSessionTemplate sqlSession, String res_id);
+
+	//박지용 Seat테이블 환출 처리 업데이트
+	int updateRefundSeat(SqlSessionTemplate sqlSession, String seat_id);
+
 	int insertBoardfile(SqlSessionTemplate sqlSession, BoardFile bf);
+
 	
 }

@@ -81,6 +81,12 @@
 		<id property="reservation_id" column="RESERVATION_ID"/>
 	</resultMap>
 	
+	<resultMap type="Movie" id="movieResultSetSeven">
+		<id property="seat_id" column="SEAT_ID"/>
+		<id property="reservation_id" column="RESERVATION_ID"/>
+		<id property="pay_id" column="PAY_ID"/>
+	</resultMap>
+	
 	<!-- 박지용 영화 리스트를 가져오는 쿼리문 -->
 	<select id="selectMovieList" resultMap="movieResultSetTwo" parameterType="Movie">
 		SELECT DISTINCT MOVIE.MOVIE_ID, MOVIE.MOVIE_TITLE, FILE_SRC, BOARD_DATE
@@ -183,11 +189,35 @@
 	<update id="updateSeat">
 		UPDATE SEAT SET SEAT_STATUS = '확인' WHERE SEAT_ID = #{seat_id}
 	</update>
+
+	
+	<select id="selectPrimaryKey" resultMap="movieResultSetSeven" parameterType="string">
+		SELECT SEAT.SEAT_ID, RESERVATION.RESERVATION_ID, PAY.PAY_ID
+		FROM SEAT, RESERVATION, PAY
+		WHERE SEAT.SEAT_ID = RESERVATION.SEAT_ID
+		AND RESERVATION.RESERVATION_ID = PAY.RESERVATION_ID
+		AND APPROVAL_NUMBER = #{imp}
+		ORDER BY PAY_ID
+	</select>
+	
+	<update id="updateRefundPay" parameterType="string">
+		UPDATE PAY SET PAY_STATUS = 'REFUND', REFUND_STATUS = 'Y' WHERE PAY_ID = #{pay_id}
+	</update>
+	
+	<update id="updateRefundRes" parameterType="string">
+		UPDATE RESERVATION SET RESERVATION_STATUS = '취소' WHERE RESERVATION_ID = #{res_id}
+	</update>
+	
+	<update id="updateRefundSeat" parameterType="string">
+		UPDATE SEAT SET SEAT_STATUS = '취소' WHERE SEAT_ID = #{seat_id}
+	</update>
+
 <!-- 정태 -->
 	<select id="selectMovieTiltle" resultMap="movieResultSet" parameterType="Movie">
 	  SELECT MOVIE_TITLE, MOVIE_ID
    	 FROM MOVIE
 	</select>
 	
+
 
 </mapper>
