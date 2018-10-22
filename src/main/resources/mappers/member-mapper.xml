@@ -23,7 +23,6 @@
 
 	</resultMap>
 	
-	
 	 <!--  로그인 정보 조회용 쿼리문  / 고성희 -->
 	<select id="loginCheck" resultMap="memberResultSet" parameterType="Member">
 		SELECT * 
@@ -195,7 +194,7 @@
 	<select id="selectUserMovie" parameterType="String" resultType="String">
 		SELECT M.MOVIE_ID
 		FROM RESERVATION R,SEAT S,TURNING T,PLAY P,MOVIE M
-		WHERE R.SEAT_ID = S.SEAT_ID AND S.TURNING_ID = T.TURNING_ID AND T.PLAY_ID = P.PLAY_ID AND P.MOVIE_ID = M.MOVIE_ID AND R.MID=#{mid}
+		WHERE R.SEAT_ID = S.SEAT_ID AND S.TURNING_ID = T.TURNING_ID AND T.PLAY_ID = P.PLAY_ID AND P.MOVIE_ID = M.MOVIE_ID AND R.MID = #{list}
 	</select>
 	
 	
@@ -208,6 +207,13 @@
 	<select id="selectRecommend" resultType="String" parameterType="String">
 		SELECT BF.ORIGIN_NAME
 		FROM BOARD B,BOARD_FILE BF
-		WHERE B.BOARD_ID = BF.BOARD_ID <!-- AND B.MOVIE_ID = #{movie_id} -->
+		WHERE B.BOARD_ID = BF.BOARD_ID AND B.MOVIE_ID = #{pmovie}
+	</select>
+	
+	<!-- 추천 영화 제목 -->
+	<select id="selectTitle" resultType="String" parameterType="String">
+		SELECT BTITLE
+		FROM BOARD
+		WHERE MOVIE_ID = #{pmovie}
 	</select>
 </mapper>

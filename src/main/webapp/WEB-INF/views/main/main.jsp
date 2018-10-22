@@ -1,19 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127101762-1"></script>
+<script async
+	src="https://www.googletagmanager.com/gtag/js?id=UA-127101762-1"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
 
-  gtag('config', 'UA-127101762-1');
+	gtag('config', 'UA-127101762-1');
 </script>
 
 <meta charset="UTF-8">
@@ -134,7 +137,7 @@ to {
 	margin-right: 20px;
 	margin-left: 20px;
 	height: 400px;
-	padding-left: 250px;
+	padding-left: 190px;
 }
 
 .mname {
@@ -160,45 +163,53 @@ to {
 <body>
 	<c:import url="../common/headBar.jsp" />
 	<div class="slideshow-container">
-			<div class="mySlides fade">
-				<div class="numbertext">1 / 4</div>
-					<c:if test="${fn:length(bf) >= 1}">
-						<img src="${contextPath }/resources/uploadFiles/${bf.get(0).edit_name}" style="width: 100%; height: 400px;">
-					</c:if>
-					<c:if test="${fn:length(bf) < 1}">
-						<img src="${contextPath }/resources/images/slide3.jpg" style="width: 100%; height: 400px;">
-					</c:if>
-			</div>
+		<div class="mySlides fade">
+			<c:if test="${fn:length(bf) >= 1}">
+				<img
+					src="${contextPath }/resources/uploadFiles/${bf.get(0).edit_name}"
+					style="width: 100%; height: 400px;">
+			</c:if>
+			<c:if test="${fn:length(bf) < 1}">
+				<img src="${contextPath }/resources/images/slide3.jpg"
+					style="width: 100%; height: 400px;">
+			</c:if>
+		</div>
 
-			<div class="mySlides fade">
-				<div class="numbertext">2 / 4</div>
-					<c:if test="${fn:length(bf) >= 2}">
-						<img src="${contextPath }/resources/uploadFiles/${bf.get(1).edit_name}" style="width: 100%; height: 400px;">
-					</c:if>
-					<c:if test="${fn:length(bf) < 2}">
-						<img src="${contextPath }/resources/images/slide4.jpg" style="width: 100%; height: 400px;">
-					</c:if>
-			</div>
+		<div class="mySlides fade">
+			<c:if test="${fn:length(bf) >= 2}">
+				<img
+					src="${contextPath }/resources/uploadFiles/${bf.get(1).edit_name}"
+					style="width: 100%; height: 400px;">
+			</c:if>
+			<c:if test="${fn:length(bf) < 2}">
+				<img src="${contextPath }/resources/images/slide4.jpg"
+					style="width: 100%; height: 400px;">
+			</c:if>
+		</div>
 
-			<div class="mySlides fade">
-				<div class="numbertext">3 / 4</div>
-					<c:if test="${fn:length(bf) >= 3}">
-						<img src="${contextPath }/resources/uploadFiles/${bf.get(2).edit_name}" style="width: 100%; height: 400px;">
-					</c:if>
-					<c:if test="${fn:length(bf) < 3}">
-						<img src="${contextPath }/resources/images/slide1.jpg" style="width: 100%; height: 400px;">
-					</c:if>
-			</div>
+		<div class="mySlides fade">
+			<c:if test="${fn:length(bf) >= 3}">
+				<img
+					src="${contextPath }/resources/uploadFiles/${bf.get(2).edit_name}"
+					style="width: 100%; height: 400px;">
+			</c:if>
+			<c:if test="${fn:length(bf) < 3}">
+				<img src="${contextPath }/resources/images/slide1.jpg"
+					style="width: 100%; height: 400px;">
+			</c:if>
+		</div>
 
-			<div class="mySlides fade">
-				<div class="numbertext">4 / 4</div>
-					<c:if test="${fn:length(bf) eq 4}">
-						<img src="${contextPath }/resources/uploadFiles/${bf.get(3).edit_name}" style="width: 100%; height: 400px;">
-					</c:if>
-					<c:if test="${fn:length(bf) < 4}">
-						<img src="${contextPath }/resources/images/slide2.jpg" style="width: 100%; height: 400px;">
-					</c:if>
-			</div>
+		<div class="mySlides fade">
+			<c:if test="${fn:length(bf) eq 4}">
+				<img
+					src="${contextPath }/resources/uploadFiles/${bf.get(3).edit_name}"
+					style="width: 100%; height: 400px;">
+			</c:if>
+			<c:if test="${fn:length(bf) < 4}">
+				<img src="${contextPath }/resources/images/slide2.jpg"
+					style="width: 100%; height: 400px;">
+			</c:if>
+		</div>
 	</div>
 	<br>
 
@@ -257,44 +268,85 @@ to {
 	</div>
 
 	<div class="movie">
+		<c:set var="rlist" value="${rlist}" scope="session" />
 		<div class="ranking">
 			<ul class="rul">
-				<li class="rank"><img class="rimage"
-					src="${contextPath }/resources/images/slide1.jpg"
-					style="width: 100%; height: 70%;">
-					<div class="mname">
-						<p>영화1</p>
-					</div>
+				<li class="rank"><c:if test="${ empty sessionScope.loginUser }">
+						<img class="rimage"
+							src="${contextPath }/resources/images/movie/1046.jpg"
+							style="width: 100%; height: 70%;">
+						<div class="mname">
+							<p>그레코로만</p>
+						</div>
+					</c:if> <c:if test="${ !empty sessionScope.loginUser }">
+						<img class="rimage"
+							src="${contextPath }/resources/images/movie/${rlist.get(0)}"
+							style="width: 100%; height: 70%;">
+						<div class="mname">
+							<p>${rlist.get(7) }</p>
+						</div>
+					</c:if>
+
 					<div>
 						<button id="detail" onclick="location.href=''">상세보기</button>
 						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>
 					</div></li>
-				<li class="rank"><img class="rimage"
-					src="${contextPath }/resources/images/slide2.jpg"
-					style="width: 100%; height: 70%;">
-					<div class="mname">
-						<p>영화2</p>
-					</div>
+				<li class="rank"><c:if test="${ empty sessionScope.loginUser }">
+						<img class="rimage"
+							src="${contextPath }/resources/images/movie/1044.jpg"
+							style="width: 100%; height: 70%;">
+						<div class="mname">
+							<p>밝은 미래</p>
+						</div>
+					</c:if> <c:if test="${ !empty sessionScope.loginUser }">
+						<img class="rimage"
+							src="${contextPath }/resources/images/movie/${rlist.get(1)}"
+							style="width: 100%; height: 70%;">
+						<div class="mname">
+							<p>${rlist.get(6) }</p>
+						</div>
+					</c:if>
+
 					<div>
 						<button id="detail">상세보기</button>
 						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>
 					</div></li>
-				<li class="rank"><img class="rimage"
-					src="${contextPath }/resources/images/slide3.jpg"
-					style="width: 100%; height: 70%;">
-					<div class="mname">
-						<p>영화3</p>
-					</div>
+				<li class="rank"><c:if test="${ empty sessionScope.loginUser }">
+						<img class="rimage"
+							src="${contextPath }/resources/images/movie/1051.jpg"
+							style="width: 100%; height: 70%;">
+						<div class="mname">
+							<p>아버지의 마음은</p>
+						</div>
+					</c:if> <c:if test="${ !empty sessionScope.loginUser }">
+						<img class="rimage"
+							src="${contextPath }/resources/images/movie/${rlist.get(2)}"
+							style="width: 100%; height: 70%;">
+						<div class="mname">
+							<p>${rlist.get(5) }</p>
+						</div>
+					</c:if>
+
 					<div>
 						<button id="detail">상세보기</button>
 						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>
 					</div></li>
-				<li class="rank"><img class="rimage"
-					src="${contextPath }/resources/images/slide4.jpg"
-					style="width: 100%; height: 70%;">
-					<div class="mname">
-						<p>영화4</p>
-					</div>
+				<li class="rank"><c:if test="${ empty sessionScope.loginUser }">
+						<img class="rimage"
+							src="${contextPath }/resources/images/movie/1059.jpg"
+							style="width: 100%; height: 70%;">
+						<div class="mname">
+							<p>위로</p>
+						</div>
+					</c:if> <c:if test="${ !empty sessionScope.loginUser }">
+						<img class="rimage"
+							src="${contextPath }/resources/images/movie/${rlist.get(3)}"
+							style="width: 100%; height: 70%;">
+						<div class="mname">
+							<p>${rlist.get(4) }</p>
+						</div>
+					</c:if>
+
 					<div>
 						<button id="detail">상세보기</button>
 						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>
