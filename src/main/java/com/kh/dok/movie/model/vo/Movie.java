@@ -56,6 +56,8 @@ public class Movie  implements java.io.Serializable{
 	
 	private String seat_row;
 	
+	private String edit_name;
+	
 	//황이주 추가
 	private String mid;
 	
@@ -67,7 +69,7 @@ public class Movie  implements java.io.Serializable{
 			String movieroom_name, String play_status, String area_id, String area_name, String area_level,
 			String area_parents, String theater_id, String theater_name, String movie_type, String file_src,
 			int pay_count, String seat_id, String seat_name, String msg, String reservation_id, String imp,
-			String pay_id, String seat_row, String mid) {
+			String pay_id, String seat_row, String edit_name, String mid) {
 		super();
 		this.movie_id = movie_id;
 		this.movie_title = movie_title;
@@ -103,6 +105,7 @@ public class Movie  implements java.io.Serializable{
 		this.imp = imp;
 		this.pay_id = pay_id;
 		this.seat_row = seat_row;
+		this.edit_name = edit_name;
 		this.mid = mid;
 	}
 
@@ -240,6 +243,10 @@ public class Movie  implements java.io.Serializable{
 
 	public String getSeat_row() {
 		return seat_row;
+	}
+
+	public String getEdit_name() {
+		return edit_name;
 	}
 
 	public String getMid() {
@@ -382,6 +389,10 @@ public class Movie  implements java.io.Serializable{
 		this.seat_row = seat_row;
 	}
 
+	public void setEdit_name(String edit_name) {
+		this.edit_name = edit_name;
+	}
+
 	public void setMid(String mid) {
 		this.mid = mid;
 	}
@@ -398,8 +409,10 @@ public class Movie  implements java.io.Serializable{
 				+ ", theater_id=" + theater_id + ", theater_name=" + theater_name + ", movie_type=" + movie_type
 				+ ", file_src=" + file_src + ", pay_count=" + pay_count + ", seat_id=" + seat_id + ", seat_name="
 				+ seat_name + ", msg=" + msg + ", reservation_id=" + reservation_id + ", imp=" + imp + ", pay_id="
-				+ pay_id + ", seat_row=" + seat_row + ", mid=" + mid + "]";
+				+ pay_id + ", seat_row=" + seat_row + ", edit_name=" + edit_name + ", mid=" + mid + "]";
 	}
+
+	
 
 	
 }

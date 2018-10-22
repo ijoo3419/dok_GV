@@ -35,6 +35,8 @@
 		<result property="movieroom_id" column="MOVIEROOM_ID"/>
 		<result property="play_status" column="PLAY_STATUS"/>
 		<result property="file_src" column="FILE_SRC"/>
+		<result property="edit_name" column="EDIT_NAME"/>
+		
 	</resultMap>
 	
 	<!-- 박지용 상영 리스트를 ResultSet -->
@@ -94,7 +96,7 @@
 	
 	<!-- 박지용 영화 리스트를 가져오는 쿼리문 -->
 	<select id="selectMovieList" resultMap="movieResultSetTwo" parameterType="Movie">
-		SELECT DISTINCT MOVIE.MOVIE_ID, MOVIE.MOVIE_TITLE, FILE_SRC, BOARD_DATE
+		SELECT DISTINCT MOVIE.MOVIE_ID, MOVIE.MOVIE_TITLE, EDIT_NAME, FILE_SRC, BOARD_DATE
 		FROM MOVIE, PLAY, BOARD, BOARD_FILE
 		WHERE MOVIE.MOVIE_ID = PLAY.MOVIE_ID
 		AND MOVIE.MOVIE_ID = BOARD.MOVIE_ID

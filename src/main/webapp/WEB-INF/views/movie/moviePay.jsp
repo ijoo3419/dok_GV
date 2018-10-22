@@ -608,7 +608,7 @@ a{
 						$tdhiddenTitle.val(data[key].movie_id);
 						$tdTwo.text(data[key].movie_title);
 						
-						$tdOne.append("<" + data[key].file_src + "style='width:150px; height:200px;'>");
+						$tdOne.append("<img src=${ contextPath }/resources/uploadFiles/" + data[key].edit_name + "style='width:150px; height:200px;'>");
 						$tdOne.append($tdhiddenTitle);
 						$trOne.append($tdOne);
 						$table.append($trOne);
