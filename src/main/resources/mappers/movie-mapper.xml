@@ -224,6 +224,7 @@
 		UPDATE SEAT SET SEAT_STATUS = '취소' WHERE SEAT_ID = #{seat_id}
 	</update>
 	
+	
 	<!-- 박지용 -->
 	<select id="selectSeatIdTree" resultMap="movieResultSetEight" parameterType="string">
 		SELECT TURNING_ID, SEAT_ROW 
