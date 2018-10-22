@@ -34,6 +34,9 @@
 <title>독GV</title>
 </head>
 <style>
+body{
+	background:#D8D8D8;
+}
 #myModal {
 	overflow: hidden ;
 	width: 1400px ;
@@ -548,6 +551,9 @@ a{
 									<img src="${ contextPath }/resources/images/plusBtn.PNG" width="30" height="30">
 								</button>
 							</a>
+							<br>
+							<br>
+							<button class="seatPay-btn-right" onClick="window.location.reload()">검색 지우기</button>
 							<input type="hidden" class="movie-id" value="">
 						</div>
 					</div>
@@ -649,6 +655,11 @@ a{
 		var run = 0;
 		var dateRun = 0;
 		
+		/* $('.ui-datepicker-calendar').find('tbody').click(function(){
+			alert('클릭');
+			run = 0;
+		}); */
+		
 		/* 모달 3 체크용 변수 */
 		var treeCheck = 0; //모달3에서 체크용 변수
 		var treePlue = 0;
@@ -656,6 +667,7 @@ a{
 			
 		window.onload = function () {
 			treeCheck = $("#movieCount option:selected").val();
+			$("#myModal").show();
 		}
 		
 		var userSeat = new Array(); //유저가 선택한 좌석
@@ -751,10 +763,6 @@ a{
 		
 		$(document).ready(function(){
 			   $('#Progress_Loading').show(); //첫 시작시 로딩바를 숨겨준다.
-		})
-		
-		$(function myFunction(){
-			run = 0;
 		});
 		
 		$(function foo(){
@@ -920,13 +928,14 @@ a{
 					var userId = "${ sessionScope.loginUser.mid }";
 					var price = $(".seatPay-price").find("#td-web-fontTitle").val();
 			       	var msg = $('.hiddenTurning').val();
+			       	var seatName = $(".seatPay").find("tr").eq(5).find('td').text();
 			       	
 					$.ajax({
 			    		url:"insertSeat.mo",
 			    		type:"post",
 			    		traditional : true,
 			    		data: {turningId: turningId, movieRoomId: movieRoomId, seatSplitAjax: seatSplitAjax, 
-			    			   userId: userId, price: price, excelSplitAjax: excelSplitAjax},
+			    			   userId: userId, price: price, excelSplitAjax: excelSplitAjax, seatName: seatName},
 			    		success:function(data){
 			    			if(data == 0){
 			    				alert("이미 예약된 좌석입니다.");
@@ -943,7 +952,7 @@ a{
 			    				alert("다시 예매 해주세요");
 			    			});
 			    		}
-			    	});
+			    	}); 
 			    	
 				});
 			    
@@ -1199,17 +1208,17 @@ a{
 						    						if(y == 14){
 						    							$div.append("<br>");
 						    						}
-						    					}else if(data[i][y] == 'P'){
+						    					}else if(data[i][y] == '.'){
+						    						$div.append("&nbsp;&nbsp;");
+						    						if(y == 14){
+						    							$div.append("<br>");
+						    						}
+						    					}else{
 						    						var $checkBox = $("<label class='checkbox-wrap'><input type='checkbox' name='checkbox' value='"+ i + "/" + y +"' class='checkNot'><i class='check-icon-pay'><font class='checkFont'>X</font></i></label>");
 						    						$div.append($checkBox);
 						    						++numberCheck;
 						    						rowCheckIf = 1;
 						    						rowCheckIfTwo = 1;
-						    						if(y == 14){
-						    							$div.append("<br>");
-						    						}
-						    					}else{
-						    						$div.append("&nbsp;&nbsp;");
 						    						if(y == 14){
 						    							$div.append("<br>");
 						    						}

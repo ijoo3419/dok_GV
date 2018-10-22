@@ -138,10 +138,10 @@ public class MemberController {
 	   System.out.println("loginCheck MemberController : " + m);
 	   
       try {
-    	ArrayList<String> recommendUser = new ArrayList<String>();
+		model.addAttribute("loginUser", ms.loginMember(m));
+		/*ArrayList<String> recommendUser = new ArrayList<String>();
     	ArrayList<String> recommendMovie = new ArrayList<String>();
     	ArrayList<String> fourCount = new ArrayList<String>();
-		model.addAttribute("loginUser", ms.loginMember(m));
 		String email = m.getEmail();
 		String mid = ms.selectMid(email);
 		System.out.println(mid);
@@ -248,7 +248,7 @@ public class MemberController {
 		}
 		
 		ArrayList fourMovie = ms.selectRecommend(fourCount);
-		System.out.println("최종 추천 영화는"+fourMovie);
+		System.out.println("최종 추천 영화는"+fourMovie);*/
 		return "main/main";
       	}
    

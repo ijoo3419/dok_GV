@@ -112,5 +112,8 @@ public interface MovieDao {
 
 	int insertBoardfile(SqlSessionTemplate sqlSession, BoardFile bf);
 
+	//박지용 Seat Row와 TU_ID가져오기
+	ArrayList<Movie> selectSeatIdTree(SqlSessionTemplate sqlSession, String seat_id);
+
 	
 }

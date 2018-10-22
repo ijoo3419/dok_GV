@@ -33,7 +33,7 @@ public class cellClass {
 		String filePath = root + "\\movieRoomFile";
 		
 		
-		System.out.println("name 은 : " + name);
+		//System.out.println("name 은 : " + name);
 		try {
 		
 			
@@ -42,9 +42,9 @@ public class cellClass {
 
 			//sheet수 취득
 			int sheetCn = workbook.getNumberOfSheets();
-			System.out.println("sheet수 : " + sheetCn);
+			//System.out.println("sheet수 : " + sheetCn);
 
-				System.out.println("취득하는 sheet 이름 : " + workbook.getSheetName(0));
+				//System.out.println("취득하는 sheet 이름 : " + workbook.getSheetName(0));
 
 				//0번째 sheet 정보 취득
 				XSSFSheet sheet = workbook.getSheetAt(0);
@@ -195,10 +195,7 @@ public class cellClass {
 				cell = sheet.getRow(Integer.parseInt(arr[0])).getCell(Integer.parseInt(arr[1]));
 				
 				if(cell.getStringCellValue().equals("O")){
-					sheet.getRow(Integer.parseInt(arr[0])).getCell(Integer.parseInt(arr[1])).setCellValue("P");	//값 넣기
-				}
-				else if(cell.getStringCellValue().equals("P")){
-					check = 0;
+					sheet.getRow(Integer.parseInt(arr[0])).getCell(Integer.parseInt(arr[1])).setCellValue(name);	//값 넣기
 				}
 				else{
 					check = 0;
@@ -224,6 +221,59 @@ public class cellClass {
 		
 		return check;
 	}
+	
+	//박지용 특정 셀값 수정하기
+		public int insertPayRefundCell(String name, String tableName, HttpServletRequest request){
+
+			FileInputStream inputStream = null;
+			FileOutputStream outputStream = null;
+			XSSFWorkbook workbook = null;
+			XSSFCell cell;
+			int check = 1;
+
+			String root = request.getSession().getServletContext().getRealPath("resources");
+			
+			String filePath = root + "\\movieRoomFile";
+			
+			try {
+					inputStream = new FileInputStream(filePath + "\\" + tableName +".xlsx");
+					workbook = new XSSFWorkbook(inputStream);
+					
+					XSSFSheet sheet = workbook.getSheetAt(0);	//Class Data 시트
+					
+					for(int i = 1; i <= 15; i ++){
+						for(int y = 1; y <= 15; y++){
+							cell = sheet.getRow(i).getCell(y);
+							
+							if(cell.getStringCellValue().equals(name)){
+								sheet.getRow(i).getCell(y).setCellValue("O");	//값 넣기
+							}
+							else{
+								check = 0;
+							}
+						}
+					}
+					
+					outputStream = new FileOutputStream(filePath + "\\" + tableName +".xlsx");
+					workbook.write(outputStream);
+					outputStream.close();
+					
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}finally{
+				try {
+					inputStream.close();
+					workbook.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+			}
+			
+			return check;
+		}
 
 
 	//여기부터 정태부분 회차등록할 때 상영관 파일을 만들어주는 것~~
