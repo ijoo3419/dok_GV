@@ -323,10 +323,7 @@ input[type=text]:placeholder, input[type=password]:placeholder {
 	<div class="fadeIn second">
 		<a id="kakao-login-btn"></a>
 		<script type='text/javascript'>
-  			//<![CDATA[
-    			// ����� ���� JavaScript Ű�� ������ �ּ���.
     			Kakao.init('faa355a32a09b6c1847ad4dc9444637b');
-   			 	// īī�� �α��� ��ư�� �����մϴ�.
     			Kakao.Auth.createLoginButton({
       				container: '#kakao-login-btn',
       				success: function(authObj) {
@@ -336,11 +333,9 @@ input[type=text]:placeholder, input[type=password]:placeholder {
       					console.log("refreshToken : " + refreshToken);
       					
       				if(accessToken){
-        			// �α��� ������, API�� ȣ���մϴ�.
         			Kakao.API.request({
           				url: '/v2/user/me',
           				success: function(res) {
-            				/* alert(JSON.stringify(res)); */
             				
             				var str = JSON.stringify(res);
             				var id = str.substring(str.indexOf('id'), str.length);
@@ -359,20 +354,11 @@ input[type=text]:placeholder, input[type=password]:placeholder {
             				var end_nick = nickEnd.indexOf(',');
             				var nickname = nickEnd.substring(start_nick + 2, end_nick - 1);
             				
-            				console.log("useremail : " + useremail);
-            				
             				document.kakaoform.email.value = useremail;
             				document.kakaoform.idNum.value = idNum;
             				document.kakaoform.nickname.value = nickname;
             				document.kakaoform.refreshToken.value = refreshToken;
             				document.kakaoform.submit();
-            				
-            				console.log("useremail : " + email);
-            				console.log("idNum : " + idNum);
-            				console.log("nickname : " + nickname);
-            				console.log("refreshToken : " + refreshToken);
-            				
-            
           				},
           				fail: function(error) {
             				alert(JSON.stringify(error));
@@ -384,7 +370,6 @@ input[type=text]:placeholder, input[type=password]:placeholder {
         			alert(JSON.stringify(err));
       			}
     		});
-  		//]]>
 		</script>
 		
 		<form action="kakaologin.me" form="post" name="kakaoform">

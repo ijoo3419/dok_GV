@@ -73,10 +73,12 @@
 					</div>
 					<br>
 					<h2 align="left">3.파일첨부</h2>
-					<div class="col-12">
+					<div class="col-12" >
 						<input type="file" name="file">
-					</div>
-				<button type="submit" class="button" onclick="requiremp();">문의등록</button>
+					</div><br><br><br><br>
+					<div align="center">
+				<button type="submit" class="button" onclick="requiremp();" align="center">문의등록</button>
+				</div>
 				
 				<script>
 					function requiremp(){

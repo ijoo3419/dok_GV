@@ -15,6 +15,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <style>
+#grade{
+	display:inline-block;
+	margin-left:20px;
+	border: solid 1px;
+	width:200px;
+	height:100px;
+	float:left;
+}
 #main > .post.featured {
     text-align: left !important;
 }
@@ -178,7 +186,7 @@ hr {
     #gardetext{
     	display:inline-blick;
     	float:left;
-    	width:200px;
+    	width:650px;
     	
     	
     }
@@ -523,7 +531,6 @@ hr {
       </div>
 
 
------------------------------------------------------------------------------------------------------------------------------
 <div id="usergrade">
       <table>
       <tr>
@@ -565,7 +572,6 @@ hr {
       </div>
 
 
------------------------------------------------------------------------------------------------------------------------------
 <div id="usergrade">
       <table>
       <tr>
@@ -607,7 +613,6 @@ hr {
       </div>
 
 
------------------------------------------------------------------------------------------------------------------------------
 <div id="usergrade">
       <table>
       <tr>
@@ -649,7 +654,6 @@ hr {
       </div>
 
 
------------------------------------------------------------------------------------------------------------------------------
 <div id="usergrade">
       <table>
       <tr>
