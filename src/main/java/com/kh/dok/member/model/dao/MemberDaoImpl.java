@@ -257,7 +257,9 @@ public class MemberDaoImpl implements MemberDao {
 		for(int i=0;i<midList.size();i++){
 			UserMovie um = new UserMovie();
 			um.setMid(midList.get(i));
-			ArrayList<String> movieList = (ArrayList)sqlSession.selectList("Member.selectUserMovie",midList.get(i));
+			String list = midList.get(i);
+			ArrayList<String> movieList = (ArrayList)sqlSession.selectList("Member.selectUserMovie",list);
+			System.out.println(movieList);
 			if(movieList.size() != 0){
 				um.setMovieId(movieList);
 			}else{
@@ -294,15 +296,21 @@ public class MemberDaoImpl implements MemberDao {
 		ArrayList<String> fourMovie = new ArrayList<String>();
 		
 		for(int i=0 ; i<4 ; i++){
+			int k = i + 3;
 			String pmovie = fourCount.get(i);
+			if(pmovie.equals("MO1080")){
+				i--;
+				continue;
+			}
 			String movie = sqlSession.selectOne("Member.selectRecommend", pmovie);
+			String movieTitle = sqlSession.selectOne("Member.selectTitle",pmovie);
 			fourMovie.add(i, movie);
+			fourMovie.add(i+1, movieTitle);
 		}
-		
+
 		return fourMovie;
 
 	}
 
-	
 
 }

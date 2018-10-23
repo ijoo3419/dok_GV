@@ -166,10 +166,10 @@ public class AdminController {
 
 			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 
-			ArrayList<ReportHistory> rlist = as.searchBlack(pi,sc);
+			ArrayList<ReportHistory> relist = as.searchBlack(pi,sc);
 
 			model.addAttribute("pi",pi);
-			model.addAttribute("rlist",rlist);
+			model.addAttribute("relist",relist);
 			model.addAttribute("tab",tab);
 			model.addAttribute("sc",sc);
 

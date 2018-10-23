@@ -90,6 +90,7 @@ public interface MemberDao {
 
 	//소진 추천 영화 조회
 	ArrayList selectRecommened(SqlSessionTemplate sqlSession, ArrayList<String> fourCount);
+	
 
 
 
