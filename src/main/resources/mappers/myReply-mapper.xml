@@ -31,7 +31,6 @@
 		JOIN BOARD_FILE BF ON(R.BID = BF.BOARD_ID)
 		WHERE BF.FILE_LEVEL = 1
 		AND R.RWRITER = #{ mid }
-		AND R.DIVISION = 'MOVIE'
 		AND R.STATUS = 'Y'
 	</select>
 	
