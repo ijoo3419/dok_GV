@@ -128,7 +128,7 @@ img {
 															<td></td>
 														</c:when>
 														<c:when test="${ status eq '취소불가_리뷰가능' }">
-															<td><img id="review" src="${ contextPath }/resources/images/member/rating.png" width="25" height="25" style="margin-left:10px; margin-top:10px;"></td>
+															<td><img id="review" src="${ contextPath }/resources/images/member/rating.png" width="25" height="25" style="margin-left:10px; margin-top:10px;" onclick='reviews("${ bk.movie_id }");'></td>
 														</c:when>
 													</c:choose>
 												</tr>
@@ -157,100 +157,57 @@ img {
 			
 		<script>
 		
-		$(function(){
-			$("#tableArea tr").find("#cancel").click(function(){
-				
-				var str = ""
-				var tdArr = new Array();
-				
-				var tr = $(this);
-				var td = tr.children();
-				
-				alert("클릭");
-				
-				td.each(function(i){
-					tdArr.push(td.eq(i).text());
-				});
-				
-				alert("tdArr" + tdArr);
-				
-			});
-		});
+		/* 리뷰 등록하러 가기 */
+		function reviews(movie_id){
+			
+			if(confirm('해당 영화에 대한 리뷰를 남기시겠습니까?')){
+				location.href='movieDetail.mo?id=' + movie_id;
+			}
+			
+			
+		}
 		
-		$(function(){
-			$("#tableArea tr").find("#review").click(function(){
-				
-				var str = ""
-				var tdArr = new Array();
-				
-				var tr = $(this);
-				var td = tr.children();
-				
-				alert("클릭");
-				
-				td.each(function(i){
-					tdArr.push(td.eq(i).text());
-				});
-				
-				alert("tdArr" + tdArr);
-				
-			});
-		});
 		
-		/* $('#cancel').click(function(){
-			$('#myModal').show();
-		}); */
-
-      
-      $(function(){
-         $("#tableArea tr").find("#cancel").click(function(){
-            
-            var str = ""
-            var tdArr = new Array();
-            
-            var tr = $(this);
-            var td = tr.children();
-            
-            var payNumber = $(this).parent().parent().find('td').eq(0).text(); //예매번호 가져오기(박지용)
-            
-            //환불 신청 Ajax(박지용)
-	         $.ajax({
-	            url:"updateRefund.mo", 
-	           type:"post",
-	           data:{payNumber:payNumber},
-	           success:function(data){
-	              
-	           },
-	           error:function(){
-	              console.log("에러!");
-	           }
+		
+		
+		/* 환불 + status 변경 */
+		 var payNumver = "";
+	      
+	      $(function(){
+	         $("#tableArea tr").find("#cancel").click(function(){
+	            
+	            var str = ""
+	            var tdArr = new Array();
+	            
+	            var tr = $(this);
+	            var td = tr.children();
+	            
+	            payNumber = $(this).parent().parent().find('td').eq(0).text(); //예매번호 가져오기(박지용)
+	            
+	            $('#myModal').show();
+	            
 	         });
-            
-            /* td.each(function(i){
-               tdArr.push(td.eq(i).text());
-            });
-            
-            alert("tdArr" + tdArr); */
-            
-         });
-      });
-      
-      /* $('#cancel').click(function(){
-         $('#myModal').show();
-      }); */
-      
-       function cancelBooking(){
-          alert("status 취소로 바꾸러 가기");
-          
-          var mid = "${ sessionScope.loginUser.mid }";
-          var resId = $('.table-wrapper').find('table').find('tbody').eq(0).find('tr').text();
-          
-          alert(mid + resId);
-       }
-       
-       function cancelCancel(){
-          $('#myModal').hide();
-       }
+	      });
+	      
+	       function cancelBooking(){
+	          //환불 신청 Ajax(박지용)
+	            $.ajax({
+	              url:"updateRefund.mo", 
+	              type:"post",
+	              data:{payNumber: payNumber},
+	              success:function(data){
+	                 alert(data);
+	                 $('#myModal').hide();
+	              },
+	              error:function(){
+	                 console.log("에러!");
+	              }
+	            });
+	       }
+	       
+	       function cancelCancel(){
+	          $('#myModal').hide();
+	       }
         
     </script>
 

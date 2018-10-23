@@ -17,6 +17,7 @@ public class BookingHistory {
 	private String reservation_status;
 	private String status;
 	private String seats;
+	private String movie_id;
 	
 	public BookingHistory(){}
 
@@ -116,18 +117,26 @@ public class BookingHistory {
 		this.seats = seats;
 	}
 
+	public String getMovie_id() {
+		return movie_id;
+	}
+
+	public void setMovie_id(String movie_id) {
+		this.movie_id = movie_id;
+	}
+
 	@Override
 	public String toString() {
 		return "BookingHistory [mid=" + mid + ", approval_number=" + approval_number + ", movie_title=" + movie_title
 				+ ", theater_name=" + theater_name + ", movieroom_name=" + movieroom_name + ", seat_row=" + seat_row
 				+ ", seat_column=" + seat_column + ", reservation_date=" + reservation_date + ", turning_day="
 				+ turning_day + ", reservation_status=" + reservation_status + ", status=" + status + ", seats=" + seats
-				+ "]";
+				+ ", movie_id=" + movie_id + "]";
 	}
 
 	public BookingHistory(int mid, String approval_number, String movie_title, String theater_name,
 			String movieroom_name, String seat_row, String seat_column, String reservation_date, String turning_day,
-			String reservation_status, String status, String seats) {
+			String reservation_status, String status, String seats, String movie_id) {
 		super();
 		this.mid = mid;
 		this.approval_number = approval_number;
@@ -141,6 +150,7 @@ public class BookingHistory {
 		this.reservation_status = reservation_status;
 		this.status = status;
 		this.seats = seats;
+		this.movie_id = movie_id;
 	}
 
 	
