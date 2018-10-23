@@ -11,6 +11,7 @@ import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.board.model.vo.BoardNBoardFile;
 import com.kh.dok.board.model.vo.SearchCondition1;
+import com.kh.dok.cinema.model.vo.Cinema;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.review.model.vo.Reply;
 
@@ -26,7 +27,7 @@ public interface BoardDao {
 
 	int updateCount(SqlSessionTemplate sqlSession, String board_id) throws BoardSelectOneException;
 
-	int getlistCount(SqlSessionTemplate sqlSession, String mId);
+	int getlistCount(SqlSessionTemplate sqlSession, String mid);
 
 	ArrayList<BoardNBoardFile> selectNoticeList(SqlSessionTemplate sqlSession, PageInfo pi, String mId);
 
@@ -39,11 +40,25 @@ public interface BoardDao {
 	int getInquirelistCount(SqlSessionTemplate sqlSession, String TheaterId);
 
 	String getTheaterId(SqlSessionTemplate sqlSession, String mid);
-  
+
 	ArrayList<BoardNBoardFile> selectINquireList(SqlSessionTemplate sqlSession, PageInfo pi, String theaterId);
 
 	int addComment(SqlSessionTemplate sqlSession, Reply reply);
 
 	ArrayList<Reply> selectReply(SqlSessionTemplate sqlSession, String bid);
+
+	BoardNBoardFile selectInquireOne(SqlSessionTemplate sqlSession, String board_id);
+
+	int updateNotice(SqlSessionTemplate sqlSession, Board b, BoardFile bf)  throws BoardInsertException;
+
+	int deleteNotice(SqlSessionTemplate sqlSession, String board_id);
+
+	int insertInquireMp(SqlSessionTemplate sqlSession, Board b, BoardFile bf)  throws BoardInsertException;
+
+	ArrayList<BoardNBoardFile> selectMpInquireList(SqlSessionTemplate sqlSession, PageInfo pi, String mid);
+
+	ArrayList<Cinema> cinemaList(SqlSessionTemplate sqlSession);
+
+	//ArrayList<Reply> selectrlist(SqlSessionTemplate sqlSession, PageInfo pi, String theaterId);
 
 }

@@ -61,14 +61,19 @@
 					<div class="row gtr-uniform">
 						<div class="col-6 col-12-xsmall">
 							<h2 align="left">1.제목</h2>
-							<input type="text" name="btitle" id="btitle" placeholder="공지사항의 제목을 입력해주세요." />				
+							<input type="text" name="btitle" id="btitle" placeholder="공지사항의 제목을 입력해주세요." value="${ bbf.btitle }"/>				
 						</div>
 					</div>
 					<br>
 					<h2 align="left">2.내용</h2>
 				
 					<div class="col-12">
-						<textarea name="bcontent" id="bcontent" placeholder="공지사항의 내용을 입력해주세요." rows="6"></textarea>
+						<textarea name="bcontent" id="bcontent" placeholder="공지사항의 내용을 입력해주세요." rows="6">${ bbf.bcontent }</textarea>
+						<br><br>
+						<div id="image">
+                            <img src="${ contextPath }/resources/uploadFiles/${bbf.edit_name}.jpg" style="width:300px; hieght:400px;">
+                            	<!-- <${ bbf.file_src } style="width:500px; height:450px;"> -->
+                         	</div>
 					</div>
 					<br>
 					<h2 align="left">3.파일첨부</h2>
@@ -76,10 +81,16 @@
 						<input type="file" name="file">
 					</div>
 				<!-- <button class="button"><a href="insertNotice.bo">공지등록</a></button> -->
-				<button type="submit" class="button">수정하기</button>
+				<button type="submit" class="button" onclick="modifyNotice();">수정하기</button>
 				
 				</div>
 				</form>
+				
+				<script>
+					function modifyNotice(){
+						location.href = "modifyManageNotice.bo?board_id=" + board_id;
+					}
+				</script>
 				
 			</article>
 		</div>

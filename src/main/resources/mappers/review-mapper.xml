@@ -17,6 +17,7 @@
 		<result property="theater_id" column="THEATER_ID"/>
 		<result property="movie_id" column="MOVIE_ID"/>
 		<result property="grade_count" column="GRADE_COUNT"/>
+		<result property="nickname" column="NICKNAME"/>
 	</resultMap>
 	
 	<!-- 무비아이디로 보드아이디 불러오기 -->
@@ -34,12 +35,18 @@
 	
 	<!-- 리뷰리스트 불러오기 -->
 	<select id="selectReview" parameterType="java.lang.String" resultMap="ReplySet">
-		SELECT *
-		FROM REPLY
-		WHERE BID = #{bid}
-		AND STATUS = 'Y'
+		SELECT REPLY.RID, REPLY.BID, REPLY.RWRITER, REPLY.RCONTENT, REPLY.RCREATE_DATE, REPLY.RMODIFY_DATE, REPLY.STATUS, REPLY.RECOMMEND_COUNT, REPLY.DIVISION, REPLY.THEATER_ID, REPLY.MOVIE_ID, REPLY.GRADE_COUNT, MEMBER.NICKNAME
+		FROM REPLY, MEMBER
+		WHERE REPLY.RWRITER = MEMBER.MID
+		AND BID = #{bid}
+		AND REPLY.STATUS = 'Y'
 	</select>
 	
+	<!-- 댓글 좋아요 -->
+	<update id="likeComment">
+	UPDATE REPLY SET RECOMMEND_COUNT = RECOMMEND_COUNT + 1
+	WHERE RID = #{ rid }
+	</update>
 
 	
 	

@@ -2,6 +2,8 @@
 package com.kh.dok.movie.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.board.model.vo.BoardNBoardFile;
 import com.kh.dok.common.CommonUtils;

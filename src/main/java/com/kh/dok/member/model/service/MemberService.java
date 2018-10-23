@@ -92,6 +92,9 @@ public interface MemberService {
 	
 	//소진 추천 영화 조회
 	ArrayList selectRecommend(ArrayList<String> fourCount);
+
+	//성희 댓글 좋아요
+	int updateRecom(MyReply m);
 	
 	
 
