@@ -312,4 +312,11 @@ public class MovieServiceImpl implements MovieService{
 		return md.updateRefundSeat(sqlSession, seat_id);
 	}
 
+	//박지용 Seat Row와 TU_ID가져오기
+	@Override
+	public ArrayList<Movie> selectSeatIdTree(String seat_id) {
+		
+		return md.selectSeatIdTree(sqlSession, seat_id);
+	}
+
 }

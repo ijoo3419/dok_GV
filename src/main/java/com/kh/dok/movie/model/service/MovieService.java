@@ -109,4 +109,7 @@ public interface MovieService {
 		//박지용 Seat 테이블 환불 처리 업데이트
 		int updateRefundSeat(String seat_id);
 		
+		//박지용 Seat Row와 TU_ID가져오기
+		ArrayList<Movie> selectSeatIdTree(String seat_id);
+		
 }

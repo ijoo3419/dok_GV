@@ -276,11 +276,11 @@ public class MovieDaoImpl implements MovieDao{
 		return sqlSession.update("Movie.updateRefundSeat", seat_id);
 	}
 
+	//박지용 Seat Row와 TU_ID가져오기
 	@Override
-	public int insertBoardfile(SqlSessionTemplate sqlSession, String originFileName, String changeName, String id1,
-			String root1) {
-		// TODO Auto-generated method stub
-		return 0;
+	public ArrayList<Movie> selectSeatIdTree(SqlSessionTemplate sqlSession, String seat_id) {
+
+		return (ArrayList)sqlSession.selectList("Movie.selectSeatIdTree", seat_id);
 	}
 
 	

@@ -78,176 +78,180 @@ public class LicenseeController {
 	
 	//정태 영화관 등록 메소드(+파일 첨부)
 	@RequestMapping(value="theaterInsert.li")
-	public String insertTheater(Model model, Cinema2 cm,
-								HttpServletRequest request,
-								@RequestParam(name="photo1", required=false)MultipartFile photo1,
-								@RequestParam(name="photo2", required=false)MultipartFile photo2,
-								@RequestParam(name="photo3", required=false)MultipartFile photo3,
-								@RequestParam(name="photo4", required=false)MultipartFile photo4){
-		
-		System.out.println(photo1);
-		System.out.println("controller cm : " + cm);
+	   public String insertTheater(Model model, Cinema2 cm,
+	                        HttpServletRequest request,
+	                        @RequestParam(name="photo1", required=false)MultipartFile photo1,
+	                        @RequestParam(name="photo2", required=false)MultipartFile photo2,
+	                        @RequestParam(name="photo3", required=false)MultipartFile photo3,
+	                        @RequestParam(name="photo4", required=false)MultipartFile photo4){
+	      
+	      System.out.println(photo1);
+	      System.out.println("controller cm : " + cm);
 
-		cm.setTheaterAddress(cm.getTheaterAddress1()+","+cm.getTheaterAddress2()+","+cm.getTheaterAddress3());
-		
-		System.out.println("movieRoom Address = " + cm.getTheaterAddress());
-		
-		String areaName = cm.getTheaterAddress2().substring(0, 2);
-		String areaId = "";
-		System.out.println("areaName = " + areaName);
-		
-		if(areaName.equals("서울")){
-			System.out.println("여기에 온다면 소리질러~!");
-			areaId = "A1";
-			System.out.println("areaId = " + areaId);
-			cm.setAreaId(areaId);
+	      cm.setTheaterAddress(cm.getTheaterAddress1()+","+cm.getTheaterAddress2()+","+cm.getTheaterAddress3());
+	      
+	      System.out.println("movieRoom Address = " + cm.getTheaterAddress());
+	      
+	      String areaName = cm.getTheaterAddress2().substring(0, 2);
+	      String areaId = "";
+	      System.out.println("areaName = " + areaName);
+	      
+	      if(areaName.equals("서울")){
+	         System.out.println("여기에 온다면 소리질러~!");
+	         areaId = "A1";
+	         System.out.println("areaId = " + areaId);
+	         cm.setAreaId(areaId);
 
-			System.out.println("areaId는 ? = "+cm.getAreaId());
-			ls.insertTheater(cm);
-		}if(areaName.equals("경기")){
-			areaId = "A2";
-			cm.setAreaId(areaId);
-			System.out.println("areaId = " + areaId);
+	         System.out.println("areaId는 ? = "+cm.getAreaId());
+	         ls.insertTheater(cm);
+	      }if(areaName.equals("경기")){
+	         areaId = "A2";
+	         cm.setAreaId(areaId);
+	         System.out.println("areaId = " + areaId);
 
-			System.out.println("areaId는 ? = "+cm.getAreaId());
-			ls.insertTheater(cm);
-		}if(areaName.equals("인천")){
-			areaId = "A3";
-			cm.setAreaId(areaId);
-			System.out.println("areaId = " + areaId);
+	         System.out.println("areaId는 ? = "+cm.getAreaId());
+	         ls.insertTheater(cm);
+	      }if(areaName.equals("인천")){
+	         areaId = "A3";
+	         cm.setAreaId(areaId);
+	         System.out.println("areaId = " + areaId);
 
-			System.out.println("areaId는 ? = "+cm.getAreaId());
-			ls.insertTheater(cm);
-		}if(areaName.equals("강원")){
-			areaId = "A4";
-			cm.setAreaId(areaId);
-			System.out.println("areaId = " + areaId);
+	         System.out.println("areaId는 ? = "+cm.getAreaId());
+	         ls.insertTheater(cm);
+	      }if(areaName.equals("강원")){
+	         areaId = "A4";
+	         cm.setAreaId(areaId);
+	         System.out.println("areaId = " + areaId);
 
-			System.out.println("areaId는 ? = "+cm.getAreaId());
-			ls.insertTheater(cm);
-		}if(areaName.equals("대전") || areaName.equals("충남") || areaName.equals("충북")){
-			areaId = "A5";
-			cm.setAreaId(areaId);
-			System.out.println("areaId = " + areaId);
+	         System.out.println("areaId는 ? = "+cm.getAreaId());
+	         ls.insertTheater(cm);
+	      }if(areaName.equals("대전") || areaName.equals("충남") || areaName.equals("충북")){
+	         areaId = "A5";
+	         cm.setAreaId(areaId);
+	         System.out.println("areaId = " + areaId);
 
-			System.out.println("areaId는 ? = "+cm.getAreaId());
-			ls.insertTheater(cm);
-		}if(areaName.equals("대구")){
-			areaId = "A6";
-			cm.setAreaId(areaId);
-			System.out.println("areaId = " + areaId);
+	         System.out.println("areaId는 ? = "+cm.getAreaId());
+	         ls.insertTheater(cm);
+	      }if(areaName.equals("대구")){
+	         areaId = "A6";
+	         cm.setAreaId(areaId);
+	         System.out.println("areaId = " + areaId);
 
-			System.out.println("areaId는 ? = "+cm.getAreaId());
-			ls.insertTheater(cm);
-		}if(areaName.equals("부산") || areaName.equals("울산")){
-			areaId = "A7";
-			cm.setAreaId(areaId);
-			System.out.println("areaId = " + areaId);
+	         System.out.println("areaId는 ? = "+cm.getAreaId());
+	         ls.insertTheater(cm);
+	      }if(areaName.equals("부산") || areaName.equals("울산")){
+	         areaId = "A7";
+	         cm.setAreaId(areaId);
+	         System.out.println("areaId = " + areaId);
 
-			System.out.println("areaId는 ? = "+cm.getAreaId());
-			ls.insertTheater(cm);
-		}if(areaName.equals("경남") || areaName.equals("경북") ){
-			areaId = "A8";
-			cm.setAreaId(areaId);
-			System.out.println("areaId = " + areaId);
+	         System.out.println("areaId는 ? = "+cm.getAreaId());
+	         ls.insertTheater(cm);
+	      }if(areaName.equals("경남") || areaName.equals("경북") ){
+	         areaId = "A8";
+	         cm.setAreaId(areaId);
+	         System.out.println("areaId = " + areaId);
 
-			System.out.println("areaId는 ? = "+cm.getAreaId());
-			ls.insertTheater(cm);
-		}if(areaName.equals("전남") || areaName.equals("전북") || areaName.equals("제주")){
-			areaId = "A9";
-			cm.setAreaId(areaId);
-			System.out.println("areaId = " + areaId);
-			System.out.println("areaId는 ? = "+cm.getAreaId());
-			ls.insertTheater(cm);
-		}
-		
-		
-		String root = request.getSession().getServletContext().getRealPath("resources");
-		System.out.println("root : " + root);
-		String filePath = root + "\\uploadFiles";
-		System.out.println("filePath : " + filePath);
-		
-	
-		
-		ls.insertTheaterBoard(cm);
-		
-		String board_id = "B";
-		
-		board_id += ls.selectOneBoardId();
-		cm.setBoard_id(board_id);
-		
-		try{
-		if(photo1 != null){
-			
-		
-		String originFileName = photo1.getOriginalFilename();
-		String ext = originFileName.substring(originFileName.lastIndexOf("."));
-		String changeName = CommonUtils.getRandomString();
-		String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
-		
-		cm.setOrigin_name(originFileName); 
-		cm.setEdit_name(changeName);
-		cm.setFile_src(filePath);
-		cm.setFile_level(1);
-		
-		ls.insertTheaterBoardFile(cm);
-		photo1.transferTo(new File(filePath + "\\" + changeName + ext));
-		}
-		if(photo2 != null){
-			String originFileName = photo2.getOriginalFilename();
-			String ext = originFileName.substring(originFileName.lastIndexOf("."));
-			String changeName = CommonUtils.getRandomString();
-			String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
-			
-			cm.setOrigin_name(originFileName); 
-			cm.setEdit_name(changeName);
-			cm.setFile_src(filePath);
-			cm.setFile_level(2);
-			
-			ls.insertTheaterBoardFile(cm);
-			photo2.transferTo(new File(filePath + "\\" + changeName + ext));
-			
-		}if(photo3 != null){
-			String originFileName = photo3.getOriginalFilename();
-			String ext = originFileName.substring(originFileName.lastIndexOf("."));
-			String changeName = CommonUtils.getRandomString();
-			String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
-			
-			cm.setOrigin_name(originFileName); 
-			cm.setEdit_name(changeName);
-			cm.setFile_src(filePath);
-			cm.setFile_level(2);
-			
-			ls.insertTheaterBoardFile(cm);
-			photo3.transferTo(new File(filePath + "\\" + changeName + ext));
-			
-		}if(photo4 != null){
-			String originFileName = photo4.getOriginalFilename();
-			String ext = originFileName.substring(originFileName.lastIndexOf("."));
-			String changeName = CommonUtils.getRandomString();
-			String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
-			
-			cm.setOrigin_name(originFileName); 
-			cm.setEdit_name(changeName);
-			cm.setFile_src(filePath);
-			cm.setFile_level(2);
-	
-			ls.insertTheaterBoardFile(cm);
-			photo4.transferTo(new File(filePath + "\\" + changeName + ext));
-			
-		}
-		return "licensee/mainLicenseePage";
-	
-	}
-		catch (Exception e){
-			
-			System.out.println("실패하면 여기로");
-			model.addAttribute("msg", "영화관 추가 실패!");
-			
-			return "common/errorPage";
-			
-		}
-	}
+	         System.out.println("areaId는 ? = "+cm.getAreaId());
+	         ls.insertTheater(cm);
+	      }if(areaName.equals("전남") || areaName.equals("전북") || areaName.equals("제주")){
+	         areaId = "A9";
+	         cm.setAreaId(areaId);
+	         System.out.println("areaId = " + areaId);
+	         System.out.println("areaId는 ? = "+cm.getAreaId());
+	         ls.insertTheater(cm);
+	      }
+	      
+	      
+	      String root = request.getSession().getServletContext().getRealPath("resources");
+	      System.out.println("root : " + root);
+	      String filePath = root + "\\uploadFiles";
+	      System.out.println("filePath : " + filePath);
+	      
+	   
+	      
+	      ls.insertTheaterBoard(cm);
+	      
+	      String board_id = "B";
+	      
+	      board_id += ls.selectOneBoardId();
+	      cm.setBoard_id(board_id);
+	      
+	      try{
+	      if(photo1 != null){
+	         
+	      
+	      String originFileName = photo1.getOriginalFilename();
+	      String ext = originFileName.substring(originFileName.lastIndexOf("."));
+	      String changeName = CommonUtils.getRandomString();
+	      String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
+	      String changeName1 = changeName + ext;
+	      
+	      cm.setOrigin_name(originFileName); 
+	      cm.setEdit_name(changeName1);
+	      cm.setFile_src(filePath);
+	      cm.setFile_level(1);
+	      
+	      ls.insertTheaterBoardFile(cm);
+	      photo1.transferTo(new File(filePath + "\\" + changeName + ext));
+	      }
+	      if(photo2 != null){
+	         String originFileName = photo2.getOriginalFilename();
+	         String ext = originFileName.substring(originFileName.lastIndexOf("."));
+	         String changeName = CommonUtils.getRandomString();
+	         String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
+	         String changeName1 = changeName + ext;
+	         
+	         cm.setOrigin_name(originFileName); 
+	         cm.setEdit_name(changeName1);
+	         cm.setFile_src(filePath);
+	         cm.setFile_level(2);
+	         
+	         ls.insertTheaterBoardFile(cm);
+	         photo2.transferTo(new File(filePath + "\\" + changeName + ext));
+	         
+	      }if(photo3 != null){
+	         String originFileName = photo3.getOriginalFilename();
+	         String ext = originFileName.substring(originFileName.lastIndexOf("."));
+	         String changeName = CommonUtils.getRandomString();
+	         String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
+	         String changeName1 = changeName + ext;
+	         
+	         cm.setOrigin_name(originFileName); 
+	         cm.setEdit_name(changeName1);
+	         cm.setFile_src(filePath);
+	         cm.setFile_level(2);
+	         
+	         ls.insertTheaterBoardFile(cm);
+	         photo3.transferTo(new File(filePath + "\\" + changeName + ext));
+	         
+	      }if(photo4 != null){
+	         String originFileName = photo4.getOriginalFilename();
+	         String ext = originFileName.substring(originFileName.lastIndexOf("."));
+	         String changeName = CommonUtils.getRandomString();
+	         String ichangeName = changeName.substring(originFileName.lastIndexOf("."));
+	         String changeName1 = changeName + ext;
+	         
+	         cm.setOrigin_name(originFileName); 
+	         cm.setEdit_name(changeName1);
+	         cm.setFile_src(filePath);
+	         cm.setFile_level(2);
+	   
+	         ls.insertTheaterBoardFile(cm);
+	         photo4.transferTo(new File(filePath + "\\" + changeName + ext));
+	         
+	      }
+	      return "licensee/mainLicenseePage";
+	   
+	   }
+	      catch (Exception e){
+	         
+	         System.out.println("실패하면 여기로");
+	         model.addAttribute("msg", "영화관 추가 실패!");
+	         
+	         return "common/errorPage";
+	         
+	      }
+	   }
 	
 	//정태 상영관 등록(엑셀 파일 완료)
 	@RequestMapping(value="movieRoomInsert.li")

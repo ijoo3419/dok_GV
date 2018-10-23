@@ -51,6 +51,8 @@ public class MemberController {
    private MemberService ms;
    @Autowired BCryptPasswordEncoder passwordEncoder;
    
+   @Autowired
+	private MovieService mss;
    
     //마이페이지 메인
    @RequestMapping("member.me")
@@ -117,13 +119,20 @@ public class MemberController {
    
    //회원가입
    @RequestMapping(value="insert.me")
-   public String insertMember(Model model, Member m){ 
+   public String insertMember(MovieThumbnail msn,Model model, Member m){ 
 	   
 	   m.setUser_pwd(passwordEncoder.encode(m.getUser_pwd()));
 	   
 	   int result = ms.insertMember(m);
 	   
 		if(result > 0){
+			ArrayList<MovieThumbnail> movieRank1 = mss.selectMovieRank1(msn);
+				ArrayList<MovieThumbnail> movieRank2 = mss.selectMovieRank2(msn);
+				ArrayList<MovieThumbnail> movieRank3 = mss.selectMovieRank3(msn);
+				
+				model.addAttribute("movieRank1",movieRank1);
+				model.addAttribute("movieRank2",movieRank2);
+				model.addAttribute("movieRank3",movieRank3);
 			return "main/main";
 		} else {
 			model.addAttribute("msg", "회원 가입 실패");
@@ -133,7 +142,7 @@ public class MemberController {
 
    //암호화 처리 로그인(성희)
    @RequestMapping("loginCheck.me")
-   public String loginCheck(Member m, Model model){
+   public String loginCheck(MovieThumbnail msn,Member m, Model model){
 	   
 	   System.out.println("loginCheck MemberController : " + m);
 	   
@@ -249,6 +258,13 @@ public class MemberController {
 		
 		ArrayList fourMovie = ms.selectRecommend(fourCount);
 		System.out.println("최종 추천 영화는"+fourMovie);
+		ArrayList<MovieThumbnail> movieRank1 = mss.selectMovieRank1(msn);
+			ArrayList<MovieThumbnail> movieRank2 = mss.selectMovieRank2(msn);
+			ArrayList<MovieThumbnail> movieRank3 = mss.selectMovieRank3(msn);
+			
+			model.addAttribute("movieRank1",movieRank1);
+			model.addAttribute("movieRank2",movieRank2);
+			model.addAttribute("movieRank3",movieRank3);
 		return "main/main";
       	}
    
@@ -284,9 +300,16 @@ public class MemberController {
 
    //암호화 처리 로그아웃(성희)
    @RequestMapping("logout.me")
-   public String logout(SessionStatus status){
+   public String logout(MovieThumbnail msn, Model model, SessionStatus status){
 	   status.setComplete();
 	   
+	   ArrayList<MovieThumbnail> movieRank1 = mss.selectMovieRank1(msn);
+		ArrayList<MovieThumbnail> movieRank2 = mss.selectMovieRank2(msn);
+		ArrayList<MovieThumbnail> movieRank3 = mss.selectMovieRank3(msn);
+		
+		model.addAttribute("movieRank1",movieRank1);
+		model.addAttribute("movieRank2",movieRank2);
+		model.addAttribute("movieRank3",movieRank3);
 	   return "main/main";
 
    }
@@ -480,7 +503,7 @@ public class MemberController {
 
    //카카오 로그인(성희)
    @RequestMapping("kakaologin.me")
-   public String kakaologin(Member m, Model model){
+   public String kakaologin(MovieThumbnail msn,Member m, Model model){
 	   System.out.println("카카오 로그인 : " + m);
 	   
 	   //1. 기존 유저인가 확인
@@ -504,6 +527,13 @@ public class MemberController {
 		   
 		   model.addAttribute("loginUser", loginUser);
 		   
+		   ArrayList<MovieThumbnail> movieRank1 = mss.selectMovieRank1(msn);
+			ArrayList<MovieThumbnail> movieRank2 = mss.selectMovieRank2(msn);
+			ArrayList<MovieThumbnail> movieRank3 = mss.selectMovieRank3(msn);
+			
+			model.addAttribute("movieRank1",movieRank1);
+			model.addAttribute("movieRank2",movieRank2);
+			model.addAttribute("movieRank3",movieRank3);
 		   return "main/main";
 	   }else{
 		   model.addAttribute("msg", "카카오 로그인 실패");
@@ -515,10 +545,17 @@ public class MemberController {
    
    //카톡유저 추가정보 업데이트(성희)
    @RequestMapping(value="updatePlusInfo.me")
-   public String updatePlusInfo(Model model, Member m){
+   public String updatePlusInfo(MovieThumbnail msn,Model model, Member m){
 	   int result = ms.updatePlusInfo(m);
 	   
 	   if(result > 0){
+		   ArrayList<MovieThumbnail> movieRank1 = mss.selectMovieRank1(msn);
+			ArrayList<MovieThumbnail> movieRank2 = mss.selectMovieRank2(msn);
+			ArrayList<MovieThumbnail> movieRank3 = mss.selectMovieRank3(msn);
+			
+			model.addAttribute("movieRank1",movieRank1);
+			model.addAttribute("movieRank2",movieRank2);
+			model.addAttribute("movieRank3",movieRank3);
 		   return "main/main";
 	   }else{
 		   model.addAttribute("msg", "카톡유저 추가정보 입력 실패!");
