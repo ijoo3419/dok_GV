@@ -302,43 +302,43 @@ to {
 	<c:import url="../common/headBar.jsp" />
 	<div class="slideshow-container">
 
-			<div class="mySlides fade1">
+			<div class="mySlides fade1" align="center">
 				<div class="numbertext">1 / 4</div>
 					<c:if test="${fn:length(bf) >= 1}">
-						<img src="${contextPath }/resources/uploadFiles/${bf.get(0).edit_name}" style="width: 100%; height: 400px;">
+						<img src="${contextPath }/resources/uploadFiles/${bf.get(0).edit_name}" style="width: 1000px; height: 450px;">
 					</c:if>
 					<c:if test="${fn:length(bf) < 1}">
-						<img src="${contextPath }/resources/images/slide3.jpg" style="width: 100%; height: 400px;">
+						<img src="${contextPath }/resources/images/slide3.jpg" style="width: 1000px; height: 450px;">
 					</c:if>
 			</div>
 
-			<div class="mySlides fade1">
+			<div class="mySlides fade1"  align="center">
 				<div class="numbertext">2 / 4</div>
 					<c:if test="${fn:length(bf) >= 2}">
-						<img src="${contextPath }/resources/uploadFiles/${bf.get(1).edit_name}" style="width: 100%; height: 400px;">
+						<img src="${contextPath }/resources/uploadFiles/${bf.get(1).edit_name}" style="width: 1000px; height: 450px;">
 					</c:if>
 					<c:if test="${fn:length(bf) < 2}">
-						<img src="${contextPath }/resources/images/slide4.jpg" style="width: 100%; height: 400px;">
+						<img src="${contextPath }/resources/images/slide4.jpg" style="width: 1000px; height: 450px;">
 					</c:if>
 			</div>
 
-			<div class="mySlides fade1">
+			<div class="mySlides fade1"  align="center">
 				<div class="numbertext">3 / 4</div>
 					<c:if test="${fn:length(bf) >= 3}">
-						<img src="${contextPath }/resources/uploadFiles/${bf.get(2).edit_name}" style="width: 100%; height: 400px;">
+						<img src="${contextPath }/resources/uploadFiles/${bf.get(2).edit_name}" style="width: 1000px; height: 450px;">
 					</c:if>
 					<c:if test="${fn:length(bf) < 3}">
-						<img src="${contextPath }/resources/images/slide1.jpg" style="width: 100%; height: 400px;">
+						<img src="${contextPath }/resources/images/slide1.jpg" style="width: 1000px; height: 450px;">
 					</c:if>
 			</div>
 
-			<div class="mySlides fade1">
+			<div class="mySlides fade1"  align="center">
 				<div class="numbertext">4 / 4</div>
 					<c:if test="${fn:length(bf) eq 4}">
-						<img src="${contextPath }/resources/uploadFiles/${bf.get(3).edit_name}" style="width: 100%; height: 400px;">
+						<img src="${contextPath }/resources/uploadFiles/${bf.get(3).edit_name}" style="width: 1000px; height: 450px;">
 					</c:if>
 					<c:if test="${fn:length(bf) < 4}">
-						<img src="${contextPath }/resources/images/slide2.jpg" style="width: 100%; height: 400px;">
+						<img src="${contextPath }/resources/images/slide2.jpg" style="width: 1000px; height: 450px;">
 					</c:if>
 			</div>
 
