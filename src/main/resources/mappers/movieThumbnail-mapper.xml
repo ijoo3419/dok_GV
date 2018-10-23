@@ -148,15 +148,31 @@ WHERE ROWNUM BETWEEN 7 AND 9
 <!-- 위시리스트 뷰 뿌리기용 쿼리문 -->
 
 
-<select id="selectWishlist" parameterType="MovieThumbnail" resultMap="movieThumbnailResultSet">SELECT M.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_ETITLE,M.MOVIE_CONTENT, M.OPEN_DATE,M.DIRECTOR_NAME,M.PRODUCTION_COM, M.MOVIE_AGE,M.GENRE,M.RUNNIG_TIME, BF.FILE_SRC, BF.FILE_LEVELFROM MOVIE M, BOARD B, BOARD_FILE BF, WISHLIST WWHERE M.MOVIE_ID = B.MOVIE_IDAND B.BOARD_ID = BF.BOARD_IDAND W.MOVIE_ID = M.MOVIE_IDAND BF.FILE_LEVEL='1'AND W.MID = '${mid}' </select>
+<select id="selectWishlist" parameterType="MovieThumbnail" resultMap="movieThumbnailResultSet">
+SELECT M.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_ETITLE,M.MOVIE_CONTENT, M.OPEN_DATE,M.DIRECTOR_NAME,M.PRODUCTION_COM, M.MOVIE_AGE,M.GENRE,M.RUNNIG_TIME, BF.FILE_SRC, BF.FILE_LEVEL
+FROM MOVIE M, BOARD B, BOARD_FILE BF, WISHLIST W
+WHERE M.MOVIE_ID = B.MOVIE_ID
+AND B.BOARD_ID = BF.BOARD_ID
+AND W.MOVIE_ID = M.MOVIE_ID
+AND BF.FILE_LEVEL='1'
+AND W.MID = '${mid}' </select>
 
 <!-- 위시리스트 중복 조회용 쿼리문 -->
 
 
-<select id="checkDupli" resultType="java.lang.Integer" parameterType="Movie">SELECT NVL(COUNT(*),0)FROM WISHLISTWHERE MID = #{ mid }AND MOVIE_ID = #{ movie_id } </select>
+<select id="checkDupli" resultType="java.lang.Integer" parameterType="Movie">
+SELECT NVL(COUNT(*),0)
+FROM WISHLIST
+WHERE MID = #{ mid }
+AND MOVIE_ID = #{ movie_id } </select>
 
-<select id="movieSelectOne" parameterType="MovieThumbnail" resultMap="movieThumbnailResultSet">SELECT MOVIE_ID, MOVIE_TITLE, MOVIE_ETITLE,MOVIE_CONTENT, OPEN_DATE,DIRECTOR_NAME,PRODUCTION_COM, MOVIE_AGE,GENRE,RUNNIG_TIME, MOVIE_ACTOR, MOVIE_TYPEFROM MOVIEWHERE MOVIE_TITLE = #{id} </select>
+<select id="movieSelectOne" parameterType="MovieThumbnail" resultMap="movieThumbnailResultSet">
+SELECT MOVIE_ID, MOVIE_TITLE, MOVIE_ETITLE,MOVIE_CONTENT, OPEN_DATE,DIRECTOR_NAME,
+PRODUCTION_COM, MOVIE_AGE,GENRE,RUNNIG_TIME, MOVIE_ACTOR, MOVIE_TYPE
+FROM MOVIE
+WHERE MOVIE_TITLE = #{id} </select>
 
-<insert id="insertMovie">INSERT INTO MOVIE VALUES('MO' || TO_CHAR(MOVIE_MOVIE_ID.NEXTVAL), #{movie_title}, #{movie_etitle}, #{movie_content}, #{open_date} , #{director_name}, #{production_com}, #{movie_age}, #{genre}, #{runnig_time}, #{movie_actor}, #{movie_type}) </insert>
+<insert id="insertMovie">
+INSERT INTO MOVIE VALUES('MO' || TO_CHAR(MOVIE_MOVIE_ID.NEXTVAL), #{movie_title}, #{movie_etitle}, #{movie_content}, #{open_date} , #{director_name}, #{production_com}, #{movie_age}, #{genre}, #{runnig_time}, #{movie_actor}, #{movie_type}) </insert>
 	
 </mapper>
