@@ -126,18 +126,18 @@
     data.addColumn('number', '월 별 예매 수');
 
     data.addRows([
-      [1,  ${vslist2[0]}],
-      [2,  ${vslist2[1]}],
-      [3,  ${vslist2[2]}],
-      [4,  ${vslist2[3]}],
-      [5,  ${vslist2[4]}],
-      [6,  ${vslist2[5]}],
-      [7,  ${vslist2[6]}],
-      [8,  ${vslist2[7]}],
-      [9,  ${vslist2[8]}],
-      [10, ${vslist2[9]}],
-      [11, ${vslist2[10]}],
-      [12, ${vslist2[11]}],
+      [1,  ${booklist[0]}],
+      [2,  ${booklist[1]}],
+      [3,  ${booklist[2]}],
+      [4,  ${booklist[3]}],
+      [5,  ${booklist[4]}],
+      [6,  ${booklist[5]}],
+      [7,  ${booklist[6]}],
+      [8,  ${booklist[7]}],
+      [9,  ${booklist[8]}],
+      [10, ${booklist[9]}],
+      [11, ${booklist[10]}],
+      [12, ${booklist[11]}],
     ]);
 
     var options = {

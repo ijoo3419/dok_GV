@@ -296,7 +296,7 @@ public class AdminController {
 		int[] vlist = as.countVisit(time);
 		int[] mlist = as.countMember();
 		int[] clist = as.countClass();
-		int[] rlist = as.countBook();
+		int[] booklist = as.countBook();
 		model.addAttribute("tab", tab);
 		String[] vslist = {"0","0","0","0","0","0","0","0","0","0","0","0"};
 		String[] vslist2 = {"0","0","0","0","0","0","0","0","0","0","0","0"};
@@ -312,6 +312,7 @@ public class AdminController {
 		model.addAttribute("vslist", vslist);
 		model.addAttribute("vslist2",vslist2);
 		model.addAttribute("cslist", cslist);
+		model.addAttribute("booklist", booklist);
 		return "admin/adminPage";
 	}
 	
