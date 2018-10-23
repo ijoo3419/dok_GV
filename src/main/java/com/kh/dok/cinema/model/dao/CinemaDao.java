@@ -17,3 +17,4 @@ public interface CinemaDao {
 	ArrayList<Cinema> selectCinemaEa(SqlSessionTemplate sqlSession, Cinema ca);
 
 }
+  

@@ -22,7 +22,7 @@
    display: inline;
    padding: 100px;
 
-}
+}  
 
 </style>
 

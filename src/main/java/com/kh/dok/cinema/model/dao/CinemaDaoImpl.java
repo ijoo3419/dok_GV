@@ -24,7 +24,7 @@ public class CinemaDaoImpl implements CinemaDao{
 	public ArrayList<Cinema> selectCinemaDetail(SqlSessionTemplate sqlSession, Cinema ca) {
 		
 		String id = ca.getTheaterId();
-		
+		  
 		
 		ArrayList<Cinema> cinemaDetail = null;
 		

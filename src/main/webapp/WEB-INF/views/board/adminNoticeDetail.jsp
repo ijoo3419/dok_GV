@@ -25,7 +25,7 @@
 .post {
 	display: none;
 }
-
+  
 .post.current {
 	display: inherit;
 }

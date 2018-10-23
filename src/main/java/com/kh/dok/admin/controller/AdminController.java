@@ -40,7 +40,7 @@ import com.kh.dok.movie.model.vo.MovieThumbnail;
 @SessionAttributes("bf")
 @Controller
 public class AdminController {
-
+  
 	@Autowired
 	private AdminService as;
 	

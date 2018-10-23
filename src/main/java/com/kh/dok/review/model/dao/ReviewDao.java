@@ -15,3 +15,4 @@ public interface ReviewDao {
 	ArrayList<Reply> selectReview(SqlSessionTemplate sqlSession, String bid);
 
 }
+  

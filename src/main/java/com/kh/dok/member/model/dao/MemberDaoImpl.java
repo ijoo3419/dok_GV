@@ -23,7 +23,7 @@ public class MemberDaoImpl implements MemberDao {
 	public String selectEncPassword(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.selectOne("Member.selectPwd", m.getEmail());
 	}
-	
+	  
 	
 	//비밀번호 일치시 회원 정보 조회용 메소드
 	@Override

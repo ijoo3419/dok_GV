@@ -22,7 +22,7 @@
 h3 {
     font-size: 1.25rem;
     margin: 0 !important;
-}
+}  
 h1 {
 		font-size: 3rem !important;
 		line-height: 1.1;

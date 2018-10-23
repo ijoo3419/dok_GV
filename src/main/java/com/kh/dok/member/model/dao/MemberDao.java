@@ -26,7 +26,7 @@ public interface MemberDao {
 
 	int updateInfo(SqlSessionTemplate sqlSession, Member m);
 
-
+  
 	int insertWish(SqlSessionTemplate sqlSession, Movie m);
 
 	int kakaoUserCheck(SqlSessionTemplate sqlSession, Member m);

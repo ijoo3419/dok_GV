@@ -20,7 +20,7 @@ public interface MemberService {
 	int checkNick(Member m);
 
 	int checkSame(Member m);
-
+  
 	int checkPass(Member m) throws LoginException;
 
 	int updateInfo(Member m);

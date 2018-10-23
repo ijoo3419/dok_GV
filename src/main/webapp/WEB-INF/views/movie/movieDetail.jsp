@@ -16,7 +16,7 @@
 #main > .post.featured {
     text-align: left !important;
 }
-
+  
 h3 {
     font-size: 1.25rem;
     margin: 0 !important;

@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="${contextPath }/resources/css/main.css" />
 <link rel="stylesheet" href="${contextPath }/resources/css/noscript.css" />
 </head>
-
+  
 	<body class="is-preload">
 	<c:import url="../common/headBar.jsp" />
 

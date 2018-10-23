@@ -24,7 +24,7 @@ public class ReviewServiceImpl implements ReviewService{
 	public String selectBid(String movie_id) {
 
 		return rd.selectBid(sqlSession, movie_id);
-	}
+	}  
 	
 	//리뷰등록
 	@Override

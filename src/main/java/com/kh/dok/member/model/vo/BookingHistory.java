@@ -16,7 +16,7 @@ public class BookingHistory {
 	private String turning_day;
 	private String reservation_status;
 	private String status;
-	private String seats;
+	private String seats;  
 	
 	public BookingHistory(){}
 
