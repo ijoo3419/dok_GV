@@ -14,7 +14,6 @@ import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieThumbnail;
 
 
-
 public interface MovieDao {
 	
 	//이진희 전체영화 출력
@@ -107,8 +106,6 @@ public interface MovieDao {
 	//박지용 Seat Row와 TU_ID가져오기
 	ArrayList<Movie> selectSeatIdTree(SqlSessionTemplate sqlSession, String seat_id);
 
-	//박지용 Seat Row와 TU_ID가져오기
-	ArrayList<Movie> selectSeatIdTree(SqlSessionTemplate sqlSession, String seat_id);
 
 	
 }
