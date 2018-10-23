@@ -22,7 +22,7 @@ public class Member implements java.io.Serializable{
 	private String nickname;
 	private String refreshToken;
 	private String new_pass;
-	private String rid;
+	private String rid;  
 	
 	public Member(){}
 

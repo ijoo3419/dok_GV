@@ -38,7 +38,7 @@ import com.kh.dok.member.model.vo.Member;
 @SessionAttributes("bf")
 @Controller
 public class AdminController {
-
+  
 	@Autowired
 	private AdminService as;
 

@@ -26,7 +26,7 @@
 		margin-right:20px;
 		margin-top:20px;
 		float: left;
-	}
+	}  
 </style>
 <body class="is-preload">
    <c:import url="../common/headBar.jsp" />

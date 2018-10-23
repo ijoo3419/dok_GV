@@ -13,7 +13,7 @@ public class BoardNBoardFile implements java.io.Serializable{
 	private String board_sort;
 	private Date board_date;
 	private Date modify_date;
-	private String bstatus;
+	private String bstatus;  
 	private int bcount;
 	private String cinema_div;
 	private String theater_id;

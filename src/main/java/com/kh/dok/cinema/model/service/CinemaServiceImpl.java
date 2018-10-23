@@ -24,7 +24,7 @@ public class CinemaServiceImpl implements CinemaService{
 		
 		cienmaView = cd.selectCinema(sqlSession, c);
 		
-		return cienmaView;
+		return cienmaView;  
 	}
 
 

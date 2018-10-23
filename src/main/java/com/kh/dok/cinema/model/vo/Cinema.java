@@ -16,7 +16,7 @@ public class Cinema implements Serializable{
 	private String file_src;
 	private int file_level;
 	private String edit_name;
-
+  
 	
 	public Cinema(){}
 

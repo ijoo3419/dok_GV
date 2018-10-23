@@ -51,7 +51,7 @@ public class MemberController {
    private MemberService ms;
    @Autowired BCryptPasswordEncoder passwordEncoder;
    
-   
+     
     //마이페이지 메인
    @RequestMapping("member.me")
    public String showMypageView(Model model, HttpServletRequest request){

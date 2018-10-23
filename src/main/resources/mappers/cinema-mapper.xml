@@ -16,7 +16,7 @@
 		<result column="EDIT_NAME" property="edit_name"/>
 	</resultMap>
 	
-
+  
 	
 <!-- 정태 영화관(THEATER) 추가하기~!~!~!~!~! -->
 <insert id="insertTheater" parameterType="Cinema">

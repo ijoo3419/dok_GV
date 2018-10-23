@@ -13,3 +13,4 @@ public interface ReviewService {
 	ArrayList<Reply> selectReview(String bid);
 
 }
+  

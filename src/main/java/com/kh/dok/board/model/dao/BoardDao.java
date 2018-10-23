@@ -39,7 +39,7 @@ public interface BoardDao {
 	int getInquirelistCount(SqlSessionTemplate sqlSession, String TheaterId);
 
 	String getTheaterId(SqlSessionTemplate sqlSession, String mid);
-
+  
 	ArrayList<BoardNBoardFile> selectINquireList(SqlSessionTemplate sqlSession, PageInfo pi, String theaterId);
 
 	int addComment(SqlSessionTemplate sqlSession, Reply reply);

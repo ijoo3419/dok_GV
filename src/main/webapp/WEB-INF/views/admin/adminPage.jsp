@@ -652,7 +652,7 @@ img.ui-datepicker-trigger {
 						<option value="bcontent">내용</option>
 					</select> <input id="searchResult" name="searchValue" type="text" placeholder="검색" style="width:300px; margin-left:10px; display:inline-block"> <a href="#" class="button primary icon fa-search" onclick="searchBoard()">조회</a> <button type="button" class="img_btn user cancel mr7" align="right"><a href="writeNotice.bo">공지작성</a></button>
 				</div>
-				<br>
+				<br>   
 				<script>
 					function searchBoard(){
 						var searchCondition = $("#searchCondition").val();

@@ -44,7 +44,7 @@ public class MovieController {
 		if(request.getParameter("currentPage") != null){
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		
+		  
 		int listCount = ms.getlistCount();
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);

@@ -21,7 +21,7 @@ public class ReviewDaoImpl implements ReviewDao{
 	public int addReview(SqlSessionTemplate sqlSession, Reply r) {
 
 		return sqlSession.insert("Review.addReview", r);
-	}
+	}  
 
 	@Override
 	public ArrayList<Reply> selectReview(SqlSessionTemplate sqlSession, String bid) {

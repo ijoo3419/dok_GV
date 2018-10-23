@@ -20,7 +20,7 @@ public class Reply implements java.io.Serializable{
 	private int grade_count;
 	private String nickname;
 	
-	public Reply(){}
+	public Reply(){}  
 
 	public Reply(String rid, String bid, String rwriter, String rcontent, String rcreate_date, Date rmodify_date,
 			String status, int recommend_count, String division, String theater_id, String movie_id, int grade_count,
