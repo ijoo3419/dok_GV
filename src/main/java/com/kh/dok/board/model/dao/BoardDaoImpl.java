@@ -14,6 +14,7 @@ import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.board.model.vo.BoardNBoardFile;
 import com.kh.dok.board.model.vo.SearchCondition1;
+import com.kh.dok.cinema.model.vo.Cinema;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.review.model.vo.Reply;
 
@@ -33,14 +34,20 @@ public class BoardDaoImpl implements BoardDao{
 			System.out.println("BoardDaoImpl board_id 조회 성공 + " + board_id);
 			
 			
-			int BFResult = sqlSession.insert("Board.insertNoticeFile", bf);
-			System.out.println("BoardDaoImpl File insert 성공");
 			
-			if(BFResult > 0){
-				
-				return BFResult;
+			if(bf == null){
+				return BResult;
 			}else{
-				throw new BoardInsertException("3단계 : 첨부파일 등록 실패!");
+				int BFResult = sqlSession.insert("Board.insertNoticeFile", bf);
+				System.out.println("BoardDaoImpl File insert 성공");
+				
+				if(BFResult > 0){
+					
+					return BFResult;
+				}else{
+					throw new BoardInsertException("3단계 : 첨부파일 등록 실패!");
+				}
+				
 			}
 			
 		}else{
@@ -99,9 +106,10 @@ public class BoardDaoImpl implements BoardDao{
 
 	//페이징 게시글 전체 수
 	@Override
-	public int getlistCount(SqlSessionTemplate sqlSession, String mId) {
+	public int getlistCount(SqlSessionTemplate sqlSession, String mid) {
+		System.out.println("1021 에러나는거 getlistCount mid : " + mid);
 		
-		int listCount = sqlSession.selectOne("Board.getlistCount", mId);
+		int listCount = sqlSession.selectOne("Board.getlistCount", mid);
 		
 		return listCount;
 	}
@@ -201,6 +209,113 @@ public class BoardDaoImpl implements BoardDao{
 		return list;
 	}
 
+	@Override
+	public BoardNBoardFile selectInquireOne(SqlSessionTemplate sqlSession, String board_id) {
+		BoardNBoardFile bbf = sqlSession.selectOne("Board.selectInquireOne", board_id);
+		return bbf;
+	}
+
+	//판매자 공지사항 수정
+	@Override
+	public int updateNotice(SqlSessionTemplate sqlSession, Board b, BoardFile bf) throws BoardInsertException {
+		int BResult = sqlSession.update("Board.updateNotice", b);
+		
+		if(BResult > 0){
+			
+			if(bf == null){
+				return BResult;
+			}else{
+				int BFResult = sqlSession.update("Board.updateNoticeFile", bf);
+				
+				if(BFResult > 0){
+					return BFResult;
+				}else{
+					throw new BoardInsertException("첨부파일 수정 실패");
+				}
+				
+			}
+		}else{
+			throw new BoardInsertException("첨부파일 수정 실패");
+		}
+				
+	}
+	//문의사항 댓글수 가져오기
+	/*@Override
+	public ArrayList<Reply> selectrlist(SqlSessionTemplate sqlSession, PageInfo pi, String theaterId) {
+		ArrayList<Reply> rlist = null;
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		
+		rlist = (ArrayList)sqlSession.selectList("Board.selectrlist", theaterId, rowBounds);
+		
+		return rlist;
+	}*/
+
+	@Override
+	public int deleteNotice(SqlSessionTemplate sqlSession, String board_id) {
+		System.out.println("ekdh다오오오오옹 ; " + board_id);
+		int result = sqlSession.update("Board.deleteNotice", board_id);
+		
+		return result;
+	}
+
+	@Override
+	public int insertInquireMp(SqlSessionTemplate sqlSession, Board b, BoardFile bf) throws BoardInsertException {
+		System.out.println("인써트마페 다오에서 b : " + b);
+		int BResult = sqlSession.insert("Board.insertInquireMp", b);
+		
+		if(BResult > 0){
+			String board_id = sqlSession.selectOne("Board.selectBoardId", b);
+			bf.setBoard_id(board_id);
+			
+			if(bf == null){
+				return BResult;
+				
+			}else{
+				int BFResult = sqlSession.insert("Board.insertNoticeFile", bf);
+				System.out.println("BoardDaoImpl File insert 성공");
+				
+				if(BFResult > 0){
+					
+					return BFResult;
+				}else{
+					throw new BoardInsertException("3단계 : 첨부파일 등록 실패!");
+				}
+			}
+		}else{
+			throw new BoardInsertException("3단계 : 첨부파일 등록 실패!");
+		}
+		
+		
 	
-  
+	}
+	
+	//마이페이지 글 10개 불렁기
+	@Override
+	public ArrayList<BoardNBoardFile> selectMpInquireList(SqlSessionTemplate sqlSession, PageInfo pi, String mid) {
+		ArrayList<BoardNBoardFile> list = null;
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		
+		list = (ArrayList)sqlSession.selectList("Board.selectMpInquireList", mid, rowBounds);
+		
+		
+		
+		return list;
+	}
+
+	@Override
+	public ArrayList<Cinema> cinemaList(SqlSessionTemplate sqlSession) {
+		ArrayList<Cinema> list = null;
+		
+		list = (ArrayList)sqlSession.selectList("Board.cinemaList");
+		
+		return list;
+	}
+
+	
+
 }

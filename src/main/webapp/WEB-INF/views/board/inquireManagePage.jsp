@@ -56,6 +56,7 @@
 							<tr>
 								<th>글번호</th>
 								<th>제목</th>
+								<th>문의상태</th>
 								<th>작성자</th>
 								<th>조회수</th>
 								<th>작성일</th>
@@ -70,6 +71,14 @@
 								<tr>
 									<td>${ list.board_id }</td>
 									<td>${ list.btitle }</td>
+									<td>
+									<c:if test="${ list.co == null}" >
+									[답변대기]
+									</c:if>
+									<c:if test="${ list.co != null }">
+									[답변완료!]
+									</c:if>
+									</td>
 									<td>${ list.nickname }</td>
 									<td>${ list.bcount }</td>
 									<td>${ list.board_date }</td>
@@ -88,7 +97,7 @@
 					}).click(function(){
 						var board_id = $(this).parents().children("td").eq(0).text();
 						console.log(board_id);
-						location.href = "selectInquireOne.bo?board_id=" + board_id;
+						location.href = "selectInquireOne.bo?board_id=" + board_id + "&abc=in";
 					}); 
 				});
 				</script>

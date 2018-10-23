@@ -33,7 +33,11 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.dok.admin.model.vo.UserMovie;
+import com.kh.dok.board.model.service.BoardService;
 import com.kh.dok.board.model.vo.Board;
+import com.kh.dok.board.model.vo.BoardNBoardFile;
+import com.kh.dok.common.PageInfo;
+import com.kh.dok.common.Pagination;
 import com.kh.dok.member.model.exception.LoginException;
 import com.kh.dok.member.model.service.MemberService;
 import com.kh.dok.member.model.vo.BookingHistory;
@@ -55,6 +59,8 @@ public class MemberController {
 
    @Autowired
 	private MovieService mss;
+	@Autowired
+	private BoardService bs;
 
     //마이페이지 메인
    @RequestMapping("member.me")
@@ -95,13 +101,29 @@ public class MemberController {
    }
 
    @RequestMapping("ask.me")
-   public String myAskView(Model model, HttpServletRequest request){
+   public String myAskView(Model model, HttpServletRequest request, PageInfo p){
+	   BoardNBoardFile bbf = new BoardNBoardFile();
 	   
+	   HttpSession session = request.getSession();
 	   Member m = (Member)request.getSession().getAttribute("loginUser");
+	   String mid = m.getMid();
 	   
-	   ArrayList<Board> myAskView = ms.selectMyAsk(m);
+	   bbf.setmId(mid); 
 	   
-	   model.addAttribute("myAskView", myAskView);
+	   if(p.getCurrentPage() == 0){
+		   p.setCurrentPage(1);
+	   }
+	   
+	   
+	   int listCount = bs.getlistCount(mid);
+	   
+	   PageInfo pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
+	   
+	   ArrayList<BoardNBoardFile> list = bs.selectMpInquireList(pi, mid);
+	   
+	   model.addAttribute("pi", pi);
+	   model.addAttribute("list", list);
+	   
 	   
       return "member/ask";
    }
@@ -147,6 +169,7 @@ public class MemberController {
 	@RequestMapping("loginCheck.me")
 
 	public String loginCheck(MovieThumbnail msn,Model model, Member m){
+
 
 		System.out.println("loginCheck MemberController : " + m);
 
@@ -806,6 +829,16 @@ public class MemberController {
 			return result;
 		}
 
+	}
+	
+	//댓글 좋아요
+	@ResponseBody
+	@RequestMapping("likeComment.me")
+	public int updateRecom(MyReply m){
+		
+		int result = ms.updateRecom(m);
+
+		return result;
 	}
 
 

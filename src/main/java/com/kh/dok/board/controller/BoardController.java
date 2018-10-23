@@ -25,9 +25,11 @@ import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.board.model.vo.BoardNBoardFile;
 import com.kh.dok.board.model.vo.SearchCondition1;
+import com.kh.dok.cinema.model.vo.Cinema;
 import com.kh.dok.common.CommonUtils;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.common.Pagination;
+import com.kh.dok.member.controller.MemberController;
 import com.kh.dok.member.model.vo.Member;
 import com.kh.dok.review.model.vo.Reply;
 
@@ -37,7 +39,7 @@ import net.sf.json.JSONArray;
 public class BoardController {
 	@Autowired
 	private BoardService bs;
-	
+	@Autowired private MemberController mc;
 	
 	   @RequestMapping("writeQna.bo")
 	   public String writeQnaView(){
@@ -50,7 +52,12 @@ public class BoardController {
 	   }
 	   
 	   @RequestMapping("modifyNotice.bo")
-	   public String modifyNotice(){
+	   public String modifyNotice(String board_id, Model model) throws BoardSelectOneException{
+		  System.out.println("공지사항 수정 board_id : " + board_id);
+		   BoardNBoardFile bbf = new BoardNBoardFile();
+		   bbf = bs.modifyNoticeOne(board_id);
+		   model.addAttribute("bbf", bbf);
+		   
 		   return "board/noticeManagePageModify";
 	   }
 	   
@@ -128,6 +135,7 @@ public class BoardController {
 		public String showNoticeView(PageInfo p, HttpServletRequest request, Model model){
 		   BoardNBoardFile bbf = new BoardNBoardFile();
 		   
+		   HttpSession session = request.getSession();
 		   Member m = (Member)request.getSession().getAttribute("loginUser");
 		   String mid = m.getMid();
 		   bbf.setmId(mid); 
@@ -191,9 +199,10 @@ public class BoardController {
 	   
 	   
 	   //문의사항 페이지로
-	   @RequestMapping(value="inquire.li")  
+	   @RequestMapping(value="inquire.li")
 		public String showInquireView(PageInfo p, HttpServletRequest request, Model model){
 		   BoardNBoardFile bbf = new BoardNBoardFile();
+		   Reply r = new Reply();
 		   
 		   Member m = (Member)request.getSession().getAttribute("loginUser");
 		   String mid = m.getMid();
@@ -274,6 +283,8 @@ public class BoardController {
 		   
 		   try {
 			   BoardNBoardFile bbf = bs.selectNoticeOne(board_id);
+			   
+			   System.out.println("보드컨트롤러 공지사항 클릭했을 때 갓다옴 bbf : " + bbf);
 			   
 			   model.addAttribute("bbf", bbf);
 			
@@ -383,20 +394,33 @@ public class BoardController {
 	   
 	   //판매자 문의사항 클릭시
 	   @RequestMapping(value="selectInquireOne.bo")
-	   public String selectInquireOne(Model model, String board_id){
+	   public String selectInquireOne(String abc, Model model, String board_id){
+		   
 		   try {
+			   System.out.println("aaaaaaaaaaaaabbbbbbbbbbbbccccccccc : " + abc);
 			   System.out.println("성희 : 보드컨트롤러 board_id : " + board_id);
 			BoardNBoardFile bbf = bs.selectInquireOne(board_id);
 			System.out.println("성희 : 지금 볼라고 한거 bbf : " + bbf);
 			
 			model.addAttribute("bbf", bbf);
+			
+			
 		} catch (BoardSelectOneException e) {
 			model.addAttribute("msg", "updateCount 실패");
 			
 			return "common/errorPage";
 		}
+		   if(abc.equals("ask")){
+			   System.out.println("abc" + abc);
+			   return "member/inquireDetailMp";
+		   }else if(abc.equals("in")){
+			   System.out.println("board" + abc);
+			   return "board/inquireManagePageDetail";
+			   
+		   }else{
+			   return "board/inquireManagePageDetail";
+		   }
 		   
-		   return "board/inquireManagePageDetail";
 		   
 	   }
 	   
@@ -452,8 +476,145 @@ public class BoardController {
 		   return "board/writeRequiremp";
 	   }
 	   
+	   //판매자 공지 수정 등록
+	   @RequestMapping(value="modifyManageNotice.bo")
+	   public String modifyManageNotice(String board_id, Model model, Board b, BoardFile bf, HttpServletRequest request, @RequestParam(name="file", required=false)MultipartFile file){
+		   Member m = (Member)request.getSession().getAttribute("loginUser");
+		   b.setBoard_id(board_id);
+		   b.setmId(m.getMid());
+		   bf.setBoard_id(board_id);
+		   
+		   String root = request.getSession().getServletContext().getRealPath("resources");
+		   String filePath = root + "\\uploadFiles";
+		   
+		   System.out.println("root : " + root);
+		   System.out.println("filepath : " + filePath);
+		   
+		   String originFileName = file.getOriginalFilename();
+		   System.out.println("originFileName : " + originFileName);
+		   String ext = originFileName.substring(originFileName.lastIndexOf("."));
+		   String changeName = CommonUtils.getRandomString();
+		   
+		   System.out.println("찰리찰리 uploadFile에 등록 햇나요? NO");
+		   
+		   try {
+			file.transferTo(new File(filePath + "\\" + changeName + ext));
+			
+			bf.setFile_src(filePath + "\\" + changeName + ext);
+			bf.setOrigin_name(originFileName);
+			bf.setEdit_name(changeName);
+			
+			System.out.println("찰리찰리 파일 이름 바꾸고 등록 햇나여? YES");
+			
+			try {
+				int result = bs.updateNotice(b, bf);
+				
+				selectNoticeOne(model, board_id);
+				
+				return "board/noticeManagePageDetail";
+			} catch (Exception e) {
+				new File(filePath + "\\" + changeName + ext).delete();
+				
+				model.addAttribute("msg", "공지사항 수정 실패! //파일등록안됨");
+				return "common/errorPage";
+			}
+			
+			
+		} catch (IllegalStateException e) {
+			model.addAttribute("msg", "공지사항 수정 실패! //파일등록안됨");
+			return "common/errorPage";
+		} catch (IOException e) {
+			model.addAttribute("msg", "공지사항 수정 실패! //파일등록안됨");
+			return "common/errorPage";
+		}
+		   
+	   }
 	   
-	     
+	 @RequestMapping(value="deleteNotice.bo")
+	 public String deleteNotice(String board_id, Model model, HttpServletRequest request){
+		System.out.println("왓니??");
+		 int result = bs.deleteNotice(board_id);
+		 
+		 PageInfo p = new PageInfo();
+		 showNoticeView(p, request, model);
+		 
+		 return "board/noticeManagePage";
+	 }
+	 
+	 @RequestMapping(value="requirempmp.bo")
+	 public String mypageRequireInsert(HttpServletRequest request, Model model, Board b, BoardFile bf, @RequestParam(name="file", required=false)MultipartFile file){
+		 System.out.println("마이페이지 문의사항 등록 컨트롤러 왔어요~~");
+		 Member m = (Member)request.getSession().getAttribute("loginUser");
+		 
+		 String theaterId = request.getParameter("demo-category");
+		 System.out.println("지금 확인해야하는 theaterId : " + theaterId);
+		 
+		 if(theaterId == null){
+			 b.setTheater_id("null");
+		 }else{
+			 b.setTheater_id(theaterId);
+		 }
+		 
+		 
+		 String root = request.getSession().getServletContext().getRealPath("resources");
+		   String filePath = root + "\\uploadFiles";
+		   
+		   System.out.println("root : " + root);
+		   System.out.println("filepath : " + filePath);
+		   
+		   String originFileName = file.getOriginalFilename();
+		   System.out.println("originFileName : " + originFileName);
+		   String ext = originFileName.substring(originFileName.lastIndexOf("."));
+		   String changeName = CommonUtils.getRandomString();
+		   
+		   System.out.println("찰리찰리 uploadFile에 등록 햇나요? NO");
+		   
+		   try {
+			file.transferTo(new File(filePath + "\\" + changeName + ext));
+			
+			bf.setFile_src(filePath + "\\" + changeName + ext);
+			bf.setOrigin_name(originFileName);
+			bf.setEdit_name(changeName);
+			
+			System.out.println("찰리찰리 파일 이름 바꾸고 등록 햇나여? YES");
+			
+			try {
+				System.out.println("인써트인콰이어마페 가기전 컨트롤러 b : " + b);
+				int result = bs.insertInquireMp(b, bf);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			PageInfo p = new PageInfo();
+			
+			mc.myAskView(model, request, p);
+			
+			return "member/ask";
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		   PageInfo p = new PageInfo();
+			
+			mc.myAskView(model, request, p);
+			
+			return "member/ask";
+	 }
+	 
+	 @RequestMapping(value="selectCinema.bo")
+	 public @ResponseBody HashMap<String, Object> ajax_cinemaList(HttpServletRequest request, Model model){
+		 ArrayList<Cinema> list = bs.cinemaList();
+		 
+		 HashMap<String, Object> hmap = new HashMap<String, Object>();
+		 hmap.put("list", list);
+		 
+		 return hmap;
+	 }
+	   
 
 }
 

@@ -271,7 +271,7 @@ hr {
 								<th>조회수</th>
 								<th>작성일</th>
 							</tr>
-						<c:if test="${ list == null }">
+						<%-- <c:if test="${ list == null }">
 							<tr>
 								<td>등록된 공지사항이 없습니다.</td>
 							</tr>
@@ -286,7 +286,77 @@ hr {
 									<td>${ list.board_date }</td>
 								</tr>
 							</c:forEach>
-						</c:if>
+						</c:if> --%>
+						<tr>
+						<td>1367</td>
+						<td>카카오뱅크 전산시스템 점검에 따른 서비스 일시 중단 안내</td>
+						<td>관리자</td>
+						<td>5023</td>
+						<td>2018-10-17</td>
+						</tr>
+						<tr>
+						<td>1366</td>
+						<td>10월 배리어프리 상영작 안내</td>
+						<td>관리자</td>
+						<td>1055</td>
+						<td>2018-10-05</td>
+						</tr>
+						<tr>
+						<td>1349</td>
+						<td>개인정보 처리방침 변경 안내</td>
+						<td>관리자</td>
+						<td>1032</td>
+						<td>2018-09-29</td>
+						</tr>
+						<tr>
+						<td>1336</td>
+						<td>킹 오브 프리즘 로즈파티 2018 진행 안내</td>
+						<td>관리자</td>
+						<td>3025</td>
+						<td>2018-09-21</td>
+						</tr>
+						<tr>
+						<td>1335</td>
+						<td>현대백화점 상품권 결제 서비스 종료 안내</td>
+						<td>관리자</td>
+						<td>1932</td>
+						<td>2018-09-15</td>
+						</tr>
+						<tr>
+						<td>1325</td>
+						<td>[사표대신 영화표] 당첨자 발표</td>
+						<td>관리자</td>
+						<td>2035</td>
+						<td>2018-09-11</td>
+						</tr>
+						<tr>
+						<td>1324</td>
+						<td>클래식 라이브 <2018 베를린 필하모닉 발트뷔네 콘서트> - 상영 안내</td>
+						<td>관리자</td>
+						<td>3012</td>
+						<td>2018-09-07</td>
+						</tr>
+						<tr>
+						<td>1303</td>
+						<td>8월 24일 자정 서버 점검이 시행됩니다.</td>
+						<td>관리자</td>
+						<td>2905</td>
+						<td>2018-09-01</td>
+						</tr>
+						<tr>
+						<td>1301</td>
+						<td>9/05 행정안전부 주관 전국 지진 대피 훈련 안내</td>
+						<td>관리자</td>
+						<td>2354</td>
+						<td>2018-08-30</td>
+						</tr>
+						<tr>
+						<td>1294</td>
+						<td>신협 시스템 점검작업에 따른 펌뱅킹서비스 일시 중지 안내 (08/30)</td>
+						<td>관리자</td>
+						<td>3944</td>
+						<td>2018-08-20</td>
+						</tr>
 					</table>
 				</div>
 				<script>
@@ -323,7 +393,7 @@ hr {
 				                                                                                                        
 				
 				<!-- 페이징 처리 -->
-				<div id="page" align="center">
+				<%-- <div id="page" align="center">
 					<div class="pagination" align="center">
 						<c:if test="${ pi.currentPage <= 1 }">
 							<a>이전 </a>
@@ -358,7 +428,23 @@ hr {
 							<a href="${ blistEnd }">다음</a>
 						</c:if>
 					</div>
-				</div>
+				</div> --%>
+				<div class="pagination" align="center">
+						<%-- <c:if test="${ pi.currentPage <= 1 }"> --%>
+							<a>이전 </a>
+							<a>1 </a>
+							<a>2 </a>
+							<a>3 </a>
+							<a>4 </a>
+							<a>5 </a>
+							<a>6 </a>
+							<a>7 </a>
+							<a>8 </a>
+							<a>9 </a>
+							<a>10 </a>
+							<a> 다음</a>
+							</div>
+				
 				
 				
 				

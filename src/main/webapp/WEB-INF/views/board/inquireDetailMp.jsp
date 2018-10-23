@@ -1,20 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="${contextPath }/resources/css/main.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<noscript>
-	<link rel="stylesheet" href="${contextPath }/resources/css/noscript.css" />
-</noscript>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <style>
 	#image{
@@ -26,39 +21,47 @@
 		margin-right:20px;
 		margin-top:20px;
 		float: left;
-	}  
+	}
 </style>
 <body class="is-preload">
-   <c:import url="../common/headBar.jsp" />
+
+	<%@ include file="../common/headBar.jsp"%>
+
+	<!-- Wrapper -->
+	<div id="wrapper" class="fade-in">
+
+		<!-- Header -->
+
+		<header id="header"> </header>
+
+		<!-- Nav -->
+		<nav id="nav">
+			<ul class="links">
+				<li><a href="member.me">나의 독GV</a>
+				<li><a href="editInfo.me">회원정보수정</a></li>
+				<li><a href="bookingHist.me">예매확인/취소</a></li>
+				<li class="active"><a href="ask.me">문의내역</a></li>
+				<li><a href="wishlist.me">위시리스트</a></li>
+				<li><a href="reviews.me">내가 쓴 리뷰</a></li>
+				<c:if test="${ sessionScope.loginUser.user_class eq 'BUYER'}">
+					<li><a href="theaterAdd.me">판매자 등록</a></li>
+				</c:if>
+			</ul>
+		</nav>
+
+		<!-- Main -->
+		<div id="main">
 
 
-   <div id="wrapper" class="fade-in">
+			<!-- Posts -->
+			<section class="post">
+				<header class="major">
+					<h3>나의 문의 내역</h3>
+					<h6>고객센터에서 남겨주신 문의내역을 모두 확인하실 수 있습니다.</h6>
+				</header>
+			</section>
 
-      <header id="header">
-      </header>
-
-   <nav id="nav">
-         <ul class="links">
-            <li><a href="play.li"><fontsize="4">상영등록</font></a></li>
-            <li><a href="theater.li"><font size="4">영화관등록</font></a></li>
-            <li><a href="movieRoom.li"><font size="4">상영관등록</font></a></li>
-            <li><a href="stats.li"><font size="4">통계/관리</font></a></li>
-            <li><a href="reservation.li"><font size="4">예매현황</font></a></li>
-            <li><a href="notice.li"><font size="4">공지사항/등록</font></a></li>
-            <li><a href="inquire.li"><font size="4">문의내역</font></a></li>
-         </ul>
-      </nav>
-      
-      </nav>
-
-      <div id="main">
-
-         <article class="post featured">
-         
-         <h2>문의사항 상세보기</h2>
-            <br><br>
-            
-            <div id="detailView">
+			<div id="detailView">
                   <div align="left" style="display:inline-block; float:left;">
                         <h4 align="left" id="title" style="display:inline-block; margin-bottom:0px;"> 글 번호 </h4>&nbsp;
                         <h4 align="left" id="title" style="display:inline-block; margin-bottom:0px;"> ${ bbf.board_id } </h4>
@@ -85,7 +88,7 @@
                         <div style="width:900px; height:400px; border:1px solid #eeeeee; text-align:left;">
                             ${ bbf.bcontent }
                             <div id="image">
-                            <img src="${ contextPath }/resources/uploadFiles/${bbf.edit_name}.png" style="width:300px; hieght:400px;">
+                            <img src="${ contextPath }/resources/uploadFiles/${bbf.edit_name}.jpg" style="width:300px; hieght:400px;">
                             	<!-- <${ bbf.file_src } style="width:500px; height:450px;"> -->
                          	</div>
                          </div>  
@@ -172,7 +175,7 @@
             					}
             				}else{
             					html += "<div>";
-            	                html += "<div><table class='table'><h6><strong>등록된 답변이 없습니다.</strong></h6>";
+            	                html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
             	                html += "</table></div>";
             	                html += "</div>";
             				}
@@ -190,30 +193,7 @@
             </script>
             
             
-            
-            
-            
-            
-            
-            
-            
-            
-          
-            
-            <!-- <table align="center">
-               <tr>
-                  <td>
-                     <textarea cols="60" rows="5"></textarea>
-                  </td>
-                  <td>
-                     <button>등록하기</button>
-                  </td>
-               </tr>
-               <tr>
-                  <td colspan="2"><b>답글(갯수)</b></td>
-               </tr>
-            </table> -->
-            <hr>
+             <hr>
             
              <button class="button" onclick="goBack()">목록</button>
             
@@ -226,36 +206,33 @@
             
             
             
-            <%-- <c:if test="댓글갯수 > 0">
-               <table align="center">
-               <%--    <c:forEach var="r" item="댓글리스트">
-                     <tr>
-                        <td width="100px">유저네임</td>
-                        <td width="300px">댓글내용</td>
-                        <td width="100px">날짜</td>
-                     </tr>
-                  </c:forEach> --%>
-               </table>
-   
-         
-         
-         
-         
-         </article>
-      </div>
-   </div>
 
 
 
 
-   <!-- Scripts -->
-   <script src="assets/js/jquery.min.js"></script>
-   <script src="assets/js/jquery.scrollex.min.js"></script>
-   <script src="assets/js/jquery.scrolly.min.js"></script>
-   <script src="assets/js/browser.min.js"></script>
-   <script src="assets/js/breakpoints.min.js"></script>
-   <script src="assets/js/util.js"></script>
-   <script src="assets/js/main.js"></script>
+		</div>
+
+
+
+
+		<!-- Copyright -->
+		<div id="copyright">
+			<ul>
+				<li>&copy; Untitled</li>
+				<li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+			</ul>
+		</div>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="${contextPath }/resources/js/jquery.min.js"></script>
+	<script src="${contextPath }/resources/js/jquery.scrollex.min.js"></script>
+	<script src="${contextPath }/resources/js/jquery.scrolly.min.js"></script>
+	<script src="${contextPath }/resources/js/browser.min.js"></script>
+	<script src="${contextPath }/resources/js/breakpoints.min.js"></script>
+	<script src="${contextPath }/resources/js/util.js"></script>
+	<script src="${contextPath }/resources/js/main.js"></script>
 
 </body>
 </html>

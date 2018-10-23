@@ -302,6 +302,7 @@ to {
 	<c:import url="../common/headBar.jsp" />
 	<div class="slideshow-container">
 
+
 			<div class="mySlides fade1" align="center">
 				<div class="numbertext">1 / 4</div>
 					<c:if test="${fn:length(bf) >= 1}">
@@ -311,6 +312,7 @@ to {
 						<img src="${contextPath }/resources/images/slide3.jpg" style="width: 1000px; height: 450px;">
 					</c:if>
 			</div>
+
 
 			<div class="mySlides fade1"  align="center">
 				<div class="numbertext">2 / 4</div>
@@ -322,6 +324,7 @@ to {
 					</c:if>
 			</div>
 
+
 			<div class="mySlides fade1"  align="center">
 				<div class="numbertext">3 / 4</div>
 					<c:if test="${fn:length(bf) >= 3}">
@@ -331,6 +334,7 @@ to {
 						<img src="${contextPath }/resources/images/slide1.jpg" style="width: 1000px; height: 450px;">
 					</c:if>
 			</div>
+
 
 			<div class="mySlides fade1"  align="center">
 				<div class="numbertext">4 / 4</div>

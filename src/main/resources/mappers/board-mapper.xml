@@ -25,6 +25,7 @@
 		<result property="file_date" column="FILE_DATE"/>
 		<result property="file_level" column="FILE_LEVEL"/>
 		<result property="nickname" column="NICKNAME" />
+		<result property="co" column="CO"/>
 	</resultMap>
 	
 	<resultMap type="Reply" id="ReplyResultSet">
@@ -51,6 +52,11 @@
 		<result property="fileSrc" column="FILE_SRC" />
 		<result property="fileDate" column="FILE_DATE" />
 		<result property="fileLevel" column="FILE_LEVEL" />
+	</resultMap>
+	
+	<resultMap type="Cinema" id="cinemaResultSet">
+		<id property="theaterId" column="THEATER_ID"/>
+		<result property="theaterName" column="THEATER_NAME"/>
 	</resultMap>
 	
 	<!-- 공지등록 -->
@@ -128,7 +134,7 @@
 		AND BOARD.MID = M.MID
 		AND BOARD.BOARD_ID = 'B' || #{board_id}
 		AND BSTATUS = 'Y'
-		AND BOARD_DIV = 'BD1'
+		AND BOARD_DIV = 'BD4'
 	</select>
 	
 	<!-- 공지사항 페이징 getListCount(성희) -->
@@ -136,7 +142,7 @@
 		SELECT COUNT(*)
 		FROM BOARD
 		WHERE BSTATUS = 'Y'
-		AND MID = #{mId}
+		AND MID = #{mid}
 	</select>
 	
 	<!-- 공지사항 페이징 한쪽 불러오기(성희) -->
@@ -201,10 +207,11 @@
 	<!-- 관리자 문의사항 제목 10 개 불러오기 (성희) -->
 	<select id="selectINquireList" parameterType="java.lang.String" resultMap="BBFileResultSet">
 		SELECT TO_NUMBER(SUBSTR(BOARD.BOARD_ID, 2)) AS BOARD_ID, BOARD.MID, BTITLE, BCONTENT, BOARD_SORT, BOARD_DATE, BCOUNT, 
-       		   FILE_ID, ORIGIN_NAME, EDIT_NAME, FILE_SRC, FILE_DATE, FILE_LEVEL, M.NICKNAME
-		FROM BOARD, BOARD_FILE, MEMBER M
+       		   FILE_ID, ORIGIN_NAME, EDIT_NAME, FILE_SRC, FILE_DATE, FILE_LEVEL, M.NICKNAME, CO
+		FROM BOARD, BOARD_FILE, MEMBER M, (SELECT BOARD_ID, COUNT(*) AS CO FROM BOARD B RIGHT JOIN REPLY R ON(B.BOARD_ID=R.BID) GROUP BY BOARD_ID) R
 		WHERE BOARD.BOARD_ID = BOARD_FILE.BOARD_ID(+)
 		AND BOARD.MID = M.MID
+        AND BOARD.BOARD_ID = R.BOARD_ID(+)
 		AND BOARD.THEATER_ID = #{theaterId}
 		AND BSTATUS = 'Y'
 		AND BOARD_DIV = 'BD1'
@@ -251,6 +258,71 @@
 		INSERT INTO BOARD_FILE VALUES('BF' || TO_CHAR(BOARD_FILE_FILE_ID.NEXTVAL), #{board_id}, #{origin_name}, #{edit_name}
 		,#{file_src}, SYSDATE, #{file_level})
 	</insert>
+	
+	<!-- 문의사항 상세보기 -->
+	<select id="selectInquireOne" parameterType="java.lang.String" resultMap="BBFileResultSet">
+		SELECT TO_NUMBER(SUBSTR(BOARD.BOARD_ID, 2)) AS BOARD_ID, BOARD.MID, BTITLE, BCONTENT, BOARD_SORT, BOARD_DATE, BCOUNT, 
+       		   FILE_ID, ORIGIN_NAME, EDIT_NAME, FILE_SRC, FILE_DATE, FILE_LEVEL, M.NICKNAME
+		FROM BOARD, BOARD_FILE, MEMBER M
+		WHERE BOARD.BOARD_ID = BOARD_FILE.BOARD_ID(+)
+		AND BOARD.MID = M.MID
+		AND BOARD.BOARD_ID = 'B' || #{board_id}
+		AND BSTATUS = 'Y'
+		AND BOARD_DIV = 'BD1'
+	</select>
+	
+	<!-- 판매자 공지사항 수정(업데이트) -->
+	<update id="updateNotice" parameterType="board">
+		UPDATE BOARD
+		SET BTITLE = #{btitle}, BCONTENT = #{bcontent}, MODIFY_DATE = SYSDATE
+		WHERE BOARD_ID = 'B' || #{board_id}
+	</update>
+	
+	<!-- 판매자 공지사항 파일업데이트 -->
+	<update id="updateNoticeFile" parameterType="BoardFile">
+		UPDATE BOARD_FILE
+        SET ORIGIN_NAME = #{origin_name}, EDIT_NAME = #{edit_name}, FILE_SRC = #{file_src}, FILE_DATE = #{file_date}
+        WHERE BOARD_ID = 'B' || #{board_id}
+	</update>
+	
+	<!-- 문의사항 댓글수 -->
+	<!-- <select id="selectrlist" parameterType="java.lang.String" resultType="_int">
+	
+	</select> -->
+	
+	<!-- 공지사항 삭제 -->
+	<update id="deleteNotice" parameterType="java.lang.String">
+		UPDATE BOARD
+		SET BSTATUS = 'N'
+		WHERE BOARD_ID = 'B' || #{board_id}
+	</update>
+	
+	<!-- 마페 문의사항 insert -->
+	<!-- theater_id, movie_id 추가해야함 bd1도 바꾸기 -->
+	<insert id="insertInquireMp" parameterType="board">
+		INSERT INTO BOARD
+		VALUES('B' || BOARD_BOARD_ID_SND.NEXTVAL, #{mId}, #{btitle}, #{bcontent}, 'BOARD', 
+				SYSDATE, NULL, 'Y', DEFAULT, NULL, #{theater_id}, NULL, 'BD1')
+	</insert>
+	
+	<!-- 마페 문의사항 글 10개 불러오기 -->
+	<select id="selectMpInquireList" parameterType="java.lang.String" resultMap="BBFileResultSet">
+		SELECT TO_NUMBER(SUBSTR(BOARD.BOARD_ID, 2)) AS BOARD_ID, BOARD.MID, BTITLE, BCONTENT, BOARD_SORT, BOARD_DATE, BCOUNT, 
+       		   FILE_ID, ORIGIN_NAME, EDIT_NAME, FILE_SRC, FILE_DATE, FILE_LEVEL, M.NICKNAME
+		FROM BOARD, BOARD_FILE, MEMBER M
+		WHERE BOARD.BOARD_ID = BOARD_FILE.BOARD_ID(+)
+		AND BOARD.MID = M.MID
+		AND BOARD.MID = #{mid}
+		AND BSTATUS = 'Y'
+		AND BOARD_DIV = 'BD1'
+		ORDER BY BOARD_ID DESC
+	</select>
+	
+	<!-- 시네마 리스트 불러오기 -->
+	<select id="cinemaList" resultMap="cinemaResultSet">
+		SELECT *
+		FROM THEATER
+	</select>
 	
 	
 </mapper>

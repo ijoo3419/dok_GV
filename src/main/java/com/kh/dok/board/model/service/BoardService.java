@@ -9,6 +9,7 @@ import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.board.model.vo.BoardNBoardFile;
 import com.kh.dok.board.model.vo.SearchCondition1;
+import com.kh.dok.cinema.model.vo.Cinema;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.review.model.vo.Reply;
 
@@ -24,7 +25,7 @@ public interface BoardService {
 
 	BoardNBoardFile selectNoticeOne(String board_id) throws BoardSelectOneException;
 
-	int getlistCount(String mId);
+	int getlistCount(String mid);
 
 	ArrayList<BoardNBoardFile> selectNoticeList(PageInfo pi, String mId);
 
@@ -45,5 +46,20 @@ public interface BoardService {
 	int addComment(Reply reply);
 
 	ArrayList<Reply> selectReply(String bid);
+
+	BoardNBoardFile modifyNoticeOne(String board_id);
+
+	int updateNotice(Board b, BoardFile bf)  throws BoardInsertException;
+
+	int deleteNotice(String board_id);
+
+	int insertInquireMp(Board b, BoardFile bf)  throws BoardInsertException;
+
+	ArrayList<BoardNBoardFile> selectMpInquireList(PageInfo pi, String mid);
+
+	ArrayList<Cinema> cinemaList();
+
+
+	//ArrayList<Reply> selectrlist(PageInfo pi, String theaterId);
 
 }

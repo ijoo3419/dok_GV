@@ -90,6 +90,9 @@ public interface MemberDao {
 
 	//소진 추천 영화 조회
 	ArrayList selectRecommened(SqlSessionTemplate sqlSession, ArrayList<String> fourCount);
+
+	//댓글 좋아요
+	int updateRecom(SqlSessionTemplate sqlSession, MyReply m);
 	
 
 
