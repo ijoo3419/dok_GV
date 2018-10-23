@@ -292,7 +292,7 @@ hr {
 			<hr width="1px" size="40px" color="black" id="hrline">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<!-- <a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">예매율 7위 30.4%</a> -->
-			<input type="button" value="예매하기" style="background:purple; font-clolr:white; float:right;  margin-top:10px;">
+			<input type="button" value="예매하기" style="background:#e879fc; float:right;  margin-top:10px;" onclick="location.href='moviePay.mo'">
 			<br>
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">상영관 수: <c:forEach items="${cinemaEa}" var="row2">${row2.ea }</c:forEach> </a><br>
 			<!-- <a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">좌석 수:</a><br> -->
@@ -303,7 +303,7 @@ hr {
 			<br>
 			<!-- <input type="button" value="상영시간표" style="float:right; ">
 			<input type="button" value="♥영화관 찜" style="float:right; margin-right:10px; text-decoration: none;"> -->
-			<input type="button" value="문의하기" style="float:right;  margin-right:10px;">
+			<input type="button" value="문의하기" style="float:right;  margin-right:10px;" onclick="location.href='writeRequire.bo'">
 		</div>
 		<br><br><br><br><br><br><br><br><br><br><br><br>
 		<hr>

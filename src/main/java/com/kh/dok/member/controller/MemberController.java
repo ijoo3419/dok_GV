@@ -585,6 +585,11 @@ public class MemberController {
 			model.addAttribute("movieRank1",movieRank1);
 			model.addAttribute("movieRank2",movieRank2);
 			model.addAttribute("movieRank3",movieRank3);
+			
+			ArrayList<String> go = new ArrayList<String>();
+			go.add("go");
+			model.addAttribute("go", go);
+			
 		   return "main/main";
 	   }else{
 		   model.addAttribute("msg", "카카오 로그인 실패");

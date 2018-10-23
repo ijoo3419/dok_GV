@@ -332,7 +332,7 @@ hr {
 						
 						<c:forEach items="${ wishlistView }" var="row">
 					<div id="sumnailimage">
-						<${ row.file_src } style="width:298px; height:270px;">
+						<img src="${ contextPath }/resources/uploadFiles/${row.edit_name}" style="width:298px; height:270px;">
 						<c:set var="name" value="${row.movie_age}"/>
                     <c:choose>
 					    <c:when test="${name eq '12'}">

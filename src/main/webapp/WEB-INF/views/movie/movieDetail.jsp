@@ -322,8 +322,8 @@ hr {
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<hr width="1px" size="40px" color="black" id="hrline">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">예매율 ${row.rnum }위</a>
-			<input type="button" value="예매하기" style="background:#e879fc; float:right;  margin-top:10px;">
+			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">예매 ${row.rnum }위</a>
+			<input type="button" value="예매하기" style="background:#e879fc; float:right;  margin-top:10px;" onclick="location.href='moviePay.mo'">
 			<br>
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">타입: ${row.movie_type}</a><br>
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">개봉일: ${row.open_date }</a><br>
@@ -331,7 +331,7 @@ hr {
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">출연진: ${row.movie_actor }</a><br>
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">장르: ${row.genre}</a><br>
 			
-			<input type="button" value="상영시간표" style="float:right; ">
+			<!-- <input type="button" value="상영시간표" style="float:right; "> -->
 			<input type="button" value="♥보고싶어" style="float:right; margin-right:10px; text-decoration: none;" onclick="insertWish()">
 			<input type="hidden" value="${ loginUser.mid }" id="mid" >
 			<%-- <input type="hidden" value="${ movieDetail.movie_id }" id="movie_id"> --%>
