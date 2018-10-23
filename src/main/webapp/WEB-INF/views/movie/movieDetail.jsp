@@ -687,11 +687,10 @@ hr {
 						rcontent:rcontent
 					},
 					success:function(data){
-						alert("성공함");
+						alert("리뷰를 수정하였습니다.");
 						location.href="movieDetail.mo?id=" + movie_id;
 					},
 					error:function(data){
-						alert("에러남");
 						location.href="movieDetail.mo?id=" + movie_id;
 					}
 				});
@@ -717,6 +716,7 @@ hr {
 						mid:mid
 						},
 					success:function(data){
+						alert("리뷰가 삭제되었습니다.")
 						location.href="movieDetail.mo?id=" + movie_id;
 					},
 					error:function(){

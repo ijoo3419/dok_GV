@@ -166,6 +166,7 @@ hr {
 	    pointer: cursor;
 	}
 	.pagination a {
+	align:center
 	    color: black;
 	    padding: 8px 16px;
 	    text-decoration: none;
@@ -429,8 +430,9 @@ hr {
 						</c:if>
 					</div>
 				</div> --%>
-				<div class="pagination" align="center">
 						<%-- <c:if test="${ pi.currentPage <= 1 }"> --%>
+						<div align="center">
+				<div class="pagination" align="center">
 							<a>이전 </a>
 							<a>1 </a>
 							<a>2 </a>
@@ -444,7 +446,7 @@ hr {
 							<a>10 </a>
 							<a> 다음</a>
 							</div>
-				
+				</div>
 				
 				
 				

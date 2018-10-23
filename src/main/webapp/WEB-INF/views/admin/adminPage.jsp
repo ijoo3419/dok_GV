@@ -750,8 +750,7 @@ img.ui-datepicker-trigger {
 		</section>
 		<!-- 여섯번째 탭(공지사항) : 성희 공간-->
 		<section id="tab-6" class="post">
-		<h2 align="center">공지사항</h2>
-				<br><br>
+		<h2>공지사항</h2>
 				<div class="table-wrapper">
 					<table id="boardArea" align="center">
 							<tr>
@@ -905,6 +904,7 @@ img.ui-datepicker-trigger {
 						</c:if>
 					</div>
 				</div> --%>
+				<div align="center">
 				<div class="pagination" align="center">
 						<%-- <c:if test="${ pi.currentPage <= 1 }"> --%>
 							<a>이전 </a>
@@ -917,7 +917,7 @@ img.ui-datepicker-trigger {
 							<a>7 </a>
 							<a> 다음</a>
 							</div>
-				
+				</div>
 				
 				
 				
