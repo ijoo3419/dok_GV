@@ -128,8 +128,8 @@ public class BoardController {
 		public String showNoticeView(PageInfo p, HttpServletRequest request, Model model){
 		   BoardNBoardFile bbf = new BoardNBoardFile();
 		   
-		   HttpSession session = request.getSession();
-		   String mid = (String)session.getAttribute("mid");
+		   Member m = (Member)request.getSession().getAttribute("loginUser");
+		   String mid = m.getMid();
 		   bbf.setmId(mid); 
 		   
 		   if(p.getCurrentPage() == 0){
@@ -191,7 +191,7 @@ public class BoardController {
 	   
 	   
 	   //문의사항 페이지로
-	   @RequestMapping(value="inquire.li")
+	   @RequestMapping(value="inquire.li")  
 		public String showInquireView(PageInfo p, HttpServletRequest request, Model model){
 		   BoardNBoardFile bbf = new BoardNBoardFile();
 		   
@@ -205,6 +205,7 @@ public class BoardController {
 		   }
 		   
 		   String TheaterId = bs.getTheaterId(mid);
+		   System.out.println("보드 컨트롤러 TheaterId : " + TheaterId);
 		   
 		   int listCount = bs.getInquirelistCount(TheaterId);
 		   

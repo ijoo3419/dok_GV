@@ -1,4 +1,4 @@
-package com.kh.dok.board.model.service;
+package com.kh.dok.board.model.service;  
 
 import java.util.ArrayList;
 

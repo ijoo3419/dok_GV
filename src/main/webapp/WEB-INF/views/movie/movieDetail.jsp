@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
@@ -259,6 +259,10 @@ hr {
 	border-bottom: dotted 0px !important; 
 	color:black !important;
 }
+.noresize {
+  resize: none; /* 사용자 임의 변경 불가 */
+}
+
 </style>		
 		 <title>Massively by HTML5 UP</title>
 		<meta charset="utf-8" />
@@ -327,7 +331,7 @@ hr {
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">출연진: ${row.movie_actor }</a><br>
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">장르: ${row.genre}</a><br>
 			
-			<!-- <input type="button" value="상영시간표" style="float:right; "> -->
+			<input type="button" value="상영시간표" style="float:right; ">
 			<input type="button" value="♥보고싶어" style="float:right; margin-right:10px; text-decoration: none;" onclick="insertWish()">
 			<input type="hidden" value="${ loginUser.mid }" id="mid" >
 			<%-- <input type="hidden" value="${ movieDetail.movie_id }" id="movie_id"> --%>
@@ -431,17 +435,17 @@ hr {
 				
 				<a style="text-align:center; width:100px; margin-left:40px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">평점을 입력하세요.</a>
 			</div>
-			<c:if test="${ !empty session.Scope.loginUser }">
+			<c:if test="${ !empty sessionScope.loginUser }">
 			<div id="gradeinsert">
 				<input type="text" id="comment" name="comment" placeholder="리뷰를 입력해주세요!" style="width:600px; height:98px; margin:0 !important;">
 			</div>
 			<input type="button" onclick="fn_comment('${ result.code}')" value="등록" style="width:100px; height:100px;">
 			</c:if>
-			<c:if test="${ empty session.Scope.loginUser }">
+			<c:if test="${ empty sessionScope.loginUser }">
 			<div id="gradeinsert">
 				<input type="text" id="comment" name="comment" placeholder="로그인 후 리뷰를 등록하실 수 있습니다." style="width:600px; height:98px; margin:0 !important;" readonly>
 			</div>
-			<input type="button" onclick="#" value="등록" style="width:100px; height:100px;">
+			<input type="button" onclick="" value="등록" style="width:100px; height:100px;">
 			</c:if>
 		</div>
 		
@@ -457,178 +461,7 @@ hr {
 			<a style="text-align:center; width:50px; margin-left:10px; margin-right:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">평점순</a>
 		</div>
 		<div id="usergrade">
-			<%-- <table border="1" summary="" style="width:900px; height:600px;">
-				<tr>
-					<td>
-						<div id="gradeimage">
-							<img src="${contextPath }/resources/images/logo.jpg" width="100" height="100">
-						</div>
-						<div id="gardetext">
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">ddljdo</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">18.09.18</a>
-						<a style="text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">☆☆☆☆☆</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">재밌음</a><br>
-						<img src="${contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">추천</a>
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">0</a>
-						<img src="${contextPath }/resources/images/garbage.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">신고하기</a>
-						</div>
-					</td>
-					<td>
-						<div id="gradeimage">
-							<img src="${contextPath }/resources/images/logo.jpg" width="100" height="100">
-						</div>
-						<div id="gardetext">
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">ddljdo</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">18.09.18</a>
-						<a style="text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">☆☆☆☆☆</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">재밌음</a><br>
-						<img src="${contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">추천</a>
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">0</a>
-						<img src="${contextPath }/resources/images/garbage.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">신고하기</a>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div id="gradeimage">
-							<img src="${contextPath }/resources/images/logo.jpg" width="100" height="100">
-						</div>
-						<div id="gardetext">
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">ddljdo</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">18.09.18</a>
-						<a style="text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">☆☆☆☆☆</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">재밌음</a><br>
-						<img src="${contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">추천</a>
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">0</a>
-						<img src="${contextPath }/resources/images/garbage.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">신고하기</a>
-						</div>
-					</td>
-					<td>
-						<div id="gradeimage">
-							<img src="${contextPath }/resources/images/logo.jpg" width="100" height="100">
-						</div>
-						<div id="gardetext">
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">ddljdo</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">18.09.18</a>
-						<a style="text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">☆☆☆☆☆</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">재밌음</a><br>
-						<img src="${contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">추천</a>
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">0</a>
-						<img src="${contextPath }/resources/images/garbage.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">신고하기</a>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div id="gradeimage">
-							<img src="${contextPath }/resources/images/logo.jpg" width="100" height="100">
-						</div>
-						<div id="gardetext">
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">ddljdo</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">18.09.18</a>
-						<a style="text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">☆☆☆☆☆</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">재밌음</a><br>
-						<img src="${contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">추천</a>
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">0</a>
-						<img src="${contextPath }/resources/images/garbage.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">신고하기</a>
-						</div>
-					</td>
-					<td>
-						<div id="gradeimage">
-							<img src="${contextPath }/resources/images/logo.jpg" width="100" height="100">
-						</div>
-						<div id="gardetext">
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">ddljdo</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">18.09.18</a>
-						<a style="text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">☆☆☆☆☆</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">재밌음</a><br>
-						<img src="${contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">추천</a>
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">0</a>
-						<img src="${contextPath }/resources/images/garbage.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">신고하기</a>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div id="gradeimage">
-							<img src="${contextPath }/resources/images/logo.jpg" width="100" height="100">
-						</div>
-						<div id="gardetext">
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">ddljdo</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">18.09.18</a>
-						<a style="text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">☆☆☆☆☆</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">재밌음</a><br>
-						<img src="${contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">추천</a>
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">0</a>
-						<img src="${contextPath }/resources/images/garbage.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">신고하기</a>
-						</div>
-					</td>
-					<td>
-						<div id="gradeimage">
-							<img src="${contextPath }/resources/images/logo.jpg" width="100" height="100">
-						</div>
-						<div id="gardetext">
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">ddljdo</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">18.09.18</a>
-						<a style="text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">☆☆☆☆☆</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">재밌음</a><br>
-						<img src="${contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">추천</a>
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">0</a>
-						<img src="${contextPath }/resources/images/garbage.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">신고하기</a>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div id="gradeimage">
-							<img src="${contextPath }/resources/images/logo.jpg" width="100" height="100">
-						</div>
-						<div id="gardetext">
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">ddljdo</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">18.09.18</a>
-						<a style="text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">☆☆☆☆☆</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">재밌음</a><br>
-						<img src="${contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">추천</a>
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">0</a>
-						<img src="${contextPath }/resources/images/garbage.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">신고하기</a>
-						</div>
-					</td>
-					<td>
-						<div id="gradeimage">
-							<img src="${contextPath }/resources/images/logo.jpg" width="100" height="100">
-						</div>
-						<div id="gardetext">
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">ddljdo</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">18.09.18</a>
-						<a style="text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">☆☆☆☆☆</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">재밌음</a><br>
-						<img src="${contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">추천</a>
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">0</a>
-						<img src="${contextPath }/resources/images/garbage.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">신고하기</a>
-						</div>
-					</td>
-				</tr>
-			</table> --%>
+
 		</div>
 		
 		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -702,10 +535,14 @@ hr {
     			url : "addReview.re",
     			data : {star : star, comment : comment, movie_id : movie_id},
     			success : function(data){
+    				
+    				
 
     				/* getCommentList(); */
     					$("#comment").val("");
     					console.log(data);
+    					location.href="movieDetail.mo?id=" + movie_id;
+    					
     			},
     			error:function(request, status, error){
     				console.log("리뷰뷰등록실패 ajax");
@@ -721,7 +558,7 @@ hr {
     		getCommentList();
     	});
     	
-    	//댓글 불러오기
+     	//댓글 불러오기
     	function getCommentList(){
 			var movie_id = $("#movie_id").val();
 			
@@ -732,81 +569,15 @@ hr {
     			success:function(data){
     				console.log("리뷰리스트 불러오기 성공");
     				console.log(data);
-    				 /* data.list[0]. */
     				var html = "";
     				var cCnt = data.list.length;
     				
     				var like = '${contextPath }/resources/images/like.png';
-    				var garbage = '${contextPath }/resources/images/garbage.png';
     				
     				if(data.list.length > 0){
     					html += "<table border='1' summary='' style='width:900px; height:600px;'>";
     					
-    					if(data.list.length % 2 == 0){
-    						for(i = 0; i < data.list.length; i+2){
-    							html += "<tr>";
-    							html += "<td>";
-    							html += "<div id='gradeimage'>";
-    							html += "<img src='${contextPath }/resources/images/review.jpg' width='100' height='100'>";
-    							html += "</div>";
-    							html += "<div id='gardetext'>";
-    							html += "<a style='text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i].rwriter + "</a><br>";
-    							/* html += "<a style='text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i].rcreate_date;
-    							html += "</a>"; */
-    							if(data.list[i].grade_count == 1){
-    								html += "<a class='reviewstar'>★☆☆☆☆ </a><br>";
-    							}else if(data.list[i].grade_count == 2){
-    								html += "<a class='reviewstar'>★★☆☆☆ </a><br>";
-    							}else if(data.list[i].grade_count == 3){
-    								html += "<a class='reviewstar'>★★★☆☆ </a><br>";
-    							}else if(data.list[i].grade_count == 4){
-    								html += "<a class='reviewstar'>★★★★☆ </a><br>";
-    							}else if(data.list[i].grade_count == 5){
-    								html += "<a class='reviewstar'>★★★★★ </a><br>";
-    							}else{
-    								html += "<a class='reviewstar'>등록된 평점이 없습니다! </a><br>";
-    							}
-    							html += "<a style='text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i].rcontent + "</a><br>";
-    							html += "<img src='src/main/webapp/resources/images/like.png' width='20' height='20' style='margin-left:10px; margin-top:10px;'>";
-    							html += "<a class='reviewchu'>추천</a>";
-    							html += "<a style='text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i].recommend_count + "</a>";
-    							html += "<img src='" + garbage + "' width='20' height='20' style='margin-left:10px; margin-top:10px;'>";
-     							html += "<a class='reviewre'>신고하기</a>";
-    							html += "</div>";
-    							html += "</td>";
-    							
-    							html += "<td>";
-    							html += "<div id='gradeimage'>";
-    							html += "<img src='${contextPath }/resources/images/review.jpg' width='100' height='100'>";
-    							html += "</div>";
-    							html += "<div id='gardetext'>";
-     							html += "<a style='text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i+1].rwriter + "</a><br>";
-     							html += "<a style='text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i+1].rcreate_date;
-     							html += "</a>";
-    							if(data.list[i+1].grade_count == 1){
-    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★☆☆☆☆ </a><br>";
-    							}else if(data.list[i+1].grade_count == 2){
-    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★★☆☆☆ </a><br>";
-    							}else if(data.list[i+1].grade_count == 3){
-    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★★★☆☆ </a><br>";
-    							}else if(data.list[i+1].grade_count == 4){
-    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★★★★☆ </a><br>";
-    							}else if(data.list[i+1].grade_count == 5){
-    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★★★★★ </a><br>";
-    							}else{
-    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>등록된 평점이 없습니다! </a><br>";
-    							}
-    							html += "<a style='text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i+1].rcontent+ "</a><br>";
-    							html += "<img src='${contextPath }/resources/images/like.png' width='20' height='20' style='margin-left:10px; margin-top:10px;'>";
-    							html += "<a style='text-align:center; width:50px; margin-top:100px; margin-left:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>추천</a>";
-    							html += "<a style='text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i+1].recommend_count + "</a>";
-    							html += "<img src='${contextPath }/resources/images/garbage.png' width='20' height='20' style='margin-left:10px; margin-top:10px;'>";
-    							html += "<a style='text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>신고하기</a>";
-    							html += "</div>";
-    							html += "</td>";
-    							html += "</tr>";
-    						}
-    					}else{
+    					
     						for(i = 0; i < data.list.length; i++){
     							html += "<tr>";
     							html += "<td>";
@@ -829,19 +600,32 @@ hr {
     							}else{
     								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>등록된 평점이 없습니다! </a><br>";
     							}
-    							html += "<a style='text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i].rcontent+ "</a><br>";
+    							html += "<textarea class='noresize' id='rcontent" + data.list[i].rid + "' readonly style='text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i].rcontent+ "</textarea><br>";
     							html += "<img src='${contextPath }/resources/images/like.png' width='20' height='20' style='margin-left:10px; margin-top:10px;'>";
     							html += "<a class='reviewchu'>추천</a>";
     							html += "<a style='text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i].recommend_count + "</a>";
-    							html += "<img src='${contextPath }/resources/images/garbage.png' width='20' height='20' style='margin-left:10px; margin-top:10px;'>";
+    							html += "<img src='${contextPath }/resources/images/member/siren.png' width='20' height='20' style='margin-left:10px; margin-top:10px;'>";
     							html += "<a style='text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>신고하기</a>";
+    							if( data.list[i].rwriter == "${sessionScope.loginUser.mid}"){
+    								
+    							html += "<div id='rere'>";
+    							html += "<img id='edit2"+data.list[i].rid+"' src='${contextPath }/resources/images/member/edit.png' width='20' height='20' style='margin-left:10px; margin-top:10px;'>";
+    							html += "<a style='text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;' id='edit"+data.list[i].rid+"' onclick=\"edit('"+data.list[i].rid+"');\">수정</a>";
+    							html += "<img src='${contextPath }/resources/images/member/delete.png' width='20' height='20' style='margin-left:10px; margin-top:10px;'>";
+    							html += "<a style='text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;' id='disappear"+data.list[i].rid+"' onclick=\"disappear('"+data.list[i].rid+"');\">삭제</a>";
+    							html += "</div>";
+    							
+    							}
+    							
     							html += "</div>";
     							html += "</td>";
     							html += "</tr>";
+    					html += "</table>";
+    					
+    					
     						}
     						
-    					}
-    					html += "</table>";
+    					
     					
     			}else{
     				html += "<br><br><br><h3 align='center'>등록된 리뷰가 없습니다. 가장 먼저 리뷰를 남겨보세요!<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></h3>";
@@ -856,9 +640,70 @@ hr {
     				console.log("에러!!!!");
     			}
     		});
+    	} 
+		
+    	function edit(rid){
+    		
+    		var mid = $("#mid").val();
+    		var movie_id = $("#movie_id").val();
+    		
+    		$("#rcontent" + rid).prop('readonly', false);
+			$("#rcontent" + rid).focus();
+			$("#edit2" + rid).attr("src", "${ contextPath }/resources/images/member/enter.png");
+			$("#edit" + rid).attr("onclick", 'updateRcontent();');
+			$("#edit" + rid).attr("id", "submit");
+			
+			$("#submit").click(function updateRcontent(){
+				var rcontent = $("#rcontent" + rid).val();
+				
+				$.ajax({
+					url: "updateReview.me",
+					type:"post",
+					data:{
+						rid:rid,
+						mid:mid,
+						rcontent:rcontent
+					},
+					success:function(data){
+						alert("성공함");
+						location.href="movieDetail.mo?id=" + movie_id;
+					},
+					error:function(data){
+						alert("에러남");
+						location.href="movieDetail.mo?id=" + movie_id;
+					}
+				});
+				
+			
+			 });
+    		
     	}
-		
-		
+    	
+    	function disappear(rid){
+			
+			var mid = $("#mid").val();
+			var movie_id = $("#movie_id").val();
+			
+			if(confirm('해당 한줄평을 삭제하시겠습니까?')){
+			
+			
+			 $.ajax({
+					url:"deleteReview.me",
+					type:"post",
+					data:{
+						rid:rid,
+						mid:mid
+						},
+					success:function(data){
+						location.href="movieDetail.mo?id=" + movie_id;
+					},
+					error:function(){
+						alert("댓글 삭제에 실패했습니다.");
+					}
+				}); 
+			}
+		}
+    	
     	
     	
 		</script>
@@ -885,6 +730,9 @@ hr {
 			<script src="assets/js/main.js"></script>
 			
 	<script>
+	
+	
+	
 	
 		function insertWish(){
 			
