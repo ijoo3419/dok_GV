@@ -231,7 +231,8 @@ public class MovieController {
 			
 			return check;
 		}
-	
+		return check;
+	}
 	@RequestMapping(value="insertPay.mo")
 	public @ResponseBody int insertPay(@RequestParam String msg, @RequestParam String movieRoomId, @RequestParam String turningId, @RequestParam String userId){
 		int check = 1;
