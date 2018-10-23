@@ -145,7 +145,7 @@ public class MemberController {
 
 	//암호화 처리 로그인(성희)
 	@RequestMapping("loginCheck.me")
-	public String loginCheck(Member m, Model model){
+	public String loginCheck(MovieThumbnail msn, Member m, Model model){
 
 		System.out.println("loginCheck MemberController : " + m);
 
@@ -313,7 +313,7 @@ public class MemberController {
 
 	//암호화 처리 로그아웃(성희)
 	@RequestMapping("logout.me")
-	public String logout(SessionStatus status){
+	public String logout(SessionStatus status, Model model,MovieThumbnail msn){
 		status.setComplete();
 	   
 	   ArrayList<MovieThumbnail> movieRank1 = mss.selectMovieRank1(msn);
