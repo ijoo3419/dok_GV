@@ -464,13 +464,22 @@ hr {
     //var map = new naver.maps.Map('map', {mapTypeId: naver.maps.MapTypeId.HYBRID}); 
     // 기본지도에 높낮이만 적용하려면 MapTypeId 객체의 TERRAIN 상수 값을 사용합니다. 
     //var map = new naver.maps.Map('map', {mapTypeId: naver.maps.MapTypeId.TERRAIN});
-    var myaddress = '${row1.theater_address}';// 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!)
+    
+    var address = '${row1.theater_address}';
+    var address1 = new Array();
+    
+    
+    address1 = address.split(",");
+    
+    
+    
+    var myaddress = address1[1];// 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!)
     // 주소가 있는지 체크
     /* var xx =1;
     var yy=1; */
     naver.maps.Service.geocode({address: myaddress}, function(status, response) { 
         if (status !== naver.maps.Service.Status.OK) { 
-            return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러'); 
+            /* return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');  */
         }
         var result = response.result; 
         // 검색 결과 갯수: result.total 
@@ -518,7 +527,7 @@ hr {
 	    		}
 			});	 */
 			if(d<=100){
-				
+			
 				var html = '';
 				var c = '<button id="detail" onclick="location.href=\'cinemaDetail.ci?id=${row1.theaterId}\'">상세보기</button>&nbsp';
 				var s = '<button id="book" onclick="location.href=\'moviePay.mo\'">예매하기</button>';
@@ -537,6 +546,7 @@ hr {
             $("#map").before(html);
 			
 			}
+			
 				/* var $div = $(<div id="sumnailimage">d</div>);
 				var div = document.createElement('div');
 				var text = document.createTextNode('d');

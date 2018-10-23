@@ -237,7 +237,6 @@
    <select id="selectMovieTiltle" resultMap="movieResultSet" parameterType="Movie">
      SELECT MOVIE_TITLE, MOVIE_ID
        FROM MOVIE
-       WHERE PLAY_STATUS = 'Y'
    </select>
 	
 
