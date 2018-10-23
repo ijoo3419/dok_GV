@@ -56,7 +56,7 @@
 			
 			<!-- 영화관 정보 폼 -->
 				<h2>공지사항 수정</h2><br><br>
-				<form action="insertNotice.bo" method="post" encType="multipart/form-data">
+				<form action="modifyManageNotice.bo" method="post" encType="multipart/form-data">
 				<input type="hidden" id="mId" name="mId" value="${ loginUser.mid }">
 					<div class="row gtr-uniform">
 						<div class="col-6 col-12-xsmall">
