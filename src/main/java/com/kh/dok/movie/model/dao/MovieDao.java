@@ -107,8 +107,5 @@ public interface MovieDao {
 	//박지용 Seat Row와 TU_ID가져오기
 	ArrayList<Movie> selectSeatIdTree(SqlSessionTemplate sqlSession, String seat_id);
 
-	//박지용 Seat Row와 TU_ID가져오기
-	ArrayList<Movie> selectSeatIdTree(SqlSessionTemplate sqlSession, String seat_id);
-
 	
 }

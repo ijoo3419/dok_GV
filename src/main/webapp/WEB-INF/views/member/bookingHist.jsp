@@ -170,39 +170,53 @@ img {
 		
 		
 		/* 환불 + status 변경 */
-		 var payNumver = "";
+		  var payNumver = "";
+      
+      $(function(){
+         $("#tableArea tr").find("#cancel").click(function(){
+            
+            var str = ""
+            var tdArr = new Array();
+            
+            var tr = $(this);
+            var td = tr.children();
+            
+            payNumber = $(this).parent().parent().find('td').eq(0).text(); //예매번호 가져오기(박지용)
+            
+            $('#myModal').show();
+            
+            /* td.each(function(i){
+               tdArr.push(td.eq(i).text());
+            });
+            
+            alert("tdArr" + tdArr); */
+            
+         });
+      });
 	      
-	      $(function(){
-	         $("#tableArea tr").find("#cancel").click(function(){
-	            
-	            var str = ""
-	            var tdArr = new Array();
-	            
-	            var tr = $(this);
-	            var td = tr.children();
-	            
-	            payNumber = $(this).parent().parent().find('td').eq(0).text(); //예매번호 가져오기(박지용)
-	            
-	            $('#myModal').show();
-	            
+      function cancelBooking(){
+  		//환불 신청 Ajax(박지용)
+	         $.ajax({
+	           url:"updateRefund.mo", 
+	           type:"post",
+	           data:{payNumber: payNumber},
+	           success:function(data){
+	              alert(data);
+	              $('#myModal').hide();
+	              location.reload();
+	           },
+	           error:function(){
+	              console.log("에러!");
+	           }
 	         });
-	      });
-	      
-	       function cancelBooking(){
-	          //환불 신청 Ajax(박지용)
-	            $.ajax({
-	              url:"updateRefund.mo", 
-	              type:"post",
-	              data:{payNumber: payNumber},
-	              success:function(data){
-	                 alert(data);
-	                 $('#myModal').hide();
-	              },
-	              error:function(){
-	                 console.log("에러!");
-	              }
-	            });
-	       }
+  		
+        /* alert("status 취소로 바꾸러 가기");
+        
+        var mid = "${ sessionScope.loginUser.mid }";
+        var resId = $('.table-wrapper').find('table').find('tbody').eq(0).find('tr').text();
+        
+        alert(mid + resId); */
+     }
 	       
 	       function cancelCancel(){
 	          $('#myModal').hide();
