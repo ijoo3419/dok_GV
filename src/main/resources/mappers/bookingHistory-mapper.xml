@@ -15,13 +15,14 @@
 		<result property="reservation_date" column="reservation_date" />
 		<result property="turning_day" column="TURNING_DAY" />
 		<result property="reservation_status" column="RESERVATION_STATUS" />
+		<result property="movie_id" column="MOVIE_ID" />
 	</resultMap>
 	
 	<select id="selectBookingHist" resultMap="bookingHistoryResultSet">
 	SELECT PA.APPROVAL_NUMBER, M.MOVIE_TITLE, TH.THEATER_NAME, MR.MOVIEROOM_NAME,
-        R.RESERVATION_DATE, T.TURNING_DAY, 
+        R.RESERVATION_DATE, T.TURNING_DAY, P.MOVIE_ID,
         CASE WHEN R.RESERVATION_STATUS = '확인'
-        AND SYSDATE > T.END_TIME 
+        AND SYSDATE > T.START_TIME
         THEN '취소불가_리뷰가능'
         ELSE '취소가능_리뷰불가'
         END AS STATUS,
@@ -36,7 +37,7 @@
     JOIN THEATER TH ON (MR.THEATER_ID = TH.THEATER_ID)
     WHERE R.RESERVATION_STATUS != '취소'
 	AND R.MID = #{ mid }
-    GROUP BY PA.APPROVAL_NUMBER, M.MOVIE_TITLE, TH.THEATER_NAME, MR.MOVIEROOM_NAME, R.RESERVATION_DATE, T.TURNING_DAY, R.RESERVATION_STATUS, T.END_TIME
+    GROUP BY PA.APPROVAL_NUMBER, M.MOVIE_TITLE, TH.THEATER_NAME, MR.MOVIEROOM_NAME, R.RESERVATION_DATE, T.TURNING_DAY, R.RESERVATION_STATUS, T.START_TIME, P.MOVIE_ID
 	</select>
 	
 	

@@ -189,11 +189,9 @@
 								rcontent:rcontent
 							},
 							success:function(data){
-								alert("성공함!!!");
 								location.href = "reviews.me";
 							},
 							error:function(data){
-								alert("실패함 ㅠㅠ");
 								location.href = "review.me";
 							}
 						});
@@ -234,43 +232,7 @@
 				}
 					
 				}
-				
-				
-				/* $(function(){
-					$("#tableArea tr").find("#delete").click(function(){
-						
-						var tdArr = new Array();
-						
-						var tr = $(this);
-						var td = tr.children();
-						
-						td.each(function(i){
-							tdArr.push(td.eq(i).text());
-						});
-						
-						var rid = td.eq(1).text();
-						var mid = $("#mid").val();
-						
-						console.log("tdArr" + tdArr);
-						alert("rid" + rid);
-						
-						 $.ajax({
-							url:"deleteReview.me",
-							type:"post",
-							data:{
-								rid:rid,
-								mid:mid
-								},
-							success:function(data){
-								location.href = "reviews.me";
-							},
-							error:function(){
-								alert("댓글 삭제에 실패했습니다.");
-							}
-						}); 
-						
-					});
-				}); */
+
 				
 				</script>
 				
