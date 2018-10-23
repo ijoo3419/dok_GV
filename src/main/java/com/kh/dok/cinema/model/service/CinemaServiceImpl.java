@@ -42,5 +42,12 @@ public class CinemaServiceImpl implements CinemaService{
 		
 		return cinemaimagecut;
 	}
+
+
+	@Override
+	public ArrayList<Cinema> selectCinemaEa(Cinema ca) {
+		ArrayList<Cinema> cinemaEa = cd.selectCinemaEa(sqlSession, ca);
+		return cinemaEa;
+	}
 	
 }

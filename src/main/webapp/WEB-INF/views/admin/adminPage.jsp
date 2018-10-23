@@ -414,7 +414,7 @@ img.ui-datepicker-trigger {
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="ar" items="${rlist }">
+						<c:forEach var="ar" items="${relist }">
 							<tr>
 								<td>${ar.rep_id }</td>
 								<td>${ar.rid }</td>

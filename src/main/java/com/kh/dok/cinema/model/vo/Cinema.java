@@ -16,12 +16,13 @@ public class Cinema implements Serializable{
 	private String file_src;
 	private int file_level;
 	private String edit_name;
-  
+	private String ea;
+
 	
 	public Cinema(){}
 
 	public Cinema(String theaterId, String mid, String theaterName, String theaterRoot, String theaterText,
-			String theater_address, String area_id, String file_src, int file_level, String edit_name) {
+			String theater_address, String area_id, String file_src, int file_level, String edit_name, String ea) {
 		super();
 		this.theaterId = theaterId;
 		this.mid = mid;
@@ -33,7 +34,10 @@ public class Cinema implements Serializable{
 		this.file_src = file_src;
 		this.file_level = file_level;
 		this.edit_name = edit_name;
+		this.ea = ea;
 	}
+
+
 
 
 
@@ -132,12 +136,23 @@ public class Cinema implements Serializable{
 		this.edit_name = edit_name;
 	}
 
+
+	public String getEa() {
+		return ea;
+	}
+
+	public void setEa(String ea) {
+		this.ea = ea;
+	}
+
 	@Override
 	public String toString() {
 		return "Cinema [theaterId=" + theaterId + ", mid=" + mid + ", theaterName=" + theaterName + ", theaterRoot="
 				+ theaterRoot + ", theaterText=" + theaterText + ", theater_address=" + theater_address + ", area_id="
-				+ area_id + ", file_src=" + file_src + ", file_level=" + file_level + ",edit_name" + edit_name +  "]";
+				+ area_id + ", file_src=" + file_src + ", file_level=" + file_level + ", edit_name=" + edit_name
+				+ ", ea=" + ea + "]";
 	}
+	
 
 	
 	

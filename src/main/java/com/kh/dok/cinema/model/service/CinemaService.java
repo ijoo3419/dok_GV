@@ -11,6 +11,8 @@ public interface CinemaService {
 		ArrayList<Cinema> selectCinemaDetail(Cinema ca);
 
 		ArrayList<Cinema> selectCinemaImageCut(Cinema ca);
+
+		ArrayList<Cinema> selectCinemaEa(Cinema ca);
 		
 
 }

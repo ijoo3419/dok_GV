@@ -57,11 +57,14 @@ public class CinemaController {
 		
 		ArrayList<Cinema> cinemaDetail = cs.selectCinemaDetail(ca);
 		ArrayList<Cinema> cinemaimagecut = cs.selectCinemaImageCut(ca);
+		ArrayList<Cinema> cinemaEa = cs.selectCinemaEa(ca);
 		
+		model.addAttribute("cinemaEa",cinemaEa);
 		model.addAttribute("cinemaDetail",cinemaDetail);
 		model.addAttribute("cinemaimagecut",cinemaimagecut);
 		
 		return "cinema/cinemaDetail";
 	}
+	
 }
 
