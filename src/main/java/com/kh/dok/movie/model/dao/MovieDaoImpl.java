@@ -284,6 +284,6 @@ public class MovieDaoImpl implements MovieDao{
 		return (ArrayList)sqlSession.selectList("Movie.selectSeatIdTree", seat_id);
 	}
 
-	
+
 	
 }

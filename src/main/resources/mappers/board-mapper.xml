@@ -184,7 +184,7 @@
 	</select>
 	
 	<!-- 관리자 문의사항 getInquirelistCount(성희) -->
-	<select id="getInquirelistCount" parameterType="java.lang.String" resultType="_int">
+	<select id="getInquirelistCount" parameterType="java.lang.String" resultType="_int">    
 		SELECT COUNT(*)
 		FROM BOARD B, THEATER T
 		WHERE T.THEATER_ID = B.THEATER_ID
@@ -248,7 +248,7 @@
 	 </select>
 	
 	<insert id="insertfile" parameterType="BoardFile">
-		INSERT INTO BOARD_FILE VALUES('BF' || TO_CHAR(BOARD_BOARD_ID.NEXTVAL), #{board_id}, #{origin_name}, #{edit_name}
+		INSERT INTO BOARD_FILE VALUES('BF' || TO_CHAR(BOARD_FILE_FILE_ID.NEXTVAL), #{board_id}, #{origin_name}, #{edit_name}
 		,#{file_src}, SYSDATE, #{file_level})
 	</insert>
 	

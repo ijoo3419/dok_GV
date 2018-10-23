@@ -145,7 +145,8 @@ public class MemberController {
 
 	//암호화 처리 로그인(성희)
 	@RequestMapping("loginCheck.me")
-	public String loginCheck(MovieThumbnail msn, Member m, Model model){
+
+	public String loginCheck(MovieThumbnail msn,Model model, Member m){
 
 		System.out.println("loginCheck MemberController : " + m);
 
@@ -158,6 +159,7 @@ public class MemberController {
 			String mid = ms.selectMid(email);
 			System.out.println(mid);
 			ArrayList<String> mlist = ms.selectUserMovie(mid);
+			if(mlist.size()!=0){
 			System.out.println(mlist);
 			int midListSize = mlist.size();
 			ArrayList<String> midList = ms.selectAllMid();
@@ -270,7 +272,14 @@ public class MemberController {
 
 			ArrayList fourMovie = ms.selectRecommend(fourCount);
 		System.out.println("최종 추천 영화는"+fourMovie);
-		ArrayList<MovieThumbnail> movieRank1 = mss.selectMovieRank1(msn);
+		
+		model.addAttribute("rlist", fourMovie);
+			}else{
+				ArrayList<String> go = new ArrayList<String>();
+				go.add("go");
+				model.addAttribute("go", go);
+			}
+		    ArrayList<MovieThumbnail> movieRank1 = mss.selectMovieRank1(msn);
 			ArrayList<MovieThumbnail> movieRank2 = mss.selectMovieRank2(msn);
 			ArrayList<MovieThumbnail> movieRank3 = mss.selectMovieRank3(msn);
 			
@@ -313,9 +322,15 @@ public class MemberController {
 
 	//암호화 처리 로그아웃(성희)
 	@RequestMapping("logout.me")
-	public String logout(SessionStatus status, Model model,MovieThumbnail msn){
+
+	public String logout(SessionStatus status, MovieThumbnail msn, Model model){
+
 		status.setComplete();
 	   
+		ArrayList<String> go = new ArrayList<String>();
+		go.add("go");
+		model.addAttribute("go", go);
+		
 	   ArrayList<MovieThumbnail> movieRank1 = mss.selectMovieRank1(msn);
 		ArrayList<MovieThumbnail> movieRank2 = mss.selectMovieRank2(msn);
 		ArrayList<MovieThumbnail> movieRank3 = mss.selectMovieRank3(msn);

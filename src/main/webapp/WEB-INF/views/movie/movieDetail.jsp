@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
@@ -331,7 +331,7 @@ hr {
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">출연진: ${row.movie_actor }</a><br>
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">장르: ${row.genre}</a><br>
 			
-			<!-- <input type="button" value="상영시간표" style="float:right; "> -->
+			<input type="button" value="상영시간표" style="float:right; ">
 			<input type="button" value="♥보고싶어" style="float:right; margin-right:10px; text-decoration: none;" onclick="insertWish()">
 			<input type="hidden" value="${ loginUser.mid }" id="mid" >
 			<%-- <input type="hidden" value="${ movieDetail.movie_id }" id="movie_id"> --%>
@@ -461,6 +461,7 @@ hr {
 			<a style="text-align:center; width:50px; margin-left:10px; margin-right:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">평점순</a>
 		</div>
 		<div id="usergrade">
+
 		</div>
 		
 		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

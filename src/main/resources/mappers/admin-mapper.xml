@@ -172,7 +172,7 @@
 	<insert id="insertFile" parameterType="BoardFile">
 		INSERT INTO BOARD_FILE
 		VALUES('BF' ||
-		BOARD_FILE_FILE_ID.NEXTVAL,#{board_id},#{origin_name},#{edit_name},#{file_src},SYSDATE,#{file_level})
+		TO_CHAR(BOARD_FILE_FILE_ID.NEXTVAL),#{board_id},#{origin_name},#{edit_name},#{file_src},SYSDATE,#{file_level})
 	</insert>
 
 	<!-- 슬라이드 사진 파일 수정 -->
