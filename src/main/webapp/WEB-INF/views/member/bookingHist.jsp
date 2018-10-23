@@ -191,6 +191,7 @@ img {
 	           success:function(data){
 	              alert(data);
 	              $('#myModal').hide();
+	              location.reload();
 	           },
 	           error:function(){
 	              console.log("에러!");

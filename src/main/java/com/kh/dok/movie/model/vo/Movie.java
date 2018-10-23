@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import org.springframework.stereotype.Repository;
 
+
 @Repository
 public class Movie  implements java.io.Serializable{
 	private String movie_id;

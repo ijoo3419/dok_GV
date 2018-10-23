@@ -35,6 +35,7 @@ public class MovieController {
 	
 	
 	
+	
 	//이진희 전체영화 출력
 	@RequestMapping("movie.mo")
 	public String showmovieView(MovieThumbnail msn, Model model, HttpServletRequest request){

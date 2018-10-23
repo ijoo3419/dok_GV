@@ -21,8 +21,8 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <!-- 구글폰트 -->
-<link href="https://fonts.googleapis.com/css?family=Do+Hyeon"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
 
@@ -586,6 +586,7 @@ a{
 	
 	<script>
 		function selectMovieList(){
+			
 			var fromDate = $("#fromDate").val();
 			
 			$.ajax({
@@ -608,7 +609,7 @@ a{
 						$tdhiddenTitle.val(data[key].movie_id);
 						$tdTwo.text(data[key].movie_title);
 						
-						$tdOne.append("<img src=${ contextPath }/resources/uploadFiles/" + data[key].edit_name + "style='width:150px; height:200px;'>");
+						$tdOne.append("<img src=${ contextPath }/resources/uploadFiles/" + data[key].edit_name + " style='width:150px; height:200px;'>");
 						$tdOne.append($tdhiddenTitle);
 						$trOne.append($tdOne);
 						$table.append($trOne);
@@ -1464,6 +1465,46 @@ a{
 			</div>
 		</div>
 	</div>
+	<style>
+	#myModal6 {
+		display: none; /* Hidden by default */
+		position: fixed; /* Stay in place */
+		/* z-index: 100; /* Sit on top */ */
+		left: 0;
+		top: 0;
+		width: 100%; /* Full width */
+		height: 100%; /* Full height */
+		overflow: auto; /* Enable scroll if needed */
+		background-color: rgb(0, 0, 0); /* Fallback color */
+		background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	}
+	#myModal6 .modal-content{
+		margin-top:300px;
+		margin-left:600px;
+		width: 300px; /* Full width */
+		height: 150px; /* Full height */
+	}
+	#confirm{
+		border: 2px solid black;
+		font-family: 'Do Hyeon', sans-serif;
+		background: white;
+		width:70px;
+		height:30px;
+	}
+	.modal-content h3{
+		font-family: 'Do Hyeon', sans-serif;
+		margin-top:40px;
+	}
+	</style>
+	<div id="myModal6" class="modal">
+		<div class="modal-content" align="center">
+			<h3 align="center">결제가 완료되었습니다.</h3>
+			<br>
+			<div align="center">
+				<button id="confirm" onclick="location.href='main.co'">확인</button>
+			</div>
+		</div>
+	</div>
 	<script>
 	$(function(){
 		$('#myModal3 .seatPay-btn .seatPay-btn-right').click(function(){
@@ -1554,7 +1595,9 @@ a{
 		    			  turningId: turningId,
 		    			  userId: userId},
 		    		success:function(data){
-		    			alert("결제가 완료되었습니다.");
+		    			$('#myModal3').hide();
+		    			$('#myModal2').hide();
+		    			$('#myModal6').show();
 		    		},
 		    		error:function(data){
 		    			console.log(data);
@@ -1845,6 +1888,7 @@ a{
 			</div>
 		</div>
 	</div>
+	
 	<script>
 		$(function(){
 			$(".cinemaBtn").mouseenter(function(){
@@ -1861,7 +1905,7 @@ a{
 		 						var area_val = new Array();
 		 						
 		 						for(var key in data){
-		 							area_parents[key] = data[key].area_parents; //부모의 지역 아이디를 저장
+		 							area_parents[key] = data[key].area_id; //부모의 지역 아이디를 저장
 		 							
 		 							for(var i = 0; i < 9; i++){
 		 								if($(".areaTable").find("td").eq(i).find("input").val() == area_parents[key]){ //부모의 지역 아이디에 해당 되는 td만 활성화 
@@ -1874,7 +1918,26 @@ a{
 		 							}
 		 						}
 		 						
-		 						$div = $(".areaChild");	
+		 						$(function(){
+		 							$(".areaTable td").mouseenter(function(){
+		 								
+		 						 	}).click(function(){
+		 						 			var num = $(this).find("font").text();
+		 						 			var id = $(this).find("input").val();
+		 						 			var $font = $("<font id='web-fontTitle-child-two'>");
+		 						 			$font.append(num);
+		 									$(".cinemaBtn").find("img").remove();
+		 									$(".cinemaBtn").find("font").remove();
+		 									$(".cinemaBtn").append($font);
+		 									$(".cinemaBtn").show();
+		 									
+		 									$(".theater-id").val(id);
+		 									
+		 									$("#myModal5").find(".close").click();
+		 						 	});
+		 					  	});
+		 						
+		 						/* $div = $(".areaChild");	
 		 						$div.find("table").remove();
 		 						var $table = $("<table>");
 		 						
@@ -1915,7 +1978,7 @@ a{
 		 									
 		 									$("#myModal5").find(".close").click();
 		 						 	});
-		 					  	});
+		 					  	}); */
 		 					},
 		 					error:function(){
 		 						console.log("에러!");

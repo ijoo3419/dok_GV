@@ -14,6 +14,7 @@ import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieThumbnail;
 
 
+
 public interface MovieDao {
 	
 	//이진희 전체영화 출력
