@@ -33,7 +33,7 @@ public interface BoardService {
 	ArrayList<BoardNBoardFile> selectSearchNoticeList(PageInfo pi, SearchCondition1 sc);
 
 	BoardNBoardFile selectAdminNoticeOne(String board_id) throws BoardSelectOneException;
-
+  
 	int getInquirelistCount(String mid);
 
 	String getTheaterId(String TheaterId);

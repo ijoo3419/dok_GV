@@ -14,7 +14,7 @@ public class SearchCondition1 implements java.io.Serializable{
 		this.btitle = btitle;
 		this.bcontent = bcontent;
 	}
-
+  
 	public String getBtitle() {
 		return btitle;
 	}

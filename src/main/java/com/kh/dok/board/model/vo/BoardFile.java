@@ -11,7 +11,7 @@ public class BoardFile implements java.io.Serializable{
 	private String file_src;
 	private String file_date;
 	private String file_level;
-	
+	  
 	public BoardFile(){}
 
 	public BoardFile(String file_id, String board_id, String origin_name, String edit_name, String file_src,

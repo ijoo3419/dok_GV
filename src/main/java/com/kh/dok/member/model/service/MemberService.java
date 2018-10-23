@@ -20,7 +20,7 @@ public interface MemberService {
 	int checkNick(Member m);
 
 	int checkSame(Member m);
-
+  
 	int checkPass(Member m) throws LoginException;
 
 	int updateInfo(Member m);
@@ -81,15 +81,18 @@ public interface MemberService {
 
 	//소진 전체 MID 조회
 	ArrayList<String> selectAllMid();
-
+	
+	//모든 회원 영화 찾기
 	ArrayList<UserMovie> selectAllUserMovie(ArrayList<String> midList);
-
+	
+	//소진 본 영화 찾기
 	ArrayList<String> selectUserMovie(String mid);
 
 
 	
 	//소진 추천 영화 조회
 	ArrayList selectRecommend(ArrayList<String> fourCount);
+	
 	
 
 

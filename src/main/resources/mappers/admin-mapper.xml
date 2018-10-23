@@ -19,7 +19,7 @@
 		<result property="join_date" column="JOIN_DATE" />
 		<result property="withdraw_date" column="WITHDRAW_DATE" />
 		<result property="nickname" column="NICKNAME" />
-	</resultMap>
+	</resultMap>  
 
 	<resultMap type="ReportHistory" id="searchBlackListSet">
 		<id property="rep_id" column="REP_ID" />

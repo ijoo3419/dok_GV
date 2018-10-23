@@ -2,7 +2,7 @@
 <!-- xml문서의 유효성 체크를 위해 필요한 부분 -->
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">  
   
 <configuration>
 	<typeAliases>
@@ -19,13 +19,11 @@
 		<typeAlias type="com.kh.dok.member.model.vo.BookingHistory" alias="BookingHistory"></typeAlias>
 		<typeAlias type="com.kh.dok.licensee.model.vo.MovieRoom" alias="MovieRoom"></typeAlias>
 		<typeAlias type="com.kh.dok.member.model.vo.MyReply" alias="MyReply"></typeAlias>
-
 		<typeAlias type="com.kh.dok.licensee.model.vo.Play" alias="Play"></typeAlias>
 		<typeAlias type="com.kh.dok.licensee.model.vo.Turning" alias="Turning"></typeAlias>
-
 		<typeAlias type="com.kh.dok.admin.model.vo.VisitHistory" alias="VisitHistory"></typeAlias>
 		<typeAlias type="com.kh.dok.board.model.vo.SearchCondition1" alias="SearchCondition1"></typeAlias>
-
+		<typeAlias type="com.kh.dok.review.model.vo.Reply" alias="Reply"></typeAlias>
 	</typeAliases>
 	
 	<mappers>
@@ -48,6 +46,8 @@
 		<mapper resource="mappers/board-mapper.xml"/>
 		
 		<mapper resource="mappers/licensee-mapper.xml"/>
+		
+		<mapper resource="mappers/review-mapper.xml" />
 	</mappers>
 </configuration>
 

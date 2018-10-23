@@ -22,7 +22,7 @@
 #main > .post.featured {
     text-align: left !important;
 }
-
+  
 h3 {
     font-size: 1.25rem;
     margin: 0 !important;
@@ -490,12 +490,23 @@ hr {
 			var lon = position.coords.longitude;
 			console.log("lat : " + lat);
 	        console.log("lon : " + lon);
+	        
+	        function deg2rad(deg) {
+	            return deg * (Math.PI/180)
+	        }
 			
-			xx = ex - lon;
-		 	yy = ey - lat;
-			console.log(myaddress +" : " + xx);
-			console.log(yy);
+	        var R = 6371;
+	        var dLon = deg2rad(ex - lon);
+	        var dLat = deg2rad(ey - lat);
+	        var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat)) * Math.cos(deg2rad(ey)) * Math.sin(dLon/2) * Math.sin(dLon/2);
+			var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+			var d = R * c;
+	        /* xx = ex - lon;
+		 	yy = ey - lat; */
+			/* console.log(myaddress +" : " + xx);
+			console.log(yy); */
 
+			console.log(d);
 			/* var allData = { "xx": xx, "yy": yy };
 			$.ajax({
 	    		url:"/cinema1.ci",
@@ -506,12 +517,14 @@ hr {
 	    			console.log(allData);
 	    		}
 			});	 */
-			if(xx>=0.001 && xx<=0.1){
+			if(d<=100){
 				
 				var html = '';
 				var c = '<button id="detail" onclick="location.href=\'cinemaDetail.ci?id=${row1.theaterId}\'">상세보기</button>&nbsp';
 				var s = '<button id="book" onclick="location.href=\'moviePay.mo\'">예매하기</button>';
+		
 	            html += '<div id="sumnailimage">';
+                html += '<img src=${ contextPath }/resources/uploadFiles/${row1.edit_name} style="width:298px; height:270px;">';
 	            html += '${row1.theaterName }<br>';
 	            html += '<hr>';
 	            html += '<div id="buttonarea">';

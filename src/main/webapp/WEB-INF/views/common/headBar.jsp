@@ -15,7 +15,7 @@ body, div, p, li, h3, h1, h2, h4, h5, h6, input, th, tr, td, button, a, select, 
 		font-family: 'GoyangIlsan' !important;
 	}
 
-
+  
 .headerd {
 	position: fixed; 
 	height: 50px;

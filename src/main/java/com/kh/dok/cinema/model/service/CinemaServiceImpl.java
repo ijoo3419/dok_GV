@@ -24,7 +24,7 @@ public class CinemaServiceImpl implements CinemaService{
 		
 		cienmaView = cd.selectCinema(sqlSession, c);
 		
-		return cienmaView;
+		return cienmaView;  
 	}
 
 
@@ -41,6 +41,13 @@ public class CinemaServiceImpl implements CinemaService{
 		ArrayList<Cinema> cinemaimagecut = cd.selectCinemaImageCut(sqlSession,ca);
 		
 		return cinemaimagecut;
+	}
+
+
+	@Override
+	public ArrayList<Cinema> selectCinemaEa(Cinema ca) {
+		ArrayList<Cinema> cinemaEa = cd.selectCinemaEa(sqlSession, ca);
+		return cinemaEa;
 	}
 	
 }

@@ -29,7 +29,7 @@ public class MemberServiceImpl implements MemberService{
 	private BCryptPasswordEncoder passwordEncoder;
 	@Autowired
 	private DataSourceTransactionManager transactionManager;
-	
+	  
 	//로그인 메소드    
 	@Override
 	public Member loginMember(Member m) throws LoginException{
@@ -306,6 +306,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		return md.selectRecommened(sqlSession,fourCount);
 	}
+
 
 	
 	

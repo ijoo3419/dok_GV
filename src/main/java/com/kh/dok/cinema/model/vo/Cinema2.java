@@ -18,7 +18,7 @@ public class Cinema2  implements java.io.Serializable{
 	private String theaterAddress1;
 	private String theaterAddress2;
 	private String theaterAddress3;
-	
+	  
 
 	//Board 부분
 	private String board_id;

@@ -182,4 +182,4 @@ public class BoardServiceImpl implements BoardService{
 		return bd.selectReply(sqlSession, bid);
 	}
 
-}
+}  

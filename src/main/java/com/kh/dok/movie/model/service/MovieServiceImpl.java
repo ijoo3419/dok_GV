@@ -16,6 +16,7 @@ import com.kh.dok.movie.model.vo.MovieThumbnail;
 
 
 
+
 @Service
 public class MovieServiceImpl implements MovieService{
 	@Autowired
@@ -310,6 +311,13 @@ public class MovieServiceImpl implements MovieService{
 	public int updateRefundSeat(String seat_id) {
 		
 		return md.updateRefundSeat(sqlSession, seat_id);
+	}
+
+	//박지용 Seat Row와 TU_ID가져오기
+	@Override
+	public ArrayList<Movie> selectSeatIdTree(String seat_id) {
+		
+		return md.selectSeatIdTree(sqlSession, seat_id);
 	}
 
 }

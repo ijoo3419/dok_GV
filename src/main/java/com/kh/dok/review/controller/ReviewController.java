@@ -26,7 +26,7 @@ import com.kh.dok.review.model.vo.Reply;
 @Controller
 public class ReviewController {
 	@Autowired
-	private ReviewService rs;
+	private ReviewService rs;  
 	
 	//리뷰 등록
 	@RequestMapping(value="addReview.re")

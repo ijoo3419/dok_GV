@@ -21,7 +21,7 @@
 		<result column="FILE_LEVEL" property="file_level"/>
 		<result column="EDIT_NAME" property="edit_name"/>
 	</resultMap>
-	
+	    
 	<resultMap type="MovieRoom" id="movieRoomResultSet2">
 		<id property="movie_id" column="MOVIE_ID"/>
 		<result property="movie_title" column="MOVIE_TITLE"/>

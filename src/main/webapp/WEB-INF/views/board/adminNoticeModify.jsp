@@ -22,7 +22,7 @@
 		href="${contextPath }/resources/css/noscript.css" />
 </noscript>
 <style>
-.post {
+.post {  
 	display: none;
 }
 

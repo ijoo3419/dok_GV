@@ -17,7 +17,7 @@ public class Board implements java.io.Serializable{
 	private int bcount;
 	private String cinema_div;
 	private String theater_id;
-	private String movie_id;
+	private String movie_id;  
 	private String board_biv;
 	
 	public Board(){}

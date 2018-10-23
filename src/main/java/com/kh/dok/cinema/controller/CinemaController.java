@@ -34,7 +34,7 @@ public class CinemaController {
 		
 		return "cinema/cinema";
 	}
-	
+	  
 	/*@RequestMapping(value="/cinema1.ci", method=RequestMethod.GET)
 	public void showcinemaView1(@RequestParam(value="xx") String xx, @RequestParam(value="yy") String yy, HttpServletResponse response){
 		String xx1 =xx;
@@ -57,11 +57,14 @@ public class CinemaController {
 		
 		ArrayList<Cinema> cinemaDetail = cs.selectCinemaDetail(ca);
 		ArrayList<Cinema> cinemaimagecut = cs.selectCinemaImageCut(ca);
+		ArrayList<Cinema> cinemaEa = cs.selectCinemaEa(ca);
 		
+		model.addAttribute("cinemaEa",cinemaEa);
 		model.addAttribute("cinemaDetail",cinemaDetail);
 		model.addAttribute("cinemaimagecut",cinemaimagecut);
 		
 		return "cinema/cinemaDetail";
 	}
+	
 }
 

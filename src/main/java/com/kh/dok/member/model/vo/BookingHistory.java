@@ -18,6 +18,7 @@ public class BookingHistory {
 	private String status;
 	private String seats;
 	private String movie_id;
+
 	
 	public BookingHistory(){}
 

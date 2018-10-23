@@ -20,7 +20,7 @@
 		width: 170px;
 		display: inline-block;
 		margin-left: 80px;
-	}
+	}  
 </style>
 
 </head>

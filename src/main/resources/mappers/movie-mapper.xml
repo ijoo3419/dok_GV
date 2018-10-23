@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Movie">
+<mapper namespace="Movie">  
 	<resultMap type="Movie" id="movieResultSet">
 		<id property="movie_id" column="MOVIE_ID"/>
 		<result property="movie_title" column="MOVIE_TITLE"/>
@@ -35,6 +35,8 @@
 		<result property="movieroom_id" column="MOVIEROOM_ID"/>
 		<result property="play_status" column="PLAY_STATUS"/>
 		<result property="file_src" column="FILE_SRC"/>
+		<result property="edit_name" column="EDIT_NAME"/>
+		
 	</resultMap>
 	
 	<!-- 박지용 상영 리스트를 ResultSet -->
@@ -87,9 +89,14 @@
 		<id property="pay_id" column="PAY_ID"/>
 	</resultMap>
 	
+	<resultMap type="Movie" id="movieResultSetEight">
+		<id property="turning_id" column="TURNING_ID"/>
+		<id property="seat_row" column="SEAT_ROW"/>
+	</resultMap>
+	
 	<!-- 박지용 영화 리스트를 가져오는 쿼리문 -->
 	<select id="selectMovieList" resultMap="movieResultSetTwo" parameterType="Movie">
-		SELECT DISTINCT MOVIE.MOVIE_ID, MOVIE.MOVIE_TITLE, FILE_SRC, BOARD_DATE
+		SELECT DISTINCT MOVIE.MOVIE_ID, MOVIE.MOVIE_TITLE, EDIT_NAME, FILE_SRC, BOARD_DATE
 		FROM MOVIE, PLAY, BOARD, BOARD_FILE
 		WHERE MOVIE.MOVIE_ID = PLAY.MOVIE_ID
 		AND MOVIE.MOVIE_ID = BOARD.MOVIE_ID
@@ -174,23 +181,27 @@
 		ORDER BY SEAT_ROW
 	</select>
 	
+	<!-- 박지용 -->
 	<insert id="insertPay">
 		INSERT INTO PAY VALUES('PA' || TO_CHAR(PAY_PAY_ID.NEXTVAL), #{reservation_id}, 'PAY', 'CARD', #{msg}, NULL, 'N')
 	</insert>
 	
+	<!-- 박지용 -->
 	<update id="updateRes">
 		UPDATE RESERVATION SET RESERVATION_STATUS = '확인' WHERE RESERVATION_ID = #{reservation_id}
 	</update>
 	
+	<!-- 박지용 -->
 	<select id="selectSeatIdTwo" resultType="string">
 		SELECT SEAT_ID FROM RESERVATION WHERE RESERVATION_ID = #{reservation_id}
 	</select>
 	
+	<!-- 박지용 -->
 	<update id="updateSeat">
 		UPDATE SEAT SET SEAT_STATUS = '확인' WHERE SEAT_ID = #{seat_id}
 	</update>
 
-	
+	<!-- 박지용 -->
 	<select id="selectPrimaryKey" resultMap="movieResultSetSeven" parameterType="string">
 		SELECT SEAT.SEAT_ID, RESERVATION.RESERVATION_ID, PAY.PAY_ID
 		FROM SEAT, RESERVATION, PAY
@@ -200,17 +211,28 @@
 		ORDER BY PAY_ID
 	</select>
 	
+	<!-- 박지용 -->
 	<update id="updateRefundPay" parameterType="string">
 		UPDATE PAY SET PAY_STATUS = 'REFUND', REFUND_STATUS = 'Y' WHERE PAY_ID = #{pay_id}
 	</update>
 	
+	<!-- 박지용 -->
 	<update id="updateRefundRes" parameterType="string">
 		UPDATE RESERVATION SET RESERVATION_STATUS = '취소' WHERE RESERVATION_ID = #{res_id}
 	</update>
 	
+	<!-- 박지용 -->
 	<update id="updateRefundSeat" parameterType="string">
 		UPDATE SEAT SET SEAT_STATUS = '취소' WHERE SEAT_ID = #{seat_id}
 	</update>
+	
+	
+	<!-- 박지용 -->
+	<select id="selectSeatIdTree" resultMap="movieResultSetEight" parameterType="string">
+		SELECT TURNING_ID, SEAT_ROW 
+		FROM SEAT 
+		WHERE SEAT_ID = #{seat_id}
+	</select>
 
 <!-- 정태 -->
 	<select id="selectMovieTiltle" resultMap="movieResultSet" parameterType="Movie">
