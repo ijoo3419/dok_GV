@@ -265,6 +265,10 @@ public class AdminController {
  				ArrayList<MovieThumbnail> movieRank2 = ms.selectMovieRank2(msn);
  				ArrayList<MovieThumbnail> movieRank3 = ms.selectMovieRank3(msn);
  				
+ 				ArrayList<String> go = new ArrayList<String>();
+				go.add("go");
+				model.addAttribute("go", go);
+				
  				model.addAttribute("movieRank1",movieRank1);
  				model.addAttribute("movieRank2",movieRank2);
  				model.addAttribute("movieRank3",movieRank3);

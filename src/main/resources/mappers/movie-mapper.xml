@@ -120,7 +120,6 @@
 		AND THEATER.THEATER_ID = MOVIEROOM.THEATER_ID
 		AND AREA.AREA_ID = THEATER.AREA_ID
 		AND MOVIEROOM.MOVIEROOM_ID = TURNING.MOVIEROOM_ID
-		AND PLAY.PLAY_STATUS = 'Y' 
 		AND TURNING_DAY = #{turning_day}
 		AND AREA.AREA_ID = #{area_id}
 		AND MOVIE.MOVIE_ID = #{movie_id}
@@ -235,10 +234,11 @@
 	</select>
 
 <!-- 정태 -->
-	<select id="selectMovieTiltle" resultMap="movieResultSet" parameterType="Movie">
-	  SELECT MOVIE_TITLE, MOVIE_ID
-   	 FROM MOVIE
-	</select>
+   <select id="selectMovieTiltle" resultMap="movieResultSet" parameterType="Movie">
+     SELECT MOVIE_TITLE, MOVIE_ID
+       FROM MOVIE
+       WHERE PLAY_STATUS = 'Y'
+   </select>
 	
 
 
