@@ -13,6 +13,7 @@ import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieThumbnail;
 
 
+
 public interface MovieService {
 	
 

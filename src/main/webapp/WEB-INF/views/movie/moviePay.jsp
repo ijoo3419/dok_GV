@@ -21,8 +21,8 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <!-- 구글폰트 -->
-<link href="https://fonts.googleapis.com/css?family=Do+Hyeon"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
 
@@ -34,6 +34,9 @@
 <title>독GV</title>
 </head>
 <style>
+body{
+	background:#D8D8D8;
+}
 #myModal {
 	overflow: hidden ;
 	width: 1400px ;
@@ -548,6 +551,9 @@ a{
 									<img src="${ contextPath }/resources/images/plusBtn.PNG" width="30" height="30">
 								</button>
 							</a>
+							<br>
+							<br>
+							<button class="seatPay-btn-right" onClick="window.location.reload()">검색 지우기</button>
 							<input type="hidden" class="movie-id" value="">
 						</div>
 					</div>
@@ -580,6 +586,7 @@ a{
 	
 	<script>
 		function selectMovieList(){
+			
 			var fromDate = $("#fromDate").val();
 			
 			$.ajax({
@@ -602,7 +609,7 @@ a{
 						$tdhiddenTitle.val(data[key].movie_id);
 						$tdTwo.text(data[key].movie_title);
 						
-						$tdOne.append("<" + data[key].file_src + "style='width:150px; height:200px;'>");
+						$tdOne.append("<img src=${ contextPath }/resources/uploadFiles/" + data[key].edit_name + " style='width:150px; height:200px;'>");
 						$tdOne.append($tdhiddenTitle);
 						$trOne.append($tdOne);
 						$table.append($trOne);
@@ -649,6 +656,11 @@ a{
 		var run = 0;
 		var dateRun = 0;
 		
+		/* $('.ui-datepicker-calendar').find('tbody').click(function(){
+			alert('클릭');
+			run = 0;
+		}); */
+		
 		/* 모달 3 체크용 변수 */
 		var treeCheck = 0; //모달3에서 체크용 변수
 		var treePlue = 0;
@@ -656,6 +668,7 @@ a{
 			
 		window.onload = function () {
 			treeCheck = $("#movieCount option:selected").val();
+			$("#myModal").show();
 		}
 		
 		var userSeat = new Array(); //유저가 선택한 좌석
@@ -751,10 +764,6 @@ a{
 		
 		$(document).ready(function(){
 			   $('#Progress_Loading').show(); //첫 시작시 로딩바를 숨겨준다.
-		})
-		
-		$(function myFunction(){
-			run = 0;
 		});
 		
 		$(function foo(){
@@ -920,13 +929,14 @@ a{
 					var userId = "${ sessionScope.loginUser.mid }";
 					var price = $(".seatPay-price").find("#td-web-fontTitle").val();
 			       	var msg = $('.hiddenTurning').val();
+			       	var seatName = $(".seatPay").find("tr").eq(5).find('td').text();
 			       	
 					$.ajax({
 			    		url:"insertSeat.mo",
 			    		type:"post",
 			    		traditional : true,
 			    		data: {turningId: turningId, movieRoomId: movieRoomId, seatSplitAjax: seatSplitAjax, 
-			    			   userId: userId, price: price, excelSplitAjax: excelSplitAjax},
+			    			   userId: userId, price: price, excelSplitAjax: excelSplitAjax, seatName: seatName},
 			    		success:function(data){
 			    			if(data == 0){
 			    				alert("이미 예약된 좌석입니다.");
@@ -943,7 +953,7 @@ a{
 			    				alert("다시 예매 해주세요");
 			    			});
 			    		}
-			    	});
+			    	}); 
 			    	
 				});
 			    
@@ -1199,17 +1209,17 @@ a{
 						    						if(y == 14){
 						    							$div.append("<br>");
 						    						}
-						    					}else if(data[i][y] == 'P'){
+						    					}else if(data[i][y] == '.'){
+						    						$div.append("&nbsp;&nbsp;");
+						    						if(y == 14){
+						    							$div.append("<br>");
+						    						}
+						    					}else{
 						    						var $checkBox = $("<label class='checkbox-wrap'><input type='checkbox' name='checkbox' value='"+ i + "/" + y +"' class='checkNot'><i class='check-icon-pay'><font class='checkFont'>X</font></i></label>");
 						    						$div.append($checkBox);
 						    						++numberCheck;
 						    						rowCheckIf = 1;
 						    						rowCheckIfTwo = 1;
-						    						if(y == 14){
-						    							$div.append("<br>");
-						    						}
-						    					}else{
-						    						$div.append("&nbsp;&nbsp;");
 						    						if(y == 14){
 						    							$div.append("<br>");
 						    						}
@@ -1455,6 +1465,46 @@ a{
 			</div>
 		</div>
 	</div>
+	<style>
+	#myModal6 {
+		display: none; /* Hidden by default */
+		position: fixed; /* Stay in place */
+		/* z-index: 100; /* Sit on top */ */
+		left: 0;
+		top: 0;
+		width: 100%; /* Full width */
+		height: 100%; /* Full height */
+		overflow: auto; /* Enable scroll if needed */
+		background-color: rgb(0, 0, 0); /* Fallback color */
+		background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	}
+	#myModal6 .modal-content{
+		margin-top:300px;
+		margin-left:600px;
+		width: 300px; /* Full width */
+		height: 150px; /* Full height */
+	}
+	#confirm{
+		border: 2px solid black;
+		font-family: 'Do Hyeon', sans-serif;
+		background: white;
+		width:70px;
+		height:30px;
+	}
+	.modal-content h3{
+		font-family: 'Do Hyeon', sans-serif;
+		margin-top:40px;
+	}
+	</style>
+	<div id="myModal6" class="modal">
+		<div class="modal-content" align="center">
+			<h3 align="center">결제가 완료되었습니다.</h3>
+			<br>
+			<div align="center">
+				<button id="confirm" onclick="location.href='main.co'">확인</button>
+			</div>
+		</div>
+	</div>
 	<script>
 	$(function(){
 		$('#myModal3 .seatPay-btn .seatPay-btn-right').click(function(){
@@ -1545,7 +1595,9 @@ a{
 		    			  turningId: turningId,
 		    			  userId: userId},
 		    		success:function(data){
-		    			alert("결제가 완료되었습니다.");
+		    			$('#myModal3').hide();
+		    			$('#myModal2').hide();
+		    			$('#myModal6').show();
 		    		},
 		    		error:function(data){
 		    			console.log(data);
@@ -1836,6 +1888,7 @@ a{
 			</div>
 		</div>
 	</div>
+	
 	<script>
 		$(function(){
 			$(".cinemaBtn").mouseenter(function(){
@@ -1852,7 +1905,7 @@ a{
 		 						var area_val = new Array();
 		 						
 		 						for(var key in data){
-		 							area_parents[key] = data[key].area_parents; //부모의 지역 아이디를 저장
+		 							area_parents[key] = data[key].area_id; //부모의 지역 아이디를 저장
 		 							
 		 							for(var i = 0; i < 9; i++){
 		 								if($(".areaTable").find("td").eq(i).find("input").val() == area_parents[key]){ //부모의 지역 아이디에 해당 되는 td만 활성화 
@@ -1865,7 +1918,26 @@ a{
 		 							}
 		 						}
 		 						
-		 						$div = $(".areaChild");	
+		 						$(function(){
+		 							$(".areaTable td").mouseenter(function(){
+		 								
+		 						 	}).click(function(){
+		 						 			var num = $(this).find("font").text();
+		 						 			var id = $(this).find("input").val();
+		 						 			var $font = $("<font id='web-fontTitle-child-two'>");
+		 						 			$font.append(num);
+		 									$(".cinemaBtn").find("img").remove();
+		 									$(".cinemaBtn").find("font").remove();
+		 									$(".cinemaBtn").append($font);
+		 									$(".cinemaBtn").show();
+		 									
+		 									$(".theater-id").val(id);
+		 									
+		 									$("#myModal5").find(".close").click();
+		 						 	});
+		 					  	});
+		 						
+		 						/* $div = $(".areaChild");	
 		 						$div.find("table").remove();
 		 						var $table = $("<table>");
 		 						
@@ -1906,7 +1978,7 @@ a{
 		 									
 		 									$("#myModal5").find(".close").click();
 		 						 	});
-		 					  	});
+		 					  	}); */
 		 					},
 		 					error:function(){
 		 						console.log("에러!");

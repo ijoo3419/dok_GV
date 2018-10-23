@@ -17,6 +17,7 @@ import com.kh.dok.movie.model.vo.Movie;
 import com.kh.dok.movie.model.vo.MovieThumbnail;
 
 
+
 @Repository
 public class MovieDaoImpl implements MovieDao{
 	
@@ -280,6 +281,13 @@ public class MovieDaoImpl implements MovieDao{
 	@Override
 	public ArrayList<Movie> selectSeatIdTree(SqlSessionTemplate sqlSession, String seat_id) {
 
+		return (ArrayList)sqlSession.selectList("Movie.selectSeatIdTree", seat_id);
+	}
+
+	//박지용 Seat Row와 TU_ID가져오기
+	@Override
+	public ArrayList<Movie> selectSeatIdTree(SqlSessionTemplate sqlSession, String seat_id) {
+		
 		return (ArrayList)sqlSession.selectList("Movie.selectSeatIdTree", seat_id);
 	}
 

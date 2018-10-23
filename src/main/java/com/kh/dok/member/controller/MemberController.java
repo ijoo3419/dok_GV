@@ -141,6 +141,7 @@ public class MemberController {
 		}
 	}
 
+
 	//암호화 처리 로그인(성희)
 	@RequestMapping("loginCheck.me")
 	public String loginCheck(Member m, Model model){

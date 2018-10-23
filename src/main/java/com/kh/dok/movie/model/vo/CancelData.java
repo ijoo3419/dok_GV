@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import com.google.gson.annotations.SerializedName;
 
+
 public class CancelData {
 
 	@SerializedName("imp_uid")
