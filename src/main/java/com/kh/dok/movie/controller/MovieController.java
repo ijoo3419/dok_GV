@@ -162,8 +162,8 @@ public class MovieController {
 	}
 
 	//박지용 @ResponseBody를 이용한 ajax 처리
-	@RequestMapping(value="selectMovieRoom.mo")
-	public @ResponseBody String[][] selectMovieRoom(@RequestParam String movieRoomIdVal, HttpServletRequest request){
+		@RequestMapping(value="selectMovieRoom.mo")
+		public @ResponseBody String[][] selectMovieRoom(@RequestParam String movieRoomIdVal, HttpServletRequest request){
 
 		System.out.println("영화관 출력하기: " + movieRoomIdVal);
 		
@@ -201,37 +201,36 @@ public class MovieController {
 			if(check == 0){
 				return check;
 			}
-		}
-				
-		
-		for(int i = 0; i < seatSplitAjax.length; i++){
+					
 			
-			if(check != 0){
-				Movie m = new Movie();
+			for(int i = 0; i < seatSplitAjax.length; i++){
 				
-				seatId = seatSplitAjax[i];
-				m.setTurning_id(turningId);
-				m.setMovieroom_id(movieRoomId);
-				m.setSeat_name(seatId);
-				m.setMid(userId);
-				m.setPrice(price);
-				
-				//좌석 예매 insert
-				check = ms.insertSeat(m);
-	
-				//예매된 좌석 id 가져오기
-				m.setSeat_id("S" + ms.selectSeatId());
-				
-				//예매 테이블 추가
-				ms.insertReservation(m);
-				
-			}else{
-				System.out.println(i + "번째 추가 안됨");
-			}
-		}
+				if(check != 0){
+					Movie m = new Movie();
+					
+					seatId = seatSplitAjax[i];
+					m.setTurning_id(turningId);
+					m.setMovieroom_id(movieRoomId);
+					m.setSeat_name(seatId);
+					m.setMid(userId);
+					m.setPrice(price);
+					
+					//좌석 예매 insert
+					check = ms.insertSeat(m);
 		
-		return check;
-	}
+					//예매된 좌석 id 가져오기
+					m.setSeat_id("S" + ms.selectSeatId());
+					
+					//예매 테이블 추가
+					ms.insertReservation(m);
+					
+				}else{
+					System.out.println(i + "번째 추가 안됨");
+				}
+			}
+			
+			return check;
+		}
 	
 	@RequestMapping(value="insertPay.mo")
 	public @ResponseBody int insertPay(@RequestParam String msg, @RequestParam String movieRoomId, @RequestParam String turningId, @RequestParam String userId){

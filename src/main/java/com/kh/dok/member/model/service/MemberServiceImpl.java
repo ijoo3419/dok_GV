@@ -307,6 +307,7 @@ public class MemberServiceImpl implements MemberService{
 		return md.selectRecommened(sqlSession,fourCount);
 	}
 
+
 	
 	
 	
