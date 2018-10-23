@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
@@ -327,7 +327,7 @@ hr {
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">출연진: ${row.movie_actor }</a><br>
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">장르: ${row.genre}</a><br>
 			
-			<!-- <input type="button" value="상영시간표" style="float:right; "> -->
+			<input type="button" value="상영시간표" style="float:right; ">
 			<input type="button" value="♥보고싶어" style="float:right; margin-right:10px; text-decoration: none;" onclick="insertWish()">
 			<input type="hidden" value="${ loginUser.mid }" id="mid" >
 			<%-- <input type="hidden" value="${ movieDetail.movie_id }" id="movie_id"> --%>
@@ -431,13 +431,13 @@ hr {
 				
 				<a style="text-align:center; width:100px; margin-left:40px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">평점을 입력하세요.</a>
 			</div>
-			<c:if test="${ !empty session.Scope.loginUser }">
+			<c:if test="${ !empty sessionScope.loginUser }">
 			<div id="gradeinsert">
 				<input type="text" id="comment" name="comment" placeholder="리뷰를 입력해주세요!" style="width:600px; height:98px; margin:0 !important;">
 			</div>
 			<input type="button" onclick="fn_comment('${ result.code}')" value="등록" style="width:100px; height:100px;">
 			</c:if>
-			<c:if test="${ empty session.Scope.loginUser }">
+			<c:if test="${ empty sessionScope.loginUser }">
 			<div id="gradeinsert">
 				<input type="text" id="comment" name="comment" placeholder="로그인 후 리뷰를 등록하실 수 있습니다." style="width:600px; height:98px; margin:0 !important;" readonly>
 			</div>
@@ -457,178 +457,7 @@ hr {
 			<a style="text-align:center; width:50px; margin-left:10px; margin-right:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">평점순</a>
 		</div>
 		<div id="usergrade">
-			<%-- <table border="1" summary="" style="width:900px; height:600px;">
-				<tr>
-					<td>
-						<div id="gradeimage">
-							<img src="${contextPath }/resources/images/logo.jpg" width="100" height="100">
-						</div>
-						<div id="gardetext">
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">ddljdo</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">18.09.18</a>
-						<a style="text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">☆☆☆☆☆</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">재밌음</a><br>
-						<img src="${contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">추천</a>
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">0</a>
-						<img src="${contextPath }/resources/images/garbage.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">신고하기</a>
-						</div>
-					</td>
-					<td>
-						<div id="gradeimage">
-							<img src="${contextPath }/resources/images/logo.jpg" width="100" height="100">
-						</div>
-						<div id="gardetext">
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">ddljdo</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">18.09.18</a>
-						<a style="text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">☆☆☆☆☆</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">재밌음</a><br>
-						<img src="${contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">추천</a>
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">0</a>
-						<img src="${contextPath }/resources/images/garbage.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">신고하기</a>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div id="gradeimage">
-							<img src="${contextPath }/resources/images/logo.jpg" width="100" height="100">
-						</div>
-						<div id="gardetext">
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">ddljdo</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">18.09.18</a>
-						<a style="text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">☆☆☆☆☆</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">재밌음</a><br>
-						<img src="${contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">추천</a>
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">0</a>
-						<img src="${contextPath }/resources/images/garbage.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">신고하기</a>
-						</div>
-					</td>
-					<td>
-						<div id="gradeimage">
-							<img src="${contextPath }/resources/images/logo.jpg" width="100" height="100">
-						</div>
-						<div id="gardetext">
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">ddljdo</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">18.09.18</a>
-						<a style="text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">☆☆☆☆☆</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">재밌음</a><br>
-						<img src="${contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">추천</a>
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">0</a>
-						<img src="${contextPath }/resources/images/garbage.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">신고하기</a>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div id="gradeimage">
-							<img src="${contextPath }/resources/images/logo.jpg" width="100" height="100">
-						</div>
-						<div id="gardetext">
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">ddljdo</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">18.09.18</a>
-						<a style="text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">☆☆☆☆☆</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">재밌음</a><br>
-						<img src="${contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">추천</a>
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">0</a>
-						<img src="${contextPath }/resources/images/garbage.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">신고하기</a>
-						</div>
-					</td>
-					<td>
-						<div id="gradeimage">
-							<img src="${contextPath }/resources/images/logo.jpg" width="100" height="100">
-						</div>
-						<div id="gardetext">
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">ddljdo</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">18.09.18</a>
-						<a style="text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">☆☆☆☆☆</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">재밌음</a><br>
-						<img src="${contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">추천</a>
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">0</a>
-						<img src="${contextPath }/resources/images/garbage.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">신고하기</a>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div id="gradeimage">
-							<img src="${contextPath }/resources/images/logo.jpg" width="100" height="100">
-						</div>
-						<div id="gardetext">
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">ddljdo</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">18.09.18</a>
-						<a style="text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">☆☆☆☆☆</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">재밌음</a><br>
-						<img src="${contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">추천</a>
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">0</a>
-						<img src="${contextPath }/resources/images/garbage.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">신고하기</a>
-						</div>
-					</td>
-					<td>
-						<div id="gradeimage">
-							<img src="${contextPath }/resources/images/logo.jpg" width="100" height="100">
-						</div>
-						<div id="gardetext">
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">ddljdo</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">18.09.18</a>
-						<a style="text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">☆☆☆☆☆</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">재밌음</a><br>
-						<img src="${contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">추천</a>
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">0</a>
-						<img src="${contextPath }/resources/images/garbage.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">신고하기</a>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div id="gradeimage">
-							<img src="${contextPath }/resources/images/logo.jpg" width="100" height="100">
-						</div>
-						<div id="gardetext">
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">ddljdo</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">18.09.18</a>
-						<a style="text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">☆☆☆☆☆</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">재밌음</a><br>
-						<img src="${contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">추천</a>
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">0</a>
-						<img src="${contextPath }/resources/images/garbage.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">신고하기</a>
-						</div>
-					</td>
-					<td>
-						<div id="gradeimage">
-							<img src="${contextPath }/resources/images/logo.jpg" width="100" height="100">
-						</div>
-						<div id="gardetext">
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">ddljdo</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">18.09.18</a>
-						<a style="text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">☆☆☆☆☆</a><br>
-						<a style="text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">재밌음</a><br>
-						<img src="${contextPath }/resources/images/like.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:10px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">추천</a>
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">0</a>
-						<img src="${contextPath }/resources/images/garbage.png" width="20" height="20" style="margin-left:10px; margin-top:10px;">
-						<a style="text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">신고하기</a>
-						</div>
-					</td>
-				</tr>
-			</table> --%>
+		
 		</div>
 		
 		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

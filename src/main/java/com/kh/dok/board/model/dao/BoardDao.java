@@ -1,4 +1,4 @@
-package com.kh.dok.board.model.dao;
+package com.kh.dok.board.model.dao;  
 
 import java.util.ArrayList;
 
