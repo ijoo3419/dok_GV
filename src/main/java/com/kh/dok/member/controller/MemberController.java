@@ -148,6 +148,7 @@ public class MemberController {
 
 	public String loginCheck(MovieThumbnail msn,Model model, Member m){
 
+
 		System.out.println("loginCheck MemberController : " + m);
 
 		try {

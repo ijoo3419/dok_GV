@@ -922,7 +922,7 @@ a{
 				}
 			    
 			    $("#myModal2 .seatPay-btn-right").off().on('click', function(){
-			    	var turningId = $('.hiddenTurning').val();
+			    	var turningId = $('.torres').val();
 					var movieRoomId = $('.movieRoomId').val();
 					var seatSplitAjax = seatSplit;
 					var excelSplitAjax = excelSplit;
@@ -1174,7 +1174,15 @@ a{
 									$("#myModal3").find(".pay-right").find("table").find("tr").eq(0).find("td").find("img").attr("src", c);
 									$("#myModal3").find(".pay-right").find("table").find("tr").eq(0).find("td").find("img").attr("style", "width:200px; height:280px;");
 									
-									var movieRoomIdVal = $(this).find(".hiddenTurning").val();
+									var movieRoomIdVal = $(this).find('.hiddenTurning').val();
+		    						
+									var $screen = $(".screen");
+									var $torres = $("<input type='hidden' class='torres' val=''>");
+									
+									$screen.append($torres);
+									
+									$(".torres").val(movieRoomIdVal);
+									
 									var movieRoomIdValTree = $(this).find(".hiddenRoomId").val();
 									$('.movieRoomId').val(movieRoomIdValTree);
 									
@@ -1585,7 +1593,7 @@ a{
 		       	  
 		       	  var userId = "${ sessionScope.loginUser.mid }"; //유저 id
 		       	  var movieRoomId = $('.movieRoomId').val();
-		       	  var turningId = $('.hiddenTurning').val();
+		       	  var turningId = $('.torres').val();
 		       	  
 		       $.ajax({
 		    		url:"insertPay.mo",

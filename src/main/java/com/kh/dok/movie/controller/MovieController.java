@@ -162,22 +162,22 @@ public class MovieController {
 	}
 
 	//박지용 @ResponseBody를 이용한 ajax 처리
-		@RequestMapping(value="selectMovieRoom.mo")
-		public @ResponseBody String[][] selectMovieRoom(@RequestParam String movieRoomIdVal, HttpServletRequest request){
+	@RequestMapping(value="selectMovieRoom.mo")
+	public @ResponseBody String[][] selectMovieRoom(@RequestParam String movieRoomIdVal, HttpServletRequest request){
 
 		System.out.println("영화관 출력하기: " + movieRoomIdVal);
-		
+
 		String name = movieRoomIdVal;
-		
+
 		System.out.println(name);
 		String[][] arr = new cellClass().test(name, request);
-		
+
 		/*for(String[] str : arr){
-			for(String s : str)
-				System.out.print(s);
-			System.out.println();
-		}*/
-		
+				for(String s : str)
+					System.out.print(s);
+				System.out.println();
+			}*/
+
 		return arr;
 	}
 	
@@ -195,8 +195,6 @@ public class MovieController {
 		
 		for(int y = 0; y < excelSplitAjax.length - 1; y++){ //3번을 반복
 			excel = excelSplitAjax[y].split("/"); 
-			/*System.out.println("excel: " + y + "열" + excel[0]);
-			System.out.println("excel: " + y + "번호 " + excel[1]);*/
 			check = c.insertPayTurningCell(excel, seatSplit[y], turningId, request);
 			if(check == 0){
 				return check;
@@ -236,6 +234,7 @@ public class MovieController {
 
 	@RequestMapping(value="insertPay.mo")
 	public @ResponseBody int insertPay(@RequestParam String msg, @RequestParam String movieRoomId, @RequestParam String turningId, @RequestParam String userId){
+		
 		int check = 1;
 		int checkTwo = 1;
 		int checkTree = 1;
@@ -248,8 +247,15 @@ public class MovieController {
 		m.setMsg(msgSplit[0]);
 		m.setMid(userId);
 		
+		System.out.println(movieRoomId);
+		System.out.println(turningId);
+		System.out.println(msgSplit[0]);
+		System.out.println(userId);
+		
 		//예매 ID 가져오기
 		ArrayList<Movie> pay = ms.selectPayList(m);
+		
+		System.out.println(pay.toString());
 		
 		for (int index = 0; index < pay.size(); index++) {
 			   /*System.out.println(pay.get(index).getReservation_id());*/
