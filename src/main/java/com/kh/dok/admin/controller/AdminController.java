@@ -34,6 +34,8 @@ import com.kh.dok.common.CommonUtils;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.common.Pagination;
 import com.kh.dok.member.model.vo.Member;
+import com.kh.dok.movie.model.service.MovieService;
+import com.kh.dok.movie.model.vo.MovieThumbnail;
 
 @SessionAttributes("bf")
 @Controller
@@ -41,6 +43,9 @@ public class AdminController {
 
 	@Autowired
 	private AdminService as;
+	
+	@Autowired
+	private MovieService ms;
 
 	//관리자 페이지로 이동
 	@RequestMapping("admin.ad")
@@ -183,7 +188,7 @@ public class AdminController {
 
 	//메인 사진 업로드
 	@RequestMapping(value="upload.ad")
-	public String upload(Model model, String gm,HttpServletRequest request, @RequestParam(name="file",required=false)MultipartFile photo,
+	public String upload(MovieThumbnail msn,Model model, String gm,HttpServletRequest request, @RequestParam(name="file",required=false)MultipartFile photo,
 			@RequestParam(name="file2",required=false)MultipartFile photo2,@RequestParam(name="file3",required=false)MultipartFile photo3,
 			@RequestParam(name="file4",required=false)MultipartFile photo4,HttpSession session){
 
@@ -256,6 +261,13 @@ public class AdminController {
 				int iv = as.insertvisit(time,ip);
 				/*int[] vcList = as.selectVlist(time);*/
  				model.addAttribute("iv", iv);
+ 				ArrayList<MovieThumbnail> movieRank1 = ms.selectMovieRank1(msn);
+ 				ArrayList<MovieThumbnail> movieRank2 = ms.selectMovieRank2(msn);
+ 				ArrayList<MovieThumbnail> movieRank3 = ms.selectMovieRank3(msn);
+ 				
+ 				model.addAttribute("movieRank1",movieRank1);
+ 				model.addAttribute("movieRank2",movieRank2);
+ 				model.addAttribute("movieRank3",movieRank3);
 				return "main/main";
 			}
 		} catch (UploadException e) {
@@ -316,7 +328,14 @@ public class AdminController {
 	
 	//메인으로
 	@RequestMapping("main.ad")
-	public String main(Model model){
+	public String main(MovieThumbnail msn, Model model, HttpServletRequest request){
+		ArrayList<MovieThumbnail> movieRank1 = ms.selectMovieRank1(msn);
+		ArrayList<MovieThumbnail> movieRank2 = ms.selectMovieRank2(msn);
+		ArrayList<MovieThumbnail> movieRank3 = ms.selectMovieRank3(msn);
+		
+		model.addAttribute("movieRank1",movieRank1);
+		model.addAttribute("movieRank2",movieRank2);
+		model.addAttribute("movieRank3",movieRank3);
 		
 		return "main/main";
 	}
