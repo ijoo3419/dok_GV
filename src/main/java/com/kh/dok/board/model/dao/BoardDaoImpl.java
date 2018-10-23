@@ -254,6 +254,7 @@ public class BoardDaoImpl implements BoardDao{
 
 	@Override
 	public int deleteNotice(SqlSessionTemplate sqlSession, String board_id) {
+		System.out.println("ekdh다오오오오옹 ; " + board_id);
 		int result = sqlSession.update("Board.deleteNotice", board_id);
 		
 		return result;

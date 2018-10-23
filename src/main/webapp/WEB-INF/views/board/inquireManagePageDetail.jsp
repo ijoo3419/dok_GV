@@ -85,7 +85,7 @@
                         <div style="width:900px; height:400px; border:1px solid #eeeeee; text-align:left;">
                             ${ bbf.bcontent }
                             <div id="image">
-                            <img src="${ contextPath }/resources/uploadFiles/${bbf.edit_name}.jpg" style="width:300px; hieght:400px;">
+                            <img src="${ contextPath }/resources/uploadFiles/${bbf.edit_name}.png" style="width:300px; hieght:400px;">
                             	<!-- <${ bbf.file_src } style="width:500px; height:450px;"> -->
                          	</div>
                          </div>  
@@ -172,7 +172,7 @@
             					}
             				}else{
             					html += "<div>";
-            	                html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
+            	                html += "<div><table class='table'><h6><strong>등록된 답변이 없습니다.</strong></h6>";
             	                html += "</table></div>";
             	                html += "</div>";
             				}

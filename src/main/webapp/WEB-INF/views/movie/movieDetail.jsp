@@ -652,7 +652,7 @@ hr {
      			type:"POST",
      			data:{ rid:rid },
      			success:function(data){
-     				alert("성공함");
+     				alert("리뷰가 추천되었습니다.");
      				location.href="movieDetail.mo?id=" + movie_id;
 				},
 				error:function(data){

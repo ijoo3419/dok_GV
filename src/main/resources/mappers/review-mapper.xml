@@ -40,6 +40,7 @@
 		WHERE REPLY.RWRITER = MEMBER.MID
 		AND BID = #{bid}
 		AND REPLY.STATUS = 'Y'
+		 ORDER BY REPLY.RCREATE_DATE DESC
 	</select>
 	
 	<!-- 댓글 좋아요 -->

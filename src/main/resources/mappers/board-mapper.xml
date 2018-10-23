@@ -25,6 +25,7 @@
 		<result property="file_date" column="FILE_DATE"/>
 		<result property="file_level" column="FILE_LEVEL"/>
 		<result property="nickname" column="NICKNAME" />
+		<result property="co" column="CO"/>
 	</resultMap>
 	
 	<resultMap type="Reply" id="ReplyResultSet">
@@ -206,10 +207,11 @@
 	<!-- 관리자 문의사항 제목 10 개 불러오기 (성희) -->
 	<select id="selectINquireList" parameterType="java.lang.String" resultMap="BBFileResultSet">
 		SELECT TO_NUMBER(SUBSTR(BOARD.BOARD_ID, 2)) AS BOARD_ID, BOARD.MID, BTITLE, BCONTENT, BOARD_SORT, BOARD_DATE, BCOUNT, 
-       		   FILE_ID, ORIGIN_NAME, EDIT_NAME, FILE_SRC, FILE_DATE, FILE_LEVEL, M.NICKNAME
-		FROM BOARD, BOARD_FILE, MEMBER M
+       		   FILE_ID, ORIGIN_NAME, EDIT_NAME, FILE_SRC, FILE_DATE, FILE_LEVEL, M.NICKNAME, CO
+		FROM BOARD, BOARD_FILE, MEMBER M, (SELECT BOARD_ID, COUNT(*) AS CO FROM BOARD B RIGHT JOIN REPLY R ON(B.BOARD_ID=R.BID) GROUP BY BOARD_ID) R
 		WHERE BOARD.BOARD_ID = BOARD_FILE.BOARD_ID(+)
 		AND BOARD.MID = M.MID
+        AND BOARD.BOARD_ID = R.BOARD_ID(+)
 		AND BOARD.THEATER_ID = #{theaterId}
 		AND BSTATUS = 'Y'
 		AND BOARD_DIV = 'BD1'
@@ -292,7 +294,7 @@
 	<update id="deleteNotice" parameterType="java.lang.String">
 		UPDATE BOARD
 		SET BSTATUS = 'N'
-		WHERE BOARD_ID = #{board_id}
+		WHERE BOARD_ID = 'B' || #{board_id}
 	</update>
 	
 	<!-- 마페 문의사항 insert -->

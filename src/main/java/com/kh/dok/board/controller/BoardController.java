@@ -395,6 +395,7 @@ public class BoardController {
 	   //판매자 문의사항 클릭시
 	   @RequestMapping(value="selectInquireOne.bo")
 	   public String selectInquireOne(String abc, Model model, String board_id){
+		   
 		   try {
 			   System.out.println("aaaaaaaaaaaaabbbbbbbbbbbbccccccccc : " + abc);
 			   System.out.println("성희 : 보드컨트롤러 board_id : " + board_id);
@@ -402,6 +403,8 @@ public class BoardController {
 			System.out.println("성희 : 지금 볼라고 한거 bbf : " + bbf);
 			
 			model.addAttribute("bbf", bbf);
+			
+			
 		} catch (BoardSelectOneException e) {
 			model.addAttribute("msg", "updateCount 실패");
 			
@@ -410,10 +413,12 @@ public class BoardController {
 		   if(abc.equals("ask")){
 			   System.out.println("abc" + abc);
 			   return "member/inquireDetailMp";
-		   }else{
+		   }else if(abc.equals("in")){
 			   System.out.println("board" + abc);
 			   return "board/inquireManagePageDetail";
 			   
+		   }else{
+			   return "board/inquireManagePageDetail";
 		   }
 		   
 		   
@@ -527,6 +532,7 @@ public class BoardController {
 	   
 	 @RequestMapping(value="deleteNotice.bo")
 	 public String deleteNotice(String board_id, Model model, HttpServletRequest request){
+		System.out.println("왓니??");
 		 int result = bs.deleteNotice(board_id);
 		 
 		 PageInfo p = new PageInfo();

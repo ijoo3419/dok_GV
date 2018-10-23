@@ -596,7 +596,156 @@ img.ui-datepicker-trigger {
 		<!-- 다섯번째 탭(문의 사항) : 성희 공간 -->
 		<section id="tab-5" class="post">
 			<h2>문의사항</h2>
+			
+			<div class="table-wrapper">
+					<table id="boardArea" align="center">
+							<tr>
+								<th>글번호</th>
+								<th>제목</th>
+								<th>문의상태</th>
+								<th>작성자</th>
+								<th>조회수</th>
+								<th>작성일</th>
+							</tr>
+							<tr>
+								<td>603</td>
+								<td>단체 대관 가능한가요</td>
+								<td>[답변대기]</td>
+								<td>바라미</td>
+								<th>2</th>
+								<td>2018-10-22</td>
+							</tr>
+							<tr>
+								<td>579</td>
+								<td>비회원은 문의사항을 남길 수 없나요?</td>
+								<td>[답변완료!]</td>
+								<td>바닐라</td>
+								<th>4</th>
+								<td>2018-10-22</td>
+							</tr>
+							<tr>
+								<td>570</td>
+								<td>영화 포스터나 전단지를 보내주세요</td>
+								<td>[답변완료!]</td>
+								<td>유자</td>
+								<th>2</th>
+								<td>2018-10-19</td>
+							</tr>
+							<tr>
+								<td>569</td>
+								<td>영화 수수료는 얼마인가요</td>
+								<td>[답변완료!]</td>
+								<td>누룽지</td>
+								<th>5</th>
+								<td>2018-10-17</td>
+							</tr>
+							<tr>
+								<td>540</td>
+								<td>회원탈퇴 하고싶어요</td>
+								<td>[답변완료!]</td>
+								<td>끼리쓰</td>
+								<th>13</th>
+								<td>2018-10-15</td>
+							</tr>
+							<tr>
+								<td>535</td>
+								<td>문의사항 왜 답변 안달아주나요</td>
+								<td>[답변완료!]</td>
+								<td>오현진</td>
+								<th>5</th>
+								<td>2018-10-14</td>
+							</tr>
+							<tr>
+								<td>523</td>
+								<td>만 65세 경로우대는 없나요?</td>
+								<td>[답변완료!]</td>
+								<td>낭군님</td>
+								<th>2</th>
+								<td>2018-09-24</td>
+							</tr>
+							<tr>
+								<td>509</td>
+								<td>예매를 했는데 시간변경 가능할까요????</td>
+								<td>[답변완료!]</td>
+								<td>종이나리</td>
+								<th>5</th>
+								<td>2018-09-22</td>
+							</tr>
+							<tr>
+								<td>501</td>
+								<td>멤버십은 없나요?</td>
+								<td>[답변완료!]</td>
+								<td>아이드림</td>
+								<th>4</th>
+								<td>2018-09-17</td>
+							</tr>
+							<tr>
+								<td>493</td>
+								<td>온라인 홈페이지에서 예매했는데 예매취소 어떻게하나요</td>
+								<td>[답변완료!]</td>
+								<td>역삼동쭈꾸미</td>
+								<th>7</th>
+								<td>2018-09-14</td>
+							</tr>
+						
+						
+					</table>
+				</div>
+				
+				<div class="search">
+					<select id="searchCondition" name="searchCondition" style="width:150px; height:40px; display:inline-block; margin-left:80px;">
+						<option value="">검색기준</option>
+						<option value="btitle">제목</option>
+						<option value="bcontent">내용</option>
+					</select> <input id="searchResult" name="searchValue" type="text" placeholder="검색" style="width:300px; margin-left:10px; display:inline-block"> <a href="#" class="button primary icon fa-search" onclick="searchBoard()">조회</a> <button type="button" class="img_btn user cancel mr7" align="right"><a href="writeNotice.bo">공지작성</a></button>
+				</div>
 
+
+<div id="page" align="center">
+					<div class="pagination" align="center">
+						<%-- <c:if test="${ pi.currentPage <= 1 }"> --%>
+							<a>이전 </a>
+							<a>1 </a>
+							<a>2 </a>
+							<a>3 </a>
+							<a>4 </a>
+							<a>5 </a>
+							<a>6 </a>
+							<a> 다음</a>
+							</div>
+						<%-- </c:if>
+						<c:if test="${ pi.currentPage > 1 }">
+							<c:url var="blistBack" value="notice.li">
+								<c:param name="currentPage" value="${ pi.currentPage - 1 }" />
+								<c:param name="mId" value="${ mId }" />
+							</c:url>
+							<a href="${ blistBack }">이전</a>
+						</c:if>
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+							<c:if test="${ p eq pi.currentPage }">
+								<font color="red" size="4"><a>5</a></font>
+							</c:if>
+							<c:if test="${ p ne pi.currentPage }">
+								<c:url var="blistCheck" value="notice.li">
+									<c:param name="currentPage" value="5" />
+									<c:param name="mId" value="${ mId }" />
+								</c:url>
+								<a href="${ blistCheck }">5</a>
+							</c:if>
+						</c:forEach>
+						<c:if test="${ pi.currentPage >= pi.maxPage }"> --%>
+						<%-- </c:if>
+						<c:if test="${ pi.currentPage < pi.maxPage }">
+							<c:url var="blistEnd" value="notice.li">
+								<c:param name="currentPage" value="${ pi.currentPage + 1 }" />
+								<c:param name="mId" value="${ mId }" />
+							</c:url>
+							<a href="${ blistEnd }">다음</a>
+						</c:if> --%>
+					
+				</div>
+				
+				
 
 		</section>
 		<!-- 여섯번째 탭(공지사항) : 성희 공간-->
@@ -612,22 +761,76 @@ img.ui-datepicker-trigger {
 								<th>조회수</th>
 								<th>작성일</th>
 							</tr>
-						<c:if test="${ list == null }">
-							<tr>
-								<td>등록된 공지사항이 없습니다.</td>
-							</tr>
-						</c:if>
-						<c:if test="${ list != null }">
-							<c:forEach var="list" items="${ list }">
-								<tr>
-									<td>${ list.board_id }</td>
-									<td>${ list.btitle }</td>
-									<td>${ list.nickname }</td>
-									<td>${ list.bcount }</td>
-									<td>${ list.board_date }</td>
-								</tr>
-							</c:forEach>
-						</c:if>
+						<tr>
+						<td>1367</td>
+						<td>카카오뱅크 전산시스템 점검에 따른 서비스 일시 중단 안내</td>
+						<td>관리자</td>
+						<td>5023</td>
+						<td>2018-10-17</td>
+						</tr>
+						<tr>
+						<td>1366</td>
+						<td>10월 배리어프리 상영작 안내</td>
+						<td>관리자</td>
+						<td>1055</td>
+						<td>2018-10-05</td>
+						</tr>
+						<tr>
+						<td>1349</td>
+						<td>개인정보 처리방침 변경 안내</td>
+						<td>관리자</td>
+						<td>1032</td>
+						<td>2018-09-29</td>
+						</tr>
+						<tr>
+						<td>1336</td>
+						<td>킹 오브 프리즘 로즈파티 2018 진행 안내</td>
+						<td>관리자</td>
+						<td>3025</td>
+						<td>2018-09-21</td>
+						</tr>
+						<tr>
+						<td>1335</td>
+						<td>현대백화점 상품권 결제 서비스 종료 안내</td>
+						<td>관리자</td>
+						<td>1932</td>
+						<td>2018-09-15</td>
+						</tr>
+						<tr>
+						<td>1325</td>
+						<td>[사표대신 영화표] 당첨자 발표</td>
+						<td>관리자</td>
+						<td>2035</td>
+						<td>2018-09-11</td>
+						</tr>
+						<tr>
+						<td>1324</td>
+						<td>클래식 라이브 <2018 베를린 필하모닉 발트뷔네 콘서트> - 상영 안내</td>
+						<td>관리자</td>
+						<td>3012</td>
+						<td>2018-09-07</td>
+						</tr>
+						<tr>
+						<td>1303</td>
+						<td>8월 24일 자정 서버 점검이 시행됩니다.</td>
+						<td>관리자</td>
+						<td>2905</td>
+						<td>2018-09-01</td>
+						</tr>
+						<tr>
+						<td>1301</td>
+						<td>9/05 행정안전부 주관 전국 지진 대피 훈련 안내</td>
+						<td>관리자</td>
+						<td>2354</td>
+						<td>2018-08-30</td>
+						</tr>
+						<tr>
+						<td>1294</td>
+						<td>신협 시스템 점검작업에 따른 펌뱅킹서비스 일시 중지 안내 (08/30)</td>
+						<td>관리자</td>
+						<td>3944</td>
+						<td>2018-08-20</td>
+						</tr>
 					</table>
 				</div>
 				
@@ -666,7 +869,7 @@ img.ui-datepicker-trigger {
 				                                                                                                        
 				
 				<!-- 페이징 처리 -->
-				<div id="page" align="center">
+				<%-- <div id="page" align="center">
 					<div class="pagination" align="center">
 						<c:if test="${ pi.currentPage <= 1 }">
 							<a>이전 </a>
@@ -701,7 +904,19 @@ img.ui-datepicker-trigger {
 							<a href="${ blistEnd }">다음</a>
 						</c:if>
 					</div>
-				</div>
+				</div> --%>
+				<div class="pagination" align="center">
+						<%-- <c:if test="${ pi.currentPage <= 1 }"> --%>
+							<a>이전 </a>
+							<a>1 </a>
+							<a>2 </a>
+							<a>3 </a>
+							<a>4 </a>
+							<a>5 </a>
+							<a>6 </a>
+							<a>7 </a>
+							<a> 다음</a>
+							</div>
 				
 				
 				
