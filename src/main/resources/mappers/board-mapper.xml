@@ -248,7 +248,7 @@
 	 </select>
 	
 	<insert id="insertfile" parameterType="BoardFile">
-		INSERT INTO BOARD_FILE VALUES('BF' || TO_CHAR(BOARD_BOARD_ID.NEXTVAL), #{board_id}, #{origin_name}, #{edit_name}
+		INSERT INTO BOARD_FILE VALUES('BF' || TO_CHAR(BOARD_FILE_FILE_ID.NEXTVAL), #{board_id}, #{origin_name}, #{edit_name}
 		,#{file_src}, SYSDATE, #{file_level})
 	</insert>
 	

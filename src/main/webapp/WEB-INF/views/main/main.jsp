@@ -539,16 +539,18 @@ $(document).ready(function(){
 <br><br><br><br><br><br><br><br><br><br><br><br>
 	<div class="movie">
 		<c:set var="rlist" value="${rlist}" scope="session" />
+		<c:set var="go" value="${go }"/>
 		<div class="ranking">
 			<ul class="rul">
-				<li class="rank"><c:if test="${ empty sessionScope.loginUser }">
+				<li class="rank"><c:if test="${ empty sessionScope.loginUser || !empty go }">
 						<img class="rimage"
 							src="${contextPath }/resources/images/movie/1046.jpg"
 							style="width: 100%; height: 70%;">
 						<div class="mname">
 							<p>그레코로만</p>
 						</div>
-					</c:if> <c:if test="${ !empty sessionScope.loginUser }">
+						
+					</c:if> <c:if test="${ !empty sessionScope.loginUser && empty go }">
 						<img class="rimage"
 							src="${contextPath }/resources/images/movie/${rlist.get(0)}"
 							style="width: 100%; height: 70%;">
@@ -561,14 +563,14 @@ $(document).ready(function(){
 						<button id="detail" onclick="location.href=''">상세보기</button>
 						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>
 					</div></li>
-				<li class="rank"><c:if test="${ empty sessionScope.loginUser }">
+				<li class="rank"><c:if test="${ empty sessionScope.loginUser || !empty go }">
 						<img class="rimage"
 							src="${contextPath }/resources/images/movie/1044.jpg"
 							style="width: 100%; height: 70%;">
 						<div class="mname">
 							<p>밝은 미래</p>
 						</div>
-					</c:if> <c:if test="${ !empty sessionScope.loginUser }">
+					</c:if> <c:if test="${ !empty sessionScope.loginUser && empty go }">
 						<img class="rimage"
 							src="${contextPath }/resources/images/movie/${rlist.get(1)}"
 							style="width: 100%; height: 70%;">
@@ -581,14 +583,14 @@ $(document).ready(function(){
 						<button id="detail">상세보기</button>
 						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>
 					</div></li>
-				<li class="rank"><c:if test="${ empty sessionScope.loginUser }">
+				<li class="rank"><c:if test="${ empty sessionScope.loginUser || !empty go }">
 						<img class="rimage"
 							src="${contextPath }/resources/images/movie/1051.jpg"
 							style="width: 100%; height: 70%;">
 						<div class="mname">
 							<p>아버지의 마음은</p>
 						</div>
-					</c:if> <c:if test="${ !empty sessionScope.loginUser }">
+					</c:if> <c:if test="${ !empty sessionScope.loginUser && empty go }">
 						<img class="rimage"
 							src="${contextPath }/resources/images/movie/${rlist.get(2)}"
 							style="width: 100%; height: 70%;">
@@ -601,14 +603,14 @@ $(document).ready(function(){
 						<button id="detail">상세보기</button>
 						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>
 					</div></li>
-				<li class="rank"><c:if test="${ empty sessionScope.loginUser }">
+				<li class="rank"><c:if test="${ empty sessionScope.loginUser || !empty go }">
 						<img class="rimage"
 							src="${contextPath }/resources/images/movie/1059.jpg"
 							style="width: 100%; height: 70%;">
 						<div class="mname">
 							<p>위로</p>
 						</div>
-					</c:if> <c:if test="${ !empty sessionScope.loginUser }">
+					</c:if> <c:if test="${ !empty sessionScope.loginUser && empty go }">
 						<img class="rimage"
 							src="${contextPath }/resources/images/movie/${rlist.get(3)}"
 							style="width: 100%; height: 70%;">
