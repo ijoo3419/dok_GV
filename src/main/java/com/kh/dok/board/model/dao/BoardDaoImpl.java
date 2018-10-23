@@ -154,13 +154,14 @@ public class BoardDaoImpl implements BoardDao{
 
 	@Override
 	public int getInquirelistCount(SqlSessionTemplate sqlSession, String TheaterId) {
-
+  
 		return sqlSession.selectOne("Board.getInquirelistCount", TheaterId);
 	}
 
 	//getThearterId
 	@Override
 	public String getTheaterId(SqlSessionTemplate sqlSession, String mid) {
+		System.out.println("보드다오임플 mid : " + mid);
 		return sqlSession.selectOne("Board.getTheaterId", mid);
 	}
 
