@@ -15,7 +15,7 @@ body, div, p, li, h3, h1, h2, h4, h5, h6, input, th, tr, td, button, a, select, 
 		font-family: 'GoyangIlsan' !important;
 	}
 
-  
+
 .headerd {
 	position: fixed; 
 	height: 50px;
@@ -194,6 +194,8 @@ a {
 		</ul>
 		</c:if>
 		<c:if test="${ !empty sessionScope.loginUser }">
+		
+		
 		<ul class="nau">	<!-- href="#"부분 자신한테 맞게 변경하기 ex) 로그인 : href="login.me"-->
 			<li class="nli" style="border-left: 1px solid #a9a5a5;"><a href="movie.mo" title="영화 바로가기"><p>영화</p></a></li>
 			<li class="nli"><a href="cinema.ci" title="극장 바로가기"><p>극장</p></a></li>
@@ -204,10 +206,17 @@ a {
 			<li class="nli"><a href="logout.me" title="로그아웃 하기"><p>로그아웃</p></a></li>
       
 			<li class="nli"><a href="member.me" title="마이페이지 바로가기"><p>마이페이지</p></a></li>
-			<li class="nli"><a href="licensee.li" title="영화관 관리 바로가기"><p>영화관관리</p></a></li>
+			</c:if>
+				<c:if test="${ sessionScope.loginUser.user_class eq 'SELLER'}">
+			
+			<li class="nli"><a href="theater.li" title="영화관 관리 바로가기"><p>영화관관리</p></a></li>
+			
+			</c:if>
+				<c:if test="${ sessionScope.loginUser.user_class eq 'ADMIN'}">
 			<li class="nli"><a href="searchAll.ad?currentPage=1&searchResult=M&searchCondition=id" title="관리자 페이지"><p>관리자</p></a></li>
+				</c:if>
 		</ul>
-		</c:if>
+			
 	</div>
 	
 

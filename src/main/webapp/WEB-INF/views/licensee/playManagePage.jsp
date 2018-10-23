@@ -68,45 +68,31 @@ h2 {
 
 	<%@ include file="../common/headBar.jsp"%>	
 	
-	<form action="play.li" method="post">
-	
-		<input type="hidden" value=${ sessionScope.loginUser.mid } name="mid"/>
+	<form action="play.li" method="post" name="frm">
+
+		<input type="hidden" value=${ sessionScope.loginUser.mid } name="mid" />
 	<!-- Wrapper -->
 	<div id="wrapper" class="fade-in">
 		<!-- Intro -->
 
 
-		<!-- <div id="intro">
-						<h1>This is<br />
-						Massively</h1>
-						<p>A free, fully responsive HTML5 + CSS3 site template designed by <a href="https://twitter.com/ajlkn">@ajlkn</a> for <a href="https://html5up.net">HTML5 UP</a><br />
-						and released for free under the <a href="https://html5up.net/license">Creative Commons license</a>.</p>
-						<ul class="actions">
-							<li><a href="#header" class="button icon solo fa-arrow-down scrolly">Continue</a></li>
-						</ul> 
-					</div>
-			 -->
-		<!-- Header -->
-
 		<header id="header">
 			<!-- <a href="index.html" class="logo">Massively</a> -->
 		</header>
 
-
-		<!-- Nav -->
-
-					
-					
+		<c:set var="mid" value="${ loginUser.mid }" scope="session"/>
 							
 	<nav id="nav">
 			<ul class="links">
-				<li class="active"><a href="javascript:play();"><font size="4">상영등록</font></a></li>
-				<li><a href="theater.li"><font size="4">영화관등록</font></a></li>
-				<li><a href="movieRoom.li"><font size="4">상영관등록</font></a></li>
-				<li><a href="stats.li"><font size="4">통계/관리</font></a></li>
-				<li><a href="reservation.li"><font size="4">예매현황</font></a></li>
-				<li><a href="notice.li"><font size="4">공지사항/등록</font></a></li>
-				<li><a href="inquire.li"><font size="4">문의내역</font></a></li>
+				<%-- <c:if test="${ !empty sessionScope.Theater.theaterId}">		 --%>		
+				<li><a href="theater.li">영화관등록</a></li>
+				<%-- </c:if> --%>
+				<li><a href="movieRoom.li">상영관등록</a></li>
+				<li class="active"><a href="javascript:play();">상영등록</a></li>
+				<!-- <li><a href="stats.li"><font size="4">통계/관리</font></a></li>
+				<li><a href="reservation.li"><font size="4">예매현황</font></a></li> -->
+				<li><a href="notice.li">공지사항/등록</a></li>
+				<li><a href="inquire.li">문의내역</a></li>
 			</ul>
 		</nav>
 		<!-- Main -->
@@ -134,6 +120,8 @@ h2 {
 						 <option value="${item.movie_title}">${item.movie_title}</option> 
 						</c:forEach>
 						</select>
+						
+						 
 							<!-- <input type="text" name="movie_title" id="demo-name" value=""
 								placeholder="영화를 입력하세요" /> -->
 						
@@ -158,11 +146,11 @@ h2 {
 				
 						<table id="playTable" border="1" cellspacing="3">
 						<tr>
-								<th style=width:100px; class="align-center">회차</th>
+								<th style=width:80px; class="align-center">회차</th>
 								<th class="align-center">가격</th>
 								<th class="align-center">상영날짜</th>
-								<th style=width:300px; class="align-center">상영시간</th>
-								<th style=width:150px; class="align-center">상영관</th> 
+								<th style=width:250px; class="align-center">상영시간</th>
+								<th style=width:130px; class="align-center">상영관</th> 
 						</tr>
 							<tbody id="my-tbody">
 							</tbody>
@@ -176,6 +164,16 @@ h2 {
 						</ul>
 					</div>
 						
+						<script>
+		function play(){
+			document.frm.method="post";
+			document.frm.action="play.li";
+			document.frm.submit();
+			
+		}
+	</script>
+	
+	
 			<script>
 				// 테이블 행 반복해서 가져오기
 				$(function(){
@@ -222,14 +220,7 @@ h2 {
 		<script src="//code.jquery.com/jquery.min.js"></script>
 	
 	
-		<script>
-		function play(){
-			document.frm.method="post";
-			document.frm.action="play.li";
-			document.frm.submit();
-			
-		}
-	</script>
+		
 	
 	<script>
 	
@@ -267,7 +258,7 @@ h2 {
   var $movieRoomName = $('<input style="width:80px;"  name="movieRoomName" >');	//상영관이름 */
     
      $('#playTable > tbody:last').append('<tr><td>' + seq 
-     + '</td><td><input style="width:160px;" name= "price" class="priceTest"><td><input type="date" class="turningDayTest" style="width:150px;" name="turningDay"><td><input style="width:120px;" class="startTimeTest" name="startTime_pre">~<input style="width:120px;" class="endTimeTest" name="endTime_pre"><td><select name="movieRoomName"><c:forEach var="item" items="${movieRoomName }"><option value="${item.movieRoomName}" style="width:80px;" class="movieRoomNameTest" name="movieRoomName">${item.movieRoomName }</option></c:forEach></select></td></tr>');
+     + '</td><td><input style="width:110px;" name= "price" class="priceTest"><td><input type="date" class="turningDayTest" style="width:150px;" name="turningDay"><td><input style="width:90px;" class="startTimeTest" name="startTime_pre">~<input style="width:90px;" class="endTimeTest" name="endTime_pre"><td><select name="movieRoomName"><c:forEach var="item" items="${movieRoomName }"><option value="${item.movieRoomName}" style="width:80px;" class="movieRoomNameTest" name="movieRoomName">${item.movieRoomName }</option></c:forEach></select></td></tr>');
   });
   
   

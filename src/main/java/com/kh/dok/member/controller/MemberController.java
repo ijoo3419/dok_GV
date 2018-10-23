@@ -145,6 +145,7 @@ public class MemberController {
 
 	//암호화 처리 로그인(성희)
 	@RequestMapping("loginCheck.me")
+
 	public String loginCheck(MovieThumbnail msn,Model model, Member m){
 
 		System.out.println("loginCheck MemberController : " + m);
@@ -321,7 +322,9 @@ public class MemberController {
 
 	//암호화 처리 로그아웃(성희)
 	@RequestMapping("logout.me")
+
 	public String logout(SessionStatus status, MovieThumbnail msn, Model model){
+
 		status.setComplete();
 	   
 		ArrayList<String> go = new ArrayList<String>();

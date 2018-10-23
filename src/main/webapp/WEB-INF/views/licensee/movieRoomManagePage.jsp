@@ -129,15 +129,15 @@ input[type="checkbox"]+label:before, input[type="radio"]+label:before {
 			<!-- Nav -->
 			<nav id="nav">
 				<ul class="links">
-					<li><a href="javascript:play();"><font size="4">상영등록</font></a></li>
-
-					<li><a href="theater.li"><font size="4">영화관 등록</font></a></li>
-					<li class="active"><a href="movieRoom.li"><font size="4">상영관
-								등록</font></a></li>
-					<li><a href="stats.li"><font size="4">통계/관리</font></a></li>
-					<li><a href="reservation.li"><font size="4">예매 현황</font></a></li>
-					<li><a href="notice.li"><font size="4">공지사항 등록</font></a></li>
-					<li><a href="inquire.li"><font size="4">문의내역</font></a></li>
+						<%-- <c:if test="${ !empty sessionScope.Theater.theaterId}">		 --%>		
+				<li><a href="theater.li">영화관등록</a></li>
+				<%-- </c:if> --%>
+				<li class="active"><a href="movieRoom.li">상영관등록</a></li>
+				<li><a href="javascript:play();">상영등록</a></li>
+				<!-- <li><a href="stats.li"><font size="4">통계/관리</font></a></li>
+				<li><a href="reservation.li"><font size="4">예매현황</font></a></li> -->
+				<li><a href="notice.li">공지사항/등록</a></li>
+				<li><a href="inquire.li">문의내역</a></li>
 				</ul>
 			</nav>
 	</form>

@@ -58,13 +58,17 @@ input[type=submit], input[type=reset] {
 		<c:set var="mid" value="${ loginUser.mid }" scope="session" />
 		<nav id="nav">
 			<ul class="links">
-				<li><a href="javascript:play();"><font size="4">상영등록</font></a></li>
-				<li class="active"><a href="theater.li"><font size="4">영화관등록</font></a></li>
-				<li><a href="movieRoom.li"><font size="4">상영관등록</font></a></li>
-				<li><a href="stats.li"><font size="4">통계/관리</font></a></li>
-				<li><a href="reservation.li"><font size="4">예매현황</font></a></li>
-				<li><a href="notice.li"><font size="4">공지사항/등록</font></a></li>
-				<li><a href="inquire.li"><font size="4">문의내역</font></a></li>
+				
+				
+					<%-- <c:if test="${ !empty sessionScope.Theater.theaterId}">		 --%>		
+				<li class="active"><a href="theater.li">영화관등록</a></li>
+				<%-- </c:if> --%>
+				<li><a href="movieRoom.li">상영관등록</a></li>
+				<li><a href="javascript:play();">상영등록</a></li>
+				<!-- <li><a href="stats.li"><font size="4">통계/관리</font></a></li>
+				<li><a href="reservation.li"><font size="4">예매현황</font></a></li> -->
+				<li><a href="notice.li">공지사항/등록</a></li>
+				<li><a href="inquire.li">문의내역</a></li>
 			</ul>
 		</nav>
 </form>
