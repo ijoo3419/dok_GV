@@ -38,6 +38,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-codec-1.9.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-logging-1.2.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/gson-2.8.0.jar"/>
@@ -47,5 +48,6 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/iamport-rest-client-java-hc-0.0.2.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jstl-1.2.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/junit-4.12.jar"/>
+
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

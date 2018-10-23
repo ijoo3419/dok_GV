@@ -46,6 +46,7 @@ import com.kh.dok.movie.model.vo.MovieThumbnail;
 @Controller
 @SessionAttributes("loginUser")
 public class MemberController {
+
 	
    @Autowired
    private MemberService ms;
@@ -124,7 +125,7 @@ public class MemberController {
 	   m.setUser_pwd(passwordEncoder.encode(m.getUser_pwd()));
 	   
 	   int result = ms.insertMember(m);
-	   
+
 		if(result > 0){
 			ArrayList<MovieThumbnail> movieRank1 = mss.selectMovieRank1(msn);
 				ArrayList<MovieThumbnail> movieRank2 = mss.selectMovieRank2(msn);
@@ -138,125 +139,134 @@ public class MemberController {
 			model.addAttribute("msg", "회원 가입 실패");
 			return "common/errorPage";
 		}
-   }
+	}
 
-   //암호화 처리 로그인(성희)
-   @RequestMapping("loginCheck.me")
-   public String loginCheck(MovieThumbnail msn,Member m, Model model){
-	   
-	   System.out.println("loginCheck MemberController : " + m);
-	   
-      try {
-    	ArrayList<String> recommendUser = new ArrayList<String>();
-    	ArrayList<String> recommendMovie = new ArrayList<String>();
-    	ArrayList<String> fourCount = new ArrayList<String>();
-		model.addAttribute("loginUser", ms.loginMember(m));
-		String email = m.getEmail();
-		String mid = ms.selectMid(email);
-		System.out.println(mid);
-		ArrayList<String> mlist = ms.selectUserMovie(mid);
-		int midListSize = mlist.size();
-		ArrayList<String> midList = ms.selectAllMid();
-		ArrayList<UserMovie> allUserMovie = ms.selectAllUserMovie(midList);
-		int allUserSize = allUserMovie.size();
-		int count = 0;
-		int userCount = 0;
-		int[] scount;
-		int[] random = new int[4];
-		scount = new int[allUserSize];
-		for(int i=0; i<allUserSize; i++){
-			if(!allUserMovie.get(i).getMid().equals(mid) && midListSize >2 && allUserMovie.get(i).getMovieId().size() >= midListSize){
-				System.out.println(allUserMovie.get(i).getMid());
-				for(int j = 0;j<midListSize;j++){
-					for(int k = 0; k<allUserMovie.get(i).getMovieId().size();k++){
-						if(mlist.get(j).equals(allUserMovie.get(i).getMovieId().get(k))){
-							count++;
+	//암호화 처리 로그인(성희)
+	@RequestMapping("loginCheck.me")
+	public String loginCheck(Member m, Model model){
+
+		System.out.println("loginCheck MemberController : " + m);
+
+		try {
+			ArrayList<String> recommendUser = new ArrayList<String>();
+			ArrayList<String> recommendMovie = new ArrayList<String>();
+			ArrayList<String> fourCount = new ArrayList<String>();
+			model.addAttribute("loginUser", ms.loginMember(m));
+			String email = m.getEmail();
+			String mid = ms.selectMid(email);
+			System.out.println(mid);
+			ArrayList<String> mlist = ms.selectUserMovie(mid);
+			System.out.println(mlist);
+			int midListSize = mlist.size();
+			ArrayList<String> midList = ms.selectAllMid();
+			ArrayList<UserMovie> allUserMovie = ms.selectAllUserMovie(midList);
+			int allUserSize = allUserMovie.size();
+			int count = 0;
+			int userCount = 0;
+			int[] scount;
+			int[] random = new int[4];
+			scount = new int[allUserSize];
+			for(int i=0; i<allUserSize; i++){
+				if(!allUserMovie.get(i).getMid().equals(mid) && midListSize >2 && allUserMovie.get(i).getMovieId().size() >= midListSize){
+					System.out.println(allUserMovie.get(i).getMid());
+					for(int j = 0;j<midListSize;j++){
+						for(int k = 0; k<allUserMovie.get(i).getMovieId().size();k++){
+							if(mlist.get(j).equals(allUserMovie.get(i).getMovieId().get(k))){
+								count++;
+							}
 						}
 					}
-				}
-			}else if(!allUserMovie.get(i).getMid().equals(mid) && midListSize > 2 && allUserMovie.get(i).getMovieId().size() < midListSize){
-				for(int j = 0;j<allUserMovie.get(i).getMovieId().size();j++){
-					for(int k = 0; k<midListSize ; k++){
-						if(allUserMovie.get(i).getMovieId().get(j).equals(mlist.get(k))){
-							count++;
+				}else if(!allUserMovie.get(i).getMid().equals(mid) && midListSize > 2 && allUserMovie.get(i).getMovieId().size() < midListSize){
+					for(int j = 0;j<allUserMovie.get(i).getMovieId().size();j++){
+						for(int k = 0; k<midListSize ; k++){
+							if(allUserMovie.get(i).getMovieId().get(j).equals(mlist.get(k))){
+								count++;
+							}
 						}
 					}
+				}else if(allUserMovie.get(i).getMid().equals(mid)){
+					count = 0;
 				}
-			}else if(allUserMovie.get(i).getMid().equals(mid)){
+				System.out.println(count);
+				scount[i] = count;
 				count = 0;
 			}
-			System.out.println(count);
-			scount[i] = count;
-			count = 0;
-		}
-		recommendUser.add(mid);
-		
-		for(int i=0 ; i<allUserSize;i++){	
-			if(scount[i]/(float)midListSize > 0.5){
-				System.out.println(scount[i]/(float)midListSize);
-				System.out.println(scount[i]);
-				System.out.println(allUserMovie.get(i).getMid());
-				recommendUser.add(allUserMovie.get(i).getMid());
-				System.out.println(recommendUser.get(userCount++));
+			recommendUser.add(mid);
+
+			for(int i=0 ; i<allUserSize;i++){	
+				if(scount[i]/(float)midListSize > 0.5){
+					System.out.println(scount[i]/(float)midListSize);
+					System.out.println(scount[i]);
+					System.out.println(allUserMovie.get(i).getMid());
+					recommendUser.add(allUserMovie.get(i).getMid());
+					System.out.println(recommendUser.get(userCount++));
+				}
 			}
-		}
-		System.out.println(recommendUser);
-		System.out.println(userCount);
-		for(int i=0; i<userCount ; i++){
-			int rcount = 0;
-			ArrayList<Integer> rcountList = new ArrayList<Integer>(); 
-			ArrayList<String> otherList = ms.selectUserMovie(recommendUser.get(i+1));
-			int[] countA = new int[otherList.size()];
-			System.out.println("otherList사이즈는"+otherList.size());
-			System.out.println("countA길이는"+countA.length);
-			if(i==0){
-				for(int j=0; j<midListSize; j++){
-					for(int k=0; k< otherList.size(); k++){
-						if(!mlist.get(j).equals(otherList.get(k))){
-							countA[k]++;
-							if(countA[k] == midListSize){
-								rcountList.add(k);
+			System.out.println(recommendUser);
+			System.out.println(userCount);
+			for(int i=0; i<userCount ; i++){
+				int rcount = 0;
+				ArrayList<Integer> rcountList = new ArrayList<Integer>(); 
+				ArrayList<String> otherList = ms.selectUserMovie(recommendUser.get(i+1));
+				int[] countA = new int[otherList.size()];
+				System.out.println("otherList사이즈는"+otherList.size());
+				System.out.println("countA길이는"+countA.length);
+				if(i==0){
+					for(int j=0; j<midListSize; j++){
+						for(int k=0; k< otherList.size(); k++){
+							if(!mlist.get(j).equals(otherList.get(k))){
+								countA[k]++;
+								if(countA[k] == midListSize){
+									rcountList.add(k);
+								}
 							}
 						}
 					}
 				}
-			}
-			else{
-				for(int j=0; j<recommendMovie.size(); j++){
-					for(int k=0; k<otherList.size(); k++){
-						if(!recommendMovie.get(j).equals(otherList.get(k))){
-							countA[k]++;
-							if(countA[k] == recommendMovie.size()){
-								rcountList.add(k);
+				else{
+					for(int j=0; j<recommendMovie.size(); j++){
+						for(int k=0; k<otherList.size(); k++){
+							if(!recommendMovie.get(j).equals(otherList.get(k))){
+								countA[k]++;
+								if(countA[k] == recommendMovie.size()){
+									rcountList.add(k);
+								}
 							}
 						}
 					}
+					System.out.println("test");
 				}
-				System.out.println("test");
+				for(int v=0;v<rcountList.size();v++){
+					recommendMovie.add(otherList.get(rcountList.get(v)));
+				}
+
+				System.out.println("r카운터 사이즈는? "+rcountList.size());
 			}
-			for(int v=0;v<rcountList.size();v++){
-				recommendMovie.add(otherList.get(rcountList.get(v)));
-			}
-			
-			System.out.println("r카운터 사이즈는? "+rcountList.size());
-		}
-		for(int i=0;i<midListSize;i++){
-			for(int j=0;j<recommendMovie.size();j++){
-				if(mlist.get(i).equals(recommendMovie.get(j))){
-					recommendMovie.remove(j);
+			for(int i=0;i<midListSize;i++){
+				for(int j=0;j<recommendMovie.size();j++){
+					if(mlist.get(i).equals(recommendMovie.get(j))){
+						recommendMovie.remove(j);
+					}
 				}
 			}
-		}
-		System.out.println("추천 영화는"+recommendMovie);
-		Random randomCount = new Random();
-		for(int i=0; i<4; i++){
-			random[i] = randomCount.nextInt(recommendMovie.size());
-			System.out.println(random[i]);
-			
-			fourCount.add(recommendMovie.get(random[i]));
-		}
-		
-		ArrayList fourMovie = ms.selectRecommend(fourCount);
+			System.out.println("추천 영화는"+recommendMovie);
+			Random randomCount = new Random();
+			for(int i=0; i<4; i++){
+				random[i] = randomCount.nextInt(recommendMovie.size());
+				System.out.println(random[i]);
+				if(i > 0){
+					for(int j=0; j<i ; j++){
+						if(random[i] == random[j]){
+							random[i] = randomCount.nextInt(recommendMovie.size());
+							j=0;
+							continue;
+						}
+					}
+				}
+				fourCount.add(recommendMovie.get(random[i]));
+			}
+
+			ArrayList fourMovie = ms.selectRecommend(fourCount);
 		System.out.println("최종 추천 영화는"+fourMovie);
 		ArrayList<MovieThumbnail> movieRank1 = mss.selectMovieRank1(msn);
 			ArrayList<MovieThumbnail> movieRank2 = mss.selectMovieRank2(msn);
@@ -265,43 +275,44 @@ public class MemberController {
 			model.addAttribute("movieRank1",movieRank1);
 			model.addAttribute("movieRank2",movieRank2);
 			model.addAttribute("movieRank3",movieRank3);
-		return "main/main";
-      	}
-   
-        catch (LoginException e) {
-      		
-		model.addAttribute("msg", e.getMessage());
-		
-		return "common/errorPage";
-        }
-	}
       
-   
-   
-   //회원 정보 수정 - 비밀번호 비교
-   @ResponseBody
-   @RequestMapping("checkEditable.me")
-   public int checkPass(Member m, Model model){
+			return "main/main";
+		}
 
-	   int result;
+		catch (LoginException e) {
 
-	   try {
-		   result = ms.checkPass(m);
-		   return result;
+			model.addAttribute("msg", e.getMessage());
 
-	   } catch (LoginException e) {
+			return "common/errorPage";
+		}
+	}
 
-		   result = 0;
-		   return result;
 
-	   }
 
-   }
+	//회원 정보 수정 - 비밀번호 비교
+	@ResponseBody
+	@RequestMapping("checkEditable.me")
+	public int checkPass(Member m, Model model){
 
-   //암호화 처리 로그아웃(성희)
-   @RequestMapping("logout.me")
-   public String logout(MovieThumbnail msn, Model model, SessionStatus status){
-	   status.setComplete();
+		int result;
+
+		try {
+			result = ms.checkPass(m);
+			return result;
+
+		} catch (LoginException e) {
+
+			result = 0;
+			return result;
+
+		}
+
+	}
+
+	//암호화 처리 로그아웃(성희)
+	@RequestMapping("logout.me")
+	public String logout(SessionStatus status){
+		status.setComplete();
 	   
 	   ArrayList<MovieThumbnail> movieRank1 = mss.selectMovieRank1(msn);
 		ArrayList<MovieThumbnail> movieRank2 = mss.selectMovieRank2(msn);
@@ -311,8 +322,8 @@ public class MemberController {
 		model.addAttribute("movieRank2",movieRank2);
 		model.addAttribute("movieRank3",movieRank3);
 	   return "main/main";
+	}
 
-   }
    
    //메일 인증  + 보내기 (이주)
    @ResponseBody
@@ -587,248 +598,198 @@ public class MemberController {
    //위시리스트 뷰 출력
 	@RequestMapping("wishlist.me")
 	public String wishlistView(MovieThumbnail msn, Model model, HttpServletRequest request){
-		
+
 		Member m = (Member)request.getSession().getAttribute("loginUser");
-		
+
 		ArrayList<MovieThumbnail> wishlistView = ms.selectWishList(msn, m);
-		
+
 		model.addAttribute("wishlistView", wishlistView);
-		
+
 		return "member/wishlist";
 	}
-	
+
 	//예매내역 뷰 출력
-	 @RequestMapping("bookingHist.me")
-	 public String bookingHistView(Model model, HttpServletRequest request){
-		 
-		 Member m = (Member)request.getSession().getAttribute("loginUser");
-		 
-		 ArrayList<BookingHistory> bookingHistView = ms.selectBookingHist(m);
-		/* ArrayList<BookingHistory> list = new ArrayList<BookingHistory>();
-		 for(int i = 0; i < bookingHistView.size(); i++){
-			 if(i == 0){
-				 BookingHistory b = new BookingHistory();
-				 b.setapproval_number(bookingHistView.get(i).getapproval_number());
-				 b.setMovie_title(bookingHistView.get(i).getMovie_title());
-				 b.setTheater_name(bookingHistView.get(i).getTheater_name());
-				 b.setMovieroom_name(bookingHistView.get(i).getMovieroom_name());
-				 b.setSeat_row(bookingHistView.get(i).getSeat_row());
-				 b.setReservation_date(bookingHistView.get(i).getReservation_date());
-				 b.setTurning_day(bookingHistView.get(i).getTurning_day());
-				 b.setStatus(bookingHistView.get(i).getStatus());
-				 list.add(b);
-				 
-			 }else{
-				 if(!bookingHistView.get(i-1).getapproval_number().equals(bookingHistView.get(i).getapproval_number())){
-					 BookingHistory b = new BookingHistory();
-					 b.setapproval_number(bookingHistView.get(i).getapproval_number());
-					 b.setMovie_title(bookingHistView.get(i).getMovie_title());
-					 b.setTheater_name(bookingHistView.get(i).getTheater_name());
-					 b.setMovieroom_name(bookingHistView.get(i).getMovieroom_name());
-					 b.setSeat_row(bookingHistView.get(i).getSeat_row());
-					 b.setReservation_date(bookingHistView.get(i).getReservation_date());
-					 b.setTurning_day(bookingHistView.get(i).getTurning_day());
-					 b.setStatus(bookingHistView.get(i).getStatus());
-					 list.add(b);
-				 }else{
-					 int length = list.size() - 1;
-					 list.get(length).setSeat_row(list.get(length).getSeat_row() + " , " + bookingHistView.get(i).getSeat_row());
-				 }
-			 }
-			 
-		 }
-		 
-		 System.out.println(list);*/
-		 model.addAttribute("bookingHistView", bookingHistView);
-		
-	    return "member/bookingHist";
-	 }
-	 
-	 //내가 쓴 리뷰 출력
-	  @RequestMapping("reviews.me")
-	  public String reviewsView(Model model, HttpServletRequest request){
-		  
-		  Member m = (Member)request.getSession().getAttribute("loginUser");
-		  
-		  ArrayList<MyReply> movieReviews = ms.selectMovReply(m);
-		  ArrayList<MyReply> cinemaReviews = ms.selectCinReply(m);
-		  
-		  model.addAttribute("movieReviews", movieReviews);
-		  model.addAttribute("cinemaReviews", cinemaReviews);
+	@RequestMapping("bookingHist.me")
+	public String bookingHistView(Model model, HttpServletRequest request){
 
-	     return "member/reviews";
-	  }
-	  
-	  //내가 쓴 리뷰 삭제
-	  @ResponseBody
-	  @RequestMapping("deleteReview.me")
-	  public int deleteReview(Member m){
-		  
-		  int result = ms.deleteReview(m);
-		  
-		  return result;
-		  
-	  }
-	  
-	  //내가 쓴 리뷰 수정
-	  @ResponseBody
-	  @RequestMapping("updateReview.me")
-	  public int updateReview(MyReply m){
-		  System.out.println(m);
-		  int result = ms.updateReview(m);
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+
+		ArrayList<BookingHistory> bookingHistView = ms.selectBookingHist(m);
+		
+		model.addAttribute("bookingHistView", bookingHistView);
+
+		return "member/bookingHist";
+	}
+
+	//내가 쓴 리뷰 출력
+	@RequestMapping("reviews.me")
+	public String reviewsView(Model model, HttpServletRequest request){
+
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+
+		ArrayList<MyReply> movieReviews = ms.selectMovReply(m);
+		ArrayList<MyReply> cinemaReviews = ms.selectCinReply(m);
+
+		model.addAttribute("movieReviews", movieReviews);
+		model.addAttribute("cinemaReviews", cinemaReviews);
+
+		return "member/reviews";
+	}
+
+	//내가 쓴 리뷰 삭제
+	@ResponseBody
+	@RequestMapping("deleteReview.me")
+	public int deleteReview(Member m){
+
+		int result = ms.deleteReview(m);
+
 		return result;
-	  }
-	  
 
-	  
-	  @RequestMapping("findIdPassword.me")
-	   public String findIdPassword(){
-		   
-		   return "member/findIdPassword";
+	}
 
-	   }
-	  
-	 
-	 /*//이진희 id찾기 
-	  @ResponseBody
-	   @RequestMapping("findUser.me")
-	   public ArrayList<Member> findId(@RequestParam String name, @RequestParam String tel){
-		  
-		  Member m = new Member();
-		  
-		  m.setUser_name(name);
-		  m.setPhone(tel);
-		  
-		  ArrayList<Member> findlist = ms.findId(m);
-		  
-		  return findlist; 
-	   }*/
-	  
-	//이진희 id찾기 
-	  
-	   @RequestMapping(value="findUser.me")
-	   public @ResponseBody String findId(@RequestParam String name, @RequestParam String tel){
-		  
-		  Member m = new Member();
-		  
-		  m.setUser_name(name);
-		  m.setPhone(tel);
-		  
-		  String findlist = ms.findId(m);
-		  
-		  return findlist; 
-	   }
-	  
-	  
-	 //이진희 비밀번호 찾기
-	  
-		   @ResponseBody
-		   @RequestMapping("findPassword.me")
-		   public int findPassWord(HttpServletResponse response, HttpServletRequest request) throws Exception {
-		  
-		   String email = request.getParameter("email");
-		   String authNum = "";
-		   int authNumOrig = 0;
-		   
-		   authNum = RandomNum1();
-		  authNumOrig = Integer.parseInt(authNum);
+	//내가 쓴 리뷰 수정
+	@ResponseBody
+	@RequestMapping("updateReview.me")
+	public int updateReview(MyReply m){
+		System.out.println(m);
+		int result = ms.updateReview(m);
+		return result;
+	}
 
-		   findEmail(email.toString(),authNum);
-		
-		   return authNumOrig;
-		     
-	   }
-	   
-	   private void findEmail(String email, String authNum){
-		   String host = "smtp.gmail.com";
-		   String subject = "회원님의 임시비밀번호 입니다! 로그인 후 비밀번호를 변경해주세요.";
-		   String fromName = "독GV";
-		   String from = "dokdokdokGV@gmail.com";
-		   String to1 = email;
-		   
-		   String content = "임시비밀번호[" + authNum + "]";
-		   
-		   System.out.println("이멜로 간 인증번호" +  authNum);
-		   
-		   try {
-			   
-			   Properties props = new Properties();
-			   
-			   props.put("mail.smtp.starttls.enable", "true");
-			   props.put("mail.transport.protocol", "smtp");
-			   props.put("mail.smtp.host", host);
-			   props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-			   props.put("mail.smtp.port", "465");
-			   props.put("mail.smtp.user", from);
-			   props.put("mail.smtp.auth", "true");
-			   
-			   Session mailSession = Session.getInstance(props, new javax.mail.Authenticator() {
-				   protected PasswordAuthentication getPasswordAuthentication(){
-					   return new PasswordAuthentication("dokdokdokGV", "dokdokdok123"); //이거 username 바꿔가면서 try
-				   }
-			   });
-			   
-			  Message msg = new MimeMessage(mailSession);
-			  msg.setFrom(new InternetAddress(from, MimeUtility.encodeText(fromName, "UTF-8", "B")));
-			  
-			  InternetAddress[] address1 = { new InternetAddress(to1) };
-			  msg.setRecipients(Message.RecipientType.TO, address1);
-			  msg.setSubject(subject);
-			  msg.setSentDate(new java.util.Date());
-			  msg.setContent(content, "text/html;charset=euc-kr");
-			  
-			  Transport.send(msg);
-			  
-			  Member m = new Member();
-			   m.setEmail(email);
-			   m.setUser_pwd(passwordEncoder.encode(authNum));
-			   
-			   int updatePwd = ms.findPassword(m);
-			   
-		   } catch (MessagingException e) {
-			   e.printStackTrace();
-		   } catch (Exception e) {
-			   e.printStackTrace();
-		   }
-	   }
+
+
+	@RequestMapping("findIdPassword.me")
+	public String findIdPassword(){
+
+		return "member/findIdPassword";
+
+	}
+
+
+	//이진희 id찾기
+	@RequestMapping(value="findUser.me")
+	public @ResponseBody String findId(@RequestParam String name, @RequestParam String tel){
+
+		Member m = new Member();
+
+		m.setUser_name(name);
+		m.setPhone(tel);
+
+		String findlist = ms.findId(m);
+
+		return findlist; 
+	}
+
+
+	//이진희 비밀번호 찾기
+
+	@ResponseBody
+	@RequestMapping("findPassword.me")
+	public int findPassWord(HttpServletResponse response, HttpServletRequest request) throws Exception {
+
+		String email = request.getParameter("email");
+		String authNum = "";
+		int authNumOrig = 0;
+
+		authNum = RandomNum1();
+		authNumOrig = Integer.parseInt(authNum);
+
+		findEmail(email.toString(),authNum);
+
+		return authNumOrig;
+
+	}
+
+	private void findEmail(String email, String authNum){
+		String host = "smtp.gmail.com";
+		String subject = "회원님의 임시비밀번호 입니다! 로그인 후 비밀번호를 변경해주세요.";
+		String fromName = "독GV";
+		String from = "dokdokdokGV@gmail.com";
+		String to1 = email;
+
+		String content = "임시비밀번호[" + authNum + "]";
+
+		System.out.println("이멜로 간 인증번호" +  authNum);
+
+		try {
+
+			Properties props = new Properties();
+
+			props.put("mail.smtp.starttls.enable", "true");
+			props.put("mail.transport.protocol", "smtp");
+			props.put("mail.smtp.host", host);
+			props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			props.put("mail.smtp.port", "465");
+			props.put("mail.smtp.user", from);
+			props.put("mail.smtp.auth", "true");
+
+			Session mailSession = Session.getInstance(props, new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication(){
+					return new PasswordAuthentication("dokdokdokGV", "dokdokdok123"); //이거 username 바꿔가면서 try
+				}
+			});
+
+			Message msg = new MimeMessage(mailSession);
+			msg.setFrom(new InternetAddress(from, MimeUtility.encodeText(fromName, "UTF-8", "B")));
+
+			InternetAddress[] address1 = { new InternetAddress(to1) };
+			msg.setRecipients(Message.RecipientType.TO, address1);
+			msg.setSubject(subject);
+			msg.setSentDate(new java.util.Date());
+			msg.setContent(content, "text/html;charset=euc-kr");
+
+			Transport.send(msg);
+
+			Member m = new Member();
+			m.setEmail(email);
+			m.setUser_pwd(passwordEncoder.encode(authNum));
+
+			int updatePwd = ms.findPassword(m);
+
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public String RandomNum1(){
-		   StringBuffer buffer = new StringBuffer();
-		   for (int i = 0; i < 6; i++){
-			   int n = (int) (Math.random() * 10);
-			   buffer.append(n);
-		   }
-		   return buffer.toString();
-	   }
+		StringBuffer buffer = new StringBuffer();
+		for (int i = 0; i < 6; i++){
+			int n = (int) (Math.random() * 10);
+			buffer.append(n);
+		}
+		return buffer.toString();
+	}
 
-	  //회원 탈퇴
-	  @RequestMapping("member_quit.me")
-	  public String memberQuitView(){
-		  return "member/member_quit";
-	  }
-	  
-	  @ResponseBody
-	  @RequestMapping("memberQuit.me")
-	  public int updateStatus(Member m){
-		  
+	//회원 탈퇴
+	@RequestMapping("member_quit.me")
+	public String memberQuitView(){
+		return "member/member_quit";
+	}
+
+	@ResponseBody
+	@RequestMapping("memberQuit.me")
+	public int updateStatus(Member m){
+
 		int result;
-		  
+
 		try {
 			result = ms.checkPass(m);
 			if(result > 0){
-				  result = ms.updateStatus(m);
-				  return result;
-			  } else {
-				  result = 3;
-				  return result;
-			  }
-			
+				result = ms.updateStatus(m);
+				return result;
+			} else {
+				result = 3;
+				return result;
+			}
+
 		} catch (LoginException e) {
 			result = 0;
 			return result;
 		}
-		
-	  }
+
+	}
 
 
 }

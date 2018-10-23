@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html>
 <head>
+
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -13,12 +14,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-127101762-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'UA-127101762-1');
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-127101762-1');
 </script>
 
 <meta charset="UTF-8">
@@ -139,7 +143,7 @@ to {
 	margin-right: 20px;
 	margin-left: 20px;
 	height: 400px;
-	padding-left: 250px;
+	padding-left: 190px;
 }
 
 .mname {
@@ -297,6 +301,7 @@ to {
 <body>
 	<c:import url="../common/headBar.jsp" />
 	<div class="slideshow-container">
+
 			<div class="mySlides fade1">
 				<div class="numbertext">1 / 4</div>
 					<c:if test="${fn:length(bf) >= 1}">
@@ -336,6 +341,7 @@ to {
 						<img src="${contextPath }/resources/images/slide2.jpg" style="width: 100%; height: 400px;">
 					</c:if>
 			</div>
+
 	</div>
 	<br>
 
@@ -532,44 +538,85 @@ $(document).ready(function(){
 </script>	
 <br><br><br><br><br><br><br><br><br><br><br><br>
 	<div class="movie">
+		<c:set var="rlist" value="${rlist}" scope="session" />
 		<div class="ranking">
 			<ul class="rul">
-				<li class="rank"><img class="rimage"
-					src="${contextPath }/resources/images/slide1.jpg"
-					style="width: 100%; height: 70%;">
-					<div class="mname">
-						<p>영화1</p>
-					</div>
+				<li class="rank"><c:if test="${ empty sessionScope.loginUser }">
+						<img class="rimage"
+							src="${contextPath }/resources/images/movie/1046.jpg"
+							style="width: 100%; height: 70%;">
+						<div class="mname">
+							<p>그레코로만</p>
+						</div>
+					</c:if> <c:if test="${ !empty sessionScope.loginUser }">
+						<img class="rimage"
+							src="${contextPath }/resources/images/movie/${rlist.get(0)}"
+							style="width: 100%; height: 70%;">
+						<div class="mname">
+							<p>${rlist.get(7) }</p>
+						</div>
+					</c:if>
+
 					<div>
 						<button id="detail" onclick="location.href=''">상세보기</button>
 						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>
 					</div></li>
-				<li class="rank"><img class="rimage"
-					src="${contextPath }/resources/images/slide2.jpg"
-					style="width: 100%; height: 70%;">
-					<div class="mname">
-						<p>영화2</p>
-					</div>
+				<li class="rank"><c:if test="${ empty sessionScope.loginUser }">
+						<img class="rimage"
+							src="${contextPath }/resources/images/movie/1044.jpg"
+							style="width: 100%; height: 70%;">
+						<div class="mname">
+							<p>밝은 미래</p>
+						</div>
+					</c:if> <c:if test="${ !empty sessionScope.loginUser }">
+						<img class="rimage"
+							src="${contextPath }/resources/images/movie/${rlist.get(1)}"
+							style="width: 100%; height: 70%;">
+						<div class="mname">
+							<p>${rlist.get(6) }</p>
+						</div>
+					</c:if>
+
 					<div>
 						<button id="detail">상세보기</button>
 						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>
 					</div></li>
-				<li class="rank"><img class="rimage"
-					src="${contextPath }/resources/images/slide3.jpg"
-					style="width: 100%; height: 70%;">
-					<div class="mname">
-						<p>영화3</p>
-					</div>
+				<li class="rank"><c:if test="${ empty sessionScope.loginUser }">
+						<img class="rimage"
+							src="${contextPath }/resources/images/movie/1051.jpg"
+							style="width: 100%; height: 70%;">
+						<div class="mname">
+							<p>아버지의 마음은</p>
+						</div>
+					</c:if> <c:if test="${ !empty sessionScope.loginUser }">
+						<img class="rimage"
+							src="${contextPath }/resources/images/movie/${rlist.get(2)}"
+							style="width: 100%; height: 70%;">
+						<div class="mname">
+							<p>${rlist.get(5) }</p>
+						</div>
+					</c:if>
+
 					<div>
 						<button id="detail">상세보기</button>
 						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>
 					</div></li>
-				<li class="rank"><img class="rimage"
-					src="${contextPath }/resources/images/slide4.jpg"
-					style="width: 100%; height: 70%;">
-					<div class="mname">
-						<p>영화4</p>
-					</div>
+				<li class="rank"><c:if test="${ empty sessionScope.loginUser }">
+						<img class="rimage"
+							src="${contextPath }/resources/images/movie/1059.jpg"
+							style="width: 100%; height: 70%;">
+						<div class="mname">
+							<p>위로</p>
+						</div>
+					</c:if> <c:if test="${ !empty sessionScope.loginUser }">
+						<img class="rimage"
+							src="${contextPath }/resources/images/movie/${rlist.get(3)}"
+							style="width: 100%; height: 70%;">
+						<div class="mname">
+							<p>${rlist.get(4) }</p>
+						</div>
+					</c:if>
+
 					<div>
 						<button id="detail">상세보기</button>
 						<button id="book" onclick="location.href='moviePay.mo'">예매하기</button>
