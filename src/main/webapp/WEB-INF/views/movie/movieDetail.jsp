@@ -176,7 +176,7 @@ hr {
     #gardetext{
     	display:inline-blick;
     	float:left;
-    	width:200px;
+    	width:650px;
     	
     	
     }
@@ -416,8 +416,8 @@ hr {
 		<hr>
 		<h2 align="left" style="margin-left:20px;">평점</h2>
 		
-		<div id="userimage">
-			<img src="${contextPath }/resources/images/logo.jpg" width="100" height="100">
+		<div id="userimage" style="border:0;">
+			<img src="${contextPath }/resources/images/member/user.png" width="100" height="100">
 		</div>
 		
 		
@@ -581,49 +581,50 @@ hr {
     						for(i = 0; i < data.list.length; i++){
     							html += "<tr>";
     							html += "<td>";
+    							html += "<div>";
     							html += "<div id='gradeimage'>";
-    							html += "<img src='${contextPath }/resources/images/review.jpg' width='100' height='100'>";
+    							html += "<img src='${contextPath }/resources/images/member/user.png' width='100' height='100'>";
     							html += "</div>";
     							html += "<div id='gardetext'>";
-    							html += "<a style='text-align:center; width:50px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i].rwriter + "</a><br>";
-    							html += "<a style='text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i].rcreate_date + "</a>";
+    							html += "<a style='text-align:center; width:300px; margin-left:20px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i].nickname + "</a> &nbsp;&nbsp;";
+    							html += "<a style='text-align:right; width:500px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i].rcreate_date + "</a>";
     							if(data.list[i].grade_count == 1){
-    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★☆☆☆☆ </a><br>";
+    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★☆☆☆☆ </a>&nbsp;&nbsp;";
     							}else if(data.list[i].grade_count == 2){
-    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★★☆☆☆ </a><br>";
+    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★★☆☆☆ </a>&nbsp;&nbsp;";
     							}else if(data.list[i].grade_count == 3){
-    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★★★☆☆ </a><br>";
+    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★★★☆☆ </a>&nbsp;&nbsp;";
     							}else if(data.list[i].grade_count == 4){
-    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★★★★☆ </a><br>";
+    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★★★★☆ </a>&nbsp;&nbsp;";
     							}else if(data.list[i].grade_count == 5){
-    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★★★★★ </a><br>";
+    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>★★★★★ </a>&nbsp;&nbsp;";
     							}else{
-    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>등록된 평점이 없습니다! </a><br>";
+    								html += "<a style='text-align:center; width:50px; margin-left:15px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>등록된 평점이 없습니다! </a>&nbsp;&nbsp;";
     							}
-    							html += "<textarea class='noresize' id='rcontent" + data.list[i].rid + "' readonly style='text-align:center; width:50px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i].rcontent+ "</textarea><br>";
+    							html += "<textarea class='noresize' id='rcontent" + data.list[i].rid + "' readonly style='text-align:center; width:650px; margin-left:20px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i].rcontent+ "</textarea><br>";
+    							html += "<div align='right'>";
     							html += "<img src='${contextPath }/resources/images/like.png' width='20' height='20' style='margin-left:10px; margin-top:10px;'>";
-    							html += "<a class='reviewchu'>추천</a>";
+    							html += "<a class='reviewchu' id='like" + data.list[i].rid + "' onclick=\"like('"+data.list[i].rid+"');\">추천</a>";
     							html += "<a style='text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>" + data.list[i].recommend_count + "</a>";
     							html += "<img src='${contextPath }/resources/images/member/siren.png' width='20' height='20' style='margin-left:10px; margin-top:10px;'>";
-    							html += "<a style='text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;'>신고하기</a>";
+    							html += "<a style='text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;' onclick='report();'>신고하기</a>";
     							if( data.list[i].rwriter == "${sessionScope.loginUser.mid}"){
     								
-    							html += "<div id='rere'>";
     							html += "<img id='edit2"+data.list[i].rid+"' src='${contextPath }/resources/images/member/edit.png' width='20' height='20' style='margin-left:10px; margin-top:10px;'>";
     							html += "<a style='text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;' id='edit"+data.list[i].rid+"' onclick=\"edit('"+data.list[i].rid+"');\">수정</a>";
     							html += "<img src='${contextPath }/resources/images/member/delete.png' width='20' height='20' style='margin-left:10px; margin-top:10px;'>";
     							html += "<a style='text-align:center; width:50px; margin-top:100px; margin-left:5px; font-size:15px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;' id='disappear"+data.list[i].rid+"' onclick=\"disappear('"+data.list[i].rid+"');\">삭제</a>";
-    							html += "</div>";
     							
     							}
-    							
+    							html += "</div>";
+    							html += "</div>";
     							html += "</div>";
     							html += "</td>";
     							html += "</tr>";
-    					html += "</table>";
     					
     					
     						}
+    							html += "</table>";
     						
     					
     					
@@ -641,6 +642,27 @@ hr {
     			}
     		});
     	} 
+     	
+     	
+     	function like(rid){
+     		var movie_id = $("#movie_id").val();
+     		
+     		$.ajax({
+     			url:"likeComment.me",
+     			type:"POST",
+     			data:{ rid:rid },
+     			success:function(data){
+     				alert("성공함");
+     				location.href="movieDetail.mo?id=" + movie_id;
+				},
+				error:function(data){
+					alert("에러남");
+					location.href="movieDetail.mo?id=" + movie_id;
+				}
+     		});
+     	}
+     	
+     	
 		
     	function edit(rid){
     		
@@ -704,6 +726,11 @@ hr {
 			}
 		}
     	
+    	function report(){
+    		if(confirm('해당 리뷰를 신고하시겠습니까?')){
+    			alert('신고되었습니다.');
+    		}
+    	}
     	
     	
 		</script>

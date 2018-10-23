@@ -11,6 +11,18 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
+<style>
+	#searchValue{
+		margin-left: 10px;
+		display: inline-block;
+	}
+	
+	#searchCondition{
+		width: 170px;
+		display: inline-block;
+		margin-left: 80px;
+	}
+</style>
 <body class="is-preload">
   
 	<%@ include file="../common/headBar.jsp"%>
@@ -86,7 +98,8 @@
 					}).click(function(){
 						var board_id = $(this).parents().children("td").eq(0).text();
 						console.log(board_id);
-						location.href = "selectInquireOne.bo?board_id=" + board_id;
+						var abc = "ask";
+						location.href = "selectInquireOne.bo?board_id=" + board_id + "&abc=" + abc;
 					}); 
 				});
 				</script>

@@ -49,12 +49,14 @@
 				</header>
 			</section>
 
-				<form action="insertNotice.bo" method="post" encType="multipart/form-data">
+				<form action="requirempmp.bo" method="post" encType="multipart/form-data">
 				<input type="hidden" id="mId" name="mId" value="${ loginUser.mid }">
 					<div>
-					<h2 align="left">0.분류를 선택해주세요</h2>
-					<h4 align="left">사이트에 대한 문의는</h4> <input type="radio" id="dok" name="choose" value="dokGV">독GV
-					<h4 align="left">독립영화관에 대한 문의는</h4> <input type="radio" id="cinema" name="choose" value="cinema" onclick="cinemacheck();">독립영화관
+					<h2 align="left">0.분류</h2>
+					<input type="radio" id="demo-priority-low" name="demo-priority" value="dok" onclick="nonecheck();">
+               		<label for="demo-priority-low">독GV에 남기는 문의사항</label><br>
+               		<input type="radio" id="demo-priority-normal" name="demo-priority" value="cinema" onclick="cinemacheck();">
+               	<label for="demo-priority-normal">독립영화관에 남기는 문의사항</label>
 					<div id="cinemaCheck"></div>
 					</div><br>
 					<div class="row gtr-uniform">
@@ -74,20 +76,57 @@
 					<div class="col-12">
 						<input type="file" name="file">
 					</div>
-				<button type="submit" class="button">문의등록</button>
+				<button type="submit" class="button" onclick="requiremp();">문의등록</button>
+				
+				<script>
+					function requiremp(){
+						location.href = "requirempmp.bo";
+					}
+				</script>
 				
 				</div>
 				</form>
 				
 			<script>
+				function nonecheck(){
+					var html ="";
+					$("#cinemaCheck").html(html);
+				}
 				function cinemacheck(){
 					var html = "";
 					
-					html += "<select>";
-					html += "<option value=''>극장을 선택해주세요</option>";
-					html += "</select>";
+					$.ajax({
+						type:'get',
+						url: "selectCinema.bo",
+						success:function(data){
+							console.log("success");
+							
+							var html = "";
+							
+							if(data.list.length > 0){
+									html += "<select name='demo-category' id='demo-category'>";
+									html += "<option value=''>-- 문의를 남기실 독립영화관을 선택해주세요 --</option>";
+										for(var i = 0; i < data.list.length; i++){
+									
+											html += "<option value='" + data.list[i].theaterId + "'>" + data.list[i].theaterName + "</option>";
+										}
+											html += "</select>";
+							}else{
+								html += "<select name='demo-category' id='demo-category'>";
+								html += "<option value=''>-- 등록된 영화관이 없습니다 --</option>";
+								html += "</select>";
+							}
+							
+							$("#cinemaCheck").html(html);
+						},
+						error:function(data){
+							console.log("영화관 못불러옴 에러");
+						}
+					});
 					
-					$("#cinemaCheck").html(html);
+					
+					
+					
 				}
 			</script>
 

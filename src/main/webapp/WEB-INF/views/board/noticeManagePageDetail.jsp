@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +35,18 @@
    <link rel="stylesheet" href="${contextPath }/resources/css/noscript.css" />
 </noscript>
 </head>
+<style>
+	#image{
+		/* border: solid 1px; */
+		display:inline-block;
+		width:300px;
+		height:400px;
+		margin-left:20px;
+		margin-right:20px;
+		margin-top:20px;
+		float: left;
+	}
+</style>
 <body class="is-preload">
 
    <c:import url="../common/headBar.jsp" />
@@ -232,7 +245,9 @@
             </table> -->
             <hr>
             
-             <button class="button" onclick="goBack()">목록</button>
+             <button class="button" onclick="goBack()">목록으로</button>
+             <button class="button" onclick="modify()">글 수정</button>
+             <button align="center" class="button" onclick="deleteNotice()">글 삭제</button>
             
             <script>
                function goBack(){
@@ -319,12 +334,11 @@
             
             
             <script>
-               function goBack(){
-                  location.href="notice.li";
-               }
-               
                function modify(){
-                  location.href="modifyNotice.bo";
+                   location.href="modifyNotice.bo?board_id=" + board_id;
+                }
+               function deleteNotice(){
+            	   location.href="deleteNotice.bo?board_id=" + board_id;
                }
             </script>
 

@@ -15,6 +15,7 @@ import com.kh.dok.board.model.vo.Board;
 import com.kh.dok.board.model.vo.BoardFile;
 import com.kh.dok.board.model.vo.BoardNBoardFile;
 import com.kh.dok.board.model.vo.SearchCondition1;
+import com.kh.dok.cinema.model.vo.Cinema;
 import com.kh.dok.common.PageInfo;
 import com.kh.dok.review.model.vo.Reply;
 
@@ -80,9 +81,9 @@ public class BoardServiceImpl implements BoardService{
 
 	//판매자 공지사항 전체갯수 조회용 페이징(성희)
 	@Override
-	public int getlistCount(String mId) {
+	public int getlistCount(String mid) {
 
-		int listCount = bd.getlistCount(sqlSession, mId);
+		int listCount = bd.getlistCount(sqlSession, mid);
 		
 		return listCount;
 	}
@@ -162,7 +163,7 @@ public class BoardServiceImpl implements BoardService{
 		
 		System.out.println("성희 : 판매자 문의사항 result : " + result +", board_id : " + board_id);
 		
-		if(result > 0) return bd.selectNoticeOne(sqlSession, board_id);
+		if(result > 0) return bd.selectInquireOne(sqlSession, board_id);
 		
 		return bbf;
 	}
@@ -182,4 +183,57 @@ public class BoardServiceImpl implements BoardService{
 		return bd.selectReply(sqlSession, bid);
 	}
 
-}  
+
+	@Override
+	public BoardNBoardFile modifyNoticeOne(String board_id) {
+		BoardNBoardFile bbf = null;
+		bbf = bd.selectNoticeOne(sqlSession, board_id);
+		
+		return bbf;
+	}
+
+
+	@Override
+	public int updateNotice(Board b, BoardFile bf) throws BoardInsertException {
+		int result = bd.updateNotice(sqlSession, b, bf);
+		return result;
+	}
+
+
+	@Override
+	public int deleteNotice(String board_id) {
+		int result = bd.deleteNotice(sqlSession, board_id);
+		return result;
+	}
+
+
+	@Override
+	public int insertInquireMp(Board b, BoardFile bf) throws BoardInsertException {
+		int result = bd.insertInquireMp(sqlSession, b, bf);
+		
+		return result;
+	}
+
+	//마이페이지 문의사항 탭 클릭 글 불러오기
+	@Override
+	public ArrayList<BoardNBoardFile> selectMpInquireList(PageInfo pi, String mid) {
+		ArrayList<BoardNBoardFile> list = bd.selectMpInquireList(sqlSession, pi, mid);
+		return list;
+	}
+
+	//마페 문의사항 시네마리스트불러오기
+	@Override
+	public ArrayList<Cinema> cinemaList() {
+		ArrayList<Cinema> list = bd.cinemaList(sqlSession);
+
+		return list;
+	}
+
+	//문의사항 댓글수 가져오기
+	/*@Override
+	public ArrayList<Reply> selectrlist(PageInfo pi, String theaterId) {
+		ArrayList <Reply> rlist = bd.selectrlist(sqlSession, pi, theaterId);
+		return rlist;
+	}*/
+
+}

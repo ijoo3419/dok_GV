@@ -312,5 +312,11 @@ public class MemberDaoImpl implements MemberDao {
 
 	}
 
+	//댓글 좋아요
+	@Override
+	public int updateRecom(SqlSessionTemplate sqlSession, MyReply m) {
+		return sqlSession.update("Review.likeComment", m);
+	}
+
 
 }

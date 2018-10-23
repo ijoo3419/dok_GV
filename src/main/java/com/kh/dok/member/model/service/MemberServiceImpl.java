@@ -306,6 +306,12 @@ public class MemberServiceImpl implements MemberService{
 		
 		return md.selectRecommened(sqlSession,fourCount);
 	}
+	
+	//댓글 좋아요
+	@Override
+	public int updateRecom(MyReply m) {
+		return md.updateRecom(sqlSession, m);
+	}
 
 
 	
