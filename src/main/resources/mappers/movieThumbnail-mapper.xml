@@ -14,7 +14,7 @@
 		<result property="production_com" column="PRODUCTION_COM"/>
 		<result property="movie_age" column="MOVIE_AGE"/>
 		<result property="genre" column="GENRE"/>
-		<result property="runnig_time" column="RUNNIG_TIME"/>
+		<result property="runnig_time" column="RUNNIG_TIME"/>  
 		<result property="file_src" column="FILE_SRC" />
 		<result property="file_level" column="FILE_LEVEL" />
 		<result property="mid" column="MID" />

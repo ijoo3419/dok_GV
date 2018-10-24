@@ -14,7 +14,7 @@
 		<result property="phone" column="PHONE" />
 		<result property="user_class" column="USER_CLASS" />
 		<result property="status" column="STATUS" />
-		<result property="login_class" column="LOGIN_CLASS" />
+		<result property="login_class" column="LOGIN_CLASS" />  
 		<result property="blacklist_status" column="BLACKLIST_CLASS" />
 		<result property="join_date" column="JOIN_DATE" />
 		<result property="withdraw_date" column="WITHDRAW_DATE" />

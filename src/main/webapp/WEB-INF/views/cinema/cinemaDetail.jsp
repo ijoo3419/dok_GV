@@ -304,7 +304,12 @@ hr {
 			<br>
 			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">상영관 수: <c:forEach items="${cinemaEa}" var="row2">${row2.ea }</c:forEach> </a><br>
 			<!-- <a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">좌석 수:</a><br> -->
-			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">주소: ${row1.theater_address}</a><br>
+			<c:set var="aa" value="${row1.theater_address}"/>
+		<% 
+			String ss = (String)pageContext.getAttribute("aa") ;
+			String[] array1 = ss.split(",");
+		%>
+			<a style="text-align:left; width:100px; margin:0; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important;">주소: <%=array1[1] %><%=array1[2] %></a><br>
 			<br>
 			<br>
 			<br>
@@ -337,11 +342,19 @@ hr {
     //var map = new naver.maps.Map('map', {mapTypeId: naver.maps.MapTypeId.HYBRID}); 
     // 기본지도에 높낮이만 적용하려면 MapTypeId 객체의 TERRAIN 상수 값을 사용합니다. 
     //var map = new naver.maps.Map('map', {mapTypeId: naver.maps.MapTypeId.TERRAIN});
-    var myaddress = '${row1.theater_address}';// 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!) 
+   var address = '${row1.theater_address}';
+    var address1 = new Array();
+    
+    
+    address1 = address.split(",");
+    
+    
+    
+    var myaddress = address1[1];// 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!)
     // 주소가 있는지 체크
     naver.maps.Service.geocode({address: myaddress}, function(status, response) { 
         if (status !== naver.maps.Service.Status.OK) { 
-            return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러'); 
+            /* return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');  */
         }
         var result = response.result; 
         // 검색 결과 갯수: result.total 
@@ -387,8 +400,14 @@ hr {
 </script>
 		</div>
 		<br><br><br><br><br><br><br>
+		<c:set var="aaa" value="${row1.theater_address}"/>
+		<% 
+			String s = (String)pageContext.getAttribute("aaa") ;
+			String[] array = s.split(",");
+		%>
+		
 		<a style="text-align:left; width:400px; margin-right:100px; font-size:20px; text-decoration:none !important; border-bottom: dotted 0px !important; color:black !important; float:right"
-		href="http://m.map.naver.com/route.nhn?menu=route&ename=${row1.theater_address}&ex='&{ex};'&ey='&{ey};'" onclick="window.open(this.href, '_blanck','width=600, height=600'); return false">오는길 찾기</a>
+		href="http://m.map.naver.com/route.nhn?menu=route&ename=<%=array[1]%>&ex='&{ex};'&ey='&{ey};'" onclick="window.open(this.href, '_blanck','width=600, height=600'); return false">오는길 찾기</a>
 		<br><br>
 		<hr>
 		<br>

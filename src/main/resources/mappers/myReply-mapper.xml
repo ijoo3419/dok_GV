@@ -16,7 +16,7 @@
 		<result property="recommend_count" column="RECOMMEND_COUNT" />
 		
 		<!-- 내가 쓴 리뷰 조회용 추가 resultSet -->
-		<result property="file_src" column="FILE_SRC" />
+		<result property="file_src" column="FILE_SRC" />  
 		<result property="movie_title" column="MOVIE_TITLE" />
 		<result property="grade_count" column="GRADE_COUNT" />
 		<result property="division" column="DIVISION" />

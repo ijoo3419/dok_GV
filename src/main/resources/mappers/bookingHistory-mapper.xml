@@ -14,7 +14,7 @@
 		<result property="seat_column" column="SEAT_column" />
 		<result property="reservation_date" column="reservation_date" />
 		<result property="turning_day" column="TURNING_DAY" />
-		<result property="reservation_status" column="RESERVATION_STATUS" />
+		<result property="reservation_status" column="RESERVATION_STATUS" />  
 		<result property="movie_id" column="MOVIE_ID" />
 	</resultMap>
 	

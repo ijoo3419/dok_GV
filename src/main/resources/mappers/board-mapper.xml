@@ -10,7 +10,7 @@
 		<result property="mId" column="MID"/>
 		<result property="btitle" column="BTITLE"/>
 		<result property="bcontent" column="BCONTENT"/>
-		<result property="board_sort" column="BOARD_SORT"/>
+		<result property="board_sort" column="BOARD_SORT"/>  
 		<result property="board_date" column="BOARD_DATE"/>
 		<result property="modify_date" column="MODIFY_DATE"/>
 		<result property="bstatus" column="BSTATUS"/>
