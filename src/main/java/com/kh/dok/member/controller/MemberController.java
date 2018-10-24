@@ -221,6 +221,7 @@ public class MemberController {
 			}
 			recommendUser.add(mid);
 
+			
 			for(int i=0 ; i<allUserSize;i++){	
 				if(scount[i]/(float)midListSize > 0.5){
 					System.out.println(scount[i]/(float)midListSize);
