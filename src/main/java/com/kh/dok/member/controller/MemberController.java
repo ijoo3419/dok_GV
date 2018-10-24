@@ -182,6 +182,7 @@ public class MemberController {
 			String mid = ms.selectMid(email);
 			System.out.println(mid);
 			ArrayList<String> mlist = ms.selectUserMovie(mid);
+			
 			if(mlist.size()!=0){
 			System.out.println(mlist);
 			int midListSize = mlist.size();
@@ -195,7 +196,7 @@ public class MemberController {
 			scount = new int[allUserSize];
 			for(int i=0; i<allUserSize; i++){
 				if(!allUserMovie.get(i).getMid().equals(mid) && midListSize >2 && allUserMovie.get(i).getMovieId().size() >= midListSize){
-					System.out.println(allUserMovie.get(i).getMid());
+					
 					for(int j = 0;j<midListSize;j++){
 						for(int k = 0; k<allUserMovie.get(i).getMovieId().size();k++){
 							if(mlist.get(j).equals(allUserMovie.get(i).getMovieId().get(k))){

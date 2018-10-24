@@ -465,15 +465,15 @@ hr {
     // 기본지도에 높낮이만 적용하려면 MapTypeId 객체의 TERRAIN 상수 값을 사용합니다. 
     //var map = new naver.maps.Map('map', {mapTypeId: naver.maps.MapTypeId.TERRAIN});
     
-    var address = '${row1.theater_address}';
-    var address1 = new Array();
+    var address1 = '${row1.theater_address}';
+    var address2 = new Array();
     
     
-    address1 = address.split(",");
+    address2 = address1.split(",");
     
     
     
-    var myaddress = address1[1];// 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!)
+    var myaddress = address2[1];// 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!)
     // 주소가 있는지 체크
     /* var xx =1;
     var yy=1; */
