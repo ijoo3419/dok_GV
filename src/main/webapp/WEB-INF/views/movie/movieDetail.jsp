@@ -300,7 +300,7 @@ hr {
 					    <c:when test="${name eq '12'}">
 					        <div id="age">12</div>
 					    </c:when>
-					    <c:when test="${name eq '15'}">
+					    <c:when test="${name eq '15'}">  
 					        <div id="age" style="background:#FDD835;">15</div>
 					    </c:when>
 					     <c:when test="${name eq '19'}">

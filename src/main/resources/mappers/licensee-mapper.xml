@@ -11,7 +11,7 @@
       <result property="movieRoomAddress" column="MOVIEROOM_ADDRESS"/>
    
       <result column="THEATER_ID" property="theaterId"/>
-      <result column="MID" property="mid"/>
+      <result column="MID" property="mid"/>  
       <result column="THEATER_NAME" property="theaterName"/>
       <result column="THEATER_ROOT" property="theaterRoot"/>
       <result column="THEATER_TEXT" property="theaterText"/>

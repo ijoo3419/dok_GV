@@ -12,7 +12,7 @@
 		<result property="user_name" column="USER_NAME"/>
 		<result property="birthday" column="BIRTHDAY"/>
 		<result property="gender" column="GENDER"/>
-		<result property="phone" column="PHONE"/>
+		<result property="phone" column="PHONE"/>  
 		<result property="user_class" column="USER_CLASS"/>
 		<result property="status" column="STATUS"/>
 		<result property="login_class" column="LOGIN_CLASS"/>

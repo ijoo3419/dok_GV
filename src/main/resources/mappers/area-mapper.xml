@@ -10,7 +10,7 @@
 		<result property="area_level" column="AREA_LEVEL"/>
 		<result property="area_parents" column="AREA_PARENTS"/>
 	</resultMap>
-	
+	  
 	<select id="selectAreaList" resultMap="areaResultSet" parameterType="Area">
 		SELECT DISTINCT AREA.AREA_ID, AREA.AREA_PARENTS, AREA.AREA_NAME 
 		FROM TURNING, PLAY, MOVIE, MOVIEROOM, THEATER, AREA

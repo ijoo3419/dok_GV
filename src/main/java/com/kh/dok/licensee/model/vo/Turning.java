@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class Turning implements java.io.Serializable{
-   
+     
    private String turningId;
    private String playId;
    private int price;

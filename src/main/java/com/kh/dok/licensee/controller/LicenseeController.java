@@ -97,7 +97,7 @@ public class LicenseeController {
       return "licensee/theaterManagePage";
    }
    
-   //정태 영화관 등록 메소드(+파일 첨부)
+   //정태 영화관 등록 메소드(+파일 첨부)  
    @RequestMapping(value="theaterInsert.li")
    public String insertTheater(Model model, Cinema2 cm,
                         HttpServletRequest request,

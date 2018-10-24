@@ -526,7 +526,7 @@ hr {
 	    			console.log(allData);
 	    		}
 			});	 */
-			if(d<=100){
+			if(d<=100){  
 			
 				var html = '';
 				var c = '<button id="detail" onclick="location.href=\'cinemaDetail.ci?id=${row1.theaterId}\'">상세보기</button>&nbsp';

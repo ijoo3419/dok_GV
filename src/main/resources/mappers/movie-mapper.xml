@@ -215,7 +215,7 @@
 		UPDATE PAY SET PAY_STATUS = 'REFUND', REFUND_STATUS = 'Y' WHERE PAY_ID = #{pay_id}
 	</update>
 	
-	<!-- 박지용 -->
+	<!-- 박지용 --> 
 	<update id="updateRefundRes" parameterType="string">
 		UPDATE RESERVATION SET RESERVATION_STATUS = '취소' WHERE RESERVATION_ID = #{res_id}
 	</update>

@@ -48,7 +48,7 @@
 	SELECT PLAY_PLAY_ID.CURRVAL
 	FROM DUAL 
 	</select>
-	
+	  
 <!-- 이진희 영화관 출력 -->
 <select id="selectCinema" parameterType="Cinema" resultMap="cinemaResultSet"> 
 SELECT C.THEATER_ID, C.MID, C.THEATER_NAME,C.THEATER_ROOT, C.THEATER_TEXT, c.THEATER_ADDRESS,C.AREA_ID, EDIT_NAME

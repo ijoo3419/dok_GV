@@ -15,7 +15,7 @@
 		<result property="recommend_count" column="RECOMMEND_COUNT"/>
 		<result property="division" column="DIVISION"/>
 		<result property="theater_id" column="THEATER_ID"/>
-		<result property="movie_id" column="MOVIE_ID"/>
+		<result property="movie_id" column="MOVIE_ID"/>  
 		<result property="grade_count" column="GRADE_COUNT"/>
 		<result property="nickname" column="NICKNAME"/>
 	</resultMap>
